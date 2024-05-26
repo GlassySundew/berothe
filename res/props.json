@@ -1,0 +1,14 @@
+{
+	"plugins": [
+		"../../../haxelib/hxToolShed/git/bin/prefab_berothe.js",
+		"../../../haxelib/hxToolShed/git/bin/bodyparts_animations.js",
+		"../../../haxelib/hxToolShed/git/bin/instance_fix.js"
+	],
+	"sceneeditor.newgroups": [
+		"custom|plugins.bodyparts_animations.src.CustomObject",
+		"2D|hrt.prefab.Object2D",
+		"3D|hrt.prefab.Object3D",
+		"RFX|hrt.prefab.rfx.RendererFX"
+	],
+	"debug.displayErrors" : false
+}

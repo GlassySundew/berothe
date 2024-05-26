@@ -1,0 +1,11 @@
+hl.sdl.hxml
+-hl redist/sdl_win/hlboot.dat
+-D pak
+-D windows
+
+--next
+
+hl.server.hxml
+-hl redist/sdl_win/server.hl
+-D pak
+-D windows

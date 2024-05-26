@@ -1,0 +1,32 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "object",
+			"name": "group",
+			"x": 0.5,
+			"y": 1.5,
+			"children": [
+				{
+					"type": "reference",
+					"name": "left_hand",
+					"source": "voxel/characters/human/bodyparts/left_hand.bdprt",
+					"x": -2
+				},
+				{
+					"type": "reference",
+					"name": "torso",
+					"source": "voxel/characters/human/bodyparts/torso.bdprt",
+					"x": 2,
+					"y": 6
+				},
+				{
+					"type": "reference",
+					"name": "right_hand",
+					"source": "voxel/characters/human/bodyparts/right_hand.bdprt",
+					"x": 2
+				}
+			]
+		}
+	]
+}

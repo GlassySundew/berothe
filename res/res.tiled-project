@@ -1,0 +1,13 @@
+{
+    "automappingRulesFile": "",
+    "commands": [
+    ],
+    "extensionsPath": "extensions",
+    "folders": [
+        "tiled",
+        ".",
+        "tiled",
+        "tiled/separated"
+    ],
+    "objectTypesFile": ""
+}

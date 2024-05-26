@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="250" height="100" tilewidth="1" tileheight="1" infinite="0" backgroundcolor="#333b3f" nextlayerid="14" nextobjectid="90">
+ <tileset firstgid="1" source="ui.tsx"/>
+ <objectgroup draworder="index" id="5" name="hz che eto"/>
+ <objectgroup draworder="index" id="12" name="craft-caret">
+  <object id="84" name="window" gid="13" x="41" y="30" width="6" height="18"/>
+  <object id="86" name="9slice" x="40" y="18" width="4" height="8"/>
+ </objectgroup>
+ <objectgroup draworder="index" id="6" name="craft_recipe">
+  <object id="78" name="window" gid="4" x="81" y="66" width="32" height="20"/>
+  <object id="79" name="9slice" x="87" y="49" width="7" height="16"/>
+ </objectgroup>
+ <objectgroup draworder="index" id="7" name="ingreds_hint">
+  <object id="83" name="window" gid="6" x="142" y="74" width="22" height="33"/>
+  <object id="81" name="9slice" x="136" y="62" width="14" height="7"/>
+ </objectgroup>
+ <objectgroup draworder="index" id="11" name="window">
+  <object id="73" name="window" gid="11" x="41" y="78" width="26" height="30"/>
+  <object id="74" name="9slice" x="36" y="56" width="12" height="16"/>
+ </objectgroup>
+ <objectgroup draworder="index" id="13" name="nav_win">
+  <object id="87" name="window" gid="14" x="190" y="53" width="12" height="12"/>
+  <object id="89" name="9slice" x="187" y="44" width="8" height="8"/>
+ </objectgroup>
+</map>

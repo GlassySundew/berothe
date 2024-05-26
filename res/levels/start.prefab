@@ -1,0 +1,40 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "instance",
+			"name": "player",
+			"props": {
+				"id": "player",
+				"entity": "player",
+				"$cdbtype": "entitySpawnPointDF"
+			},
+			"x": -3,
+			"y": 3,
+			"children": [
+				{
+					"type": "text",
+					"name": "text",
+					"blendMode": "Alpha",
+					"color": 0,
+					"size": 22,
+					"pathFont": "fonts/alagard.fnt",
+					"text": "player"
+				}
+			]
+		},
+		{
+			"type": "customBox",
+			"name": "customBox",
+			"scaleX": 68,
+			"scaleY": 78
+		},
+		{
+			"type": "customBox",
+			"name": "customBox",
+			"x": -31,
+			"scaleY": 74.72,
+			"scaleZ": 72
+		}
+	]
+}

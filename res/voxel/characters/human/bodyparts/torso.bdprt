@@ -1,0 +1,27 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "walk",
+			"children": [
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "stand",
+			"children": [
+				{
+					"type": "model",
+					"name": "torso_stand",
+					"source": "voxel/characters/human/fbx/torso_stand.fbx"
+				}
+			]
+		}
+	]
+}

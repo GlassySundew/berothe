@@ -1,0 +1,16 @@
+{
+	"materials": {
+		"PBR": {
+			"torso_stand_material": {
+				"mode": "BeforeTonemapping",
+				"blend": "Alpha",
+				"shadows": true,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"depthWrite": "On"
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../haxelib"
+		},
+		{
+			"path": "../../../../HaxeToolkit/haxe/std"
+		}
+	],
+	"settings": {
+        "haxe.enableCompilationServer": false,
+        "haxe.importsSortOrder": "stdlib -> libs -> project"
+	}
+}

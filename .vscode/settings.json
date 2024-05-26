@@ -1,0 +1,21 @@
+{
+	"haxe.displayPort": 64228,
+	"workbench.colorCustomizations": {
+		"titleBar.inactiveBackground": "#134e41",
+		"titleBar.activeBackground": "#1a6b59",
+		"titleBar.activeForeground": "#ffffff"
+	},
+	"files.watcherExclude": {
+		"**/dump/**": true,
+		"**/*.pak": true
+	},
+	"css.lint.emptyRules": "ignore",
+	"css.lint.fontFaceProperties": "ignore",
+	"css.lint.propertyIgnoredDueToDisplay": "ignore",
+	"css.lint.unknownAtRules": "ignore",
+	"css.lint.unknownProperties": "ignore",
+	"css.lint.vendorPrefix": "ignore",
+	"less.lint.propertyIgnoredDueToDisplay": "ignore",
+	"eslint.quiet": true,
+	"berothe": true 
+}

@@ -1,0 +1,165 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "relaunch haxe servers",
+			"type": "shell",
+			"command": "haxe --wait 64228 & haxe --wait 64229",
+			"group": {
+				"kind": "build"
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"dependsOn": "kill haxe servers"
+		},
+		{
+			"label": "kill haxe servers",
+			"type": "shell",
+			"command": "taskkill /IM haxe.exe /F & ",
+			"group": {
+				"kind": "build"
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"label": "build all and display time",
+			"type": "shell",
+			"command": "echo \"Built at $(Get-Date -UFormat '%T')\"",
+			"group": {
+				"isDefault": true,
+				"kind": "build"
+			},
+			"presentation": {
+				"echo": false,
+				"reveal": "always",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"dependsOn": [
+				"server_connect_compile",
+				"client_connect_compile"
+			],
+			"dependsOrder": "parallel"
+		},
+		{
+			"label": "hl_debug_all",
+			"type": "hxml",
+			"file": "hl.debug.all.connect.hxml",
+			"presentation": {
+				"echo": false,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": true
+			}
+		},
+		{
+			"label": "server_connect_compile",
+			"type": "hxml",
+			"file": "hl.server.debug.connect.hxml",
+			"presentation": {
+				"echo": false,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
+				"clear": true
+			}
+		},
+		{
+			"label": "client_connect_compile",
+			"type": "hxml",
+			"file": "hl.client.debug.connect.hxml",
+			"presentation": {
+				"echo": false,
+				"reveal": "silent",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
+				"clear": true
+			}
+		},
+		{
+			"label": "default hxml",
+			"type": "haxe",
+			"args": "active configuration",
+			"group": {
+				"kind": "build"
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"problemMatcher": [
+				"$haxe-absolute",
+				"$haxe",
+				"$haxe-error",
+				"$haxe-trace"
+			]
+		},
+		{
+			"label": "build server",
+			"type": "shell",
+			"command": "haxe hl.server.hxml",
+			"group": "build",
+			"presentation": {
+				"echo": true,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"label": "run hl",
+			"type": "shell",
+			"command": "clear && hl bin/game.hl",
+			"runOptions": {
+				"instanceLimit": 4
+			},
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"problemMatcher": [],
+			"promptOnClose": false
+		},
+		{
+			"type": "shell",
+			"label": "run server",
+			"command": "hl bin/server.hl"
+		},
+		{
+			"type": "shell",
+			"label": "kill hl",
+			"command": "taskkill /IM hl.exe /F"
+		}
+	]
+}

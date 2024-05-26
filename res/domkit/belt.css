@@ -1,0 +1,37 @@
+beltCont {
+	margin: 7;
+	margin-right: 0;
+}
+
+.backgroundFlow {
+	background: rgba(73, 78, 85, 0.789);
+
+	min-width: 25;
+	min-height: 25;
+	max-width: 25;
+	max-height: 25;
+}
+
+.backgroundFlow:active {
+	background: rgba(65, 108, 172, 0.969);
+}
+
+beltCont:active {
+	margin-bottom: 13;
+}
+
+.hotkeyFlow {
+	position: absolute;
+	align: top left;
+	padding-left: 5;
+	scale: 0.5;
+}
+.beltSlotNumber {
+	align: top left;
+	color: rgba(172, 170, 170, 0.858);
+}
+
+.itemContainer {
+	position: absolute;
+	align: middle middle;
+}

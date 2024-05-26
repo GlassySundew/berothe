@@ -1,0 +1,30 @@
+
+-lib hide:git:https://github.com/HeapsIO/hide.git
+-lib heaps:git:https://github.com/HeapsIO/heaps.git
+-lib heeps:git:https://github.com/Yanrishatum/heeps.git
+-lib castle:git:https://github.com/ncannasse/castle.git
+-lib hxbit:git:https://github.com/GlassySundew/hxbit.git#channels
+-lib deepnightLibs:git:https://github.com/deepnight/deepnightLibs.git
+-lib oimophysics:git:https://github.com/GlassySundew/OimoPhysics
+-lib hlimgui:separatorText:https://github.com/GlassySundew/hlimgui
+-lib domkit:git:https://github.com/GlassySundew/domkit#fix
+-lib format:git:https://github.com/HaxeFoundation/format.git
+-lib tink_core:git:https://github.com/haxetink/tink_core.git
+-lib hscript:git:https://github.com/HaxeFoundation/hscript
+-lib hxToolShed:git:https://github.com/GlassySundew/hxToolShed
+-lib compiletime
+-lib random
+-lib seedyrng
+-lib haxe-concurrent
+
+-cp src
+-cp .
+-cp libs
+-cp src/shadow
+
+-D domkit
+-D heaps_enable_hl_mp3
+-D no-deprecation-warnings
+-D hscriptPos
+
+ImportPrefab

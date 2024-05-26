@@ -1,0 +1,348 @@
+structures.png
+size: 240, 818
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+amethyst
+  rotate: false
+  xy: 0, 0
+  size: 48, 36
+  orig: 48, 36
+  offset: 0, 0
+  index: -1
+backdoor0
+  rotate: false
+  xy: 48, 0
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor1
+  rotate: false
+  xy: 96, 0
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor2
+  rotate: false
+  xy: 144, 0
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor3
+  rotate: false
+  xy: 192, 0
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor4
+  rotate: false
+  xy: 0, 60
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor5
+  rotate: false
+  xy: 48, 60
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor6
+  rotate: false
+  xy: 96, 60
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor7
+  rotate: false
+  xy: 144, 60
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor8
+  rotate: false
+  xy: 192, 60
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor9
+  rotate: false
+  xy: 0, 120
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor10
+  rotate: false
+  xy: 48, 120
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor11
+  rotate: false
+  xy: 96, 120
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor12
+  rotate: false
+  xy: 144, 120
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor13
+  rotate: false
+  xy: 192, 120
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor14
+  rotate: false
+  xy: 0, 180
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor15
+  rotate: false
+  xy: 48, 180
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor16
+  rotate: false
+  xy: 96, 180
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+backdoor17
+  rotate: false
+  xy: 144, 180
+  size: 48, 60
+  orig: 48, 60
+  offset: 0, 0
+  index: -1
+bridge_chair
+  rotate: false
+  xy: 192, 180
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+bridge_table_2
+  rotate: false
+  xy: 0, 240
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+bridge_wall
+  rotate: false
+  xy: 96, 624
+  size: 114, 134
+  orig: 114, 134
+  offset: 0, 0
+  index: -1
+chest
+  rotate: false
+  xy: 48, 240
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+door0
+  rotate: false
+  xy: 96, 240
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door1
+  rotate: false
+  xy: 144, 240
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door2
+  rotate: false
+  xy: 192, 240
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door3
+  rotate: false
+  xy: 0, 312
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door4
+  rotate: false
+  xy: 48, 312
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door5
+  rotate: false
+  xy: 96, 312
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door6
+  rotate: false
+  xy: 144, 312
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door7
+  rotate: false
+  xy: 192, 312
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door8
+  rotate: false
+  xy: 0, 384
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door9
+  rotate: false
+  xy: 48, 384
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door10
+  rotate: false
+  xy: 96, 384
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door11
+  rotate: false
+  xy: 144, 384
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door12
+  rotate: false
+  xy: 192, 384
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door13
+  rotate: false
+  xy: 0, 456
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door14
+  rotate: false
+  xy: 48, 456
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door15
+  rotate: false
+  xy: 96, 456
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door16
+  rotate: false
+  xy: 144, 456
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+door17
+  rotate: false
+  xy: 192, 456
+  size: 48, 72
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+emerald
+  rotate: false
+  xy: 0, 528
+  size: 48, 36
+  orig: 48, 36
+  offset: 0, 0
+  index: -1
+hydroponics0
+  rotate: false
+  xy: 0, 576
+  size: 96, 48
+  orig: 96, 48
+  offset: 0, 0
+  index: -1
+hydroponics1
+  rotate: false
+  xy: 96, 576
+  size: 96, 48
+  orig: 96, 48
+  offset: 0, 0
+  index: -1
+iron
+  rotate: false
+  xy: 48, 528
+  size: 48, 36
+  orig: 48, 36
+  offset: 0, 0
+  index: -1
+navigationconsole
+  rotate: false
+  xy: 0, 758
+  size: 144, 60
+  orig: 144, 60
+  offset: 0, 0
+  index: -1
+sleeping_pod
+  rotate: false
+  xy: 0, 624
+  size: 96, 72
+  orig: 96, 72
+  offset: 0, 0
+  index: -1
+teleport
+  rotate: false
+  xy: 96, 528
+  size: 48, 36
+  orig: 48, 36
+  offset: 0, 0
+  index: -1
+workbench
+  rotate: false
+  xy: 144, 528
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1

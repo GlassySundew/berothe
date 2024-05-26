@@ -1,0 +1,896 @@
+{
+	"sheets": [
+		{
+			"name": "entity",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "6:entityBody",
+					"name": "body",
+					"kind": null
+				},
+				{
+					"typeStr": "9:EntityControlType",
+					"name": "control",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "rogue",
+					"body": "human",
+					"control": [
+						0
+					]
+				},
+				{
+					"id": "player",
+					"body": "human",
+					"control": [
+						1
+					]
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "entityBody",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
+				{
+					"typeStr": "17",
+					"name": "properties",
+					"documentation": "game.server.factory.EntityPropertyFactory"
+				},
+				{
+					"typeStr": "17",
+					"name": "view",
+					"documentation": "EntityViewComponent.hx\n"
+				}
+			],
+			"props": {},
+			"lines": [
+				{
+					"id": "human",
+					"properties": {
+						"rigidBodyTorso": {
+							"sizeX": 3,
+							"sizeY": 3,
+							"sizeZ": 8,
+							"offsetZ": 9
+						},
+						"dynamics": true,
+						"bodyHitbox": {
+							"sizeX": 4,
+							"sizeY": 4,
+							"sizeZ": 17,
+							"offsetZ": 9
+						}
+					},
+					"view": {
+						"type": [
+							0,
+							"human"
+						],
+						"animations": {
+							"idle": [
+								{
+									"animationName": "stand"
+								}
+							],
+							"attack_prime_idle": [
+								{
+									"animationName": "right_hand_idle"
+								}
+							],
+							"attack_seco_idle": [
+								{
+									"animationName": "left_hand_idle"
+								}
+							],
+							"walk": [
+								{
+									"animationName": "walk"
+								}
+							]
+						}
+					}
+				}
+			],
+			"separators": []
+		},
+		{
+			"name": "entityComposed",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "13",
+					"name": "file",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "human",
+					"file": "voxel/characters/human/human.enco"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "entityBody@properties",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "17",
+					"name": "rigidBodyTorso",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "2",
+					"name": "dynamics",
+					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "bodyHitbox",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@view",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:EntityViewType",
+					"name": "type",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "animations",
+					"opt": true,
+					"documentation": "EntityViewComponent.AnimationKey"
+				}
+			]
+		},
+		{
+			"name": "entityBody@view@animations",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "8",
+					"name": "idle",
+					"opt": true,
+					"documentation": "EntityViewComponent.AnimationKey"
+				},
+				{
+					"typeStr": "8",
+					"name": "attack_prime_idle",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "attack_seco_idle",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "walk",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@view@animations@idle",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "animationName",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@view@animations@attack_prime_idle",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "animationName",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@view@animations@attack_seco_idle",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "animationName",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@view@animations@walk",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "animationName",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@properties@rigidBodyTorso",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "3",
+					"name": "offsetZ"
+				},
+				{
+					"typeStr": "3",
+					"name": "sizeX",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "sizeY",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "sizeZ",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityBody@properties@bodyHitbox",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "3",
+					"name": "sizeX",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "sizeY",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "sizeZ",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "offsetZ",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entitySpawnPointDF",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "6:entity",
+					"name": "entity",
+					"kind": null
+				}
+			],
+			"separators": [],
+			"props": {
+				"dataFiles": "entitySpawnPointDF"
+			}
+		},
+		{
+			"name": "mobs",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "6:entityBody",
+					"name": "entity",
+					"kind": null
+				}
+			],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "structure",
+			"columns": [
+				{
+					"typeStr": "6:entityBody",
+					"name": "entity",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "use_range",
+					"kind": null
+				}
+			],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "inventory",
+			"columns": [
+				{
+					"typeStr": "6:entityBody",
+					"name": "entity",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "width",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "height",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"entity": "human",
+					"width": 4,
+					"height": 4
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "item",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"scope": null
+				},
+				{
+					"typeStr": "1",
+					"name": "atlas_name"
+				},
+				{
+					"typeStr": "1",
+					"name": "display_name"
+				},
+				{
+					"typeStr": "5:tool,plant,blueprint,resource",
+					"name": "cat"
+				},
+				{
+					"typeStr": "5:_1,_4,_16,_64",
+					"name": "stack"
+				},
+				{
+					"typeStr": "2",
+					"name": "can_hit"
+				},
+				{
+					"typeStr": "3",
+					"name": "hit_range",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "damage"
+				}
+			],
+			"lines": [
+				{
+					"id": "iron",
+					"atlas_name": "item_iron_ore",
+					"display_name": "Iron",
+					"cat": 3,
+					"stack": 3,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				},
+				{
+					"id": "emerald",
+					"atlas_name": "emerald",
+					"display_name": "Emerald crystalline",
+					"cat": 3,
+					"stack": 3,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				},
+				{
+					"id": "plant",
+					"atlas_name": "seaweed",
+					"display_name": "Seaweed",
+					"cat": 3,
+					"stack": 3,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				},
+				{
+					"id": "seeds_seaweed",
+					"atlas_name": "seeds_seaweed",
+					"display_name": "Seaweed seeds",
+					"cat": 1,
+					"stack": 2,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				},
+				{
+					"id": "axe",
+					"atlas_name": "fireaxe",
+					"display_name": "Fireaxe",
+					"cat": 0,
+					"stack": 0,
+					"can_hit": true,
+					"damage": 1,
+					"hit_range": 50
+				},
+				{
+					"id": "hydroponics",
+					"atlas_name": "hydroponics",
+					"display_name": "Hydroponics",
+					"cat": 2,
+					"stack": 1,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				},
+				{
+					"id": "workbench",
+					"atlas_name": "workbench",
+					"display_name": "Workbench",
+					"cat": 2,
+					"stack": 1,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				},
+				{
+					"id": "door",
+					"atlas_name": "door",
+					"display_name": "Door",
+					"cat": 2,
+					"stack": 1,
+					"can_hit": false,
+					"damage": 0,
+					"hit_range": 0
+				}
+			],
+			"props": {},
+			"separators": [
+				{
+					"title": "tools",
+					"id": "axe"
+				},
+				{
+					"title": "blueprints",
+					"id": "hydroponics"
+				}
+			]
+		},
+		{
+			"name": "recipe",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"scope": null
+				},
+				{
+					"typeStr": "1",
+					"name": "name",
+					"kind": "localizable"
+				},
+				{
+					"typeStr": "6:item",
+					"name": "item_icon"
+				},
+				{
+					"typeStr": "10:Player,Workbench",
+					"name": "recipe_source"
+				},
+				{
+					"typeStr": "8",
+					"name": "ingred"
+				},
+				{
+					"typeStr": "8",
+					"name": "result"
+				}
+			],
+			"lines": [
+				{
+					"id": "axe",
+					"name": "Axe",
+					"item_icon": "axe",
+					"result": [
+						{
+							"item": "axe",
+							"amount": 1
+						}
+					],
+					"recipe_source": 3,
+					"ingred": [
+						{
+							"item": "iron",
+							"amount": 2
+						}
+					]
+				},
+				{
+					"id": "workbench",
+					"name": "Workbench",
+					"item_icon": "workbench",
+					"result": [
+						{
+							"item": "workbench",
+							"amount": 1
+						}
+					],
+					"recipe_source": 1,
+					"ingred": [
+						{
+							"item": "iron",
+							"amount": 3
+						}
+					]
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": null
+				}
+			}
+		},
+		{
+			"name": "tileset",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "9:BlockRenderer",
+					"name": "type",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "tileSize",
+					"kind": null
+				},
+				{
+					"typeStr": "5:vertical,horizontal",
+					"name": "orientation"
+				},
+				{
+					"typeStr": "13",
+					"name": "texturePath",
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "sequences",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "CONGRUENT",
+					"sequences": [
+						{
+							"startX": 0,
+							"startY": 31,
+							"palettes": 11,
+							"amount": 8
+						},
+						{
+							"startX": 0,
+							"startY": 0,
+							"palettes": 31,
+							"amount": 43
+						}
+					],
+					"orientation": 0,
+					"texturePath": "atlas/CONGRUENT.png",
+					"tileSize": 8,
+					"type": [
+						0,
+						1
+					]
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "location",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "3",
+					"name": "chunkSize",
+					"kind": null
+				},
+				{
+					"typeStr": "9:LocationType",
+					"name": "level",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "start",
+					"chunkSize": 7,
+					"level": [
+						0,
+						"start"
+					]
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": [
+						"location"
+					]
+				}
+			}
+		},
+		{
+			"name": "prefabLevel",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "13",
+					"name": "file",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "start",
+					"file": "levels/start.prefab"
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": [
+						"location"
+					]
+				}
+			}
+		},
+		{
+			"name": "tileset@sequences",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "3",
+					"name": "startX",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "startY",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "amount",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "palettes",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "recipe@result",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:item",
+					"name": "item"
+				},
+				{
+					"typeStr": "3",
+					"name": "amount"
+				}
+			]
+		},
+		{
+			"name": "recipe@ingred",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:item",
+					"name": "item"
+				},
+				{
+					"typeStr": "3",
+					"name": "amount"
+				}
+			]
+		}
+	],
+	"customTypes": [
+		{
+			"name": "BlockRenderer",
+			"cases": [
+				{
+					"name": "LUT",
+					"args": [
+						{
+							"name": "lutRows",
+							"typeStr": "3"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "LocationType",
+			"cases": [
+				{
+					"name": "Prefab",
+					"args": [
+						{
+							"name": "file",
+							"typeStr": "6:prefabLevel"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EntityViewType",
+			"cases": [
+				{
+					"name": "EntityComposer",
+					"args": [
+						{
+							"name": "file",
+							"typeStr": "6:entityComposed"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EntityControlType",
+			"cases": [
+				{
+					"name": "AI",
+					"args": []
+				},
+				{
+					"name": "PlayerControl",
+					"args": []
+				}
+			]
+		}
+	],
+	"compress": false
+}

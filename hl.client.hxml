@@ -1,0 +1,6 @@
+-D client
+
+-hl bin/game.hl
+
+hl.client.sdl.hxml
+base.hxml

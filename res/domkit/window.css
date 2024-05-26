@@ -1,0 +1,22 @@
+
+.close_button {
+  align: top right;
+  position: absolute;
+  offset: 1 -1;
+}
+
+.dragable_comp {
+  height: 20;
+  position: absolute;
+}
+
+.windowLabel {
+  scale: 0.5;
+  align: top middle;
+  margin-top: 7;
+  margin-bottom: 2;
+}
+
+window {
+  /* overflow: hidden; */
+}
