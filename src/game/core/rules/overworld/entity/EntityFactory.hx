@@ -13,8 +13,8 @@ class EntityFactory {
 		this.location = location;
 	}
 
-	public function createEntityBySpawnPointEntityType( entityDesc : EntityDescription ) : OverworldEntity {
-		var spawnPointDesc : LocationSpawnDescription = location.getSpawnByEntityType( entityDesc );
+	public function createEntityBySpawnPointEntityDesc( entityDesc : EntityDescription ) : OverworldEntity {
+		var spawnPointDesc : LocationSpawnDescription = location.getSpawnByEntityDesc( entityDesc );
 
 		var entity = createEntity( entityDesc );
 		entity.transform.setTransform(

@@ -1,5 +1,6 @@
 package game.core.rules.overworld.location;
 
+import signals.Signal;
 import game.data.location.objects.LocationSpawnDescription;
 import game.data.storage.entity.EntityDescription;
 import util.Assert;
@@ -12,16 +13,20 @@ class Location {
 
 	public final locationDesc : LocationDescription;
 	public final entityFactory : EntityFactory;
+	public final onChunkCreated : Signal<Chunk> = new Signal<Chunk>();
+	public final id : Int;
 
 	var locationDataProvider : ILocationObjectsDataProvider;
 	var locationDataResolver : LocationDataResolver;
 	var entities : Array<OverworldEntity> = [];
 	var chunks : Chunks;
 
-	public function new( locationDesc : LocationDescription ) {
+	public function new( locationDesc : LocationDescription, id : Int ) {
 		this.locationDesc = locationDesc;
+		this.id = id;
+
 		entityFactory = new EntityFactory( this );
-		chunks = new Chunks( locationDesc.chunkSize );
+		chunks = new Chunks( this, locationDesc.chunkSize );
 
 		// TODO async
 		load();
@@ -42,7 +47,7 @@ class Location {
 		locationDataProvider.load();
 	}
 
-	public function getSpawnByEntityType( entityDesc : EntityDescription ) : LocationSpawnDescription {
+	public function getSpawnByEntityDesc( entityDesc : EntityDescription ) : LocationSpawnDescription {
 		return locationDataProvider.getSpawnsByEntityDesc( entityDesc )[0];
 	}
 }

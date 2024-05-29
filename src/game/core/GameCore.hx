@@ -1,15 +1,20 @@
 package game.core;
 
+import signals.Signal;
 import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.location.LocationFactory;
 import game.data.storage.location.LocationDescription;
 
 class GameCore {
 
-	var locationFactory : LocationFactory = new LocationFactory();
-	var locations : Map<String, Location> = [];
+	public final onLocationCreated : Signal<Location> = new Signal<Location>();
 
-	public function new() {}
+	final locationFactory : LocationFactory;
+	final locations : Map<String, Location> = [];
+
+	public function new() {
+		locationFactory = new LocationFactory( this );
+	}
 
 	public function getOrCreateLocationByDesc(
 		locationDesc : LocationDescription
@@ -20,6 +25,4 @@ class GameCore {
 			return locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
 		}
 	}
-
-	
 }

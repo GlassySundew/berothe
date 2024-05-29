@@ -4,9 +4,17 @@ import game.data.storage.location.LocationDescription;
 
 class LocationFactory {
 
-	public function new() {}
+	static var LOCATION_ID_STUB = 0;
+
+	var gameCore : GameCore;
+
+	public function new( gameCore : GameCore ) {
+		this.gameCore = gameCore;
+	}
 
 	public function createLocation( locationDesc : LocationDescription ) : Location {
-		return new Location( locationDesc );
+		var location = new Location( locationDesc, ++LOCATION_ID_STUB );
+		gameCore.onLocationCreated.dispatch( location );
+		return location;
 	}
 }

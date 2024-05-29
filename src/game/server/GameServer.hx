@@ -1,5 +1,9 @@
 package game.server;
 
+import game.net.location.CoreReplicationManager;
+import game.core.rules.overworld.location.Chunk;
+import game.net.PlayerReplicationManager;
+import game.core.rules.overworld.entity.OverworldEntity;
 import signals.Signal0;
 import signals.Signal;
 import game.core.rules.overworld.location.Location;
@@ -38,17 +42,9 @@ class GameServer extends Process {
 		Data.load( hxd.Res.data.entry.getText() );
 		new DataStorage();
 
-		onClientAuthMessage.add( ( networkClient : NetworkClient ) -> {
-			if ( networkClient.ownerObject != null ) return;
+		new CoreReplicationManager(core);
 
-			var clientController = new ClientController( networkClient );
-			networkClient.ownerObject = clientController;
-			@:privateAccess server.host.register( clientController, networkClient.ctx );
-			networkClient.sync();
-
-			createPlayer();
-			// entityFactory.createPlayer( "new player", clientController );
-		} );
+		onClientAuthMessage.add( onNewClientConnected );
 
 		#if debug
 		onGetServerStatusMessage.add( ( client ) -> {
@@ -68,11 +64,25 @@ class GameServer extends Process {
 		return core.getOrCreateLocationByDesc( locationDesc );
 	}
 
-	function createLevel( conf : Data.Location ) : ServerLevelController {
-		var objectsProvider = ObjectsProviderFactory.create( conf );
-		var level = new ServerLevelController( objectsProvider );
-		objectsProvider.init( level );
-		return level;
+	function createPlayer( cliCon : ClientController ) {
+		var location = getLevel(
+			DataStorage.inst.locationStorage.getStartLocationDescription()
+		);
+
+		var entity = location.entityFactory.createEntityBySpawnPointEntityDesc(
+			DataStorage.inst.entityStorage.getPlayerDescription()
+		);
+
+		preparePlayer( entity, cliCon );
+
+		trace( entity );
+	}
+
+	function preparePlayer(
+		playerEntity : OverworldEntity,
+		cliCon : ClientController
+	) {
+		new PlayerReplicationManager( cliCon, playerEntity );
 	}
 
 	function gc() {
@@ -83,28 +93,26 @@ class GameServer extends Process {
 		Entity.GC = [];
 	}
 
-	function createPlayer() {
-		var location = getLevel( DataStorage.inst.locationStorage.getStartLocationDescription() );
-
-		var entity = location.entityFactory.createEntityBySpawnPointEntityType(
-			DataStorage.inst.entityStorage.getPlayerDescription()
-		);
-
-		trace( entity );
-	}
-
 	override function update() {
 		super.update();
 
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed )
-			e.headlessPreUpdate();
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed )
-			e.headlessUpdate();
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed )
-			e.headlessPostUpdate();
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed )
-			e.headlessFrameEnd();
+		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessPreUpdate();
+		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessUpdate();
+		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessPostUpdate();
+		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessFrameEnd();
 		gc();
+	}
+
+	function onNewClientConnected( networkClient : NetworkClient ) {
+		if ( networkClient.ownerObject != null ) return;
+
+		var clientController = new ClientController( networkClient );
+		networkClient.ownerObject = clientController;
+		@:privateAccess server.host.register( clientController, networkClient.ctx );
+		networkClient.sync();
+
+		createPlayer( clientController );
+		// entityFactory.createPlayer( "new player", clientController );
 	}
 }
 #end

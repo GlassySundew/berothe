@@ -1,20 +1,16 @@
 package net;
 
-import en.comp.client.EntityCameraFollowComponent;
-import util.Settings;
-import en.player.Player;
 import en.Entity;
+import en.comp.client.EntityCameraFollowComponent;
 import en.comp.client.EntityMovementControlComponent;
-import en.player.PlayerChannelContainer;
 import game.client.GameClient;
-import game.server.ServerLevelController;
-import hxbit.NetworkHost.NetworkClient;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable;
+import util.Assert;
 import util.Const;
+import util.Settings;
 import util.tools.Save;
 import net.transaction.Transaction;
-import util.Assert;
 
 enum SaveSystemOrderType {
 	CreateNewSave( name : String );
@@ -23,6 +19,9 @@ enum SaveSystemOrderType {
 	DeleteSave( name : String );
 }
 
+/**
+	`ClientController` is a root net node for a singular player's channel
+**/
 class ClientController extends NetNode {
 
 	public static var clientInst : ClientController;
@@ -50,9 +49,6 @@ class ClientController extends NetNode {
 		new game.client.debug.ImGuiGameClientDebug( GameClient.inst );
 		#end
 	}
-
-	// function customSerialize( ctx : hxbit.Serializer ) {}
-	// function customUnserialize( ctx : hxbit.Serializer ) {}
 
 	public override function networkAllow(
 		op : hxbit.NetworkSerializable.Operation,

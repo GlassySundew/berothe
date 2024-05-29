@@ -5,12 +5,13 @@ import game.core.rules.overworld.entity.OverworldEntity;
 
 class Chunks {
 
-	var chunks : Array<Array<Array<Chunk>>> = [];
-
 	final chunkSize : Int;
+	final location : Location;
+	final chunks : Array<Array<Array<Chunk>>> = [];
 
-	public function new( chunkSize : Int ) {
+	public function new( location : Location, chunkSize : Int ) {
 		this.chunkSize = chunkSize;
+		this.location = location;
 	}
 
 	public function placeEntity( entity : OverworldEntity ) {
@@ -26,6 +27,9 @@ class Chunks {
 	function validateChunkAccess( x : Int, y : Int, z : Int ) {
 		if ( chunks[z] == null ) chunks[z] = [];
 		if ( chunks[z][y] == null ) chunks[z][y] = [];
-		if ( chunks[z][y][x] == null ) chunks[z][y][x] = new Chunk();
+		if ( chunks[z][y][x] == null ) {
+			var chunk : Chunk = chunks[z][y][x] = new Chunk( x, y, z );
+			location.onChunkCreated.dispatch( chunk );
+		}
 	}
 }

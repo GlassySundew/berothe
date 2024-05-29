@@ -7,13 +7,13 @@ class EntityReplicator extends NetNode {
 
 	@:s var transformRepl : EntityTransformReplicator;
 
-	public function new( ?parent ) {
+	final entity : OverworldEntity;
+
+	public function new( entity : OverworldEntity, ?parent ) {
 		super( parent );
+		this.entity = entity;
 
 		transformRepl = new EntityTransformReplicator( this );
+		transformRepl.followEntity( entity );
 	}
-
-	public function setEntity(entity:OverworldEntity) {
-		transformRepl.setEntity(entity);
-	} 
 }
