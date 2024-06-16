@@ -1,8 +1,8 @@
 package game.server;
 
-import game.net.location.CoreReplicationManager;
+import game.net.location.CoreReplicator;
 import game.core.rules.overworld.location.Chunk;
-import game.net.PlayerReplicationManager;
+import game.net.player.PlayerReplicationManager;
 import game.core.rules.overworld.entity.OverworldEntity;
 import signals.Signal0;
 import signals.Signal;
@@ -30,6 +30,7 @@ class GameServer extends Process {
 
 	final server : Server;
 	final core : GameCore = new GameCore();
+	final coreReplicator : CoreReplicator;
 
 	public function new( server : Server ) {
 		super();
@@ -42,7 +43,7 @@ class GameServer extends Process {
 		Data.load( hxd.Res.data.entry.getText() );
 		new DataStorage();
 
-		new CoreReplicationManager(core);
+		coreReplicator = new CoreReplicator( core );
 
 		onClientAuthMessage.add( onNewClientConnected );
 
@@ -69,20 +70,26 @@ class GameServer extends Process {
 			DataStorage.inst.locationStorage.getStartLocationDescription()
 		);
 
-		var entity = location.entityFactory.createEntityBySpawnPointEntityDesc(
+		var entity = core.entityFactory.createEntityBySpawnPointEntityDesc(
+			location,
 			DataStorage.inst.entityStorage.getPlayerDescription()
 		);
+		location.addEntity( entity );
 
 		preparePlayer( entity, cliCon );
-
-		trace( entity );
 	}
 
 	function preparePlayer(
 		playerEntity : OverworldEntity,
 		cliCon : ClientController
 	) {
-		new PlayerReplicationManager( cliCon, playerEntity );
+		var playerReplicator = coreReplicator.getEntityReplicator( playerEntity );
+		new PlayerReplicationManager(
+			playerEntity,
+			playerReplicator,
+			cliCon,
+			coreReplicator
+		);
 	}
 
 	function gc() {

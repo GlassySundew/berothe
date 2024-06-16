@@ -9,6 +9,7 @@ import dn.M;
 
 using util.Extensions.ArrayExtensions;
 
+@:noCompletion
 class EntityDynamicsComponent extends EntityNetComponent {
 
 	/** client **/

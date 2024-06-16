@@ -1,7 +1,7 @@
 package ui.core;
 
 import ch2.ui.EventInteractive;
-import signals.Signal1;
+import signals.Signal;
 import en.Entity;
 import en.Item;
 import en.player.Player;
@@ -217,7 +217,7 @@ class InventoryCellFlow extends h2d.Flow {
 		inter.propagateEvents = true;
 		getProperties( inter ).isAbsolute = true;
 
-		if ( cell.onSetItem == null ) cell.onSetItem = new Signal1();
+		if ( cell.onSetItem == null ) cell.onSetItem = new Signal<Item>();
 
 		cell.onSetItem.add( ( v : Item ) -> {
 			inter.cursor = if ( v == null && Player.inst != null && Player.inst.inventoryModel.holdItem.item == null ) Default else Button;

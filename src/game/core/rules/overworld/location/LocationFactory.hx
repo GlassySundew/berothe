@@ -1,20 +1,19 @@
 package game.core.rules.overworld.location;
 
+import signals.Signal;
 import game.data.storage.location.LocationDescription;
 
 class LocationFactory {
 
 	static var LOCATION_ID_STUB = 0;
 
-	var gameCore : GameCore;
+	public final onLocationCreated = new Signal<Location>();
 
-	public function new( gameCore : GameCore ) {
-		this.gameCore = gameCore;
-	}
+	public function new() {}
 
 	public function createLocation( locationDesc : LocationDescription ) : Location {
-		var location = new Location( locationDesc, ++LOCATION_ID_STUB );
-		gameCore.onLocationCreated.dispatch( location );
+		var location = new Location( locationDesc, '${++LOCATION_ID_STUB}' );
+		onLocationCreated.dispatch( location );
 		return location;
 	}
 }

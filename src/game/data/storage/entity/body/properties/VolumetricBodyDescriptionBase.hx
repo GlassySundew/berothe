@@ -1,6 +1,8 @@
 package game.data.storage.entity.body.properties;
 
-abstract class VolumetricBodyDescriptionBase {
+import game.data.storage.entity.component.EntityComponentDescription;
+
+abstract class VolumetricBodyDescriptionBase extends EntityComponentDescription {
 
 	public final offsetZ : Int = 0;
 	public final sizeX : Int = 0;

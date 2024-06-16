@@ -3,7 +3,7 @@ package en.util.item;
 import hxbit.NetworkHost;
 import net.transaction.TransactionFactory;
 import hxd.Res;
-import signals.Signal1;
+import signals.Signal;
 import en.Item.ItemPresense;
 import hxbit.NetworkSerializable;
 
@@ -14,7 +14,7 @@ class InventoryCell implements NetworkSerializable {
 	@:s public var containmentEntity : Entity;
 	@:s public var type : ItemPresense;
 
-	public var onSetItem : Signal1<Item>;
+	public var onSetItem : Signal<Item>;
 
 	function setPresense( item : Item, presense : ItemPresense ) {
 		item.itemPresense = presense;
@@ -54,6 +54,6 @@ class InventoryCell implements NetworkSerializable {
 	}
 
 	public function alive() {
-		onSetItem = new Signal1();
+		onSetItem = new Signal<Item>();
 	}
 }

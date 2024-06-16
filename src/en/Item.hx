@@ -1,7 +1,7 @@
 package en;
 
 import util.Util;
-import signals.Signal1;
+import signals.Signal;
 import signals.Signal;
 import hxbit.NetworkSerializable;
 import ui.core.ItemSprite;
@@ -27,7 +27,7 @@ class Item implements NetworkSerializable {
     public var onPlayerHold = new Signal();
     public var onPlayerRemove = new Signal();
 
-    public var onAmountChanged = new Signal1<Int>();
+    public var onAmountChanged = new Signal<Int>();
 
     public var itemPresense : ItemPresense;
     public var itemSprite : ItemSprite;

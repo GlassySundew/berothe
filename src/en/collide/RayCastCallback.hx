@@ -1,7 +1,7 @@
 package en.collide;
 
 import signals.Signal2;
-import signals.Signal1;
+import signals.Signal;
 import oimo.dynamics.rigidbody.Shape;
 import oimo.collision.geometry.RayCastHit;
 import oimo.dynamics.callback.RayCastClosest;

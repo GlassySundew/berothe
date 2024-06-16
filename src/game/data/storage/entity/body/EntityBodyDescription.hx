@@ -1,18 +1,33 @@
 package game.data.storage.entity.body;
 
-import game.data.storage.entity.body.properties.HitboxBodyDescription;
-import game.data.storage.entity.body.properties.VolumetricBodyDescriptionBase;
-import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
+import game.data.storage.entity.component.EntityComponentDescription;
+import util.Extensions.ArrayExtensions;
+import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.DescriptionBase;
+import game.data.storage.entity.body.properties.HitboxBodyDescription;
+import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 
 class EntityBodyDescription extends DescriptionBase {
 
-	var rigidBodyTorsoDesc : RigidBodyTorsoDescription;
-	var bodyHitbox : HitboxBodyDescription;
-	var isDynamicsPropEnabled : Bool = false;
+	public final propertyDescriptions : Array<EntityComponentDescription> = [];
+
+	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
+	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
+	public var dynamics( default, null ) : Null<DynamicsDescription>;
 
 	public function new( entry : Data.EntityBody ) {
 		super( entry.id.toString() );
+
+		createComponents( entry );
+
+		propertyDescriptions = ArrayExtensions.deNullify(( [
+			rigidBodyTorsoDesc,
+			bodyHitbox,
+			dynamics
+		] : Array<EntityComponentDescription> ) );
+	}
+
+	function createComponents( entry : Data.EntityBody ) {
 
 		if ( entry.properties.rigidBodyTorso != null ) {
 			var cdbProp = entry.properties.rigidBodyTorso;
@@ -34,8 +49,8 @@ class EntityBodyDescription extends DescriptionBase {
 			);
 		}
 
-		isDynamicsPropEnabled = entry.properties.dynamics;
+		if ( entry.properties.dynamics ) {
+			dynamics = new DynamicsDescription();
+		}
 	}
-
-	public function init() {}
 }

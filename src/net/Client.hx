@@ -1,5 +1,4 @@
 #if client
-
 package net;
 
 import en.Entity;
@@ -15,7 +14,7 @@ import ui.dialog.ConfirmDialog;
 import util.Assets;
 import util.Repeater;
 
-@:build( util.Macros.buildNetworkMessageSignals(net.Message) )
+@:build( util.Macros.buildNetworkMessageSignals( net.Message ) )
 class Client extends Process {
 
 	static var CONNECT_REPEATER_ID : String = "connect";
@@ -143,8 +142,10 @@ class Client extends Process {
 	public function addOnConnectionCallback( callback : Void -> Void ) {
 		if ( connected )
 			callback();
-		else
-			onConnection.add( callback ).repeat( 1 );
+		else {
+			onConnection.add( callback );
+			onConnection.repeat( 1 );
+		}
 	}
 
 	override function update() {
@@ -169,5 +170,4 @@ class Client extends Process {
 		host.sendMessage( msg );
 	}
 }
-
 #end

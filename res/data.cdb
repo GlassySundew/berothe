@@ -180,6 +180,12 @@
 					"name": "animations",
 					"opt": true,
 					"documentation": "EntityViewComponent.AnimationKey"
+				},
+				{
+					"typeStr": "17",
+					"name": "r",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -217,6 +223,16 @@
 					"kind": null
 				}
 			]
+		},
+		{
+			"name": "entityBody@view@r",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": []
 		},
 		{
 			"name": "entityBody@view@animations@idle",
@@ -722,7 +738,7 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 7,
+					"chunkSize": 35,
 					"level": [
 						0,
 						"start"

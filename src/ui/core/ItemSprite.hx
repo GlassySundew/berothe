@@ -102,7 +102,8 @@ class ItemSprite extends Flow {
 		minWidth = minHeight = maxWidth = maxHeight = defaultContainerSize;
 		onAdded.add(() -> {
 			minWidth = minHeight = maxWidth = maxHeight = null;
-		} ).repeat( 1 );
+		} );
+		onAdded.repeat( 1 );
 	}
 
 	function updateTooltip() {

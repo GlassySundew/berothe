@@ -86,7 +86,8 @@ class EntityView {
 		GameClient.inst.cameraProc.onMove.add( refreshNicknameLabel );
 		GameClient.inst.cameraProc.onFrame.add(() -> {
 			GameClient.inst.cameraProc.delayer.addF( refreshNicknameLabel, 1 );
-		} ).repeat( 1 );
+		} );
+		GameClient.inst.cameraProc.onFrame.repeat( 1 );
 	}
 
 	function refreshNicknameLabel() {

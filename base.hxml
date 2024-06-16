@@ -6,12 +6,13 @@
 -lib hxbit:git:https://github.com/GlassySundew/hxbit.git#channels
 -lib deepnightLibs:git:https://github.com/deepnight/deepnightLibs.git
 -lib oimophysics:git:https://github.com/GlassySundew/OimoPhysics
--lib hlimgui:separatorText:https://github.com/GlassySundew/hlimgui
+-lib hlimgui:git:https://github.com/GlassySundew/hlimgui.git#separatorText
 -lib domkit:git:https://github.com/GlassySundew/domkit#fix
 -lib format:git:https://github.com/HaxeFoundation/format.git
 -lib tink_core:git:https://github.com/haxetink/tink_core.git
 -lib hscript:git:https://github.com/HaxeFoundation/hscript
 -lib hxToolShed:git:https://github.com/GlassySundew/hxToolShed
+-lib rxHaxe:git:https://github.com/darmie/RxHaxe
 -lib compiletime
 -lib random
 -lib seedyrng

@@ -51,7 +51,8 @@ class GameClient extends Process {
 		cameraProc = new CameraProcess( this );
 		cameraProc.doRound = false;
 
-		Client.inst.onConnectionClosed.add( destroy ).repeat( 1 );
+		Client.inst.onConnectionClosed.add( destroy );
+		Client.inst.onConnectionClosed.repeat( 1 );
 	}
 
 	public function onCdbReload() {}

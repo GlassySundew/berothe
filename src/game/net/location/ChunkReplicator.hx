@@ -1,5 +1,9 @@
 package game.net.location;
 
+import hxbit.NetworkSerializable.NetworkSerializer;
+import hxbit.NetworkHost;
+import game.core.GameCore;
+import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.entity.OverworldEntity;
 import game.core.rules.overworld.location.Chunk;
 import net.NSArray;
@@ -10,15 +14,22 @@ class ChunkReplicator extends NetNode {
 
 	@:s var entities : NSArray<EntityReplicator> = new NSArray();
 
-	final chunk : Chunk;
+	public final chunk : Chunk;
 
-	public function new( chunk : Chunk, ?parent ) {
+	final coreReplicator : CoreReplicator;
+
+	public function new( chunk : Chunk, coreReplicator : CoreReplicator, ?parent ) {
 		super( parent );
 		this.chunk = chunk;
+		this.coreReplicator = coreReplicator;
 		chunk.onEntityAdded.add( onEntityAddedToChunk );
 	}
 
+	override function alive() {
+		super.alive();
+	}
+
 	function onEntityAddedToChunk( entity : OverworldEntity ) {
-		entities.push( new EntityReplicator(entity) );
+		// entities.unregisterChild( coreReplicator.getEntityReplicator( entity ), NetworkHost.current );
 	}
 }

@@ -8,13 +8,17 @@ class EntityTransform {
 	public var y( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
 	public var z( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
 
-	var rotationX : Float;
-	var rotationY : Float;
-	var rotationZ : Float;
+	public var velX( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public var velY( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public var velZ( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+
+	public var rotationX( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public var rotationY( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public var rotationZ( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
 
 	public function new() {}
 
-	public function setTransform( x : Float, y : Float, z : Float ) {
+	public function setPosition( x : Float, y : Float, z : Float ) {
 		this.x.val = x;
 		this.y.val = y;
 		this.z.val = z;

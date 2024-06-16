@@ -20,7 +20,7 @@ class Chunk extends NetNode {
 	public var view : MutableProperty<ChunkView> = new MutableProperty();
 
 	public function new( ?parent ) {
-        super( parent );
+		super( parent );
 		blocks = new Map();
 	}
 
@@ -46,8 +46,8 @@ class Chunk extends NetNode {
 
 	override function unregister(
 		host : NetworkHost,
-		ctx : NetworkSerializer,
-		?finalize : Bool
+		?ctx : NetworkSerializer,
+		?finalize : Bool = false
 	) {
 		super.unregister( host, ctx, finalize );
 

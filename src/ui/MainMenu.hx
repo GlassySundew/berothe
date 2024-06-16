@@ -1,28 +1,33 @@
 package ui;
 
-import util.GameUtil;
-import h3d.Vector4;
-import h3d.mat.Texture;
-import h3d.Vector;
-import dn.Tweenie.TType;
-import util.tools.Settings;
-import util.Util;
-import util.Const;
-import dn.heaps.slib.HSprite;
-import ui.core.TextButton;
-import ui.core.Button;
-import ui.core.ShadowedText;
+import rx.Observable;
 import dn.Process;
+import dn.Tweenie.TType;
+import dn.heaps.slib.HSprite;
 import h2d.Bitmap;
 import h2d.Flow;
 import h2d.Object;
 import h2d.Tile;
+import h3d.Vector4;
+import h3d.Vector;
+import h3d.mat.Texture;
 import hxd.System;
+import rx.ObservableFactory;
+import rx.Observer;
+import rx.Scheduler;
+import rx.observables.MakeScheduled.SubscribeInterval;
+import util.Assets;
+import util.Const;
+import util.GameUtil;
+import util.Util;
+import util.tools.Settings;
+import ui.core.Button;
+import ui.core.ShadowedText;
+import ui.core.TextButton;
 import ui.dialog.ConnectMenu;
 import ui.dialog.NewSaveDialog;
 import ui.dialog.OptionsMenu;
 import ui.dialog.SaveManager;
-import util.Assets;
 
 class MainMenu extends Process {
 
@@ -73,11 +78,6 @@ class MainMenu extends Process {
 		vertFlow.verticalSpacing = 1;
 
 		vertFlow.addSpacing( 10 );
-
-		// new TextButton("login", ( _ ) -> {
-		// 	destroy();
-		// 	Main.inst.startClient();
-		// }, vertFlow);
 
 		new TextButton( "connect", ( _ ) -> {
 			new ConnectMenu(() -> destroy(), parentFlow );

@@ -5,7 +5,8 @@ import game.core.rules.overworld.entity.OverworldEntity;
 
 class EntityReplicator extends NetNode {
 
-	@:s var transformRepl : EntityTransformReplicator;
+	var transformRepl : EntityTransformReplicator;
+	var componentsRepl : EntityComponentsReplicator;
 
 	final entity : OverworldEntity;
 
@@ -15,5 +16,8 @@ class EntityReplicator extends NetNode {
 
 		transformRepl = new EntityTransformReplicator( this );
 		transformRepl.followEntity( entity );
+
+		componentsRepl = new EntityComponentsReplicator( this );
+		componentsRepl.followEntity( entity );
 	}
 }

@@ -1,5 +1,7 @@
 package game.core;
 
+import game.core.rules.overworld.entity.OverworldEntity;
+import game.core.rules.overworld.entity.EntityFactory;
 import signals.Signal;
 import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.location.LocationFactory;
@@ -7,13 +9,23 @@ import game.data.storage.location.LocationDescription;
 
 class GameCore {
 
-	public final onLocationCreated : Signal<Location> = new Signal<Location>();
+	public var onLocationCreated( get, never ) : Signal<Location>;
+	inline function get_onLocationCreated() : Signal<Location> {
+		return locationFactory.onLocationCreated;
+	}
 
+	public var onEntityCreated( get, never ) : Signal<OverworldEntity>;
+	inline function get_onEntityCreated() : Signal<OverworldEntity> {
+		return entityFactory.onEntityCreated;
+	}
+
+	public final entityFactory : EntityFactory;
 	final locationFactory : LocationFactory;
 	final locations : Map<String, Location> = [];
 
 	public function new() {
-		locationFactory = new LocationFactory( this );
+		locationFactory = new LocationFactory();
+		entityFactory = new EntityFactory();
 	}
 
 	public function getOrCreateLocationByDesc(

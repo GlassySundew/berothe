@@ -46,7 +46,6 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	}
 
 	function parsePrefabElement( localPrefab : Prefab ) {
-		trace( "parsing: " + localPrefab.name );
 		switch ( Type.getClass( localPrefab ) ) {
 			case Instance: resolveInstance( Std.downcast( localPrefab, Instance ) );
 			case Collision:

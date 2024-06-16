@@ -1,5 +1,6 @@
 package en.comp;
 
+@:noCompletion
 class EntityComponent implements IEntityComponent<EntityComponent> {
 
 	public final classType : Class<EntityComponent>;
