@@ -103,7 +103,7 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		entity.components.onAppear(
 			EntityDynamicsComponent,
 			( key, dynamicsComponent ) -> {
-				standRayCastCallback.onProcess.add( onRayCollide );
+				standRayCastCallback.onShapeCollide.add( onRayCollide );
 
 				dynamicsComponent.onMove.add(() -> {
 					rigidBody.wakeUp();

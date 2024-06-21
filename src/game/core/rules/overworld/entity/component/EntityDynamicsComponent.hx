@@ -11,18 +11,19 @@ class EntityDynamicsComponent extends EntityComponent {
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
+		
 		entity.onFrame.add( onFrame );
 
 		entity.transform.x.addOnValue(
-			( oldVal ) -> if ( M.fabs( entity.transform.x.val - oldVal ) > 0 )
+			( oldVal ) -> // if ( M.fabs( entity.transform.x.val - oldVal ) > 0 )
 				onMoveInvalidate = true
 		);
 		entity.transform.y.addOnValue(
-			( oldVal ) -> if ( M.fabs( entity.transform.y.val - oldVal ) > 0 )
+			( oldVal ) -> // if ( M.fabs( entity.transform.y.val - oldVal ) > 0 )
 				onMoveInvalidate = true
 		);
 		entity.transform.z.addOnValue(
-			( oldVal ) -> if ( M.fabs( entity.transform.z.val - oldVal ) > 0 )
+			( oldVal ) -> // if ( M.fabs( entity.transform.z.val - oldVal ) > 0 )
 				onMoveInvalidate = true
 		);
 	}

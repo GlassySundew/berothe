@@ -1,5 +1,6 @@
 package game.core.rules.overworld.location;
 
+import game.physics.PhysicsEngineAbstractFactory;
 import signals.Signal;
 import game.data.location.objects.LocationSpawnDescription;
 import game.data.storage.entity.EntityDescription;
@@ -16,6 +17,8 @@ class Location {
 	public final onEntityAdded = new Signal<OverworldEntity>();
 	public final chunks : Chunks;
 
+	final physics : IPhysicsEngine;
+
 	var locationDataProvider : ILocationObjectsDataProvider;
 	var locationDataResolver : LocationDataResolver;
 	var entities : Array<OverworldEntity> = [];
@@ -25,8 +28,8 @@ class Location {
 		this.id = id;
 
 		chunks = new Chunks( this, locationDesc.chunkSize );
+		physics = PhysicsEngineAbstractFactory.create();
 
-		// TODO async
 		load();
 	}
 
@@ -41,13 +44,18 @@ class Location {
 		onEntityAdded.dispatch( entity );
 	}
 
-	public function load() {
+	public function getSpawnByEntityDesc( entityDesc : EntityDescription ) : LocationSpawnDescription {
+		return locationDataProvider.getSpawnsByEntityDesc( entityDesc )[0];
+	}
+
+	public function update( dt : Float ) {
+		physics.update( dt );
+	}
+
+	function load() {
+		// TODO async
 		locationDataResolver = locationDesc.createLocationDataResolver();
 		locationDataProvider = locationDataResolver.objectsDataProvider;
 		locationDataProvider.load();
-	}
-
-	public function getSpawnByEntityDesc( entityDesc : EntityDescription ) : LocationSpawnDescription {
-		return locationDataProvider.getSpawnsByEntityDesc( entityDesc )[0];
 	}
 }

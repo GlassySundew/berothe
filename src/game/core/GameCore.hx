@@ -37,4 +37,10 @@ class GameCore {
 			return locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
 		}
 	}
+
+	public function update( dt : Float ) {
+		for ( location in locations ) {
+			location.update( dt );
+		}
+	}
 }

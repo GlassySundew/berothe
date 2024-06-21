@@ -1,6 +1,13 @@
 {
 	"sheets": [
 		{
+			"name": "rule",
+			"columns": [],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		},
+		{
 			"name": "entity",
 			"columns": [
 				{
@@ -102,7 +109,8 @@
 									"animationName": "walk"
 								}
 							]
-						}
+						},
+						"r": {}
 					}
 				}
 			],
