@@ -80,7 +80,7 @@ class MainMenu extends Process {
 		vertFlow.addSpacing( 10 );
 
 		new TextButton( "connect", ( _ ) -> {
-			new ConnectMenu(() -> destroy(), parentFlow );
+			new ConnectMenu( parentFlow );
 		}, vertFlow );
 
 		new TextButton( "options", ( _ ) -> {

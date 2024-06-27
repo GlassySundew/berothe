@@ -47,7 +47,7 @@ class Chunk extends NetNode {
 	override function unregister(
 		host : NetworkHost,
 		?ctx : NetworkSerializer,
-		?finalize : Bool = false
+		finalize : Bool = false
 	) {
 		super.unregister( host, ctx, finalize );
 

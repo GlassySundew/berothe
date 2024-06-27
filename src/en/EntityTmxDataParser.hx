@@ -6,7 +6,7 @@ import util.Util;
 import haxe.exceptions.NotImplementedException;
 import h3d.Vector;
 
-using util.Extensions.ArrayExtensions;
+using util.extensions.ArrayExtensions;
 
 // class EntityTmxDataParser {
 

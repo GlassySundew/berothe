@@ -1,5 +1,6 @@
 package game.core.rules.overworld.location;
 
+import game.core.rules.overworld.location.physics.IPhysicsEngine;
 import game.physics.PhysicsEngineAbstractFactory;
 import signals.Signal;
 import game.data.location.objects.LocationSpawnDescription;
@@ -16,8 +17,7 @@ class Location {
 	public final onChunkCreated = new Signal<Chunk>();
 	public final onEntityAdded = new Signal<OverworldEntity>();
 	public final chunks : Chunks;
-
-	final physics : IPhysicsEngine;
+	public final physics : IPhysicsEngine;
 
 	var locationDataProvider : ILocationObjectsDataProvider;
 	var locationDataResolver : LocationDataResolver;

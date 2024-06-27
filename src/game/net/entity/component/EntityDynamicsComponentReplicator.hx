@@ -1,5 +1,7 @@
 package game.net.entity.component;
 
+import game.core.rules.overworld.entity.EntityComponent;
+
 class EntityDynamicsComponentReplicator extends EntityComponentReplicator {
 
 	public function new( ?parent ) {
@@ -8,6 +10,5 @@ class EntityDynamicsComponentReplicator extends EntityComponentReplicator {
 
 	override function alive() {
 		super.alive();
-		trace( "aliving dynamics component" );
 	}
 }

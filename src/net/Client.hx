@@ -1,6 +1,7 @@
-#if client
 package net;
 
+#if client
+import util.Assert;
 import en.Entity;
 import util.Const;
 import signals.Signal;
@@ -17,41 +18,38 @@ import util.Repeater;
 @:build( util.Macros.buildNetworkMessageSignals( net.Message ) )
 class Client extends Process {
 
+	public static var inst : Client;
+
 	static var CONNECT_REPEATER_ID : String = "connect";
 	static var PORT = 6676;
 
-	public static var inst : Client;
+	// temp
+	static var infoFlow : Flow;
 
 	public var host : hxd.net.SocketHost;
-	public var uid : Int;
 
 	public var onConnection : Signal = new Signal();
 	public var onConnectionClosed : Signal = new Signal();
 
 	public var connected( get, never ) : Bool;
-
 	function get_connected() @:privateAccess return host.connected;
+
+	var game : GameClient;
 
 	public function new() {
 		super( Main.inst );
 		inst = this;
 
-		host = new hxd.net.SocketHost();
-		host.setLogger( function ( msg ) {
-			#if network_debug
-			log( msg );
-			#end
-		} );
-
 		Main.inst.onClose.add(() -> {
 			try {
 				sendMessage( Disconnect );
-				host.dispose();
-				if ( GameClient.inst != null ) GameClient.inst.gc();
+				host?.dispose();
 			} catch( e : Dynamic ) {
-				trace( "error occured while disposing: " + e );
+				trace( "error occured while disposing client: " + e );
 			}
 		} );
+
+		game = new GameClient();
 	}
 
 	public function repeatConnect( interval = 0.5, repeats = 6 ) {
@@ -67,13 +65,20 @@ class Client extends Process {
 		}
 	}
 
-	static var infoFlow : Flow;
-
 	public function connect( hostIp = "127.0.0.1", ?onFail : Void -> Void ) {
+		Assert.isNull( host, "double host creation on client, unknown behaviour..." );
+
+		host = new hxd.net.SocketHost();
+		host.setLogger( function ( msg ) {
+			#if network_debug
+			log( msg );
+			#end
+		} );
+
 		trace( "trying to connect" );
 
-		host.connect( hostIp, PORT, function ( b ) {
-			if ( !b ) {
+		host.connect( hostIp, PORT, function ( connectionStatus ) {
+			if ( !connectionStatus ) {
 				if ( !Main.inst.repeater.has( '$CONNECT_REPEATER_ID' ) ) {
 					if ( infoFlow != null )
 						infoFlow.remove();
@@ -100,7 +105,7 @@ class Client extends Process {
 			if ( infoFlow != null )
 				infoFlow.remove();
 
-			trace( "Connected to server", uid );
+			trace( "Connected to server" );
 
 			sendMessage( Message.ClientAuth );
 
@@ -115,6 +120,23 @@ class Client extends Process {
 		host.onUnregister = function ( o ) {
 			if ( Std.isOfType( o, Entity ) ) cast( o, Entity ).destroy();
 		};
+	}
+
+	public function disconnect() {
+		try {
+			host.dispose();
+		} catch( e ) {
+			trace( e );
+		}
+	}
+
+	public function addOnConnectionCallback( callback : Void -> Void ) {
+		if ( connected )
+			callback();
+		else {
+			onConnection.add( callback );
+			onConnection.repeat( 1 );
+		}
 	}
 
 	function onError( msg : String ) {
@@ -139,35 +161,13 @@ class Client extends Process {
 		onConnectionClosed.dispatch();
 	}
 
-	public function addOnConnectionCallback( callback : Void -> Void ) {
-		if ( connected )
-			callback();
-		else {
-			onConnection.add( callback );
-			onConnection.repeat( 1 );
-		}
-	}
-
 	override function update() {
 		super.update();
-		host.flush();
-	}
-
-	public function disconnect() {
-		try {
-			host.dispose();
-		} catch( e ) {
-			trace( e );
-		}
-	}
-
-	public function log( s : String, ?pos : haxe.PosInfos ) {
-		pos.fileName = ( host.isAuth ? "[S]" : "[C]" ) + " " + pos.fileName;
-		haxe.Log.trace( s, pos );
+		host?.flush();
 	}
 
 	public function sendMessage( msg : Message ) {
-		host.sendMessage( msg );
+		host?.sendMessage( msg );
 	}
 }
 #end

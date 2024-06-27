@@ -9,7 +9,9 @@ import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 
 class DynamicsDescription extends EntityComponentDescription {
 
-	public function new() {}
+	public function new() {
+		super( "dynamics" );
+	}
 
 	public function buildComponennt() : EntityComponent {
 		return new EntityDynamicsComponent( this );

@@ -58,28 +58,15 @@ class ConnectMenu extends FocusMenu {
 
 	public var textInput : TextInput;
 
-	public function new( ?onGameStart : Void -> Void, ?parent : Object ) {
+	public function new( ?parent : Object ) {
 		super( parent );
 		centrizeContent();
-
-		function onConnect() {
-			Main.inst.startGame( false );
-			onGameStart();
-			destroy();
-		}
 
 		var connectComp = new ConnectComp( contentFlow );
 		connectComp.localConnect.onClick = () -> {
 			MainMenu.hide();
 
-			// Main.inst.cliCon.onAppear(
-			// 	(cc) -> cc.spawnPlayer( Settings.params.nickname )
-			// );
-
-			Client.inst.addOnConnectionCallback( onConnect );
-			Client.inst.connect(() -> {
-				Client.inst.onConnection.remove( onConnect );
-			} );
+			Client.inst.connect(() -> trace( "failed connection" ) );
 		};
 
 		connectComp.cancel.onClick = ( e ) -> {

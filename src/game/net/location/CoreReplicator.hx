@@ -10,7 +10,7 @@ import game.core.rules.overworld.location.Location;
 
 class CoreReplicator {
 
-	final locations : Map<String, LocationReplicationManager> = [];
+	final locations : Map<String, LocationReplicator> = [];
 	final entities : Map<String, EntityReplicator> = [];
 
 	final core : GameCore;
@@ -28,9 +28,9 @@ class CoreReplicator {
 		return entityRepl;
 	}
 
-	public function getLocationReplicationManager(
+	public function getLocationReplicator(
 		location : Location
-	) : LocationReplicationManager {
+	) : LocationReplicator {
 		var locationRepl = locations[location.id];
 		Assert.notNull( locationRepl, "location replication manager is not found when creating sync bridge" );
 		return locationRepl;
@@ -45,10 +45,15 @@ class CoreReplicator {
 		);
 		#end
 		core.onEntityCreated.add( onEntityCreated );
-		locations[location.id] = new LocationReplicationManager( location, this );
+		locations[location.id] = new LocationReplicator( location, this );
 	}
 
 	function onEntityCreated( entity : OverworldEntity ) {
-		entities[entity.id] = new EntityReplicator( entity );
+		var entityReplicator = new EntityReplicator( entity );
+		entities[entity.id] = entityReplicator;
+
+		entity.location.onAppear(
+			( location ) -> entityReplicator.addChild( locations[location.id] )
+		);
 	}
 }

@@ -1,5 +1,10 @@
 package game.client;
 
+import core.IProperty;
+import game.data.storage.DataStorage;
+import game.net.location.LocationReplicator;
+import game.net.entity.EntityReplicator;
+import game.core.rules.overworld.location.Location;
 import core.MutableProperty;
 import dn.Process;
 import dn.heaps.input.ControllerAccess;
@@ -14,37 +19,38 @@ import util.Settings;
 import util.threeD.CameraProcess;
 import game.client.level.LevelView;
 
-
 /**
 	Логика игры на клиете
 **/
 class GameClient extends Process {
 
-	public static var inst : GameClient;
+	public static var inst( default, set ) : GameClient;
+	static function set_inst( game : GameClient ) {
+		if ( inst != null ) {
+			inst.destroy();
+			@:privateAccess Process._garbageCollector( Process.ROOTS );
+		}
+		return inst = game;
+	}
 
 	public var cameraProc : CameraProcess;
-	public var levelView : MutableProperty<LevelView> = new MutableProperty();
-	public var player : en.player.Player;
-	public var suspended : Bool = false;
-	public var navFieldsGenerated : Null<Int>;
+
+	public var controlledEntity( default, null ) : EntityReplicator;
+
+	final currentLocationSelf : MutableProperty<Location> = new MutableProperty();
+	public var currentLocation( get, never ) : IProperty<Location>;
+	inline function get_currentLocation() : IProperty<Location> {
+		return currentLocationSelf;
+	}
 
 	var ca : ControllerAccess<ControllerAction>;
-	private var cam : CameraController;
-
-	#if game_tmod
-	var stats : h2d.Text;
-	#end
+	var cam : CameraController;
 
 	public function new() {
 		super( Main.inst );
 
 		inst = this;
-
 		ca = Main.inst.controller.createAccess();
-
-		#if game_tmod
-		stats = new Text( Assets.fontPixel, Boot.inst.s2d );
-		#end
 
 		createRootInLayers( Main.inst.root, Const.DP_BG );
 
@@ -55,36 +61,6 @@ class GameClient extends Process {
 		Client.inst.onConnectionClosed.repeat( 1 );
 	}
 
-	public function onCdbReload() {}
-
-	public function restartLevel() {
-		// startLevel(lvlName);
-	}
-
-	public function startLevelFromTmx( name : String ) {
-		// this.tmxMap = tmxMap;
-		// engine.clear( 0, 1 );
-
-		// if ( level != null ) {
-		// 	level.destroy();
-		// 	gc();
-		// }
-		// level = new Level( tmxMap );
-
-		// hideStrTiles();
-
-		// onLevelChanged.dispatch();
-
-		// return level;
-	}
-
-	public function gc() {
-		if ( Entity.GC == null || Entity.GC.length == 0 ) return;
-
-		for ( e in Entity.GC ) e.dispose();
-		Entity.GC = [];
-	}
-
 	override function onDispose() {
 		super.onDispose();
 
@@ -92,16 +68,7 @@ class GameClient extends Process {
 
 		inst = null;
 
-		#if game_tmod
-		if ( stats != null ) stats.remove();
-		#end
-
 		if ( cameraProc != null ) cameraProc.destroy();
-
-		for ( e in Entity.ALL.copy() ) {
-			e.dispose();
-		}
-		gc();
 
 		Client.inst.disconnect();
 
@@ -110,24 +77,6 @@ class GameClient extends Process {
 
 	override function update() {
 		super.update();
-
-		#if game_tmod
-		stats.text = "tmod: " + tmod;
-		#end
-
-		// Updates
-
-		for ( e in Entity.ALL ) if ( !e.isDestroyed ) e.preUpdate();
-		for ( e in Entity.ALL ) if ( !e.isDestroyed ) e.update();
-
-		if ( levelView.val != null ) {
-			levelView.val.physics.step( Boot.inst.deltaTime );
-		}
-
-		for ( e in Entity.ALL ) if ( !e.isDestroyed ) e.postUpdate();
-		for ( e in Entity.ALL ) if ( !e.isDestroyed ) e.frameEnd();
-
-		gc();
 
 		if ( ca.isPressed( Escape ) ) {
 			new PauseMenu( this, Main.inst.root, Main.inst );
@@ -140,6 +89,15 @@ class GameClient extends Process {
 
 	override function resume() {
 		super.resume();
+	}
+
+	public function onLocationProvided( locationRepl : LocationReplicator ) {
+		currentLocationSelf.val = new Location(
+			DataStorage.inst.locationStorage.getDescriptionById(
+				locationRepl.locationDescriptionId
+			),
+			'0'
+		);
 	}
 }
 
@@ -165,6 +123,7 @@ class AxesHelper extends h3d.scene.Graphics {
 		lineTo( 0, 0, size );
 	}
 }
+
 class GridHelper extends h3d.scene.Graphics {
 
 	public function new( ?parent : Object, size = 10.0, divisions = 10, color1 = 0x444444, color2 = 0x888888, lineWidth = 1.0 ) {

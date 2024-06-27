@@ -1,13 +1,13 @@
 package en.comp.net;
 
 import game.client.GameClient;
-import util.Extensions.ArrayExtensions;
+import util.extensions.ArrayExtensions;
 import h3d.Vector;
 import oimo.common.Vec3;
 import signals.Signal;
 import dn.M;
 
-using util.Extensions.ArrayExtensions;
+using util.extensions.ArrayExtensions;
 
 @:noCompletion
 class EntityDynamicsComponent extends EntityNetComponent {

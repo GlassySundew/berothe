@@ -182,7 +182,7 @@ class SaveManager extends FocusMenu {
 		
 
 		Client.inst.repeatConnect( 0.1, 40 );
-		Main.inst.startGame( true );
+		// Main.inst.startGame( true );
 
 		// Client.inst.addOnConnectionCallback(() -> Client.inst.sendMessage( SaveSystemOrder( CreateNewSave( e ) ) ) );
 	};

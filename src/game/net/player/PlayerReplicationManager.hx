@@ -1,5 +1,6 @@
 package game.net.player;
 
+import game.core.rules.overworld.location.Location;
 import hxbit.NetworkHost;
 import net.ClientController;
 import util.Assert;
@@ -8,7 +9,7 @@ import game.core.rules.overworld.location.Chunk;
 import game.net.entity.EntityReplicator;
 import game.net.location.ChunkReplicator;
 import game.net.location.CoreReplicator;
-import game.net.location.LocationReplicationManager;
+import game.net.location.LocationReplicator;
 
 /**
 	`PlayerReplicationManager` manages singular player sight objects
@@ -18,8 +19,8 @@ class PlayerReplicationManager {
 	public static final PLAYER_VISION_RANGE_CHUNKS = 1;
 
 	public final cliCon : ClientController;
+	public final playerEntityReplicator : EntityReplicator;
 	final playerEntity : OverworldEntity;
-	final playerEntityReplicator : EntityReplicator;
 	final coreReplicator : CoreReplicator;
 
 	final chunks : Map<Int, Map<Int, Map<Int, ChunkReplicator>>> = [];
@@ -43,14 +44,16 @@ class PlayerReplicationManager {
 	function init() {
 		playerEntity.chunk.addOnValueImmediately( onAddedToChunk );
 		cliCon.addChild( playerEntityReplicator );
+		cliCon.giveControlOverEntity( playerEntityReplicator );
+		playerEntity.location.addOnValueImmediately( onAddedToLocation );
 	}
 
 	function validateChunkAccess( x : Int, y : Int, z : Int ) {
 		if ( chunks[z] == null ) chunks[z] = new Map();
 		if ( chunks[z][y] == null ) chunks[z][y] = new Map();
 		if ( chunks[z][y][x] == null ) {
-			var locationReplManager : LocationReplicationManager //
-				= coreReplicator.getLocationReplicationManager( playerEntity.location.getValue() );
+			var locationReplManager : LocationReplicator //
+				= coreReplicator.getLocationReplicator( playerEntity.location.getValue() );
 			chunks[z][y][x] = locationReplManager.getChunkReplicator( x, y, z );
 
 			Assert.notNull( chunks[z][y][x], "chunk replicator is null" );
@@ -135,5 +138,12 @@ class PlayerReplicationManager {
 		}
 
 		attachVisibleChunks( chunk );
+	}
+
+	function onAddedToLocation( location : Location ) {
+		if ( location == null ) return;
+
+		var locationRepl = coreReplicator.getLocationReplicator( location );
+		cliCon.onControlledEntityLocationChange( locationRepl );
 	}
 }

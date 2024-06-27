@@ -1,22 +1,19 @@
 package game.net.location;
 
-import game.core.GameCore;
+import net.NetNode;
 import game.core.rules.overworld.location.Location;
 
-class LocationReplicationManager {
+class LocationReplicator extends NetNode {
+
+	@:s public final locationDescriptionId : String;
 
 	final location : Location;
 	final chunksReplicator : ChunksReplicationManager;
 	final coreReplicator : CoreReplicator;
 
-	/* 
-		как только `LocationReplicationManager` 
-		ещё что-то захочет, надо обернуть все аргументы 
-		в `NetworkReplicationService` dto
-		с удобным интерфейсом для вытаскивания репликаторов 
-		сущностей и т.д.
-	 */
-	public function new( location : Location, coreReplicator : CoreReplicator ) {
+	public function new( location : Location, coreReplicator : CoreReplicator, ?parent ) {
+		super( parent );
+		locationDescriptionId = location.locationDesc.id;
 		this.location = location;
 		this.coreReplicator = coreReplicator;
 		chunksReplicator = new ChunksReplicationManager( location, coreReplicator );
@@ -25,5 +22,10 @@ class LocationReplicationManager {
 	public function getChunkReplicator( x : Int, y : Int, z : Int ) : ChunkReplicator {
 		location.chunks.validateChunkAccess( x, y, z );
 		return chunksReplicator.chunks[z][y][x];
+	}
+
+	override function alive() {
+		super.alive();
+		
 	}
 }

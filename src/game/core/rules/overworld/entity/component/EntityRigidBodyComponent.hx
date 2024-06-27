@@ -1,63 +1,60 @@
 package game.core.rules.overworld.entity.component;
 
-import oimo.collision.geometry.BoxGeometry;
 import oimo.common.Vec3;
-import oimo.dynamics.rigidbody.RigidBody;
-import oimo.dynamics.rigidbody.RigidBodyConfig;
-import oimo.dynamics.rigidbody.RigidBodyType;
-import oimo.dynamics.rigidbody.Shape;
-import oimo.dynamics.rigidbody.ShapeConfig;
 import util.Const;
+import game.core.rules.overworld.location.Location;
+import game.core.rules.overworld.location.physics.IPhysicsEngine;
+import game.core.rules.overworld.location.physics.IRigidBody;
+import game.core.rules.overworld.location.physics.IRigidBodyShape;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
+import game.physics.RigidBodyAbstractFactory;
+import game.physics.ShapeAbstractFactory;
 
 class EntityRigidBodyComponent extends EntityComponent {
 
-	var halfSizeX : Float;
-	var halfSizeY : Float;
-	var halfSizeZ : Float;
+	var physics : IPhysicsEngine;
+	var rigidBody : IRigidBody;
+	var torsoShape : IRigidBodyShape;
 
-	var rigidBody : RigidBody;
-	var torsoShape : Shape;
-
-	var description : RigidBodyTorsoDescription;
+	var rigidBodyDesc : RigidBodyTorsoDescription;
 
 	public function new( description : RigidBodyTorsoDescription ) {
 		super( description );
-		this.description = description;
+		this.rigidBodyDesc = description;
 	}
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
-		halfSizeX = description.sizeX / 2;
-		halfSizeY = description.sizeY / 2;
-		halfSizeZ = description.sizeZ / 2;
+		createRigidBody();
+
+		entity.location.onAppear( onAttachedToLocation );
+	}
+
+	function onAttachedToLocation( location : Location ) {
+		physics = location.physics;
+		physics.addRigidBody( rigidBody );
 	}
 
 	function createRigidBody() {
-		if ( rigidBody != null ) throw "bad logic, rigidBody is not suppposed to be created twice for one component";
-		var torsoGeom = new BoxGeometry(
-			new Vec3(
-				halfSizeX,
-				halfSizeY,
-				halfSizeZ
-			) );
+		if ( rigidBody != null )
+			throw "bad logic, rigidBody is not suppposed to be created twice for one component";
 
-		var shapec : ShapeConfig = new ShapeConfig();
-		shapec.geometry = torsoGeom;
-		torsoShape = new Shape( shapec );
+		torsoShape = ShapeAbstractFactory.box(
+			rigidBodyDesc.sizeX,
+			rigidBodyDesc.sizeY,
+			rigidBodyDesc.sizeZ
+		);
+
+		rigidBody = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
+
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
-		var bodyc : RigidBodyConfig = new RigidBodyConfig();
-		bodyc.type = RigidBodyType.DYNAMIC;
-		rigidBody = new RigidBody( bodyc );
-		rigidBody.addShape( torsoShape );
+
 		rigidBody.setRotationFactor( new Vec3() );
-		rigidBody.setLinearDamping( 25 );
+		rigidBody.setLinearDamping( new Vec3( 25, 25, 25 ) );
 		rigidBody.setGravityScale( 40 );
 
-		// rigidBody.isPositionSnapped = true;
-
-		torsoShape._localTransform._positionZ += description.offsetZ - halfSizeZ % 1;
+		torsoShape.move( 0, 0, rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeX / 2 ) % 1 );
 	}
 }

@@ -10,7 +10,7 @@ class LocationDescriptionStorage extends DescriptionStorageBase<LocationDescript
 		return getDescriptionById( PLAYER_START_LOCATION_ID );
 	}
 
-	function parseItem( entry : Data.Location ) {
+	override function parseItem( entry : Data.Location ) {
 		addItem( new LocationDescription( entry ) );
 	}
 }

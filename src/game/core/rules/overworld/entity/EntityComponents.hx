@@ -21,8 +21,8 @@ class EntityComponents {
 		Assert.notExistsInClassMap( component, components );
 		#end
 
-		components[component.classType] = component;
 		onComponentAdded.dispatch( component );
+		components[component.classType] = component;
 		component.attachToEntity( entity );
 	}
 

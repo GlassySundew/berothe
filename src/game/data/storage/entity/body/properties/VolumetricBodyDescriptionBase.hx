@@ -9,7 +9,14 @@ abstract class VolumetricBodyDescriptionBase extends EntityComponentDescription 
 	public final sizeY : Int = 0;
 	public final sizeZ : Int = 0;
 
-	public function new( offsetZ : Int, sizeX : Int, sizeY : Int, sizeZ : Int ) {
+	public function new(
+		offsetZ : Int,
+		sizeX : Int,
+		sizeY : Int,
+		sizeZ : Int,
+		id : String
+	) {
+		super( id );
 		this.offsetZ = offsetZ;
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;

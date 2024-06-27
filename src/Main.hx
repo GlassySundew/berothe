@@ -41,6 +41,10 @@ class Main extends Process {
 
 	public final repeater : Repeater = new Repeater( hxd.Timer.wantedFPS );
 
+	#if game_tmod
+	var stats : h2d.Text;
+	#end
+
 	public function new( s : h2d.Scene ) {
 		super();
 
@@ -58,7 +62,7 @@ class Main extends Process {
 
 		Data.load( hxd.Res.data.entry.getText() );
 		new DataStorage();
-		
+
 		createUi();
 
 		initGamePadController();
@@ -91,6 +95,9 @@ class Main extends Process {
 
 		#if debug
 		createFpsCounter();
+			#if game_tmod
+			stats = new Text( Assets.fontPixel, Boot.inst.s2d );
+			#end
 		#end
 	}
 
@@ -152,18 +159,13 @@ class Main extends Process {
 		#end
 	}
 
-	/**
-		start local server
-	**/
-	public function startGame( ?spawnServer = false ) {
-		if ( GameClient.inst != null ) {
-			GameClient.inst.destroy();
-			@:privateAccess Process._garbageCollector( Process.ROOTS );
-		}
-		if ( spawnServer ) Boot.inst.createServer();
-		new GameClient();
-	}
+	override function onDispose() {
+		#if game_tmod
+		if ( stats != null ) stats.remove();
+		#end
 
+	}
+	
 	override function onResize() {
 		super.onResize();
 
@@ -182,6 +184,10 @@ class Main extends Process {
 		if ( ca.isKeyboardPressed( Key.F11 ) ) toggleFullscreen();
 		// if ( ca.isKeyboardPressed(Key.M) ) Assets.toggleMusicPause();
 		repeater.update( tmod );
+		
+		#if game_tmod
+		stats.text = "tmod: " + tmod;
+		#end
 
 		onUpdate.dispatch();
 		super.update();

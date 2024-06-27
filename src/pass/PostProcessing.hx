@@ -129,7 +129,6 @@ class PostProcessing extends h3d.pass.ScreenFx<PostProcessingShader> {
 	}
 
 	public function apply( from : h3d.mat.Texture, time : Float, ?to : h3d.mat.Texture ) {
-		engine.pushTarget( to );
 		// pass.setBlendMode( None );
 		shader.colorTexture = from;
 		shader.time = time;
@@ -142,6 +141,7 @@ class PostProcessing extends h3d.pass.ScreenFx<PostProcessingShader> {
 			flashDuration = 0;
 		}
 
+		engine.pushTarget( to );
 		render();
 		engine.popTarget();
 	}

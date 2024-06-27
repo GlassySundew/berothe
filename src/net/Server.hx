@@ -27,7 +27,7 @@ class Server extends Process {
 	public var host( default, null ) : SocketHost;
 	public var uid : Int;
 
-	public var game : GameServer;
+	var game : GameServer;
 
 	public final repeater : Repeater = new Repeater( hxd.Timer.wantedFPS );
 
@@ -48,9 +48,8 @@ class Server extends Process {
 
 		if ( GameServer.inst != null ) {
 			GameServer.inst.destroy();
-			game = new GameServer( this );
-		} else
-			game = new GameServer( this );
+		}
+		game = new GameServer( this );
 
 		startServer();
 	}

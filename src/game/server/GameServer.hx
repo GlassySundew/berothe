@@ -1,5 +1,6 @@
 package game.server;
 
+import game.net.entity.EntityReplicator;
 import game.net.location.CoreReplicator;
 import game.core.rules.overworld.location.Chunk;
 import game.net.player.PlayerReplicationManager;
@@ -26,7 +27,14 @@ using en.util.EntityUtil;
 @:build( util.Macros.buildNetworkMessageSignals( net.Message ) )
 class GameServer extends Process {
 
-	public static var inst : GameServer;
+	public static var inst( default, set ) : GameServer;
+	static function set_inst( game : GameServer ) {
+		if ( inst != null ) {
+			inst.destroy();
+			@:privateAccess Process._garbageCollector( Process.ROOTS );
+		}
+		return inst = game;
+	}
 
 	final server : Server;
 	final core : GameCore = new GameCore();
@@ -65,7 +73,7 @@ class GameServer extends Process {
 		return core.getOrCreateLocationByDesc( locationDesc );
 	}
 
-	function createPlayer( cliCon : ClientController ) {
+	function createPlayer() : EntityReplicator {
 		var location = getLevel(
 			DataStorage.inst.locationStorage.getStartLocationDescription()
 		);
@@ -76,20 +84,21 @@ class GameServer extends Process {
 		);
 		location.addEntity( entity );
 
-		preparePlayer( entity, cliCon );
+		return coreReplicator.getEntityReplicator( entity );
 	}
 
 	function preparePlayer(
 		playerEntity : OverworldEntity,
+		playerReplicator : EntityReplicator,
 		cliCon : ClientController
-	) {
-		var playerReplicator = coreReplicator.getEntityReplicator( playerEntity );
-		new PlayerReplicationManager(
-			playerEntity,
-			playerReplicator,
-			cliCon,
-			coreReplicator
-		);
+	) : PlayerReplicationManager {
+		return
+			new PlayerReplicationManager(
+				playerEntity,
+				playerReplicator,
+				cliCon,
+				coreReplicator
+			);
 	}
 
 	function gc() {
@@ -118,7 +127,10 @@ class GameServer extends Process {
 		@:privateAccess server.host.register( clientController, networkClient.ctx );
 		networkClient.sync();
 
-		createPlayer( clientController );
+		var playerReplicator = createPlayer();
+
+		var playerReplManager = preparePlayer( playerReplicator.entity, playerReplicator, clientController );
+
 		// entityFactory.createPlayer( "new player", clientController );
 	}
 }

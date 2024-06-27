@@ -1,3 +1,5 @@
+import oimo.common.Vec3;
+import oimo.m.IVec3;
 import core.ClassMap;
 import rx.Observable;
 import rx.ObservableFactory;

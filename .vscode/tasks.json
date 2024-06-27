@@ -15,7 +15,7 @@
 				"reveal": "always",
 				"focus": false,
 				"panel": "dedicated",
-				"showReuseMessage": true,
+				"showReuseMessage": false,
 				"clear": false
 			},
 			"dependsOn": "kill haxe servers"
@@ -23,7 +23,7 @@
 		{
 			"label": "kill haxe servers",
 			"type": "shell",
-			"command": "taskkill /IM haxe.exe /F & ",
+			"command": "taskkill /IM haxe.exe /F",
 			"group": {
 				"kind": "build"
 			},
@@ -33,7 +33,8 @@
 				"focus": false,
 				"panel": "dedicated",
 				"showReuseMessage": true,
-				"clear": false
+				"clear": false,
+				"close": true
 			}
 		},
 		{
@@ -138,7 +139,8 @@
 			"type": "shell",
 			"command": "clear && hl bin/game.hl",
 			"runOptions": {
-				"instanceLimit": 4
+				"instanceLimit": 4,
+				"reevaluateOnRerun": false
 			},
 			"presentation": {
 				"echo": true,

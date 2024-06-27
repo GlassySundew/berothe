@@ -4,7 +4,7 @@ import net.NetNode;
 import game.net.entity.EntityComponentReplicator;
 import game.core.rules.overworld.entity.EntityComponent;
 
-abstract class EntityComponentDescription {
+abstract class EntityComponentDescription extends DescriptionBase {
 
 	abstract public function buildComponennt() : EntityComponent;
 	abstract public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicator;

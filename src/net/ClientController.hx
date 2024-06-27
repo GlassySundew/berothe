@@ -1,5 +1,7 @@
 package net;
 
+import game.net.location.LocationReplicator;
+import game.net.entity.EntityReplicator;
 import en.Entity;
 import en.comp.client.EntityCameraFollowComponent;
 import en.comp.client.EntityMovementControlComponent;
@@ -65,19 +67,26 @@ class ClientController extends NetNode {
 	) @:privateAccess {}
 
 	@:rpc( owner )
-	public function giveControlOverEntity( entity : Entity ) {
-		Assert.notNull( GameClient.inst, "LOGIC VIOLATION: TRYING TO CREATE CLIENT CONTROL COMPONENT ON A SERVER" );
+	public function giveControlOverEntity( entityRepl : EntityReplicator ) {
+		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
-		entity.onSpawned.handle(
-			( level ) -> {
-				entity.clientComponents.add(
-					new EntityMovementControlComponent( entity )
-				);
-				entity.clientComponents.add(
-					new EntityCameraFollowComponent( entity )
-				);
-			}
-		);
+		// entity.onSpawned.handle(
+		// 	( level ) -> {
+		// 		entity.clientComponents.add(
+		// 			new EntityMovementControlComponent( entity )
+		// 		);
+		// 		entity.clientComponents.add(
+		// 			new EntityCameraFollowComponent( entity )
+		// 		);
+		// 	}
+		// );
+	}
+
+	@:rpc( owner )
+	public function onControlledEntityLocationChange( locationRepl : LocationReplicator ) {
+		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
+
+		GameClient.inst.onLocationProvided( locationRepl );
 	}
 
 	@:rpc( server )

@@ -8,7 +8,7 @@ class EntityDescriptionStorage extends DescriptionStorageBase<EntityDescription,
 		return getDescriptionById( PLAYER_ENTITY_ID );
 	}
 
-	function parseItem( entry : Data.Entity ) {
+	override function parseItem( entry : Data.Entity ) {
 		addItem( new EntityDescription( entry ) );
 	}
 }

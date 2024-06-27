@@ -45,7 +45,7 @@ class LevelView extends dn.Process {
 		root3d = new Object( Boot.inst.s3d );
 		batcher = new LUTBatcher();
 
-		GameClient.inst.levelView.val = this;
+		// GameClient.inst.levelView.val = this;
 
 		physics = new ClientPhysics( level.world );
 

@@ -30,6 +30,5 @@ class Chunk {
 
 		entities.push( entity );
 		entity.addToChunk( this );
-		trace( "adding entity " + entity.desc.id );
 	}
 }

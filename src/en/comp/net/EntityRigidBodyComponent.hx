@@ -18,6 +18,8 @@ import en.comp.net.EntityDynamicsComponent.PixelPerfectMoving;
 /**
 	main body of an entity
 **/
+@:deprecated
+@:noCompletion
 class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPositionProvider {
 
 	@:s var sizeX : Int;
@@ -149,10 +151,11 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 		var bodyc : RigidBodyConfig = new RigidBodyConfig();
 		bodyc.type = RigidBodyType.DYNAMIC;
+		
 		rigidBody = new RigidBody( bodyc );
 		rigidBody.addShape( torsoShape );
 		rigidBody.setRotationFactor( new Vec3() );
-		rigidBody.setLinearDamping( 25 );
+		rigidBody.setLinearDamping( new Vec3( 25, 25, 25 ) );
 		rigidBody.setGravityScale( 40 );
 
 		// rigidBody.isPositionSnapped = true;

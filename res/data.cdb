@@ -73,14 +73,16 @@
 							"sizeX": 3,
 							"sizeY": 3,
 							"sizeZ": 8,
-							"offsetZ": 9
+							"offsetZ": 9,
+							"id": "humanTorso"
 						},
 						"dynamics": true,
 						"bodyHitbox": {
 							"sizeX": 4,
 							"sizeY": 4,
 							"sizeZ": 17,
-							"offsetZ": 9
+							"offsetZ": 9,
+							"id": "humanTorsoHitbox"
 						}
 					},
 					"view": {
@@ -329,6 +331,12 @@
 					"typeStr": "3",
 					"name": "sizeZ",
 					"kind": null
+				},
+				{
+					"typeStr": "0",
+					"name": "id",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -364,6 +372,11 @@
 					"name": "offsetZ",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "0",
+					"name": "id",
+					"opt": true
 				}
 			]
 		},

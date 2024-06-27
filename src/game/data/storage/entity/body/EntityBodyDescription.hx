@@ -1,7 +1,7 @@
 package game.data.storage.entity.body;
 
 import game.data.storage.entity.component.EntityComponentDescription;
-import util.Extensions.ArrayExtensions;
+import util.extensions.ArrayExtensions;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
@@ -25,6 +25,10 @@ class EntityBodyDescription extends DescriptionBase {
 			bodyHitbox,
 			dynamics
 		] : Array<EntityComponentDescription> ) );
+
+		for ( propertyDesc in propertyDescriptions ) {
+			DataStorage.inst.entityPropertiesStorage.provideExistingDescription( propertyDesc );
+		}
 	}
 
 	function createComponents( entry : Data.EntityBody ) {
@@ -35,7 +39,8 @@ class EntityBodyDescription extends DescriptionBase {
 				cdbProp.offsetZ,
 				cdbProp.sizeX,
 				cdbProp.sizeY,
-				cdbProp.sizeZ
+				cdbProp.sizeZ,
+				cdbProp.id.toString()
 			);
 		}
 
@@ -45,7 +50,8 @@ class EntityBodyDescription extends DescriptionBase {
 				cdbProp.offsetZ,
 				cdbProp.sizeX,
 				cdbProp.sizeY,
-				cdbProp.sizeZ
+				cdbProp.sizeZ,
+				cdbProp.id.toString()
 			);
 		}
 
