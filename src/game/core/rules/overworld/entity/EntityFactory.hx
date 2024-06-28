@@ -2,7 +2,7 @@ package game.core.rules.overworld.entity;
 
 import util.Assert;
 import signals.Signal;
-import game.data.location.objects.LocationSpawnDescription;
+import game.data.location.objects.LocationSpawn;
 import game.data.storage.entity.EntityDescription;
 import game.core.rules.overworld.location.Location;
 
@@ -18,7 +18,7 @@ class EntityFactory {
 		location : Location,
 		entityDesc : EntityDescription
 	) : OverworldEntity {
-		var spawnPointDesc : LocationSpawnDescription = location.getSpawnByEntityDesc( entityDesc );
+		var spawnPointDesc : LocationSpawn = location.getSpawnByEntityDesc( entityDesc );
 
 		var entity = createEntity( entityDesc );
 		entity.transform.setPosition(

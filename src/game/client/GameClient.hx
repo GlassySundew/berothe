@@ -8,8 +8,6 @@ import game.core.rules.overworld.location.Location;
 import core.MutableProperty;
 import dn.Process;
 import dn.heaps.input.ControllerAccess;
-import en.Entity;
-import en.player.Player;
 import h3d.scene.CameraController;
 import h3d.scene.Object;
 import net.Client;

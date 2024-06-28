@@ -24,17 +24,28 @@
 			]
 		},
 		{
-			"type": "customBox",
-			"name": "customBox",
-			"scaleX": 68,
-			"scaleY": 78
-		},
-		{
-			"type": "customBox",
-			"name": "customBox",
-			"x": -31,
-			"scaleY": 74.72,
-			"scaleZ": 72
+			"type": "instance",
+			"name": "global",
+			"props": {
+				"id": "global",
+				"$cdbtype": "locationObjTypeDF",
+				"type": "global"
+			},
+			"children": [
+				{
+					"type": "customBox",
+					"name": "customBox",
+					"scaleX": 68,
+					"scaleY": 78
+				},
+				{
+					"type": "customBox",
+					"name": "customBox",
+					"x": -33,
+					"scaleY": 81,
+					"scaleZ": 110
+				}
+			]
 		}
 	]
 }

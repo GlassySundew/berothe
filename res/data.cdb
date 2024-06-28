@@ -401,279 +401,6 @@
 			}
 		},
 		{
-			"name": "mobs",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				},
-				{
-					"typeStr": "6:entityBody",
-					"name": "entity",
-					"kind": null
-				}
-			],
-			"lines": [],
-			"separators": [],
-			"props": {}
-		},
-		{
-			"name": "structure",
-			"columns": [
-				{
-					"typeStr": "6:entityBody",
-					"name": "entity",
-					"kind": null
-				},
-				{
-					"typeStr": "3",
-					"name": "use_range",
-					"kind": null
-				}
-			],
-			"lines": [],
-			"separators": [],
-			"props": {}
-		},
-		{
-			"name": "inventory",
-			"columns": [
-				{
-					"typeStr": "6:entityBody",
-					"name": "entity",
-					"kind": null
-				},
-				{
-					"typeStr": "3",
-					"name": "width",
-					"kind": null
-				},
-				{
-					"typeStr": "3",
-					"name": "height",
-					"kind": null
-				}
-			],
-			"lines": [
-				{
-					"entity": "human",
-					"width": 4,
-					"height": 4
-				}
-			],
-			"separators": [],
-			"props": {}
-		},
-		{
-			"name": "item",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"scope": null
-				},
-				{
-					"typeStr": "1",
-					"name": "atlas_name"
-				},
-				{
-					"typeStr": "1",
-					"name": "display_name"
-				},
-				{
-					"typeStr": "5:tool,plant,blueprint,resource",
-					"name": "cat"
-				},
-				{
-					"typeStr": "5:_1,_4,_16,_64",
-					"name": "stack"
-				},
-				{
-					"typeStr": "2",
-					"name": "can_hit"
-				},
-				{
-					"typeStr": "3",
-					"name": "hit_range",
-					"kind": null
-				},
-				{
-					"typeStr": "4",
-					"name": "damage"
-				}
-			],
-			"lines": [
-				{
-					"id": "iron",
-					"atlas_name": "item_iron_ore",
-					"display_name": "Iron",
-					"cat": 3,
-					"stack": 3,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				},
-				{
-					"id": "emerald",
-					"atlas_name": "emerald",
-					"display_name": "Emerald crystalline",
-					"cat": 3,
-					"stack": 3,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				},
-				{
-					"id": "plant",
-					"atlas_name": "seaweed",
-					"display_name": "Seaweed",
-					"cat": 3,
-					"stack": 3,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				},
-				{
-					"id": "seeds_seaweed",
-					"atlas_name": "seeds_seaweed",
-					"display_name": "Seaweed seeds",
-					"cat": 1,
-					"stack": 2,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				},
-				{
-					"id": "axe",
-					"atlas_name": "fireaxe",
-					"display_name": "Fireaxe",
-					"cat": 0,
-					"stack": 0,
-					"can_hit": true,
-					"damage": 1,
-					"hit_range": 50
-				},
-				{
-					"id": "hydroponics",
-					"atlas_name": "hydroponics",
-					"display_name": "Hydroponics",
-					"cat": 2,
-					"stack": 1,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				},
-				{
-					"id": "workbench",
-					"atlas_name": "workbench",
-					"display_name": "Workbench",
-					"cat": 2,
-					"stack": 1,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				},
-				{
-					"id": "door",
-					"atlas_name": "door",
-					"display_name": "Door",
-					"cat": 2,
-					"stack": 1,
-					"can_hit": false,
-					"damage": 0,
-					"hit_range": 0
-				}
-			],
-			"props": {},
-			"separators": [
-				{
-					"title": "tools",
-					"id": "axe"
-				},
-				{
-					"title": "blueprints",
-					"id": "hydroponics"
-				}
-			]
-		},
-		{
-			"name": "recipe",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"scope": null
-				},
-				{
-					"typeStr": "1",
-					"name": "name",
-					"kind": "localizable"
-				},
-				{
-					"typeStr": "6:item",
-					"name": "item_icon"
-				},
-				{
-					"typeStr": "10:Player,Workbench",
-					"name": "recipe_source"
-				},
-				{
-					"typeStr": "8",
-					"name": "ingred"
-				},
-				{
-					"typeStr": "8",
-					"name": "result"
-				}
-			],
-			"lines": [
-				{
-					"id": "axe",
-					"name": "Axe",
-					"item_icon": "axe",
-					"result": [
-						{
-							"item": "axe",
-							"amount": 1
-						}
-					],
-					"recipe_source": 3,
-					"ingred": [
-						{
-							"item": "iron",
-							"amount": 2
-						}
-					]
-				},
-				{
-					"id": "workbench",
-					"name": "Workbench",
-					"item_icon": "workbench",
-					"result": [
-						{
-							"item": "workbench",
-							"amount": 1
-						}
-					],
-					"recipe_source": 1,
-					"ingred": [
-						{
-							"item": "iron",
-							"amount": 3
-						}
-					]
-				}
-			],
-			"separators": [],
-			"props": {
-				"editor": {
-					"categories": null
-				}
-			}
-		},
-		{
 			"name": "tileset",
 			"columns": [
 				{
@@ -776,6 +503,44 @@
 			}
 		},
 		{
+			"name": "locationObjTypeDF",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "6:locationObjType",
+					"name": "type",
+					"kind": null
+				}
+			],
+			"separators": [],
+			"props": {
+				"dataFiles": "locationObjTypeDF"
+			}
+		},
+		{
+			"name": "locationObjType",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "global"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
 			"name": "prefabLevel",
 			"columns": [
 				{
@@ -832,42 +597,6 @@
 					"typeStr": "3",
 					"name": "palettes",
 					"kind": null
-				}
-			]
-		},
-		{
-			"name": "recipe@result",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "6:item",
-					"name": "item"
-				},
-				{
-					"typeStr": "3",
-					"name": "amount"
-				}
-			]
-		},
-		{
-			"name": "recipe@ingred",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "6:item",
-					"name": "item"
-				},
-				{
-					"typeStr": "3",
-					"name": "amount"
 				}
 			]
 		}

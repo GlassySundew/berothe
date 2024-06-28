@@ -2,7 +2,6 @@ package net;
 
 import game.net.location.LocationReplicator;
 import game.net.entity.EntityReplicator;
-import en.Entity;
 import en.comp.client.EntityCameraFollowComponent;
 import en.comp.client.EntityMovementControlComponent;
 import game.client.GameClient;

@@ -20,7 +20,7 @@ class EntityReplicator extends NetNode {
 		entityDescriptionId = entity.desc.id.toString();
 
 		transformRepl = new EntityTransformReplicator( this );
-		transformRepl.followEntity( entity );
+		transformRepl.followEntityServer( entity );
 
 		componentsRepl = new EntityComponentsReplicator( this );
 		componentsRepl.followEntityServer( entity );

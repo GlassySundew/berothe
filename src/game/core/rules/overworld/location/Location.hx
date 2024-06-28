@@ -1,9 +1,13 @@
 package game.core.rules.overworld.location;
 
+import game.core.rules.overworld.location.objects.OverworldObjectsFactory;
+import game.data.location.LocationObjectFactory;
+import game.core.rules.overworld.location.objects.OverworldStaticObject;
+import game.data.location.objects.LocationObject;
 import game.core.rules.overworld.location.physics.IPhysicsEngine;
 import game.physics.PhysicsEngineAbstractFactory;
 import signals.Signal;
-import game.data.location.objects.LocationSpawnDescription;
+import game.data.location.objects.LocationSpawn;
 import game.data.storage.entity.EntityDescription;
 import util.Assert;
 import game.core.rules.overworld.entity.OverworldEntity;
@@ -14,18 +18,22 @@ class Location {
 
 	public final locationDesc : LocationDescription;
 	public final id : String;
-	public final onChunkCreated = new Signal<Chunk>();
-	public final onEntityAdded = new Signal<OverworldEntity>();
-	public final chunks : Chunks;
 	public final physics : IPhysicsEngine;
 
+	public final chunks : Chunks;
+	public final globalObjects : Array<OverworldStaticObject> = [];
+
+	public final objectFactory : OverworldObjectsFactory;
+	public final onChunkCreated = new Signal<Chunk>();
+	public final onEntityAdded = new Signal<OverworldEntity>();
+
 	var locationDataProvider : ILocationObjectsDataProvider;
-	var locationDataResolver : LocationDataResolver;
 	var entities : Array<OverworldEntity> = [];
 
 	public function new( locationDesc : LocationDescription, id : String ) {
 		this.locationDesc = locationDesc;
 		this.id = id;
+		objectFactory = new OverworldObjectsFactory( this );
 
 		chunks = new Chunks( this, locationDesc.chunkSize );
 		physics = PhysicsEngineAbstractFactory.create();
@@ -44,7 +52,7 @@ class Location {
 		onEntityAdded.dispatch( entity );
 	}
 
-	public function getSpawnByEntityDesc( entityDesc : EntityDescription ) : LocationSpawnDescription {
+	public function getSpawnByEntityDesc( entityDesc : EntityDescription ) : LocationSpawn {
 		return locationDataProvider.getSpawnsByEntityDesc( entityDesc )[0];
 	}
 
@@ -54,8 +62,16 @@ class Location {
 
 	function load() {
 		// TODO async
-		locationDataResolver = locationDesc.createLocationDataResolver();
-		locationDataProvider = locationDataResolver.objectsDataProvider;
+		locationDataProvider = locationDesc.createLocationDataResolver().objectsDataProvider;
 		locationDataProvider.load();
+
+		addStaticObjects();
+	}
+
+	function addStaticObjects() {
+		var objects = locationDataProvider.getGlobalObjects();
+		for ( object in objects ) {
+			globalObjects.push( objectFactory.byDesc( object ) );
+		}
 	}
 }

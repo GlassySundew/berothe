@@ -1,24 +1,24 @@
 package game.data.location.prefab;
 
-import hrt.prefab.l2d.Text;
-import game.data.storage.entity.EntityDescription;
-import game.data.location.objects.LocationSpawnDescription;
-import plugins.prefab_berothe.src.customObj.CustomBox;
-import plugins.prefab_berothe.src.customObj.Collision;
-import hrt.prefab.l3d.Instance;
-import util.HideUtil;
 import hrt.prefab.Prefab;
+import hrt.prefab.l3d.Instance;
 import hxd.res.Loader;
+import util.HideUtil;
 import game.core.rules.overworld.location.ILocationObjectsDataProvider;
+import game.data.location.objects.LocationObject;
+import game.data.location.objects.LocationSpawn;
+import game.data.storage.entity.EntityDescription;
 
 enum abstract DataSheetIdent( String ) from String {
 
 	var ENTITY_SPAWNPOINT = "entitySpawnPointDF";
+	var LOCATION_OBJ_TYPE = "locationObjTypeDF";
 }
 
 class LocationPrefabSource implements ILocationObjectsDataProvider {
 
-	var spawns : Array<LocationSpawnDescription> = [];
+	var spawns : Array<LocationSpawn> = [];
+	var globalObjects : Array<LocationObject> = [];
 
 	var file : String;
 	var prefab : Prefab;
@@ -35,37 +35,55 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 		parse();
 	}
 
-	public function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawnDescription> {
+	public function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawn> {
 		return spawns.filter( ( spawn ) -> {
 			return spawn.entityDesc == entityDesc;
 		} );
 	}
 
+	public function getGlobalObjects() {
+		return globalObjects;
+	}
+
 	function parse() {
-		HideUtil.mapPrefabWithDeref( prefab, parsePrefabElement );
+		HideUtil.mapPrefabChildrenWithDerefRec( prefab, parsePrefabElement );
 	}
 
 	function parsePrefabElement( localPrefab : Prefab ) {
 		switch ( Type.getClass( localPrefab ) ) {
 			case Instance: resolveInstance( Std.downcast( localPrefab, Instance ) );
-			case Collision:
-			case CustomBox:
-			case Text:
-			case e:
-				trace( "found not suppported item: " + e + " while parsing prefab: " + prefab.shared.prefabSource );
 		}
+		return false;
 	}
 
 	function resolveInstance( instance : Instance ) {
 		var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( instance.props, "$cdbtype" ) );
 
-		return
-			switch cdbSheetId {
-				case ENTITY_SPAWNPOINT:
-					var entry : Data.EntitySpawnPointDFDef = instance.props;
-					spawns.push( LocationSpawnDescription.fromPrefabInstance( instance, entry ) );
-				case e:
-					throw "Prefab instance: " + e + " is not suppported";
-			}
+		switch cdbSheetId {
+			case ENTITY_SPAWNPOINT:
+				var entry : Data.EntitySpawnPointDFDef = instance.props;
+				spawns.push( LocationSpawn.fromPrefabInstance( instance, entry ) );
+			case LOCATION_OBJ_TYPE:
+				var entry : Data.LocationObjTypeDFDef = instance.props;
+				switch entry.type {
+					case global:
+						globalObjects = globalObjects.concat( resolveContainer( instance ) );
+				}
+			case e:
+				trace( "Prefab instance: " + e + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
+		}
+	}
+
+	function resolveContainer( prefab : Prefab ) : Array<LocationObject> {
+		var result = [];
+
+		function parsePrefabElementsLocal( prefabLocal : Prefab ) : Bool {
+			result.push( LocationObjectFactory.fromPrefab( prefabLocal ) );
+			return false;
+		}
+
+		HideUtil.mapPrefabChildrenWithDerefRec( prefab, parsePrefabElementsLocal );
+
+		return result;
 	}
 }

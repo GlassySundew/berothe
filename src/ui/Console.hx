@@ -1,8 +1,5 @@
 package ui;
 
-import en.Item;
-import en.player.Player;
-import en.util.item.InventoryCell;
 import game.client.GameClient;
 import game.client.level.LevelView;
 import h2d.Console.ConsoleArg;
@@ -51,17 +48,6 @@ class Console extends h2d.Console {
 			} else {
 				log( "- " + k, 0xFF8000 );
 				setFlag( k, false );
-			}
-		} );
-
-		this.addCommand( "giveItem", [
-			{ name : "item", t : AString, opt : false },
-			{ name : "amount", t : AInt, opt : true }
-		], function ( ?k : Data.ItemKind, ?amount : Int = 1 ) {
-			if ( Data.item.get( k ) != null ) {
-				var cell = new InventoryCell( Cursor, null );
-				cell.item = Item.fromCdbEntry( k, Player.inst, amount );
-				Player.inst.inventoryModel.inventory.giveItem( cell, false );
 			}
 		} );
 

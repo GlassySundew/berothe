@@ -32,27 +32,27 @@ class LevelView extends dn.Process {
 	public var batcher : LUTBatcher;
 	public var root3d : Object;
 
-	public final level : Level;
+	// public final level : Level;
 
-	public final physics : ClientPhysics;
+	// public final physics : ClientPhysics;
 	var physicsDebugView : HeapsOimophysicsDebugDraw;
 
 
-	public function new( level : Level ) {
-		super( GameClient.inst );
-		this.level = level;
-		inst = this;
-		root3d = new Object( Boot.inst.s3d );
-		batcher = new LUTBatcher();
+	// public function new( level : Level ) {
+	// 	super( GameClient.inst );
+	// 	this.level = level;
+	// 	inst = this;
+	// 	root3d = new Object( Boot.inst.s3d );
+	// 	batcher = new LUTBatcher();
 
-		// GameClient.inst.levelView.val = this;
+	// 	// GameClient.inst.levelView.val = this;
 
-		physics = new ClientPhysics( level.world );
+	// 	physics = new ClientPhysics( level.world );
 
-		#if debug
-		debugInit();
-		#end
-	}
+	// 	#if debug
+	// 	debugInit();
+	// 	#end
+	// }
 
 	override function onDispose() {
 		super.onDispose();
@@ -73,7 +73,7 @@ class LevelView extends dn.Process {
 		super.postUpdate();
 	}
 
-	function debugInit() {
-		physics.debugInit();
-	}
+	// function debugInit() {
+	// 	physics.debugInit();
+	// }
 }

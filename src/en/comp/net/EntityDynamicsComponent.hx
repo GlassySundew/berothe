@@ -22,10 +22,6 @@ class EntityDynamicsComponent extends EntityNetComponent {
 
 	var rigidBodyComponent : EntityRigidBodyComponent;
 
-	public function new( entity : Entity, ?parent ) {
-		super( entity, parent );
-	}
-
 	// public function cancelVelocities() {
 	// 	dx = dy = 0;
 	// }
@@ -33,30 +29,30 @@ class EntityDynamicsComponent extends EntityNetComponent {
 	override function init() {
 		super.init();
 
-		entity.components.onAppear(
-			EntityRigidBodyComponent,
-			( key, component ) -> {
-				rigidBodyComponent = component;
-			}
-		);
+		// entity.components.onAppear(
+		// 	EntityRigidBodyComponent,
+		// 	( key, component ) -> {
+		// 		rigidBodyComponent = component;
+		// 	}
+		// );
 
-		entity.x.addOnValue(
-			( oldVal ) -> if ( M.fabs( entity.x.val - oldVal ) > 0 )
-				onMoveInvalidate = true
-		);
-		entity.y.addOnValue(
-			( oldVal ) -> if ( M.fabs( entity.y.val - oldVal ) > 0 )
-				onMoveInvalidate = true
-		);
-		entity.z.addOnValue(
-			( oldVal ) -> if ( M.fabs( entity.z.val - oldVal ) > 0 ) {
-				onMoveInvalidate = true;
-			}
-		);
+		// entity.x.addOnValue(
+		// 	( oldVal ) -> if ( M.fabs( entity.x.val - oldVal ) > 0 )
+		// 		onMoveInvalidate = true
+		// );
+		// entity.y.addOnValue(
+		// 	( oldVal ) -> if ( M.fabs( entity.y.val - oldVal ) > 0 )
+		// 		onMoveInvalidate = true
+		// );
+		// entity.z.addOnValue(
+		// 	( oldVal ) -> if ( M.fabs( entity.z.val - oldVal ) > 0 ) {
+		// 		onMoveInvalidate = true;
+		// 	}
+		// );
 
-		entityPositionProvider.then( ( _ ) -> {
-			entity.onFrame.add( onFrame );
-		} );
+		// entityPositionProvider.then( ( _ ) -> {
+		// 	entity.onFrame.add( onFrame );
+		// } );
 	}
 
 	function onFrame() {
@@ -65,20 +61,20 @@ class EntityDynamicsComponent extends EntityNetComponent {
 		var entityPos = entityPositionProvider.result;
 		entityPos.update();
 
-		if ( M.fabs( entityPos.velX ) <= 0.0005 * entity.tmod ) {
-			entityPos.velX = 0;
-		} else
-			onMoveInvalidate = true;
+		// if ( M.fabs( entityPos.velX ) <= 0.0005 * entity.tmod ) {
+		// 	entityPos.velX = 0;
+		// } else
+		// 	onMoveInvalidate = true;
 
-		if ( M.fabs( entityPos.velY ) <= 0.0005 * entity.tmod ) {
-			entityPos.velY = 0;
-		} else
-			onMoveInvalidate = true;
+		// if ( M.fabs( entityPos.velY ) <= 0.0005 * entity.tmod ) {
+		// 	entityPos.velY = 0;
+		// } else
+		// 	onMoveInvalidate = true;
 
-		if ( M.fabs( entityPos.velZ ) <= 0.0005 * entity.tmod ) {
-			entityPos.velZ = 0;
-		} else
-			onMoveInvalidate = true;
+		// if ( M.fabs( entityPos.velZ ) <= 0.0005 * entity.tmod ) {
+		// 	entityPos.velZ = 0;
+		// } else
+		// 	onMoveInvalidate = true;
 
 		if ( onMoveInvalidate ) {
 			onMove.dispatch();

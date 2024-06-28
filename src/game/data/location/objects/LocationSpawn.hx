@@ -4,14 +4,14 @@ import hrt.prefab.l3d.Instance;
 import game.data.storage.DataStorage;
 import game.data.storage.entity.EntityDescription;
 
-class LocationSpawnDescription {
+class LocationSpawn extends LocationObject {
 
 	public static function fromPrefabInstance(
 		instance : Instance,
 		cdbEntry : Data.EntitySpawnPointDFDef
-	) : LocationSpawnDescription {
+	) : LocationSpawn {
 
-		return new LocationSpawnDescription(
+		return new LocationSpawn(
 			Std.int( instance.x ),
 			Std.int( instance.y ),
 			Std.int( instance.z ),
@@ -20,10 +20,6 @@ class LocationSpawnDescription {
 		);
 	}
 
-	public final x : Int;
-	public final y : Int;
-	public final z : Int;
-	public final name : String;
 	public final entityDesc : EntityDescription;
 
 	public function new(
@@ -33,10 +29,7 @@ class LocationSpawnDescription {
 		name : String,
 		desc : EntityDescription
 	) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		this.name = name;
+		super( x, y, z, name );
 		entityDesc = desc;
 	}
 }

@@ -72,7 +72,6 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		sizeX : Int,
 		sizeY : Int,
 		sizeZ : Int,
-		entity : Entity,
 		?parent
 	) {
 		this.sizeX = sizeX;
@@ -81,7 +80,7 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 
 		this.offsetZ = offsetZ;
 
-		super( entity, parent );
+		super( parent );
 	}
 
 	override function init() {
@@ -91,35 +90,35 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		halfSizeY = sizeY / 2;
 		halfSizeZ = sizeZ / 2;
 
-		entity.onSpawned.handle(
-			( level ) -> {
-				createRigidBody();
+		// entity.onSpawned.handle(
+		// 	( level ) -> {
+		// 		createRigidBody();
 
-				level.world.addRigidBody( rigidBody );
-				world = level.world;
+		// 		level.world.addRigidBody( rigidBody );
+		// 		world = level.world;
 
-				rigidBody.setPosition( new Vec3( entity.x, entity.y, entity.z ) );
-			}
-		);
+		// 		rigidBody.setPosition( new Vec3( entity.x, entity.y, entity.z ) );
+		// 	}
+		// );
 
-		entity.components.onAppear(
-			EntityDynamicsComponent,
-			( key, dynamicsComponent ) -> {
-				standRayCastCallback.onShapeCollide.add( onRayCollide );
+		// entity.components.onAppear(
+		// 	EntityDynamicsComponent,
+		// 	( key, dynamicsComponent ) -> {
+		// 		standRayCastCallback.onShapeCollide.add( onRayCollide );
 
-				dynamicsComponent.onMove.add(() -> {
-					rigidBody.wakeUp();
+		// 		dynamicsComponent.onMove.add(() -> {
+		// 			rigidBody.wakeUp();
 
-					var start = torsoShape.getTransform().getPosition();
-					var end = start.clone();
-					end.z -= offsetZ;
+		// 			var start = torsoShape.getTransform().getPosition();
+		// 			var end = start.clone();
+		// 			end.z -= offsetZ;
 
-					world.rayCast( start, end, standRayCastCallback );
-				} );
-				dynamicsComponent.onMoveInvalidate = true;
-				dynamicsComponent.entityPositionProvider.resolve( this );
-			}
-		);
+		// 			world.rayCast( start, end, standRayCastCallback );
+		// 		} );
+		// 		dynamicsComponent.onMoveInvalidate = true;
+		// 		dynamicsComponent.entityPositionProvider.resolve( this );
+		// 	}
+		// );
 	}
 
 	inline function onRayCollide( shape : Shape, rayCastHit : RayCastHit ) {
@@ -180,22 +179,22 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		// newPosition.y = M.round( newPosition.y );
 		// newPosition.z = M.round( newPosition.z );
 
-		var currentPosition = new Vector( entity.x, entity.y, entity.z );
+		// var currentPosition = new Vector( entity.x, entity.y, entity.z );
 
-		if ((
-			Math.abs( newPosition.x - currentPosition.x ) > 0.001
-			|| Math.abs( newPosition.y - currentPosition.y ) > 0.001
-			|| Math.abs( newPosition.z - currentPosition.z ) > 0.001
-		) && ( /**rigidBody.isPositionSnapped**/
-			true || pixelPerfectMoving.checkIfPerfect(
-				currentPosition,
-				newPosition
-			) ) ) {
-				entity.setPos(
-					newPosition.x,
-					newPosition.y,
-					newPosition.z
-				);
-		}
+		// if ((
+		// 	Math.abs( newPosition.x - currentPosition.x ) > 0.001
+		// 	|| Math.abs( newPosition.y - currentPosition.y ) > 0.001
+		// 	|| Math.abs( newPosition.z - currentPosition.z ) > 0.001
+		// ) && ( /**rigidBody.isPositionSnapped**/
+		// 	true || pixelPerfectMoving.checkIfPerfect(
+		// 		currentPosition,
+		// 		newPosition
+		// 	) ) ) {
+		// 		entity.setPos(
+		// 			newPosition.x,
+		// 			newPosition.y,
+		// 			newPosition.z
+		// 		);
+		// }
 	}
 }

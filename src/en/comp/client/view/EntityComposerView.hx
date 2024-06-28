@@ -65,7 +65,7 @@
 // 	}
 
 // 	function provideSceneTools() {
-// 		util.HideUtil.mapPrefabWithDeref( entityComposerPrefab, ( prefab ) -> {
+// 		util.HideUtil.mapPrefabChildrenWithDerefRec( entityComposerPrefab, ( prefab ) -> {
 // 			if ( Std.isOfType( prefab, INeedPrefabContext ) ) {
 // 				var providee = cast( prefab, INeedPrefabContext );
 // 				var scenePrefab = modelObject.getObjectByName( prefab.name );

@@ -20,7 +20,7 @@ class EntityTransformReplicator extends NetNode {
 		super( parent );
 	}
 
-	public function followEntity( entity : OverworldEntity ) {
+	public function followEntityServer( entity : OverworldEntity ) {
 		this.entity = entity;
 
 		entity.transform.x.subscribeProp( x );

@@ -2,7 +2,6 @@ package net;
 
 #if client
 import util.Assert;
-import en.Entity;
 import util.Const;
 import signals.Signal;
 import dn.Process;
@@ -117,9 +116,9 @@ class Client extends Process {
 
 		host.onMessage = onMessage;
 
-		host.onUnregister = function ( o ) {
-			if ( Std.isOfType( o, Entity ) ) cast( o, Entity ).destroy();
-		};
+		// host.onUnregister = function ( o ) {
+		// 	if ( Std.isOfType( o, Entity ) ) cast( o, Entity ).destroy();
+		// };
 	}
 
 	public function disconnect() {

@@ -11,13 +11,11 @@ import game.core.rules.overworld.location.Location;
 import game.data.storage.location.LocationDescription;
 #if server
 import dn.Process;
-import en.Entity;
 import hxbit.NetworkHost.NetworkClient;
 import net.ClientController;
 import net.Server;
 import game.core.GameCore;
 import game.data.storage.DataStorage;
-import game.server.level.ObjectsProviderFactory;
 
 using en.util.EntityUtil;
 
@@ -62,13 +60,6 @@ class GameServer extends Process {
 		#end
 	}
 
-	override function onDispose() {
-		super.onDispose();
-
-		for ( e in Entity.ServerALL ) e.destroy();
-		gc();
-	}
-
 	public function getLevel( locationDesc : LocationDescription ) : Location {
 		return core.getOrCreateLocationByDesc( locationDesc );
 	}
@@ -99,24 +90,6 @@ class GameServer extends Process {
 				cliCon,
 				coreReplicator
 			);
-	}
-
-	function gc() {
-		if ( Entity.GC == null || Entity.GC.length == 0 )
-			return;
-
-		for ( e in Entity.GC ) e.dispose();
-		Entity.GC = [];
-	}
-
-	override function update() {
-		super.update();
-
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessPreUpdate();
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessUpdate();
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessPostUpdate();
-		for ( e in Entity.ServerALL ) if ( !e.isDestroyed ) e.headlessFrameEnd();
-		gc();
 	}
 
 	function onNewClientConnected( networkClient : NetworkClient ) {
