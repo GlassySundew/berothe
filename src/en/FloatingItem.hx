@@ -4,7 +4,7 @@ import dn.heaps.slib.HSprite;
 import util.Util;
 import dn.M;
 import en.spr.EntityView;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import util.Assets;
 import util.Assets;
 import en.objs.IsoTileSpr;

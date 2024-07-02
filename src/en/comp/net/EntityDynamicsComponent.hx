@@ -1,6 +1,6 @@
 package en.comp.net;
 
-import game.client.GameClient;
+import game.net.client.GameClient;
 import util.extensions.ArrayExtensions;
 import h3d.Vector;
 import oimo.common.Vec3;

@@ -23,7 +23,7 @@ class ServerBoot {
 	final thousandSlashSixty = 1000 / 60;
 
 	function mainLoop() {
-		Sys.sleep( ( thousandSlashSixty - Timer.dt ) / 1000 );
+		Sys.sleep(( thousandSlashSixty - Timer.dt ) / 1000 );
 		hxd.Timer.update();
 		var dt = hxd.Timer.dt;
 
@@ -36,8 +36,8 @@ class ServerBoot {
 	public function new() {
 
 		haxe.Log.trace = function ( v : Dynamic, ?infos : haxe.PosInfos ) {
-			var str = haxe.Log.formatOutput( v, infos );
-			Sys.println( "[SERVER] " + str );
+			var str = haxe.Log.formatOutput( "\033[34m" + v, infos );
+			Sys.println( "[SERVER] " + str + "\033[0m" );
 		}
 
 		hxd.System.start( function () {

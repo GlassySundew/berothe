@@ -1,5 +1,6 @@
 package game.physics;
 
+import game.core.rules.overworld.location.physics.Types.RigidBodyType;
 import util.Assert;
 import game.physics.oimo.OimoRigidBody;
 import oimo.dynamics.rigidbody.RigidBody;

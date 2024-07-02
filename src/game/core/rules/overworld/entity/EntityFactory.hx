@@ -8,6 +8,19 @@ import game.core.rules.overworld.location.Location;
 
 class EntityFactory {
 
+	public static function createAndAttachComponentsFromProperties(
+		entityDesc : EntityDescription,
+		entity : OverworldEntity
+	) {
+		var properties = entityDesc.getBodyDescription();
+		var components = EntityComponentsFactory.fromPropertyDescription( properties );
+		for ( component in components ) {
+			// Assert.notNull( component, "null component came from body property factory" );
+			if ( component != null )
+				entity.components.add( component );
+		}
+	}
+	
 	static var ENTITY_ID_STUB = 0;
 
 	public final onEntityCreated = new Signal<OverworldEntity>();
@@ -31,23 +44,12 @@ class EntityFactory {
 
 	function createEntity( entityDesc : EntityDescription ) : OverworldEntity {
 		var entity = new OverworldEntity( entityDesc, '${++ENTITY_ID_STUB}' );
-		createComponentsFromProperties( entityDesc, entity );
+		createAndAttachComponentsFromProperties( entityDesc, entity );
 
 		onEntityCreated.dispatch( entity );
 
 		return entity;
 	}
 
-	function createComponentsFromProperties(
-		entityDesc : EntityDescription,
-		entity : OverworldEntity
-	) {
-		var properties = entityDesc.getBodyDescription();
-		var components = EntityComponentsFactory.fromPropertyDescription( properties );
-		for ( component in components ) {
-			// Assert.notNull( component, "null component came from body property factory" );
-			if ( component != null )
-				entity.components.add( component );
-		}
-	}
+
 }

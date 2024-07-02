@@ -1,7 +1,7 @@
 package net;
 
 import en.structures.Door;
-import game.server.GameServer;
+import game.net.server.GameServer;
 import en.player.Player;
 
 /**

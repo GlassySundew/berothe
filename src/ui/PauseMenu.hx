@@ -6,7 +6,7 @@ import dn.Tweenie.TType;
 import ui.core.TextButton;
 import ui.core.ShadowedText;
 import net.Client;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import util.Assets;
 import dn.Process;
 import h2d.Flow;

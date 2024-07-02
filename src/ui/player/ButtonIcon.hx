@@ -2,7 +2,7 @@ package ui.player;
 
 import util.Const;
 import dn.heaps.slib.HSprite;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import h2d.domkit.Style;
 import h2d.Flow;
 import h2d.Object;

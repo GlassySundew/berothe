@@ -5,7 +5,7 @@ import util.Util;
 import util.Const;
 import dn.heaps.input.ControllerAccess;
 import dn.Process;
-import game.client.ControllerAction;
+import game.net.client.ControllerAction;
 import h2d.Flow;
 import h2d.Object;
 import h2d.Tile;

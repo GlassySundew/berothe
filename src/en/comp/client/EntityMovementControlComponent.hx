@@ -5,7 +5,7 @@ import oimo.common.Vec3;
 import en.comp.net.EntityDynamicsComponent;
 import dn.M;
 import dn.heaps.input.ControllerAccess;
-import game.client.ControllerAction;
+import game.net.client.ControllerAction;
 import util.Const;
 
 /**

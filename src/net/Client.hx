@@ -5,7 +5,7 @@ import util.Assert;
 import util.Const;
 import signals.Signal;
 import dn.Process;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import h2d.Flow;
 import ui.MainMenu;
 import ui.core.ShadowedText;

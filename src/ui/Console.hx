@@ -1,6 +1,6 @@
 package ui;
 
-import game.client.GameClient;
+import game.net.client.GameClient;
 import game.client.level.LevelView;
 import h2d.Console.ConsoleArg;
 import h3d.col.Bounds;

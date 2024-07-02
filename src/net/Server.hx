@@ -2,7 +2,7 @@
 package net;
 
 import dn.Process;
-import game.server.GameServer;
+import game.net.server.GameServer;
 import hxbit.NetworkHost.NetworkClient;
 import hxd.net.SocketHost;
 import util.Env;

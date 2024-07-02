@@ -9,6 +9,19 @@ import game.net.entity.component.EntityRigidBodyComponentReplicator;
 
 class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 
+	public inline static function fromCdb(
+		entry : Data.EntityBody_properties_rigidBodyTorso
+	) : RigidBodyTorsoDescription {
+		if ( entry == null ) return null;
+		return new RigidBodyTorsoDescription(
+			entry.offsetZ,
+			entry.sizeX,
+			entry.sizeY,
+			entry.sizeZ,
+			entry.id.toString()
+		);
+	}
+
 	public function buildComponennt() : EntityComponent {
 		return new EntityRigidBodyComponent( this );
 	}

@@ -1,5 +1,8 @@
 package game.physics.oimo;
 
+import oimo.common.Vec3;
+import game.core.rules.overworld.location.physics.Types.ThreeDeeVectorType;
+import game.core.rules.overworld.location.physics.Types.RigidBodyType;
 import util.Assert;
 import oimo.dynamics.rigidbody.RigidBodyConfig;
 import oimo.dynamics.rigidbody.Shape;
@@ -34,7 +37,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setRotationFactor( rotationFactor : ThreeDeeVectorType ) {
 		rigidBody.setRotationFactor(
-			new oimo.common.Vec3(
+			new Vec3(
 				rotationFactor.x,
 				rotationFactor.y,
 				rotationFactor.z
@@ -43,7 +46,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setLinearDamping( damping : ThreeDeeVectorType ) {
 		rigidBody.setLinearDamping(
-			new oimo.common.Vec3(
+			new Vec3(
 				damping.x,
 				damping.y,
 				damping.z
@@ -53,5 +56,9 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setGravityScale( gravitiScale : Float ) {
 		rigidBody.setGravityScale( gravitiScale );
+	}
+
+	public function setPosition( pos : ThreeDeeVectorType ) {
+		rigidBody.setPosition( new Vec3( pos.x, pos.y, pos.z ) );
 	}
 }

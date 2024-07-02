@@ -2,7 +2,7 @@ package en.spr;
 
 import util.GameUtil;
 import dn.heaps.slib.SpriteLib;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import h2d.Object;
 import h2d.Tile;
 import h3d.mat.Texture;

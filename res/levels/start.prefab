@@ -7,7 +7,10 @@
 			"props": {
 				"id": "player",
 				"entity": "player",
-				"$cdbtype": "entitySpawnPointDF"
+				"$cdbtype": "entitySpawnPointDF",
+				"entitySpawned": "player",
+				"blockEntity": "point",
+				"spawnedEntity": "player"
 			},
 			"x": -3,
 			"y": 3,
@@ -15,6 +18,7 @@
 				{
 					"type": "text",
 					"name": "text",
+					"locked": true,
 					"blendMode": "Alpha",
 					"color": 0,
 					"size": 22,
@@ -27,21 +31,30 @@
 			"type": "instance",
 			"name": "global",
 			"props": {
-				"id": "global",
-				"$cdbtype": "locationObjTypeDF",
-				"type": "global"
+				"id": "Start_global",
+				"type": "global",
+				"$cdbtype": "locationObjContainerTypeDF"
 			},
 			"children": [
 				{
 					"type": "customBox",
 					"name": "customBox",
+					"props": {
+						"blockEntity": "graybox",
+						"$cdbtype": "locationStaticObjDF"
+					},
 					"scaleX": 68,
 					"scaleY": 78
 				},
 				{
 					"type": "customBox",
 					"name": "customBox",
-					"x": -33,
+					"props": {
+						"blockEntity": "graybox",
+						"$cdbtype": "locationStaticObjDF"
+					},
+					"x": -29.73,
+					"y": -8.33,
 					"scaleY": 81,
 					"scaleZ": 110
 				}

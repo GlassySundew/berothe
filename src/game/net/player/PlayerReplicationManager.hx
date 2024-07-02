@@ -12,7 +12,7 @@ import game.net.location.CoreReplicator;
 import game.net.location.LocationReplicator;
 
 /**
-	`PlayerReplicationManager` manages singular player sight objects
+	A server-side only service, `PlayerReplicationManager` manages singular player replication channel
 **/
 class PlayerReplicationManager {
 

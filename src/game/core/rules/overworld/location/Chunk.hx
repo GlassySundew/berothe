@@ -1,5 +1,7 @@
 package game.core.rules.overworld.location;
 
+import rx.ObservableFactory;
+import rx.Observable;
 import signals.Signal;
 import game.core.rules.overworld.entity.OverworldEntity;
 import util.Assert;
@@ -11,6 +13,7 @@ class Chunk {
 	public final z : Int;
 	public final location : Location;
 	public final onEntityAdded : Signal<OverworldEntity> = new Signal<OverworldEntity>();
+	public final entityStream : Observable<OverworldEntity>;
 
 	var entities : Array<OverworldEntity> = [];
 
@@ -19,6 +22,9 @@ class Chunk {
 		this.y = y;
 		this.z = z;
 		this.location = location;
+
+		entityStream = ObservableFactory.ofIterable( entities )
+			.append( ObservableFactory.fromSignal( onEntityAdded ) );
 	}
 
 	public function addEntity( entity : OverworldEntity ) {

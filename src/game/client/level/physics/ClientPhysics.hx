@@ -2,7 +2,7 @@ package game.client.level.physics;
 
 import util.Settings;
 import oimo.dynamics.World;
-import game.client.debug.HeapsOimophysicsDebugDraw;
+import game.debug.HeapsOimophysicsDebugDraw;
 
 class ClientPhysics {
 

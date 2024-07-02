@@ -2,7 +2,7 @@ package game.client.level;
 
 import game.client.level.physics.ClientPhysics;
 import util.tools.Settings;
-import game.client.debug.HeapsOimophysicsDebugDraw;
+import game.debug.HeapsOimophysicsDebugDraw;
 import dn.Process;
 import h3d.scene.Interactive;
 import h3d.scene.Object;

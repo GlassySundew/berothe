@@ -4,7 +4,7 @@ import game.net.location.LocationReplicator;
 import game.net.entity.EntityReplicator;
 import en.comp.client.EntityCameraFollowComponent;
 import en.comp.client.EntityMovementControlComponent;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable;
 import util.Assert;
@@ -47,7 +47,7 @@ class ClientController extends NetNode {
 		Main.inst.cliCon.val = this;
 
 		#if debug
-		new game.client.debug.ImGuiGameClientDebug( GameClient.inst );
+		new game.debug.ImGuiGameClientDebug( GameClient.inst );
 		#end
 	}
 

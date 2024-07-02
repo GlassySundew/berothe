@@ -1,5 +1,6 @@
 package game.net.entity;
 
+import game.core.rules.overworld.location.Location;
 import game.data.storage.DataStorage;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable.NetworkSerializer;
@@ -12,6 +13,8 @@ class EntityReplicator extends NetNode {
 
 	@:s var componentsRepl : EntityComponentsReplicator;
 	@:s var entityDescriptionId : String;
+	@:s var locationDescId : String;
+
 	var transformRepl : EntityTransformReplicator;
 
 	public function new( entity : OverworldEntity, ?parent ) {
@@ -24,10 +27,14 @@ class EntityReplicator extends NetNode {
 
 		componentsRepl = new EntityComponentsReplicator( this );
 		componentsRepl.followEntityServer( entity );
+
+		entity.location.addOnValueImmediately( onLocationChanged );
 	}
 
 	override function alive() {
 		super.alive();
+
+		trace( "aliving entity " + entityDescriptionId );
 
 		var desc = DataStorage.inst.entityStorage.getDescriptionById( entityDescriptionId );
 		entity = new OverworldEntity( desc, "0" ); // todo client ids
@@ -38,5 +45,9 @@ class EntityReplicator extends NetNode {
 		if ( finalize ) componentsRepl = null;
 
 		super.unregister( host, ctx, finalize );
+	}
+
+	function onLocationChanged( location : Location ) {
+		locationDescId = location?.locationDesc.id.toString();
 	}
 }

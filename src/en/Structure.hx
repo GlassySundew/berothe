@@ -1,6 +1,6 @@
 package en;
 
-import game.server.GameServer;
+import game.net.server.GameServer;
 import net.Server;
 import en.util.CdbUtil;
 import en.model.StructureModel;
@@ -9,8 +9,8 @@ import en.model.InventoryModel;
 import dn.M;
 import util.Util;
 import en.spr.EntityView;
-import game.client.GameClient;
-import game.client.GameClient;
+import game.net.client.GameClient;
+import game.net.client.GameClient;
 import util.Assets;
 import en.player.Player;
 

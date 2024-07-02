@@ -24,10 +24,18 @@
 				{
 					"typeStr": "9:EntityControlType",
 					"name": "control",
-					"kind": null
+					"opt": true
 				}
 			],
 			"lines": [
+				{
+					"id": "graybox",
+					"body": "block"
+				},
+				{
+					"id": "point",
+					"body": "block"
+				},
 				{
 					"id": "rogue",
 					"body": "human",
@@ -43,7 +51,16 @@
 					]
 				}
 			],
-			"separators": [],
+			"separators": [
+				{
+					"title": "blocks",
+					"id": "graybox"
+				},
+				{
+					"title": "characters",
+					"id": "rogue"
+				}
+			],
 			"props": {}
 		},
 		{
@@ -66,6 +83,20 @@
 			],
 			"props": {},
 			"lines": [
+				{
+					"id": "block",
+					"properties": {
+						"dynamics": false,
+						"staticObjectRigidBody": {
+							"id": "blockRigidBody"
+						}
+					},
+					"view": {
+						"type": [
+							1
+						]
+					}
+				},
 				{
 					"id": "human",
 					"properties": {
@@ -111,12 +142,20 @@
 									"animationName": "walk"
 								}
 							]
-						},
-						"r": {}
+						}
 					}
 				}
 			],
-			"separators": []
+			"separators": [
+				{
+					"title": "static blocks",
+					"id": "block"
+				},
+				{
+					"title": "characters",
+					"id": "human"
+				}
+			]
 		},
 		{
 			"name": "entityComposed",
@@ -167,6 +206,12 @@
 					"name": "bodyHitbox",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "staticObjectRigidBody",
+					"opt": true,
+					"documentation": "Component for static rigid body, size, rotation and position are taken from prefab"
 				}
 			]
 		},
@@ -190,12 +235,6 @@
 					"name": "animations",
 					"opt": true,
 					"documentation": "EntityViewComponent.AnimationKey"
-				},
-				{
-					"typeStr": "17",
-					"name": "r",
-					"opt": true,
-					"kind": null
 				}
 			]
 		},
@@ -233,16 +272,6 @@
 					"kind": null
 				}
 			]
-		},
-		{
-			"name": "entityBody@view@r",
-			"props": {
-				"hide": true,
-				"isProps": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": []
 		},
 		{
 			"name": "entityBody@view@animations@idle",
@@ -381,24 +410,20 @@
 			]
 		},
 		{
-			"name": "entitySpawnPointDF",
+			"name": "entityBody@properties@staticObjectRigidBody",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
 			"columns": [
 				{
 					"typeStr": "0",
 					"name": "id",
-					"kind": null,
-					"scope": null
-				},
-				{
-					"typeStr": "6:entity",
-					"name": "entity",
 					"kind": null
 				}
-			],
-			"separators": [],
-			"props": {
-				"dataFiles": "entitySpawnPointDF"
-			}
+			]
 		},
 		{
 			"name": "tileset",
@@ -503,14 +528,31 @@
 			}
 		},
 		{
-			"name": "locationObjTypeDF",
+			"name": "entitySpawnPointDF",
 			"columns": [
 				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
+					"typeStr": "6:entity",
+					"name": "spawnedEntity"
 				},
+				{
+					"typeStr": "6:entity",
+					"name": "blockEntity",
+					"kind": null
+				}
+			],
+			"separators": [],
+			"props": {
+				"dataFiles": "entitySpawnPointDF",
+				"editor": {
+					"categories": [
+						"locationDF"
+					]
+				}
+			}
+		},
+		{
+			"name": "locationObjContainerTypeDF",
+			"columns": [
 				{
 					"typeStr": "6:locationObjType",
 					"name": "type",
@@ -519,7 +561,31 @@
 			],
 			"separators": [],
 			"props": {
-				"dataFiles": "locationObjTypeDF"
+				"dataFiles": "locationObjContainerTypeDF",
+				"editor": {
+					"categories": [
+						"locationDF"
+					]
+				}
+			}
+		},
+		{
+			"name": "locationStaticObjDF",
+			"columns": [
+				{
+					"typeStr": "6:entity",
+					"name": "blockEntity",
+					"kind": null
+				}
+			],
+			"separators": [],
+			"props": {
+				"dataFiles": "locationStaticObjDF",
+				"editor": {
+					"categories": [
+						"locationDF"
+					]
+				}
 			}
 		},
 		{
@@ -538,7 +604,13 @@
 				}
 			],
 			"separators": [],
-			"props": {}
+			"props": {
+				"editor": {
+					"categories": [
+						"locationDF"
+					]
+				}
+			}
 		},
 		{
 			"name": "prefabLevel",
@@ -641,6 +713,10 @@
 							"typeStr": "6:entityComposed"
 						}
 					]
+				},
+				{
+					"name": "Graybox",
+					"args": []
 				}
 			]
 		},

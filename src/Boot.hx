@@ -1,3 +1,4 @@
+import rx.schedulers.Test.TestBase;
 import oimo.common.Vec3;
 import oimo.m.IVec3;
 import core.ClassMap;
@@ -53,8 +54,8 @@ class Boot extends hxd.App {
 			Sys.println( str );
 			#else
 			if ( !StringTools.startsWith( infos.fileName, "hx/concurrent" ) ) {
-				var str = haxe.Log.formatOutput( v, infos );
-				Sys.println( str );
+				var str = haxe.Log.formatOutput( "\033[36m" + v, infos );
+				Sys.println( str + "\033[0m" );
 			}
 			#end
 		}

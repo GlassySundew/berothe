@@ -1,5 +1,7 @@
 package game.net.location;
 
+import util.Assert;
+import game.net.client.GameClient;
 import hxbit.NetworkSerializable.NetworkSerializer;
 import hxbit.NetworkHost;
 import game.core.GameCore;
@@ -22,14 +24,24 @@ class ChunkReplicator extends NetNode {
 		super( parent );
 		this.chunk = chunk;
 		this.coreReplicator = coreReplicator;
-		chunk.onEntityAdded.add( onEntityAddedToChunk );
+		chunk.entityStream.observe( onEntityAddedToChunk );
 	}
 
 	override function alive() {
 		super.alive();
+
+		entities.subscribleWithMapping( ( entityReplicator ) -> {
+			GameClient.inst.currentLocation.onAppear( ( location ) -> {
+				trace( "got entity in chunk: " + entityReplicator.entity.desc );
+				Assert.notNull( entityReplicator.entity );
+				location.addEntity( entityReplicator.entity );
+			} );
+		} );
 	}
 
 	function onEntityAddedToChunk( entity : OverworldEntity ) {
-		// entities.unregisterChild( coreReplicator.getEntityReplicator( entity ), NetworkHost.current );
+		trace( "entity added on server chunk" );
+		var entityReplicator = coreReplicator.getEntityReplicator( entity );
+		entities.push( entityReplicator );
 	}
 }

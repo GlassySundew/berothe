@@ -1,18 +1,14 @@
 package game.core.rules.overworld.location;
 
-import game.core.rules.overworld.location.objects.OverworldObjectsFactory;
-import game.data.location.LocationObjectFactory;
-import game.core.rules.overworld.location.objects.OverworldStaticObject;
-import game.data.location.objects.LocationObject;
-import game.core.rules.overworld.location.physics.IPhysicsEngine;
-import game.physics.PhysicsEngineAbstractFactory;
 import signals.Signal;
-import game.data.location.objects.LocationSpawn;
-import game.data.storage.entity.EntityDescription;
 import util.Assert;
 import game.core.rules.overworld.entity.OverworldEntity;
-import game.data.location.prefab.LocationDataResolver;
+import game.core.rules.overworld.location.OverworldObjectsFactory;
+import game.core.rules.overworld.location.physics.IPhysicsEngine;
+import game.data.location.objects.LocationSpawn;
+import game.data.storage.entity.EntityDescription;
 import game.data.storage.location.LocationDescription;
+import game.physics.PhysicsEngineAbstractFactory;
 
 class Location {
 
@@ -21,7 +17,9 @@ class Location {
 	public final physics : IPhysicsEngine;
 
 	public final chunks : Chunks;
-	public final globalObjects : Array<OverworldStaticObject> = [];
+
+	/** not replicated fully but via location id -> geting through DataStorage on client **/
+	public final globalObjects : Array<OverworldEntity> = [];
 
 	public final objectFactory : OverworldObjectsFactory;
 	public final onChunkCreated = new Signal<Chunk>();
@@ -37,7 +35,7 @@ class Location {
 
 		chunks = new Chunks( this, locationDesc.chunkSize );
 		physics = PhysicsEngineAbstractFactory.create();
-
+		
 		load();
 	}
 
@@ -47,8 +45,8 @@ class Location {
 		#end
 
 		entities.push( entity );
-		entity.addToLocation( this );
 		chunks.placeEntity( entity );
+		entity.addToLocation( this );
 		onEntityAdded.dispatch( entity );
 	}
 
@@ -65,13 +63,21 @@ class Location {
 		locationDataProvider = locationDesc.createLocationDataResolver().objectsDataProvider;
 		locationDataProvider.load();
 
-		addStaticObjects();
+		createAndAttachStaticObjects();
 	}
 
-	function addStaticObjects() {
+	function createAndAttachStaticObjects() {
 		var objects = locationDataProvider.getGlobalObjects();
 		for ( object in objects ) {
-			globalObjects.push( objectFactory.byDesc( object ) );
+			globalObjects.push( objectFactory.createByDesc( object ) );
 		}
+
+		for ( globalObject in globalObjects ) {
+			addGlobalEntity( globalObject );
+		}
+	}
+
+	function addGlobalEntity( entity : OverworldEntity ) {
+		entity.addToLocation( this );
 	}
 }

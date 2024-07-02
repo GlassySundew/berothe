@@ -1,6 +1,6 @@
 package en.comp.client;
 
-import game.client.GameClient;
+import game.net.client.GameClient;
 
 class EntityCameraFollowComponent extends EntityComponent {
 

@@ -2,8 +2,8 @@ package en.util;
 
 import oimo.common.Vec3;
 import dn.M;
-import game.client.GameClient;
-import game.server.GameServer;
+import game.net.client.GameClient;
+import game.net.server.GameServer;
 import hxGeomAlgo.HxPoint;
 import hxGeomAlgo.PoleOfInaccessibility;
 

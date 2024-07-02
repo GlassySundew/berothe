@@ -2,7 +2,7 @@ package en;
 
 import core.MutableProperty;
 import net.NSMutableProperty;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import dn.legacy.Color;
 import util.Const;
 import dn.Tweenie.TType;

@@ -23,4 +23,10 @@ class EntityTransform {
 		this.y.val = y;
 		this.z.val = z;
 	}
+
+	public function setRotation( x : Float, y : Float, z : Float ) {
+		this.rotationX.val = x;
+		this.rotationY.val = y;
+		this.rotationZ.val = z;
+	}
 }

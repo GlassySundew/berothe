@@ -4,7 +4,7 @@ import util.GameUtil;
 import dn.M;
 import util.Util;
 import util.Const;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import hxbit.Serializable;
 import ch2.ui.EventInteractive;
 import h2d.Flow;

@@ -19,10 +19,6 @@ abstract class EntityComponentReplicator extends NetNode {
 		super( parent );
 	}
 
-	override function init() {
-		super.init();
-	}
-
 	override function alive() {
 		super.alive();
 

@@ -12,7 +12,7 @@ import game.data.storage.entity.EntityDescription;
 enum abstract DataSheetIdent( String ) from String {
 
 	var ENTITY_SPAWNPOINT = "entitySpawnPointDF";
-	var LOCATION_OBJ_TYPE = "locationObjTypeDF";
+	var LOCATION_OBJ_CONTAINER_TYPE = "locationObjContainerTypeDF";
 }
 
 class LocationPrefabSource implements ILocationObjectsDataProvider {
@@ -36,8 +36,8 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	}
 
 	public function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawn> {
-		return spawns.filter( ( spawn ) -> {
-			return spawn.entityDesc == entityDesc;
+		return spawns.filter( ( spawn:LocationSpawn ) -> {
+			return spawn.spawnedEntityDesc == entityDesc;
 		} );
 	}
 
@@ -52,6 +52,8 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	function parsePrefabElement( localPrefab : Prefab ) {
 		switch ( Type.getClass( localPrefab ) ) {
 			case Instance: resolveInstance( Std.downcast( localPrefab, Instance ) );
+			case e:
+				trace( "object: " + e + " is not supported while parsing root location objects" );
 		}
 		return false;
 	}
@@ -63,8 +65,8 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 			case ENTITY_SPAWNPOINT:
 				var entry : Data.EntitySpawnPointDFDef = instance.props;
 				spawns.push( LocationSpawn.fromPrefabInstance( instance, entry ) );
-			case LOCATION_OBJ_TYPE:
-				var entry : Data.LocationObjTypeDFDef = instance.props;
+			case LOCATION_OBJ_CONTAINER_TYPE:
+				var entry : Data.LocationObjContainerTypeDFDef = instance.props;
 				switch entry.type {
 					case global:
 						globalObjects = globalObjects.concat( resolveContainer( instance ) );

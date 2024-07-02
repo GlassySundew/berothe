@@ -1,5 +1,6 @@
 package game.client.render;
 
+import game.net.client.GameClient;
 import util.GameUtil;
 import h2d.RenderContext;
 import util.Util;

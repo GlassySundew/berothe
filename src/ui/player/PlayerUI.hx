@@ -7,7 +7,7 @@ import util.Const;
 import dn.Process;
 import en.player.Player;
 import en.util.item.InventoryCell;
-import game.client.GameClient;
+import game.net.client.GameClient;
 import h2d.Flow;
 import h2d.Layers;
 import h2d.Object;
