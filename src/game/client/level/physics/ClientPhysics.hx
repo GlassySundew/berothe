@@ -15,13 +15,13 @@ class ClientPhysics {
 	}
 
 	public function debugInit() {
-		physicsDebugView = new HeapsOimophysicsDebugDraw( Boot.inst.s3d );
-		world.setDebugDraw( physicsDebugView );
-		physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
+		// physicsDebugView = new HeapsOimophysicsDebugDraw( Boot.inst.s3d );
+		// world.setDebugDraw( physicsDebugView );
+		// physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
 
-		Settings.inst.params.debug.physicsDebugVisible.addOnValue(
-			( value ) -> physicsDebugView.setVisibility( value )
-		);
+		// Settings.inst.params.debug.physicsDebugVisible.addOnValue(
+		// 	( value ) -> physicsDebugView.setVisibility( value )
+		// );
 	}
 
 	public function step( deltaTime : Float ) {

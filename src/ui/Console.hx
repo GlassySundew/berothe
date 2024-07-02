@@ -1,5 +1,6 @@
 package ui;
 
+#if client
 import game.net.client.GameClient;
 import game.client.level.LevelView;
 import h2d.Console.ConsoleArg;
@@ -304,3 +305,4 @@ class Console extends h2d.Console {
 		doCall( cmd.callb, vargs );
 	}
 }
+#end

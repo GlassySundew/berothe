@@ -73,7 +73,7 @@
 				{
 					"typeStr": "17",
 					"name": "properties",
-					"documentation": "game.server.factory.EntityPropertyFactory"
+					"documentation": "game.data.storage.entity.body.EntityBodyDescription.hx"
 				},
 				{
 					"typeStr": "17",
@@ -94,7 +94,8 @@
 					"view": {
 						"type": [
 							1
-						]
+						],
+						"id": "grayboxView"
 					}
 				},
 				{
@@ -142,7 +143,8 @@
 									"animationName": "walk"
 								}
 							]
-						}
+						},
+						"id": "humanView"
 					}
 				}
 			],
@@ -224,6 +226,10 @@
 			"separators": [],
 			"lines": [],
 			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
 				{
 					"typeStr": "9:EntityViewType",
 					"name": "type",
@@ -343,6 +349,12 @@
 			"lines": [],
 			"columns": [
 				{
+					"typeStr": "0",
+					"name": "id",
+					"opt": true,
+					"kind": null
+				},
+				{
 					"typeStr": "3",
 					"name": "offsetZ"
 				},
@@ -360,12 +372,6 @@
 					"typeStr": "3",
 					"name": "sizeZ",
 					"kind": null
-				},
-				{
-					"typeStr": "0",
-					"name": "id",
-					"opt": true,
-					"kind": null
 				}
 			]
 		},
@@ -378,6 +384,11 @@
 			"separators": [],
 			"lines": [],
 			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"opt": true
+				},
 				{
 					"typeStr": "3",
 					"name": "sizeX",
@@ -401,11 +412,6 @@
 					"name": "offsetZ",
 					"opt": true,
 					"kind": null
-				},
-				{
-					"typeStr": "0",
-					"name": "id",
-					"opt": true
 				}
 			]
 		},

@@ -11,7 +11,4 @@
 
 # --no-inline
 
--D server
--D client
-
 -debug

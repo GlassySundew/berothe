@@ -55,9 +55,9 @@ class EntityMovementControlComponent extends EntityComponent {
 		// entity.model.isMovementApplied = leftPushed;
 		
 		if ( leftPushed ) {
-			var s = leftDist * speed * Main.inst.tmod;
-			entityPositionProvider.velX += Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-			entityPositionProvider.velY += -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			// var s = leftDist * speed * Main.inst.tmod;
+			// entityPositionProvider.velX += Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			// entityPositionProvider.velY += -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
 
 			// if ( lx < -0.3 && M.fabs( ly ) < 0.6 ) entity.model.dir.val = Left;
 			// else if ( ly < -0.3 && M.fabs( lx ) < 0.6 ) entity.model.dir.val = Bottom;

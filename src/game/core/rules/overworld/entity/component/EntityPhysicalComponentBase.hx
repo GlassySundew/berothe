@@ -11,8 +11,6 @@ abstract class EntityPhysicalComponentBase extends EntityComponent {
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
-		trace( "listening location from rigidbody ", this );
-
 		entity.location.onAppear( onAttachedToLocation );
 	}
 
@@ -21,9 +19,7 @@ abstract class EntityPhysicalComponentBase extends EntityComponent {
 		rigidBody = tryCreateRigidBody();
 
 		rigidBody.setPosition( { x : entity.transform.x, y : entity.transform.y, z : entity.transform.z } );
-
 		physics.addRigidBody( rigidBody );
-		trace( "added rigidBody ", this );
 	}
 
 	final function tryCreateRigidBody() {

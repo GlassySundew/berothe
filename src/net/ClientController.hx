@@ -35,6 +35,7 @@ class ClientController extends NetNode {
 		this.networkClient = networkClient;
 	}
 
+	#if client
 	override public function alive() {
 		super.alive();
 
@@ -46,10 +47,11 @@ class ClientController extends NetNode {
 		Client.inst.host.self.ownerObject = this;
 		Main.inst.cliCon.val = this;
 
-		#if debug
+		#if( debug && client )
 		new game.debug.ImGuiGameClientDebug( GameClient.inst );
 		#end
 	}
+	#end
 
 	public override function networkAllow(
 		op : hxbit.NetworkSerializable.Operation,
@@ -67,6 +69,7 @@ class ClientController extends NetNode {
 
 	@:rpc( owner )
 	public function giveControlOverEntity( entityRepl : EntityReplicator ) {
+		#if editor
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
 		// entity.onSpawned.handle(
@@ -79,13 +82,17 @@ class ClientController extends NetNode {
 		// 		);
 		// 	}
 		// );
+
+		#end
 	}
 
 	@:rpc( owner )
 	public function onControlledEntityLocationChange( locationRepl : LocationReplicator ) {
+		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
 		GameClient.inst.onLocationProvided( locationRepl );
+		#end
 	}
 
 	@:rpc( server )

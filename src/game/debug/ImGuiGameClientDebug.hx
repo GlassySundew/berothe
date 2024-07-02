@@ -1,5 +1,6 @@
 package game.debug;
 
+import game.debug.accessor.render.OrthographicsAccessor;
 import game.debug.accessor.physics.PhysicsDebugViewAccessor;
 import game.debug.accessor.camera.FovAccessor;
 import game.debug.accessor.camera.ZFarKAccessor;
@@ -50,13 +51,11 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 
 		new DragDoubleNode( "zNear", new ZNearAccessor(), 0.1, 0.1, 10000, cameraHeader );
 		new DragDoubleNode( "zFar", new ZFarAccessor(), 1, 0, 400000, cameraHeader );
-		new DragDoubleNode( "zNearK", new ZNearKAccessor(), 0.01, 0.01, 180, cameraHeader );
-		new DragDoubleNode( "zFarK", new ZFarKAccessor(), 0.1, 0.01, 180, cameraHeader );
+		new DragDoubleNode( "zNearK", new ZNearKAccessor(), 0.001, 0.0000001, 180, cameraHeader );
+		new DragDoubleNode( "zFarK", new ZFarKAccessor(), 0.1, 0.01, 9999, cameraHeader );
 		new DragDoubleNode( "fov", new FovAccessor(), 0.1, 0.000, 180, cameraHeader );
 		new ButtonNode( "untarget", GameClient.inst.cameraProc.untarget, cameraHeader );
-		new ButtonNode( "toggleOrtho", () -> {
-			Boot.inst.s3d.camera.orthoBounds = ( Boot.inst.s3d.camera.orthoBounds == null ? new Bounds() : null );
-		}, cameraHeader );
+		new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
 
 		var physicsHeader = new CollapsingHeaderNode( "physics", rootNode );
 		new CheckboxNode( "physics debug view", new PhysicsDebugViewAccessor(), physicsHeader );

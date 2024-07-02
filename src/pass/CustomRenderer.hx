@@ -11,6 +11,7 @@ import h3d.pass.PassList;
 typedef Point = { var x : Float; var y : Float; }
 
 typedef Line = { var pt1 : Point; var pt2 : Point; }
+
 class CustomRenderer extends h3d.scene.fwd.Renderer {
 
 	public var saoBlur : h3d.pass.Blur;
@@ -105,12 +106,21 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		setTargets( [colorTex, depthTex, normalTex /*, additiveTex*/] );
 		clear( Engine.getCurrent().backgroundColor, 1 );
 		mrt.draw( get( "default" ) );
+		defaultPass.draw( get( "alpha" ), backToFront );
+		// !additive
 		resetTarget();
+
+		// var alphaTex = allocTarget( "alpha" );
+		// setTarget( alphaTex );
+		// // mrt.draw( get( "alhpa" ), backToFront );
+		// renderPass(defaultPass, get("alpha"), backToFront );
+		// resetTarget();
 
 		var saoTarget = allocTarget( "sao" );
 		setTarget( saoTarget );
 		sao.apply( depthTex, normalTex, ctx.camera );
 		resetTarget();
+
 		saoBlur.apply( ctx, saoTarget );
 		if ( enableFXAA )
 			fxaa.apply( colorTex )

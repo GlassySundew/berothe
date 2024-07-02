@@ -1,3 +1,4 @@
+import graphics.ThreeDObjectNode;
 import rx.schedulers.Test.TestBase;
 import oimo.common.Vec3;
 import oimo.m.IVec3;
@@ -24,6 +25,8 @@ class Boot extends hxd.App {
 
 	public static var inst( default, null ) : Boot;
 
+	public final root3D : ThreeDObjectNode;
+
 	public var renderer : CustomRenderer;
 	public var deltaTime( default, null ) : Float;
 
@@ -36,6 +39,7 @@ class Boot extends hxd.App {
 	public function new() {
 		inst = this;
 		super();
+		root3D = ThreeDObjectNode.fromHeapsObject( s3d );
 	}
 
 	override function setup() {
@@ -54,8 +58,8 @@ class Boot extends hxd.App {
 			Sys.println( str );
 			#else
 			if ( !StringTools.startsWith( infos.fileName, "hx/concurrent" ) ) {
-				var str = haxe.Log.formatOutput( "\033[36m" + v, infos );
-				Sys.println( str + "\033[0m" );
+				var str = haxe.Log.formatOutput( "\n\t\033[36m" + v, infos );
+				Sys.println( "[CLIENT] " + str + "\033[0m" );
 			}
 			#end
 		}

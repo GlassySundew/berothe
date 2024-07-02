@@ -1,5 +1,6 @@
 package game.core.rules.overworld.location;
 
+import game.core.rules.overworld.entity.component.view.EntityViewComponent;
 import util.Assert;
 import game.core.rules.overworld.entity.component.block.StaticObjectRigidBodyComponent;
 import game.core.rules.overworld.entity.EntityFactory;
@@ -26,12 +27,21 @@ class OverworldObjectsFactory {
 
 		var staticRBComponent = entity.components.get( StaticObjectRigidBodyComponent );
 		Assert.notNull( staticRBComponent );
-
 		staticRBComponent.provideConfiguration( {
 			sizeX : objectDesc.sizeX,
 			sizeY : objectDesc.sizeY,
 			sizeZ : objectDesc.sizeZ
 		} );
+
+		var viewComponent = entity.components.get( EntityViewComponent );
+		Assert.notNull( viewComponent );
+		viewComponent.provideExtraViewConfig(
+			Size(
+				objectDesc.sizeX,
+				objectDesc.sizeY,
+				objectDesc.sizeZ
+			)
+		);
 
 		return entity;
 	}

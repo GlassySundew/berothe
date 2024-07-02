@@ -46,4 +46,9 @@ class OverworldEntity {
 	public function addToChunk( chunk : Chunk ) {
 		chunkSelf.val = chunk;
 	}
+
+	@:keep
+	public function toString() : String {
+		return "Entity: " + desc.id;
+	}
 }

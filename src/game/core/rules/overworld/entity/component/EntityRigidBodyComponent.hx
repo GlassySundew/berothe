@@ -7,6 +7,11 @@ import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.physics.RigidBodyAbstractFactory;
 import game.physics.ShapeAbstractFactory;
 
+/**
+	by default, the data stream direction is from server to client
+	however, a player needs to control it's entity on server,
+	thus, we are inverting control stream in 
+**/
 class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 
 	var torsoShape : IRigidBodyShape;
@@ -35,7 +40,9 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 		rigidBodyLocal.setGravityScale( 40 );
 
 		torsoShape.move( 0, 0, rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeX / 2 ) % 1 );
-
+		
 		return rigidBodyLocal;
 	}
+
+
 }

@@ -1,6 +1,8 @@
 
 # -D hl-profile
 
+-hl bin/game.hl
+
 debug.hxml
 hl.client.hxml
 

@@ -23,6 +23,30 @@ class EntityTransformReplicator extends NetNode {
 	public function followEntityServer( entity : OverworldEntity ) {
 		this.entity = entity;
 
+		setupServerSyncronization();
+	}
+
+	public function followEntityClient( entity : OverworldEntity ) {
+		this.entity = entity;
+
+		setupClientSyncronization();
+
+		x.addOnValue( ( val ) -> trace( "got x change as " + val ) );
+	}
+
+	function setupServerSyncronization() {
+		entity.transform.x.subscribeProp( x );
+		entity.transform.y.subscribeProp( y );
+		entity.transform.z.subscribeProp( z );
+		x.subscribeProp( entity.transform.x );
+		y.subscribeProp( entity.transform.y );
+		z.subscribeProp( entity.transform.z );
+	}
+
+	function setupClientSyncronization() {
+		x.subscribeProp( entity.transform.x );
+		y.subscribeProp( entity.transform.y );
+		z.subscribeProp( entity.transform.z );
 		entity.transform.x.subscribeProp( x );
 		entity.transform.y.subscribeProp( y );
 		entity.transform.z.subscribeProp( z );

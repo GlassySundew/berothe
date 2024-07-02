@@ -36,15 +36,16 @@ class EntityComponentsReplicator extends NetNode {
 	}
 
 	public function followEntityClient( entity : OverworldEntity ) {
-		for ( component in components ) {
+		components.subscribleWithMapping( ( component ) -> {
+			Assert.notNull( component );
 			component.followComponentClient( entity );
-		}
+		} );
 	}
 
 	function onComponentAdded( component : EntityComponent ) {
 		var replicator = component.description.buildCompReplicator( this );
 		replicator?.followComponentServer( component );
-		components.push( replicator );
+		if ( replicator != null ) components.push( replicator );
 
 		if (
 			isMappingFinished

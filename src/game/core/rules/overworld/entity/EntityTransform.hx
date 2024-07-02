@@ -29,4 +29,9 @@ class EntityTransform {
 		this.rotationY.val = y;
 		this.rotationZ.val = z;
 	}
+
+	@:keep
+	public function toString() : String {
+		return "EntityTransform: x : " + x.val + ", y : " + y.val + ", z : " + z.val + ";";
+	}
 }

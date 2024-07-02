@@ -30,6 +30,7 @@ class ChunkReplicator extends NetNode {
 	override function alive() {
 		super.alive();
 
+		#if client
 		entities.subscribleWithMapping( ( entityReplicator ) -> {
 			GameClient.inst.currentLocation.onAppear( ( location ) -> {
 				trace( "got entity in chunk: " + entityReplicator.entity.desc );
@@ -37,10 +38,10 @@ class ChunkReplicator extends NetNode {
 				location.addEntity( entityReplicator.entity );
 			} );
 		} );
+		#end
 	}
 
 	function onEntityAddedToChunk( entity : OverworldEntity ) {
-		trace( "entity added on server chunk" );
 		var entityReplicator = coreReplicator.getEntityReplicator( entity );
 		entities.push( entityReplicator );
 	}

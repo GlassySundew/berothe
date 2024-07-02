@@ -56,7 +56,7 @@ class EntityDynamicsComponent extends EntityNetComponent {
 	}
 
 	function onFrame() {
-		if ( GameClient.inst == null ) return;
+		// if ( GameClient.inst == null ) return;
 
 		var entityPos = entityPositionProvider.result;
 		entityPos.update();

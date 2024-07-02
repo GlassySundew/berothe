@@ -6,6 +6,7 @@ class Settings extends util.tools.Settings<
 	{
 		nickname : String,
 		fullscreen : Bool,
+		orthographics : MutableProperty<Bool>,
 		saveFiles : Array<String>,
 		windowWidth : Int,
 		windowHeight : Int,
@@ -27,6 +28,7 @@ class Settings extends util.tools.Settings<
 		params = {
 			nickname : "unnamed player",
 			fullscreen : false,
+			orthographics : new MutableProperty( false ),
 			saveFiles : [],
 			windowWidth : 900,
 			windowHeight : 650,
@@ -58,6 +60,7 @@ class Settings extends util.tools.Settings<
 		#if hlsdl
 		@:privateAccess {
 			hxd.Window.getInstance().resize( params.windowWidth, params.windowHeight );
+			
 			if ( params.windowX > 0 && params.windowY > 0 ) {
 				hxd.Window.getInstance().window.setPosition(
 					params.windowX,

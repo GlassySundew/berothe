@@ -1,5 +1,8 @@
 package game.data.storage.entity.body;
 
+import game.data.storage.entity.body.view.EntityViewDescription;
+import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
+import game.data.storage.entity.body.view.IEntityView;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.properties.DynamicsDescription;
@@ -7,13 +10,6 @@ import game.data.storage.entity.body.properties.HitboxBodyDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
 import game.data.storage.entity.component.EntityComponentDescription;
-#if macro
-import haxe.macro.Expr;
-import haxe.macro.Context;
-import haxe.macro.ExprTools;
-import haxe.macro.TypeTools;
-import haxe.macro.Type;
-#end
 
 class EntityBodyDescription extends DescriptionBase {
 
@@ -24,17 +20,18 @@ class EntityBodyDescription extends DescriptionBase {
 	public var dynamics( default, null ) : Null<DynamicsDescription>;
 	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
 
+	public var view : EntityViewDescription;
+
 	public function new( entry : Data.EntityBody ) {
 		super( entry.id.toString() );
 
-		createComponents( entry );
-
+		createPropDescriptions( entry );
 		for ( propertyDesc in propertyDescriptions ) {
 			DataStorage.inst.entityPropertiesStorage.provideExistingDescription( propertyDesc );
 		}
 	}
 
-	function createComponents( entry : Data.EntityBody ) {
+	function createPropDescriptions( entry : Data.EntityBody ) {
 		propertyDescriptions = ArrayExtensions.deNullify(( [
 
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.rigidBodyTorso ),
@@ -42,6 +39,8 @@ class EntityBodyDescription extends DescriptionBase {
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.staticObjectRigidBody ),
 
 			entry.properties.dynamics ? dynamics = new DynamicsDescription() : null,
+
+			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view )
 
 		] : Array<EntityComponentDescription> ) );
 	}

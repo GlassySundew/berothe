@@ -14,8 +14,7 @@ class EntityReplicator extends NetNode {
 	@:s var componentsRepl : EntityComponentsReplicator;
 	@:s var entityDescriptionId : String;
 	@:s var locationDescId : String;
-
-	var transformRepl : EntityTransformReplicator;
+	@:s var transformRepl : EntityTransformReplicator;
 
 	public function new( entity : OverworldEntity, ?parent ) {
 		super( parent );
@@ -34,11 +33,10 @@ class EntityReplicator extends NetNode {
 	override function alive() {
 		super.alive();
 
-		trace( "aliving entity " + entityDescriptionId );
-
 		var desc = DataStorage.inst.entityStorage.getDescriptionById( entityDescriptionId );
 		entity = new OverworldEntity( desc, "0" ); // todo client ids
 		componentsRepl.followEntityClient( entity );
+		transformRepl.followEntityClient( entity );
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer, finalize : Bool = false ) {

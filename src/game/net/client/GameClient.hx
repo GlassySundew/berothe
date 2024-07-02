@@ -1,5 +1,6 @@
 package game.net.client;
 
+#if client
 import game.debug.HeapsOimophysicsDebugDraw;
 import core.IProperty;
 import core.MutableProperty;
@@ -46,6 +47,11 @@ class GameClient extends Process {
 
 	public function new() {
 		super( Main.inst );
+
+		#if debug
+		// new AxesHelper( Boot.inst.s3d );
+		// new GridHelper( Boot.inst.s3d );
+		#end
 
 		inst = this;
 		ca = Main.inst.controller.createAccess();
@@ -154,4 +160,5 @@ class GridHelper extends h3d.scene.Graphics {
 		}
 	}
 }
+#end
 #end

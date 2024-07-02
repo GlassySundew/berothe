@@ -1,3 +1,4 @@
+#if client
 import game.data.storage.DataStorage;
 import signals.*;
 import core.MutableProperty;
@@ -95,9 +96,9 @@ class Main extends Process {
 
 		#if debug
 		createFpsCounter();
-			#if game_tmod
-			stats = new Text( Assets.fontPixel, Boot.inst.s2d );
-			#end
+		#if game_tmod
+		stats = new Text( Assets.fontPixel, Boot.inst.s2d );
+		#end
 		#end
 	}
 
@@ -126,10 +127,12 @@ class Main extends Process {
 	}
 
 	function setupRenderer() {
-		Boot.inst.renderer = new CustomRenderer();
-		Boot.inst.s3d.renderer = Boot.inst.renderer;
-		Boot.inst.renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
+		var renderer = new CustomRenderer();
+		renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
 		Std.downcast( Boot.inst.s3d.lightSystem, h3d.scene.fwd.LightSystem ).ambientLight.set( .5, .5, .5 );
+
+		Boot.inst.s3d.renderer = 
+		Boot.inst.renderer = renderer;
 	}
 
 	function initGamePadController() {
@@ -163,9 +166,8 @@ class Main extends Process {
 		#if game_tmod
 		if ( stats != null ) stats.remove();
 		#end
-
 	}
-	
+
 	override function onResize() {
 		super.onResize();
 
@@ -184,7 +186,7 @@ class Main extends Process {
 		if ( ca.isKeyboardPressed( Key.F11 ) ) toggleFullscreen();
 		// if ( ca.isKeyboardPressed(Key.M) ) Assets.toggleMusicPause();
 		repeater.update( tmod );
-		
+
 		#if game_tmod
 		stats.text = "tmod: " + tmod;
 		#end
@@ -193,3 +195,4 @@ class Main extends Process {
 		super.update();
 	}
 }
+#end

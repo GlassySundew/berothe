@@ -36,7 +36,7 @@ class ServerBoot {
 	public function new() {
 
 		haxe.Log.trace = function ( v : Dynamic, ?infos : haxe.PosInfos ) {
-			var str = haxe.Log.formatOutput( "\033[34m" + v, infos );
+			var str = haxe.Log.formatOutput( "\n\t\033[38;5;162m" + v, infos );
 			Sys.println( "[SERVER] " + str + "\033[0m" );
 		}
 
