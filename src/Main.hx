@@ -5,7 +5,7 @@ import core.MutableProperty;
 import dn.Process;
 import dn.heaps.input.Controller;
 import dn.heaps.input.ControllerAccess;
-import game.net.client.ControllerAction;
+import game.client.ControllerAction;
 import game.net.client.GameClient;
 import h2d.Text;
 import h3d.Engine;
@@ -138,7 +138,7 @@ class Main extends Process {
 	function initGamePadController() {
 		controller = Controller.createFromAbstractEnum( ControllerAction );
 		ca = controller.createAccess();
-
+// ca.lockCondition
 		controller.bindKeyboard( MoveUp, [Key.UP, Key.W] );
 		controller.bindKeyboard( MoveLeft, [Key.LEFT, Key.A] );
 		controller.bindKeyboard( MoveDown, [Key.DOWN, Key.S] );

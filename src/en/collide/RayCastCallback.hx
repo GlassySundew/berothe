@@ -1,21 +1,29 @@
 package en.collide;
 
+import game.core.rules.overworld.location.physics.IPhysicsEngine;
 import signals.Signal2;
 import signals.Signal;
 import oimo.dynamics.rigidbody.Shape;
-import oimo.collision.geometry.RayCastHit;
+import game.core.rules.overworld.location.physics.RayCastHit;
 import oimo.dynamics.callback.RayCastClosest;
+import game.core.rules.overworld.location.physics.IRigidBodyShape;
 
 class RayCastCallback extends RayCastClosest {
 
-	public final onShapeCollide : Signal2<Shape, RayCastHit> = new Signal2();
+	public final onShapeCollide = new Signal<IRigidBodyShape, RayCastHit>();
 
-	public function new() {
+	final physics : IPhysicsEngine;
+
+	public function new( physics : IPhysicsEngine ) {
 		super();
+		this.physics = physics;
 	}
 
-	override function process( shape : Shape, hit : RayCastHit ) {
+	override function process( shape : Shape, hit : oimo.collision.geometry.RayCastHit ) {
 		super.process( shape, hit );
-		onShapeCollide.dispatch( shape, hit );
+		var shapeWrapped = physics.getShapeByOimo( shape );
+		var rayCastWrapped = RayCastHit.fromOimo( hit );
+
+		onShapeCollide.dispatch( shapeWrapped, rayCastWrapped );
 	}
 }

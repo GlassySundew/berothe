@@ -28,7 +28,7 @@ class ClientPhysics {
 		world.step( deltaTime );
 
 		if ( physicsDebugView != null && physicsDebugView.graphics.visible ) {
-			Std.downcast( physicsDebugView, HeapsOimophysicsDebugDraw ).graphics.clear();
+			// Std.downcast( physicsDebugView, HeapsOimophysicsDebugDraw ).graphics.clear();
 			inline world.debugDraw();
 		}
 	}

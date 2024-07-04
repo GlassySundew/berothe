@@ -102,9 +102,13 @@ class GameServer extends Process {
 
 		var playerReplicator = createPlayer();
 
-		var playerReplManager = preparePlayer( playerReplicator.entity, playerReplicator, clientController );
+		playerReplicator.entity.then( ( playerEntity ) ->
+			var playerReplManager = preparePlayer( playerEntity, playerReplicator, clientController )
+		);
+	}
 
-		// entityFactory.createPlayer( "new player", clientController );
+	override function update() {
+		core.update( tmod / hxd.Timer.wantedFPS, tmod );
 	}
 }
 #end

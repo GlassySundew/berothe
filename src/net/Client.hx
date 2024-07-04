@@ -104,8 +104,6 @@ class Client extends Process {
 			if ( infoFlow != null )
 				infoFlow.remove();
 
-			trace( "Connected to server" );
-
 			sendMessage( Message.ClientAuth );
 
 			onConnection.dispatch();

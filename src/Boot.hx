@@ -1,3 +1,4 @@
+import rx.disposables.Composite;
 import graphics.ThreeDObjectNode;
 import rx.schedulers.Test.TestBase;
 import oimo.common.Vec3;

@@ -67,6 +67,7 @@ class ConnectMenu extends FocusMenu {
 			MainMenu.hide();
 
 			Client.inst.connect(() -> trace( "failed connection" ) );
+			destroy();
 		};
 
 		connectComp.cancel.onClick = ( e ) -> {

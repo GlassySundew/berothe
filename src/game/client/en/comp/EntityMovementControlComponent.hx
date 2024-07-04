@@ -1,45 +1,40 @@
-package en.comp.client;
+package game.client.en.comp;
 
-import en.comp.net.IEntityPositionProvider;
-import oimo.common.Vec3;
-import en.comp.net.EntityDynamicsComponent;
+import hxd.Key;
+#if client
 import dn.M;
 import dn.heaps.input.ControllerAccess;
-import game.client.ControllerAction;
 import util.Const;
+import game.core.rules.overworld.entity.EntityComponent;
+import game.core.rules.overworld.entity.OverworldEntity;
+import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 
-/**
-	gives movement control on client side
-**/
 class EntityMovementControlComponent extends EntityComponent {
 
 	public var leftPushed( default, null ) : Bool;
 
 	var ca : ControllerAccess<ControllerAction>;
 	var dynamicsComponent : EntityDynamicsComponent;
-	var entityPositionProvider : IEntityPositionProvider;
 
 	// TODO temp
 	var speed = 8;
 
-	// public function new( entity ) {
-	// 	super( entity );
-	// 	ca = Main.inst.controller.createAccess();
-	// 	entity.components.onAppear(
-	// 		EntityDynamicsComponent,
-	// 		( key, dynamicsComponent ) -> {
-	// 			this.dynamicsComponent = dynamicsComponent;
-	// 			dynamicsComponent.entityPositionProvider.then(
-	// 				( posProvider ) -> this.entityPositionProvider = posProvider
-	// 			);
-	// 			entity.onFrame.add( update );
-	// 		}
-	// 	);
-	// }
+	override function attachToEntity( entity : OverworldEntity ) {
+		super.attachToEntity( entity );
 
-	function update() {
-		if ( entityPositionProvider == null ) return;
+		// TODO надо завязать leftPushed на проперти, которая реплицируется по сети
 
+		ca = Main.inst.controller.createAccess();
+		entity.components.onAppear(
+			EntityDynamicsComponent,
+			( key, dynamicsComponent ) -> {
+				this.dynamicsComponent = dynamicsComponent;
+				entity.onFrame.add( update );
+			}
+		);
+	}
+
+	function update( tmod : Float ) {
 		var lx = ca.getAnalogValue2( MoveLeft, MoveRight );
 		var ly = ca.getAnalogValue2( MoveDown, MoveUp );
 
@@ -52,12 +47,11 @@ class EntityMovementControlComponent extends EntityComponent {
 		leftPushed = leftDist >= 0.3;
 		var leftAng = Math.atan2( ly, lx );
 
-		// entity.model.isMovementApplied = leftPushed;
-		
 		if ( leftPushed ) {
-			// var s = leftDist * speed * Main.inst.tmod;
-			// entityPositionProvider.velX += Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-			// entityPositionProvider.velY += -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			var s = leftDist * speed * Main.inst.tmod;
+			entity.transform.velX.val += Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			entity.transform.velY.val += -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+
 
 			// if ( lx < -0.3 && M.fabs( ly ) < 0.6 ) entity.model.dir.val = Left;
 			// else if ( ly < -0.3 && M.fabs( lx ) < 0.6 ) entity.model.dir.val = Bottom;
@@ -71,3 +65,4 @@ class EntityMovementControlComponent extends EntityComponent {
 		}
 	}
 }
+#end

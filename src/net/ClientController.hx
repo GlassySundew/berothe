@@ -1,9 +1,9 @@
 package net;
 
+import game.client.en.comp.EntityMovementControlComponent;
+import game.client.en.comp.EntityCameraFollowComponent;
 import game.net.location.LocationReplicator;
 import game.net.entity.EntityReplicator;
-import en.comp.client.EntityCameraFollowComponent;
-import en.comp.client.EntityMovementControlComponent;
 import game.net.client.GameClient;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable;
@@ -69,20 +69,13 @@ class ClientController extends NetNode {
 
 	@:rpc( owner )
 	public function giveControlOverEntity( entityRepl : EntityReplicator ) {
-		#if editor
+		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
-		// entity.onSpawned.handle(
-		// 	( level ) -> {
-		// 		entity.clientComponents.add(
-		// 			new EntityMovementControlComponent( entity )
-		// 		);
-		// 		entity.clientComponents.add(
-		// 			new EntityCameraFollowComponent( entity )
-		// 		);
-		// 	}
-		// );
-
+		entityRepl.entity.then( entity -> {
+			entity.components.add( new EntityCameraFollowComponent( null ) );
+			entity.components.add( new EntityMovementControlComponent( null ) );
+		} );
 		#end
 	}
 

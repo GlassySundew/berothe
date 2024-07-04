@@ -38,9 +38,9 @@ class GameCore {
 		}
 	}
 
-	public function update( dt : Float ) {
+	public function update( dt : Float, tmod : Float ) {
 		for ( location in locations ) {
-			location.update( dt );
+			location.update( dt, tmod );
 		}
 	}
 }

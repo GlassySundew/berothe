@@ -12,7 +12,8 @@ import game.net.location.CoreReplicator;
 import game.net.location.LocationReplicator;
 
 /**
-	A server-side only service, `PlayerReplicationManager` manages singular player replication channel
+	A server-side only service, `PlayerReplicationManager` 
+	manages singular player replication channel
 **/
 class PlayerReplicationManager {
 
@@ -46,6 +47,22 @@ class PlayerReplicationManager {
 		cliCon.addChild( playerEntityReplicator );
 		cliCon.giveControlOverEntity( playerEntityReplicator );
 		playerEntity.location.addOnValueImmediately( onAddedToLocation );
+
+		var transform = playerEntityReplicator.transformRepl;
+		transform.x.syncBackOwner = cliCon;
+		transform.y.syncBackOwner = cliCon;
+		transform.z.syncBackOwner = cliCon;
+		
+		giveControl();
+
+		transform.x.addOnValue( ( val ) -> trace( val + " is the new player x pos" ) );
+	}
+
+	function giveControl() {
+		var transform = playerEntityReplicator.transformRepl;
+		transform.x.syncBack = false;
+		transform.y.syncBack = false;
+		transform.z.syncBack = false;
 	}
 
 	function validateChunkAccess( x : Int, y : Int, z : Int ) {

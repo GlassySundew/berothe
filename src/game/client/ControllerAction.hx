@@ -1,4 +1,4 @@
-package game.net.client;
+package game.client;
 
 enum abstract ControllerAction(Int) to Int {
 	var MoveUp;

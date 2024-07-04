@@ -1,5 +1,6 @@
 package game.net.entity;
 
+import future.Future;
 import game.core.rules.overworld.location.Location;
 import game.data.storage.DataStorage;
 import hxbit.NetworkHost;
@@ -9,16 +10,17 @@ import game.core.rules.overworld.entity.OverworldEntity;
 
 class EntityReplicator extends NetNode {
 
-	public var entity( default, null ) : OverworldEntity;
+	public var entity( default, null ) : Future<OverworldEntity> = new Future();
 
+	@:s public var transformRepl : EntityTransformReplicator;
 	@:s var componentsRepl : EntityComponentsReplicator;
+	
 	@:s var entityDescriptionId : String;
 	@:s var locationDescId : String;
-	@:s var transformRepl : EntityTransformReplicator;
 
 	public function new( entity : OverworldEntity, ?parent ) {
 		super( parent );
-		this.entity = entity;
+		this.entity.resolve( entity );
 		entityDescriptionId = entity.desc.id.toString();
 
 		transformRepl = new EntityTransformReplicator( this );
@@ -34,9 +36,11 @@ class EntityReplicator extends NetNode {
 		super.alive();
 
 		var desc = DataStorage.inst.entityStorage.getDescriptionById( entityDescriptionId );
-		entity = new OverworldEntity( desc, "0" ); // todo client ids
-		componentsRepl.followEntityClient( entity );
-		transformRepl.followEntityClient( entity );
+		var entityLocal = new OverworldEntity( desc, "0" ); // todo client ids
+		componentsRepl.followEntityClient( entityLocal );
+		transformRepl.followEntityClient( entityLocal );
+
+		entity.resolve( entityLocal );
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer, finalize : Bool = false ) {

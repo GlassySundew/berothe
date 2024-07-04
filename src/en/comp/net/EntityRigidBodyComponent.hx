@@ -37,7 +37,7 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 	public var contactCb( default, null ) : EntityContactCallback;
 
 	var world : World;
-	var standRayCastCallback : RayCastCallback = new RayCastCallback();
+	var standRayCastCallback : RayCastCallback;
 	var torsoShape : Shape;
 
 	public var velX( get, set ) : Float;
@@ -100,6 +100,7 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		// 		rigidBody.setPosition( new Vec3( entity.x, entity.y, entity.z ) );
 		// 	}
 		// );
+		// done
 
 		// entity.components.onAppear(
 		// 	EntityDynamicsComponent,
@@ -150,7 +151,7 @@ class EntityRigidBodyComponent extends EntityNetComponent implements IEntityPosi
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 		var bodyc : RigidBodyConfig = new RigidBodyConfig();
 		bodyc.type = RigidBodyType.DYNAMIC;
-		
+
 		rigidBody = new RigidBody( bodyc );
 		rigidBody.addShape( torsoShape );
 		rigidBody.setRotationFactor( new Vec3() );

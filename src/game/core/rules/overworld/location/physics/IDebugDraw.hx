@@ -1,23 +1,23 @@
 package game.core.rules.overworld.location.physics;
 
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVectorType;
+import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 
 interface IDebugDraw {
 
 	function setVisibility( value : Bool ) : Void;
-	function point( v : ThreeDeeVectorType, color : ThreeDeeVectorType ) : Void;
+	function point( v : ThreeDeeVector, color : ThreeDeeVector ) : Void;
 	function triangle(
-		v1 : ThreeDeeVectorType,
-		v2 : ThreeDeeVectorType,
-		v3 : ThreeDeeVectorType,
-		n1 : ThreeDeeVectorType,
-		n2 : ThreeDeeVectorType,
-		n3 : ThreeDeeVectorType,
-		color : ThreeDeeVectorType
+		v1 : ThreeDeeVector,
+		v2 : ThreeDeeVector,
+		v3 : ThreeDeeVector,
+		n1 : ThreeDeeVector,
+		n2 : ThreeDeeVector,
+		n3 : ThreeDeeVector,
+		color : ThreeDeeVector
 	) : Void;
 	function line(
-		v1 : ThreeDeeVectorType,
-		v2 : ThreeDeeVectorType,
-		color : ThreeDeeVectorType
+		v1 : ThreeDeeVector,
+		v2 : ThreeDeeVector,
+		color : ThreeDeeVector
 	) : Void;
 }

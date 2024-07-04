@@ -1,5 +1,6 @@
 package game.net.client;
 
+import game.client.ControllerAction;
 #if client
 import game.debug.HeapsOimophysicsDebugDraw;
 import core.IProperty;
@@ -86,7 +87,7 @@ class GameClient extends Process {
 			new PauseMenu( this, Main.inst.root, Main.inst );
 		}
 
-		currentLocationSelf.val?.update( tmod / hxd.Timer.wantedFPS );
+		currentLocationSelf.val?.update( tmod / hxd.Timer.wantedFPS, tmod );
 	}
 
 	override function pause() {

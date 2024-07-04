@@ -12,6 +12,8 @@ import game.core.rules.overworld.location.physics.IRigidBody;
 class RigidBodyAbstractFactory {
 
 	public static function create( shape : IRigidBodyShape, type : RigidBodyType ) : IRigidBody {
-		return new OimoRigidBody( shape, type );
+		// ask global resources for engine presence
+		
+		return OimoRigidBody.create( shape, type );
 	}
 }

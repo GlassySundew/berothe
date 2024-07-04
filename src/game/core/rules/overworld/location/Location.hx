@@ -35,7 +35,7 @@ class Location {
 
 		chunks = new Chunks( this, locationDesc.chunkSize );
 		physics = PhysicsEngineAbstractFactory.create();
-		
+
 		load();
 	}
 
@@ -54,8 +54,11 @@ class Location {
 		return locationDataProvider.getSpawnsByEntityDesc( entityDesc )[0];
 	}
 
-	public function update( dt : Float ) {
+	public function update( dt : Float, tmod : Float ) {
 		physics.update( dt );
+		for ( entity in entities ) {
+			entity.update( tmod );
+		}
 	}
 
 	function load() {
