@@ -17,7 +17,7 @@ import game.net.entity.EntityComponentReplicator;
 **/
 class EntityComponentsReplicator extends NetNode {
 
-	@:s public final components : NSArray<EntityComponentReplicator> = new NSArray();
+	@:s public var components : NSClassMap<Class<EntityComponentReplicator>, EntityComponentReplicator> = new NSClassMap();
 
 	var entity : OverworldEntity;
 	var isMappingFinished = false;
@@ -36,7 +36,7 @@ class EntityComponentsReplicator extends NetNode {
 	}
 
 	public function followEntityClient( entity : OverworldEntity ) {
-		components.subscribleWithMapping( ( component ) -> {
+		components.subscribleWithMapping( ( classType, component ) -> {
 			Assert.notNull( component );
 			component.followComponentClient( entity );
 		} );
@@ -45,7 +45,7 @@ class EntityComponentsReplicator extends NetNode {
 	function onComponentAdded( component : EntityComponent ) {
 		var replicator = component.description.buildCompReplicator( this );
 		replicator?.followComponentServer( component );
-		if ( replicator != null ) components.push( replicator );
+		if ( replicator != null ) components[replicator.classType] = replicator;
 
 		if (
 			isMappingFinished

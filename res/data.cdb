@@ -2,10 +2,46 @@
 	"sheets": [
 		{
 			"name": "rule",
-			"columns": [],
-			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "17",
+					"name": "value",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "entityGravityScale",
+					"value": {
+						"float": 2
+					}
+				}
+			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "rule@value",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "4",
+					"name": "float",
+					"opt": true,
+					"kind": null
+				}
+			]
 		},
 		{
 			"name": "entity",

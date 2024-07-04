@@ -12,8 +12,8 @@ class EntityReplicator extends NetNode {
 
 	public var entity( default, null ) : Future<OverworldEntity> = new Future();
 
-	@:s public var transformRepl : EntityTransformReplicator;
-	@:s var componentsRepl : EntityComponentsReplicator;
+	@:s public final transformRepl : EntityTransformReplicator;
+	@:s public final componentsRepl : EntityComponentsReplicator;
 	
 	@:s var entityDescriptionId : String;
 	@:s var locationDescId : String;
@@ -39,7 +39,7 @@ class EntityReplicator extends NetNode {
 		var entityLocal = new OverworldEntity( desc, "0" ); // todo client ids
 		componentsRepl.followEntityClient( entityLocal );
 		transformRepl.followEntityClient( entityLocal );
-
+		
 		entity.resolve( entityLocal );
 	}
 

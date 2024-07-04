@@ -37,6 +37,9 @@ class OimoRigidBody implements IRigidBody {
 	public final velX : MutableProperty<Float> = new MutableProperty();
 	public final velY : MutableProperty<Float> = new MutableProperty();
 	public final velZ : MutableProperty<Float> = new MutableProperty();
+	public final rotationX : MutableProperty<Float> = new MutableProperty();
+	public final rotationY : MutableProperty<Float> = new MutableProperty();
+	public final rotationZ : MutableProperty<Float> = new MutableProperty();
 
 	public var isSleeping( default, null ) : MutableProperty<Bool> = new MutableProperty( false );
 
@@ -101,7 +104,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {
 		rigidBody.setRotationXyz( new Vec3( x, y, z ) );
-		onUpdated(); //! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
+		onUpdated();
 	}
 
 	public inline function sleep() {
@@ -119,5 +122,9 @@ class OimoRigidBody implements IRigidBody {
 		velX.val = rigidBody._velX;
 		velY.val = rigidBody._velY;
 		velZ.val = rigidBody._velZ;
+		var rotation = rigidBody._transform.getOrientation();
+		rotationX.val = rotation.x;
+		rotationY.val = rotation.y;
+		rotationZ.val = rotation.z;
 	}
 }

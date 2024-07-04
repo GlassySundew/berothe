@@ -6,6 +6,8 @@ import signals.Signal;
 
 class EntityDynamicsComponent extends EntityComponent {
 
+	public final isMovementApplied : MutableProperty<Bool> = new MutableProperty( false );
+
 	public final onMove : Signal = new Signal();
 	public final isResting : MutableProperty<Bool> = new MutableProperty();
 

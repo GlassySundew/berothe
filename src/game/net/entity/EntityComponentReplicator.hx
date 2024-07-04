@@ -11,14 +11,20 @@ import net.NetNode;
 
 abstract class EntityComponentReplicator extends NetNode {
 
+	public var classType( default, null ) : Class<EntityComponentReplicator>;
+	public var followedComponent( default, null ) : Future<EntityComponent> = new Future();
+
 	@:s var componentDescId : NSMutableProperty<String> = new NSMutableProperty();
-	var followedComponent( default, null ) : Future<EntityComponent> = new Future();
 	var entity : OverworldEntity;
 
 	public function new( parent ) {
 		super( parent );
 	}
 
+	override function init() {
+		classType = Type.getClass( this );
+		super.init();
+	}
 	override function alive() {
 		super.alive();
 

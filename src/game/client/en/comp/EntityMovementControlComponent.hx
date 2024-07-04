@@ -1,7 +1,11 @@
 package game.client.en.comp;
 
-import hxd.Key;
+import game.net.entity.component.EntityDynamicsComponentReplicator;
+import game.net.entity.component.view.EntityViewComponentReplicator;
+import game.net.entity.EntityReplicator;
 #if client
+import core.IProperty;
+import core.MutableProperty;
 import dn.M;
 import dn.heaps.input.ControllerAccess;
 import util.Const;
@@ -11,7 +15,7 @@ import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 
 class EntityMovementControlComponent extends EntityComponent {
 
-	public var leftPushed( default, null ) : Bool;
+	final entityReplicator : EntityReplicator;
 
 	var ca : ControllerAccess<ControllerAction>;
 	var dynamicsComponent : EntityDynamicsComponent;
@@ -19,10 +23,20 @@ class EntityMovementControlComponent extends EntityComponent {
 	// TODO temp
 	var speed = 8;
 
+	final isMovementAppliedSelf : MutableProperty<Bool> = new MutableProperty( false );
+	public var isMovementApplied( get, never ) : IProperty<Bool>;
+	inline function get_isMovementApplied() : IProperty<Bool> {
+		return isMovementAppliedSelf;
+	}
+
+	public function new( entityReplicator : EntityReplicator ) {
+		super( null );
+
+		this.entityReplicator = entityReplicator;
+	}
+
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
-
-		// TODO надо завязать leftPushed на проперти, которая реплицируется по сети
 
 		ca = Main.inst.controller.createAccess();
 		entity.components.onAppear(
@@ -32,6 +46,14 @@ class EntityMovementControlComponent extends EntityComponent {
 				entity.onFrame.add( update );
 			}
 		);
+
+		// ! shit code
+		var dynamicsReplicator = entityReplicator.componentsRepl.components.get( EntityDynamicsComponentReplicator );
+		dynamicsReplicator.followedComponent.then( ( component ) -> {
+			var dynamics : EntityDynamicsComponent = Std.downcast( component, EntityDynamicsComponent );
+			isMovementAppliedSelf.subscribeProp( dynamics.isMovementApplied );
+		} );
+		// ! shit code off
 	}
 
 	function update( tmod : Float ) {
@@ -44,14 +66,13 @@ class EntityMovementControlComponent extends EntityComponent {
 		}
 
 		var leftDist = M.dist( 0, 0, lx, ly );
-		leftPushed = leftDist >= 0.3;
+		isMovementAppliedSelf.val = leftDist >= 0.3;
 		var leftAng = Math.atan2( ly, lx );
 
-		if ( leftPushed ) {
+		if ( isMovementAppliedSelf.val ) {
 			var s = leftDist * speed * Main.inst.tmod;
 			entity.transform.velX.val += Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
 			entity.transform.velY.val += -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-
 
 			// if ( lx < -0.3 && M.fabs( ly ) < 0.6 ) entity.model.dir.val = Left;
 			// else if ( ly < -0.3 && M.fabs( lx ) < 0.6 ) entity.model.dir.val = Bottom;

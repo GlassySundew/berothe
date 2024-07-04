@@ -1,5 +1,6 @@
 package game.core.rules.overworld.entity.component;
 
+import game.data.storage.DataStorage;
 import game.core.rules.overworld.location.physics.RayCastHit;
 import oimo.dynamics.rigidbody.Shape;
 import game.core.rules.overworld.location.Location;
@@ -15,6 +16,7 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 	var torsoShape : IRigidBodyShape;
 	var rigidBodyDesc : RigidBodyTorsoDescription;
 	var standRayCastCallback : RayCastCallback;
+	var dynamicsComponent : EntityDynamicsComponent;
 
 	public function new( description : RigidBodyTorsoDescription ) {
 		super( description );
@@ -35,7 +37,7 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBodyLocal.setLinearDamping( { x : 25, y : 25, z : 0 } );
-		// rigidBodyLocal.setGravityScale( 40 );
+		rigidBodyLocal.setGravityScale( DataStorage.inst.rule.entityGravityScale );
 
 		torsoShape.moveLocally( 0, 0, rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeX / 2 ) % 1 );
 
@@ -60,11 +62,20 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 		entity.transform.velX.subscribeProp( rigidBody.velX );
 		entity.transform.velY.subscribeProp( rigidBody.velY );
 		entity.transform.velZ.subscribeProp( rigidBody.velZ );
+
+		rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
+		rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
+		rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
+		entity.transform.rotationX.subscribeProp( rigidBody.rotationX );
+		entity.transform.rotationY.subscribeProp( rigidBody.rotationY );
+		entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ );
 	}
 
 	function subscribeStanding( key, dynamicsComponent : EntityDynamicsComponent ) {
 		standRayCastCallback = new RayCastCallback( physics );
 		standRayCastCallback.onShapeCollide.add( onRayCollide );
+
+		this.dynamicsComponent = dynamicsComponent;
 
 		dynamicsComponent.onMove.add(() -> {
 			rigidBody.wakeUp();
@@ -84,7 +95,8 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 	}
 
 	inline function setRotationBasedOffVelocities() {
-		// if
+		if ( !dynamicsComponent.isMovementApplied.val ) return;
+
 		var angle = Math.atan2( entity.transform.velY.val, entity.transform.velX.val );
 		rigidBody.setRotation( 0, 0, angle );
 	}

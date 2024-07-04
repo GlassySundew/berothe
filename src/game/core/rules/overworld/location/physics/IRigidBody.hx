@@ -14,6 +14,10 @@ interface IRigidBody {
 	final velY : IMutableProperty<Float>;
 	final velZ : IMutableProperty<Float>;
 
+	final rotationX : IMutableProperty<Float>;
+	final rotationY : IMutableProperty<Float>;
+	final rotationZ : IMutableProperty<Float>;
+
 	var isSleeping( default, null ) : IProperty<Bool>;
 
 	function move( x : Float, y : Float, z : Float ) : Void;

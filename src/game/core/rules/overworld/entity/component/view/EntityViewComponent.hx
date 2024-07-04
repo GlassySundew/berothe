@@ -19,12 +19,6 @@ class EntityViewComponent extends EntityComponent {
 		viewExtraConfig = config;
 	}
 
-	#if client
-	public function createView() : graphics.ThreeDObjectNode {
-		return viewDescription.viewProvider?.createView( viewExtraConfig );
-	}
-	#end
-
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
@@ -34,6 +28,10 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	#if client
+	function createView() : graphics.ThreeDObjectNode {
+		return viewDescription.viewProvider?.createView( viewExtraConfig );
+	}
+
 	function onAttachedToLocation( location : Location ) {
 		var node = createView();
 

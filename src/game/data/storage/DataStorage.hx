@@ -12,11 +12,14 @@ class DataStorage {
 	public final locationStorage : LocationDescriptionStorage = new LocationDescriptionStorage();
 	public final entityBodyStorage : EntityBodyDescriptionStorage = new EntityBodyDescriptionStorage();
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
-	
+	public final rule : RuleStorage;
+
 	public final entityPropertiesStorage : EntityPropertiesStorage = new EntityPropertiesStorage();
 
 	public function new() {
 		inst = this;
+
+		rule = new RuleStorage( Data.rule );
 
 		locationStorage.init( Data.location );
 		entityBodyStorage.init( Data.entityBody );

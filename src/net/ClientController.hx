@@ -1,5 +1,7 @@
 package net;
 
+import game.core.rules.overworld.entity.component.view.EntityViewComponent;
+import game.core.rules.overworld.entity.OverworldEntity;
 import game.client.en.comp.EntityMovementControlComponent;
 import game.client.en.comp.EntityCameraFollowComponent;
 import game.net.location.LocationReplicator;
@@ -72,12 +74,18 @@ class ClientController extends NetNode {
 		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
-		entityRepl.entity.then( entity -> {
-			entity.components.add( new EntityCameraFollowComponent( null ) );
-			entity.components.add( new EntityMovementControlComponent( null ) );
-		} );
+		entityRepl.entity.then( ownEntity.bind( entityRepl ) );
 		#end
 	}
+
+	#if client
+	function ownEntity( entityRepl : EntityReplicator, entity : OverworldEntity ) {
+		entity.components.add( new EntityCameraFollowComponent( null ) );
+
+		var movementControlComponent = new EntityMovementControlComponent( entityRepl );
+		entity.components.add( movementControlComponent );
+	}
+	#end
 
 	@:rpc( owner )
 	public function onControlledEntityLocationChange( locationRepl : LocationReplicator ) {

@@ -54,8 +54,6 @@ class PlayerReplicationManager {
 		transform.z.syncBackOwner = cliCon;
 		
 		giveControl();
-
-		transform.x.addOnValue( ( val ) -> trace( val + " is the new player x pos" ) );
 	}
 
 	function giveControl() {
