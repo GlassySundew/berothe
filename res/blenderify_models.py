@@ -1,4 +1,4 @@
-
+ 
 import bpy
 import os
 from os import walk
@@ -12,17 +12,19 @@ absPath = os.path.abspath(".")
 
 for (dirpath, dirnames, filenames) in walk:
 	for file in filenames:
-		if (file.endswith('.fbx') or file.endswith('.obj') ):
+		if (not (dirpath.endswith("/fbx") or dirpath.endswith("\\fbx")) and ( file.endswith('.fbx') or file.endswith('.obj')) ):
 			os.chdir(dirpath)
 			resultFilePath = file
-   
+			
 			if (file.endswith('.fbx')):
 				bpy.ops.import_scene.fbx(filepath=file)
 			if (file.endswith('.obj')):
 				bpy.ops.import_scene.obj(filepath=file) 
 				resultFilePath = file.replace(".obj", ".fbx")
-    
-			bpy.ops.export_scene.fbx(filepath=resultFilePath)
+
+			if not os.path.isdir("fbx"):
+				os.mkdir("fbx")
+			bpy.ops.export_scene.fbx(filepath="fbx/" + resultFilePath )
 			bpy.ops.collection.objects_remove_all()
 			os.chdir(absPath)
 

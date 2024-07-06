@@ -5,13 +5,13 @@ import h3d.mat.Material;
 import h3d.scene.Mesh;
 import h3d.prim.Cube;
 import graphics.ThreeDObjectNode;
-import game.data.storage.entity.body.view.IEntityView.EntityViewInitializationSetting;
+import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
 
-class StaticObjectGrayboxViewDescription implements IEntityView {
+class StaticObjectGrayboxViewDescription implements IEntityViewProvider {
 
 	public function new() {}
 
-	public function createView( setting : EntityViewInitializationSetting ) : ThreeDObjectNode {
+	public function createView( setting : EntityViewExtraInitSetting ) : ThreeDObjectNode {
 		var view = switch setting {
 			case Size( x, y, z ):
 				createCubeOfSize( x, y, z );
@@ -37,20 +37,5 @@ class StaticObjectGrayboxViewDescription implements IEntityView {
 		mesh.material.mainPass.depth( true, LessEqual );
 
 		return ThreeDObjectNode.fromHeapsObject( mesh );
-	}
-
-	function defaultCube( x, y, z ) {
-		// var engine = h3d.Engine.getCurrent();
-		// var c : Cube = @:privateAccess engine.resCache.get( Cube );
-		// if ( c != null )
-		// 	return c;
-		// c = new h3d.prim.Cube( x, y, z );
-		// c.translate( , -0.5, -0.5 );
-		// c.unindex();
-		// c.addNormals();
-		// c.addUniformUVs( 1.0 );
-		// c.addTangents();
-		// @:privateAccess engine.resCache.set( Cube, c );
-		// return c;
 	}
 }

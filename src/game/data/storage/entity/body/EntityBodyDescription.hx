@@ -2,7 +2,7 @@ package game.data.storage.entity.body;
 
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
-import game.data.storage.entity.body.view.IEntityView;
+import game.data.storage.entity.body.view.IEntityViewProvider;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.properties.DynamicsDescription;

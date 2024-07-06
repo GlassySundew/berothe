@@ -1,27 +1,57 @@
 {
-	"type": "prefab",
 	"children": [
 		{
 			"type": "fbfAnimationNode",
 			"name": "walk",
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
 			"children": [
 				{
 					"type": "model",
 					"name": "torso_walk",
-					"source": "voxel/characters/human/fbx/torso_walk.fbx"
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-0-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-1-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-2-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-3-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-4-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-5-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-6-torso.fbx"
+				},
+				{
+					"type": "model",
+					"name": "torso_walk",
+					"source": "voxel/characters/human/fbx/torso_walk/fbx/torso_walk-7-torso.fbx"
 				}
 			]
 		},
 		{
 			"type": "fbfAnimationNode",
-			"name": "stand",
-			"children": [
-				{
-					"type": "model",
-					"name": "torso_stand",
-					"source": "voxel/characters/human/fbx/torso_stand.fbx"
-				}
-			]
+			"name": "idle"
 		}
 	]
 }

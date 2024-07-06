@@ -12,7 +12,7 @@
 -lib tink_core:git:https://github.com/haxetink/tink_core.git
 -lib hscript:git:https://github.com/HaxeFoundation/hscript
 -lib hxToolShed:git:https://github.com/GlassySundew/hxToolShed
--lib rxHaxe:git:https://github.com/darmie/RxHaxe
+-lib rxHaxe:git:https://github.com/GlassySundew/RxHaxe
 -lib compiletime
 -lib random
 -lib seedyrng
