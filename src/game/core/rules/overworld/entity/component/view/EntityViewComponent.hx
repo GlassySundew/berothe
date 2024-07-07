@@ -1,21 +1,24 @@
 package game.core.rules.overworld.entity.component.view;
 
+import dn.M;
+import game.client.en.comp.view.IEntityView;
 import game.core.rules.overworld.location.Location;
-import game.data.storage.entity.body.view.IEntityView.EntityViewInitializationSetting;
+import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
 import game.data.storage.entity.body.view.EntityViewDescription;
 
 class EntityViewComponent extends EntityComponent {
 
 	final viewDescription : EntityViewDescription;
 
-	var viewExtraConfig : EntityViewInitializationSetting = None;
+	var viewExtraConfig : EntityViewExtraInitSetting = None;
+	var view : IEntityView;
 
 	public function new( viewDescription : EntityViewDescription ) {
 		super( viewDescription );
 		this.viewDescription = viewDescription;
 	}
 
-	public function provideExtraViewConfig( config : EntityViewInitializationSetting ) {
+	public function provideExtraViewConfig( config : EntityViewExtraInitSetting ) {
 		viewExtraConfig = config;
 	}
 
@@ -28,18 +31,41 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	#if client
-	function createView() : graphics.ThreeDObjectNode {
+	function createView() : IEntityView {
 		return viewDescription.viewProvider?.createView( viewExtraConfig );
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		var node = createView();
+		view = createView();
 
-		// Boot.inst.root3D.addChild( node );
-		if ( node != null ) {
-			node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
-			@:privateAccess Boot.inst.s3d.addChild( node.heapsObject );
-		}
+		if ( view == null ) return;
+
+		var node = view.getGraphics();
+		Boot.inst.root3D.addChild( node );
+
+		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
+
+		entity.onFrame.add( ( _ ) -> {
+			var object = view.getGraphics();
+			if ( object == null ) {
+				trace( "view found to be null while synchronizing from entity" );
+				return;
+			}
+			object.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
+
+
+			entity.components.onAppear(
+				EntityDynamicsComponent,
+				( _, dynamics ) -> {
+					dynamics.onMove.add(() -> {
+						object.setRotation(
+							entity.transform.rotationX,
+							entity.transform.rotationY,
+							entity.transform.rotationZ
+						);
+					} );
+				} );
+		} );
 	}
 	#end
 }

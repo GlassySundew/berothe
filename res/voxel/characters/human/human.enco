@@ -1,15 +1,13 @@
 {
+	"type": "entityComposer",
 	"children": [
 		{
-			"type": "object",
-			"name": "group",
-			"children": [
-				{
-					"type": "reference",
-					"name": "torso",
-					"source": "voxel/characters/human/bodyparts/torso.bdprt"
-				}
-			]
+			"type": "reference",
+			"name": "torso",
+			"source": "voxel/characters/human/bodyparts/torso.bdprt",
+			"x": 0.5,
+			"y": -0.5,
+			"z": -0.5
 		}
 	]
 }

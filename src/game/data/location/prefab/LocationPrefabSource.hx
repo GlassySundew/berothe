@@ -29,6 +29,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 
 	public function load() {
 		if ( prefab != null ) return;
+		
 		// TODO maybe multithread this
 		prefab = Loader.currentInstance.load( file ).toPrefab().load();
 

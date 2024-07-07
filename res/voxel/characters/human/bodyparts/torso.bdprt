@@ -1,4 +1,5 @@
 {
+	"type": "bodypart",
 	"children": [
 		{
 			"type": "fbfAnimationNode",
@@ -51,7 +52,17 @@
 		},
 		{
 			"type": "fbfAnimationNode",
-			"name": "idle"
+			"name": "idle",
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
+			"children": [
+				{
+					"type": "model",
+					"name": "torso_stand",
+					"source": "voxel/characters/human/fbx/torso_stand/fbx/torso_stand.fbx"
+				}
+			]
 		}
 	]
 }

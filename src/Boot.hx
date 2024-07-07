@@ -26,7 +26,7 @@ class Boot extends hxd.App {
 
 	public static var inst( default, null ) : Boot;
 
-	public final root3D : ThreeDObjectNode;
+	public var root3D( default, null ) : ThreeDObjectNode;
 
 	public var renderer : CustomRenderer;
 	public var deltaTime( default, null ) : Float;
@@ -40,11 +40,11 @@ class Boot extends hxd.App {
 	public function new() {
 		inst = this;
 		super();
-		root3D = ThreeDObjectNode.fromHeapsObject( s3d );
 	}
 
 	override function setup() {
 		super.setup();
+		root3D = ThreeDObjectNode.fromHeapsObject( s3d );
 	}
 
 	// Engine ready

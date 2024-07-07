@@ -52,7 +52,15 @@ class PlayerReplicationManager {
 		transform.x.syncBackOwner = cliCon;
 		transform.y.syncBackOwner = cliCon;
 		transform.z.syncBackOwner = cliCon;
-		
+
+		transform.velX.syncBackOwner = cliCon;
+		transform.velY.syncBackOwner = cliCon;
+		transform.velZ.syncBackOwner = cliCon;
+
+		transform.rotationX.syncBackOwner = cliCon;
+		transform.rotationY.syncBackOwner = cliCon;
+		transform.rotationZ.syncBackOwner = cliCon;
+
 		giveControl();
 	}
 
@@ -61,6 +69,14 @@ class PlayerReplicationManager {
 		transform.x.syncBack = false;
 		transform.y.syncBack = false;
 		transform.z.syncBack = false;
+		
+		transform.velX.syncBack = false;
+		transform.velY.syncBack = false;
+		transform.velZ.syncBack = false;
+		
+		transform.rotationX.syncBack = false;
+		transform.rotationY.syncBack = false;
+		transform.rotationZ.syncBack = false;
 	}
 
 	function validateChunkAccess( x : Int, y : Int, z : Int ) {

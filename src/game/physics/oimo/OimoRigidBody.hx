@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import h3d.Quat;
 import core.MutableProperty;
 import oimo.common.Vec3;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
@@ -104,7 +105,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {
 		rigidBody.setRotationXyz( new Vec3( x, y, z ) );
-		onUpdated();
+		// onUpdated();
 	}
 
 	public inline function sleep() {
@@ -122,7 +123,9 @@ class OimoRigidBody implements IRigidBody {
 		velX.val = rigidBody._velX;
 		velY.val = rigidBody._velY;
 		velZ.val = rigidBody._velZ;
-		var rotation = rigidBody._transform.getOrientation();
+		var oimoRotation = rigidBody._transform.getOrientation();
+		var quat = new Quat( oimoRotation.x, oimoRotation.y, oimoRotation.z, oimoRotation.w );
+		var rotation = quat.toEuler();
 		rotationX.val = rotation.x;
 		rotationY.val = rotation.y;
 		rotationZ.val = rotation.z;
