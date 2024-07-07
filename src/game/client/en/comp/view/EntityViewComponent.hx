@@ -1,5 +1,8 @@
-package game.core.rules.overworld.entity.component.view;
+package game.client.en.comp.view;
 
+import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
+import game.core.rules.overworld.entity.OverworldEntity;
+import game.core.rules.overworld.entity.EntityComponent;
 import dn.M;
 import game.client.en.comp.view.IEntityView;
 import game.core.rules.overworld.location.Location;
@@ -32,7 +35,7 @@ class EntityViewComponent extends EntityComponent {
 
 	#if client
 	function createView() : IEntityView {
-		return viewDescription.viewProvider?.createView( viewExtraConfig );
+		return viewDescription.viewProvider?.createView( this, viewExtraConfig );
 	}
 
 	function onAttachedToLocation( location : Location ) {
@@ -45,27 +48,22 @@ class EntityViewComponent extends EntityComponent {
 
 		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
 
-		entity.onFrame.add( ( _ ) -> {
-			var object = view.getGraphics();
-			if ( object == null ) {
-				trace( "view found to be null while synchronizing from entity" );
-				return;
-			}
-			object.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
-
-
-			entity.components.onAppear(
-				EntityDynamicsComponent,
-				( _, dynamics ) -> {
-					dynamics.onMove.add(() -> {
-						object.setRotation(
-							entity.transform.rotationX,
-							entity.transform.rotationY,
-							entity.transform.rotationZ
-						);
-					} );
+		entity.components.onAppear(
+			EntityDynamicsComponent,
+			( _, dynamics ) -> {
+				dynamics.onMove.add(() -> {
+					node.setRotation(
+						entity.transform.rotationX,
+						entity.transform.rotationY,
+						entity.transform.rotationZ
+					);
+					node.setPosition(
+						entity.transform.x,
+						entity.transform.y,
+						entity.transform.z
+					);
 				} );
-		} );
+			} );
 	}
 	#end
 }

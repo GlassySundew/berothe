@@ -28,4 +28,4 @@
 -D no-deprecation-warnings
 -D hscriptPos
 
-ImportPrefab
+plugins.bodyparts_animations.src.HideImports

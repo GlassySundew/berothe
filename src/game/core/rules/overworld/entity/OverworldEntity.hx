@@ -15,7 +15,7 @@ class OverworldEntity {
 	public final transform : EntityTransform = new EntityTransform();
 	public final components : EntityComponents;
 
-	public final onFrame : Signal<Float> = new Signal<Float>();
+	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 
 	var chunkSelf : MutableProperty<Chunk> = new MutableProperty<Chunk>();
 	public var chunk( get, never ) : IProperty<Chunk>;
@@ -35,8 +35,8 @@ class OverworldEntity {
 		this.id = id;
 	}
 
-	public function update( tmod : Float ) {
-		onFrame.dispatch( tmod );
+	public function update( dt : Float, tmod : Float ) {
+		onFrame.dispatch( dt, tmod );
 	}
 
 	public function addToLocation( location : Location ) {

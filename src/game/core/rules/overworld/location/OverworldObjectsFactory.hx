@@ -1,6 +1,6 @@
 package game.core.rules.overworld.location;
 
-import game.core.rules.overworld.entity.component.view.EntityViewComponent;
+import game.client.en.comp.view.EntityViewComponent;
 import util.Assert;
 import game.core.rules.overworld.entity.component.block.StaticObjectRigidBodyComponent;
 import game.core.rules.overworld.entity.EntityFactory;

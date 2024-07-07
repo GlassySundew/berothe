@@ -17,7 +17,7 @@ class WalkAnimationState extends AnimationState {
 		);
 	}
 
-	override function getOverrideSpeed() : Float {
+	override function getSpeed() : Float {
 		var posProv = dynamics.entityPositionProvider.toResult();
 		return M.dist( 0, 0, posProv.velX, posProv.velY );
 	}

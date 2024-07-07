@@ -1,10 +1,10 @@
-package en.comp.client.view;
+package game.client.en.comp.view.anim;
 
 class AnimationState {
 
 	public final listener : Void -> Bool;
 
-	public function getOverrideSpeed() : Float {
+	public function getSpeed() : Float {
 		return -1.;
 	}
 

@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import game.data.storage.entity.body.view.AnimationKey;
 import core.MutableProperty;
 import h3d.mat.Texture;
 import h3d.mat.Material;
@@ -31,6 +32,4 @@ class EntityStaticBoxView implements IEntityView {
 	public function getGraphics() : ThreeDObjectNode {
 		return object;
 	}
-
-	public inline function playAnimation( animationKey : AnimationKey, ?overrideSpeed : Float ) {}
 }

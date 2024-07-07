@@ -39,21 +39,21 @@ class EntityDynamicsComponent extends EntityComponent {
 		);
 	}
 
-	function onFrame( tmod : Float ) {
+	function onFrame( dt, tmod : Float ) {
 		if ( M.fabs( entity.transform.velX.val ) < 0.0005 * tmod ) {
-			entity.transform.velX.val = 0;
+			// entity.transform.velX.val = 0;
 		} else {
 			onMoveInvalidate = true;
 		}
 
 		if ( M.fabs( entity.transform.velY.val ) < 0.0005 * tmod ) {
-			entity.transform.velY.val = 0;
+			// entity.transform.velY.val = 0;
 		} else {
 			onMoveInvalidate = true;
 		}
 
 		if ( M.fabs( entity.transform.velZ.val ) < 0.0005 * tmod ) {
-			entity.transform.velZ.val = 0;
+			// entity.transform.velZ.val = 0;
 		} else {
 			onMoveInvalidate = true;
 		}

@@ -1,5 +1,6 @@
 package game.data.storage.entity.body.view;
 
+import game.client.en.comp.view.EntityViewComponent;
 import game.client.en.comp.view.IEntityView;
 import graphics.ThreeDObjectNode;
 
@@ -10,5 +11,8 @@ enum EntityViewExtraInitSetting {
 
 interface IEntityViewProvider {
 
-	function createView( setting : EntityViewExtraInitSetting ) : IEntityView;
+	function createView(
+		viewComponent : EntityViewComponent,
+		setting : EntityViewExtraInitSetting
+	) : IEntityView;
 }

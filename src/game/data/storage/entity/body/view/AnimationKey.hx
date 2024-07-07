@@ -1,4 +1,4 @@
-package game.client.en.comp.view;
+package game.data.storage.entity.body.view;
 
 enum abstract AnimationKey( String ) from String {
 

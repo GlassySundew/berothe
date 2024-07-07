@@ -1,6 +1,6 @@
 package net;
 
-import game.core.rules.overworld.entity.component.view.EntityViewComponent;
+import game.client.en.comp.view.EntityViewComponent;
 import game.core.rules.overworld.entity.OverworldEntity;
 import game.client.en.comp.EntityMovementControlComponent;
 import game.client.en.comp.EntityCameraFollowComponent;

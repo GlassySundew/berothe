@@ -1,7 +1,7 @@
 package game.data.storage.entity.body.view;
 
 import game.net.entity.component.view.EntityViewComponentReplicator;
-import game.core.rules.overworld.entity.component.view.EntityViewComponent;
+import game.client.en.comp.view.EntityViewComponent;
 import game.net.entity.EntityComponentReplicator;
 import net.NetNode;
 import game.core.rules.overworld.entity.EntityComponent;

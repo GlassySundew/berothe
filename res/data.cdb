@@ -161,7 +161,7 @@
 						"animations": {
 							"idle": [
 								{
-									"animationName": "stand"
+									"animationName": "idle"
 								}
 							],
 							"attack_prime_idle": [
@@ -276,7 +276,7 @@
 					"typeStr": "17",
 					"name": "animations",
 					"opt": true,
-					"documentation": "EntityViewComponent.AnimationKey"
+					"documentation": "game.data.storage.entity.body.view.EntityAnimations;\n"
 				}
 			]
 		},
@@ -292,8 +292,7 @@
 				{
 					"typeStr": "8",
 					"name": "idle",
-					"opt": true,
-					"documentation": "EntityViewComponent.AnimationKey"
+					"opt": true
 				},
 				{
 					"typeStr": "8",

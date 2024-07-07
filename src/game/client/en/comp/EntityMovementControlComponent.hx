@@ -15,6 +15,9 @@ import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 
 class EntityMovementControlComponent extends EntityComponent {
 
+	public var inputDirX( default, null ) : Float = 0;
+	public var inputDirY( default, null ) : Float = 0;
+
 	final entityReplicator : EntityReplicator;
 
 	var ca : ControllerAccess<ControllerAction>;
@@ -56,7 +59,7 @@ class EntityMovementControlComponent extends EntityComponent {
 		// ! shit code off
 	}
 
-	function update( tmod : Float ) {
+	function update( dt, tmod : Float ) {
 		var lx = ca.getAnalogValue2( MoveLeft, MoveRight );
 		var ly = ca.getAnalogValue2( MoveDown, MoveUp );
 
@@ -71,18 +74,10 @@ class EntityMovementControlComponent extends EntityComponent {
 
 		if ( isMovementAppliedSelf.val ) {
 			var s = leftDist * speed * Main.inst.tmod;
-			entity.transform.velX.val += Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-			entity.transform.velY.val += -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-
-			// if ( lx < -0.3 && M.fabs( ly ) < 0.6 ) entity.model.dir.val = Left;
-			// else if ( ly < -0.3 && M.fabs( lx ) < 0.6 ) entity.model.dir.val = Bottom;
-			// else if ( lx > 0.3 && M.fabs( ly ) < 0.6 ) entity.model.dir.val = Right;
-			// else if ( ly > 0.3 && M.fabs( lx ) < 0.6 ) entity.model.dir.val = Top;
-
-			// if ( lx > 0.3 && ly > 0.3 ) entity.model.dir.val = TopRight;
-			// else if ( lx < -0.3 && ly > 0.3 ) entity.model.dir.val = TopLeft;
-			// else if ( lx < -0.3 && ly < -0.3 ) entity.model.dir.val = BottomLeft;
-			// else if ( lx > 0.3 && ly < -0.3 ) entity.model.dir.val = BottomRight;
+			inputDirX = Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			inputDirY = -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			entity.transform.velX.val += inputDirX;
+			entity.transform.velY.val += inputDirY;
 		}
 	}
 }

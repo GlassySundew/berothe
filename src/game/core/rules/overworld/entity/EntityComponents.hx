@@ -1,5 +1,6 @@
 package game.core.rules.overworld.entity;
 
+import rx.disposables.ISubscription;
 import game.core.rules.overworld.entity.EntityComponent;
 import signals.Signal;
 import core.ClassMap;
@@ -39,7 +40,7 @@ class EntityComponents {
 	public function onAppear<T : EntityComponent>(
 		key : Class<T>,
 		cb : Class<T> -> T -> Void
-	) {
-		components.onAppear( cast key, cast cb );
+	) : Null<ISubscription> {
+		return components.onAppear( cast key, cast cb );
 	}
 }

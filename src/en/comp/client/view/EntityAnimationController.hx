@@ -1,7 +1,7 @@
 package en.comp.client.view;
 
+import game.client.en.comp.view.EntityViewComponent;
 import en.comp.client.view.animationStates.WalkAnimationState;
-import en.comp.client.EntityViewComponent.AnimationKey;
 import en.comp.net.EntityDynamicsComponent;
 
 class EntityAnimationController {
