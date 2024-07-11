@@ -1,4 +1,5 @@
 
+# -D hide_debug
 # -D depth_debug
 # -D colliders_debug
 # -D entity_centers_debug

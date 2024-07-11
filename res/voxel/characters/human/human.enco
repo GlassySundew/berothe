@@ -2,12 +2,28 @@
 	"type": "entityComposer",
 	"children": [
 		{
-			"type": "reference",
-			"name": "torso",
-			"source": "voxel/characters/human/bodyparts/torso.bdprt",
+			"type": "object",
+			"name": "group",
 			"x": 0.5,
 			"y": -0.5,
-			"z": -0.5
+			"z": -0.5,
+			"children": [
+				{
+					"type": "reference",
+					"name": "left_hand",
+					"source": "voxel/characters/human/bodyparts/left_hand.bdprt"
+				},
+				{
+					"type": "reference",
+					"name": "right_hand",
+					"source": "voxel/characters/human/bodyparts/right_hand.bdprt"
+				},
+				{
+					"type": "reference",
+					"name": "human",
+					"source": "voxel/characters/human/bodyparts/torso.bdprt"
+				}
+			]
 		}
 	]
 }

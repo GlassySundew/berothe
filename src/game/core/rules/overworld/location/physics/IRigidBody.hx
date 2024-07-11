@@ -23,6 +23,7 @@ interface IRigidBody {
 	function move( x : Float, y : Float, z : Float ) : Void;
 	function setRotation( x : Float, y : Float, z : Float ) : Void;
 	function addShape( shape : IRigidBodyShape ) : Void;
+	function getShape() : Null<IRigidBodyShape>;
 	function setRotationFactor( vec : ThreeDeeVector ) : Void;
 	function setLinearDamping( vec : ThreeDeeVector ) : Void;
 	function setGravityScale( value : Float ) : Void;

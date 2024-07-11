@@ -8,7 +8,6 @@ import h2d.Object;
 import dn.M;
 import ch3.scene.TileSprite;
 import dn.heaps.slib.HSprite;
-import game.client.level.LevelView;
 import h2d.Tile;
 import h3d.Vector;
 import h3d.mat.Texture;
@@ -71,7 +70,7 @@ class Parallax extends Object {
 
 	override function sync( ctx : RenderContext ) @:privateAccess {
 		super.sync( ctx );
-		if ( LevelView.inst != null && GameClient.inst != null ) {
+		// if ( LevelView.inst != null && GameClient.inst != null ) {
 			var deltaX = GameClient.inst.cameraProc.camera.targetOffset.x - cameraX;
 			var deltaY = GameClient.inst.cameraProc.camera.targetOffset.y - cameraY;
 
@@ -80,6 +79,6 @@ class Parallax extends Object {
 
 			cameraX = GameClient.inst.cameraProc.camera.targetOffset.x;
 			cameraY = GameClient.inst.cameraProc.camera.targetOffset.y;
-		}
+		// }
 	}
 }

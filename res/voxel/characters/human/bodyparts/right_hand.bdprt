@@ -1,0 +1,19 @@
+{
+	"type": "bodypart",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "right_hand_idle",
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
+			"children": [
+				{
+					"type": "model",
+					"name": "_9_right_hand_idle",
+					"source": "voxel/characters/human/obj/fbx/_9_right_hand_idle.fbx"
+				}
+			]
+		}
+	]
+}

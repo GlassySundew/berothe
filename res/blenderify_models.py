@@ -24,7 +24,7 @@ for (dirpath, dirnames, filenames) in walk:
 
 			if not os.path.isdir("fbx"):
 				os.mkdir("fbx")
-			bpy.ops.export_scene.fbx(filepath="fbx/" + resultFilePath )
+			bpy.ops.export_scene.fbx(filepath="fbx/" + resultFilePath.replace("-", "_") )
 			bpy.ops.collection.objects_remove_all()
 			os.chdir(absPath)
 

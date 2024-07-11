@@ -1,16 +1,15 @@
 package game.physics.oimo;
 
-import h3d.Quat;
 import core.MutableProperty;
+import h3d.Quat;
 import oimo.common.Vec3;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
-import game.core.rules.overworld.location.physics.Types.RigidBodyType;
-import util.Assert;
-import oimo.dynamics.rigidbody.RigidBodyConfig;
-import oimo.dynamics.rigidbody.Shape;
-import game.core.rules.overworld.location.physics.IRigidBodyShape;
 import oimo.dynamics.rigidbody.RigidBody;
+import oimo.dynamics.rigidbody.RigidBodyConfig;
+import util.Assert;
 import game.core.rules.overworld.location.physics.IRigidBody;
+import game.core.rules.overworld.location.physics.IRigidBodyShape;
+import game.core.rules.overworld.location.physics.Types.RigidBodyType;
+import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 
 class OimoRigidBody implements IRigidBody {
 
@@ -31,6 +30,7 @@ class OimoRigidBody implements IRigidBody {
 		return new OimoRigidBody( rigidBody );
 	}
 
+	public final shapes : Array<IRigidBodyShape> = [];
 	public final rigidBody : RigidBody;
 	public final x : MutableProperty<Float> = new MutableProperty();
 	public final y : MutableProperty<Float> = new MutableProperty();
@@ -43,8 +43,6 @@ class OimoRigidBody implements IRigidBody {
 	public final rotationZ : MutableProperty<Float> = new MutableProperty();
 
 	public var isSleeping( default, null ) : MutableProperty<Bool> = new MutableProperty( false );
-
-	var initialShape : Shape;
 
 	public inline function new( rigidBody : RigidBody ) {
 		this.rigidBody = rigidBody;
@@ -61,8 +59,8 @@ class OimoRigidBody implements IRigidBody {
 	}
 
 	public inline function addShape( shape : IRigidBodyShape ) {
+		shapes.push( shape );
 		rigidBody.addShape( Std.downcast( shape, OimoRigidBodyShape ).shape );
-		onUpdated();
 	}
 
 	public inline function setRotationFactor( rotationFactor : ThreeDeeVector ) {
@@ -105,7 +103,6 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {
 		rigidBody.setRotationXyz( new Vec3( x, y, z ) );
-		// onUpdated();
 	}
 
 	public inline function sleep() {
@@ -129,5 +126,9 @@ class OimoRigidBody implements IRigidBody {
 		rotationX.val = rotation.x;
 		rotationY.val = rotation.y;
 		rotationZ.val = rotation.z;
+	}
+
+	public function getShape() : Null<IRigidBodyShape> {
+		return shapes[0];
 	}
 }

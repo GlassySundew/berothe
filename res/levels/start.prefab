@@ -56,8 +56,8 @@
 						"blockEntity": "graybox",
 						"$cdbtype": "locationStaticObjDF"
 					},
-					"x": -29.73,
-					"y": -31.87,
+					"x": -29,
+					"y": -31,
 					"scaleY": 81,
 					"scaleZ": 110
 				}

@@ -161,7 +161,7 @@
 						"animations": {
 							"idle": [
 								{
-									"animationName": "idle"
+									"animationName": "torso_stand"
 								}
 							],
 							"attack_prime_idle": [
@@ -176,7 +176,7 @@
 							],
 							"walk": [
 								{
-									"animationName": "walk"
+									"animationName": "torso_walk"
 								}
 							]
 						},
