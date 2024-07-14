@@ -34,11 +34,11 @@ class EntityBodyDescription extends DescriptionBase {
 	function createPropDescriptions( entry : Data.EntityBody ) {
 		propertyDescriptions = ArrayExtensions.deNullify(( [
 
-			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.rigidBodyTorso ),
-			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.bodyHitbox ),
-			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.staticObjectRigidBody ),
+			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
+			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
+			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
 
-			entry.properties.dynamics ? dynamics = new DynamicsDescription() : null,
+			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription() : null,
 
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view )
 

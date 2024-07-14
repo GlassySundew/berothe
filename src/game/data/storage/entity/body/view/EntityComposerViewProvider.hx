@@ -10,7 +10,7 @@ class EntityComposerViewProvider implements IEntityViewProvider {
 	final animations : EntityAnimations;
 	final file : String;
 
-	public function new( file : String, animations : Data.EntityBody_view_animations ) {
+	public function new( file : String, animations : cdb.Types.ArrayRead<Data.EntityView_animations> ) {
 		this.animations = new EntityAnimations( animations );
 		this.file = file;
 	}

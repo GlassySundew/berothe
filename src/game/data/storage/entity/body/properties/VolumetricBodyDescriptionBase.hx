@@ -4,16 +4,16 @@ import game.data.storage.entity.component.EntityComponentDescription;
 
 abstract class VolumetricBodyDescriptionBase extends EntityComponentDescription {
 
-	public final offsetZ : Int = 0;
-	public final sizeX : Int = 0;
-	public final sizeY : Int = 0;
-	public final sizeZ : Int = 0;
+	public final offsetZ : Float = 0;
+	public final sizeX : Float = 0;
+	public final sizeY : Float = 0;
+	public final sizeZ : Float = 0;
 
 	public function new(
-		offsetZ : Int,
-		sizeX : Int,
-		sizeY : Int,
-		sizeZ : Int,
+		offsetZ : Float,
+		sizeX : Float,
+		sizeY : Float,
+		sizeZ : Float,
 		id : String
 	) {
 		super( id );
