@@ -1,5 +1,6 @@
 package game.physics;
 
+import game.physics.oimo.OimoGeometry;
 import game.physics.oimo.OimoRigidBody;
 import game.physics.oimo.OimoRigidBodyShape;
 import oimo.common.Vec3;
@@ -17,16 +18,10 @@ class ShapeAbstractFactory {
 		zSize : Float
 	) : IRigidBodyShape {
 
-		var geom = new BoxGeometry(
-			new Vec3(
-				xSize / 2,
-				ySize / 2,
-				zSize / 2
-			)
-		);
+		var geom = GeometryAbstractFactory.box( xSize, ySize, zSize );
 
 		var shapeConf : ShapeConfig = new ShapeConfig();
-		shapeConf.geometry = geom;
+		shapeConf.geometry = Std.downcast( geom, OimoGeometry ).geom;
 
 		return OimoRigidBodyShape.create( shapeConf );
 	}

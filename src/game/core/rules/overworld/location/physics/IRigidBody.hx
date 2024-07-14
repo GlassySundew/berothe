@@ -18,6 +18,8 @@ interface IRigidBody {
 	final rotationY : IMutableProperty<Float>;
 	final rotationZ : IMutableProperty<Float>;
 
+	final transformProvider : ITransformProvider;
+
 	var isSleeping( default, null ) : IProperty<Bool>;
 
 	function move( x : Float, y : Float, z : Float ) : Void;

@@ -10,6 +10,6 @@
 # -D hx_concurrent
 # -D network_debug
 
--D no-inline
+# -D no-inline # does not work :(
 
 -debug

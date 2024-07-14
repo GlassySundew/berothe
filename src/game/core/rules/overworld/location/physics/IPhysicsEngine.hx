@@ -6,14 +6,20 @@ import oimo.dynamics.rigidbody.Shape;
 
 interface IPhysicsEngine {
 
-	public function update( dt : Float ) : Void;
-	public function addRigidBody( rigidBody : IRigidBody ) : Void;
-	public function setDebugDraw( debugDraw : IDebugDraw ) : Void;
-	public function rayCast(
+	function update( dt : Float ) : Void;
+	function addRigidBody( rigidBody : IRigidBody ) : Void;
+	function setDebugDraw( debugDraw : IDebugDraw ) : Void;
+	function rayCast(
 		start : ThreeDeeVector,
 		end : ThreeDeeVector,
 		rayCastCallBack : RayCastCallback
 	) : Void;
+	function convexCast(
+		convex : IGeometry,
+		start : ITransformProvider,
+		end : ThreeDeeVector,
+		callback : RayCastCallback
+	) : Void;
 
-	public function getShapeByOimo( shape : Shape ) : IRigidBodyShape;
+	function getShapeByOimo( shape : Shape ) : IRigidBodyShape;
 }

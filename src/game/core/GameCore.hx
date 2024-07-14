@@ -1,5 +1,6 @@
 package game.core;
 
+import game.core.rules.IUpdatable;
 import game.core.rules.overworld.entity.OverworldEntity;
 import game.core.rules.overworld.entity.EntityFactory;
 import signals.Signal;
@@ -7,7 +8,7 @@ import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.location.LocationFactory;
 import game.data.storage.location.LocationDescription;
 
-class GameCore {
+class GameCore implements IUpdatable {
 
 	public var onLocationCreated( get, never ) : Signal<Location>;
 	inline function get_onLocationCreated() : Signal<Location> {
@@ -34,7 +35,8 @@ class GameCore {
 		if ( locations.exists( locationDesc.id ) ) {
 			return locations[locationDesc.id];
 		} else {
-			return locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
+			return
+				locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
 		}
 	}
 

@@ -34,11 +34,9 @@ class OimoRigidBodyShape implements IRigidBodyShape {
 	public function getPosition() : ThreeDeeVector {
 		var transform = shape.getTransform();
 		return {
-			{
-				x : transform._positionX,
-				y : transform._positionY,
-				z : transform._positionZ
-			}
+			x : transform._positionX,
+			y : transform._positionY,
+			z : transform._positionZ
 		};
 	}
 

@@ -13,6 +13,8 @@ import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 
 class OimoRigidBody implements IRigidBody {
 
+	public final transformProvider : OimoRigidBodyTransformProvider;
+
 	public static function create( shape : IRigidBodyShape, type : RigidBodyType ) : IRigidBody {
 		Assert.isOfType( shape, OimoRigidBodyShape );
 		var unwrapShape = Std.downcast( shape, OimoRigidBodyShape ).shape;
@@ -46,6 +48,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function new( rigidBody : RigidBody ) {
 		this.rigidBody = rigidBody;
+		this.transformProvider = new OimoRigidBodyTransformProvider( rigidBody );
 
 		x.addOnValue( ( value ) -> rigidBody._transform._positionX = value );
 		y.addOnValue( ( value ) -> rigidBody._transform._positionY = value );
@@ -65,22 +68,11 @@ class OimoRigidBody implements IRigidBody {
 	}
 
 	public inline function setRotationFactor( rotationFactor : ThreeDeeVector ) {
-		rigidBody.setRotationFactor(
-			new Vec3(
-				rotationFactor.x,
-				rotationFactor.y,
-				rotationFactor.z
-			) );
+		rigidBody.setRotationFactor( rotationFactor.toOimo() );
 	}
 
 	public inline function setLinearDamping( damping : ThreeDeeVector ) {
-		rigidBody.setLinearDamping(
-			new Vec3(
-				damping.x,
-				damping.y,
-				damping.z
-			)
-		);
+		rigidBody.setLinearDamping( damping.toOimo() );
 	}
 
 	public inline function setGravityScale( gravitiScale : Float ) {
@@ -88,7 +80,7 @@ class OimoRigidBody implements IRigidBody {
 	}
 
 	public inline function setPosition( pos : ThreeDeeVector ) {
-		rigidBody.setPosition( new Vec3( pos.x, pos.y, pos.z ) );
+		rigidBody.setPosition( pos.toOimo() );
 		onUpdated();
 	}
 
@@ -99,7 +91,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function move( x : Float, y : Float, z : Float ) {
 		rigidBody.translate( new Vec3( x, y, z ) );
-		onUpdated(); //! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
+		onUpdated(); // ! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
 	}
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {
@@ -121,12 +113,10 @@ class OimoRigidBody implements IRigidBody {
 		velX.val = rigidBody._velX;
 		velY.val = rigidBody._velY;
 		velZ.val = rigidBody._velZ;
-		var oimoRotation = rigidBody._transform.getOrientation();
-		var quat = new Quat( oimoRotation.x, oimoRotation.y, oimoRotation.z, oimoRotation.w );
-		var rotation = quat.toEuler();
-		rotationX.val = rotation.x;
-		rotationY.val = rotation.y;
-		rotationZ.val = rotation.z;
+		var vector = ThreeDeeVector.anglesFromQuat( rigidBody._transform.getOrientation() );
+		rotationX.val = vector.x;
+		rotationY.val = vector.y;
+		rotationZ.val = vector.z;
 	}
 
 	public function getShape() : Null<IRigidBodyShape> {

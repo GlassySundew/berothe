@@ -1,5 +1,7 @@
 package game.physics.oimo;
 
+import game.core.rules.overworld.location.physics.ITransformProvider;
+import game.core.rules.overworld.location.physics.IGeometry;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 import en.collide.RayCastCallback;
 import oimo.dynamics.rigidbody.Shape;
@@ -49,7 +51,8 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 	}
 
 	public function getShapeByOimo( shape : Shape ) : IRigidBodyShape {
-		if ( shape._id == -1 ) throw "trying to get unattached shape with id = -1, don't know how to handle";
+		if ( shape._id == -1 )
+			throw "trying to get unattached shape with id = -1, don't know how to handle";
 
 		var result : IRigidBodyShape = null;
 		var savedShape = shapes[shape._id];
@@ -69,5 +72,23 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		#if client
 		debugDraw.line( begin, end, ThreeDeeVector.fromColorF( 0xBA8200 ).toOimo() );
 		#end
+	}
+
+	public function convexCast(
+		convex : IGeometry,
+		start : ITransformProvider,
+		end : ThreeDeeVector,
+		callback : RayCastCallback
+	) {
+		#if debug
+		Assert.isOfType( convex, OimoGeometry );
+		#end
+
+		world.convexCast(
+			Std.downcast( convex, OimoGeometry ).geom,
+			Std.downcast(start.get(), OimoTransform).transform,
+			end.toOimo(),
+			callback
+		);
 	}
 }
