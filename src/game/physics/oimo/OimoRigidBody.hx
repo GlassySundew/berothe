@@ -56,6 +56,7 @@ class OimoRigidBody implements IRigidBody {
 		velZ.addOnValue( ( value ) -> rigidBody._velZ = value );
 
 		rigidBody._sleeping.subscribeProp( isSleeping );
+		rigidBody.onUpdated.add( onUpdated );
 	}
 
 	public inline function addShape( shape : IRigidBodyShape ) {
@@ -93,12 +94,12 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function wakeUp() {
 		rigidBody.wakeUp();
-		onUpdated();
+		// onUpdated();
 	}
 
 	public inline function move( x : Float, y : Float, z : Float ) {
 		rigidBody.translate( new Vec3( x, y, z ) );
-		// onUpdated(); //! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
+		onUpdated(); //! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
 	}
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {

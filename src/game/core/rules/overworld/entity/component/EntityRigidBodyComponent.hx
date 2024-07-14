@@ -90,7 +90,9 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 		} );
 		dynamicsComponent.invalidateMove();
 		dynamicsComponent.isResting.addOnValue( ( value ) -> {
-			if ( value ) rigidBody.sleep();
+			if ( value ) {
+				rigidBody.sleep();
+			}
 		} );
 	}
 
@@ -105,6 +107,9 @@ class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
 		if ( shape.getCollisionGroup() & torsoShape.getCollisionMask() == 0 ) return;
 
 		rigidBody.velZ.setWithPostSetDispatch( 0 );
+		if ( rigidBody.velX.val == 0 && rigidBody.velY.val == 0 ) {
+			rigidBody.sleep();
+		}
 
 		rigidBody.move( 0, 0, ( 1 - rayCastHit.fraction ) * rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeZ / 2 ) % 1 );
 	}

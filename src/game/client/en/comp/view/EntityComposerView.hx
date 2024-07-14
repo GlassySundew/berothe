@@ -40,7 +40,7 @@ class EntityComposerView implements IEntityView {
 				if ( listener.listener() ) {
 					playAnimation(
 						key,
-						listener.getSpeed() * tmod
+						listener.getSpeed() / tmod
 					);
 				}
 			}

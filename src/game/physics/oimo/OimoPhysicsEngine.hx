@@ -67,7 +67,7 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		world.rayCast( begin.toOimo(), end.toOimo(), callback );
 
 		#if client
-		debugDraw.line( begin, end, ThreeDeeVector.fromColorF( 0xBA8200 ) );
+		debugDraw.line( begin, end, ThreeDeeVector.fromColorF( 0xBA8200 ).toOimo() );
 		#end
 	}
 }

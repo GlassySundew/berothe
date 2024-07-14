@@ -31,6 +31,8 @@ class EntityTransformReplicator extends NetNode {
 	public function followEntityServer( entity : OverworldEntity ) {
 		this.entity = entity;
 
+		// entity.transform.x.addOnValue( val -> trace( "got player x repl as " + val ) );
+
 		setupServerSyncronization();
 	}
 

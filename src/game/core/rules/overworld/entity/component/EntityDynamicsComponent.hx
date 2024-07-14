@@ -40,20 +40,21 @@ class EntityDynamicsComponent extends EntityComponent {
 	}
 
 	function onFrame( dt, tmod : Float ) {
+		// trace( entity.transform.velX, entity.transform.velY, entity.transform.velZ );
 		if ( M.fabs( entity.transform.velX.val ) < 0.0005 * tmod ) {
-			// entity.transform.velX.val = 0;
+			entity.transform.velX.val = 0;
 		} else {
 			onMoveInvalidate = true;
 		}
 
 		if ( M.fabs( entity.transform.velY.val ) < 0.0005 * tmod ) {
-			// entity.transform.velY.val = 0;
+			entity.transform.velY.val = 0;
 		} else {
 			onMoveInvalidate = true;
 		}
 
 		if ( M.fabs( entity.transform.velZ.val ) < 0.0005 * tmod ) {
-			// entity.transform.velZ.val = 0;
+			entity.transform.velZ.val = 0;
 		} else {
 			onMoveInvalidate = true;
 		}
@@ -61,6 +62,7 @@ class EntityDynamicsComponent extends EntityComponent {
 		isResting.val = !onMoveInvalidate;
 
 		if ( onMoveInvalidate ) {
+			// trace( "onMoving" );
 			onMove.dispatch();
 			onMoveInvalidate = false;
 		}
