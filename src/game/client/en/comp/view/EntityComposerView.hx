@@ -59,7 +59,7 @@ class EntityComposerView implements IEntityView {
 	}
 
 	function playAnimation( animationKey : AnimationKey, ?speed : Float ) {
-		for ( animation in animations.byKey[animationKey] ) {
+		for ( animation in animations.byKey[animationKey].keys ) {
 			var animationContainer = entityComposer.animationManager.animationGroups[animation];
 			if ( animationContainer == null ) {
 				trace( 'cannot find animation node with id: $animation in enco: $file ' );

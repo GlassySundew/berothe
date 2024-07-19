@@ -14,6 +14,8 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 	) : RigidBodyTorsoDescription {
 		if ( entry == null ) return null;
 		return new RigidBodyTorsoDescription(
+			0,
+			0,
 			entry.offsetZ,
 			entry.sizeX,
 			entry.sizeY,

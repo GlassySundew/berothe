@@ -2,23 +2,24 @@ package game.data.storage.entity.body;
 
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
-import game.data.storage.entity.body.view.IEntityViewProvider;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
+import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.component.EntityComponentDescription;
 
 class EntityBodyDescription extends DescriptionBase {
 
 	public var propertyDescriptions( default, null ) : Array<EntityComponentDescription> = [];
 
-	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
-	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var dynamics( default, null ) : Null<DynamicsDescription>;
+	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
 	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
+	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
+	public var attackDesc( default, null ) : Null<AttackListDescription>;
 
 	public var view : EntityViewDescription;
 
@@ -26,6 +27,7 @@ class EntityBodyDescription extends DescriptionBase {
 		super( entry.id.toString() );
 
 		createPropDescriptions( entry );
+
 		for ( propertyDesc in propertyDescriptions ) {
 			DataStorage.inst.entityPropertiesStorage.provideExistingDescription( propertyDesc );
 		}
@@ -37,6 +39,7 @@ class EntityBodyDescription extends DescriptionBase {
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
+			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attackDesc ),
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription() : null,
 

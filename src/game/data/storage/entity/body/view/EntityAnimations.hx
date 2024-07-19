@@ -9,23 +9,30 @@ class EntityAnimations {
 	/**
 		values are identifiers from entity composer animation
 	**/
-	public final byKey : Map<AnimationKey, Array<String>> = [];
+	public final byKey : Map<AnimationKey, EntityAnimationState> = [];
 
 	public function new( animations : cdb.Types.ArrayRead<Data.EntityView_animations> ) {
 
 		for ( animation in animations ) {
-			var key : AnimationKey = switch animation.key {
-				case idle: IDLE;
-				case walk: WALK;
-				case attack_prime_idle: ATTACK_PRIME_IDLE;
-				case attack_prime_attack: ATTACK_PRIME_ATTACK;
-				case attack_seco_idle: ATTACK_SECO_IDLE;
-				case attack_seco_attack: ATTACK_SECO_ATTACK;
-			}
+			var key : AnimationKey = AnimationKey.fromCdb( animation.key );
 
 			Assert.isNull( byKey[key], 'unsupported behaviour: by key ($key) animation node doubled' );
 
-			byKey[key] = [for ( anim in animation.animations ) anim.key];
+			byKey[key] = new EntityAnimationState(
+				animation.id.toString(),
+				[for ( anim in animation.animations ) anim.key]
+			);
 		}
+	}
+}
+
+class EntityAnimationState {
+
+	public final id : String;
+	public final keys : Array<AnimationKey>;
+
+	public inline function new( id : String, keys : Array<String> ) {
+		this.id = id;
+		this.keys = keys;
 	}
 }

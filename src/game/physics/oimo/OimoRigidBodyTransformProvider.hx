@@ -12,7 +12,7 @@ class OimoRigidBodyTransformProvider implements ITransformProvider {
 
 	public inline function new( rigidBody : RigidBody ) {
 		this.rigidBody = rigidBody;
-		this.transform = new OimoTransform( rigidBody._transform );
+		this.transform = new OimoTransform( rigidBody._transform ); 
 	}
 
 	public inline function get() : ITransform {

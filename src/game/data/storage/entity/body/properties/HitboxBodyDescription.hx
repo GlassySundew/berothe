@@ -11,6 +11,8 @@ class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 	) : HitboxBodyDescription {
 		if ( entry == null ) return null;
 		return new HitboxBodyDescription(
+			0,
+			0,
 			entry.offsetZ,
 			entry.sizeX,
 			entry.sizeY,

@@ -65,11 +65,11 @@
 			],
 			"lines": [
 				{
-					"id": "graybox",
+					"id": "point",
 					"body": "block"
 				},
 				{
-					"id": "point",
+					"id": "graybox",
 					"body": "block"
 				},
 				{
@@ -90,7 +90,7 @@
 			"separators": [
 				{
 					"title": "blocks",
-					"id": "graybox"
+					"id": "point"
 				},
 				{
 					"title": "characters",
@@ -183,6 +183,39 @@
 							"sizeZ": 17,
 							"offsetZ": 9,
 							"id": "humanTorsoHitbox"
+						},
+						"attackDesc": {
+							"id": "human_attack",
+							"attackList": [
+								{
+									"id": "human_attack_rh_right",
+									"tweenType": 0,
+									"sizeX": 5,
+									"sizeY": 5,
+									"sizeZ": 5,
+									"offsetX": 0,
+									"offsetY": 0,
+									"offsetZ": 0,
+									"cooldown": 0.7,
+									"duration": 1,
+									"endX": 10,
+									"key": "attack_prime_attack"
+								},
+								{
+									"id": "human_attack_rh_left",
+									"tweenType": 0,
+									"sizeX": 5,
+									"sizeY": 5,
+									"sizeZ": 5,
+									"offsetX": 0,
+									"offsetY": 0,
+									"offsetZ": 0,
+									"cooldown": 3.5,
+									"duration": 1,
+									"endX": 10,
+									"key": "attack_seco_attack"
+								}
+							]
 						}
 					}
 				}
@@ -197,6 +230,37 @@
 					"id": "human"
 				}
 			],
+			"props": {}
+		},
+		{
+			"name": "entityViewState",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				}
+			],
+			"lines": [
+				{
+					"id": "idle"
+				},
+				{
+					"id": "walk"
+				},
+				{
+					"id": "attack_prime_idle"
+				},
+				{
+					"id": "attack_prime_attack"
+				},
+				{
+					"id": "attack_seco_idle"
+				},
+				{
+					"id": "attack_seco_attack"
+				}
+			],
+			"separators": [],
 			"props": {}
 		},
 		{
@@ -229,6 +293,11 @@
 					"name": "staticObjectRigidBody",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "attackDesc",
+					"opt": true
 				}
 			]
 		},
@@ -331,6 +400,95 @@
 			]
 		},
 		{
+			"name": "entityProperty@properties@attackDesc",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
+				{
+					"typeStr": "8",
+					"name": "attackList"
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@attackDesc@attackList",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null
+				},
+				{
+					"typeStr": "6:entityViewState",
+					"name": "key",
+					"kind": null
+				},
+				{
+					"typeStr": "5:Linear",
+					"name": "tweenType",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "sizeX",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "sizeY",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "sizeZ",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetX",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetY",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetZ",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "cooldown",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "duration",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "endX",
+					"kind": null
+				}
+			]
+		},
+		{
 			"name": "entityView",
 			"columns": [
 				{
@@ -366,52 +524,58 @@
 					],
 					"animations": [
 						{
-							"key": 0,
 							"animations": [
 								{
 									"key": "torso_stand"
 								}
-							]
+							],
+							"id": "human_idle",
+							"key": "idle"
 						},
 						{
-							"key": 1,
 							"animations": [
 								{
 									"key": "torso_walk"
 								}
-							]
+							],
+							"id": "human_walk",
+							"key": "walk"
 						},
 						{
-							"key": 2,
 							"animations": [
 								{
 									"key": "right_hand_idle"
 								}
-							]
+							],
+							"id": "human_attack_prime_idle",
+							"key": "attack_prime_idle"
 						},
 						{
-							"key": 3,
 							"animations": [
 								{
 									"key": "right_hand_attack"
 								}
-							]
+							],
+							"id": "human_attack_prime_attack",
+							"key": "attack_prime_attack"
 						},
 						{
-							"key": 4,
 							"animations": [
 								{
 									"key": "left_hand_idle"
 								}
-							]
+							],
+							"id": "human_attack_seco_idle",
+							"key": "attack_seco_idle"
 						},
 						{
-							"key": 5,
 							"animations": [
 								{
 									"key": "left_hand_attack"
 								}
-							]
+							],
+							"id": "human_attack_seco_attack",
+							"key": "attack_seco_attack"
 						}
 					]
 				}
@@ -428,8 +592,14 @@
 			"lines": [],
 			"columns": [
 				{
-					"typeStr": "5:idle,walk,attack_prime_idle,attack_prime_attack,attack_seco_idle,attack_seco_attack",
-					"name": "key"
+					"typeStr": "0",
+					"name": "id",
+					"kind": null
+				},
+				{
+					"typeStr": "6:entityViewState",
+					"name": "key",
+					"kind": null
 				},
 				{
 					"typeStr": "8",
@@ -550,6 +720,11 @@
 					"scope": null
 				},
 				{
+					"typeStr": "5:PerPlayerPerRealm,Singleton,PerRealm",
+					"name": "instancing",
+					"kind": null
+				},
+				{
 					"typeStr": "3",
 					"name": "chunkSize",
 					"kind": null
@@ -567,7 +742,8 @@
 					"level": [
 						0,
 						"start"
-					]
+					],
+					"instancing": 0
 				}
 			],
 			"separators": [],
@@ -597,7 +773,8 @@
 				"dataFiles": "entitySpawnPointDF",
 				"editor": {
 					"categories": [
-						"locationDF"
+						"locationDF",
+						"df"
 					]
 				}
 			}
@@ -616,7 +793,8 @@
 				"dataFiles": "locationObjContainerTypeDF",
 				"editor": {
 					"categories": [
-						"locationDF"
+						"locationDF",
+						"df"
 					]
 				}
 			}
@@ -635,7 +813,7 @@
 				"dataFiles": "locationStaticObjDF",
 				"editor": {
 					"categories": [
-						"locationDF"
+						"df"
 					]
 				}
 			}
@@ -693,49 +871,6 @@
 					]
 				}
 			}
-		},
-		{
-			"name": "test",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				},
-				{
-					"typeStr": "8",
-					"name": "animations",
-					"kind": null
-				}
-			],
-			"lines": [
-				{
-					"id": "human",
-					"animations": []
-				},
-				{
-					"id": "asd",
-					"animations": []
-				}
-			],
-			"separators": [],
-			"props": {}
-		},
-		{
-			"name": "test@animations",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "1",
-					"name": "e",
-					"kind": null
-				}
-			]
 		},
 		{
 			"name": "tileset@sequences",
