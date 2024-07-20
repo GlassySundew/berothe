@@ -14,12 +14,13 @@ interface IPhysicsEngine {
 		end : ThreeDeeVector,
 		rayCastCallBack : RayCastCallback
 	) : Void;
+
 	function convexCast(
 		convex : IGeometry,
-		start : ITransformProvider,
-		end : ThreeDeeVector,
+		start : ITransform,
+		translation : ThreeDeeVector,
 		callback : RayCastCallback
 	) : Void;
 
-	function getShapeByOimo( shape : Shape ) : IRigidBodyShape;
+	// function getShapeByOimo( shape : Shape ) : IRigidBodyShape;
 }

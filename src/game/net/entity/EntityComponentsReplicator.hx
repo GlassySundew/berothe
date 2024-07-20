@@ -8,7 +8,7 @@ import net.NSClassMap;
 import net.NetNode;
 import game.core.rules.overworld.entity.OverworldEntity;
 import game.core.rules.overworld.entity.EntityComponent;
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 
 /**
 	`EntityComponentsReplicator` подключает реплицированные 
@@ -17,7 +17,10 @@ import game.net.entity.EntityComponentReplicator;
 **/
 class EntityComponentsReplicator extends NetNode {
 
-	@:s public var components : NSClassMap<Class<EntityComponentReplicator>, EntityComponentReplicator> = new NSClassMap();
+	@:s public var components : NSClassMap<
+		Class<EntityComponentReplicatorBase>,
+		EntityComponentReplicatorBase
+	> = new NSClassMap();
 
 	var entity : OverworldEntity;
 	var isMappingFinished = false;
@@ -27,9 +30,10 @@ class EntityComponentsReplicator extends NetNode {
 	}
 
 	public function followEntityServer( entity : OverworldEntity ) {
-		Assert.isNull( this.entity, "double entity following for entity comps replicator" );
+		Assert.isNull( this.entity, "double entity following for single replicator of components" );
 
 		this.entity = entity;
+
 		entity.components.map( onComponentAdded );
 		isMappingFinished = true;
 		entity.components.onComponentAdded.add( onComponentAdded );
@@ -53,7 +57,8 @@ class EntityComponentsReplicator extends NetNode {
 		)
 			trace( "apparently bad logic, double component set: " + component.classType );
 
-		if ( replicator == null ) trace( component + " component does not have network replication" );
+		if ( replicator == null )
+			trace( component + " component does not have network replication" );
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer, finalize : Bool = false ) {

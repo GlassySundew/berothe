@@ -1,20 +1,28 @@
 package game.physics.oimo;
 
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
-import oimo.dynamics.rigidbody.ShapeConfig;
-import oimo.dynamics.rigidbody.Shape;
 import game.core.rules.overworld.location.physics.IRigidBodyShape;
+import game.core.rules.overworld.location.physics.IShapeConfig;
+import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
+import game.physics.oimo.OimoWrappedShape;
 
 class OimoRigidBodyShape implements IRigidBodyShape {
 
-	public static function create( config : ShapeConfig ) : IRigidBodyShape {
-		return new OimoRigidBodyShape( new Shape( config ) );
+	public static function create( config : IShapeConfig ) : IRigidBodyShape {
+		var shape = //
+			new OimoRigidBodyShape(
+				new OimoWrappedShape(
+					config
+				)
+			);
+
+		return shape;
 	}
 
-	public final shape : Shape;
+	public final shape : OimoWrappedShape;
 
-	public inline function new( shape : Shape ) {
+	public inline function new( shape : OimoWrappedShape ) {
 		this.shape = shape;
+		OimoShapeCache.provideShape( this );
 	}
 
 	public inline function setCollisionGroup( collisionGroup : Int ) {

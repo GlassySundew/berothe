@@ -1,5 +1,6 @@
 package game.core.rules.overworld.entity.component;
 
+import game.physics.oimo.OimoRigidBodyShape;
 import game.data.storage.DataStorage;
 import game.core.rules.overworld.location.physics.RayCastHit;
 import oimo.dynamics.rigidbody.Shape;

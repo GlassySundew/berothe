@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import game.core.rules.overworld.location.physics.ITransform;
 import core.MutableProperty;
 import h3d.Quat;
 import oimo.common.Vec3;
@@ -13,7 +14,7 @@ import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 
 class OimoRigidBody implements IRigidBody {
 
-	public final transformProvider : OimoRigidBodyTransformProvider;
+	public final transform : ITransform;
 
 	public static function create( shape : IRigidBodyShape, type : RigidBodyType ) : IRigidBody {
 		Assert.isOfType( shape, OimoRigidBodyShape );
@@ -48,7 +49,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function new( rigidBody : RigidBody ) {
 		this.rigidBody = rigidBody;
-		this.transformProvider = new OimoRigidBodyTransformProvider( rigidBody );
+		this.transform = new OimoTransform( rigidBody._transform );
 
 		x.addOnValue( ( value ) -> rigidBody._transform._positionX = value );
 		y.addOnValue( ( value ) -> rigidBody._transform._positionY = value );

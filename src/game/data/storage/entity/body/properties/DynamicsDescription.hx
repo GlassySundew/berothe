@@ -1,7 +1,7 @@
 package game.data.storage.entity.body.properties;
 
 import net.NetNode;
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 import game.net.entity.component.EntityDynamicsComponentReplicator;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.core.rules.overworld.entity.EntityComponent;
@@ -17,7 +17,7 @@ class DynamicsDescription extends EntityComponentDescription {
 		return new EntityDynamicsComponent( this );
 	}
 
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicator {
+	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
 		return new EntityDynamicsComponentReplicator( parent );
 	}
 }

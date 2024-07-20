@@ -1,14 +1,14 @@
 package game.data.storage.entity.body;
 
-import game.data.storage.entity.body.view.EntityViewDescription;
-import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
+import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
-import game.data.storage.entity.body.properties.AttackListDescription;
+import game.data.storage.entity.body.view.EntityViewDescription;
+import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.component.EntityComponentDescription;
 
 class EntityBodyDescription extends DescriptionBase {

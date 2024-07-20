@@ -7,7 +7,7 @@ import game.core.rules.overworld.entity.component.combat.EntityAttackListCompone
 import game.data.storage.entity.body.view.AnimationKey;
 import game.data.storage.entity.body.view.AttackTranslationTween;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 
 class AttackListDescription extends EntityComponentDescription {
 
@@ -38,8 +38,9 @@ class AttackListDescription extends EntityComponentDescription {
 		return new EntityAttackListComponent( this );
 	}
 
-	public function buildCompReplicator( ?parent ) : EntityComponentReplicator {
-		throw new haxe.exceptions.NotImplementedException();
+	public function buildCompReplicator( ?parent ) : EntityComponentReplicatorBase {
+		// throw new haxe.exceptions.NotImplementedException();
+		return null;
 	}
 }
 
@@ -105,7 +106,7 @@ class AttackListItemDescription extends VolumetricBodyDescriptionBase {
 		return new EntityAttackComponent(this);
 	}
 
-	public function buildCompReplicator(?parent:NetNode):EntityComponentReplicator {
+	public function buildCompReplicator(?parent:NetNode):EntityComponentReplicatorBase {
 		throw new haxe.exceptions.NotImplementedException();
 	}
 }

@@ -18,7 +18,7 @@ interface IRigidBody {
 	final rotationY : IMutableProperty<Float>;
 	final rotationZ : IMutableProperty<Float>;
 
-	final transformProvider : ITransformProvider;
+	final transform : ITransform;
 
 	var isSleeping( default, null ) : IProperty<Bool>;
 

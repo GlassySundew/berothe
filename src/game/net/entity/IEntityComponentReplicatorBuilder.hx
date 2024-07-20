@@ -1,8 +1,8 @@
 package game.net.entity;
 
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 
 interface IEntityComponentReplicatorBuilder {
 
-	function build() : EntityComponentReplicator;
+	function build() : EntityComponentReplicatorBase;
 }

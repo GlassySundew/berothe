@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import game.core.rules.overworld.location.physics.ITransform;
 import game.core.rules.overworld.location.physics.ITransformProvider;
 import game.core.rules.overworld.location.physics.IGeometry;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
@@ -50,21 +51,21 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		world.setDebugDraw( this.debugDraw );
 	}
 
-	public function getShapeByOimo( shape : Shape ) : IRigidBodyShape {
-		if ( shape._id == -1 )
-			throw "trying to get unattached shape with id = -1, don't know how to handle";
+	// public function getShapeByOimo( shape : Shape ) : IRigidBodyShape {
+	// 	if ( shape._id == -1 )
+	// 		throw "trying to get unattached shape with id = -1, don't know how to handle";
 
-		var result : IRigidBodyShape = null;
-		var savedShape = shapes[shape._id];
+	// 	var result : IRigidBodyShape = null;
+	// 	var savedShape = shapes[shape._id];
 
-		if ( savedShape == null ) {
-			result = ShapeAbstractFactory.fromShape( shape );
-		} else {
-			result = savedShape;
-		}
+	// 	if ( savedShape == null ) {
+	// 		result = ShapeAbstractFactory.fromShape( shape );
+	// 	} else {
+	// 		result = savedShape;
+	// 	}
 
-		return result;
-	}
+	// 	return result;
+	// }
 
 	public inline function rayCast( begin : ThreeDeeVector, end : ThreeDeeVector, callback : RayCastCallback ) {
 		world.rayCast( begin.toOimo(), end.toOimo(), callback );
@@ -76,8 +77,8 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 
 	public function convexCast(
 		convex : IGeometry,
-		start : ITransformProvider,
-		end : ThreeDeeVector,
+		start : ITransform,
+		translation : ThreeDeeVector,
 		callback : RayCastCallback
 	) {
 		#if debug
@@ -86,8 +87,8 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 
 		world.convexCast(
 			Std.downcast( convex, OimoGeometry ).geom,
-			Std.downcast(start.get(), OimoTransform).transform,
-			end.toOimo(),
+			Std.downcast( start, OimoTransform ).transform,
+			translation.toOimo(),
 			callback
 		);
 	}

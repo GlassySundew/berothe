@@ -1,8 +1,8 @@
 package game.net.entity.component.view;
 
 import net.NSMutableProperty;
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 
-class EntityViewComponentReplicator extends EntityComponentReplicator {
+class EntityViewComponentReplicator extends EntityComponentReplicatorBase {
 
 }

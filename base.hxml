@@ -13,6 +13,7 @@
 -lib hscript:git:https://github.com/HaxeFoundation/hscript
 -lib hxToolShed:git:https://github.com/GlassySundew/hxToolShed
 -lib rxHaxe:git:https://github.com/GlassySundew/RxHaxe
+-lib min-max:git:https://github.com/skial/min-max
 -lib compiletime
 -lib random
 -lib seedyrng

@@ -1,5 +1,8 @@
 package en.collide;
 
+import game.physics.oimo.OimoShapeCache;
+import game.physics.oimo.OimoWrappedShape;
+import util.Assert;
 import game.core.rules.overworld.location.physics.IPhysicsEngine;
 import signals.Signal2;
 import signals.Signal;
@@ -21,7 +24,10 @@ class RayCastCallback extends RayCastClosest {
 
 	override function process( shape : Shape, hit : oimo.collision.geometry.RayCastHit ) {
 		super.process( shape, hit );
-		var shapeWrapped = physics.getShapeByOimo( shape );
+
+		Assert.isOfType( shape, OimoWrappedShape );
+
+		var shapeWrapped = OimoShapeCache.getShape( Std.downcast( shape, OimoWrappedShape ).cacheId );
 		var rayCastWrapped = RayCastHit.fromOimo( hit );
 
 		onShapeCollide.dispatch( shapeWrapped, rayCastWrapped );

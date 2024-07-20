@@ -1,7 +1,7 @@
 package game.data.storage.entity.body.properties;
 
 import net.NetNode;
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 import game.core.rules.overworld.entity.EntityComponent;
 
 class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
@@ -25,7 +25,7 @@ class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 		return null;
 	}
 
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicator {
+	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
 		return null;
 	}
 }

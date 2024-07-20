@@ -9,17 +9,18 @@ import game.core.rules.overworld.entity.OverworldEntity;
 import game.core.rules.overworld.entity.EntityComponent;
 import net.NetNode;
 
-abstract class EntityComponentReplicator extends NetNode {
+/**
+	когда базовый класс `EntityComponentReplicator` реплицируется на клиент, 
+	то он автоматически создаёт "чистый" компонент, и, если он привязан к
+	сущности(из `EntityReplicator`), то будет вызвана `followComponentClient()`
+**/
+abstract class EntityComponentReplicatorBase extends NetNode {
 
-	public var classType( default, null ) : Class<EntityComponentReplicator>;
+	public var classType( default, null ) : Class<EntityComponentReplicatorBase>;
 	public var followedComponent( default, null ) : Future<EntityComponent> = new Future();
 
 	@:s var componentDescId : NSMutableProperty<String> = new NSMutableProperty();
 	var entity : OverworldEntity;
-
-	public function new( parent ) {
-		super( parent );
-	}
 
 	override function init() {
 		classType = Type.getClass( this );

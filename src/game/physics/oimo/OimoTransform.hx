@@ -21,7 +21,17 @@ class OimoTransform implements ITransform {
 		};
 	}
 
+	public inline function setPosition( vec : ThreeDeeVector ) {
+		transform._positionX = vec.x;
+		transform._positionY = vec.y;
+		transform._positionZ = vec.z;
+	}
+
 	public inline function getRotation() : Quat {
 		return transform.getOrientation();
+	}
+
+	public inline function setRotation( vec : ThreeDeeVector ) {
+		transform.setRotationXyz( vec.toOimo() );
 	}
 }

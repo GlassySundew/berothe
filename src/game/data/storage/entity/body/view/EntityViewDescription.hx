@@ -2,7 +2,7 @@ package game.data.storage.entity.body.view;
 
 import game.net.entity.component.view.EntityViewComponentReplicator;
 import game.client.en.comp.view.EntityViewComponent;
-import game.net.entity.EntityComponentReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 import net.NetNode;
 import game.core.rules.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
@@ -21,7 +21,7 @@ class EntityViewDescription extends EntityComponentDescription {
 		return new EntityViewComponent( this );
 	}
 
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicator {
+	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
 		return new EntityViewComponentReplicator( parent );
 	}
 }
