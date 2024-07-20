@@ -1,12 +1,13 @@
 package game.core.rules.overworld.entity.component.block;
 
-import oimo.common.Vec3;
+import game.core.rules.overworld.entity.component.EntityRigidBodyComponentBase;
 import util.Assert;
-import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
-import game.core.rules.overworld.location.physics.IRigidBody;
-import game.physics.ShapeAbstractFactory;
-import game.physics.RigidBodyAbstractFactory;
 import util.Const;
+import game.core.rules.overworld.entity.component.EntityPhysicsComponentBase;
+import game.core.rules.overworld.location.physics.IRigidBody;
+import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
+import game.physics.RigidBodyAbstractFactory;
+import game.physics.ShapeAbstractFactory;
 
 typedef StaticObjectConfiguration = {
 	var sizeX : Float;
@@ -14,7 +15,7 @@ typedef StaticObjectConfiguration = {
 	var sizeZ : Float;
 }
 
-class StaticObjectRigidBodyComponent extends EntityPhysicalComponentBase {
+class StaticObjectRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	var rigidBodyDesc : StaticObjectRigidBodyDescription;
 	var config : StaticObjectConfiguration;

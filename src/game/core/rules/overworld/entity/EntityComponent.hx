@@ -9,7 +9,7 @@ abstract class EntityComponent {
 
 	public var entity( default, null ) : OverworldEntity;
 
-	public function new( description : EntityComponentDescription ) {
+	public function new( ?description : EntityComponentDescription ) {
 		classType = Type.getClass( this );
 		this.description = description;
 	}

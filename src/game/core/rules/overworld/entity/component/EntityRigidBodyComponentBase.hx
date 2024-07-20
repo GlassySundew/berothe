@@ -4,20 +4,14 @@ import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.location.physics.IPhysicsEngine;
 import game.core.rules.overworld.location.physics.IRigidBody;
 
-abstract class EntityPhysicalComponentBase extends EntityComponent {
+abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 
-	var physics : IPhysicsEngine;
 	var rigidBody : IRigidBody;
 
-	override function attachToEntity( entity : OverworldEntity ) {
-		super.attachToEntity( entity );
-		entity.location.onAppear( onAttachedToLocation );
-	}
+	override function onAttachedToLocation( location : Location ) {
+		super.onAttachedToLocation( location );
 
-	function onAttachedToLocation( location : Location ) {
-		physics = location.physics;
 		rigidBody = tryCreateRigidBody();
-
 		rigidBody.setPosition( { x : entity.transform.x, y : entity.transform.y, z : entity.transform.z } );
 		physics.addRigidBody( rigidBody );
 	}

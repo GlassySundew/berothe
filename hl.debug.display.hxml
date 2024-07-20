@@ -3,6 +3,8 @@
 -D server
 -D client
 
+# -D display
+
 debug.hxml
 
 hl.client.debug.hxml

@@ -1,9 +1,6 @@
 package game.physics;
 
-import oimo.dynamics.rigidbody.Shape;
-import oimo.dynamics.rigidbody.ShapeConfig;
 import game.core.rules.overworld.location.physics.IRigidBodyShape;
-import game.physics.oimo.OimoGeometry;
 import game.physics.oimo.OimoRigidBodyShape;
 
 class ShapeAbstractFactory {

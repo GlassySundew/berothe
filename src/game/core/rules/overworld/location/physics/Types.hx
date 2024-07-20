@@ -72,6 +72,14 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		}
 	}
 
+	public inline function div( subdiv : Float ) : ThreeDeeVector {
+		return {
+			x : this.x / subdiv,
+			y : this.y / subdiv,
+			z : this.z / subdiv
+		}
+	}
+
 	public inline function clone() : ThreeDeeVector {
 		return { x : this.x, y : this.y, z : this.z };
 	}

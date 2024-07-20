@@ -1,8 +1,5 @@
-package game.client.en.comp;
+package game.client.en.comp.control;
 
-import game.net.entity.component.EntityDynamicsComponentReplicator;
-import game.net.entity.component.view.EntityViewComponentReplicator;
-import game.net.entity.EntityReplicator;
 #if client
 import core.IProperty;
 import core.MutableProperty;
@@ -12,6 +9,8 @@ import util.Const;
 import game.core.rules.overworld.entity.EntityComponent;
 import game.core.rules.overworld.entity.OverworldEntity;
 import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
+import game.net.entity.EntityReplicator;
+import game.net.entity.component.EntityDynamicsComponentReplicator;
 
 class EntityMovementControlComponent extends EntityComponent {
 
@@ -19,8 +18,8 @@ class EntityMovementControlComponent extends EntityComponent {
 	public var inputDirY( default, null ) : Float = 0;
 
 	final entityReplicator : EntityReplicator;
+	final ca : ControllerAccess<ControllerAction>;
 
-	var ca : ControllerAccess<ControllerAction>;
 	var dynamicsComponent : EntityDynamicsComponent;
 
 	// TODO temp
@@ -32,16 +31,16 @@ class EntityMovementControlComponent extends EntityComponent {
 		return isMovementAppliedSelf;
 	}
 
-	public function new( entityReplicator : EntityReplicator ) {
+	public function new( entityReplicator : EntityReplicator, ca :  ControllerAccess<ControllerAction>) {
 		super( null );
 
+		this.ca = ca;
 		this.entityReplicator = entityReplicator;
 	}
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
-		ca = Main.inst.controller.createAccess();
 		entity.components.onAppear(
 			EntityDynamicsComponent,
 			( key, dynamicsComponent ) -> {
@@ -50,13 +49,11 @@ class EntityMovementControlComponent extends EntityComponent {
 			}
 		);
 
-		// ! shit code
 		var dynamicsReplicator = entityReplicator.componentsRepl.components.get( EntityDynamicsComponentReplicator );
 		dynamicsReplicator.followedComponent.then( ( component ) -> {
 			var dynamics : EntityDynamicsComponent = Std.downcast( component, EntityDynamicsComponent );
 			isMovementAppliedSelf.subscribeProp( dynamics.isMovementApplied );
 		} );
-		// ! shit code off
 	}
 
 	function update( dt, tmod : Float ) {

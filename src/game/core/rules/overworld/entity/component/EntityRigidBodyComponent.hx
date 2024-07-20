@@ -12,7 +12,7 @@ import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.physics.RigidBodyAbstractFactory;
 import game.physics.ShapeAbstractFactory;
 
-class EntityRigidBodyComponent extends EntityPhysicalComponentBase {
+class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	var torsoShape : IRigidBodyShape;
 	var rigidBodyDesc : RigidBodyTorsoDescription;

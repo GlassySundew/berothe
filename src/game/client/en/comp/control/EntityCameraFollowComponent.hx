@@ -1,4 +1,4 @@
-package game.client.en.comp;
+package game.client.en.comp.control;
 
 #if client
 import game.net.client.GameClient;

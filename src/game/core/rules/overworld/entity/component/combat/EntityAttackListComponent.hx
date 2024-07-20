@@ -6,22 +6,30 @@ class EntityAttackListComponent extends EntityComponent {
 
 	public final attackListDesc : AttackListDescription;
 
-	final components : Array<EntityAttackComponent>;
+	final attackComponents : Array<EntityAttackListItem>;
 
 	public function new( description : AttackListDescription ) {
 		super( description );
 		this.attackListDesc = description;
 
-		components = createComponents();
+		attackComponents = createAttackList();
 	}
 
-	function createComponents() : Array<EntityAttackComponent> {
+	function createAttackList() : Array<EntityAttackListItem> {
 		var result = [
 			for ( attackDesc in attackListDesc.attackList ) {
-				Std.downcast( attackDesc.buildComponennt(), EntityAttackComponent );
+				new EntityAttackListItem( attackDesc );
 			}
 		];
 
 		return result;
+	}
+
+	override function attachToEntity( entity : OverworldEntity ) {
+		super.attachToEntity( entity );
+
+		for ( component in attackComponents ) {
+			component.attachToEntity( entity );
+		}
 	}
 }

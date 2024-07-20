@@ -29,13 +29,14 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 	override function alive() {
 		super.alive();
 
-		componentDescId.onAppear( ( descId ) -> {
+		componentDescId.onAppear( descId -> {
 			var desc = DataStorage.inst.entityPropertiesStorage.getDescriptionById( descId );
 			followedComponent.resolve( desc.buildComponennt() );
 		} );
 	}
 
 	public function followComponentClient( entity : OverworldEntity ) {
+		this.entity = entity;
 		followedComponent.then( ( component ) -> entity.components.add( component ) );
 	}
 

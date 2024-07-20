@@ -4,7 +4,6 @@ import en.collide.RayCastCallback;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 import game.core.rules.overworld.location.physics.ITransform;
 import game.core.rules.overworld.location.physics.IGeometry;
-import game.core.rules.IUpdatable;
 import game.core.rules.overworld.location.physics.IPhysicsEngine;
 
 /**
@@ -26,7 +25,7 @@ class OimoGeometryCastEmitter {
 		contactCB = new RayCastCallback( physics );
 	}
 
-	public function emit() {
+	function emit() {
 		physics.convexCast( geom, start, translation, contactCB );
 	}
 }

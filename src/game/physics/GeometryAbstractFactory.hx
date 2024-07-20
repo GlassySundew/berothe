@@ -1,9 +1,9 @@
 package game.physics;
 
-import game.physics.oimo.OimoGeometry;
-import oimo.common.Vec3;
 import oimo.collision.geometry.BoxGeometry;
-import game.core.rules.overworld.location.physics.IGeometry;
+import oimo.common.Vec3;
+import game.core.rules.overworld.location.physics.geom.IBoxGeometry;
+import game.physics.oimo.geom.OimoBoxGeometry;
 
 class GeometryAbstractFactory {
 
@@ -11,7 +11,7 @@ class GeometryAbstractFactory {
 		xSize : Float,
 		ySize : Float,
 		zSize : Float
-	) : IGeometry {
+	) : IBoxGeometry {
 
 		var geom = new BoxGeometry(
 			new Vec3(
@@ -21,7 +21,7 @@ class GeometryAbstractFactory {
 			)
 		);
 
-		var wrapper = new OimoGeometry( geom );
+		var wrapper = new OimoBoxGeometry( geom );
 		return wrapper;
 	}
 }
