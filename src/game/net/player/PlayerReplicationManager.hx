@@ -37,8 +37,6 @@ class PlayerReplicationManager {
 		this.playerEntity = playerEntity;
 		this.coreReplicator = coreReplicator;
 
-		// playerChunksReplicationManager = new PlayerChunksReplicationManager();
-
 		init();
 	}
 
@@ -69,11 +67,11 @@ class PlayerReplicationManager {
 		transform.x.syncBack = false;
 		transform.y.syncBack = false;
 		transform.z.syncBack = false;
-		
+
 		transform.velX.syncBack = false;
 		transform.velY.syncBack = false;
 		transform.velZ.syncBack = false;
-		
+
 		transform.rotationX.syncBack = false;
 		transform.rotationY.syncBack = false;
 		transform.rotationZ.syncBack = false;
@@ -160,7 +158,7 @@ class PlayerReplicationManager {
 		}
 	}
 
-	function onAddedToChunk( chunk : Chunk ) {
+	function onAddedToChunk( _, chunk : Chunk ) {
 		var oldChunk = playerEntity.chunk.getValue();
 		if ( oldChunk.location != chunk.location ) {
 			wipeAllChunks();
@@ -171,7 +169,7 @@ class PlayerReplicationManager {
 		attachVisibleChunks( chunk );
 	}
 
-	function onAddedToLocation( location : Location ) {
+	function onAddedToLocation( _, location : Location ) {
 		if ( location == null ) return;
 
 		var locationRepl = coreReplicator.getLocationReplicator( location );

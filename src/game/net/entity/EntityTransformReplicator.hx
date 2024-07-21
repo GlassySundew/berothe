@@ -83,6 +83,6 @@ class EntityTransformReplicator extends NetNode {
 
 	function setupClientSyncronization() {
 		createNetworkToModelStream();
-		createModelToNetworkStream();
+		// createModelToNetworkStream();
 	}
 }

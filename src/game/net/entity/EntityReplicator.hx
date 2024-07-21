@@ -49,7 +49,7 @@ class EntityReplicator extends NetNode {
 		super.unregister( host, ctx, finalize );
 	}
 
-	function onLocationChanged( location : Location ) {
+	function onLocationChanged( _, location : Location ) {
 		locationDescId = location?.locationDesc.id.toString();
 	}
 }

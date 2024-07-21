@@ -55,10 +55,10 @@ class Location {
 	}
 
 	public function update( dt : Float, tmod : Float ) {
-		physics.update( dt );
 		for ( entity in entities ) {
 			entity.update( dt, tmod );
 		}
+		physics.update( dt );
 	}
 
 	function load() {

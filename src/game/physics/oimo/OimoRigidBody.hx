@@ -51,21 +51,31 @@ class OimoRigidBody implements IRigidBody {
 		this.rigidBody = rigidBody;
 		this.transform = new OimoTransform( rigidBody._transform );
 
-		x.addOnValue( ( value ) -> rigidBody._transform._positionX = value );
-		y.addOnValue( ( value ) -> rigidBody._transform._positionY = value );
-		z.addOnValue( ( value ) -> rigidBody._transform._positionZ = value );
+		x.addOnValue(
+			( oldVal, value ) -> rigidBody._transform._positionX = value
+		);
+		y.addOnValue(
+			( oldVal, value ) -> rigidBody._transform._positionY = value
+		);
+		z.addOnValue(
+			( oldVal, value ) -> rigidBody._transform._positionZ = value
+		);
 
-		velX.addOnValue( ( value ) -> rigidBody._velX = value );
-		velY.addOnValue( ( value ) -> rigidBody._velY = value );
-		velZ.addOnValue( ( value ) -> rigidBody._velZ = value );
+		velX.addOnValue( ( oldVal, value ) -> rigidBody._velX = value );
+		velY.addOnValue( ( oldVal, value ) -> rigidBody._velY = value );
+		velZ.addOnValue( ( oldVal, value ) -> rigidBody._velZ = value );
 
 		rigidBody._sleeping.subscribeProp( isSleeping );
+		isSleeping.addOnValue( ( _, _ ) -> onUpdated() );
+		onUpdated();
+		
 		rigidBody.onUpdated.add( onUpdated );
 	}
 
 	public inline function addShape( shape : IRigidBodyShape ) {
 		shapes.push( shape );
 		rigidBody.addShape( Std.downcast( shape, OimoRigidBodyShape ).shape );
+		// onUpdated();
 	}
 
 	public inline function setRotationFactor( rotationFactor : ThreeDeeVector ) {
@@ -82,7 +92,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setPosition( pos : ThreeDeeVector ) {
 		rigidBody.setPosition( pos.toOimo() );
-		onUpdated();
+		// onUpdated();
 	}
 
 	public inline function wakeUp() {
@@ -92,7 +102,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function move( x : Float, y : Float, z : Float ) {
 		rigidBody.translate( new Vec3( x, y, z ) );
-		onUpdated(); // ! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
+		// onUpdated(); // ! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
 	}
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {

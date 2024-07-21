@@ -160,9 +160,13 @@ class Client extends Process {
 
 	override function update() {
 		super.update();
-		host?.flush();
 	}
 
+	override function postUpdate() {
+		super.postUpdate();
+		host?.flush();
+	}
+	
 	public function sendMessage( msg : Message ) {
 		host?.sendMessage( msg );
 	}

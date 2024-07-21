@@ -111,7 +111,7 @@ class GameClient extends Process {
 		physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
 
 		Settings.inst.params.debug.physicsDebugVisible.addOnValue(
-			( value ) -> physicsDebugView.setVisibility( value )
+			( oldVal, value ) -> physicsDebugView.setVisibility( value )
 		);
 	}
 }

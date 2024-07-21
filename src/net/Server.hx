@@ -120,6 +120,11 @@ class Server extends Process {
 		haxe.Log.trace( s, pos );
 	}
 
+	override function preUpdate() {
+		super.preUpdate();
+		
+	}
+	
 	override function update() {
 		repeater.update( tmod );
 	}

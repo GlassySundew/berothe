@@ -23,17 +23,17 @@ class EntityDynamicsComponent extends EntityComponent {
 		entity.onFrame.add( onFrame );
 
 		entity.transform.x.addOnValue(
-			( oldVal ) -> {
+			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
 		);
 		entity.transform.y.addOnValue(
-			( oldVal ) -> {
+			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
 		);
 		entity.transform.z.addOnValue(
-			( oldVal ) -> {
+			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
 		);

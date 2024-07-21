@@ -50,26 +50,26 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
 
-		rigidBody.x.subscribeProp( entity.transform.x );
-		rigidBody.y.subscribeProp( entity.transform.y );
-		rigidBody.z.subscribeProp( entity.transform.z );
 		entity.transform.x.subscribeProp( rigidBody.x );
 		entity.transform.y.subscribeProp( rigidBody.y );
 		entity.transform.z.subscribeProp( rigidBody.z );
-
-		rigidBody.velX.subscribeProp( entity.transform.velX );
-		rigidBody.velY.subscribeProp( entity.transform.velY );
-		rigidBody.velZ.subscribeProp( entity.transform.velZ );
+		rigidBody.x.subscribeProp( entity.transform.x );
+		rigidBody.y.subscribeProp( entity.transform.y );
+		rigidBody.z.subscribeProp( entity.transform.z );
+		
 		entity.transform.velX.subscribeProp( rigidBody.velX );
 		entity.transform.velY.subscribeProp( rigidBody.velY );
 		entity.transform.velZ.subscribeProp( rigidBody.velZ );
+		rigidBody.velX.subscribeProp( entity.transform.velX );
+		rigidBody.velY.subscribeProp( entity.transform.velY );
+		rigidBody.velZ.subscribeProp( entity.transform.velZ );
 
-		rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
-		rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
-		rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
 		entity.transform.rotationX.subscribeProp( rigidBody.rotationX );
 		entity.transform.rotationY.subscribeProp( rigidBody.rotationY );
 		entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ );
+		rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
+		rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
+		rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
 	}
 
 	function subscribeStanding( key, dynamicsComponent : EntityDynamicsComponent ) {
@@ -90,7 +90,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 			physics.rayCast( start, end, standRayCastCallback );
 		} );
 		dynamicsComponent.invalidateMove();
-		dynamicsComponent.isResting.addOnValue( ( value ) -> {
+		dynamicsComponent.isResting.addOnValue( ( vold, value ) -> {
 			if ( value ) {
 				rigidBody.sleep();
 			}
@@ -107,10 +107,10 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 	function onRayCollide( shape : IRigidBodyShape, rayCastHit : RayCastHit ) {
 		if ( shape.getCollisionGroup() & torsoShape.getCollisionMask() == 0 ) return;
 
-		rigidBody.velZ.setWithPostSetDispatch( 0 );
-		if ( rigidBody.velX.val == 0 && rigidBody.velY.val == 0 ) {
-			rigidBody.sleep();
-		}
+		rigidBody.velZ.val = 0;
+		// if ( rigidBody.velX.val == 0 && rigidBody.velY.val == 0 ) {
+		// 	rigidBody.sleep();
+		// }
 
 		rigidBody.move( 0, 0, ( 1 - rayCastHit.fraction ) * rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeZ / 2 ) % 1 );
 	}

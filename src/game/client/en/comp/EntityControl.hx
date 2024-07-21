@@ -21,5 +21,7 @@ class EntityControl {
 		entity.components.add( new EntityCameraFollowComponent( null ) );
 		entity.components.add( new EntityMovementControlComponent( entityRepl, ca ) );
 		// entity.components.add( new EntityAttackControlComponent( entityRepl, ca ) );
+
+		entityRepl.transformRepl.createModelToNetworkStream();
 	}
 }
