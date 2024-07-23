@@ -1,6 +1,6 @@
-#if server
 package net;
 
+#if server
 import dn.Process;
 import game.net.server.GameServer;
 import hxbit.NetworkHost.NetworkClient;
@@ -9,6 +9,7 @@ import util.Env;
 import util.Repeater;
 import util.tools.Save;
 import net.ClientController;
+import rx.disposables.ISubscription;
 
 using util.Extensions.SocketHostExtender;
 
@@ -29,7 +30,7 @@ class Server extends Process {
 
 	var game : GameServer;
 
-	public final repeater : Repeater = new Repeater( hxd.Timer.wantedFPS );
+	var connectionRepeater : ISubscription;
 
 	public function new( ?seed : String ) {
 		super();
@@ -80,6 +81,30 @@ class Server extends Process {
 			#end
 		} );
 
+		connect(
+			() -> connectionRepeater = Repeater.repeatSeconds(
+				() -> connect(),
+				1, 5,
+				() -> trace( "server has failed to take port" )
+			)
+		);
+	}
+
+	public function destroyClient( c : SocketClient ) {
+		var clientController = cast( c.ownerObject, ClientController );
+		if ( clientController.__host == null ) return;
+		// if ( clientController.player != null ) clientController.player.destroy(); // TODO remove this into signals
+		for ( i => client in host.clientsOwners ) {
+			clientController.unreg( host, client.ctx, i + 1 == host.clients.length );
+		}
+	}
+
+	public function log( s : String, ?pos : haxe.PosInfos ) {
+		pos.fileName = ( host.isAuth ? "[S]" : "[C]" ) + " " + pos.fileName;
+		haxe.Log.trace( s, pos );
+	}
+
+	function connect( onFail : () -> Void = null ) {
 		try {
 			@:privateAccess
 			host.waitFixed( HOST, PORT,
@@ -101,33 +126,19 @@ class Server extends Process {
 
 			log( "Server Started" );
 			host.makeAlive();
+
+			connectionRepeater?.unsubscribe();
 		} catch( e : Dynamic ) {
-			log( "port 6676 is already taken, server will not be booted..." );
+			log( "cannot take port 6676: already taken" );
+			if ( onFail != null ) onFail();
 		}
-	}
-
-	public function destroyClient( c : SocketClient ) {
-		var clientController = cast( c.ownerObject, ClientController );
-		if ( clientController.__host == null ) return;
-		// if ( clientController.player != null ) clientController.player.destroy(); // TODO remove this into signals
-		for ( i => client in host.clientsOwners ) {
-			clientController.unreg( host, client.ctx, i + 1 == host.clients.length );
-		}
-	}
-
-	public function log( s : String, ?pos : haxe.PosInfos ) {
-		pos.fileName = ( host.isAuth ? "[S]" : "[C]" ) + " " + pos.fileName;
-		haxe.Log.trace( s, pos );
 	}
 
 	override function preUpdate() {
 		super.preUpdate();
-		
 	}
-	
-	override function update() {
-		repeater.update( tmod );
-	}
+
+	override function update() {}
 
 	override function postUpdate() {
 		host.flush();

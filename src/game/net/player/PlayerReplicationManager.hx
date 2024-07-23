@@ -44,6 +44,7 @@ class PlayerReplicationManager {
 		playerEntity.chunk.addOnValueImmediately( onAddedToChunk );
 		cliCon.addChild( playerEntityReplicator );
 		cliCon.giveControlOverEntity( playerEntityReplicator );
+		
 		playerEntity.location.addOnValueImmediately( onAddedToLocation );
 
 		var transform = playerEntityReplicator.transformRepl;
@@ -58,6 +59,8 @@ class PlayerReplicationManager {
 		transform.rotationX.syncBackOwner = cliCon;
 		transform.rotationY.syncBackOwner = cliCon;
 		transform.rotationZ.syncBackOwner = cliCon;
+
+		// transform.x.addOnValue( ( _, val ) -> trace( "got player replication x: " + val ) );
 
 		giveControl();
 	}

@@ -1,5 +1,6 @@
 package game.client.en.comp;
 
+import game.core.rules.overworld.entity.component.EntityRigidBodyComponent;
 import game.client.en.comp.control.EntityAttackControlComponent;
 import dn.heaps.input.ControllerAccess;
 import rx.disposables.ISubscription;
@@ -23,5 +24,9 @@ class EntityControl {
 		// entity.components.add( new EntityAttackControlComponent( entityRepl, ca ) );
 
 		entityRepl.transformRepl.createModelToNetworkStream();
+
+		entity.components.onAppear( EntityRigidBodyComponent, ( key, rbComp ) -> {
+			rbComp.claimOwnage();
+		} );
 	}
 }

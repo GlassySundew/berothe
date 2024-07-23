@@ -18,6 +18,6 @@ class WalkAnimationState extends AnimationState {
 		/** todo make functionality to get entity walking speed (via walking
 			archetype that is affected with, say, speed potion or whatever other speed modificator)
 		**/
-		return M.dist( 0, 0, entity.transform.velX, entity.transform.velY ) * .15;
+		return M.dist( 0, 0, entity.transform.velX, entity.transform.velY ) * .1;
 	}
 }

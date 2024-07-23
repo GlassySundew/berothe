@@ -40,7 +40,6 @@ class EntityDynamicsComponent extends EntityComponent {
 	}
 
 	function onFrame( dt, tmod : Float ) {
-		// trace( entity.transform.velX, entity.transform.velY, entity.transform.velZ );
 		if ( M.fabs( entity.transform.velX.val ) < 0.0005 * tmod ) {
 			entity.transform.velX.val = 0;
 		} else {

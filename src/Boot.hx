@@ -51,7 +51,6 @@ class Boot extends hxd.App {
 	override function init() {
 		Env.init();
 		Save.initFields();
-		new Repeater( hxd.Timer.wantedFPS );
 
 		haxe.Log.trace = function ( v : Dynamic, ?infos : haxe.PosInfos ) {
 			#if hx_concurrent

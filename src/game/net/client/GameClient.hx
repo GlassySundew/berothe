@@ -87,7 +87,7 @@ class GameClient extends Process {
 			new PauseMenu( this, Main.inst.root, Main.inst );
 		}
 
-		currentLocationSelf.val?.update( tmod / hxd.Timer.wantedFPS, tmod );
+		currentLocationSelf.val?.update( hxd.Timer.dt, tmod );
 	}
 
 	override function pause() {

@@ -31,7 +31,7 @@ class EntityMovementControlComponent extends EntityComponent {
 		return isMovementAppliedSelf;
 	}
 
-	public function new( entityReplicator : EntityReplicator, ca :  ControllerAccess<ControllerAction>) {
+	public function new( entityReplicator : EntityReplicator, ca : ControllerAccess<ControllerAction> ) {
 		super( null );
 
 		this.ca = ca;
@@ -56,7 +56,7 @@ class EntityMovementControlComponent extends EntityComponent {
 		} );
 	}
 
-	function update( dt, tmod : Float ) {
+	function update( dt : Float, tmod : Float ) {
 		var lx = ca.getAnalogValue2( MoveLeft, MoveRight );
 		var ly = ca.getAnalogValue2( MoveDown, MoveUp );
 
@@ -76,6 +76,12 @@ class EntityMovementControlComponent extends EntityComponent {
 			entity.transform.velX.val += inputDirX;
 			entity.transform.velY.val += inputDirY;
 		}
+
+		// for ( i in haxe.CallStack.callStack() )
+		// 	for ( i in haxe.CallStack.callStack() )
+		// 		// for ( i in haxe.CallStack.callStack() )
+		// 		for ( i in haxe.CallStack.callStack() )
+		// 			Std.parseFloat( ".0123" );
 	}
 }
 #end

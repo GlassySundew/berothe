@@ -2,6 +2,7 @@
 	entrypoint for headless standalone server executable
 **/
 
+import hxd.System;
 import hxd.Timer;
 import net.Server;
 

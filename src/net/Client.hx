@@ -1,5 +1,6 @@
 package net;
 
+import rx.disposables.ISubscription;
 #if client
 import util.Assert;
 import util.Const;
@@ -22,9 +23,6 @@ class Client extends Process {
 	static var CONNECT_REPEATER_ID : String = "connect";
 	static var PORT = 6676;
 
-	// temp
-	static var infoFlow : Flow;
-
 	public var host : hxd.net.SocketHost;
 
 	public var onConnection : Signal = new Signal();
@@ -34,6 +32,8 @@ class Client extends Process {
 	function get_connected() @:privateAccess return host.connected;
 
 	var game : GameClient;
+
+	var connectionRepeater : ISubscription;
 
 	public function new() {
 		super( Main.inst );
@@ -52,16 +52,13 @@ class Client extends Process {
 	}
 
 	public function repeatConnect( interval = 0.5, repeats = 6 ) {
-		connect();
-		if ( !connected ) {
-			addOnConnectionCallback(() -> {
-				Main.inst.repeater.unset( '$CONNECT_REPEATER_ID' );
-			} );
-
-			Main.inst.repeater.setS( '$CONNECT_REPEATER_ID', interval, repeats, () -> {
-				connect();
-			} );
-		}
+		connect(() -> {
+			connectionRepeater = Repeater.repeatSeconds(
+				() -> connect(),
+				1, 5,
+				() -> trace( "client has failed to connect" )
+			);
+		} );
 	}
 
 	public function connect( hostIp = "127.0.0.1", ?onFail : Void -> Void ) {
@@ -78,31 +75,11 @@ class Client extends Process {
 
 		host.connect( hostIp, PORT, function ( connectionStatus ) {
 			if ( !connectionStatus ) {
-				if ( !Main.inst.repeater.has( '$CONNECT_REPEATER_ID' ) ) {
-					if ( infoFlow != null )
-						infoFlow.remove();
+				if ( onFail != null ) onFail();
 
-					// server not found
-					infoFlow = new Flow( Boot.inst.s2d );
-					infoFlow.verticalAlign = Middle;
-					var textInfo = new ShadowedText( Assets.fontPixel, infoFlow );
-					textInfo.text = "unable to connect... ";
-
-					var mainMenuBut : TextButton = null;
-					mainMenuBut = new TextButton( "return back to menu", ( e ) -> {
-						mainMenuBut.cursor = Default;
-						infoFlow.remove();
-						destroy();
-						MainMenu.spawn( Boot.inst.s2d );
-					}, infoFlow );
-					infoFlow.getProperties( mainMenuBut ).verticalAlign = Bottom;
-
-					trace( "Failed to connect to server" );
-				}
+				trace( "Failed to connect to server" );
 				return;
 			}
-			if ( infoFlow != null )
-				infoFlow.remove();
 
 			sendMessage( Message.ClientAuth );
 
@@ -158,15 +135,11 @@ class Client extends Process {
 		onConnectionClosed.dispatch();
 	}
 
-	override function update() {
-		super.update();
-	}
-
 	override function postUpdate() {
 		super.postUpdate();
 		host?.flush();
 	}
-	
+
 	public function sendMessage( msg : Message ) {
 		host?.sendMessage( msg );
 	}

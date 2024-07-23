@@ -1,5 +1,6 @@
 package game.core.rules.overworld.entity;
 
+import game.core.rules.overworld.entity.component.EntityRigidBodyComponent;
 import game.core.rules.overworld.location.Location;
 import core.IProperty;
 import core.MutableProperty;
@@ -35,7 +36,7 @@ class OverworldEntity {
 		this.id = id;
 	}
 
-	public function update( dt : Float, tmod : Float ) {
+	public inline function update( dt : Float, tmod : Float ) {
 		onFrame.dispatch( dt, tmod );
 	}
 

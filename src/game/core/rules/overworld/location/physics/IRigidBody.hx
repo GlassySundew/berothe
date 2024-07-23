@@ -33,4 +33,5 @@ interface IRigidBody {
 	function sleep() : Void;
 	function wakeUp() : Void;
 	function setAutoSleep( value : Bool ) : Void;
+	// function onUpdated():Void;
 }

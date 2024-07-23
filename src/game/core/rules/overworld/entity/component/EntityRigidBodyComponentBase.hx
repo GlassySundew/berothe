@@ -1,12 +1,14 @@
 package game.core.rules.overworld.entity.component;
 
+import future.Future;
 import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.location.physics.IPhysicsEngine;
 import game.core.rules.overworld.location.physics.IRigidBody;
 
 abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 
-	var rigidBody : IRigidBody;
+	public var rigidBody : IRigidBody;
+	var rigidBodyFuture : Future<IRigidBody> = new Future();
 
 	override function onAttachedToLocation( location : Location ) {
 		super.onAttachedToLocation( location );
@@ -14,6 +16,8 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 		rigidBody = tryCreateRigidBody();
 		rigidBody.setPosition( { x : entity.transform.x, y : entity.transform.y, z : entity.transform.z } );
 		physics.addRigidBody( rigidBody );
+
+		rigidBodyFuture.resolve( rigidBody );
 	}
 
 	final function tryCreateRigidBody() {

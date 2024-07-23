@@ -52,23 +52,43 @@ class OimoRigidBody implements IRigidBody {
 		this.transform = new OimoTransform( rigidBody._transform );
 
 		x.addOnValue(
-			( oldVal, value ) -> rigidBody._transform._positionX = value
+			( oldVal, value ) -> {
+				rigidBody._transform._positionX = value;
+				// wakeUp();
+			}
 		);
 		y.addOnValue(
-			( oldVal, value ) -> rigidBody._transform._positionY = value
+			( oldVal, value ) -> {
+				rigidBody._transform._positionY = value;
+				// wakeUp();
+			}
 		);
 		z.addOnValue(
-			( oldVal, value ) -> rigidBody._transform._positionZ = value
+			( oldVal, value ) -> {
+				rigidBody._transform._positionZ = value;
+				// wakeUp();
+			}
 		);
 
-		velX.addOnValue( ( oldVal, value ) -> rigidBody._velX = value );
-		velY.addOnValue( ( oldVal, value ) -> rigidBody._velY = value );
-		velZ.addOnValue( ( oldVal, value ) -> rigidBody._velZ = value );
+		velX.addOnValue(
+			( oldVal, value ) -> {
+				rigidBody._velX = value;
+				// wakeUp();
+			} );
+		velY.addOnValue(
+			( oldVal, value ) -> {
+				rigidBody._velY = value;
+				// wakeUp();
+			} );
+		velZ.addOnValue(
+			( oldVal, value ) -> {
+				rigidBody._velZ = value;
+				// wakeUp();
+			} );
 
 		rigidBody._sleeping.subscribeProp( isSleeping );
 		isSleeping.addOnValue( ( _, _ ) -> onUpdated() );
 		onUpdated();
-		
 		rigidBody.onUpdated.add( onUpdated );
 	}
 

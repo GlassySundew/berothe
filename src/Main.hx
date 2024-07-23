@@ -40,19 +40,14 @@ class Main extends Process {
 	public var onResizeEvent : Signal = new Signal();
 	public var onUpdate : Signal = new Signal();
 
-	public final repeater : Repeater = new Repeater( hxd.Timer.wantedFPS );
-
 	#if game_tmod
 	var stats : h2d.Text;
 	#end
 
 	public function new( s : h2d.Scene ) {
 		super();
-
 		inst = this;
 		createRoot( s );
-
-		// root.filter = new h2d.filter.ColorMatrix();
 
 		setupResources();
 		setupRenderer();
@@ -131,14 +126,13 @@ class Main extends Process {
 		renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
 		Std.downcast( Boot.inst.s3d.lightSystem, h3d.scene.fwd.LightSystem ).ambientLight.set( .5, .5, .5 );
 
-		Boot.inst.s3d.renderer = 
-		Boot.inst.renderer = renderer;
+		Boot.inst.s3d.renderer = Boot.inst.renderer = renderer;
 	}
 
 	function initGamePadController() {
 		controller = Controller.createFromAbstractEnum( ControllerAction );
 		ca = controller.createAccess();
-// ca.lockCondition
+		// ca.lockCondition
 		controller.bindKeyboard( MoveUp, [Key.UP, Key.W] );
 		controller.bindKeyboard( MoveLeft, [Key.LEFT, Key.A] );
 		controller.bindKeyboard( MoveDown, [Key.DOWN, Key.S] );
@@ -185,7 +179,6 @@ class Main extends Process {
 		// dn.heaps.slib.SpriteLib.TMOD = tmod;
 		if ( ca.isKeyboardPressed( Key.F11 ) ) toggleFullscreen();
 		// if ( ca.isKeyboardPressed(Key.M) ) Assets.toggleMusicPause();
-		repeater.update( tmod );
 
 		#if game_tmod
 		stats.text = "tmod: " + tmod;
