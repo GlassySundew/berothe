@@ -14,7 +14,7 @@ class EntityReplicator extends NetNode {
 
 	@:s public final transformRepl : EntityTransformReplicator;
 	@:s public final componentsRepl : EntityComponentsReplicator;
-	
+
 	@:s var entityDescriptionId : String;
 	@:s var locationDescId : String;
 
@@ -39,16 +39,14 @@ class EntityReplicator extends NetNode {
 		var entityLocal = new OverworldEntity( desc, "0" ); // todo client ids
 		componentsRepl.followEntityClient( entityLocal );
 		transformRepl.followEntityClient( entityLocal );
-		
+
 		entity.resolve( entityLocal );
 	}
 
-	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer, finalize : Bool = false ) {
-		if ( finalize ) componentsRepl = null;
-
-		super.unregister( host, ctx, finalize );
+	override function unregister( host : NetworkHost ) {
+		componentsRepl = null;
+		super.unregister( host );
 	}
-
 	function onLocationChanged( _, location : Location ) {
 		locationDescId = location?.locationDesc.id.toString();
 	}

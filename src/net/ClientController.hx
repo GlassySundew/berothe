@@ -26,8 +26,6 @@ enum SaveSystemOrderType {
 **/
 class ClientController extends NetNode {
 
-	public static var clientInst : ClientController;
-
 	/** server-side **/
 	public var networkClient( default, null ) : NetworkClient;
 
@@ -39,11 +37,6 @@ class ClientController extends NetNode {
 	#if client
 	override public function alive() {
 		super.alive();
-
-		if ( clientInst != null && Client.inst.host.isChannelingEnabled )
-			throw "clientController instance is replicated on a client where it is not supposed to be";
-
-		clientInst = this;
 
 		Client.inst.host.self.ownerObject = this;
 		Main.inst.cliCon.val = this;
@@ -62,18 +55,12 @@ class ClientController extends NetNode {
 		return clientSer == this;
 	}
 
-	public function unreg(
-		host : NetworkHost,
-		ctx : NetworkSerializer,
-		?finalize
-	) @:privateAccess {}
-
 	@:rpc( owner )
 	public function giveControlOverEntity( entityRepl : EntityReplicator ) {
 		#if server
 		trace( "bad rpc func call, should be on client only..." );
 		#end
-
+		
 		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 

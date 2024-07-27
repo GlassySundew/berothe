@@ -19,8 +19,7 @@ class EntityComponentsReplicator extends NetNode {
 
 	@:s public var components : NSClassMap<
 		Class<EntityComponentReplicatorBase>,
-		EntityComponentReplicatorBase
-	> = new NSClassMap();
+		EntityComponentReplicatorBase> = new NSClassMap();
 
 	var entity : OverworldEntity;
 	var isMappingFinished = false;
@@ -61,8 +60,7 @@ class EntityComponentsReplicator extends NetNode {
 			trace( component + " component does not have network replication" );
 	}
 
-	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer, finalize : Bool = false ) {
-		// if(finalize) components.push
-		super.unregister( host, ctx, finalize );
+	override function unregister( host : NetworkHost ) {
+		super.unregister( host );
 	}
 }

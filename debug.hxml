@@ -6,10 +6,13 @@
 # -D interactive_debug
 # -D display_proto # display proto layer of tmx map (automapping)
 
+-D hxbit_vanilla
+
 # -D sqlite_debug_verbose
 # -D hx_concurrent
 # -D network_debug
 
 # -D no-inline # does not work :(
+
 
 -debug

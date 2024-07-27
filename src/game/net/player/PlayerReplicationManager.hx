@@ -44,7 +44,6 @@ class PlayerReplicationManager {
 		playerEntity.chunk.addOnValueImmediately( onAddedToChunk );
 		cliCon.addChild( playerEntityReplicator );
 		cliCon.giveControlOverEntity( playerEntityReplicator );
-		
 		playerEntity.location.addOnValueImmediately( onAddedToLocation );
 
 		var transform = playerEntityReplicator.transformRepl;
@@ -115,8 +114,7 @@ class PlayerReplicationManager {
 				for ( chunk in y ) {
 					cliCon.unregisterChild(
 						chunk,
-						NetworkHost.current,
-						cliCon.networkClient.ctx
+						NetworkHost.current
 					);
 				}
 			}
@@ -140,8 +138,7 @@ class PlayerReplicationManager {
 						yChunkRow.remove( xi );
 						cliCon.unregisterChild(
 							xChunkRepl,
-							NetworkHost.current,
-							cliCon.networkClient.ctx
+							NetworkHost.current
 						);
 					}
 				}

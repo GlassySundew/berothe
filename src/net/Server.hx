@@ -93,10 +93,9 @@ class Server extends Process {
 	public function destroyClient( c : SocketClient ) {
 		var clientController = cast( c.ownerObject, ClientController );
 		if ( clientController.__host == null ) return;
-		// if ( clientController.player != null ) clientController.player.destroy(); // TODO remove this into signals
-		for ( i => client in host.clientsOwners ) {
-			clientController.unreg( host, client.ctx, i + 1 == host.clients.length );
-		}
+
+		@:privateAccess
+		host.unregister( clientController );
 	}
 
 	public function log( s : String, ?pos : haxe.PosInfos ) {

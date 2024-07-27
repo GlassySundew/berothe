@@ -97,7 +97,7 @@ class GameServer extends Process {
 
 		var clientController = new ClientController( networkClient );
 		networkClient.ownerObject = clientController;
-		@:privateAccess server.host.register( clientController, networkClient.ctx );
+		@:privateAccess server.host.register( clientController, networkClient );
 		networkClient.sync();
 
 		var playerReplicator = createPlayer();

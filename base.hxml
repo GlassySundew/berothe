@@ -3,7 +3,7 @@
 -lib heaps:git:https://github.com/HeapsIO/heaps.git
 -lib heeps:git:https://github.com/Yanrishatum/heeps.git
 -lib castle:git:https://github.com/ncannasse/castle.git
--lib hxbit:git:https://github.com/GlassySundew/hxbit.git#channels
+-lib hxbit:git:https://github.com/GlassySundew/hxbit.git#new-channels
 -lib deepnightLibs:git:https://github.com/deepnight/deepnightLibs.git
 -lib oimophysics:git:https://github.com/GlassySundew/OimoPhysics
 -lib hlimgui:git:https://github.com/GlassySundew/hlimgui.git#separatorText
@@ -28,5 +28,9 @@
 -D heaps_enable_hl_mp3
 -D no-deprecation-warnings
 -D hscriptPos
+-D hxbit_visibility
+
+# -D dump=pretty
+
 
 plugins.bodyparts_animations.src.HideImports
