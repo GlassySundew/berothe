@@ -4,14 +4,52 @@
 		{
 			"type": "fbfAnimationNode",
 			"name": "right_hand_idle",
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
 			"children": [
 				{
 					"type": "model",
-					"name": "_9_right_hand_idle",
-					"source": "voxel/characters/human/obj/fbx/_9_right_hand_idle.fbx"
+					"name": "human_23_right_hand_idle",
+					"source": "voxel/characters/human/obj/fbx/human_23_right_hand_idle.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "right_hand_attack",
+			"children": [
+				{
+					"type": "model",
+					"name": "human_8_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_8_right_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_9_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_9_right_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_10_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_10_right_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_11_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_11_right_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_12_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_12_right_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_13_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_13_right_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_14_right_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_14_right_hand_attack.fbx"
 				}
 			]
 		}

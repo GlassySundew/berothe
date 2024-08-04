@@ -4,14 +4,52 @@
 		{
 			"type": "fbfAnimationNode",
 			"name": "left_hand_idle",
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
 			"children": [
 				{
 					"type": "model",
-					"name": "_10_left_hand_idle",
-					"source": "voxel/characters/human/obj/fbx/_10_left_hand_idle.fbx"
+					"name": "human_24_left_hand_idle",
+					"source": "voxel/characters/human/obj/fbx/human_24_left_hand_idle.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_attack",
+			"children": [
+				{
+					"type": "model",
+					"name": "human_15_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_15_left_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_16_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_16_left_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_17_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_17_left_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_18_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_18_left_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_19_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_19_left_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_20_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_20_left_hand_attack.fbx"
+				},
+				{
+					"type": "model",
+					"name": "human_21_left_hand_attack",
+					"source": "voxel/characters/human/obj/fbx/human_21_left_hand_attack.fbx"
 				}
 			]
 		}
