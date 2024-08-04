@@ -16,16 +16,23 @@ class OimoGeometryCastEmitter {
 	final geom : IGeometry;
 	final physics : IPhysicsEngine;
 
-	public var start : ITransform;
+	public final start : ITransform;
 	public var translation : ThreeDeeVector;
 
-	public function new( geom : IGeometry, physics : IPhysicsEngine ) {
+	public function new(
+		geom : IGeometry,
+		sourceTransform : ITransform,
+		?translation : ThreeDeeVector,
+		physics : IPhysicsEngine
+	) {
 		this.geom = geom;
 		this.physics = physics;
+		this.start = sourceTransform;
+		this.translation = translation ?? new ThreeDeeVector();
 		contactCB = new RayCastCallback( physics );
 	}
 
-	function emit() {
+	public function emit() {
 		physics.convexCast( geom, start, translation, contactCB );
 	}
 }

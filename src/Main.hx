@@ -144,6 +144,7 @@ class Main extends Process {
 		controller.bindKeyboard( DropItem, Key.Q );
 		controller.bindKeyboard( ToggleInventory, Key.TAB );
 		controller.bindKeyboard( ToggleCraftingMenu, Key.C );
+		controller.bindKeyboard( Attack, Key.F );
 
 		controller.bindKeyboard( Escape, Key.ESCAPE );
 	}

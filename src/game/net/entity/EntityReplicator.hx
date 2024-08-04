@@ -20,6 +20,7 @@ class EntityReplicator extends NetNode {
 
 	public function new( entity : OverworldEntity, ?parent ) {
 		super( parent );
+
 		this.entity.resolve( entity );
 		entityDescriptionId = entity.desc.id.toString();
 

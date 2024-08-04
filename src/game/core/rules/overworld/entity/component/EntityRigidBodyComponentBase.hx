@@ -7,8 +7,8 @@ import game.core.rules.overworld.location.physics.IRigidBody;
 
 abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 
-	public var rigidBody : IRigidBody;
-	var rigidBodyFuture : Future<IRigidBody> = new Future();
+	public final rigidBodyFuture : Future<IRigidBody> = new Future();
+	public var rigidBody(default, null) : IRigidBody;
 
 	override function onAttachedToLocation( location : Location ) {
 		super.onAttachedToLocation( location );

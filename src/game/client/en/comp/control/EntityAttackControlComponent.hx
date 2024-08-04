@@ -1,5 +1,7 @@
 package game.client.en.comp.control;
 
+import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
+import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 import game.core.rules.overworld.entity.OverworldEntity;
 import dn.heaps.input.ControllerAccess;
 import game.net.entity.EntityReplicator;
@@ -9,26 +11,32 @@ class EntityAttackControlComponent extends EntityComponent {
 
 	public function new(
 		entityReplicator : EntityReplicator,
-		ca : ControllerAccess<ControllerAction>
+		controller : ControllerAccess<ControllerAction>
 	) {
 		super();
+		this.controller = controller;
 	}
+
+	var attackList : EntityAttackListComponent;
+	var controller : ControllerAccess<ControllerAction>;
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
-		// entity.components.onAppear(
-		// 	EntityDynamicsComponent,
-		// 	( key, dynamicsComponent ) -> {
-		// 		this.dynamicsComponent = dynamicsComponent;
-		// 		entity.onFrame.add( update );
-		// 	}
-		// );
+		entity.onFrame.add( update );
 
-		// var dynamicsReplicator = entityReplicator.componentsRepl.components.get( EntityDynamicsComponentReplicator );
-		// dynamicsReplicator.followedComponent.then( ( component ) -> {
-		// 	var dynamics : EntityDynamicsComponent = Std.downcast( component, EntityDynamicsComponent );
-		// 	isMovementAppliedSelf.subscribeProp( dynamics.isMovementApplied );
-		// } );
+		entity.components.onAppear(
+			EntityAttackListComponent,
+			( key, attackList ) -> {
+				this.attackList = attackList;
+				entity.onFrame.add( update );
+			}
+		);
+	}
+
+	function update( dt : Float, tmod : Float ) {
+		var isControlApplied = controller.isDown( Attack );
+
+		if ( isControlApplied ) attackList.attack();
 	}
 }

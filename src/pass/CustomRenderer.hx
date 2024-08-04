@@ -4,7 +4,6 @@ import h3d.Engine;
 import util.Util;
 import h3d.scene.Mesh;
 import h3d.Vector;
-import en.objs.IsoTileSpr;
 import h3d.pass.PassObject;
 import h3d.pass.PassList;
 
@@ -144,10 +143,6 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 
 	function sortPasses( p1 : PassObject, p2 : PassObject ) {
 		return
-			// if ( Std.isOfType( p1.obj, IsoTileSpr )
-			// 	&& Std.isOfType( p2.obj, IsoTileSpr ) )
-			// 	getFrontPassIso( p1, p2 );
-			// else
 			( p1.depth > p2.depth ? -1 : 1 );
 	}
 

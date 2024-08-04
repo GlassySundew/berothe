@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import dn.M;
 import game.core.rules.overworld.location.physics.ITransform;
 import core.MutableProperty;
 import h3d.Quat;
@@ -95,7 +96,6 @@ class OimoRigidBody implements IRigidBody {
 	public inline function addShape( shape : IRigidBodyShape ) {
 		shapes.push( shape );
 		rigidBody.addShape( Std.downcast( shape, OimoRigidBodyShape ).shape );
-		// onUpdated();
 	}
 
 	public inline function setRotationFactor( rotationFactor : ThreeDeeVector ) {
@@ -112,17 +112,14 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setPosition( pos : ThreeDeeVector ) {
 		rigidBody.setPosition( pos.toOimo() );
-		// onUpdated();
 	}
 
 	public inline function wakeUp() {
 		rigidBody.wakeUp();
-		// onUpdated();
 	}
 
 	public inline function move( x : Float, y : Float, z : Float ) {
 		rigidBody.translate( new Vec3( x, y, z ) );
-		// onUpdated(); // ! NO IDEA WHY BUT DO NOT UNCOMMENT THIS LINE, OR REPLICATION WILL BREAK
 	}
 
 	public inline function setRotation( x : Float, y : Float, z : Float ) {
@@ -144,10 +141,25 @@ class OimoRigidBody implements IRigidBody {
 		velX.val = rigidBody._velX;
 		velY.val = rigidBody._velY;
 		velZ.val = rigidBody._velZ;
-		var vector = ThreeDeeVector.anglesFromQuat( rigidBody._transform.getOrientation() );
+		var vector = rigidBody._transform.getOrientation().toMat3().toEulerXyz();
 		rotationX.val = vector.x;
 		rotationY.val = vector.y;
 		rotationZ.val = vector.z;
+
+		var tmod =
+			#if server
+			game.net.server.GameServer.inst.tmod;
+			#elseif client
+			game.net.client.GameClient.inst.tmod;
+			#end
+
+		if (
+			M.fabs( velX.val ) < 0.0005 * tmod
+			&& M.fabs( velY.val ) < 0.0005 * tmod
+			&& M.fabs( velZ.val ) < 0.0005 * tmod
+		) {
+			rigidBody.sleep();
+		}
 	}
 
 	public function getShape() : Null<IRigidBodyShape> {

@@ -14,5 +14,7 @@ enum abstract ControllerAction(Int) to Int {
 	var DropItem;
 	var ToggleInventory;
 	var ToggleCraftingMenu;
+	var Attack;
+	
 	var Escape;
 }

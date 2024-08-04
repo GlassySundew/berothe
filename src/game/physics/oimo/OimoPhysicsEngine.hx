@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import oimo.collision.geometry.BoxGeometry;
 import game.core.rules.overworld.location.physics.ITransform;
 import game.core.rules.overworld.location.physics.ITransformProvider;
 import game.core.rules.overworld.location.physics.IGeometry;
@@ -54,16 +55,13 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 	// public function getShapeByOimo( shape : Shape ) : IRigidBodyShape {
 	// 	if ( shape._id == -1 )
 	// 		throw "trying to get unattached shape with id = -1, don't know how to handle";
-
 	// 	var result : IRigidBodyShape = null;
 	// 	var savedShape = shapes[shape._id];
-
 	// 	if ( savedShape == null ) {
 	// 		result = ShapeAbstractFactory.fromShape( shape );
 	// 	} else {
 	// 		result = savedShape;
 	// 	}
-
 	// 	return result;
 	// }
 
@@ -85,11 +83,24 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		Assert.isOfType( convex, OimoGeometry );
 		#end
 
+		var geom = Std.downcast( convex, OimoGeometry ).geom;
+		var transform = Std.downcast( start, OimoTransform ).transform;
+
 		world.convexCast(
-			Std.downcast( convex, OimoGeometry ).geom,
-			Std.downcast( start, OimoTransform ).transform,
+			geom,
+			transform,
 			translation.toOimo(),
 			callback
 		);
+
+		#if client
+		switch Type.getClass( geom ) {
+			case BoxGeometry:
+				var box = Std.downcast(geom, BoxGeometry);
+				debugDraw.box( transform, box.getHalfExtents(), ThreeDeeVector.fromColorF( 0x185ED0 ).toOimo() );
+
+			case e: throw e + " geometry is not supported in debugdraw";
+		}
+		#end
 	}
 }

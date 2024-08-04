@@ -1,5 +1,7 @@
 package game.data.storage.entity.body.properties;
 
+import game.net.entity.component.attack.EntityAttackListReplicator;
+import game.net.entity.EntityComponentReplicatorBase;
 import game.core.rules.overworld.entity.EntityComponent;
 import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
@@ -13,15 +15,15 @@ class AttackListDescription extends EntityComponentDescription {
 		if ( attackDesc == null ) return null;
 		var attackDescriptions = [
 			for ( attackEntry in attackDesc.attackList )
-				AttackListItemDescription.fromCdb( attackEntry )
+				AttackListItem.fromCdb( attackEntry )
 		];
 		return new AttackListDescription( attackDescriptions, attackDesc.id.toString() );
 	}
 
-	public final attackList : Array<AttackListItemDescription>;
+	public final attackList : Array<AttackListItem>;
 
 	public function new(
-		attackList : Array<AttackListItemDescription>,
+		attackList : Array<AttackListItem>,
 		id : String
 	) {
 		super( id );
@@ -32,7 +34,7 @@ class AttackListDescription extends EntityComponentDescription {
 		return new EntityAttackListComponent( this );
 	}
 
-	public function buildCompReplicator( ?parent ) : EntitySimpleComponentReplicator {
-		return new EntitySimpleComponentReplicator( parent );
+	public function buildCompReplicator( ?parent ) : EntityComponentReplicatorBase {
+		return new EntityAttackListReplicator( parent );
 	}
 }

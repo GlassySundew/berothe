@@ -7,6 +7,10 @@ interface ITransform {
 
 	function getPosition() : ThreeDeeVector;
 	function setPosition( vec : ThreeDeeVector ) : Void;
-	function getRotation() : Quat;
+	function getRotation() : ThreeDeeVector;
 	function setRotation( vec : ThreeDeeVector ) : Void;
+
+	function clone() : ITransform;
+	function copyFrom( transform : ITransform ) : ITransform;
+	function translate( translation : ThreeDeeVector ) : Void;
 }

@@ -1,5 +1,8 @@
 package game.client.en.comp.view;
 
+import game.client.en.comp.view.anim.AttackAnimationState;
+import game.core.rules.overworld.entity.component.combat.EntityAttackListItem;
+import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
 import game.client.en.comp.view.anim.WalkAnimationState;
 import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 import game.data.storage.entity.body.view.EntityAnimations;
@@ -9,6 +12,11 @@ import plugins.bodyparts_animations.src.customObj.EntityComposer;
 import graphics.ThreeDObjectNode;
 
 class EntityComposerView implements IEntityView {
+
+	static final attackKeyList = [
+		{ idle : ATTACK_PRIME_IDLE, active : ATTACK_PRIME_ATTACK },
+		{ idle : ATTACK_SECO_IDLE, active : ATTACK_SECO_ATTACK }
+	];
 
 	final entityComposer : EntityComposer;
 	final object : ThreeDObjectNode;
@@ -40,7 +48,8 @@ class EntityComposerView implements IEntityView {
 				if ( listener.listener() ) {
 					playAnimation(
 						key,
-						listener.getSpeed() / tmod
+						listener,
+						tmod
 					);
 				}
 			}
@@ -58,14 +67,15 @@ class EntityComposerView implements IEntityView {
 		return object;
 	}
 
-	function playAnimation( animationKey : AnimationKey, ?speed : Float ) {
+	function playAnimation( animationKey : AnimationKey, listener : AnimationState, tmod : Float ) {
 		for ( animation in animations.byKey[animationKey].keys ) {
 			var animationContainer = entityComposer.animationManager.animationGroups[animation];
 			if ( animationContainer == null ) {
 				trace( 'cannot find animation node with id: $animation in enco: $file ' );
 				continue;
 			}
-			animationContainer.setPlay( true, speed );
+			animationContainer.setPlay( true, listener.getSpeed() / tmod );
+			listener.playedOnContainer( animationContainer );
 		}
 	}
 
@@ -76,6 +86,21 @@ class EntityComposerView implements IEntityView {
 		if ( animations.byKey.get( WALK ) != null ) {
 			stateListeners[WALK] = new WalkAnimationState( viewComponent.entity, walkListener );
 		}
+		viewComponent.entity.components.onAppear(
+			EntityAttackListComponent,
+			( cl, component ) -> {
+				for ( attackAnimItem in attackKeyList ) {
+					if ( animations.byKey.get( attackAnimItem.idle ) != null ) {
+						var attackItem = component.getItemByAnimationKey( attackAnimItem.active );
+						stateListeners[attackAnimItem.idle] = new AnimationState( attackIdleListener.bind( attackItem ) );
+					}
+					if ( animations.byKey.get( attackAnimItem.active ) != null ) {
+						var attackItem = component.getItemByAnimationKey( attackAnimItem.active );
+						stateListeners[attackAnimItem.active] = new AttackAnimationState( attackItem );
+					}
+				}
+			}
+		);
 	}
 
 	inline function walkListener() : Bool {
@@ -84,5 +109,9 @@ class EntityComposerView implements IEntityView {
 
 	inline function idleListener() : Bool {
 		return !dynamics?.isMovementApplied.val;
+	}
+
+	inline function attackIdleListener( attackItem : EntityAttackListItem ) : Bool {
+		return !attackItem.isAttacking();
 	}
 }

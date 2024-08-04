@@ -1,18 +1,31 @@
 package game.core.rules.overworld.entity.component.combat;
 
 import game.data.storage.entity.body.properties.AttackListDescription;
+import game.data.storage.entity.body.view.AnimationKey;
 
 class EntityAttackListComponent extends EntityComponent {
 
 	public final attackListDesc : AttackListDescription;
-
-	final attackComponents : Array<EntityAttackListItem>;
+	public final attackComponents : Array<EntityAttackListItem>;
 
 	public function new( description : AttackListDescription ) {
 		super( description );
 		this.attackListDesc = description;
 
 		attackComponents = createAttackList();
+	}
+
+	public function attack() {
+		for ( attackComponent in attackComponents ) {
+			attackComponent.attack();
+		}
+	}
+
+	public function getItemByAnimationKey( key : AnimationKey ) {
+		for ( listItem in attackComponents ) {
+			if ( listItem.desc.key == key ) return listItem;
+		}
+		return null;
 	}
 
 	function createAttackList() : Array<EntityAttackListItem> {

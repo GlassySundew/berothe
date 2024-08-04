@@ -1,26 +1,62 @@
 package game.core.rules.overworld.entity.component.combat;
 
+import signals.Signal;
 import game.core.rules.overworld.location.Location;
-import game.data.storage.entity.body.properties.AttackListItemDescription;
-import game.physics.oimo.OimoTweenBoxCastEmitter;
+import game.data.storage.entity.body.properties.AttackListItem;
+import game.physics.oimo.AttackTweenBoxCastEmitter;
 import oimo.collision.geometry.BoxGeometry;
 import game.data.storage.entity.body.view.AttackTranslationTween;
 
 class EntityAttackListItem {
 
-	final attackDescription : AttackListItemDescription;
+	public final desc : AttackListItem;
 
-	var emitter : OimoTweenBoxCastEmitter;
+	public final onAttackPerformed = new Signal();
 
-	public function new( desc : AttackListItemDescription ) {
-		this.attackDescription = desc;
+	var emitter : AttackTweenBoxCastEmitter;
+	var entity : OverworldEntity;
+
+	public function new( desc : AttackListItem ) {
+		this.desc = desc;
+	}
+
+	public function attack() {
+		if ( emitter.isOnCooldown() ) return;
+
+		emitter.performCasting();
+	}
+
+	public inline function isOnCooldown() {
+		return emitter.isOnCooldown();
+	}
+
+	public inline function isAttacking() : Bool {
+		return emitter.isInAction();
+	}
+
+	public inline function getCurrentAttackTime() : Float {
+		return emitter.getCurrentTimelapseRatio();
 	}
 
 	public function attachToEntity( entity : OverworldEntity ) {
+		this.entity = entity;
 		entity.location.onAppear( onAttachedToLocation );
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		emitter = new OimoTweenBoxCastEmitter( attackDescription, location.physics );
+		var rigidBodyComp = entity.components.get( EntityRigidBodyComponent );
+
+		rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
+			emitter = new AttackTweenBoxCastEmitter(
+				desc,
+				rigidBody.transform,
+				location.physics
+			);
+			entity.onFrame.add( update );
+		} );
+	}
+
+	inline function update( dt, tmod ) {
+		emitter.update( dt, tmod );
 	}
 }

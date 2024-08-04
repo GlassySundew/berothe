@@ -46,14 +46,9 @@ class EntityMovementControlComponent extends EntityComponent {
 			( key, dynamicsComponent ) -> {
 				this.dynamicsComponent = dynamicsComponent;
 				entity.onFrame.add( update );
+				isMovementAppliedSelf.subscribeProp( dynamicsComponent.isMovementApplied );
 			}
 		);
-
-		var dynamicsReplicator = entityReplicator.componentsRepl.components.get( EntityDynamicsComponentReplicator );
-		dynamicsReplicator.followedComponent.then( ( component ) -> {
-			var dynamics : EntityDynamicsComponent = Std.downcast( component, EntityDynamicsComponent );
-			isMovementAppliedSelf.subscribeProp( dynamics.isMovementApplied );
-		} );
 	}
 
 	function update( dt : Float, tmod : Float ) {

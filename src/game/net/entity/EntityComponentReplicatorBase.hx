@@ -1,13 +1,11 @@
 package game.net.entity;
 
-import net.NSMutableProperty;
-import util.Assert;
-import game.data.storage.DataStorage;
-import game.core.rules.overworld.entity.EntityComponents;
 import future.Future;
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.entity.EntityComponent;
+import net.NSMutableProperty;
 import net.NetNode;
+import game.core.rules.overworld.entity.EntityComponent;
+import game.core.rules.overworld.entity.OverworldEntity;
+import game.data.storage.DataStorage;
 
 /**
 	когда базовый класс `EntityComponentReplicator` реплицируется на клиент, 
@@ -26,6 +24,7 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 		classType = Type.getClass( this );
 		super.init();
 	}
+
 	override function alive() {
 		super.alive();
 

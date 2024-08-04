@@ -19,7 +19,7 @@ class PostProcessingShader extends h3d.shader.ScreenShader {
 		@param var tsize : Vec2;
 		@param var h : Float;
 		@param var opacity : Float;
-		@param var scanlinesOpt : Float = 0.04;
+		@param var scanlinesOpt : Float = 0.05;
 		var outColor : Vec4;
 		function curve( uv : Vec2 ) : Vec2 {
 			uv = ( uv - 0.5 ) * 2.0;
