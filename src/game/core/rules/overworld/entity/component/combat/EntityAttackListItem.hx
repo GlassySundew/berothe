@@ -20,10 +20,11 @@ class EntityAttackListItem {
 		this.desc = desc;
 	}
 
-	public function attack() {
-		if ( emitter.isOnCooldown() ) return;
+	public function attack( ignoreCooldown = false ) {
+		if ( !ignoreCooldown && emitter.isOnCooldown() ) return;
 
 		emitter.performCasting();
+		onAttackPerformed.dispatch();
 	}
 
 	public inline function isOnCooldown() {

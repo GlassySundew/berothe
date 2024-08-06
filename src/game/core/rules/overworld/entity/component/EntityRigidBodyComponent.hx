@@ -14,6 +14,8 @@ import game.physics.ShapeAbstractFactory;
 
 class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
+	public var isOwned( default, null ) : Bool = false;
+
 	var torsoShape : IRigidBodyShape;
 	var rigidBodyDesc : RigidBodyTorsoDescription;
 	var standRayCastCallback : RayCastCallback;
@@ -63,6 +65,10 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	public function claimOwnage() {
 		rigidBodyFuture.then( rigidBody -> {
+			isOwned = true;
+
+			rigidBody.setGravityScale( 1 );
+
 			rigidBody.x.subscribeProp( entity.transform.x );
 			rigidBody.y.subscribeProp( entity.transform.y );
 			rigidBody.z.subscribeProp( entity.transform.z );

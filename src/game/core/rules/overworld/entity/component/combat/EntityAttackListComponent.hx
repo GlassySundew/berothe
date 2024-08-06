@@ -28,6 +28,13 @@ class EntityAttackListComponent extends EntityComponent {
 		return null;
 	}
 
+	public function getItemByItemDescId( id : String ) {
+		for ( listItem in attackComponents ) {
+			if ( listItem.desc.id == id ) return listItem;
+		}
+		return null;
+	}
+
 	function createAttackList() : Array<EntityAttackListItem> {
 		var result = [
 			for ( attackDesc in attackListDesc.attackList ) {

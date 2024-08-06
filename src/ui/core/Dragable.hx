@@ -5,7 +5,6 @@ import h2d.col.Point;
 import h2d.Flow;
 import h2d.RenderContext;
 import signals.Signal2;
-import en.player.Player;
 import h2d.Drawable;
 import hxd.Event;
 import ch2.ui.EventInteractive;

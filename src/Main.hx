@@ -1,3 +1,5 @@
+import net.NetNode;
+import hxbit.Serializer;
 #if client
 import game.data.storage.DataStorage;
 import signals.*;

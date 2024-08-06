@@ -112,7 +112,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		emitTransform.translate( {
 			x : rotatedVector.x,
 			y : rotatedVector.y,
-			z : 0, // desc.offsetZ
+			z : rotatedVector.z // desc.offsetZ
 		} );
 
 		boxGeom.setSize( { x : tweenSizeX, y : tweenSizeY, z : tweenSizeZ } );

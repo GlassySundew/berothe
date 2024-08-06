@@ -1,5 +1,9 @@
 package game.client.en.comp;
 
+import haxe.zip.Uncompress;
+import game.net.entity.EntityComponentReplicatorBase;
+import haxe.zip.Compress;
+import haxe.zip.FlushMode;
 import util.Assert;
 import game.net.entity.component.attack.EntityAttackListReplicator;
 import game.core.rules.overworld.entity.component.EntityRigidBodyComponent;
@@ -34,10 +38,10 @@ class EntityControl {
 			EntityAttackListReplicator,
 			( key, compRepl ) -> {
 				#if debug
-				Assert.isOfType(compRepl, EntityAttackListReplicator);
+				Assert.isOfType( compRepl, EntityAttackListReplicator );
 				#end
 
-				Std.downcast(compRepl, EntityAttackListReplicator);
+				Std.downcast( compRepl, EntityAttackListReplicator ).claimOwnage();
 			}
 		);
 	}

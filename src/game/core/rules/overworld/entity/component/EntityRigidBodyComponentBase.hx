@@ -16,7 +16,7 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 		rigidBody = tryCreateRigidBody();
 		rigidBody.setPosition( { x : entity.transform.x, y : entity.transform.y, z : entity.transform.z } );
 		physics.addRigidBody( rigidBody );
-
+		
 		rigidBodyFuture.resolve( rigidBody );
 	}
 
