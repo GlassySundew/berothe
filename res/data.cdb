@@ -172,16 +172,16 @@
 						"rigidBodyTorso": {
 							"sizeX": 3,
 							"sizeY": 3,
-							"sizeZ": 8,
-							"offsetZ": 9,
+							"sizeZ": 10,
+							"offsetZ": 11,
 							"id": "humanTorso"
 						},
 						"dynamics": true,
 						"bodyHitbox": {
 							"sizeX": 4,
 							"sizeY": 4,
-							"sizeZ": 17,
-							"offsetZ": 9,
+							"sizeZ": 16,
+							"offsetZ": 7.5,
 							"id": "humanTorsoHitbox"
 						},
 						"attackDesc": {
@@ -191,28 +191,28 @@
 									"id": "human_attack_rh_right",
 									"tweenType": 0,
 									"sizeX": 1,
-									"sizeY": 0.6,
+									"sizeY": 0.8,
 									"sizeZ": 4,
-									"offsetX": 0.6,
+									"offsetX": -4.5,
 									"offsetY": 2.7,
 									"offsetZ": 8,
 									"cooldown": 0.7,
 									"duration": 0.35,
-									"endX": 1.6,
+									"endX": 3.8,
 									"key": "attack_prime_attack"
 								},
 								{
 									"id": "human_attack_rh_left",
 									"tweenType": 0,
 									"sizeX": 1,
-									"sizeY": 0.6,
+									"sizeY": 0.8,
 									"sizeZ": 4,
-									"offsetX": 0.6,
+									"offsetX": -4.5,
 									"offsetY": -2.7,
 									"offsetZ": 8,
 									"cooldown": 2.6,
 									"duration": 0.35,
-									"endX": 1.6,
+									"endX": 3.8,
 									"key": "attack_seco_attack"
 								}
 							]

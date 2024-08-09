@@ -84,20 +84,25 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		#end
 
 		var geom = Std.downcast( convex, OimoGeometry ).geom;
-		var transform = Std.downcast( start, OimoTransform ).transform;
+		var beginTransform = Std.downcast( start, OimoTransform ).transform;
 
 		world.convexCast(
 			geom,
-			transform,
+			beginTransform,
 			translation.toOimo(),
 			callback
 		);
 
 		#if client
+		var beginPoint = beginTransform.getPosition();
+		debugDraw.line( beginPoint, beginPoint.addScaled( translation, callback.fraction ), ThreeDeeVector.fromColorF( 0x23DB20 ) );
+		beginTransform.setPosition( beginTransform.getPosition().addScaledEq( translation, callback.fraction ) );
+		debugDraw.point( callback.position, ThreeDeeVector.fromColorF( 0xB224A1 ) );
+		
 		switch Type.getClass( geom ) {
 			case BoxGeometry:
 				var box = Std.downcast(geom, BoxGeometry);
-				debugDraw.box( transform, box.getHalfExtents(), ThreeDeeVector.fromColorF( 0x185ED0 ).toOimo() );
+				debugDraw.box( beginTransform, box.getHalfExtents(), ThreeDeeVector.fromColorF( 0x185ED0 ).toOimo() );
 
 			case e: throw e + " geometry is not supported in debugdraw";
 		}

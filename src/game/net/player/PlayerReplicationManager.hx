@@ -1,5 +1,10 @@
 package game.net.player;
 
+import net.NetNode;
+import util.Repeater;
+import rx.ObservableFactory;
+import rx.Observable;
+import hxbit.NetworkSerializable;
 import game.core.rules.overworld.location.Location;
 import hxbit.NetworkHost;
 import net.ClientController;

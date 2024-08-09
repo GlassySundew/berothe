@@ -1,5 +1,6 @@
 package net;
 
+
 #if client
 import game.client.en.comp.EntityControl;
 #end
@@ -60,7 +61,7 @@ class ClientController extends NetNode {
 		#if server
 		trace( "bad rpc func call, should be on client only..." );
 		#end
-		
+
 		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 

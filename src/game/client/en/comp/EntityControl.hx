@@ -24,7 +24,7 @@ class EntityControl {
 
 		ca = Main.inst.controller.createAccess();
 
-		entity.components.add( new EntityCameraFollowComponent( null ) );
+		entity.components.add( new EntityCameraFollowComponent() );
 		entity.components.add( new EntityMovementControlComponent( entityRepl, ca ) );
 		entity.components.add( new EntityAttackControlComponent( entityRepl, ca ) );
 

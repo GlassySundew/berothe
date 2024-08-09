@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import util.Util;
 import en.collide.RayCastCallback;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 import game.core.rules.overworld.location.physics.ITransform;
@@ -16,23 +17,25 @@ class OimoGeometryCastEmitter {
 	final geom : IGeometry;
 	final physics : IPhysicsEngine;
 
-	public final start : ITransform;
-	public var translation : ThreeDeeVector;
+	public final sourceTransform : ITransform;
+	public var translation : ThreeDeeVector = new ThreeDeeVector();
+
+	public var rotation : Float = 0;
 
 	public function new(
 		geom : IGeometry,
 		sourceTransform : ITransform,
-		?translation : ThreeDeeVector,
 		physics : IPhysicsEngine
 	) {
 		this.geom = geom;
 		this.physics = physics;
-		this.start = sourceTransform;
-		this.translation = translation ?? new ThreeDeeVector();
-		contactCB = new RayCastCallback( physics );
+		this.sourceTransform = sourceTransform;
+		contactCB = new RayCastCallback();
 	}
 
 	public function emit() {
-		physics.convexCast( geom, start, translation, contactCB );
+		contactCB.clear();
+
+		physics.convexCast( geom, sourceTransform, translation, contactCB );
 	}
 }

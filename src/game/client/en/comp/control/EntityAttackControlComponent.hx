@@ -1,13 +1,11 @@
 package game.client.en.comp.control;
 
-import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
-import game.core.rules.overworld.entity.OverworldEntity;
 import dn.heaps.input.ControllerAccess;
+import game.core.rules.overworld.entity.OverworldEntity;
+import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
 import game.net.entity.EntityReplicator;
-import game.core.rules.overworld.entity.EntityComponent;
 
-class EntityAttackControlComponent extends EntityComponent {
+class EntityAttackControlComponent extends EntityClientComponent {
 
 	public function new(
 		entityReplicator : EntityReplicator,

@@ -37,8 +37,8 @@ class EntityBodyDescription extends DescriptionBase {
 		propertyDescriptions = ArrayExtensions.deNullify(( [
 
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
-			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
+			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attackDesc ),
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription() : null,

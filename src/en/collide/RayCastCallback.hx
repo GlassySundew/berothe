@@ -15,13 +15,6 @@ class RayCastCallback extends RayCastClosest {
 
 	public final onShapeCollide = new Signal<IRigidBodyShape, RayCastHit>();
 
-	final physics : IPhysicsEngine;
-
-	public function new( physics : IPhysicsEngine ) {
-		super();
-		this.physics = physics;
-	}
-
 	override function process( shape : Shape, hit : oimo.collision.geometry.RayCastHit ) {
 		super.process( shape, hit );
 

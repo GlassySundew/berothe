@@ -21,6 +21,4 @@ interface IPhysicsEngine {
 		translation : ThreeDeeVector,
 		callback : RayCastCallback
 	) : Void;
-
-	// function getShapeByOimo( shape : Shape ) : IRigidBodyShape;
 }

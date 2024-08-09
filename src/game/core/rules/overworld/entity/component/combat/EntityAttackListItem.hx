@@ -54,6 +54,11 @@ class EntityAttackListItem {
 				location.physics
 			);
 			entity.onFrame.add( update );
+
+			emitter.getCallbackContainer().onShapeCollide.add(
+				( shapeHit, hit ) -> {
+					trace( shapeHit.getCollisionGroup(), shapeHit.getCollisionMask(), Math.random() );
+				} );
 		} );
 	}
 

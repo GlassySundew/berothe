@@ -1,5 +1,7 @@
 package game.physics.oimo;
 
+import oimo.common.Vec3;
+import en.collide.RayCastCallback;
 import util.Util;
 import dn.M;
 import dn.Cooldown;
@@ -71,6 +73,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		return tweenCombinator.getElapsedProgress() ?? 0;
 	}
 
+	public inline function getCallbackContainer() : RayCastCallback {
+		return emitter.contactCB;
+	}
+
 	public function performCasting() {
 		// TODO y and z maybe(?) because now its only x (forward direction)
 
@@ -103,19 +109,33 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		emitTransform.copyFrom( sourceTransform );
 
 		var rotatedVector = new ThreeDeeVector(
-			desc.offsetX + ( tweenSizeX - desc.sizeX ) * 2,
-			desc.offsetY + ( tweenSizeY - desc.sizeY ) * 2,
-			desc.offsetZ
+			desc.offsetX, // + ( tweenSizeX - desc.sizeX ) * 2,
+			desc.offsetY, // + ( tweenSizeY - desc.sizeY ) * 2,
+			desc.offsetZ // + ( tweenSizeZ - desc.sizeZ ) * 2
 		);
 		Util.rotateVector( emitTransform.getRotation().z, rotatedVector );
 
 		emitTransform.translate( {
 			x : rotatedVector.x,
 			y : rotatedVector.y,
-			z : rotatedVector.z // desc.offsetZ
+			z : rotatedVector.z
 		} );
 
 		boxGeom.setSize( { x : tweenSizeX, y : tweenSizeY, z : tweenSizeZ } );
+
+		var minX = Math.min(( tweenSizeX - desc.sizeX ) * 2, 0 );
+		var maxX = Math.max(( tweenSizeX - desc.sizeX ) * 2, 0 );
+
+		var begin = new Vec3(
+			minX, 0, 0
+		).mulTransform( Std.downcast( emitTransform, OimoTransform ).transform );
+
+		var end = new Vec3(
+			maxX, 0, 0
+		).mulTransform( Std.downcast( emitTransform, OimoTransform ).transform );
+
+		emitter.translation = end.sub( begin );
+
 		emitter.emit();
 	}
 }

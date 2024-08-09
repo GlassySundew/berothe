@@ -12,7 +12,7 @@ import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
 import game.net.entity.EntityReplicator;
 import game.net.entity.component.EntityDynamicsComponentReplicator;
 
-class EntityMovementControlComponent extends EntityComponent {
+class EntityMovementControlComponent extends EntityClientComponent {
 
 	public var inputDirX( default, null ) : Float = 0;
 	public var inputDirY( default, null ) : Float = 0;
@@ -32,7 +32,7 @@ class EntityMovementControlComponent extends EntityComponent {
 	}
 
 	public function new( entityReplicator : EntityReplicator, ca : ControllerAccess<ControllerAction> ) {
-		super( null );
+		super();
 
 		this.ca = ca;
 		this.entityReplicator = entityReplicator;

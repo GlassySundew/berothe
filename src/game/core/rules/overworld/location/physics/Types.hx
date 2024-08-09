@@ -72,6 +72,14 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		}
 	}
 
+	public inline function add( subtractive : ThreeDeeVector ) : ThreeDeeVector {
+		return {
+			x : this.x + subtractive.x,
+			y : this.y + subtractive.y,
+			z : this.z + subtractive.z
+		}
+	}
+
 	public inline function div( subdiv : Float ) : ThreeDeeVector {
 		return {
 			x : this.x / subdiv,
