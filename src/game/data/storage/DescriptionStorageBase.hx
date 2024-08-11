@@ -24,7 +24,7 @@ abstract class DescriptionStorageBase<T : DescriptionBase, CdbType> {
 	public function parseItem( entry : CdbType ) : Void {}
 
 	function addItem( item : T ) {
-		Assert.isNull( items[item.id], "overlapping id set");
+		Assert.isNull( items[item.id], 'overlapping id set: ${item.id}, $item');
 		items[item.id] = item;
 	}
 }

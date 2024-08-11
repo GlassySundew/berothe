@@ -1,5 +1,7 @@
 package game.data.storage.entity.body;
 
+import game.client.en.comp.auxil.EntityMountPointsComponent;
+import game.data.storage.entity.body.auxil.EntityMountPointsDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.properties.AttackListDescription;
@@ -11,7 +13,7 @@ import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.component.EntityComponentDescription;
 
-class EntityBodyDescription extends DescriptionBase {
+class EntityPropertiesDescription extends DescriptionBase {
 
 	public var propertyDescriptions( default, null ) : Array<EntityComponentDescription> = [];
 
@@ -21,9 +23,10 @@ class EntityBodyDescription extends DescriptionBase {
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 
-	public var view : EntityViewDescription;
+	public var model : Null<EntityMountPointsDescription>;
+	public var view : Null<EntityViewDescription>;
 
-	public function new( entry : Data.EntityBody ) {
+	public function new( entry : Data.EntityPreset ) {
 		super( entry.id.toString() );
 
 		createPropDescriptions( entry );
@@ -33,7 +36,7 @@ class EntityBodyDescription extends DescriptionBase {
 		}
 	}
 
-	function createPropDescriptions( entry : Data.EntityBody ) {
+	function createPropDescriptions( entry : Data.EntityPreset ) {
 		propertyDescriptions = ArrayExtensions.deNullify(( [
 
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
@@ -43,6 +46,7 @@ class EntityBodyDescription extends DescriptionBase {
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription() : null,
 
+			// model = new EntityMountPointsDescription( EntityMountPointsDescription.getIdFromEntity( entry ) ),
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view )
 
 		] : Array<EntityComponentDescription> ) );

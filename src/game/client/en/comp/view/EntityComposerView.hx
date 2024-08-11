@@ -92,6 +92,7 @@ class EntityComposerView implements IEntityView {
 				for ( attackAnimItem in attackKeyList ) {
 					if ( animations.byKey.get( attackAnimItem.idle ) != null ) {
 						var attackItem = component.getItemByAnimationKey( attackAnimItem.active );
+						if ( attackItem == null ) continue;
 						stateListeners[attackAnimItem.idle] = new AnimationState( attackIdleListener.bind( attackItem ) );
 					}
 					if ( animations.byKey.get( attackAnimItem.active ) != null ) {

@@ -2,7 +2,7 @@ package game.data.storage;
 
 import game.data.storage.entity.body.EntityPropertiesStorage;
 import game.data.storage.entity.EntityDescriptionStorage;
-import game.data.storage.entity.body.EntityBodyDescriptionStorage;
+import game.data.storage.entity.body.EntityPresetDescriptionStorage;
 import game.data.storage.location.LocationDescriptionStorage;
 
 class DataStorage {
@@ -10,7 +10,7 @@ class DataStorage {
 	public static var inst( default, null ) : DataStorage;
 
 	public final locationStorage : LocationDescriptionStorage = new LocationDescriptionStorage();
-	public final entityBodyStorage : EntityBodyDescriptionStorage = new EntityBodyDescriptionStorage();
+	public final entityPresetStorage : EntityPresetDescriptionStorage = new EntityPresetDescriptionStorage();
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
 	public final rule : RuleStorage;
 
@@ -22,7 +22,7 @@ class DataStorage {
 		rule = new RuleStorage( Data.rule );
 
 		locationStorage.init( Data.location );
-		entityBodyStorage.init( Data.entityBody );
+		entityPresetStorage.init( Data.entityPreset );
 		entityStorage.init( Data.entity );
 	}
 }

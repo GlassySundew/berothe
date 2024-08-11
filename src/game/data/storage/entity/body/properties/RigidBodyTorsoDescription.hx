@@ -12,8 +12,8 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 	public inline static function fromCdb(
 		entry : Data.EntityProperty_properties_rigidBodyTorso
 	) : RigidBodyTorsoDescription {
-
 		if ( entry == null ) return null;
+		
 		return new RigidBodyTorsoDescription(
 			0,
 			0,

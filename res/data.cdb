@@ -53,9 +53,8 @@
 					"scope": null
 				},
 				{
-					"typeStr": "6:entityBody",
-					"name": "body",
-					"kind": null
+					"typeStr": "6:entityPreset",
+					"name": "preset"
 				},
 				{
 					"typeStr": "9:EntityControlType",
@@ -66,25 +65,25 @@
 			"lines": [
 				{
 					"id": "point",
-					"body": "block"
+					"preset": "block"
 				},
 				{
 					"id": "graybox",
-					"body": "block"
+					"preset": "block"
 				},
 				{
 					"id": "rogue",
-					"body": "human",
 					"control": [
 						0
-					]
+					],
+					"preset": "human"
 				},
 				{
 					"id": "player",
-					"body": "human",
 					"control": [
 						1
-					]
+					],
+					"preset": "human"
 				}
 			],
 			"separators": [
@@ -100,7 +99,7 @@
 			"props": {}
 		},
 		{
-			"name": "entityBody",
+			"name": "entityPreset",
 			"columns": [
 				{
 					"typeStr": "0",
@@ -188,34 +187,54 @@
 							"id": "human_attack",
 							"attackList": [
 								{
-									"id": "human_attack_rh_right",
+									"id": "human_hand_attack_right",
 									"tweenType": 0,
-									"sizeX": 1,
-									"sizeY": 0.8,
+									"sizeX": 0.1,
+									"sizeY": 0.4,
 									"sizeZ": 4,
-									"offsetX": -4.5,
-									"offsetY": 2.7,
+									"offsetX": -1.5,
+									"offsetY": 2.4,
 									"offsetZ": 8,
 									"cooldown": 0.7,
 									"duration": 0.35,
-									"endX": 3.8,
+									"endX": 2.1,
 									"key": "attack_prime_attack"
 								},
 								{
-									"id": "human_attack_rh_left",
+									"id": "human_hand_attack_left",
+									"key": "attack_seco_attack",
 									"tweenType": 0,
-									"sizeX": 1,
-									"sizeY": 0.8,
+									"sizeX": 0.1,
+									"sizeY": 0.4,
 									"sizeZ": 4,
-									"offsetX": -4.5,
-									"offsetY": -2.7,
+									"offsetX": -1.5,
+									"offsetY": -2.4,
 									"offsetZ": 8,
-									"cooldown": 2.6,
+									"cooldown": 3.4,
 									"duration": 0.35,
-									"endX": 3.8,
-									"key": "attack_seco_attack"
+									"endX": 2.1
 								}
 							]
+						},
+						"model": {
+							"equipment": [
+								{
+									"type": "equip_head"
+								},
+								{
+									"type": "equip_hand_main"
+								},
+								{
+									"type": "equip_hand_seco"
+								},
+								{
+									"type": "equip_legs"
+								},
+								{
+									"type": "equip_waist"
+								}
+							],
+							"baseHp": 5
 						}
 					}
 				}
@@ -298,6 +317,12 @@
 					"typeStr": "17",
 					"name": "attackDesc",
 					"opt": true
+				},
+				{
+					"typeStr": "17",
+					"name": "model",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -415,6 +440,43 @@
 				{
 					"typeStr": "8",
 					"name": "attackList"
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@model",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "8",
+					"name": "equipment",
+					"opt": true
+				},
+				{
+					"typeStr": "3",
+					"name": "baseHp",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@model@equipment",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:equipItemType",
+					"name": "type",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -642,6 +704,36 @@
 				{
 					"id": "human",
 					"file": "voxel/characters/human/human.enco"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "equipItemType",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "equip_head"
+				},
+				{
+					"id": "equip_hand_main"
+				},
+				{
+					"id": "equip_hand_seco"
+				},
+				{
+					"id": "equip_legs"
+				},
+				{
+					"id": "equip_waist"
 				}
 			],
 			"separators": [],

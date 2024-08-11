@@ -96,8 +96,6 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 			desc.duration * 1000
 		);
 		tweenCombinator.attachTween( currentTween );
-
-		// tweenLocal.pixel();
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {
@@ -105,13 +103,15 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		if ( tween.count() == 0 ) return;
 
+		var castBackCompensX = -( tweenSizeX ) * 2;
+
 		tween.update( tmod );
 		emitTransform.copyFrom( sourceTransform );
 
 		var rotatedVector = new ThreeDeeVector(
-			desc.offsetX, // + ( tweenSizeX - desc.sizeX ) * 2,
-			desc.offsetY, // + ( tweenSizeY - desc.sizeY ) * 2,
-			desc.offsetZ // + ( tweenSizeZ - desc.sizeZ ) * 2
+			desc.offsetX + castBackCompensX,
+			desc.offsetY,
+			desc.offsetZ
 		);
 		Util.rotateVector( emitTransform.getRotation().z, rotatedVector );
 
@@ -123,15 +123,14 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		boxGeom.setSize( { x : tweenSizeX, y : tweenSizeY, z : tweenSizeZ } );
 
-		var minX = Math.min(( tweenSizeX - desc.sizeX ) * 2, 0 );
-		var maxX = Math.max(( tweenSizeX - desc.sizeX ) * 2, 0 );
+		var diffX = (( tweenSizeX - desc.sizeX ) * 2 );
 
 		var begin = new Vec3(
-			minX, 0, 0
+			castBackCompensX, 0, 0
 		).mulTransform( Std.downcast( emitTransform, OimoTransform ).transform );
 
 		var end = new Vec3(
-			maxX, 0, 0
+			diffX, 0, 0
 		).mulTransform( Std.downcast( emitTransform, OimoTransform ).transform );
 
 		emitter.translation = end.sub( begin );

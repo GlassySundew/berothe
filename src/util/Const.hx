@@ -40,6 +40,5 @@ class Const {
 	// physics
 	public static final G_PHYSICS : Int = 1;
 	public static final G_HITBOX : Int = 2;
-	public static final G_ENTITY_PHYSICS : Int = 4;
-	public static final G_ENTITY_HITBOX : Int = 8;
+	public static final G_TEST : Int = 4;
 }

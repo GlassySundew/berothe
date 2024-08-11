@@ -1,5 +1,7 @@
 package game.core.rules.overworld.entity.component;
 
+import en.collide.ContactCallbackWrapper;
+import game.physics.oimo.OimoRigidBody;
 import game.physics.oimo.OimoRigidBodyShape;
 import game.data.storage.DataStorage;
 import game.core.rules.overworld.location.physics.RayCastHit;

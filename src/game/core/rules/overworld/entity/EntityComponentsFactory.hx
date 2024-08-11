@@ -1,11 +1,11 @@
 package game.core.rules.overworld.entity;
 
-import game.data.storage.entity.body.EntityBodyDescription;
+import game.data.storage.entity.body.EntityPropertiesDescription;
 
 class EntityComponentsFactory {
 
 	public static function fromPropertyDescription(
-		bodyDescription : EntityBodyDescription
+		bodyDescription : EntityPropertiesDescription
 	) : Array<EntityComponent> {
 		var result = [];
 

@@ -8,7 +8,7 @@ import game.core.rules.overworld.location.physics.IGeometry;
 import game.core.rules.overworld.location.physics.IPhysicsEngine;
 
 /**
-	manages constant convex emittions each frame
+	manages rb that is `CASTED`
 **/
 class OimoGeometryCastEmitter {
 
