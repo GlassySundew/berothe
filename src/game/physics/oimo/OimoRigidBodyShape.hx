@@ -1,5 +1,7 @@
 package game.physics.oimo;
 
+import util.Assert;
+import en.collide.ContactCallbackWrapper;
 import game.core.rules.overworld.location.physics.IRigidBodyShape;
 import game.core.rules.overworld.location.physics.IShapeConfig;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
@@ -54,5 +56,14 @@ class OimoRigidBodyShape implements IRigidBodyShape {
 
 	public inline function getCollisionMask() : Int {
 		return shape._collisionMask;
+	}
+
+	public inline function setContactCallback( callback : ContactCallbackWrapper ) {
+		shape.setContactCallback( callback );
+	}
+
+	public inline function getContactCallback() : ContactCallbackWrapper {
+		#if debug Assert.isOfType( shape.getContactCallback(), ContactCallbackWrapper ); #end
+		return Std.downcast( shape.getContactCallback(), ContactCallbackWrapper );
 	}
 }

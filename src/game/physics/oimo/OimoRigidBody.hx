@@ -26,6 +26,7 @@ class OimoRigidBody implements IRigidBody {
 			case DYNAMIC: oimo.dynamics.rigidbody.RigidBodyType.DYNAMIC;
 			case STATIC: oimo.dynamics.rigidbody.RigidBodyType.STATIC;
 			case KINEMATIC: oimo.dynamics.rigidbody.RigidBodyType.KINEMATIC;
+			case CASTED: oimo.dynamics.rigidbody.RigidBodyType.CASTED;
 		}
 
 		var rigidBody = new RigidBody( config );
@@ -112,6 +113,11 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function setPosition( pos : ThreeDeeVector ) {
 		rigidBody.setPosition( pos.toOimo() );
+	}
+
+	public inline function updateTransform() {
+		@:privateAccess
+		rigidBody.updateTransformExt();
 	}
 
 	public inline function wakeUp() {

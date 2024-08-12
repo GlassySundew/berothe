@@ -8,6 +8,7 @@ interface IPhysicsEngine {
 
 	function update( dt : Float ) : Void;
 	function addRigidBody( rigidBody : IRigidBody ) : Void;
+	function removeRigidBody( rigidBody : IRigidBody ) : Void;
 	function setDebugDraw( debugDraw : IDebugDraw ) : Void;
 	function rayCast(
 		start : ThreeDeeVector,

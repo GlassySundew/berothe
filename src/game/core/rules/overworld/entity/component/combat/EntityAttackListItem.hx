@@ -22,6 +22,7 @@ class EntityAttackListItem {
 
 	public function attack( ignoreCooldown = false ) {
 		if ( !ignoreCooldown && emitter.isOnCooldown() ) return;
+		if ( emitter.isInAction() ) return;
 
 		emitter.performCasting();
 		onAttackPerformed.dispatch();
@@ -46,7 +47,6 @@ class EntityAttackListItem {
 
 	function onAttachedToLocation( location : Location ) {
 		var rigidBodyComp = entity.components.get( EntityRigidBodyComponent );
-
 		rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
 			emitter = new AttackTweenBoxCastEmitter(
 				desc,
@@ -55,9 +55,13 @@ class EntityAttackListItem {
 			);
 			entity.onFrame.add( update );
 
-			emitter.getCallbackContainer().onShapeCollide.add(
-				( shapeHit, hit ) -> {
-					trace( shapeHit.getCollisionGroup(), shapeHit.getCollisionMask(), Math.random() );
+			emitter.getCallbackContainer().beginCB.add(
+				( contact ) -> {
+					trace(
+						contact._b1._shapeList.getCollisionGroup(),
+						contact._b1._shapeList.getCollisionMask(),
+						Math.random()
+					);
 				} );
 		} );
 	}

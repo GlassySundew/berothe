@@ -1,5 +1,9 @@
 package game.physics.oimo;
 
+import en.collide.ContactCallbackWrapper;
+import game.core.rules.overworld.location.physics.IRigidBodyShape;
+import game.core.rules.overworld.location.physics.IRigidBody;
+import be.Constant;
 import oimo.common.Vec3;
 import en.collide.RayCastCallback;
 import util.Util;
@@ -25,16 +29,16 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	final sourceTransform : ITransform;
 	final emitTransform : ITransform;
 	final tween : Tweenie;
+	final cooldown : Cooldown;
+	final rigidBody : IRigidBody;
+	final shape : IRigidBodyShape;
+	final physics : IPhysicsEngine;
 
 	var tweenSizeX : Float;
 	var tweenSizeY : Float;
 	var tweenSizeZ : Float;
 
 	var tweenCombinator : TweenCombinator;
-
-	final emitter : OimoGeometryCastEmitter;
-
-	final cooldown : Cooldown;
 
 	public function new(
 		desc : AttackListItem,
@@ -43,11 +47,23 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	) {
 		this.desc = desc;
 		this.sourceTransform = sourceTransform;
+		this.physics = physics;
 		this.emitTransform = new OimoTransform();
 		this.cooldown = new Cooldown( hxd.Timer.wantedFPS );
 
 		var geom = GeometryAbstractFactory.box( desc.sizeX, desc.sizeY, desc.sizeZ );
-		emitter = new OimoGeometryCastEmitter( geom, emitTransform, physics );
+		var shapeConfig = ShapeConfigFactory.create();
+		shapeConfig.setGeometry( geom );
+
+		shape = OimoRigidBodyShape.create( shapeConfig );
+		shape.setCollisionGroup( 0 );
+		shape.setCollisionMask( util.Const.G_HITBOX );
+		shape.setContactCallback( new ContactCallbackWrapper() );
+
+		rigidBody = RigidBodyAbstractFactory.create( shape, CASTED );
+		rigidBody.setRotationFactor( { x : 0, y : 0, z : 0 } );
+		rigidBody.setLinearDamping( { x : 100, y : 100, z : 100 } );
+		rigidBody.setGravityScale( 0 );
 
 		this.boxGeom = geom;
 		this.type = switch desc.tweenType {
@@ -73,16 +89,22 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		return tweenCombinator.getElapsedProgress() ?? 0;
 	}
 
-	public inline function getCallbackContainer() : RayCastCallback {
-		return emitter.contactCB;
+	public inline function getCallbackContainer() : ContactCallbackWrapper {
+		return shape.getContactCallback();
 	}
 
 	public function performCasting() {
-		// TODO y and z maybe(?) because now its only x (forward direction)
+		// ? y and z maybe because now its only x (forward direction)
 
-		cooldown.setS( '$ATTACK_CD_KEY', desc.cooldown + desc.duration * 2 );
+		if ( isInAction() ) throw "double cast attacking";
+		cooldown.setS(
+			'$ATTACK_CD_KEY',
+			desc.cooldown + desc.duration * 2
+		);
+		physics.addRigidBody( rigidBody );
 
 		tweenCombinator = new TweenCombinator();
+
 		var currentTween = tween.createS(
 			tweenSizeX,
 			desc.endX,
@@ -96,6 +118,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 			desc.duration * 1000
 		);
 		tweenCombinator.attachTween( currentTween );
+		currentTween.onEnd = () -> physics.removeRigidBody( rigidBody );
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {
@@ -103,13 +126,12 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		if ( tween.count() == 0 ) return;
 
-		var castBackCompensX = -( tweenSizeX ) * 2;
-
 		tween.update( tmod );
 		emitTransform.copyFrom( sourceTransform );
 
+		var diffX = ( tweenSizeX ) * 2;
 		var rotatedVector = new ThreeDeeVector(
-			desc.offsetX + castBackCompensX,
+			desc.offsetX + diffX,
 			desc.offsetY,
 			desc.offsetZ
 		);
@@ -123,19 +145,8 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		boxGeom.setSize( { x : tweenSizeX, y : tweenSizeY, z : tweenSizeZ } );
 
-		var diffX = (( tweenSizeX - desc.sizeX ) * 2 );
-
-		var begin = new Vec3(
-			castBackCompensX, 0, 0
-		).mulTransform( Std.downcast( emitTransform, OimoTransform ).transform );
-
-		var end = new Vec3(
-			diffX, 0, 0
-		).mulTransform( Std.downcast( emitTransform, OimoTransform ).transform );
-
-		emitter.translation = end.sub( begin );
-
-		emitter.emit();
+		rigidBody.transform.copyFrom( emitTransform );
+		rigidBody.updateTransform();
 	}
 }
 

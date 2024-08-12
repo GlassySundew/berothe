@@ -1,5 +1,7 @@
 package game.core.rules.overworld.entity.component;
 
+import en.collide.ContactCallbackWrapper;
+import oimo.dynamics.callback.ContactCallback;
 import game.core.rules.overworld.location.Location;
 import game.data.storage.DataStorage;
 import game.physics.RigidBodyAbstractFactory;
@@ -27,12 +29,10 @@ class EntityHitboxComponent extends EntityRigidBodyComponentBase {
 			desc.sizeY,
 			desc.sizeZ
 		);
-
-		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
-
 		torsoShape.setCollisionGroup( Const.G_HITBOX );
 		torsoShape.setCollisionMask( 0 );
 
+		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBodyLocal.setLinearDamping( { x : 100, y : 100, z : 100 } );
 		rigidBodyLocal.setGravityScale( 0 );

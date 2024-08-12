@@ -44,6 +44,11 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		world.addRigidBody( Std.downcast( rigidBody, OimoRigidBody ).rigidBody );
 	}
 
+	public function removeRigidBody( rigidBody : IRigidBody ) {
+		Assert.isOfType( rigidBody, OimoRigidBody );
+		world.removeRigidBody( Std.downcast( rigidBody, OimoRigidBody ).rigidBody );
+	}
+
 	public function setDebugDraw( debugDraw : IDebugDraw ) {
 		Assert.isNull( this.debugDraw );
 		Assert.isOfType( debugDraw, DebugDraw );

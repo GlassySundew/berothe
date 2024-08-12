@@ -101,4 +101,5 @@ enum RigidBodyType {
 	DYNAMIC;
 	STATIC;
 	KINEMATIC;
+	CASTED;
 }

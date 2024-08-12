@@ -10,7 +10,7 @@ import game.core.rules.overworld.location.physics.IPhysicsEngine;
 /**
 	manages rb that is `CASTED`
 **/
-class OimoGeometryCastEmitter {
+class OimoCastEmitter {
 
 	public final contactCB : RayCastCallback;
 

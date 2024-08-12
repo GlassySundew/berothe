@@ -30,8 +30,8 @@ interface IRigidBody {
 	function setLinearDamping( vec : ThreeDeeVector ) : Void;
 	function setGravityScale( value : Float ) : Void;
 	function setPosition( pos : ThreeDeeVector ) : Void;
+	function updateTransform() : Void;
 	function sleep() : Void;
 	function wakeUp() : Void;
 	function setAutoSleep( value : Bool ) : Void;
-	// function onUpdated():Void;
 }

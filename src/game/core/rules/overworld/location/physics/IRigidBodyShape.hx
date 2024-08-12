@@ -1,5 +1,6 @@
 package game.core.rules.overworld.location.physics;
 
+import en.collide.ContactCallbackWrapper;
 import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
 
 interface IRigidBodyShape {
@@ -10,4 +11,6 @@ interface IRigidBodyShape {
 	function getCollisionGroup() : Int;
 	function getCollisionMask() : Int;
 	function getPosition() : ThreeDeeVector;
+	function setContactCallback( callback : ContactCallbackWrapper ) : Void;
+	function getContactCallback() : ContactCallbackWrapper;
 }

@@ -189,7 +189,7 @@
 								{
 									"id": "human_hand_attack_right",
 									"tweenType": 0,
-									"sizeX": 0.1,
+									"sizeX": 1,
 									"sizeY": 0.4,
 									"sizeZ": 4,
 									"offsetX": -1.5,
@@ -197,14 +197,14 @@
 									"offsetZ": 8,
 									"cooldown": 0.7,
 									"duration": 0.35,
-									"endX": 2.1,
+									"endX": 2,
 									"key": "attack_prime_attack"
 								},
 								{
 									"id": "human_hand_attack_left",
 									"key": "attack_seco_attack",
 									"tweenType": 0,
-									"sizeX": 0.1,
+									"sizeX": 1,
 									"sizeY": 0.4,
 									"sizeZ": 4,
 									"offsetX": -1.5,
@@ -212,7 +212,7 @@
 									"offsetZ": 8,
 									"cooldown": 3.4,
 									"duration": 0.35,
-									"endX": 2.1
+									"endX": 2
 								}
 							]
 						},

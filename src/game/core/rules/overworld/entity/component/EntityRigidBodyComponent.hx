@@ -1,15 +1,12 @@
 package game.core.rules.overworld.entity.component;
 
 import en.collide.ContactCallbackWrapper;
-import game.physics.oimo.OimoRigidBody;
-import game.physics.oimo.OimoRigidBodyShape;
-import game.data.storage.DataStorage;
-import game.core.rules.overworld.location.physics.RayCastHit;
-import oimo.dynamics.rigidbody.Shape;
-import game.core.rules.overworld.location.Location;
 import en.collide.RayCastCallback;
 import util.Const;
+import game.core.rules.overworld.location.Location;
 import game.core.rules.overworld.location.physics.IRigidBodyShape;
+import game.core.rules.overworld.location.physics.RayCastHit;
+import game.data.storage.DataStorage;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.physics.RigidBodyAbstractFactory;
 import game.physics.ShapeAbstractFactory;
@@ -35,12 +32,10 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 			rigidBodyDesc.sizeY,
 			rigidBodyDesc.sizeZ
 		);
-
-		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
-
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 
+		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBodyLocal.setLinearDamping( { x : 25, y : 25, z : 0 } );
 
