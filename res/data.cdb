@@ -183,7 +183,28 @@
 							"offsetZ": 7.5,
 							"id": "humanTorsoHitbox"
 						},
-						"attackDesc": {
+						"model": {
+							"equipment": [
+								{
+									"type": "equip_head"
+								},
+								{
+									"type": "equip_hand_main"
+								},
+								{
+									"type": "equip_hand_seco"
+								},
+								{
+									"type": "equip_legs"
+								},
+								{
+									"type": "equip_waist"
+								}
+							],
+							"baseHp": 5,
+							"id": "humanModel"
+						},
+						"attack": {
 							"id": "human_attack",
 							"attackList": [
 								{
@@ -215,26 +236,6 @@
 									"endX": 2
 								}
 							]
-						},
-						"model": {
-							"equipment": [
-								{
-									"type": "equip_head"
-								},
-								{
-									"type": "equip_hand_main"
-								},
-								{
-									"type": "equip_hand_seco"
-								},
-								{
-									"type": "equip_legs"
-								},
-								{
-									"type": "equip_waist"
-								}
-							],
-							"baseHp": 5
 						}
 					}
 				}
@@ -315,7 +316,7 @@
 				},
 				{
 					"typeStr": "17",
-					"name": "attackDesc",
+					"name": "attack",
 					"opt": true
 				},
 				{
@@ -425,7 +426,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@attackDesc",
+			"name": "entityProperty@properties@attack",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -452,6 +453,12 @@
 			"separators": [],
 			"lines": [],
 			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"opt": true,
+					"kind": null
+				},
 				{
 					"typeStr": "8",
 					"name": "equipment",
@@ -481,7 +488,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@attackDesc@attackList",
+			"name": "entityProperty@properties@attack@attackList",
 			"props": {
 				"hide": true
 			},

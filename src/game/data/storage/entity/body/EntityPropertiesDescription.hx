@@ -1,5 +1,6 @@
 package game.data.storage.entity.body;
 
+import game.data.storage.entity.body.model.EntityModelDescription;
 import game.client.en.comp.auxil.EntityMountPointsComponent;
 import game.data.storage.entity.body.auxil.EntityMountPointsDescription;
 import util.extensions.ArrayExtensions;
@@ -23,7 +24,7 @@ class EntityPropertiesDescription extends DescriptionBase {
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 
-	public var model : Null<EntityMountPointsDescription>;
+	public var model : Null<EntityModelDescription>;
 	public var view : Null<EntityViewDescription>;
 
 	public function new( entry : Data.EntityPreset ) {
@@ -42,11 +43,11 @@ class EntityPropertiesDescription extends DescriptionBase {
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
-			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attackDesc ),
+			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription() : null,
 
-			// model = new EntityMountPointsDescription( EntityMountPointsDescription.getIdFromEntity( entry ) ),
+			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view )
 
 		] : Array<EntityComponentDescription> ) );

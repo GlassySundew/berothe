@@ -10,7 +10,7 @@ import game.net.entity.component.EntitySimpleComponentReplicator;
 class AttackListDescription extends EntityComponentDescription {
 
 	public inline static function fromCdb(
-		attackDesc : Data.EntityProperty_properties_attackDesc
+		attackDesc : Data.EntityProperty_properties_attack
 	) : AttackListDescription {
 		if ( attackDesc == null ) return null;
 		var attackDescriptions = [

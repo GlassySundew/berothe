@@ -10,7 +10,7 @@ import game.core.rules.overworld.entity.EntityComponent;
 class AttackListItem {
 
 	public static function fromCdb(
-		attack : Data.EntityProperty_properties_attackDesc_attackList
+		attack : Data.EntityProperty_properties_attack_attackList
 	) : AttackListItem {
 		return new AttackListItem(
 			AnimationKey.fromCdb( attack.key ),
