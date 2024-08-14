@@ -2,8 +2,8 @@ package game.physics.oimo;
 
 import util.Assert;
 import oimo.dynamics.rigidbody.ShapeConfig;
-import game.core.rules.overworld.location.physics.IGeometry;
-import game.core.rules.overworld.location.physics.IShapeConfig;
+import game.domain.overworld.location.physics.IGeometry;
+import game.domain.overworld.location.physics.IShapeConfig;
 
 class OimoShapeConfig implements IShapeConfig {
 

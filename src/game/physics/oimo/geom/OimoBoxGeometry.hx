@@ -1,8 +1,8 @@
 package game.physics.oimo.geom;
 
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import oimo.collision.geometry.BoxGeometry;
-import game.core.rules.overworld.location.physics.geom.IBoxGeometry;
+import game.domain.overworld.location.physics.geom.IBoxGeometry;
 
 class OimoBoxGeometry extends OimoGeometry implements IBoxGeometry {
 

@@ -1,7 +1,7 @@
 package game.physics;
 
 import game.physics.oimo.OimoPhysicsEngine;
-import game.core.rules.overworld.location.physics.IPhysicsEngine;
+import game.domain.overworld.location.physics.IPhysicsEngine;
 
 class PhysicsEngineAbstractFactory {
 

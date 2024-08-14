@@ -2,8 +2,8 @@ package game.data.storage.entity.body.properties;
 
 import game.net.entity.component.attack.EntityAttackListReplicator;
 import game.net.entity.EntityComponentReplicatorBase;
-import game.core.rules.overworld.entity.EntityComponent;
-import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
+import game.domain.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.net.entity.component.EntitySimpleComponentReplicator;
 

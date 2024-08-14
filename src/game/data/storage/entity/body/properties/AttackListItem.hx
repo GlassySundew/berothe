@@ -1,11 +1,11 @@
 package game.data.storage.entity.body.properties;
 
-import game.core.rules.overworld.entity.component.combat.EntityAttackListItem;
+import game.domain.overworld.entity.component.combat.EntityAttackListItem;
 import net.NetNode;
 import game.net.entity.EntityComponentReplicatorBase;
 import game.data.storage.entity.body.view.AnimationKey;
 import game.data.storage.entity.body.view.AttackTranslationTween;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.EntityComponent;
 
 class AttackListItem {
 

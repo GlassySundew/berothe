@@ -2,7 +2,7 @@ package game.physics;
 
 import oimo.collision.geometry.BoxGeometry;
 import oimo.common.Vec3;
-import game.core.rules.overworld.location.physics.geom.IBoxGeometry;
+import game.domain.overworld.location.physics.geom.IBoxGeometry;
 import game.physics.oimo.geom.OimoBoxGeometry;
 
 class GeometryAbstractFactory {

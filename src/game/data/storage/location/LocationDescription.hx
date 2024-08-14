@@ -1,6 +1,6 @@
 package game.data.storage.location;
 
-import game.core.rules.overworld.location.ILocationObjectsDataProvider;
+import game.domain.overworld.location.ILocationObjectsDataProvider;
 import game.data.location.prefab.LocationDataResolver;
 
 class LocationDescription extends DescriptionBase {

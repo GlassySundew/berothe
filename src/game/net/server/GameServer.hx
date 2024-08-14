@@ -2,19 +2,19 @@ package game.net.server;
 
 import game.net.entity.EntityReplicator;
 import game.net.location.CoreReplicator;
-import game.core.rules.overworld.location.Chunk;
+import game.domain.overworld.location.Chunk;
 import game.net.player.PlayerReplicationManager;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.OverworldEntity;
 import signals.Signal0;
 import signals.Signal;
-import game.core.rules.overworld.location.Location;
+import game.domain.overworld.location.Location;
 import game.data.storage.location.LocationDescription;
 #if server
 import dn.Process;
 import hxbit.NetworkHost.NetworkClient;
 import net.ClientController;
 import net.Server;
-import game.core.GameCore;
+import game.domain.GameCore;
 import game.data.storage.DataStorage;
 
 

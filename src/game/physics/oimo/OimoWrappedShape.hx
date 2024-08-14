@@ -1,6 +1,6 @@
 package game.physics.oimo;
 
-import game.core.rules.overworld.location.physics.IShapeConfig;
+import game.domain.overworld.location.physics.IShapeConfig;
 import util.Assert;
 import oimo.dynamics.rigidbody.Shape;
 

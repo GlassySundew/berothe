@@ -3,7 +3,7 @@ package game.data.storage.entity.body.auxil;
 import game.net.entity.component.EntitySimpleComponentReplicator;
 import game.client.en.comp.auxil.EntityMountPointsComponent;
 import game.net.entity.EntityComponentReplicatorBase;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 
 class EntityMountPointsDescription extends EntityComponentDescription {

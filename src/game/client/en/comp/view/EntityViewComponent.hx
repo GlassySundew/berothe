@@ -1,11 +1,11 @@
 package game.client.en.comp.view;
 
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.EntityComponent;
 import dn.M;
 import game.client.en.comp.view.IEntityView;
-import game.core.rules.overworld.location.Location;
+import game.domain.overworld.location.Location;
 import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
 import game.data.storage.entity.body.view.EntityViewDescription;
 

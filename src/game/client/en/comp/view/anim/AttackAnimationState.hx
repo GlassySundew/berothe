@@ -1,6 +1,6 @@
 package game.client.en.comp.view.anim;
 
-import game.core.rules.overworld.entity.component.combat.EntityAttackListItem;
+import game.domain.overworld.entity.component.combat.EntityAttackListItem;
 import plugins.bodyparts_animations.src.anim.FBFAnimationContainer;
 
 class AttackAnimationState extends AnimationState {

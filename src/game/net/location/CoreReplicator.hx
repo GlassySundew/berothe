@@ -2,11 +2,11 @@ package game.net.location;
 
 import net.ClientController;
 import game.net.entity.EntityReplicator;
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.location.Chunk;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.location.Chunk;
 import util.Assert;
-import game.core.GameCore;
-import game.core.rules.overworld.location.Location;
+import game.domain.GameCore;
+import game.domain.overworld.location.Location;
 
 class CoreReplicator {
 

@@ -1,8 +1,8 @@
 package game.data.storage.entity.body.properties;
 
 import net.NetNode;
-import game.core.rules.overworld.entity.EntityComponent;
-import game.core.rules.overworld.entity.component.EntityRigidBodyComponent;
+import game.domain.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.data.storage.entity.body.properties.VolumetricBodyDescriptionBase;
 import game.net.entity.EntityComponentReplicatorBase;
 import game.net.entity.component.EntityRigidBodyComponentReplicator;

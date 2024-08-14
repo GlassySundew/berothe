@@ -2,10 +2,10 @@ package game.physics.oimo;
 
 import util.Util;
 import en.collide.RayCastCallback;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
-import game.core.rules.overworld.location.physics.ITransform;
-import game.core.rules.overworld.location.physics.IGeometry;
-import game.core.rules.overworld.location.physics.IPhysicsEngine;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.ITransform;
+import game.domain.overworld.location.physics.IGeometry;
+import game.domain.overworld.location.physics.IPhysicsEngine;
 
 /**
 	manages rb that is `CASTED`

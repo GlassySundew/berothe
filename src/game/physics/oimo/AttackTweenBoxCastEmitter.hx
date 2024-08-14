@@ -1,22 +1,22 @@
 package game.physics.oimo;
 
 import en.collide.ContactCallbackWrapper;
-import game.core.rules.overworld.location.physics.IRigidBodyShape;
-import game.core.rules.overworld.location.physics.IRigidBody;
+import game.domain.overworld.location.physics.IRigidBodyShape;
+import game.domain.overworld.location.physics.IRigidBody;
 import be.Constant;
 import oimo.common.Vec3;
 import en.collide.RayCastCallback;
 import util.Util;
 import dn.M;
 import dn.Cooldown;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
-import game.core.rules.overworld.location.physics.IPhysicsEngine;
-import game.core.rules.overworld.location.physics.ITransform;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.IPhysicsEngine;
+import game.domain.overworld.location.physics.ITransform;
 import game.data.storage.entity.body.properties.AttackListItem;
-import game.core.rules.overworld.location.physics.geom.IBoxGeometry;
+import game.domain.overworld.location.physics.geom.IBoxGeometry;
 import dn.Tweenie;
 import hxd.Timer;
-import game.core.rules.IUpdatable;
+import game.domain.IUpdatable;
 
 final class AttackTweenBoxCastEmitter implements IUpdatable {
 

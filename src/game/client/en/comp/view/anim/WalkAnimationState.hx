@@ -1,7 +1,7 @@
 package game.client.en.comp.view.anim;
 
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import dn.M;
 
 class WalkAnimationState extends AnimationState {

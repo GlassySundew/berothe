@@ -1,7 +1,7 @@
 package game.net.entity;
 
 import rx.disposables.Composite;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.OverworldEntity;
 import net.NSMutableProperty;
 import net.NetNode;
 

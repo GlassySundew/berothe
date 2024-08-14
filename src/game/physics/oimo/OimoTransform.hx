@@ -2,9 +2,9 @@ package game.physics.oimo;
 
 import util.Assert;
 import oimo.common.Transform;
-import game.core.rules.overworld.location.physics.Types.Quat;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
-import game.core.rules.overworld.location.physics.ITransform;
+import game.domain.overworld.location.physics.Types.Quat;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.ITransform;
 
 class OimoTransform implements ITransform {
 

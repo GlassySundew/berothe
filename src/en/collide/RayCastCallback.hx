@@ -3,13 +3,13 @@ package en.collide;
 import game.physics.oimo.OimoShapeCache;
 import game.physics.oimo.OimoWrappedShape;
 import util.Assert;
-import game.core.rules.overworld.location.physics.IPhysicsEngine;
+import game.domain.overworld.location.physics.IPhysicsEngine;
 import signals.Signal2;
 import signals.Signal;
 import oimo.dynamics.rigidbody.Shape;
-import game.core.rules.overworld.location.physics.RayCastHit;
+import game.domain.overworld.location.physics.RayCastHit;
 import oimo.dynamics.callback.RayCastClosest;
-import game.core.rules.overworld.location.physics.IRigidBodyShape;
+import game.domain.overworld.location.physics.IRigidBodyShape;
 
 class RayCastCallback extends RayCastClosest {
 

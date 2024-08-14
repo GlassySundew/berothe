@@ -1,7 +1,7 @@
 package game.net.entity.component;
 
-import game.core.rules.overworld.entity.component.EntityRigidBodyComponent;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.EntityRigidBodyComponent;
+import game.domain.overworld.entity.OverworldEntity;
 
 class EntityRigidBodyComponentReplicator extends EntityComponentReplicatorBase {
 

@@ -6,9 +6,9 @@ import core.MutableProperty;
 import dn.M;
 import dn.heaps.input.ControllerAccess;
 import util.Const;
-import game.core.rules.overworld.entity.EntityComponent;
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.net.entity.EntityReplicator;
 import game.net.entity.component.EntityDynamicsComponentReplicator;
 

@@ -1,17 +1,17 @@
 package game.physics.oimo;
 
 import dn.M;
-import game.core.rules.overworld.location.physics.ITransform;
+import game.domain.overworld.location.physics.ITransform;
 import core.MutableProperty;
 import h3d.Quat;
 import oimo.common.Vec3;
 import oimo.dynamics.rigidbody.RigidBody;
 import oimo.dynamics.rigidbody.RigidBodyConfig;
 import util.Assert;
-import game.core.rules.overworld.location.physics.IRigidBody;
-import game.core.rules.overworld.location.physics.IRigidBodyShape;
-import game.core.rules.overworld.location.physics.Types.RigidBodyType;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.IRigidBody;
+import game.domain.overworld.location.physics.IRigidBodyShape;
+import game.domain.overworld.location.physics.Types.RigidBodyType;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
 class OimoRigidBody implements IRigidBody {
 

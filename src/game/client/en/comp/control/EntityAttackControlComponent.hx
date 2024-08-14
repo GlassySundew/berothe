@@ -1,8 +1,8 @@
 package game.client.en.comp.control;
 
 import dn.heaps.input.ControllerAccess;
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.net.entity.EntityReplicator;
 
 class EntityAttackControlComponent extends EntityClientComponent {

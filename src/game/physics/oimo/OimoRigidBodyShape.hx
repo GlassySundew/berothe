@@ -2,9 +2,9 @@ package game.physics.oimo;
 
 import util.Assert;
 import en.collide.ContactCallbackWrapper;
-import game.core.rules.overworld.location.physics.IRigidBodyShape;
-import game.core.rules.overworld.location.physics.IShapeConfig;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.IRigidBodyShape;
+import game.domain.overworld.location.physics.IShapeConfig;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import game.physics.oimo.OimoWrappedShape;
 
 class OimoRigidBodyShape implements IRigidBodyShape {

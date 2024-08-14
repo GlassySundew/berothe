@@ -14,7 +14,7 @@ import ui.PauseMenu;
 import util.Const;
 import util.Settings;
 import util.threeD.CameraProcess;
-import game.core.rules.overworld.location.Location;
+import game.domain.overworld.location.Location;
 import game.data.storage.DataStorage;
 import game.net.entity.EntityReplicator;
 import game.net.location.LocationReplicator;

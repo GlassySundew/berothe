@@ -1,9 +1,9 @@
 package game.data.storage.entity.body.properties;
 
-import game.core.rules.overworld.entity.component.block.StaticObjectRigidBodyComponent;
+import game.domain.overworld.entity.component.block.StaticObjectRigidBodyComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.net.entity.EntityComponentReplicatorBase;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.EntityComponent;
 import net.NetNode;
 
 class StaticObjectRigidBodyDescription extends EntityComponentDescription {

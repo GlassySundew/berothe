@@ -1,10 +1,10 @@
 package game.client.en.comp.view;
 
 import game.client.en.comp.view.anim.AttackAnimationState;
-import game.core.rules.overworld.entity.component.combat.EntityAttackListItem;
-import game.core.rules.overworld.entity.component.combat.EntityAttackListComponent;
+import game.domain.overworld.entity.component.combat.EntityAttackListItem;
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.client.en.comp.view.anim.WalkAnimationState;
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.data.storage.entity.body.view.EntityAnimations;
 import game.client.en.comp.view.anim.AnimationState;
 import game.data.storage.entity.body.view.AnimationKey;

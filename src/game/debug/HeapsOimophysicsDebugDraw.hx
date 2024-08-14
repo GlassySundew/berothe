@@ -1,7 +1,7 @@
 package game.debug;
 
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
-import game.core.rules.overworld.location.physics.IDebugDraw;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.IDebugDraw;
 import dn.Col;
 import h3d.col.Point;
 import h3d.scene.Graphics;

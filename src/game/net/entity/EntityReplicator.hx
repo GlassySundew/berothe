@@ -1,12 +1,12 @@
 package game.net.entity;
 
 import future.Future;
-import game.core.rules.overworld.location.Location;
+import game.domain.overworld.location.Location;
 import game.data.storage.DataStorage;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable.NetworkSerializer;
 import net.NetNode;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.OverworldEntity;
 
 class EntityReplicator extends NetNode {
 

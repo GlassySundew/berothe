@@ -6,13 +6,13 @@ import haxe.zip.Compress;
 import haxe.zip.FlushMode;
 import util.Assert;
 import game.net.entity.component.attack.EntityAttackListReplicator;
-import game.core.rules.overworld.entity.component.EntityRigidBodyComponent;
+import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.client.en.comp.control.EntityAttackControlComponent;
 import dn.heaps.input.ControllerAccess;
 import game.client.en.comp.control.EntityMovementControlComponent;
 import game.client.en.comp.control.EntityCameraFollowComponent;
 import game.net.entity.EntityReplicator;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.OverworldEntity;
 
 class EntityControl {
 

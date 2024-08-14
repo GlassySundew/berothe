@@ -2,8 +2,8 @@ package game.client.en.comp.control;
 
 #if client
 import game.net.client.GameClient;
-import game.core.rules.overworld.entity.OverworldEntity;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.EntityComponent;
 
 class EntityCameraFollowComponent extends EntityClientComponent {
 

@@ -2,7 +2,7 @@ package game.physics;
 
 import oimo.dynamics.rigidbody.ShapeConfig;
 import game.physics.oimo.OimoShapeConfig;
-import game.core.rules.overworld.location.physics.IShapeConfig;
+import game.domain.overworld.location.physics.IShapeConfig;
 
 class ShapeConfigFactory {
 

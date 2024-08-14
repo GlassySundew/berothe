@@ -4,8 +4,8 @@ import net.NetNode;
 import game.net.entity.EntityComponentReplicatorBase;
 import game.net.entity.component.EntityDynamicsComponentReplicator;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.core.rules.overworld.entity.EntityComponent;
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
 
 class DynamicsDescription extends EntityComponentDescription {
 

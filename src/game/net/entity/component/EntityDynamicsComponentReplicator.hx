@@ -1,9 +1,9 @@
 package game.net.entity.component;
 
-import game.core.rules.overworld.entity.component.EntityDynamicsComponent;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.OverworldEntity;
 import net.NSMutableProperty;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.EntityComponent;
 
 class EntityDynamicsComponentReplicator extends EntityComponentReplicatorBase {
 

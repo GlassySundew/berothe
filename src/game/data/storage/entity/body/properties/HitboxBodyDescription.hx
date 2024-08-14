@@ -1,10 +1,10 @@
 package game.data.storage.entity.body.properties;
 
-import game.core.rules.overworld.entity.component.EntityHitboxComponent;
+import game.domain.overworld.entity.component.EntityHitboxComponent;
 import game.net.entity.component.EntitySimpleComponentReplicator;
 import net.NetNode;
 import game.net.entity.EntityComponentReplicatorBase;
-import game.core.rules.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.EntityComponent;
 
 class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 

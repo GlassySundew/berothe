@@ -1,7 +1,7 @@
 package game.physics.oimo;
 
 import oimo.collision.geometry.ConvexGeometry;
-import game.core.rules.overworld.location.physics.IGeometry;
+import game.domain.overworld.location.physics.IGeometry;
 
 class OimoGeometry implements IGeometry {
 

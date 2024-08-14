@@ -7,7 +7,7 @@ import h3d.mat.Material;
 import h3d.scene.Mesh;
 import h3d.prim.Cube;
 import graphics.ThreeDObjectNode;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import h3d.scene.Object;
 
 class EntityStaticBoxView implements IEntityView {

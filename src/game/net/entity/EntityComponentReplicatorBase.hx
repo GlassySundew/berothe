@@ -3,8 +3,8 @@ package game.net.entity;
 import future.Future;
 import net.NSMutableProperty;
 import net.NetNode;
-import game.core.rules.overworld.entity.EntityComponent;
-import game.core.rules.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.EntityComponent;
+import game.domain.overworld.entity.OverworldEntity;
 import game.data.storage.DataStorage;
 
 /**

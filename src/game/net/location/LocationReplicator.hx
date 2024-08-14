@@ -1,7 +1,7 @@
 package game.net.location;
 
 import net.NetNode;
-import game.core.rules.overworld.location.Location;
+import game.domain.overworld.location.Location;
 
 class LocationReplicator extends NetNode {
 

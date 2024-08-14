@@ -1,8 +1,8 @@
 package game.net.location;
 
-import game.core.GameCore;
-import game.core.rules.overworld.location.Chunk;
-import game.core.rules.overworld.location.Location;
+import game.domain.GameCore;
+import game.domain.overworld.location.Chunk;
+import game.domain.overworld.location.Location;
 
 class ChunksReplicationManager {
 

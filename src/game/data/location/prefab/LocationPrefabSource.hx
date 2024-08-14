@@ -4,7 +4,7 @@ import hrt.prefab.Prefab;
 import hrt.prefab.l3d.Instance;
 import hxd.res.Loader;
 import util.HideUtil;
-import game.core.rules.overworld.location.ILocationObjectsDataProvider;
+import game.domain.overworld.location.ILocationObjectsDataProvider;
 import game.data.location.objects.LocationObject;
 import game.data.location.objects.LocationSpawn;
 import game.data.storage.entity.EntityDescription;

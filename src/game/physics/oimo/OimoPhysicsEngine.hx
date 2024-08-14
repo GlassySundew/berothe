@@ -1,22 +1,22 @@
 package game.physics.oimo;
 
 import oimo.collision.geometry.BoxGeometry;
-import game.core.rules.overworld.location.physics.ITransform;
-import game.core.rules.overworld.location.physics.ITransformProvider;
-import game.core.rules.overworld.location.physics.IGeometry;
-import game.core.rules.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.ITransform;
+import game.domain.overworld.location.physics.ITransformProvider;
+import game.domain.overworld.location.physics.IGeometry;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import en.collide.RayCastCallback;
 import oimo.dynamics.rigidbody.Shape;
 import oimo.common.Vec3;
 import game.debug.HeapsOimophysicsDebugDraw;
 import oimo.dynamics.common.DebugDraw;
-import game.core.rules.overworld.location.physics.IDebugDraw;
+import game.domain.overworld.location.physics.IDebugDraw;
 import game.physics.oimo.OimoRigidBody;
 import util.Assert;
-import game.core.rules.overworld.location.physics.IRigidBody;
-import game.core.rules.overworld.location.physics.IRigidBodyShape;
+import game.domain.overworld.location.physics.IRigidBody;
+import game.domain.overworld.location.physics.IRigidBodyShape;
 import oimo.dynamics.rigidbody.RigidBody;
-import game.core.rules.overworld.location.physics.IPhysicsEngine;
+import game.domain.overworld.location.physics.IPhysicsEngine;
 import oimo.dynamics.World;
 
 class OimoPhysicsEngine implements IPhysicsEngine {

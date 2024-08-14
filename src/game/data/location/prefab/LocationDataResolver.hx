@@ -1,6 +1,6 @@
 package game.data.location.prefab;
 
-import game.core.rules.overworld.location.ILocationObjectsDataProvider;
+import game.domain.overworld.location.ILocationObjectsDataProvider;
 
 class LocationDataResolver {
 
