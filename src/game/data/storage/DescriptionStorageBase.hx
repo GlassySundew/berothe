@@ -17,6 +17,10 @@ abstract class DescriptionStorageBase<T : DescriptionBase, CdbType> {
 		}
 	}
 
+	public function getDescriptionByCdb( cdb : CdbType ) {
+		return items[untyped cdb.id.toString()];
+	}
+
 	public function getDescriptionById( id : String ) : T {
 		return items[id];
 	}
@@ -24,7 +28,9 @@ abstract class DescriptionStorageBase<T : DescriptionBase, CdbType> {
 	public function parseItem( entry : CdbType ) : Void {}
 
 	function addItem( item : T ) {
-		Assert.isNull( items[item.id], 'overlapping id set: ${item.id}, $item');
+		Assert.isNull(
+			items[item.id], 'overlapping id set: ${item.id}, $item, current present: ${items[item.id]}'
+		);
 		items[item.id] = item;
 	}
 }

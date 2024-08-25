@@ -1,12 +1,13 @@
 package game.domain.overworld.location;
 
-import game.data.location.objects.LocationObject;
-import game.data.location.objects.LocationSpawn;
+import game.data.location.objects.LocationEntityVO;
+import game.data.location.objects.LocationSpawnVO;
 import game.data.storage.entity.EntityDescription;
 
 interface ILocationObjectsDataProvider {
 
 	function load() : Void;
-	function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawn>;
-	function getGlobalObjects() : Array<LocationObject>;
+	function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawnVO>;
+	function getGlobalObjects() : Array<LocationEntityVO>;
+	function getPresentEntities() : Array<LocationEntityVO>;
 }

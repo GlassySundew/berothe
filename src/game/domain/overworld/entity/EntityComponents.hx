@@ -17,6 +17,12 @@ class EntityComponents {
 		this.entity = entity;
 	}
 
+	public function dispose() {
+		for ( component in components ) {
+			component.dispose();
+		}
+	}
+
 	public function add( component : EntityComponent ) {
 		#if debug
 		Assert.notExistsInClassMap( component, components );

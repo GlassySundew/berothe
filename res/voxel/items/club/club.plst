@@ -1,0 +1,16 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "idle",
+			"children": [
+				{
+					"type": "model",
+					"name": "club",
+					"source": "voxel/items/club/obj/fbx/club.fbx"
+				}
+			]
+		}
+	]
+}

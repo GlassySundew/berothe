@@ -1,10 +1,31 @@
 package game.data.location.objects;
 
+import hrt.prefab.l3d.Instance;
 import util.Assert;
 import game.data.storage.DataStorage;
 import game.data.storage.entity.EntityDescription;
 
-class LocationObject {
+class LocationEntityVO {
+
+	public static function fromPrefabInstance(
+		instance : Instance,
+		cdbEntry : Data.LocationEntityDF
+	) : LocationEntityVO {
+
+		return new LocationEntityVO(
+			instance.scaleX,
+			instance.scaleY,
+			instance.scaleZ,
+			instance.rotationX,
+			instance.rotationY,
+			instance.rotationZ,
+			instance.x,
+			instance.y,
+			instance.z,
+			instance.name,
+			cdbEntry.entity.id
+		);
+	}
 
 	public final entityDesc : EntityDescription;
 

@@ -63,6 +63,10 @@ class EntityComposerView implements IEntityView {
 		initListeners();
 	}
 
+	public function dispose() {
+		object.remove();
+	}
+
 	public function getGraphics() : ThreeDObjectNode {
 		return object;
 	}

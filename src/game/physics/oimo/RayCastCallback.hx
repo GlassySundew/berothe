@@ -1,4 +1,4 @@
-package en.collide;
+package game.physics.oimo;
 
 import game.physics.oimo.OimoShapeCache;
 import game.physics.oimo.OimoWrappedShape;

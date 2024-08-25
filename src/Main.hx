@@ -103,7 +103,7 @@ class Main extends Process {
 		var fps = new Text( Assets.fontPixel, Boot.inst.s2d );
 
 		onUpdate.add(() -> @:privateAccess {
-			fps.text = '${Boot.inst.engine.fps}\ndraw calls: ${Boot.inst.engine.drawCalls}';
+			fps.text = 'fps: ${Boot.inst.engine.fps}\ndraw calls: ${Boot.inst.engine.drawCalls}';
 		} );
 	}
 

@@ -43,8 +43,6 @@ class StaticObjectRigidBodyComponent extends EntityRigidBodyComponentBase {
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 
-		rigidBodyLocal.setGravityScale( 40 );
-
 		return rigidBodyLocal;
 	}
 }

@@ -4,20 +4,4 @@ import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.domain.overworld.entity.OverworldEntity;
 
 class EntityRigidBodyComponentReplicator extends EntityComponentReplicatorBase {
-
-	override function followComponentClient( entity : OverworldEntity ) {
-		super.followComponentClient( entity );
-
-		followedComponent.then(
-			component -> {
-				var rbComponent = Std.downcast( component, EntityRigidBodyComponent );
-				rbComponent.rigidBodyFuture.then(
-					rigidBody -> {
-						if ( rbComponent.isOwned ) return;
-						rigidBody.setGravityScale( 0 );
-					}
-				);
-			}
-		);
-	}
 }

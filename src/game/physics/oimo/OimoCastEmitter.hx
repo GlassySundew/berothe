@@ -1,7 +1,7 @@
 package game.physics.oimo;
 
 import util.Util;
-import en.collide.RayCastCallback;
+import game.physics.oimo.RayCastCallback;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import game.domain.overworld.location.physics.ITransform;
 import game.domain.overworld.location.physics.IGeometry;

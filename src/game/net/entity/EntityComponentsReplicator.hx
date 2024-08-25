@@ -59,8 +59,4 @@ class EntityComponentsReplicator extends NetNode {
 		if ( replicator == null )
 			trace( component + " component does not have network replication" );
 	}
-
-	override function unregister( host : NetworkHost ) {
-		super.unregister( host );
-	}
 }

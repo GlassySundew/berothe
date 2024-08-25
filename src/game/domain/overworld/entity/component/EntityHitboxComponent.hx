@@ -1,6 +1,6 @@
 package game.domain.overworld.entity.component;
 
-import en.collide.ContactCallbackWrapper;
+import game.physics.oimo.ContactCallbackWrapper;
 import oimo.dynamics.callback.ContactCallback;
 import game.domain.overworld.location.Location;
 import game.data.storage.DataStorage;

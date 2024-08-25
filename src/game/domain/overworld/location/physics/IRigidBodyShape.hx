@@ -1,6 +1,6 @@
 package game.domain.overworld.location.physics;
 
-import en.collide.ContactCallbackWrapper;
+import game.physics.oimo.ContactCallbackWrapper;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
 interface IRigidBodyShape {

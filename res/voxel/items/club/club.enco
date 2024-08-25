@@ -1,0 +1,15 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "reference",
+			"name": "club",
+			"source": "voxel/items/club/club.plst",
+			"y": -0.5,
+			"z": 0.5,
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10
+		}
+	]
+}

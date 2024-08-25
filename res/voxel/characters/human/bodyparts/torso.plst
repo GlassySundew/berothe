@@ -1,5 +1,5 @@
 {
-	"type": "bodypart",
+	"type": "playStates",
 	"children": [
 		{
 			"type": "fbfAnimationNode",

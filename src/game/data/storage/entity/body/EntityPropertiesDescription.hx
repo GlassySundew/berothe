@@ -1,10 +1,8 @@
 package game.data.storage.entity.body;
 
-import game.data.storage.entity.body.model.EntityModelDescription;
-import game.client.en.comp.auxil.EntityMountPointsComponent;
-import game.data.storage.entity.body.auxil.EntityMountPointsDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
+import game.data.storage.entity.body.model.EntityModelDescription;
 import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
@@ -13,6 +11,7 @@ import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.component.EntityComponentDescription;
+import game.data.storage.item.EntityPickablePropertyDescription;
 
 class EntityPropertiesDescription extends DescriptionBase {
 
@@ -23,6 +22,8 @@ class EntityPropertiesDescription extends DescriptionBase {
 	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
+
+	public var pickable( default, null ) : Null<EntityPickablePropertyDescription>;
 
 	public var model : Null<EntityModelDescription>;
 	public var view : Null<EntityViewDescription>;
@@ -45,10 +46,12 @@ class EntityPropertiesDescription extends DescriptionBase {
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
 
-			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription() : null,
+			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
 
-			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
-			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view )
+			// model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
+			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
+
+			pickable = EntityPickablePropertyDescription.fromCdb( entry.properties.properties.pickable )
 
 		] : Array<EntityComponentDescription> ) );
 	}

@@ -9,8 +9,8 @@ import game.domain.overworld.entity.component.EntityDynamicsComponent;
 
 class DynamicsDescription extends EntityComponentDescription {
 
-	public function new() {
-		super( "dynamics" );
+	public function new( id : String ) {
+		super( id );
 	}
 
 	public function buildComponennt() : EntityComponent {

@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import future.Future;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.domain.overworld.location.Location;
 import core.IProperty;
@@ -17,6 +18,7 @@ class OverworldEntity {
 	public final components : EntityComponents;
 
 	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
+	public final disposed : Future<Bool> = new Future();
 
 	var chunkSelf : MutableProperty<Chunk> = new MutableProperty<Chunk>();
 	public var chunk( get, never ) : IProperty<Chunk>;
@@ -34,6 +36,11 @@ class OverworldEntity {
 		this.desc = entityDesc;
 		components = new EntityComponents( this );
 		this.id = id;
+	}
+	
+	public function dispose() {
+		components.dispose();
+		disposed.resolve(true);
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {

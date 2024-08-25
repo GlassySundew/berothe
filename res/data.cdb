@@ -84,6 +84,10 @@
 						1
 					],
 					"preset": "human"
+				},
+				{
+					"id": "club",
+					"preset": "club"
 				}
 			],
 			"separators": [
@@ -94,6 +98,10 @@
 				{
 					"title": "characters",
 					"id": "rogue"
+				},
+				{
+					"title": "items",
+					"id": "club"
 				}
 			],
 			"props": {}
@@ -127,6 +135,11 @@
 					"id": "human",
 					"view": "human",
 					"properties": "human"
+				},
+				{
+					"id": "club",
+					"properties": "club",
+					"view": "club"
 				}
 			],
 			"separators": [
@@ -137,6 +150,10 @@
 				{
 					"title": "characters",
 					"id": "human"
+				},
+				{
+					"title": "items",
+					"id": "club"
 				}
 			]
 		},
@@ -238,6 +255,24 @@
 							]
 						}
 					}
+				},
+				{
+					"id": "club",
+					"properties": {
+						"dynamics": true,
+						"pickable": {
+							"item": "club",
+							"id": "clubProp",
+							"tooltipLocale": "Poop"
+						},
+						"rigidBodyTorso": {
+							"sizeX": 4,
+							"sizeY": 1,
+							"sizeZ": 1,
+							"offsetZ": 0,
+							"id": "clubRigidBody"
+						}
+					}
 				}
 			],
 			"separators": [
@@ -248,6 +283,10 @@
 				{
 					"title": "characters",
 					"id": "human"
+				},
+				{
+					"title": "items",
+					"id": "club"
 				}
 			],
 			"props": {}
@@ -322,6 +361,12 @@
 				{
 					"typeStr": "17",
 					"name": "model",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "pickable",
 					"opt": true,
 					"kind": null
 				}
@@ -468,6 +513,32 @@
 					"typeStr": "3",
 					"name": "baseHp",
 					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@pickable",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null
+				},
+				{
+					"typeStr": "6:item",
+					"name": "item"
+				},
+				{
+					"typeStr": "1",
+					"name": "tooltipLocale",
+					"opt": true,
+					"kind": "localizable"
 				}
 			]
 		},
@@ -647,6 +718,24 @@
 							"key": "attack_seco_attack"
 						}
 					]
+				},
+				{
+					"id": "club",
+					"type": [
+						0,
+						"club"
+					],
+					"animations": [
+						{
+							"id": "club_idle",
+							"key": "idle",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							]
+						}
+					]
 				}
 			],
 			"separators": [],
@@ -711,6 +800,31 @@
 				{
 					"id": "human",
 					"file": "voxel/characters/human/human.enco"
+				},
+				{
+					"id": "club",
+					"file": "voxel/items/club/club.enco"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "item",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "club"
+				},
+				{
+					"id": "sword"
 				}
 			],
 			"separators": [],
@@ -837,7 +951,7 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 35,
+					"chunkSize": 10,
 					"level": [
 						0,
 						"start"
@@ -882,7 +996,7 @@
 			"name": "locationObjContainerTypeDF",
 			"columns": [
 				{
-					"typeStr": "6:locationObjType",
+					"typeStr": "6:locationContainerType",
 					"name": "type",
 					"kind": null
 				}
@@ -896,6 +1010,25 @@
 						"df"
 					]
 				}
+			}
+		},
+		{
+			"name": "locationEntityDF",
+			"columns": [
+				{
+					"typeStr": "6:entity",
+					"name": "entity"
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": [
+						"df",
+						"locationDF"
+					]
+				},
+				"dataFiles": "locationEntityDF"
 			}
 		},
 		{
@@ -918,7 +1051,7 @@
 			}
 		},
 		{
-			"name": "locationObjType",
+			"name": "locationContainerType",
 			"columns": [
 				{
 					"typeStr": "0",

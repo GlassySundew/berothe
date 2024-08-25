@@ -10,6 +10,13 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 	public final rigidBodyFuture : Future<IRigidBody> = new Future();
 	public var rigidBody(default, null) : IRigidBody;
 
+	public override function dispose() {
+		super.dispose();
+		physics.removeRigidBody( rigidBody );
+		rigidBody = null;
+		physics = null;
+	}
+
 	override function onAttachedToLocation( location : Location ) {
 		super.onAttachedToLocation( location );
 
@@ -22,7 +29,7 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 
 	final function tryCreateRigidBody() {
 		if ( rigidBody != null )
-			throw "bad logic, rigidBody is not suppposed to be created twice for one component";
+			throw "bad logic, rigidBody is not suppposed to be created twice for one component, entity: " + entity;
 
 		return createRigidBody();
 	}

@@ -5,9 +5,9 @@ import util.Assert;
 import game.domain.overworld.entity.component.block.StaticObjectRigidBodyComponent;
 import game.domain.overworld.entity.EntityFactory;
 import game.domain.overworld.entity.OverworldEntity;
-import game.data.location.objects.LocationObject;
+import game.data.location.objects.LocationEntityVO;
 
-class OverworldObjectsFactory {
+class OverworldStaticObjectsFactory {
 
 	public static var OBJECT_ID_INC = 0;
 
@@ -17,7 +17,9 @@ class OverworldObjectsFactory {
 		this.location = location;
 	}
 
-	public function createByDesc( objectDesc : LocationObject ) : OverworldEntity {
+	public function createByDesc( objectDesc : LocationEntityVO ) : OverworldEntity {
+		// the only exclusion for static objects that are not 
+		// replicated over network and created on client side from location data file
 		var entity = new OverworldEntity( objectDesc.entityDesc, '${OBJECT_ID_INC++}' );
 
 		EntityFactory.createAndAttachComponentsFromProperties( objectDesc.entityDesc, entity );

@@ -5,7 +5,7 @@ import game.net.entity.EntityReplicator;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Chunk;
 import util.Assert;
-import game.domain.GameCore;
+import game.domain.overworld.GameCore;
 import game.domain.overworld.location.Location;
 
 class CoreReplicator {
@@ -18,6 +18,7 @@ class CoreReplicator {
 	public function new( core : GameCore ) {
 		this.core = core;
 		core.onLocationCreated.add( onLocationCreated );
+		core.onEntityCreated.add( onEntityCreated );
 	}
 
 	public function getEntityReplicator(
@@ -44,7 +45,6 @@ class CoreReplicator {
 			"location id interfere check failed in main replication module!"
 		);
 		#end
-		core.onEntityCreated.add( onEntityCreated );
 		locations[location.id] = new LocationReplicator( location, this );
 	}
 

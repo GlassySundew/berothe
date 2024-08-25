@@ -1,22 +1,18 @@
 package game.net.server;
 
-import game.net.entity.EntityReplicator;
-import game.net.location.CoreReplicator;
-import game.domain.overworld.location.Chunk;
-import game.net.player.PlayerReplicationManager;
-import game.domain.overworld.entity.OverworldEntity;
-import signals.Signal0;
-import signals.Signal;
-import game.domain.overworld.location.Location;
-import game.data.storage.location.LocationDescription;
 #if server
 import dn.Process;
 import hxbit.NetworkHost.NetworkClient;
 import net.ClientController;
 import net.Server;
-import game.domain.GameCore;
 import game.data.storage.DataStorage;
-
+import game.data.storage.location.LocationDescription;
+import game.domain.overworld.GameCore;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.location.Location;
+import game.net.entity.EntityReplicator;
+import game.net.location.CoreReplicator;
+import game.net.player.PlayerReplicationManager;
 
 /**
 	Логика игры на сервере
@@ -60,7 +56,7 @@ class GameServer extends Process {
 	}
 
 	public function getLevel( locationDesc : LocationDescription ) : Location {
-		return core.getOrCreateLocationByDesc( locationDesc );
+		return core.getOrCreateLocationByDesc( locationDesc, true );
 	}
 
 	function createPlayer() : EntityReplicator {
@@ -72,7 +68,6 @@ class GameServer extends Process {
 			location,
 			DataStorage.inst.entityStorage.getPlayerDescription()
 		);
-		location.addEntity( entity );
 
 		return coreReplicator.getEntityReplicator( entity );
 	}

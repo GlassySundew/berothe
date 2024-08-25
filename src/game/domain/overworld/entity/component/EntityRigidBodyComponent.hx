@@ -1,7 +1,7 @@
 package game.domain.overworld.entity.component;
 
-import en.collide.ContactCallbackWrapper;
-import en.collide.RayCastCallback;
+import game.physics.oimo.ContactCallbackWrapper;
+import game.physics.oimo.RayCastCallback;
 import util.Const;
 import game.domain.overworld.location.Location;
 import game.domain.overworld.location.physics.IRigidBodyShape;
@@ -26,22 +26,22 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		this.rigidBodyDesc = description;
 	}
 
-	function createRigidBody() {
-		torsoShape = ShapeAbstractFactory.box(
-			rigidBodyDesc.sizeX,
-			rigidBodyDesc.sizeY,
-			rigidBodyDesc.sizeZ
-		);
-		torsoShape.setCollisionGroup( Const.G_PHYSICS );
-		torsoShape.setCollisionMask( Const.G_PHYSICS );
+	public function claimOwnage() {
+		rigidBodyFuture.then( rigidBody -> {
+			isOwned = true;
 
-		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
-		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
-		rigidBodyLocal.setLinearDamping( { x : 25, y : 25, z : 0 } );
+			rigidBody.setGravityScale( DataStorage.inst.rule.entityGravityScale );
 
-		torsoShape.moveLocally( 0, 0, rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeX / 2 ) % 1 );
-
-		return rigidBodyLocal;
+			rigidBody.x.subscribeProp( entity.transform.x );
+			rigidBody.y.subscribeProp( entity.transform.y );
+			rigidBody.z.subscribeProp( entity.transform.z );
+			rigidBody.velX.subscribeProp( entity.transform.velX );
+			rigidBody.velY.subscribeProp( entity.transform.velY );
+			rigidBody.velZ.subscribeProp( entity.transform.velZ );
+			rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
+			rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
+			rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
+		} );
 	}
 
 	override function onAttachedToLocation( location : Location ) {
@@ -60,22 +60,23 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ );
 	}
 
-	public function claimOwnage() {
-		rigidBodyFuture.then( rigidBody -> {
-			isOwned = true;
+	function createRigidBody() {
+		torsoShape = ShapeAbstractFactory.box(
+			rigidBodyDesc.sizeX,
+			rigidBodyDesc.sizeY,
+			rigidBodyDesc.sizeZ
+		);
+		torsoShape.setCollisionGroup( Const.G_PHYSICS );
+		torsoShape.setCollisionMask( Const.G_PHYSICS );
 
-			rigidBody.setGravityScale( DataStorage.inst.rule.entityGravityScale );
+		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
+		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
+		rigidBodyLocal.setLinearDamping( { x : 25, y : 25, z : 0 } );
+		rigidBodyLocal.setGravityScale( 0 );
 
-			rigidBody.x.subscribeProp( entity.transform.x );
-			rigidBody.y.subscribeProp( entity.transform.y );
-			rigidBody.z.subscribeProp( entity.transform.z );
-			rigidBody.velX.subscribeProp( entity.transform.velX );
-			rigidBody.velY.subscribeProp( entity.transform.velY );
-			rigidBody.velZ.subscribeProp( entity.transform.velZ );
-			rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
-			rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
-			rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
-		} );
+		torsoShape.moveLocally( 0, 0, rigidBodyDesc.offsetZ - ( rigidBodyDesc.sizeX / 2 ) % 1 );
+
+		return rigidBodyLocal;
 	}
 
 	function subscribeStanding( key, dynamicsComponent : EntityDynamicsComponent ) {

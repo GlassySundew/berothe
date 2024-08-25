@@ -1,4 +1,4 @@
-package game.domain;
+package game.domain.overworld;
 
 import game.domain.IUpdatable;
 import game.domain.overworld.entity.OverworldEntity;
@@ -25,19 +25,19 @@ class GameCore implements IUpdatable {
 	final locations : Map<String, Location> = [];
 
 	public function new() {
-		locationFactory = new LocationFactory();
 		entityFactory = new EntityFactory();
+		locationFactory = new LocationFactory( entityFactory );
 	}
 
 	public function getOrCreateLocationByDesc(
-		locationDesc : LocationDescription
+		locationDesc : LocationDescription,
+		auth = false
 	) : Location {
-		if ( locations.exists( locationDesc.id ) ) {
-			return locations[locationDesc.id];
-		} else {
-			return
-				locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
+		if ( locations[locationDesc.id] == null ) {
+			var location = locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
+			auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
 		}
+		return locations[locationDesc.id];
 	}
 
 	public function update( dt : Float, tmod : Float ) {

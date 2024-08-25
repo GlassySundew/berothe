@@ -1,6 +1,7 @@
 package net;
 
-
+import game.net.server.GameServer;
+import util.Repeater;
 #if client
 import game.client.en.comp.EntityControl;
 #end
@@ -103,4 +104,17 @@ class ClientController extends NetNode {
 	**/
 	@:rpc
 	function emptyPing() {}
+}
+
+class TestNetPinger extends NetNode {
+
+	public function new( ?parent ) {
+		super( parent );
+		Repeater.repeatSeconds( testPing, 1 );
+	}
+
+	@:rpc
+	public function testPing() {
+		trace( "PPPIIIIIIINNNNNG" );
+	}
 }

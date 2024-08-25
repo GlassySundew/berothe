@@ -5,7 +5,7 @@ import game.domain.overworld.location.physics.ITransform;
 import game.domain.overworld.location.physics.ITransformProvider;
 import game.domain.overworld.location.physics.IGeometry;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
-import en.collide.RayCastCallback;
+import game.physics.oimo.RayCastCallback;
 import oimo.dynamics.rigidbody.Shape;
 import oimo.common.Vec3;
 import game.debug.HeapsOimophysicsDebugDraw;

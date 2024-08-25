@@ -50,4 +50,23 @@ class Test {
 			signal.dispatch( 'ADasdasdas' );
 		}, vertFlow );
 	}
+
+	public static function name() : T {
+
+		#if server
+		var pinger = new TestNetPinger();
+		addChild( pinger );
+
+		GameServer.inst.delayer.addS( "a", () -> {
+			removeChild( pinger );
+			pinger.unregister(NetworkHost.current);
+
+			GameServer.inst.delayer.addS( "a", () -> {
+				trace(addChild( pinger ));
+			}, 2 );
+
+		}, 3 );
+		
+		#end
+	}
 }

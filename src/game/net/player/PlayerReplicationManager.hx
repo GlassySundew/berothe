@@ -64,8 +64,6 @@ class PlayerReplicationManager {
 		transform.rotationY.syncBackOwner = cliCon;
 		transform.rotationZ.syncBackOwner = cliCon;
 
-		// transform.x.addOnValue( ( _, val ) -> trace( "got player replication x: " + val ) );
-
 		giveControl();
 	}
 
@@ -94,10 +92,11 @@ class PlayerReplicationManager {
 
 			Assert.notNull( chunks[z][y][x], "chunk replicator is null" );
 		}
+		return chunks[z][y][x];
 	}
 
 	#if !debug inline #end
-	function isCoordsOutOfRange(
+	function isCoordsInRange(
 		x0 : Int,
 		y0 : Int,
 		z0 : Int,
@@ -107,9 +106,9 @@ class PlayerReplicationManager {
 		range : Int
 	) : Bool {
 		return(
-			Math.abs( x1 - x0 ) > range
-			|| Math.abs( y1 - y0 ) > range
-			|| Math.abs( z1 - z0 ) > range
+			Math.abs( x1 - x0 ) < range
+			&& Math.abs( y1 - y0 ) < range
+			&& Math.abs( z1 - z0 ) < range
 		);
 	}
 
@@ -117,10 +116,11 @@ class PlayerReplicationManager {
 		for ( z in chunks ) {
 			for ( y in z ) {
 				for ( chunk in y ) {
-					cliCon.unregisterChild(
-						chunk,
-						NetworkHost.current
-					);
+					trace( "todo" );
+					// cliCon.unregisterChild(
+					// 	chunk,
+					// 	NetworkHost.current
+					// );
 				}
 			}
 		}
@@ -131,7 +131,7 @@ class PlayerReplicationManager {
 		for ( zChunkRow in chunks ) {
 			for ( yChunkRow in zChunkRow ) {
 				for ( xi => xChunkRepl in yChunkRow ) {
-					if ( isCoordsOutOfRange(
+					if ( !isCoordsInRange(
 						newChunk.x,
 						newChunk.y,
 						newChunk.z,
@@ -141,9 +141,10 @@ class PlayerReplicationManager {
 						PLAYER_VISION_RANGE_CHUNKS
 					) ) {
 						yChunkRow.remove( xi );
-						cliCon.unregisterChild(
-							xChunkRepl,
-							NetworkHost.current
+						cliCon.removeChild( xChunkRepl );
+						xChunkRepl.unregister(
+							NetworkHost.current,
+							cliCon.networkClient.ctx
 						);
 					}
 				}
@@ -153,11 +154,11 @@ class PlayerReplicationManager {
 
 	function attachVisibleChunks( newChunk : Chunk ) {
 		final range = PLAYER_VISION_RANGE_CHUNKS;
-		for ( z in newChunk.z - range...newChunk.z + range ) {
-			for ( y in newChunk.y - range...newChunk.y + range ) {
-				for ( x in newChunk.x - range...newChunk.x + range ) {
-					validateChunkAccess( x, y, z );
-					cliCon.addChild( chunks[z][y][x] );
+		for ( z in newChunk.z - range...newChunk.z + range + 1 ) {
+			for ( y in newChunk.y - range...newChunk.y + range + 1 ) {
+				for ( x in newChunk.x - range...newChunk.x + range + 1 ) {
+					var chunk = validateChunkAccess( x, y, z );
+					cliCon.connect( chunk );
 				}
 			}
 		}

@@ -14,17 +14,17 @@
 				{
 					"type": "reference",
 					"name": "left_hand",
-					"source": "voxel/characters/human/bodyparts/left_hand.bdprt"
+					"source": "voxel/characters/human/bodyparts/left_hand.plst"
 				},
 				{
 					"type": "reference",
 					"name": "right_hand",
-					"source": "voxel/characters/human/bodyparts/right_hand.bdprt"
+					"source": "voxel/characters/human/bodyparts/right_hand.plst"
 				},
 				{
 					"type": "reference",
 					"name": "human",
-					"source": "voxel/characters/human/bodyparts/torso.bdprt"
+					"source": "voxel/characters/human/bodyparts/torso.plst"
 				}
 			]
 		}

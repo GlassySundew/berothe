@@ -13,6 +13,7 @@ class Chunk {
 	public final z : Int;
 	public final location : Location;
 	public final onEntityAdded : Signal<OverworldEntity> = new Signal<OverworldEntity>();
+	public final onEntityRemoved : Signal<OverworldEntity> = new Signal<OverworldEntity>();
 	public final entityStream : Observable<OverworldEntity>;
 
 	var entities : Array<OverworldEntity> = [];
@@ -32,9 +33,18 @@ class Chunk {
 		Assert.notExistsInArray( entity, entities );
 		#end
 
+		if ( entity.chunk.getValue() != null ) {
+			entity.chunk.getValue().removeEntity( entity );
+		}
+
 		onEntityAdded.dispatch( entity );
 
 		entities.push( entity );
 		entity.addToChunk( this );
+	}
+
+	public function removeEntity( entity : OverworldEntity ) {
+		if ( entities.remove( entity ) )
+			onEntityRemoved.dispatch( entity );
 	}
 }

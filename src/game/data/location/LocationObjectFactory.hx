@@ -2,7 +2,7 @@ package game.data.location;
 
 import hrt.prefab.Object3D;
 import plugins.prefab_berothe.src.customObj.CustomBox;
-import game.data.location.objects.LocationObject;
+import game.data.location.objects.LocationEntityVO;
 
 enum abstract StaticObjectDFIdent( String ) from String {
 
@@ -11,14 +11,14 @@ enum abstract StaticObjectDFIdent( String ) from String {
 
 class LocationObjectFactory {
 
-	public static function fromPrefab( prefab : hrt.prefab.Prefab ) : LocationObject {
+	public static function fromPrefab( prefab : hrt.prefab.Prefab ) : LocationEntityVO {
 		if ( prefab.props != null ) {
 			var cdbSheetId : StaticObjectDFIdent = Std.string( Reflect.field( prefab.props, "$cdbtype" ) );
 			switch cdbSheetId {
 				case LOCATION_STATIC_OBJ_DF:
 					var entry : Data.LocationStaticObjDFDef = cast prefab.props;
 					var box = Std.downcast( prefab, Object3D );
-					return new LocationObject(
+					return new LocationEntityVO(
 						box.scaleX,
 						box.scaleY,
 						box.scaleZ,

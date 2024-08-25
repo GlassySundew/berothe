@@ -4,14 +4,14 @@ import hrt.prefab.l3d.Instance;
 import game.data.storage.DataStorage;
 import game.data.storage.entity.EntityDescription;
 
-class LocationSpawn extends LocationObject {
+class LocationSpawnVO extends LocationEntityVO {
 
 	public static function fromPrefabInstance(
 		instance : Instance,
 		cdbEntry : Data.EntitySpawnPointDFDef
-	) : LocationSpawn {
+	) : LocationSpawnVO {
 
-		return new LocationSpawn(
+		return new LocationSpawnVO(
 			instance.scaleX,
 			instance.scaleY,
 			instance.scaleZ,

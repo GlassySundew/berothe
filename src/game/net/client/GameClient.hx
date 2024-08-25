@@ -1,8 +1,8 @@
 package game.net.client;
 
-import game.client.ControllerAction;
+import net.NetNode;
+import hxbit.NetworkSerializable;
 #if client
-import game.debug.HeapsOimophysicsDebugDraw;
 import core.IProperty;
 import core.MutableProperty;
 import dn.Process;
@@ -14,8 +14,11 @@ import ui.PauseMenu;
 import util.Const;
 import util.Settings;
 import util.threeD.CameraProcess;
-import game.domain.overworld.location.Location;
+import game.client.ControllerAction;
 import game.data.storage.DataStorage;
+import game.debug.HeapsOimophysicsDebugDraw;
+import game.domain.overworld.GameCore;
+import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
 import game.net.location.LocationReplicator;
 
@@ -34,6 +37,8 @@ class GameClient extends Process {
 	}
 
 	public var cameraProc : CameraProcess;
+
+	public final core : GameCore = new GameCore();
 
 	public var controlledEntity( default, null ) : EntityReplicator;
 
@@ -64,6 +69,23 @@ class GameClient extends Process {
 
 		Client.inst.onConnectionClosed.add( destroy );
 		Client.inst.onConnectionClosed.repeat( 1 );
+		Client.inst.onUnregister.add( onUnregister );
+	}
+
+	public function onLocationProvided( locationRepl : LocationReplicator ) {
+		currentLocationSelf.val = core.getOrCreateLocationByDesc(
+			DataStorage.inst.locationStorage.getDescriptionById(
+				locationRepl.locationDescriptionId
+			)
+		);
+
+		var physicsDebugView = new HeapsOimophysicsDebugDraw( Boot.inst.s3d );
+		currentLocationSelf.val.physics.setDebugDraw( physicsDebugView );
+		physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
+
+		Settings.inst.params.debug.physicsDebugVisible.addOnValue(
+			( oldVal, value ) -> physicsDebugView.setVisibility( value )
+		);
 	}
 
 	override function onDispose() {
@@ -98,21 +120,8 @@ class GameClient extends Process {
 		super.resume();
 	}
 
-	public function onLocationProvided( locationRepl : LocationReplicator ) {
-		currentLocationSelf.val = new Location(
-			DataStorage.inst.locationStorage.getDescriptionById(
-				locationRepl.locationDescriptionId
-			),
-			'0'
-		);
-
-		var physicsDebugView = new HeapsOimophysicsDebugDraw( Boot.inst.s3d );
-		currentLocationSelf.val.physics.setDebugDraw( physicsDebugView );
-		physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
-
-		Settings.inst.params.debug.physicsDebugVisible.addOnValue(
-			( oldVal, value ) -> physicsDebugView.setVisibility( value )
-		);
+	function onUnregister( o : NetworkSerializable ) {
+		Std.downcast( o, NetNode )?.onUnregisteredClient();
 	}
 }
 

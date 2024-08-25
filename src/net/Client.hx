@@ -1,5 +1,6 @@
 package net;
 
+import hxbit.NetworkSerializable;
 import rx.disposables.ISubscription;
 #if client
 import util.Assert;
@@ -18,21 +19,19 @@ import util.Repeater;
 @:build( util.Macros.buildNetworkMessageSignals( net.Message ) )
 class Client extends Process {
 
-	public static var inst : Client;
+	public static var inst( default, null ) : Client;
+	static final PORT = 6676;
 
-	static var CONNECT_REPEATER_ID : String = "connect";
-	static var PORT = 6676;
+	public var host( default, null ) : hxd.net.SocketHost;
 
-	public var host : hxd.net.SocketHost;
-
-	public var onConnection : Signal = new Signal();
-	public var onConnectionClosed : Signal = new Signal();
+	public final onConnection : Signal = new Signal();
+	public final onConnectionClosed : Signal = new Signal();
+	public final onUnregister : Signal<NetworkSerializable> = new Signal<NetworkSerializable>();
 
 	public var connected( get, never ) : Bool;
 	function get_connected() @:privateAccess return host.connected;
 
 	var game : GameClient;
-
 	var connectionRepeater : ISubscription;
 
 	public function new() {
@@ -71,6 +70,8 @@ class Client extends Process {
 			#end
 		} );
 
+		host.onUnregister = onUnregister.dispatch;
+		
 		trace( "trying to connect" );
 
 		host.connect( hostIp, PORT, function ( connectionStatus ) {
@@ -90,10 +91,6 @@ class Client extends Process {
 		host.socket.onError = onError;
 
 		host.onMessage = onMessage;
-
-		// host.onUnregister = function ( o ) {
-		// 	if ( Std.isOfType( o, Entity ) ) cast( o, Entity ).destroy();
-		// };
 	}
 
 	public function disconnect() {

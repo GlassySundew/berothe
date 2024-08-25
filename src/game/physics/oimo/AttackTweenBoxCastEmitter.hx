@@ -1,11 +1,11 @@
 package game.physics.oimo;
 
-import en.collide.ContactCallbackWrapper;
+import game.physics.oimo.ContactCallbackWrapper;
 import game.domain.overworld.location.physics.IRigidBodyShape;
 import game.domain.overworld.location.physics.IRigidBody;
 import be.Constant;
 import oimo.common.Vec3;
-import en.collide.RayCastCallback;
+import game.physics.oimo.RayCastCallback;
 import util.Util;
 import dn.M;
 import dn.Cooldown;

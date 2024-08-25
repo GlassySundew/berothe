@@ -14,6 +14,10 @@ abstract class EntityComponent {
 		this.description = description;
 	}
 
+	public function dispose() {
+		
+	}
+
 	@:allow( game.domain.overworld.entity.EntityComponents )
 	function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;

@@ -1,4 +1,4 @@
-package en.collide;
+package game.physics.oimo;
 
 import signals.Signal;
 import oimo.dynamics.Contact;

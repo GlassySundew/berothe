@@ -1,24 +1,27 @@
 package game.data.location.prefab;
 
+import game.data.storage.DataStorage;
 import hrt.prefab.Prefab;
 import hrt.prefab.l3d.Instance;
 import hxd.res.Loader;
 import util.HideUtil;
 import game.domain.overworld.location.ILocationObjectsDataProvider;
-import game.data.location.objects.LocationObject;
-import game.data.location.objects.LocationSpawn;
+import game.data.location.objects.LocationEntityVO;
+import game.data.location.objects.LocationSpawnVO;
 import game.data.storage.entity.EntityDescription;
 
 enum abstract DataSheetIdent( String ) from String {
 
 	var ENTITY_SPAWNPOINT = "entitySpawnPointDF";
 	var LOCATION_OBJ_CONTAINER_TYPE = "locationObjContainerTypeDF";
+	var LOCATION_ENTITY_PRESENT = "locationEntityDF";
 }
 
 class LocationPrefabSource implements ILocationObjectsDataProvider {
 
-	var spawns : Array<LocationSpawn> = [];
-	var globalObjects : Array<LocationObject> = [];
+	var spawns : Array<LocationSpawnVO> = [];
+	var globalObjects : Array<LocationEntityVO> = [];
+	var presentEntities : Array<LocationEntityVO> = [];
 
 	var file : String;
 	var prefab : Prefab;
@@ -29,21 +32,25 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 
 	public function load() {
 		if ( prefab != null ) return;
-		
+
 		// TODO maybe multithread this
 		prefab = Loader.currentInstance.load( file ).toPrefab().load();
 
 		parse();
 	}
 
-	public function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawn> {
-		return spawns.filter( ( spawn:LocationSpawn ) -> {
+	public function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawnVO> {
+		return spawns.filter( ( spawn : LocationSpawnVO ) -> {
 			return spawn.spawnedEntityDesc == entityDesc;
 		} );
 	}
 
 	public function getGlobalObjects() {
 		return globalObjects;
+	}
+
+	public function getPresentEntities() : Array<LocationEntityVO> {
+		return presentEntities;
 	}
 
 	function parse() {
@@ -65,19 +72,24 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 		switch cdbSheetId {
 			case ENTITY_SPAWNPOINT:
 				var entry : Data.EntitySpawnPointDFDef = instance.props;
-				spawns.push( LocationSpawn.fromPrefabInstance( instance, entry ) );
+				spawns.push( LocationSpawnVO.fromPrefabInstance( instance, entry ) );
 			case LOCATION_OBJ_CONTAINER_TYPE:
 				var entry : Data.LocationObjContainerTypeDFDef = instance.props;
 				switch entry.type {
 					case global:
 						globalObjects = globalObjects.concat( resolveContainer( instance ) );
 				}
+			case LOCATION_ENTITY_PRESENT:
+				var entry : Data.LocationEntityDF = instance.props;
+				presentEntities.push(
+					LocationEntityVO.fromPrefabInstance( instance, entry )
+				);
 			case e:
 				trace( "Prefab instance: " + e + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
 		}
 	}
 
-	function resolveContainer( prefab : Prefab ) : Array<LocationObject> {
+	function resolveContainer( prefab : Prefab ) : Array<LocationEntityVO> {
 		var result = [];
 
 		function parsePrefabElementsLocal( prefabLocal : Prefab ) : Bool {

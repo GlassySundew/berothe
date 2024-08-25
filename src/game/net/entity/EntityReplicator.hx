@@ -1,5 +1,6 @@
 package game.net.entity;
 
+import util.Repeater;
 import future.Future;
 import game.domain.overworld.location.Location;
 import game.data.storage.DataStorage;
@@ -33,6 +34,16 @@ class EntityReplicator extends NetNode {
 		entity.location.addOnValueImmediately( onLocationChanged );
 	}
 
+	override function onUnregisteredClient() {
+		super.onUnregisteredClient();
+		entity.result.dispose();
+	}
+
+	@:rpc( clients )
+	function test() {
+		trace( entity.result, __host );
+	}
+
 	override function alive() {
 		super.alive();
 
@@ -41,13 +52,14 @@ class EntityReplicator extends NetNode {
 		componentsRepl.followEntityClient( entityLocal );
 		transformRepl.followEntityClient( entityLocal );
 
+		trace( "replicating new entity: " + desc );
 		entity.resolve( entityLocal );
 	}
 
-	override function unregister( host : NetworkHost ) {
-		componentsRepl = null;
-		super.unregister( host );
+	override public function unregister( host : NetworkHost, ?ctx ) {
+		super.unregister( host, ctx );
 	}
+
 	function onLocationChanged( _, location : Location ) {
 		locationDescId = location?.locationDesc.id.toString();
 	}

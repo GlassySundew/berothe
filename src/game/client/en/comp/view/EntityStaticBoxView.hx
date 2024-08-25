@@ -29,6 +29,10 @@ class EntityStaticBoxView implements IEntityView {
 		object = ThreeDObjectNode.fromHeapsObject( mesh );
 	}
 
+	public function dispose() {
+		object.remove();
+	}
+
 	public function getGraphics() : ThreeDObjectNode {
 		return object;
 	}

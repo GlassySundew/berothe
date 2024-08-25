@@ -14,4 +14,9 @@ class EntityDescription extends DescriptionBase {
 	public function getBodyDescription() : EntityPropertiesDescription {
 		return DataStorage.inst.entityPresetStorage.getDescriptionById( presetId );
 	}
+
+	@:keep
+	public function toString() :String {
+		return "EntityDescription: " + id;
+	}
 }

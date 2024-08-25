@@ -1,6 +1,6 @@
 package game.data.storage.entity.body.model;
 
-import game.domain.overworld.entity.component.EntityModelComponent;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 import game.net.entity.EntityComponentReplicatorBase;
 import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;

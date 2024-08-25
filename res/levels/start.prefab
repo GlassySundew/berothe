@@ -10,11 +10,16 @@
 				"$cdbtype": "entitySpawnPointDF",
 				"entitySpawned": "player",
 				"blockEntity": "point",
-				"spawnedEntity": "player"
+				"spawnedEntity": "player",
+				"e": {
+					"file": "../../../Downloads/144-Cryptoplanets-1536x1534.png",
+					"size": 16,
+					"x": 0,
+					"y": 0
+				}
 			},
 			"x": -9,
-			"y": -43,
-			"z": -1,
+			"y": -45,
 			"children": [
 				{
 					"type": "text",
@@ -32,7 +37,6 @@
 			"type": "instance",
 			"name": "global",
 			"props": {
-				"id": "Start_global",
 				"type": "global",
 				"$cdbtype": "locationObjContainerTypeDF"
 			},
@@ -61,6 +65,28 @@
 					"z": 30,
 					"scaleY": 78,
 					"scaleZ": 60
+				}
+			]
+		},
+		{
+			"type": "instance",
+			"name": "club",
+			"props": {
+				"entity": "club",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": 18.05,
+			"y": -15.39,
+			"children": [
+				{
+					"type": "text",
+					"name": "text",
+					"locked": true,
+					"blendMode": "Alpha",
+					"color": 0,
+					"size": 22,
+					"pathFont": "fonts/alagard.fnt",
+					"text": "club"
 				}
 			]
 		}
