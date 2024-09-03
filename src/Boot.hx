@@ -44,7 +44,7 @@ class Boot extends hxd.App {
 
 	override function setup() {
 		super.setup();
-		root3D = ThreeDObjectNode.fromHeapsObject( s3d );
+		root3D = ThreeDObjectNode.fromHeaps( s3d );
 	}
 
 	// Engine ready

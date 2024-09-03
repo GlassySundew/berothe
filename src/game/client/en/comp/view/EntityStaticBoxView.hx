@@ -26,7 +26,7 @@ class EntityStaticBoxView implements IEntityView {
 		var mesh = new Mesh( prim, Material.create( Texture.fromColor( 0xffffff ) ) );
 		mesh.material.mainPass.depth( true, LessEqual );
 
-		object = ThreeDObjectNode.fromHeapsObject( mesh );
+		object = ThreeDObjectNode.fromHeaps( mesh );
 	}
 
 	public function dispose() {

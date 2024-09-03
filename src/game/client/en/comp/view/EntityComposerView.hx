@@ -39,21 +39,9 @@ class EntityComposerView implements IEntityView {
 
 		var prefabSource = Std.downcast( hxd.Res.load( file ).toPrefab().load(), EntityComposer );
 		entityComposer = prefabSource.make();
-		object = ThreeDObjectNode.fromHeapsObject( entityComposer.local3d );
+		object = ThreeDObjectNode.fromHeaps( entityComposer.local3d );
 
-		viewComponent.entity.onFrame.add( ( dt, tmod ) -> {
-			entityComposer?.animationManager.update( dt );
-
-			for ( key => listener in stateListeners ) {
-				if ( listener.listener() ) {
-					playAnimation(
-						key,
-						listener,
-						tmod
-					);
-				}
-			}
-		} );
+		viewComponent.entity.onFrame.add( update );
 
 		viewComponent.entity.components.onAppear(
 			EntityDynamicsComponent,
@@ -69,6 +57,20 @@ class EntityComposerView implements IEntityView {
 
 	public function getGraphics() : ThreeDObjectNode {
 		return object;
+	}
+
+	function update( dt, tmod ) {
+		entityComposer?.animationManager.update( dt );
+
+		for ( key => listener in stateListeners ) {
+			if ( listener.listener() ) {
+				playAnimation(
+					key,
+					listener,
+					tmod
+				);
+			}
+		}
 	}
 
 	function playAnimation( animationKey : AnimationKey, listener : AnimationState, tmod : Float ) {

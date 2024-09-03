@@ -18,8 +18,8 @@
 					"y": 0
 				}
 			},
-			"x": -9,
-			"y": -45,
+			"x": -24,
+			"y": 14,
 			"children": [
 				{
 					"type": "text",
@@ -48,10 +48,10 @@
 						"blockEntity": "graybox",
 						"$cdbtype": "locationStaticObjDF"
 					},
-					"x": 3,
-					"y": -32,
-					"scaleX": 68,
-					"scaleY": 78
+					"x": -19,
+					"y": 9,
+					"scaleX": 95,
+					"scaleY": 95
 				},
 				{
 					"type": "customBox",
@@ -60,10 +60,10 @@
 						"blockEntity": "graybox",
 						"$cdbtype": "locationStaticObjDF"
 					},
-					"x": -31,
-					"y": -32,
-					"z": 30,
-					"scaleY": 78,
+					"x": -67,
+					"y": 9,
+					"z": 26,
+					"scaleY": 95,
 					"scaleZ": 60
 				}
 			]
@@ -75,8 +75,9 @@
 				"entity": "club",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": 18.05,
-			"y": -15.39,
+			"x": -16,
+			"y": 7.21,
+			"rotationZ": -137.5,
 			"children": [
 				{
 					"type": "text",
@@ -87,6 +88,11 @@
 					"size": 22,
 					"pathFont": "fonts/alagard.fnt",
 					"text": "club"
+				},
+				{
+					"type": "box",
+					"name": "box",
+					"scaleY": 14
 				}
 			]
 		}

@@ -29,6 +29,7 @@ class PlayerReplicationManager {
 	final playerEntity : OverworldEntity;
 	final coreReplicator : CoreReplicator;
 
+	/** chunks that are currently visible by a player **/
 	final chunks : Map<Int, Map<Int, Map<Int, ChunkReplicator>>> = [];
 
 	public function new(
@@ -82,7 +83,7 @@ class PlayerReplicationManager {
 		transform.rotationZ.syncBack = false;
 	}
 
-	function validateChunkAccess( x : Int, y : Int, z : Int ) {
+	function validateChunkAccess( x : Int, y : Int, z : Int ) : Bool {
 		if ( chunks[z] == null ) chunks[z] = new Map();
 		if ( chunks[z][y] == null ) chunks[z][y] = new Map();
 		if ( chunks[z][y][x] == null ) {
@@ -91,8 +92,11 @@ class PlayerReplicationManager {
 			chunks[z][y][x] = locationReplManager.getChunkReplicator( x, y, z );
 
 			Assert.notNull( chunks[z][y][x], "chunk replicator is null" );
+
+			return true;
+		} else {
+			return false;
 		}
-		return chunks[z][y][x];
 	}
 
 	#if !debug inline #end
@@ -106,9 +110,9 @@ class PlayerReplicationManager {
 		range : Int
 	) : Bool {
 		return(
-			Math.abs( x1 - x0 ) < range
-			&& Math.abs( y1 - y0 ) < range
-			&& Math.abs( z1 - z0 ) < range
+			Math.abs( x1 - x0 ) <= range
+			&& Math.abs( y1 - y0 ) <= range
+			&& Math.abs( z1 - z0 ) <= range
 		);
 	}
 
@@ -157,8 +161,8 @@ class PlayerReplicationManager {
 		for ( z in newChunk.z - range...newChunk.z + range + 1 ) {
 			for ( y in newChunk.y - range...newChunk.y + range + 1 ) {
 				for ( x in newChunk.x - range...newChunk.x + range + 1 ) {
-					var chunk = validateChunkAccess( x, y, z );
-					cliCon.connect( chunk );
+					var wasUnseen = validateChunkAccess( x, y, z );
+					if ( wasUnseen ) cliCon.connect( chunks[z][y][x] );
 				}
 			}
 		}

@@ -11,6 +11,7 @@ class Chunk {
 	public final x : Int;
 	public final y : Int;
 	public final z : Int;
+	public final size : Int;
 	public final location : Location;
 	public final onEntityAdded : Signal<OverworldEntity> = new Signal<OverworldEntity>();
 	public final onEntityRemoved : Signal<OverworldEntity> = new Signal<OverworldEntity>();
@@ -18,10 +19,11 @@ class Chunk {
 
 	var entities : Array<OverworldEntity> = [];
 
-	public function new( x : Int, y : Int, z : Int, location : Location ) {
+	public function new( x : Int, y : Int, z : Int, size : Int, location : Location ) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.size = size;
 		this.location = location;
 
 		entityStream = ObservableFactory.ofIterable( entities )

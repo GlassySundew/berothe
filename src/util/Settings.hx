@@ -13,7 +13,10 @@ class Settings extends util.tools.Settings<
 		windowX : Int,
 		windowY : Int,
 		debug : {
-			physicsDebugVisible : MutableProperty<Bool>
+			#if debug
+			physicsDebugVisible : MutableProperty<Bool>,
+			chunksDebugVisible : MutableProperty<Bool>,
+			#end
 		}
 	}
 	> {
@@ -34,8 +37,12 @@ class Settings extends util.tools.Settings<
 			windowHeight : 650,
 			windowX : -1,
 			windowY : -1,
+
 			debug : {
-				physicsDebugVisible : new MutableProperty( false )
+				#if debug
+				physicsDebugVisible : new MutableProperty( false ),
+				chunksDebugVisible : new MutableProperty( false ),
+				#end
 			}
 		};
 		super( Const.APPNAME );
@@ -60,7 +67,7 @@ class Settings extends util.tools.Settings<
 		#if hlsdl
 		@:privateAccess {
 			hxd.Window.getInstance().resize( params.windowWidth, params.windowHeight );
-			
+
 			if ( params.windowX > 0 && params.windowY > 0 ) {
 				hxd.Window.getInstance().window.setPosition(
 					params.windowX,

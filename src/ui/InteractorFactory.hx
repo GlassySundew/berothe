@@ -1,6 +1,13 @@
 package ui;
 
+import shader.OutlineExtruder;
+import h3d.shader.FixedColor;
+import dn.Col;
+import h3d.scene.Mesh;
+import h3d.col.Collider;
+import h2d.domkit.Object;
 import graphics.ThreeDObjectNode;
+import graphics.ThrEventInteractive;
 import ui.tooltip.TooltipBaseVO;
 
 class InteractorVO {
@@ -15,12 +22,50 @@ class InteractorVO {
 
 class InteractorFactory {
 
-	public static inline function create(
+	public static function create(
 		interactorVO : InteractorVO,
 		graphics : ThreeDObjectNode
 	) {
-		// trace( Type.getClass( graphics.heapsObject ) ); //  h3d.scene.$Object
+		var meshes = graphics.heapsObject.getMeshes();
+		var collider = new GroupCollider( [
+			for ( mesh in meshes ) mesh.getCollider()
+		] );
+		var int = ThrEventInteractive.fromHeaps( new h3d.scene.Interactive( collider ) );
+		graphics.addChild( int );
 
-		switch ( Type.getClass( graphics.heapsObject ) ) {}
+		// ( function createhighlight() {
+		// 	if ( !interactorVO.doHighlight ) return;
+
+		// var shader = new h3d.shader.Outline();
+		// shader.color = new Col( interactorVO.highlightColor ).toShaderVec4().toVector4();
+		// shader.distance = 20;
+		var materials = graphics.heapsObject.getMaterials();
+
+		for ( m in materials ) {
+			m.removePass( m.getPass( "highlight" ) );
+			m.removePass( m.getPass( "highlightBack" ) );
+		}
+
+		var shader = new FixedColor( 0xF2F2F2 );
+
+		int.onOver.add( ( e ) -> {
+			for ( material in materials ) {
+				var m = material;
+
+				var p = m.allocPass( "highlight" );
+				p.culling = None;
+				p.depthWrite = false;
+				p.depthTest = LessEqual;
+				p.addShader(shader);
+			}
+		} );
+
+		int.onOut.add( ( e ) -> {
+			for ( m in materials ) {
+				m.removePass( m.getPass( "highlight" ) );
+				m.removePass( m.getPass( "highlightBack" ) );
+			}
+		} );
+		// } )();
 	}
 }

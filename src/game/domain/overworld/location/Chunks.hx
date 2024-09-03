@@ -38,7 +38,7 @@ class Chunks {
 		if ( chunks[z] == null ) chunks[z] = new Map();
 		if ( chunks[z][y] == null ) chunks[z][y] = new Map();
 		if ( chunks[z][y][x] == null ) {
-			var chunk : Chunk = chunks[z][y][x] = new Chunk( x, y, z, location );
+			var chunk : Chunk = chunks[z][y][x] = new Chunk( x, y, z, chunkSize, location );
 			location.onChunkCreated.dispatch( chunk );
 		}
 		return chunks[z][y][x];
@@ -64,9 +64,9 @@ class Chunks {
 
 	inline function getChunkIdxFromAbsolute( coords : ThreeDeeVector ) : ThreeDeeVector {
 		return new ThreeDeeVector(
-			Std.int( coords.x / chunkSize ),
-			Std.int( coords.y / chunkSize ),
-			Std.int( coords.z / chunkSize )
+			Math.floor( coords.x / chunkSize ),
+			Math.floor( coords.y / chunkSize ),
+			Math.floor( coords.z / chunkSize )
 		);
 	}
 }

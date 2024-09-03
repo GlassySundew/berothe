@@ -1,5 +1,6 @@
 package game.net.client;
 
+import signals.Signal;
 import net.NetNode;
 import hxbit.NetworkSerializable;
 #if client
@@ -36,10 +37,10 @@ class GameClient extends Process {
 		return inst = game;
 	}
 
-	public var cameraProc : CameraProcess;
-
+	public final onUpdate : Signal = new Signal();
 	public final core : GameCore = new GameCore();
 
+	public var cameraProc : CameraProcess;
 	public var controlledEntity( default, null ) : EntityReplicator;
 
 	final currentLocationSelf : MutableProperty<Location> = new MutableProperty();
@@ -110,6 +111,7 @@ class GameClient extends Process {
 		}
 
 		currentLocationSelf.val?.update( hxd.Timer.dt, tmod );
+		onUpdate.dispatch();
 	}
 
 	override function pause() {
@@ -130,8 +132,6 @@ class AxesHelper extends h3d.scene.Graphics {
 
 	public function new( ?parent : h3d.scene.Object, size = 2.0, colorX = 0xEB304D, colorY = 0x7FC309, colorZ = 0x288DF9, lineWidth = 2.0 ) {
 		super( parent );
-
-		material.props = h3d.mat.MaterialSetup.current.getDefaults( "ui" );
 
 		lineShader.width = lineWidth;
 

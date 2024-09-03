@@ -7,6 +7,31 @@ import h3d.Vector;
 import h3d.pass.PassObject;
 import h3d.pass.PassList;
 
+class DefaultForwardComposite extends h3d.shader.ScreenShader {
+
+	static var SRC = {
+		@param var texture : Sampler2D;
+		@param var outline : Sampler2D;
+		function fragment() {
+			pixelColor = texture.get( calculatedUV );
+			var outval = outline.get( calculatedUV );
+
+			var l = 0.2126 * outval.r + 0.7152 * outval.g + 0.0722 * outval.b;
+
+			if ( //
+				outval.a > 0.05 && outval.a < 0.99
+			) {
+				var l = 0.2126 * pixelColor.r + 0.7152 * pixelColor.g + 0.0722 * pixelColor.b;
+				if ( l > 0.75 ) {
+					pixelColor = outval * 4.0 + 0.1;
+				} else {
+					pixelColor += outval * 3.0 + 0.1;
+				}
+			}
+		}
+	}
+}
+
 typedef Point = { var x : Float; var y : Float; }
 
 typedef Line = { var pt1 : Point; var pt2 : Point; }
@@ -24,19 +49,21 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 	public var fxaa : h3d.pass.FXAA;
 	public var post : pass.PostProcessing;
 	public var depthColorMap( default, set ) : h3d.mat.Texture;
-	public var acceptedMeshes : Array<Dynamic> = [];
 
 	public static var inst : CustomRenderer;
 
 	var depthColorMapId : Int;
 	var depthColorMax : Int;
 	var out : h3d.mat.Texture;
+	var composite : h3d.pass.ScreenFx<DefaultForwardComposite>;
+	var outlineBlur = new h3d.pass.Blur( 5, 1.2 );
 
 	public function new() {
 		super();
 		inst = this;
 		var engine = h3d.Engine.getCurrent();
-		if ( !engine.driver.hasFeature( MultipleRenderTargets ) ) throw "engine must have MRT";
+		if ( !engine.driver.hasFeature( MultipleRenderTargets ) )
+			throw "engine must have MRT";
 		mrt = new h3d.pass.Output(
 			"mrt", [
 				Value( "output.color" ),
@@ -78,6 +105,8 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		// emissive.blur.sigma = 2;
 		post = new pass.PostProcessing();
 
+		composite = new h3d.pass.ScreenFx( new DefaultForwardComposite() );
+
 		frontToBack = depthSort.bind( true );
 		backToFront = depthSort.bind( false );
 	}
@@ -96,7 +125,6 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 	}
 
 	override function render() {
-		// if ( has( "shadow" ) )
 		renderPass( shadow, get( "shadow" ) );
 		var colorTex = allocTarget( "color" );
 		var depthTex = allocTarget( "depth" );
@@ -109,17 +137,10 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		// !additive
 		resetTarget();
 
-		// var alphaTex = allocTarget( "alpha" );
-		// setTarget( alphaTex );
-		// // mrt.draw( get( "alhpa" ), backToFront );
-		// renderPass(defaultPass, get("alpha"), backToFront );
-		// resetTarget();
-
 		var saoTarget = allocTarget( "sao" );
 		setTarget( saoTarget );
 		sao.apply( depthTex, normalTex, ctx.camera );
 		resetTarget();
-
 		saoBlur.apply( ctx, saoTarget );
 		if ( enableFXAA )
 			fxaa.apply( colorTex )
@@ -127,19 +148,31 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 
 		post.apply( colorTex, ctx.time );
 
-		copy( saoTarget, null, Multiply );
+		var outlineTex = allocTarget( "outlineBlur", false );
+		var outlineSrcTex = allocTarget( "outline", true );
+		setTarget( outlineSrcTex );
+		clear( 0 );
+		// draw("highlightBack");
+		draw( "highlight" );
+		resetTarget();
+		outlineBlur.apply( ctx, outlineSrcTex, outlineTex );
+		composite.shader.outline = outlineTex;
 
-		// post.setGlobals( ctx );
+		resetTarget();
+		composite.shader.texture = colorTex;
+		composite.render();
+
+		copy( saoTarget, null, Multiply );
 	}
 
 	public function flash( color : Int, duration : Float ) {
 		post.flash( color, ctx.time, duration );
 	}
 
-	@:access( h3d.scene.Object )
-	public override function depthSort( frontToBack : Bool, passes : PassList ) {
-		passes.sort( sortPasses );
-	}
+	// @:access( h3d.scene.Object )
+	// public override function depthSort( frontToBack : Bool, passes : PassList ) {
+	// 	passes.sort( sortPasses );
+	// }
 
 	function sortPasses( p1 : PassObject, p2 : PassObject ) {
 		return

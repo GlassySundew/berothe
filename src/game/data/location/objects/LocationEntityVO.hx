@@ -1,5 +1,6 @@
 package game.data.location.objects;
 
+import dn.M;
 import hrt.prefab.l3d.Instance;
 import util.Assert;
 import game.data.storage.DataStorage;
@@ -56,9 +57,9 @@ class LocationEntityVO {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.sizeZ = sizeZ;
-		this.rotationX = rotationX;
-		this.rotationY = rotationY;
-		this.rotationZ = rotationZ;
+		this.rotationX = M.toRad( rotationX );
+		this.rotationY = M.toRad( rotationY );
+		this.rotationZ = M.toRad( rotationZ );
 		this.x = x;
 		this.y = y;
 		this.z = z;

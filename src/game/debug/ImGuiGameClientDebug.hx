@@ -1,5 +1,7 @@
 package game.debug;
 
+import util.Settings;
+import game.debug.accessor.MutablePropertyAccessor;
 import game.debug.accessor.render.OrthographicsAccessor;
 import game.debug.accessor.physics.PhysicsDebugViewAccessor;
 import game.debug.accessor.camera.FovAccessor;
@@ -41,12 +43,12 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 
 	public function new( parent : Process ) {
 		super( parent );
-		
+
 		this.drawable = new ImGuiDrawable( GameClient.inst.root );
 		drawable.scale( 1 / Const.UI_SCALE );
+		rootNode = new WindowNode( "game debug" );
 
 		GameClient.inst.root.add( drawable, Const.DP_IMGUI );
-		rootNode = new WindowNode( "game debug" );
 		var cameraHeader = new CollapsingHeaderNode( "camera", rootNode );
 
 		new DragDoubleNode( "zNear", new ZNearAccessor(), 0.1, 0.1, 10000, cameraHeader );
@@ -58,7 +60,18 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
 
 		var physicsHeader = new CollapsingHeaderNode( "physics", rootNode );
-		new CheckboxNode( "physics debug view", new PhysicsDebugViewAccessor(), physicsHeader );
+		new CheckboxNode(
+			"physics debug view",
+			new MutablePropertyAccessor( Settings.inst.params.debug.physicsDebugVisible ),
+			physicsHeader
+		);
+
+		var networkHeader = new CollapsingHeaderNode( "network", rootNode );
+		new CheckboxNode(
+			"toggleChunksView",
+			new MutablePropertyAccessor( Settings.inst.params.debug.chunksDebugVisible ),
+			networkHeader
+		);
 
 		var renderHeader = new CollapsingHeaderNode( "render", rootNode );
 		new DragIntNode( "sao samples", new SAOSamplesAccessor(), 2, 101, renderHeader );

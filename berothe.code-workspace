@@ -12,7 +12,11 @@
 	],
 	"settings": {
         "haxe.enableCompilationServer": false,
-        "haxe.importsSortOrder": "stdlib -> libs -> project"
+		"haxe.importsSortOrder": "stdlib -> libs -> project",
+		"editor.rename.enablePreview": true,
+		"editor.suggest.preview": false,
+		"workbench.editor.enablePreviewFromQuickOpen": false,
+		"workbench.editor.enablePreviewFromCodeNavigation": false
 	},
 	"tasks": {
 		"version": "2.0.0",

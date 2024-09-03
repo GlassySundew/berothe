@@ -1,10 +1,14 @@
 package game.net.location;
 
+import util.Settings;
+import rx.disposables.Composite;
+import rx.Subscription;
+import h3d.col.Point;
+import h3d.scene.Graphics;
 import util.Assert;
 import game.net.client.GameClient;
 import hxbit.NetworkSerializable.NetworkSerializer;
 import hxbit.NetworkHost;
-import game.domain.overworld.GameCore;
 import game.domain.overworld.location.Location;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Chunk;
@@ -14,16 +18,20 @@ import net.NetNode;
 
 class ChunkReplicator extends NetNode {
 
+	public static var chunkCount = 0;
+
 	@:s
 	var entities : NSArray<EntityReplicator> = new NSArray();
 
-	@:s var x: Int;
-	@:s var y: Int;
-	@:s var z: Int;
-	
+	@:s var x : Int;
+	@:s var y : Int;
+	@:s var z : Int;
+
 	public final chunk : Chunk;
 
 	final coreReplicator : CoreReplicator;
+
+	var binderUnregClient : Composite = Composite.create();
 
 	public function new( chunk : Chunk, coreReplicator : CoreReplicator, ?parent ) {
 		super( parent );
@@ -47,6 +55,11 @@ class ChunkReplicator extends NetNode {
 		super.unregister( host, ctx );
 	}
 
+	override function onUnregisteredClient() {
+		super.onUnregisteredClient();
+		binderUnregClient.unsubscribe();
+	}
+
 	override public function alive() {
 		super.alive();
 
@@ -60,6 +73,7 @@ class ChunkReplicator extends NetNode {
 				} );
 			} );
 		} );
+		drawDebug();
 		#end
 	}
 
@@ -72,4 +86,53 @@ class ChunkReplicator extends NetNode {
 		var entityReplicator = coreReplicator.getEntityReplicator( entity );
 		entities.remove( entityReplicator );
 	}
+
+	#if( client && debug )
+	function drawDebug() {
+		var graphics = new Graphics( Boot.inst.s3d );
+		graphics.material.props = h3d.mat.MaterialSetup.current.getDefaults( "ui" );
+		graphics.material.mainPass.depth( false, Always );
+		graphics.material.mainPass.setPassName( "ui" );
+
+		graphics.lineStyle( 2, 0x1a3c99, 0.7 );
+
+		Settings.inst.params.debug.chunksDebugVisible.addOnValueImmediately(
+			( _, val ) -> graphics.visible = val
+		);
+
+		binderUnregClient.add(
+			GameClient.inst.onUpdate.add(() -> {
+				if ( !graphics.visible ) return;
+				graphics.clear();
+
+				var size = GameClient.inst.currentLocation.getValue().locationDesc.chunkSize;
+
+				var x = x * size;
+				var y = y * size;
+				var z = z * size;
+
+				graphics.drawLine( new Point( x, y, z ), new Point( x + size, y, z ) );
+				graphics.drawLine( new Point( x, y, z ), new Point( x, y, z + size ) );
+				graphics.drawLine( new Point( x, y, z ), new Point( x, y + size, z ) );
+
+				graphics.drawLine( new Point( x + size, y, z + size ), new Point( x + size, y, z ) );
+				graphics.drawLine( new Point( x + size, y, z + size ), new Point( x, y, z + size ) );
+				graphics.drawLine( new Point( x + size, y, z + size ), new Point( x + size, y + size, z + size ) );
+
+				graphics.drawLine( new Point( x + size, y + size, z ), new Point( x + size, y + size, z + size ) );
+				graphics.drawLine( new Point( x + size, y + size, z ), new Point( x, y + size, z ) );
+				graphics.drawLine( new Point( x + size, y + size, z ), new Point( x + size, y, z ) );
+
+				graphics.drawLine( new Point( x, y + size, z + size ), new Point( x, y, z + size ) );
+				graphics.drawLine( new Point( x, y + size, z + size ), new Point( x + size, y + size, z + size ) );
+				graphics.drawLine( new Point( x, y + size, z + size ), new Point( x, y + size, z ) );
+			} )
+		);
+
+		binderUnregClient.add( Subscription.create(() -> {
+			graphics.clear();
+			graphics.remove();
+		} ) );
+	}
+	#end
 }

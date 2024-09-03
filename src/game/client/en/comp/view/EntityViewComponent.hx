@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import future.Future;
 import game.client.en.comp.view.IEntityView;
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
@@ -10,8 +11,8 @@ import game.domain.overworld.location.Location;
 
 class EntityViewComponent extends EntityComponent {
 
-	public var view( default, null ) : IEntityView;
-	
+	public final view : Future<IEntityView> = new Future();
+
 	final viewDescription : EntityViewDescription;
 
 	var viewExtraConfig : EntityViewExtraInitSetting = None;
@@ -23,9 +24,9 @@ class EntityViewComponent extends EntityComponent {
 
 	override function dispose() {
 		super.dispose();
-		view.dispose();
+		view.result?.dispose();
 	}
-	
+
 	public function provideExtraViewConfig( config : EntityViewExtraInitSetting ) {
 		viewExtraConfig = config;
 	}
@@ -44,11 +45,11 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		view = createView();
+		view.resolve( createView() );
 
 		if ( view == null ) return;
 
-		var node = view.getGraphics();
+		var node = view.result.getGraphics();
 		Boot.inst.root3D.addChild( node );
 
 		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );

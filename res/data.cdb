@@ -951,7 +951,7 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 10,
+					"chunkSize": 35,
 					"level": [
 						0,
 						"start"

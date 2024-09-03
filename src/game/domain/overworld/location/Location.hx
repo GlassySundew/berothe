@@ -122,6 +122,11 @@ class Location {
 				entityVO.y,
 				entityVO.z
 			);
+			entity.transform.setRotation(
+				entityVO.rotationX,
+				entityVO.rotationY,
+				entityVO.rotationZ
+			);
 			addEntity( entity );
 		}
 	}

@@ -128,7 +128,8 @@ class Main extends Process {
 		renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
 		Std.downcast( Boot.inst.s3d.lightSystem, h3d.scene.fwd.LightSystem ).ambientLight.set( .5, .5, .5 );
 
-		Boot.inst.s3d.renderer = Boot.inst.renderer = renderer;
+		Boot.inst.s3d.renderer = 
+		Boot.inst.renderer = renderer;
 	}
 
 	function initGamePadController() {

@@ -49,6 +49,8 @@ class OimoRigidBody implements IRigidBody {
 
 	public var isSleeping( default, null ) : MutableProperty<Bool> = new MutableProperty( false );
 
+	var rotationInvalidate = false;
+
 	public inline function new( rigidBody : RigidBody ) {
 		this.rigidBody = rigidBody;
 		this.transform = new OimoTransform( rigidBody._transform );
@@ -56,36 +58,45 @@ class OimoRigidBody implements IRigidBody {
 		x.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionX = value;
-				// wakeUp();
+				wakeUp();
 			}
 		);
 		y.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionY = value;
-				// wakeUp();
+				wakeUp();
 			}
 		);
 		z.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionZ = value;
-				// wakeUp();
+				wakeUp();
 			}
 		);
+
+		function wakeByRotation( _, _ ) {
+			rotationInvalidate = true;
+			wakeUp();
+		}
+
+		rotationX.addOnValue( wakeByRotation );
+		rotationY.addOnValue( wakeByRotation );
+		rotationZ.addOnValue( wakeByRotation );
 
 		velX.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._velX = value;
-				// wakeUp();
+				wakeUp();
 			} );
 		velY.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._velY = value;
-				// wakeUp();
+				wakeUp();
 			} );
 		velZ.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._velZ = value;
-				// wakeUp();
+				wakeUp();
 			} );
 
 		rigidBody._sleeping.subscribeProp( isSleeping );
@@ -141,6 +152,16 @@ class OimoRigidBody implements IRigidBody {
 	}
 
 	function onUpdated() {
+		if ( rotationInvalidate ) {
+			rigidBody.setRotationXyz(
+				new Vec3(
+					rotationX.val,
+					rotationY.val,
+					rotationZ.val
+				)
+			);
+		}
+
 		x.val = rigidBody._transform._positionX;
 		y.val = rigidBody._transform._positionY;
 		z.val = rigidBody._transform._positionZ;
@@ -166,6 +187,8 @@ class OimoRigidBody implements IRigidBody {
 		) {
 			rigidBody.sleep();
 		}
+
+		rotationInvalidate = false;
 	}
 
 	public function getShape() : Null<IRigidBodyShape> {

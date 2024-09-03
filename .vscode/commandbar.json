@@ -60,7 +60,7 @@
 
     {
       "text": "Kill HL",
-      "color": "#586284",
+      "color": "#fa2b2b",
       "skipErrorMessage": true,
       "skipSwitchToOutput": true,
       "command": "taskkill /IM hl.exe /F",

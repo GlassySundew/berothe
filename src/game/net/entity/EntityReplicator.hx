@@ -37,6 +37,7 @@ class EntityReplicator extends NetNode {
 	override function onUnregisteredClient() {
 		super.onUnregisteredClient();
 		entity.result.dispose();
+		trace( "disposing " + entity.result );
 	}
 
 	@:rpc( clients )
