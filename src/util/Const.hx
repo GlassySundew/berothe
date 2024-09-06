@@ -13,7 +13,7 @@ class Const {
 	public static var AUTO_SCALE_TARGET_WID = -1; // -1 to disable auto-scaling on width
 	public static var AUTO_SCALE_TARGET_HEI = -1; // -1 to disable auto-scaling on height
 	public static var SCALE = 10;
-	public static var UI_SCALE = 2.0;
+	public static var UI_SCALE = 1.0;
 
 	static var inc = 0;
 

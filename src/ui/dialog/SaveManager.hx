@@ -81,7 +81,7 @@ class SaveManager extends FocusMenu {
 
 		generalFlow.x += GameUtil.wScaled >> 2;
 
-		var signText = new ShadowedText( Assets.fontPixel, generalFlow );
+		var signText = new ShadowedText( Assets.fontPixel16, generalFlow );
 		signText.text = switch mode {
 			case Save: "Save file: ";
 			case Load: "Load file: ";
@@ -283,7 +283,7 @@ class SaveEntry extends Process {
 				}
 		}
 
-		var text = new ShadowedText( Assets.fontPixel, horflow );
+		var text = new ShadowedText( Assets.fontPixel16, horflow );
 		text.text = name;
 
 		utilityFlow = new Flow( thisObject );

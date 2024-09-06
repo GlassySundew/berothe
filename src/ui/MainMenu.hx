@@ -79,17 +79,26 @@ class MainMenu extends Process {
 
 		vertFlow.addSpacing( 10 );
 
-		new TextButton( "connect", ( _ ) -> {
-			new ConnectMenu( parentFlow );
-		}, vertFlow );
+		new TextButton(
+			"connect",
+			Assets.fontPixel32,
+			( _ ) -> new ConnectMenu( parentFlow ),
+			vertFlow
+		);
 
-		new TextButton( "options", ( _ ) -> {
-			root.add( new OptionsMenu().h2dObject, Const.DP_UI );
-		}, vertFlow );
+		new TextButton(
+			"options",
+			Assets.fontPixel32,
+			( _ ) -> root.add( new OptionsMenu().h2dObject, Const.DP_UI ),
+			vertFlow
+		);
 
-		new TextButton( "quitnow", ( _ ) -> {
-			System.exit();
-		}, vertFlow );
+		new TextButton(
+			"quitnow",
+			Assets.fontPixel32,
+			( _ ) -> System.exit(),
+			vertFlow
+		);
 
 		createAppearFlash();
 

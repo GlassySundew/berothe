@@ -58,7 +58,7 @@ class Belt extends Flow implements IInventory {
 			for ( i => cellFlow in row ) {
 				var cell = cellFlow.cell;
 				cellFlow.inter.onClickEvent.add( onCellClicked.bind( i ), 1 );
-				var beltCont = new BeltCont( Assets.fontPixel, i + 1, this );
+				var beltCont = new BeltCont( Assets.fontPixel16, i + 1, this );
 				beltSlots.push( beltCont );
 				style.addObject( beltCont );
 				beltCont.addChild( cellFlow );

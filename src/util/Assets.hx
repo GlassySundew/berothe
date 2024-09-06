@@ -9,7 +9,8 @@ import util.tilesets.Tileset;
 class Assets {
 
 	// public static var SFX = dn.heaps.Sfx.importDirectory("sfx");
-	public static var fontPixel : h2d.Font;
+	public static var fontPixel16 : h2d.Font;
+	public static var fontPixel32 : h2d.Font;
 
 	// public static var fontTiny:h2d.Font;
 	// public static var fontSmall:h2d.Font;
@@ -29,7 +30,9 @@ class Assets {
 
 	public static function init() {
 
-		fontPixel = hxd.Res.fonts.Haversham_new.toFont(); // toSdfFont(16, MultiChannel, 1, 1 / 16);
+		fontPixel16 = hxd.Res.fonts.Haversham_fnt.toSdfFont( 16, Alpha );
+		fontPixel32 = fontPixel16.clone();
+		fontPixel32.resizeTo(32);
 
 		// fontPixel.resizeTo(fontPixel.size >>1);
 		// fontPixel

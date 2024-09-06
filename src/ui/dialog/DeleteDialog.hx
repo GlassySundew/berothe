@@ -14,7 +14,7 @@ class DeleteDialog extends Dialog {
 	public function new( name : String, ?parent : Object, ?parentProcess : Process ) {
 		super( parent, parentProcess );
 
-		new TextLabelComp( 'Are you sure?', Assets.fontPixel, contentFlow );
+		new TextLabelComp( 'Are you sure?', Assets.fontPixel16, contentFlow );
 
 		var horizontalFlow = new Flow( contentFlow );
 		horizontalFlow.layout = Horizontal;

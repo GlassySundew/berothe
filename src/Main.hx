@@ -89,18 +89,18 @@ class Main extends Process {
 	}
 
 	function createUi() {
-		console = new ui.Console( Assets.fontPixel, Boot.inst.s2d );
+		console = new ui.Console( Assets.fontPixel16, Boot.inst.s2d );
 
 		#if debug
 		createFpsCounter();
 		#if game_tmod
-		stats = new Text( Assets.fontPixel, Boot.inst.s2d );
+		stats = new Text( Assets.fontPixel16, Boot.inst.s2d );
 		#end
 		#end
 	}
 
 	function createFpsCounter() {
-		var fps = new Text( Assets.fontPixel, Boot.inst.s2d );
+		var fps = new Text( Assets.fontPixel16, Boot.inst.s2d );
 
 		onUpdate.add(() -> @:privateAccess {
 			fps.text = 'fps: ${Boot.inst.engine.fps}\ndraw calls: ${Boot.inst.engine.drawCalls}';

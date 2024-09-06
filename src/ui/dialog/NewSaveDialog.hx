@@ -34,10 +34,10 @@ class NewSaveDialog extends Dialog {
 
 		dialogFlow.padding = 2;
 
-		var dialogText = new ShadowedText( Assets.fontPixel, dialogFlow );
+		var dialogText = new ShadowedText( Assets.fontPixel16, dialogFlow );
 		dialogText.text = 'Enter new save name: ';
 
-		textInput = new TextInput( Assets.fontPixel, dialogFlow );
+		textInput = new TextInput( Assets.fontPixel16, dialogFlow );
 		textInput.backgroundColor = 0x80808080;
 
 		dialogFlow.getProperties( dialogText ).verticalAlign = Top;

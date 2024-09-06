@@ -20,7 +20,7 @@ class OptionsMenu extends FocusMenu {
 
 		contentFlow.verticalSpacing = 5;
 
-		var mm = new ShadowedText( Assets.fontPixel, contentFlow );
+		var mm = new ShadowedText( Assets.fontPixel16, contentFlow );
 		mm.scale( 1.5 );
 		mm.text = "Options";
 
@@ -30,10 +30,10 @@ class OptionsMenu extends FocusMenu {
 		horFlow.layout = Horizontal;
 		horFlow.verticalAlign = Top;
 
-		var nickname = new ShadowedText( Assets.fontPixel, horFlow );
+		var nickname = new ShadowedText( Assets.fontPixel16, horFlow );
 		nickname.text = "username: ";
 
-		nicknameInput = new TextInput( Assets.fontPixel, horFlow );
+		nicknameInput = new TextInput( Assets.fontPixel16, horFlow );
 		nicknameInput.text = Settings.inst.params.nickname;
 		nicknameInput.onFocusLost = function ( e : Event ) {
 			Settings.inst.params.nickname = nicknameInput.text;

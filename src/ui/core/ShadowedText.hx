@@ -10,26 +10,20 @@ import h2d.Object;
 class ShadowedText extends h2d.Text {
 
 	public function new( ?font : Font, ?parent : h2d.Object ) {
-		super( font == null ? Assets.fontPixel : font, parent );
+		super( font == null ? Assets.fontPixel32 : font, parent );
 
 		smooth = false;
 		addTextOutlineTo( this );
- 
+
 		y++; // because top outlined pixel is not drawn
 	}
 
 	public static function addTextOutlineTo( drawable : Drawable ) {
-		var outline = new PixelOutline( 0x000000, 0.85 );
+		var outline = new PixelOutline( 0x000000, 10 );
 		drawable.filter = outline;
 	}
 
-	override function get_textHeight():Float {
+	override function get_textHeight() : Float {
 		return super.get_textHeight() + 1;
 	}
-
-	override function getBoundsRec( relativeTo : Object, out : Bounds, forSize : Bool ) {
-		super.getBoundsRec( relativeTo, out, forSize );
-		addBounds( relativeTo, out, x, y, 0, -5 );
-	}
-
 }

@@ -17,12 +17,12 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 
 	// @formatter:off
 	static var SRC = 
-		<connect-comp layout="vertical" vspacing="5" >
+		<connect-comp layout="vertical" vspacing="15" >
 			<shadowed-text( "Connect" ) scale="1.5" />
 
-			<flow layout="horizontal" hspacing="5" valign="middle" content-valign="middle" >
+			<flow layout="horizontal" hspacing="10" valign="middle" content-valign="middle"> /** filter="outline(1, #fffffa)" **/
 				<shadowed-text( "ip: " ) valign="middle" />
-				<text-input background-color-prop={0x80808080} input-width-prop="100" width="100" />
+				<text-input background-color-prop={0x80808080} input-width-prop="200" width="200" />
 				<button-flow label="local" public id="localConnect" />
 			</flow>
 			

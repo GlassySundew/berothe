@@ -1,10 +1,12 @@
 package game.net.entity.component;
 
-import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import ui.tooltip.text.TextTooltipVO;
+#if client
 import ui.InteractorFactory;
 import game.client.en.comp.view.EntityViewComponent;
 import game.domain.overworld.entity.OverworldEntity;
 import game.net.entity.EntityComponentReplicatorBase;
+#end
 
 class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 
@@ -12,6 +14,7 @@ class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 		super( parent );
 	}
 
+	#if client
 	override function followComponentClient( entity : OverworldEntity ) {
 		super.followComponentClient( entity );
 
@@ -22,15 +25,17 @@ class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 	}
 
 	function createInteractor( viewComp : EntityViewComponent ) {
-		var interactorConfig = new InteractorVO();
-		interactorConfig.doHighlight = true;
-		interactorConfig.highlightColor = 0x6d0303;
-		
+		var interactorVO = new InteractorVO();
+		interactorVO.doHighlight = true;
+		interactorVO.highlightColor = 0xF2F2F2;
+		interactorVO.tooltipVO = new TextTooltipVO( 'Poop' );
+
 		viewComp.view.then( ( view ) -> {
 			InteractorFactory.create(
-				interactorConfig,
+				interactorVO,
 				view.getGraphics()
 			);
 		} );
 	}
+	#end
 }

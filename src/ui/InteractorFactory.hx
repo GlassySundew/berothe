@@ -1,5 +1,6 @@
 package ui;
 
+import ui.tooltip.TooltipManager;
 import shader.OutlineExtruder;
 import h3d.shader.FixedColor;
 import dn.Col;
@@ -33,39 +34,32 @@ class InteractorFactory {
 		var int = ThrEventInteractive.fromHeaps( new h3d.scene.Interactive( collider ) );
 		graphics.addChild( int );
 
-		// ( function createhighlight() {
-		// 	if ( !interactorVO.doHighlight ) return;
-
-		// var shader = new h3d.shader.Outline();
-		// shader.color = new Col( interactorVO.highlightColor ).toShaderVec4().toVector4();
-		// shader.distance = 20;
 		var materials = graphics.heapsObject.getMaterials();
-
-		for ( m in materials ) {
-			m.removePass( m.getPass( "highlight" ) );
-			m.removePass( m.getPass( "highlightBack" ) );
+		for ( material in materials ) {
+			var m = material;
+			var p = m.allocPass( "highlight" );
+			p.culling = None;
+			p.depthWrite = false;
+			p.depthTest = LessEqual;
 		}
-
-		var shader = new FixedColor( 0xF2F2F2 );
-
+		var shader = new FixedColor( interactorVO.highlightColor );
 		int.onOver.add( ( e ) -> {
-			for ( material in materials ) {
-				var m = material;
-
-				var p = m.allocPass( "highlight" );
-				p.culling = None;
-				p.depthWrite = false;
-				p.depthTest = LessEqual;
-				p.addShader(shader);
-			}
-		} );
-
-		int.onOut.add( ( e ) -> {
 			for ( m in materials ) {
-				m.removePass( m.getPass( "highlight" ) );
-				m.removePass( m.getPass( "highlightBack" ) );
+				var pass = m.getPass( "highlight" );
+				pass.culling = None;
+				pass.addShader( shader );
 			}
 		} );
-		// } )();
+		function removeHighlight() {
+			for ( m in materials ) {
+				var pass = m.getPass( "highlight" );
+				pass.culling = Both;
+				pass.removeShader( shader );
+			}
+		}
+		removeHighlight();
+		int.onOut.add( ( e ) -> removeHighlight() );
+
+		TooltipManager.attach3d( interactorVO.tooltipVO, int );
 	}
 }

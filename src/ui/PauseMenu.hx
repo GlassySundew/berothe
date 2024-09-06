@@ -41,7 +41,7 @@ class PauseMenu extends FocusMenu {
 	}
 
 	function initContent() {
-		var mm = new ShadowedText( Assets.fontPixel, contentFlow );
+		var mm = new ShadowedText( Assets.fontPixel16, contentFlow );
 		mm.scale( 1.5 );
 		mm.text = "Menu";
 

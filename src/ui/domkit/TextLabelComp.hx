@@ -41,10 +41,10 @@ class TextLabelComp extends h2d.Flow implements h2d.domkit.Object {
 
 	public var cornersRounder : CornersRounder;
 
-	public function new( text : String, ?font : Font, ?style : Style, ?parent : Object ) {
+	public function new( text : String = "", ?font : Font, ?style : Style, ?parent : Object ) {
 		super( parent );
 		initComponent();
-		font = font == null ? Assets.fontPixel : font;
+		font = font == null ? Assets.fontPixel16 : font;
 		this.font = font;
 		label = text;
 
