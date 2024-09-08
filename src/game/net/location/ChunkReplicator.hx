@@ -51,7 +51,7 @@ class ChunkReplicator extends NetNode {
 		for ( entity in entities ) {
 			entity.unregister( host, ctx );
 		}
-		host.unregister( entities, ctx );
+		entities.unregister( host, ctx );
 		super.unregister( host, ctx );
 	}
 
@@ -129,10 +129,14 @@ class ChunkReplicator extends NetNode {
 			} )
 		);
 
-		binderUnregClient.add( Subscription.create(() -> {
-			graphics.clear();
-			graphics.remove();
-		} ) );
+		binderUnregClient.add(
+			Subscription.create(
+				() -> {
+					graphics.clear();
+					graphics.remove();
+				}
+			)
+		);
 	}
 	#end
 }

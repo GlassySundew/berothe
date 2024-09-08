@@ -18,8 +18,8 @@
 					"y": 0
 				}
 			},
-			"x": -24,
-			"y": 14,
+			"x": -33,
+			"y": 27,
 			"children": [
 				{
 					"type": "text",
@@ -75,8 +75,8 @@
 				"entity": "club",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": -16,
-			"y": 7.21,
+			"x": -7,
+			"y": -3,
 			"rotationZ": -137.5,
 			"children": [
 				{

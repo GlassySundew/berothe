@@ -46,24 +46,28 @@ class EntityAttackListItem {
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		var rigidBodyComp = entity.components.get( EntityRigidBodyComponent );
-		rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
-			emitter = new AttackTweenBoxCastEmitter(
-				desc,
-				rigidBody.transform,
-				location.physics
-			);
-			entity.onFrame.add( update );
-
-			emitter.getCallbackContainer().beginCB.add(
-				( contact ) -> {
-					trace(
-						contact._b1._shapeList.getCollisionGroup(),
-						contact._b1._shapeList.getCollisionMask(),
-						Math.random()
+		entity.components.onAppear(
+			EntityRigidBodyComponent,
+			( cl, rigidBodyComp ) -> {
+				rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
+					emitter = new AttackTweenBoxCastEmitter(
+						desc,
+						rigidBody.transform,
+						location.physics
 					);
+					entity.onFrame.add( update );
+
+					emitter.getCallbackContainer().beginCB.add(
+						( contact ) -> {
+							trace(
+								contact._b1._shapeList.getCollisionGroup(),
+								contact._b1._shapeList.getCollisionMask(),
+								Math.random()
+							);
+						} );
 				} );
-		} );
+			}
+		);
 	}
 
 	inline function update( dt, tmod ) {

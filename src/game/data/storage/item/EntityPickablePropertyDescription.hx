@@ -12,16 +12,24 @@ class EntityPickablePropertyDescription extends EntityComponentDescription {
 		entry : Data.EntityProperty_properties_pickable
 	) : EntityPickablePropertyDescription {
 		if ( entry == null ) return null;
+
 		return new EntityPickablePropertyDescription(
 			entry.item.id.toString(),
+			entry.tooltipLocale,
 			entry.id.toString()
 		);
 	}
 
 	public final itemDescId : String;
+	public final tooltipLocale : String;
 
-	public function new( itemDescId : String, id : String ) {
+	public function new(
+		itemDescId : String,
+		tooltipLocale : String,
+		id : String
+	) {
 		super( id );
+		this.tooltipLocale = tooltipLocale;
 		this.itemDescId = itemDescId;
 	}
 

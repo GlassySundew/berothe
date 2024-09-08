@@ -1,5 +1,6 @@
 package game.net.entity;
 
+import game.client.en.comp.view.EntityViewComponent;
 import future.Future;
 import net.NSMutableProperty;
 import net.NetNode;

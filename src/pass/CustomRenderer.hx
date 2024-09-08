@@ -133,8 +133,11 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		setTargets( [colorTex, depthTex, normalTex /*, additiveTex*/] );
 		clear( Engine.getCurrent().backgroundColor, 1 );
 		mrt.draw( get( "default" ) );
-		defaultPass.draw( get( "alpha" ), backToFront );
+		mrt.draw( get( "alpha" ), backToFront );
 		// !additive
+		mrt.draw(get( "overlay" ), backToFront);
+		mrt.draw(get( "ui" ), backToFront);
+		
 		resetTarget();
 
 		var saoTarget = allocTarget( "sao" );

@@ -1,5 +1,7 @@
 package game.net.player;
 
+import rx.disposables.Composite;
+import rx.Subscription;
 import net.NetNode;
 import util.Repeater;
 import rx.ObservableFactory;
@@ -16,6 +18,19 @@ import game.net.location.ChunkReplicator;
 import game.net.location.CoreReplicator;
 import game.net.location.LocationReplicator;
 
+class PlayerSubscribedChunk {
+
+	public var replicator( default, null ) : ChunkReplicator;
+	public var subscription : Composite;
+
+	public inline function new(
+		replicator : ChunkReplicator
+	) {
+		this.replicator = replicator;
+		subscription = Composite.create();
+	}
+}
+
 /**
 	A server-side only service, `PlayerReplicationManager` 
 	manages singular player replication channel
@@ -30,7 +45,9 @@ class PlayerReplicationManager {
 	final coreReplicator : CoreReplicator;
 
 	/** chunks that are currently visible by a player **/
-	final chunks : Map<Int, Map<Int, Map<Int, ChunkReplicator>>> = [];
+	final chunks : Map<Int, Map<Int, Map<Int, PlayerSubscribedChunk>>> = [];
+
+	// final chunksSubscriptions:
 
 	public function new(
 		playerEntity : OverworldEntity,
@@ -42,6 +59,8 @@ class PlayerReplicationManager {
 		this.playerEntityReplicator = playerEntityReplicator;
 		this.playerEntity = playerEntity;
 		this.coreReplicator = coreReplicator;
+
+		trace( "newing" );
 
 		init();
 	}
@@ -89,9 +108,11 @@ class PlayerReplicationManager {
 		if ( chunks[z][y][x] == null ) {
 			var locationReplManager : LocationReplicator //
 				= coreReplicator.getLocationReplicator( playerEntity.location.getValue() );
-			chunks[z][y][x] = locationReplManager.getChunkReplicator( x, y, z );
+			chunks[z][y][x] = new PlayerSubscribedChunk(
+				locationReplManager.getChunkReplicator( x, y, z )
+			);
 
-			Assert.notNull( chunks[z][y][x], "chunk replicator is null" );
+			Assert.notNull( chunks[z][y][x].replicator, "chunk replicator is null" );
 
 			return true;
 		} else {
@@ -100,19 +121,15 @@ class PlayerReplicationManager {
 	}
 
 	#if !debug inline #end
-	function isCoordsInRange(
-		x0 : Int,
-		y0 : Int,
-		z0 : Int,
-		x1 : Int,
-		y1 : Int,
-		z1 : Int,
+	function areChunksInRange(
+		chunk1 : Chunk,
+		chunk2 : Chunk,
 		range : Int
 	) : Bool {
 		return(
-			Math.abs( x1 - x0 ) <= range
-			&& Math.abs( y1 - y0 ) <= range
-			&& Math.abs( z1 - z0 ) <= range
+			Math.abs( chunk1.x - chunk2.x ) <= range
+			&& Math.abs( chunk1.y - chunk2.y ) <= range
+			&& Math.abs( chunk1.z - chunk2.z ) <= range
 		);
 	}
 
@@ -131,22 +148,20 @@ class PlayerReplicationManager {
 		untyped chunks.length = 0;
 	}
 
-	function clearChunksOutOfRange( newChunk : Chunk ) {
+	function clearChunksOutOfRange( oldChunk : Chunk, newChunk : Chunk ) {
 		for ( zChunkRow in chunks ) {
 			for ( yChunkRow in zChunkRow ) {
 				for ( xi => xChunkRepl in yChunkRow ) {
-					if ( !isCoordsInRange(
-						newChunk.x,
-						newChunk.y,
-						newChunk.z,
-						xChunkRepl.chunk.x,
-						xChunkRepl.chunk.y,
-						xChunkRepl.chunk.z,
+					if ( !areChunksInRange(
+						newChunk,
+						xChunkRepl.replicator.chunk,
 						PLAYER_VISION_RANGE_CHUNKS
 					) ) {
+						xChunkRepl.subscription.unsubscribe();
+						// xChunkRepl.replicator.chunk.onEntityRemoved.remove( onEntityRemovedFromChunk );
 						yChunkRow.remove( xi );
-						cliCon.removeChild( xChunkRepl );
-						xChunkRepl.unregister(
+						cliCon.removeChild( xChunkRepl.replicator );
+						xChunkRepl.replicator.unregister(
 							NetworkHost.current,
 							cliCon.networkClient.ctx
 						);
@@ -161,19 +176,42 @@ class PlayerReplicationManager {
 		for ( z in newChunk.z - range...newChunk.z + range + 1 ) {
 			for ( y in newChunk.y - range...newChunk.y + range + 1 ) {
 				for ( x in newChunk.x - range...newChunk.x + range + 1 ) {
+
 					var wasUnseen = validateChunkAccess( x, y, z );
-					if ( wasUnseen ) cliCon.connect( chunks[z][y][x] );
+					if ( wasUnseen ) {
+						var chunkRepl = chunks[z][y][x];
+						cliCon.connect( chunkRepl.replicator );
+
+						chunkRepl.subscription.add(
+							chunkRepl.replicator.chunk.onEntityRemoved.add( onEntityRemovedFromChunk )
+						);
+					}
 				}
 			}
 		}
 	}
 
-	function onAddedToChunk( _, chunk : Chunk ) {
-		var oldChunk = playerEntity.chunk.getValue();
+	function onEntityRemovedFromChunk( entity ) {
+		if ( entity == playerEntity ) return;
+		if ( !areChunksInRange(
+			entity.chunk.getValue(),
+			playerEntity.chunk.getValue(),
+			PLAYER_VISION_RANGE_CHUNKS
+		) ) {
+
+			var entityReplicator = coreReplicator.getEntityReplicator( entity );
+			entityReplicator.unregister(
+				NetworkHost.current,
+				cliCon.networkClient.ctx
+			);
+		}
+	}
+
+	function onAddedToChunk( oldChunk : Chunk, chunk : Chunk ) {
 		if ( oldChunk.location != chunk.location ) {
 			wipeAllChunks();
 		} else {
-			clearChunksOutOfRange( chunk );
+			clearChunksOutOfRange( oldChunk, chunk );
 		}
 
 		attachVisibleChunks( chunk );

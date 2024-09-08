@@ -53,12 +53,13 @@ class EntityReplicator extends NetNode {
 		componentsRepl.followEntityClient( entityLocal );
 		transformRepl.followEntityClient( entityLocal );
 
-		trace( "replicating new entity: " + desc );
 		entity.resolve( entityLocal );
 	}
 
 	override public function unregister( host : NetworkHost, ?ctx ) {
 		super.unregister( host, ctx );
+		transformRepl.unregister( host, ctx );
+		componentsRepl.unregister( host, ctx );
 	}
 
 	function onLocationChanged( _, location : Location ) {

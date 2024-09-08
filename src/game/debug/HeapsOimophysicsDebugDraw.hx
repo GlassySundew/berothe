@@ -17,6 +17,8 @@ class HeapsOimophysicsDebugDraw extends DebugDraw implements IDebugDraw {
 		super();
 		graphics = new Graphics( parent );
 		graphics.material.mainPass.depth( false, Always );
+		graphics.material.props = h3d.mat.MaterialSetup.current.getDefaults( "ui" );
+
 	}
 
 	public function setVisibility( value : Bool ) {

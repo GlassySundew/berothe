@@ -35,18 +35,22 @@ class Chunk {
 		Assert.notExistsInArray( entity, entities );
 		#end
 
-		if ( entity.chunk.getValue() != null ) {
-			entity.chunk.getValue().removeEntity( entity );
-		}
+		var oldChunk = entity.chunk.getValue();
 
 		onEntityAdded.dispatch( entity );
 
 		entities.push( entity );
 		entity.addToChunk( this );
+
+		oldChunk?.removeEntity( entity );
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
-		if ( entities.remove( entity ) )
-			onEntityRemoved.dispatch( entity );
+		if ( entities.remove( entity ) ) onEntityRemoved.dispatch( entity );
+	}
+
+	@:keep
+	public function toString() : String {
+		return 'Chunk: x: $x, y: $y, z: $z';
 	}
 }

@@ -263,7 +263,7 @@
 						"pickable": {
 							"item": "club",
 							"id": "clubProp",
-							"tooltipLocale": "Poop"
+							"tooltipLocale": "Club"
 						},
 						"rigidBodyTorso": {
 							"sizeX": 4,

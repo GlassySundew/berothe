@@ -1,5 +1,7 @@
 package game.net.entity;
 
+import hxbit.NetworkHost;
+import hxbit.NetworkSerializable.NetworkSerializer;
 import rx.disposables.Composite;
 import game.domain.overworld.entity.OverworldEntity;
 import net.NSMutableProperty;
@@ -84,5 +86,18 @@ class EntityTransformReplicator extends NetNode {
 	function setupClientSyncronization() {
 		createNetworkToModelStream();
 		// createModelToNetworkStream();
+	}
+
+	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
+		super.unregister( host, ctx );
+		x.unregister( host, ctx );
+		y.unregister( host, ctx );
+		z.unregister( host, ctx );
+		velX.unregister( host, ctx );
+		velY.unregister( host, ctx );
+		velZ.unregister( host, ctx );
+		rotationX.unregister( host, ctx );
+		rotationY.unregister( host, ctx );
+		rotationZ.unregister( host, ctx );
 	}
 }
