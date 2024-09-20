@@ -24,7 +24,7 @@ class TextInputComp extends TextInput implements h2d.domkit.Object {
 	var contentChangedTriggered = false;
 
 	public function new( ?font : Font, ?parent ) {
-		super( font == null ? Assets.fontPixel32 : font, parent );
+		super( font == null ? Assets.fontPixel16 : font, parent );
 		initComponent();
 	}
 

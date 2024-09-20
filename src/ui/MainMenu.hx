@@ -81,21 +81,18 @@ class MainMenu extends Process {
 
 		new TextButton(
 			"connect",
-			Assets.fontPixel32,
 			( _ ) -> new ConnectMenu( parentFlow ),
 			vertFlow
 		);
 
 		new TextButton(
 			"options",
-			Assets.fontPixel32,
 			( _ ) -> root.add( new OptionsMenu().h2dObject, Const.DP_UI ),
 			vertFlow
 		);
 
 		new TextButton(
 			"quitnow",
-			Assets.fontPixel32,
 			( _ ) -> System.exit(),
 			vertFlow
 		);

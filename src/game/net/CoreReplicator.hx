@@ -1,5 +1,8 @@
-package game.net.location;
+package game.net;
 
+import game.net.location.LocationReplicator;
+import game.net.item.ItemReplicator;
+import game.domain.overworld.item.Item;
 import net.ClientController;
 import game.net.entity.EntityReplicator;
 import game.domain.overworld.entity.OverworldEntity;
@@ -10,21 +13,32 @@ import game.domain.overworld.location.Location;
 
 class CoreReplicator {
 
-	final locations : Map<String, LocationReplicator> = [];
-	final entities : Map<String, EntityReplicator> = [];
+	public static var inst : CoreReplicator;
+
+	public final locations : Map<String, LocationReplicator> = [];
+	public final entities : Map<String, EntityReplicator> = [];
+	public final items : Map<String, ItemReplicator> = [];
 
 	final core : GameCore;
 
 	public function new( core : GameCore ) {
+		inst = this;
 		this.core = core;
 		core.onLocationCreated.add( onLocationCreated );
 		core.onEntityCreated.add( onEntityCreated );
+		core.onItemCreated.add( onItemCreated );
 	}
 
-	public function getEntityReplicator(
+	public inline function getEntityReplicator(
 		entity : OverworldEntity
 	) : EntityReplicator {
-		var entityRepl = entities[entity.id];
+		return getEntityReplicatorById( entity.id );
+	}
+
+	public function getEntityReplicatorById(
+		entityId : String
+	) : EntityReplicator {
+		var entityRepl = entities[entityId];
 		Assert.notNull( entityRepl, "entity replicator is not found when creating sync bridge" );
 		return entityRepl;
 	}
@@ -35,6 +49,14 @@ class CoreReplicator {
 		var locationRepl = locations[location.id];
 		Assert.notNull( locationRepl, "location replication manager is not found when creating sync bridge" );
 		return locationRepl;
+	}
+
+	public function getItemReplicator(
+		item : Item
+	) : ItemReplicator {
+		var itemRepl = items[item.id];
+		Assert.notNull( itemRepl, "item replicator is not found when creating sync bridge" );
+		return itemRepl;
 	}
 
 	function onLocationCreated( location : Location ) {
@@ -55,5 +77,18 @@ class CoreReplicator {
 		entity.location.onAppear(
 			( location ) -> entityReplicator.addChild( locations[location.id] )
 		);
+	}
+
+	function onItemCreated( item : Item ) {
+		#if debug
+		Assert.notExistsInMap(
+			item.id,
+			items,
+			"item id interfere check failed in main replication module!"
+		);
+		#end
+
+		var itemReplicator = new ItemReplicator( item );
+		items[item.id] = itemReplicator;
 	}
 }

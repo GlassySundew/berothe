@@ -1,21 +1,15 @@
 package game.net.player;
 
-import rx.disposables.Composite;
-import rx.Subscription;
-import net.NetNode;
-import util.Repeater;
-import rx.ObservableFactory;
-import rx.Observable;
-import hxbit.NetworkSerializable;
-import game.domain.overworld.location.Location;
 import hxbit.NetworkHost;
 import net.ClientController;
+import rx.disposables.Composite;
 import util.Assert;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Chunk;
+import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
 import game.net.location.ChunkReplicator;
-import game.net.location.CoreReplicator;
+import game.net.CoreReplicator;
 import game.net.location.LocationReplicator;
 
 class PlayerSubscribedChunk {
@@ -59,8 +53,6 @@ class PlayerReplicationManager {
 		this.playerEntityReplicator = playerEntityReplicator;
 		this.playerEntity = playerEntity;
 		this.coreReplicator = coreReplicator;
-
-		trace( "newing" );
 
 		init();
 	}
@@ -158,7 +150,6 @@ class PlayerReplicationManager {
 						PLAYER_VISION_RANGE_CHUNKS
 					) ) {
 						xChunkRepl.subscription.unsubscribe();
-						// xChunkRepl.replicator.chunk.onEntityRemoved.remove( onEntityRemovedFromChunk );
 						yChunkRow.remove( xi );
 						cliCon.removeChild( xChunkRepl.replicator );
 						xChunkRepl.replicator.unregister(

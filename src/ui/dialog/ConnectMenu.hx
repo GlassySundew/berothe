@@ -17,18 +17,23 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 
 	// @formatter:off
 	static var SRC = 
-		<connect-comp layout="vertical" vspacing="15" >
-			<shadowed-text( "Connect" ) scale="1.5" />
+		<connect-comp layout="vertical" vspacing="10">
+			<shadowed-text( "Connect" ) scale="1.5"/>
 
-			<flow layout="horizontal" hspacing="10" valign="middle" content-valign="middle"> /** filter="outline(1, #fffffa)" **/
+			<flow 
+				layout="horizontal" 
+				hspacing="10" 
+				valign="middle" 
+				content-valign="middle" 
+				padding-top="7"
+			> 
 				<shadowed-text( "ip: " ) valign="middle" />
-				<text-input background-color-prop={0x80808080} input-width-prop="200" width="200" />
-				<button-flow label="local" public id="localConnect" />
+				<text-input public id="ipInput" background-color-prop={0x80808080} input-width-prop="200" width="200" />
 			</flow>
 			
 			<flow layout="horizontal" hspacing="5">
 				<text-button( "connect" ) public id="connect" />
-				<text-button( "cancel", ( e ) -> {}, 0x666666, 0x303030 ) public id="cancel" />
+				<text-button( "cancel", ( e ) -> {}, 0xFFA54A4A, 0xFF303030 ) public id="cancel" />
 			</flow>
 		</connect-comp>
 	
@@ -63,12 +68,13 @@ class ConnectMenu extends FocusMenu {
 		centrizeContent();
 
 		var connectComp = new ConnectComp( contentFlow );
-		connectComp.localConnect.onClick = () -> {
+		connectComp.connect.onClick = ( e ) -> {
 			MainMenu.hide();
 
-			Client.inst.connect(() -> trace( "failed connection" ) );
+			Client.inst.connect( connectComp.ipInput.text,
+				() -> trace( "failed connection" ) );
 			destroy();
-		};
+		}
 
 		connectComp.cancel.onClick = ( e ) -> {
 			destroy();

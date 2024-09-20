@@ -8,7 +8,7 @@
 				{
 					"type": "model",
 					"name": "club",
-					"source": "voxel/items/club/obj/fbx/club.fbx"
+					"source": "voxel/items/club/entity/obj/fbx/club.fbx"
 				}
 			]
 		}

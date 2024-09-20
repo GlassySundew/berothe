@@ -1,5 +1,8 @@
 package game.net.entity;
 
+#if server
+import game.net.server.GameServer;
+#end
 import util.Repeater;
 import future.Future;
 import game.domain.overworld.location.Location;
@@ -15,6 +18,7 @@ class EntityReplicator extends NetNode {
 
 	@:s public final transformRepl : EntityTransformReplicator;
 	@:s public final componentsRepl : EntityComponentsReplicator;
+	@:s public final id : String;
 
 	@:s var entityDescriptionId : String;
 	@:s var locationDescId : String;
@@ -24,6 +28,7 @@ class EntityReplicator extends NetNode {
 
 		this.entity.resolve( entity );
 		entityDescriptionId = entity.desc.id.toString();
+		id = entity.id;
 
 		transformRepl = new EntityTransformReplicator( this );
 		transformRepl.followEntityServer( entity );
@@ -32,12 +37,35 @@ class EntityReplicator extends NetNode {
 		componentsRepl.followEntityServer( entity );
 
 		entity.location.addOnValueImmediately( onLocationChanged );
+
+		entity.disposed.then( onEntityUnregister );
 	}
 
+	override public function unregister( host : NetworkHost, ?ctx ) {
+		super.unregister( host, ctx );
+		transformRepl.unregister( host, ctx );
+		componentsRepl.unregister( host, ctx );
+
+		trace( "unregistering entity " + entity.result );
+	}
+
+	#if client
 	override function onUnregisteredClient() {
 		super.onUnregisteredClient();
 		entity.result.dispose();
-		trace( "disposing " + entity.result );
+	}
+	#end
+
+	function onEntityUnregister( ?v ) {
+		// entity has to be disconnected ONLY AFTER it was detached from chunk
+		entity.result.chunk.addOnValue(
+			( oldChunk, newChunk ) -> {
+				if ( newChunk != null ) throw "setting new chunk for disposed entity";
+				onEntityDisposed();
+			}
+		);
+
+		trace( entity.result.chunk.getValue() );
 	}
 
 	@:rpc( clients )
@@ -49,17 +77,19 @@ class EntityReplicator extends NetNode {
 		super.alive();
 
 		var desc = DataStorage.inst.entityStorage.getDescriptionById( entityDescriptionId );
-		var entityLocal = new OverworldEntity( desc, "0" ); // todo client ids
+		var entityLocal = new OverworldEntity( desc, id );
 		componentsRepl.followEntityClient( entityLocal );
 		transformRepl.followEntityClient( entityLocal );
 
 		entity.resolve( entityLocal );
 	}
 
-	override public function unregister( host : NetworkHost, ?ctx ) {
-		super.unregister( host, ctx );
-		transformRepl.unregister( host, ctx );
-		componentsRepl.unregister( host, ctx );
+	function onEntityDisposed( ?v ) {
+		trace( "entity net disposed" );
+
+		unregister( NetworkHost.current );
+		componentsRepl.dispose();
+		parent?.removeChild( this );
 	}
 
 	function onLocationChanged( _, location : Location ) {

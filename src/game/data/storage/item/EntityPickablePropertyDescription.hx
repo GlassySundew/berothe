@@ -33,6 +33,10 @@ class EntityPickablePropertyDescription extends EntityComponentDescription {
 		this.itemDescId = itemDescId;
 	}
 
+	public function getItemDescription() : ItemDescription {
+		return DataStorage.inst.itemStorage.getDescriptionById( itemDescId );
+	}
+
 	public function buildComponennt() : EntityComponent {
 		return new EntityPickableComponent( this );
 	}

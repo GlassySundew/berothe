@@ -7,20 +7,22 @@ class RuleStorage {
 	public var entityGravityScale( default, null ) : Float;
 
 	public function new( rules : IndexId<Data.Rule, Data.RuleKind> ) {
-		for ( entry in rules.all ) {
+		for ( entry in Reflect.fields( this ) ) {
+			var rule = rules.resolve( entry );
 			var value = null;
-			for ( field in Reflect.fields( entry.value ) ) {
-				var fieldValue = Reflect.field( entry.value, field );
+			for ( field in Reflect.fields( rule.value ) ) {
+				var fieldValue = Reflect.field( rule.value, field );
 				if ( fieldValue != null ) {
 					value = fieldValue;
 					break;
 				}
 			}
+
 			if ( value == null ) {
-				trace( "value of rule id: " + entry.id + " is null!" );
+				trace( "value of rule id: " + rule.id + " is null!" );
 				continue;
 			}
-			Reflect.setField( this, entry.id.toString(), value );
+			Reflect.setField( this, rule.id.toString(), value );
 		}
 	}
 }

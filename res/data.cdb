@@ -21,6 +21,12 @@
 					"value": {
 						"float": 2
 					}
+				},
+				{
+					"id": "pickupRange",
+					"value": {
+						"float": 40
+					}
 				}
 			],
 			"separators": [],
@@ -203,23 +209,36 @@
 						"model": {
 							"equipment": [
 								{
-									"type": "equip_head"
+									"type": "head"
 								},
 								{
-									"type": "equip_hand_main"
+									"type": "neck"
 								},
 								{
-									"type": "equip_hand_seco"
+									"type": "hand_main"
 								},
 								{
-									"type": "equip_legs"
+									"type": "hand_palm_main"
 								},
 								{
-									"type": "equip_waist"
+									"type": "hand_seco"
+								},
+								{
+									"type": "hand_palm_seco"
+								},
+								{
+									"type": "leg_right"
+								},
+								{
+									"type": "leg_left"
+								},
+								{
+									"type": "waist"
 								}
 							],
 							"baseHp": 5,
-							"id": "humanModel"
+							"id": "humanModel",
+							"baseInventorySize": 4
 						},
 						"attack": {
 							"id": "human_attack",
@@ -513,6 +532,12 @@
 					"typeStr": "3",
 					"name": "baseHp",
 					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "baseInventorySize",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -793,7 +818,7 @@
 				{
 					"typeStr": "13",
 					"name": "file",
-					"kind": null
+					"documentation": "*.enco required"
 				}
 			],
 			"lines": [
@@ -803,7 +828,7 @@
 				},
 				{
 					"id": "club",
-					"file": "voxel/items/club/club.enco"
+					"file": "voxel/items/club/entity/club.enco"
 				}
 			],
 			"separators": [],
@@ -817,18 +842,165 @@
 					"name": "id",
 					"kind": null,
 					"scope": null
+				},
+				{
+					"typeStr": "10:Weapon,Blunt,Sharp,AnimalPart,Potion,Scroll,Food",
+					"name": "type"
+				},
+				{
+					"typeStr": "17",
+					"name": "props",
+					"kind": null
 				}
 			],
 			"lines": [
 				{
-					"id": "club"
+					"id": "club",
+					"props": {
+						"equipAsset": "club",
+						"equippable": true,
+						"equipSlots": [
+							{
+								"type": "hand_main"
+							},
+							{
+								"type": "hand_seco"
+							}
+						]
+					},
+					"type": 3
 				},
 				{
-					"id": "sword"
+					"id": "sword",
+					"props": {},
+					"type": 5
 				}
 			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "item@props",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "2",
+					"name": "equippable",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "6:itemEquipAsset",
+					"name": "equipAsset",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "equipSlots",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "item@props@equipSlots",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:equipItemType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "itemEquipAsset",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "13",
+					"name": "file",
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "animations",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "club",
+					"file": "voxel/items/club/equip/club.enco",
+					"animations": [
+						{
+							"id": "club_idle",
+							"key": "idle",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							]
+						}
+					]
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "itemEquipAsset@animations",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null
+				},
+				{
+					"typeStr": "6:entityViewState",
+					"name": "key"
+				},
+				{
+					"typeStr": "8",
+					"name": "animations",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "itemEquipAsset@animations@animations",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "key",
+					"kind": null
+				}
+			]
 		},
 		{
 			"name": "equipItemType",
@@ -842,19 +1014,31 @@
 			],
 			"lines": [
 				{
-					"id": "equip_head"
+					"id": "head"
 				},
 				{
-					"id": "equip_hand_main"
+					"id": "neck"
 				},
 				{
-					"id": "equip_hand_seco"
+					"id": "hand_main"
 				},
 				{
-					"id": "equip_legs"
+					"id": "hand_palm_main"
 				},
 				{
-					"id": "equip_waist"
+					"id": "hand_seco"
+				},
+				{
+					"id": "hand_palm_seco"
+				},
+				{
+					"id": "leg_right"
+				},
+				{
+					"id": "leg_left"
+				},
+				{
+					"id": "waist"
 				}
 			],
 			"separators": [],
@@ -951,12 +1135,66 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 35,
+					"chunkSize": 10,
 					"level": [
 						0,
 						"start"
 					],
 					"instancing": 0
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": [
+						"location"
+					]
+				}
+			}
+		},
+		{
+			"name": "locationContainerType",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "global"
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": [
+						"locationDF"
+					]
+				}
+			}
+		},
+		{
+			"name": "prefabLevel",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "13",
+					"name": "file",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "start",
+					"file": "levels/start.prefab"
 				}
 			],
 			"separators": [],
@@ -1051,60 +1289,6 @@
 			}
 		},
 		{
-			"name": "locationContainerType",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				}
-			],
-			"lines": [
-				{
-					"id": "global"
-				}
-			],
-			"separators": [],
-			"props": {
-				"editor": {
-					"categories": [
-						"locationDF"
-					]
-				}
-			}
-		},
-		{
-			"name": "prefabLevel",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				},
-				{
-					"typeStr": "13",
-					"name": "file",
-					"kind": null
-				}
-			],
-			"lines": [
-				{
-					"id": "start",
-					"file": "levels/start.prefab"
-				}
-			],
-			"separators": [],
-			"props": {
-				"editor": {
-					"categories": [
-						"location"
-					]
-				}
-			}
-		},
-		{
 			"name": "tileset@sequences",
 			"props": {
 				"hide": true
@@ -1191,6 +1375,19 @@
 				},
 				{
 					"name": "PlayerControl",
+					"args": []
+				}
+			]
+		},
+		{
+			"name": "ItemType",
+			"cases": [
+				{
+					"name": "Default",
+					"args": []
+				},
+				{
+					"name": "Equippable",
 					"args": []
 				}
 			]

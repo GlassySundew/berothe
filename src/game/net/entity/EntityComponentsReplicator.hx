@@ -45,6 +45,13 @@ class EntityComponentsReplicator extends NetNode {
 		} );
 	}
 
+	public function dispose() {
+		@:privateAccess
+		for ( key => component in components.map ) {
+			component.dispose();
+		}
+	}
+
 	function onComponentAdded( component : EntityComponent ) {
 		var replicator = component.description.buildCompReplicator( this );
 		replicator?.followComponentServer( component );

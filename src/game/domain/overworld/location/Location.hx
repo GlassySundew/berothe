@@ -59,7 +59,10 @@ class Location {
 		entity.addToLocation( this );
 		onEntityAdded.dispatch( entity );
 
-		entity.disposed.then( ( _ ) -> removeEntity( entity ) );
+		entity.disposed.then( ( _ ) -> {
+			removeEntity( entity );
+			entity.removeChunk();
+		} );
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {

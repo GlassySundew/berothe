@@ -10,8 +10,8 @@ class TextButtonComp extends TextButton implements Object {
 	public function new(
 		title : String,
 		?action : Event -> Void,
-		?colorDef : Int = 0xffffff,
-		?colorPressed : Int = 0x676767,
+		?colorDef : Int = 0xffffffff,
+		?colorPressed : Int = 0xFF676767,
 		?prefix : String = "> ",
 		?parent : h2d.Object
 	) {

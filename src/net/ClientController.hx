@@ -1,5 +1,7 @@
 package net;
 
+import hxd.net.SocketHost.SocketClient;
+import hxd.net.Socket;
 import game.net.server.GameServer;
 import util.Repeater;
 #if client
@@ -34,6 +36,10 @@ class ClientController extends NetNode {
 	public function new( networkClient : NetworkClient ) {
 		super();
 		this.networkClient = networkClient;
+
+		// @:privateAccess
+		// var test = IPFetcher.get_peer_name( Std.downcast( networkClient, SocketClient ).socket.s.handle );
+		// trace(test.toBytes(22).toString());
 	}
 
 	#if client
@@ -67,6 +73,7 @@ class ClientController extends NetNode {
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
 		entityRepl.entity.then( entity -> new EntityControl( entity, entityRepl ) );
+		GameClient.inst.controlledEntity = entityRepl;
 		#end
 	}
 

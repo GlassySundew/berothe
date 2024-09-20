@@ -50,7 +50,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		if ( rigidBodyDesc.offsetZ > 0 ) {
 			entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
 		}
-		
+
 		entity.transform.x.subscribeProp( rigidBody.x );
 		entity.transform.y.subscribeProp( rigidBody.y );
 		entity.transform.z.subscribeProp( rigidBody.z );

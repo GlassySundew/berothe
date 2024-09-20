@@ -1,7 +1,9 @@
 package game.data.storage;
 
+import game.data.storage.item.ItemDescription;
 import game.data.storage.entity.body.EntityPropertiesStorage;
 import game.data.storage.entity.EntityDescriptionStorage;
+import game.data.storage.item.ItemDescriptionStorage;
 import game.data.storage.entity.body.EntityPresetDescriptionStorage;
 import game.data.storage.location.LocationDescriptionStorage;
 
@@ -12,6 +14,8 @@ class DataStorage {
 	public final locationStorage : LocationDescriptionStorage = new LocationDescriptionStorage();
 	public final entityPresetStorage : EntityPresetDescriptionStorage = new EntityPresetDescriptionStorage();
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
+	public final entityEquip : ItemDescriptionStorage = new ItemDescriptionStorage();
+	public final itemStorage : ItemDescriptionStorage = new ItemDescriptionStorage();
 	public final rule : RuleStorage;
 
 	public final entityPropertiesStorage : EntityPropertiesStorage = new EntityPropertiesStorage();
@@ -24,5 +28,6 @@ class DataStorage {
 		locationStorage.init( Data.location );
 		entityPresetStorage.init( Data.entityPreset );
 		entityStorage.init( Data.entity );
+		itemStorage.init( Data.item );
 	}
 }

@@ -10,7 +10,7 @@ import h2d.Object;
 class ShadowedText extends h2d.Text {
 
 	public function new( ?font : Font, ?parent : h2d.Object ) {
-		super( font == null ? Assets.fontPixel32 : font, parent );
+		super( font == null ? Assets.fontPixel16 : font, parent );
 
 		smooth = false;
 		addTextOutlineTo( this );

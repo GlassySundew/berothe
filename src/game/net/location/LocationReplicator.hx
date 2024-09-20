@@ -1,5 +1,6 @@
 package game.net.location;
 
+import game.net.CoreReplicator;
 import net.NetNode;
 import game.domain.overworld.location.Location;
 

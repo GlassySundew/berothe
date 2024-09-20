@@ -4,7 +4,7 @@
 		{
 			"type": "reference",
 			"name": "club",
-			"source": "voxel/items/club/club.plst",
+			"source": "voxel/items/club/entity/club.plst",
 			"y": -0.5,
 			"z": 0.5,
 			"scaleX": 10,

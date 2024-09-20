@@ -37,10 +37,11 @@ class OverworldEntity {
 		components = new EntityComponents( this );
 		this.id = id;
 	}
-	
+
 	public function dispose() {
+		if ( disposed.isTriggered ) throw "entity double dispose";
 		components.dispose();
-		disposed.resolve(true);
+		disposed.resolve( true );
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {
@@ -53,6 +54,10 @@ class OverworldEntity {
 
 	public function addToChunk( chunk : Chunk ) {
 		chunkSelf.val = chunk;
+	}
+
+	public function removeChunk() {
+		chunkSelf.val = null;
 	}
 
 	@:keep

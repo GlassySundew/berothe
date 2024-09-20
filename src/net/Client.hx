@@ -60,7 +60,14 @@ class Client extends Process {
 		} );
 	}
 
+	public function log( s : String, ?pos : haxe.PosInfos ) {
+		pos.fileName = ( host.isAuth ? "[S]" : "[C]" ) + " " + pos.fileName;
+		haxe.Log.trace( s, pos );
+	}
+
 	public function connect( hostIp = "127.0.0.1", ?onFail : Void -> Void ) {
+		if ( hostIp == "" ) hostIp = "127.0.0.1";
+
 		Assert.isNull( host, "double host creation on client, unknown behaviour..." );
 
 		host = new hxd.net.SocketHost();
@@ -71,21 +78,25 @@ class Client extends Process {
 		} );
 
 		host.onUnregister = onUnregister.dispatch;
-		
+
 		trace( "trying to connect" );
 
-		host.connect( hostIp, PORT, function ( connectionStatus ) {
-			if ( !connectionStatus ) {
-				if ( onFail != null ) onFail();
+		host.connect(
+			hostIp,
+			PORT,
+			function ( connectionStatus ) {
+				if ( !connectionStatus ) {
+					if ( onFail != null ) onFail();
 
-				trace( "Failed to connect to server" );
-				return;
+					trace( "Failed to connect to server" );
+					return;
+				}
+
+				sendMessage( Message.ClientAuth );
+
+				onConnection.dispatch();
 			}
-
-			sendMessage( Message.ClientAuth );
-
-			onConnection.dispatch();
-		} );
+		);
 
 		@:privateAccess
 		host.socket.onError = onError;

@@ -48,7 +48,7 @@ class EntityPropertiesDescription extends DescriptionBase {
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
 
-			// model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
+			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
 
 			pickable = EntityPickablePropertyDescription.fromCdb( entry.properties.properties.pickable )

@@ -11,7 +11,7 @@ import game.domain.overworld.GameCore;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
-import game.net.location.CoreReplicator;
+import game.net.CoreReplicator;
 import game.net.player.PlayerReplicationManager;
 
 /**

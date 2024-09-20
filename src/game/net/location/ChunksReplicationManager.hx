@@ -1,5 +1,6 @@
 package game.net.location;
 
+import game.net.CoreReplicator;
 import game.domain.overworld.GameCore;
 import game.domain.overworld.location.Chunk;
 import game.domain.overworld.location.Location;
