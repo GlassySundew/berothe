@@ -12,7 +12,7 @@ import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
 import game.net.CoreReplicator;
-import game.net.player.PlayerReplicationManager;
+import game.net.player.PlayerReplicationService;
 
 /**
 	Логика игры на сервере
@@ -76,9 +76,9 @@ class GameServer extends Process {
 		playerEntity : OverworldEntity,
 		playerReplicator : EntityReplicator,
 		cliCon : ClientController
-	) : PlayerReplicationManager {
+	) : PlayerReplicationService {
 		return
-			new PlayerReplicationManager(
+			new PlayerReplicationService(
 				playerEntity,
 				playerReplicator,
 				cliCon,

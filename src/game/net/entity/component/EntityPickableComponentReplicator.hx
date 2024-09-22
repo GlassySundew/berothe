@@ -35,7 +35,6 @@ class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 		pickableComponent.pickupBy( entityRepl.entity.result );
 
 		var thisEntity = CoreReplicator.inst.getEntityReplicator( entity );
-		// thisEntity.unregister( NetworkHost.current );
 		thisEntity.__host = null;
 	}
 
@@ -49,7 +48,6 @@ class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 
 	override function alive() {
 		super.alive();
-		trace( "alived pickable component" );
 	}
 
 	#if client

@@ -20,6 +20,15 @@ class GameUtil {
 	inline static function get_hScaled()
 		return Std.int( Boot.inst.s2d.height / Const.UI_SCALE );
 
+	public static var mouseXScaled( get, never ) : Int;
+	inline static function get_mouseXScaled()
+		return Std.int( Boot.inst.s2d.mouseX / Const.UI_SCALE );
+
+	public static var mouseYScaled( get, never ) : Int;
+	inline static function get_mouseYScaled()
+		return Std.int( Boot.inst.s2d.mouseY / Const.UI_SCALE );
+
+
 	public static function sendTypedMessage(
 		sHost : hxd.net.SocketHost,
 		msg : net.Message,

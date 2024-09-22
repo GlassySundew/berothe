@@ -45,7 +45,10 @@ class ItemSlot implements IItemContainer {
 		return 1;
 	}
 
-	public function hasSpaceForItem( item : ItemDescription, amount : Null<Int> = 1 ) : Bool {
+	public function hasSpaceForItem(
+		item : ItemDescription,
+		amount : Null<Int> = 1
+	) : Bool {
 		// TODO container item insides check
 
 		return

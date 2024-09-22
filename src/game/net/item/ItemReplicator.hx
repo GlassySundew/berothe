@@ -28,4 +28,9 @@ class ItemReplicator extends NetNode {
 
 		item.resolve( itemLocal );
 	}
+
+	@:keep
+	public function toString() : String {
+		return "ItemReplicator: " + item?.result.desc.id;
+	}
 }

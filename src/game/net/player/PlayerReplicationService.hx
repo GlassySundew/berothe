@@ -26,10 +26,10 @@ class PlayerSubscribedChunk {
 }
 
 /**
-	A server-side only service, `PlayerReplicationManager` 
-	manages singular player replication channel
+	A server-side only service, `PlayerReplicationService` 
+	manages a single player's replication channel
 **/
-class PlayerReplicationManager {
+class PlayerReplicationService {
 
 	public static final PLAYER_VISION_RANGE_CHUNKS = 1;
 

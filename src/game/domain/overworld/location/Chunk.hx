@@ -46,7 +46,11 @@ class Chunk {
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
-		if ( entities.remove( entity ) ) onEntityRemoved.dispatch( entity );
+		if ( entities.remove( entity ) ) {
+			onEntityRemoved.dispatch( entity );
+		} else {
+			throw "entity was not found in the chunk it has to be removed from";
+		}
 	}
 
 	@:keep

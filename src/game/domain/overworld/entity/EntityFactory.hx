@@ -8,12 +8,17 @@ import game.domain.overworld.location.Location;
 
 class EntityFactory {
 
-	public static function createAndAttachComponentsFromProperties(
+	static var ENTITY_ID_STUB = 0;
+
+	public static function createAndAttachClientComponentsFromProperties(
 		entityDesc : EntityDescription,
 		entity : OverworldEntity
 	) {
 		var properties = entityDesc.getBodyDescription();
-		var components = EntityComponentsFactory.fromPropertyDescription( properties );
+		var components = EntityComponentsFactory.fromPropertyDescriptions(
+			properties.clientPropertyDescs
+		);
+
 		for ( component in components ) {
 			Assert.notNull( component, "null component came from body property factory" );
 			if ( component != null )
@@ -21,7 +26,21 @@ class EntityFactory {
 		}
 	}
 
-	static var ENTITY_ID_STUB = 0;
+	public static function createAndAttachComponentsFromProperties(
+		entityDesc : EntityDescription,
+		entity : OverworldEntity
+	) {
+		var properties = entityDesc.getBodyDescription();
+		var components = EntityComponentsFactory.fromPropertyDescriptions(
+			properties.propertyDescs
+		);
+
+		for ( component in components ) {
+			Assert.notNull( component, "null component came from body property factory" );
+			if ( component != null )
+				entity.components.add( component );
+		}
+	}
 
 	public final onEntityCreated = new Signal<OverworldEntity>();
 

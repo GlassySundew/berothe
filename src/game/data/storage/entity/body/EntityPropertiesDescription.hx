@@ -15,7 +15,8 @@ import game.data.storage.item.EntityPickablePropertyDescription;
 
 class EntityPropertiesDescription extends DescriptionBase {
 
-	public var propertyDescriptions( default, null ) : Array<EntityComponentDescription> = [];
+	public var propertyDescs( default, null ) : Array<EntityComponentDescription> = [];
+	public var clientPropertyDescs( default, null ) : Array<EntityComponentDescription> = [];
 
 	public var dynamics( default, null ) : Null<DynamicsDescription>;
 	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
@@ -33,13 +34,13 @@ class EntityPropertiesDescription extends DescriptionBase {
 
 		createPropDescriptions( entry );
 
-		for ( propertyDesc in propertyDescriptions ) {
+		for ( propertyDesc in propertyDescs ) {
 			DataStorage.inst.entityPropertiesStorage.provideExistingDescription( propertyDesc );
 		}
 	}
 
 	function createPropDescriptions( entry : Data.EntityPreset ) {
-		propertyDescriptions = ArrayExtensions.deNullify(( [
+		propertyDescs = ArrayExtensions.deNullify(( [
 
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
@@ -49,9 +50,13 @@ class EntityPropertiesDescription extends DescriptionBase {
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
 
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
-			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
 
 			pickable = EntityPickablePropertyDescription.fromCdb( entry.properties.properties.pickable )
+
+		] : Array<EntityComponentDescription> ) );
+
+		clientPropertyDescs = ArrayExtensions.deNullify(( [
+			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
 
 		] : Array<EntityComponentDescription> ) );
 	}

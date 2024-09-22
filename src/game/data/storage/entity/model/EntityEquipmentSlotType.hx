@@ -2,7 +2,7 @@ package game.data.storage.entity.model;
 
 import util.Assert;
 
-enum abstract EntityEquipmentSlotType( String ) from String to String {
+enum abstract EntityEquipmentSlotType( Int ) {
 
 	var EQUIP_HEAD;
 	var EQUIP_NECK;

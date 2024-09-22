@@ -97,7 +97,7 @@ class Location {
 		// TODO async
 		loadData();
 
-		createAndAttachStaticObjects();
+		createAndAttachStaticObjects( false );
 	}
 
 	function loadData() {
@@ -105,10 +105,10 @@ class Location {
 		locationDataProvider.load();
 	}
 
-	function createAndAttachStaticObjects() {
+	function createAndAttachStaticObjects( isAuth = true ) {
 		var objects = locationDataProvider.getGlobalObjects();
 		for ( object in objects ) {
-			globalObjects.push( objectFactory.createByDesc( object ) );
+			globalObjects.push( objectFactory.createByDesc( object, isAuth ) );
 		}
 
 		for ( globalObject in globalObjects ) {

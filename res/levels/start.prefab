@@ -18,8 +18,8 @@
 					"y": 0
 				}
 			},
-			"x": -33,
-			"y": 27,
+			"x": -28,
+			"y": 18,
 			"children": [
 				{
 					"type": "text",
@@ -75,9 +75,8 @@
 				"entity": "club",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": -7,
-			"y": -3,
-			"rotationZ": -137.5,
+			"x": -29,
+			"y": 6,
 			"children": [
 				{
 					"type": "text",
@@ -88,11 +87,6 @@
 					"size": 22,
 					"pathFont": "fonts/alagard.fnt",
 					"text": "club"
-				},
-				{
-					"type": "box",
-					"name": "box",
-					"scaleY": 14
 				}
 			]
 		}

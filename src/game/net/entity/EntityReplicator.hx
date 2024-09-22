@@ -1,5 +1,6 @@
 package game.net.entity;
 
+import game.domain.overworld.entity.EntityFactory;
 #if server
 import game.net.server.GameServer;
 #end
@@ -18,6 +19,7 @@ class EntityReplicator extends NetNode {
 
 	@:s public final transformRepl : EntityTransformReplicator;
 	@:s public final componentsRepl : EntityComponentsReplicator;
+
 	@:s public final id : String;
 
 	@:s var entityDescriptionId : String;
@@ -45,8 +47,6 @@ class EntityReplicator extends NetNode {
 		super.unregister( host, ctx );
 		transformRepl.unregister( host, ctx );
 		componentsRepl.unregister( host, ctx );
-
-		trace( "unregistering entity " + entity.result );
 	}
 
 	#if client
@@ -57,7 +57,8 @@ class EntityReplicator extends NetNode {
 	#end
 
 	function onEntityUnregister( ?v ) {
-		// entity has to be disconnected ONLY AFTER it was detached from chunk
+		// entity has to be disconnected ONLY AFTER it was detached from the chunk
+		// (and also from any other network channel)
 		entity.result.chunk.addOnValue(
 			( oldChunk, newChunk ) -> {
 				if ( newChunk != null ) throw "setting new chunk for disposed entity";
@@ -80,6 +81,8 @@ class EntityReplicator extends NetNode {
 		var entityLocal = new OverworldEntity( desc, id );
 		componentsRepl.followEntityClient( entityLocal );
 		transformRepl.followEntityClient( entityLocal );
+
+		EntityFactory.createAndAttachClientComponentsFromProperties( desc, entityLocal );
 
 		entity.resolve( entityLocal );
 	}

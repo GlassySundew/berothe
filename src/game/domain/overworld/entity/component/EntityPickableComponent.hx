@@ -15,8 +15,6 @@ class EntityPickableComponent extends EntityComponent {
 	public function new( desc : EntityPickablePropertyDescription ) {
 		this.pickableDesc = desc;
 		super( desc );
-
-		trace( "creating pickable compo" );
 	}
 
 	public function pickupBy( entity : OverworldEntity ) {
@@ -25,7 +23,8 @@ class EntityPickableComponent extends EntityComponent {
 		#if server
 		var model = entity.components.get( EntityModelComponent );
 		var hasSpace = model.hasSpaceForItemDesc(
-			pickableDesc.getItemDescription(), 1
+			pickableDesc.getItemDescription(), 
+			1
 		);
 		if ( !hasSpace ) return;
 

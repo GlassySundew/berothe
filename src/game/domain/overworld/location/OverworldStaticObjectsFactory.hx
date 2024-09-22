@@ -17,8 +17,11 @@ class OverworldStaticObjectsFactory {
 		this.location = location;
 	}
 
-	public function createByDesc( objectDesc : LocationEntityVO ) : OverworldEntity {
-		// the only exclusion for static objects that are not 
+	public function createByDesc(
+		objectDesc : LocationEntityVO,
+		isAuth = true
+	) : OverworldEntity {
+		// the only exclusion for static objects that are not
 		// replicated over network and created on client side from location data file
 		var entity = new OverworldEntity( objectDesc.entityDesc, '${OBJECT_ID_INC++}' );
 
@@ -35,15 +38,22 @@ class OverworldStaticObjectsFactory {
 			sizeZ : objectDesc.sizeZ
 		} );
 
-		var viewComponent = entity.components.get( EntityViewComponent );
-		Assert.notNull( viewComponent );
-		viewComponent.provideExtraViewConfig(
-			Size(
-				objectDesc.sizeX,
-				objectDesc.sizeY,
-				objectDesc.sizeZ
-			)
-		);
+		if ( !isAuth ) {
+			EntityFactory.createAndAttachClientComponentsFromProperties(
+				objectDesc.entityDesc,
+				entity
+			);
+
+			var viewComponent = entity.components.get( EntityViewComponent );
+			Assert.notNull( viewComponent );
+			viewComponent.provideExtraViewConfig(
+				Size(
+					objectDesc.sizeX,
+					objectDesc.sizeY,
+					objectDesc.sizeZ
+				)
+			);
+		}
 
 		return entity;
 	}

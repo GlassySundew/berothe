@@ -16,7 +16,7 @@ class TextLabelComp extends h2d.Flow implements h2d.domkit.Object {
 	static var SRC =
 		<textLabel id="labelThis">
 			// <shadowed-text(text, font) public id="shadowed_text" />
-			<text text='$text' public id="shadowed_text" />
+			<shadowed-text(text, font) text='$text' public id="shadowed_text" />
 		</textLabel>;
 
 	// @formatter:on
