@@ -8,6 +8,7 @@ import game.data.storage.item.ItemType;
 class ItemSlot implements IItemContainer {
 
 	public final restriction : ItemRestriction;
+	public final priority : Int;
 
 	public var itemProp( get, never ) : IProperty<Item>;
 	function get_itemProp() : IProperty<Item> {
@@ -15,7 +16,11 @@ class ItemSlot implements IItemContainer {
 	}
 	final item : MutableProperty<Item> = new MutableProperty();
 
-	public function new( ?restriction : ItemRestriction ) {
+	public function new(
+		?priority : Int = 0,
+		?restriction : ItemRestriction
+	) {
+		this.priority = priority;
 		this.restriction = restriction ?? new ItemRestriction();
 	}
 

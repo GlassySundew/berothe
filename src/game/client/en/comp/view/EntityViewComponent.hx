@@ -31,24 +31,28 @@ class EntityViewComponent extends EntityComponent {
 		viewExtraConfig = config;
 	}
 
+	#if client
+	public function addChildComponent( childView : IEntityView ) {
+		view.then( ( viewResult ) -> {
+			viewResult.addChildView( childView );
+		} );
+	}
+
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
-		#if client
 		entity.location.onAppear( onAttachedToLocation );
-		#end
 	}
 
-	#if client
 	function createView() : IEntityView {
 		return viewDescription.viewProvider?.createView( this, viewExtraConfig );
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		view.resolve( createView() );
 
 		if ( view == null ) return;
 
+		view.resolve( createView() );
 		var node = view.result.getGraphics();
 		Boot.inst.root3D.addChild( node );
 
@@ -69,7 +73,8 @@ class EntityViewComponent extends EntityComponent {
 						entity.transform.z
 					);
 				} );
-			} );
+			}
+		);
 	}
 	#end
 }

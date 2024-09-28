@@ -17,7 +17,10 @@ class EntityModelDescription extends EntityComponentDescription {
 
 		var equipSlots = [
 			for ( equipSlot in entry.equipment ) {
-				EntityEquipmentSlotType.fromCdb( equipSlot.type );
+				new EntityEquipSlotDescription(
+					EntityEquipmentSlotType.fromCdb( equipSlot.type ),
+					equipSlot.priority
+				);
 			}
 		];
 
@@ -31,12 +34,12 @@ class EntityModelDescription extends EntityComponentDescription {
 
 	public final baseHp : Int;
 	public final baseInventorySize : Int;
-	public final equipSlots : Array<EntityEquipmentSlotType>;
+	public final equipSlots : Array<EntityEquipSlotDescription>;
 
 	public function new(
 		baseHp : Int,
 		baseInventorySize : Int,
-		equipSlots : Array<EntityEquipmentSlotType>,
+		equipSlots : Array<EntityEquipSlotDescription>,
 		id : String
 	) {
 		super( id );

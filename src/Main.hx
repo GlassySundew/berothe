@@ -1,14 +1,18 @@
-import net.NetNode;
-import hxbit.Serializer;
+import rx.disposables.Assignable;
+import rx.disposables.Boolean;
+import rx.Subscription;
+import rx.Observable;
+import rx.observables.Create;
+import rx.subjects.Behavior;
+import rx.ObservableFactory;
+import signals.Signal;
 #if client
-import game.data.storage.DataStorage;
-import signals.*;
 import core.MutableProperty;
 import dn.Process;
 import dn.heaps.input.Controller;
 import dn.heaps.input.ControllerAccess;
 import game.client.ControllerAction;
-import game.net.client.GameClient;
+import game.data.storage.DataStorage;
 import h2d.Text;
 import h3d.Engine;
 import hxd.Key;
@@ -20,7 +24,6 @@ import util.Assets;
 import util.Const;
 import util.Cursors;
 import util.Lang;
-import util.Repeater;
 import util.Settings;
 import util.tools.Save;
 
@@ -128,8 +131,7 @@ class Main extends Process {
 		renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
 		Std.downcast( Boot.inst.s3d.lightSystem, h3d.scene.fwd.LightSystem ).ambientLight.set( .5, .5, .5 );
 
-		Boot.inst.s3d.renderer = 
-		Boot.inst.renderer = renderer;
+		Boot.inst.s3d.renderer = Boot.inst.renderer = renderer;
 	}
 
 	function initGamePadController() {

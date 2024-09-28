@@ -11,7 +11,7 @@ class StaticObjectGrayboxViewProvider implements IEntityViewProvider {
 
 	public function createView(
 		viewComponent : EntityViewComponent,
-		setting : EntityViewExtraInitSetting
+		setting : EntityViewExtraInitSetting = None
 	) : IEntityView {
 		var view = switch setting {
 			case Size( x, y, z ):

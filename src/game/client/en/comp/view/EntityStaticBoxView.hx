@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import haxe.exceptions.NotImplementedException;
 import game.data.storage.entity.body.view.AnimationKey;
 import core.MutableProperty;
 import h3d.mat.Texture;
@@ -35,5 +36,9 @@ class EntityStaticBoxView implements IEntityView {
 
 	public function getGraphics() : ThreeDObjectNode {
 		return object;
+	}
+
+	public function addChildView( view : IEntityView ) {
+		throw new NotImplementedException();
 	}
 }

@@ -1,0 +1,63 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "idle",
+			"children": [
+				{
+					"type": "model",
+					"name": "club_0_idle",
+					"source": "voxel/items/club/equip/obj/fbx/club_0_idle.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "attack_prime_attack",
+			"children": [
+				{
+					"type": "model",
+					"name": "club_2_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_2_attack_main.fbx"
+				},
+				{
+					"type": "model",
+					"name": "club_3_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_3_attack_main.fbx"
+				},
+				{
+					"type": "model",
+					"name": "club_4_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_4_attack_main.fbx"
+				},
+				{
+					"type": "model",
+					"name": "club_4_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_4_attack_main.fbx"
+				},
+				{
+					"type": "model",
+					"name": "club_4_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_4_attack_main.fbx"
+				},
+				{
+					"type": "model",
+					"name": "club_4_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_4_attack_main.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "attack_prime_raised",
+			"children": [
+				{
+					"type": "model",
+					"name": "club_1_attack_main",
+					"source": "voxel/items/club/equip/obj/fbx/club_1_attack_main.fbx"
+				}
+			]
+		}
+	]
+}

@@ -1,19 +1,15 @@
 package game.data.location;
 
+import util.Const;
 import hrt.prefab.Object3D;
 import plugins.prefab_berothe.src.customObj.CustomBox;
 import game.data.location.objects.LocationEntityVO;
-
-enum abstract StaticObjectDFIdent( String ) from String {
-
-	var LOCATION_STATIC_OBJ_DF = "locationStaticObjDF";
-}
 
 class LocationObjectFactory {
 
 	public static function fromPrefab( prefab : hrt.prefab.Prefab ) : LocationEntityVO {
 		if ( prefab.props != null ) {
-			var cdbSheetId : StaticObjectDFIdent = Std.string( Reflect.field( prefab.props, "$cdbtype" ) );
+			var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( prefab.props, Const.cdbTypeIdent ) );
 			switch cdbSheetId {
 				case LOCATION_STATIC_OBJ_DF:
 					var entry : Data.LocationStaticObjDFDef = cast prefab.props;

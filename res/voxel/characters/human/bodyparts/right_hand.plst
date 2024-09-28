@@ -6,9 +6,28 @@
 			"name": "right_hand_idle",
 			"children": [
 				{
-					"type": "model",
-					"name": "human_23_right_hand_idle",
-					"source": "voxel/characters/human/obj/fbx/human_23_right_hand_idle.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "idle_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"y": 0.2,
+							"z": 0.6
+						},
+						{
+							"type": "model",
+							"name": "human_23_right_hand_idle",
+							"source": "voxel/characters/human/obj/fbx/human_23_right_hand_idle.fbx"
+						}
+					]
 				}
 			]
 		},
@@ -17,39 +36,210 @@
 			"name": "right_hand_attack",
 			"children": [
 				{
-					"type": "model",
-					"name": "human_8_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_8_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.3,
+							"y": 0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_8_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_8_right_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_9_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_9_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.4,
+							"y": 0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_9_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_9_right_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_10_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_10_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.5,
+							"y": 0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_10_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_10_right_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_11_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_11_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.5,
+							"y": 0.2,
+							"z": 0.8
+						},
+						{
+							"type": "model",
+							"name": "human_11_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_11_right_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_12_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_12_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.5,
+							"y": 0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_12_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_12_right_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_13_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_13_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.4,
+							"y": 0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_13_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_13_right_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_14_right_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_14_right_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "human_14_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_14_right_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "last_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.3,
+							"y": 0.2,
+							"z": 0.7
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "right_hand_raised",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "human_25_right_hand_raised",
+							"source": "voxel/characters/human/obj/fbx/human_25_right_hand_raised.fbx"
+						},
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_main"
+								]
+							},
+							"x": 0.3,
+							"y": 0.2,
+							"z": 0.6
+						}
+					]
 				}
 			]
 		}

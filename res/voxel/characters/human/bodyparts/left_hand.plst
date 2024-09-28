@@ -6,9 +6,28 @@
 			"name": "left_hand_idle",
 			"children": [
 				{
-					"type": "model",
-					"name": "human_24_left_hand_idle",
-					"source": "voxel/characters/human/obj/fbx/human_24_left_hand_idle.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"y": -0.2,
+							"z": 0.6
+						},
+						{
+							"type": "model",
+							"name": "human_24_left_hand_idle",
+							"source": "voxel/characters/human/obj/fbx/human_24_left_hand_idle.fbx"
+						}
+					]
 				}
 			]
 		},
@@ -17,39 +36,210 @@
 			"name": "left_hand_attack",
 			"children": [
 				{
-					"type": "model",
-					"name": "human_15_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_15_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.3,
+							"y": -0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_15_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_15_left_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_16_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_16_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.4,
+							"y": -0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_16_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_16_left_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_17_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_17_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.5,
+							"y": -0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_17_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_17_left_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_18_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_18_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.5,
+							"y": -0.2,
+							"z": 0.8
+						},
+						{
+							"type": "model",
+							"name": "human_18_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_18_left_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_19_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_19_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.5,
+							"y": -0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_19_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_19_left_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_20_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_20_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.4,
+							"y": -0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_20_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_20_left_hand_attack.fbx"
+						}
+					]
 				},
 				{
-					"type": "model",
-					"name": "human_21_left_hand_attack",
-					"source": "voxel/characters/human/obj/fbx/human_21_left_hand_attack.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "last_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.3,
+							"y": -0.2,
+							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_21_left_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_21_left_hand_attack.fbx"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_raised",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_seco"
+								]
+							},
+							"x": 0.3,
+							"y": -0.2,
+							"z": 0.6
+						},
+						{
+							"type": "model",
+							"name": "human_26_left_hand_raised",
+							"source": "voxel/characters/human/obj/fbx/human_26_left_hand_raised.fbx"
+						}
+					]
 				}
 			]
 		}

@@ -24,7 +24,7 @@ class EntityComposerViewProvider implements IEntityViewProvider {
 
 	public function createView(
 		viewComponent : EntityViewComponent,
-		setting : EntityViewExtraInitSetting
+		setting : EntityViewExtraInitSetting = None
 	) : IEntityView {
 		return new EntityComposerView( viewComponent, file, animations );
 	}

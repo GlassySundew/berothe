@@ -37,9 +37,70 @@
 					"source": "voxel/characters/human/obj/fbx/human_3_torso_walk.fbx"
 				},
 				{
-					"type": "model",
-					"name": "human_4_torso_walk",
-					"source": "voxel/characters/human/obj/fbx/human_4_torso_walk.fbx"
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "human_4_torso_walk",
+							"source": "voxel/characters/human/obj/fbx/human_4_torso_walk.fbx"
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"leg_left"
+								]
+							}
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"leg_left"
+								]
+							}
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"leg_left"
+								]
+							}
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"leg_left"
+								]
+							}
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"leg_left"
+								]
+							}
+						}
+					]
 				},
 				{
 					"type": "model",

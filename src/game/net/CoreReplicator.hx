@@ -39,7 +39,7 @@ class CoreReplicator {
 		entityId : String
 	) : EntityReplicator {
 		var entityRepl = entities[entityId];
-		Assert.notNull( entityRepl, "entity replicator is not found when creating sync bridge" );
+		Assert.notNull( entityRepl, 'entity replicator: $entityId is not found' );
 		return entityRepl;
 	}
 
@@ -47,7 +47,7 @@ class CoreReplicator {
 		location : Location
 	) : LocationReplicator {
 		var locationRepl = locations[location.id];
-		Assert.notNull( locationRepl, "location replication manager is not found when creating sync bridge" );
+		Assert.notNull( locationRepl, 'location replication manager is not found' );
 		return locationRepl;
 	}
 
@@ -55,7 +55,7 @@ class CoreReplicator {
 		item : Item
 	) : ItemReplicator {
 		var itemRepl = items[item.id];
-		Assert.notNull( itemRepl, "item replicator is not found when creating sync bridge" );
+		Assert.notNull( itemRepl, 'item replicator is not found' );
 		return itemRepl;
 	}
 
@@ -77,6 +77,8 @@ class CoreReplicator {
 		entity.location.onAppear(
 			( location ) -> entityReplicator.addChild( locations[location.id] )
 		);
+
+		entityReplicator.followServer();
 	}
 
 	function onItemCreated( item : Item ) {

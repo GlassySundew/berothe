@@ -1,5 +1,8 @@
 package game.net.entity.component.model;
 
+import util.Assert;
+import game.client.en.comp.view.EntityViewComponent;
+import game.domain.overworld.entity.OverworldEntity;
 import game.net.item.EquipSlotReplicator;
 import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.net.item.ItemReplicator;
@@ -12,15 +15,26 @@ import hxbit.NetworkSerializable.NetworkSerializer;
 import game.domain.overworld.entity.component.model.EntityEquip;
 import net.NetNode;
 
+#if client
+import game.client.item.ItemEquipView;
+#end
+
 class EntityEquipReplicator extends NetNode {
+
+	@:s final entityRepl : EntityReplicator;
 
 	final entityEquip : EntityEquip;
 
 	@:s var slots : NSArray<EquipSlotReplicator> = new NSArray();
 
-	public function new( entityEquip : EntityEquip, ?parent ) {
+	public function new(
+		entityEquip : EntityEquip,
+		entityRepl : EntityReplicator,
+		?parent
+	) {
 		super( parent );
 		this.entityEquip = entityEquip;
+		this.entityRepl = entityRepl;
 
 		initializeSlots();
 	}
@@ -41,6 +55,7 @@ class EntityEquipReplicator extends NetNode {
 		}
 	}
 
+	#if client
 	override function alive() {
 		super.alive();
 		slots.subscribleWithMapping( ( elem ) -> {
@@ -58,6 +73,12 @@ class EntityEquipReplicator extends NetNode {
 		if ( itemRepl == null ) return;
 		trace( "item repl change detected" );
 
-		
+		var viewComp = entityRepl.entity.result.components.get( EntityViewComponent );
+		Assert.notNull( viewComp );
+
+		itemRepl.item.then( ( item ) -> {
+			new ItemEquipView( item, type, viewComp );
+		} );
 	}
+	#end
 }

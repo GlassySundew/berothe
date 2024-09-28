@@ -6,4 +6,5 @@ interface IEntityView {
 
 	function dispose() : Void;
 	function getGraphics() : ThreeDObjectNode;
+	function addChildView( view : IEntityView ) : Void;
 }

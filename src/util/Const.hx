@@ -41,4 +41,6 @@ class Const {
 	public static final G_PHYSICS : Int = 1;
 	public static final G_HITBOX : Int = 2;
 	public static final G_TEST : Int = 4;
+
+	public static final cdbTypeIdent : String = "$cdbtype";
 }

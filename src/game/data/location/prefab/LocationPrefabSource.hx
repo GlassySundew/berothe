@@ -1,5 +1,6 @@
 package game.data.location.prefab;
 
+import util.Const;
 import game.data.storage.DataStorage;
 import hrt.prefab.Prefab;
 import hrt.prefab.l3d.Instance;
@@ -10,12 +11,6 @@ import game.data.location.objects.LocationEntityVO;
 import game.data.location.objects.LocationSpawnVO;
 import game.data.storage.entity.EntityDescription;
 
-enum abstract DataSheetIdent( String ) from String {
-
-	var ENTITY_SPAWNPOINT = "entitySpawnPointDF";
-	var LOCATION_OBJ_CONTAINER_TYPE = "locationObjContainerTypeDF";
-	var LOCATION_ENTITY_PRESENT = "locationEntityDF";
-}
 
 class LocationPrefabSource implements ILocationObjectsDataProvider {
 
@@ -67,7 +62,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	}
 
 	function resolveInstance( instance : Instance ) {
-		var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( instance.props, "$cdbtype" ) );
+		var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( instance.props, Const.cdbTypeIdent ) );
 
 		switch cdbSheetId {
 			case ENTITY_SPAWNPOINT:

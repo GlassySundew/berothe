@@ -209,31 +209,40 @@
 						"model": {
 							"equipment": [
 								{
-									"type": "head"
+									"type": "head",
+									"priority": 0
 								},
 								{
-									"type": "neck"
+									"type": "neck",
+									"priority": 0
 								},
 								{
-									"type": "hand_main"
+									"type": "hand_left",
+									"priority": 0
 								},
 								{
-									"type": "hand_palm_main"
+									"type": "hand_palm_left",
+									"priority": 0
 								},
 								{
-									"type": "hand_seco"
+									"type": "hand_right",
+									"priority": 1
 								},
 								{
-									"type": "hand_palm_seco"
+									"type": "hand_palm_right",
+									"priority": 1
 								},
 								{
-									"type": "leg_right"
+									"type": "leg_right",
+									"priority": 0
 								},
 								{
-									"type": "leg_left"
+									"type": "leg_left",
+									"priority": 0
 								},
 								{
-									"type": "waist"
+									"type": "waist",
+									"priority": 0
 								}
 							],
 							"baseHp": 5,
@@ -255,11 +264,12 @@
 									"cooldown": 0.7,
 									"duration": 0.35,
 									"endX": 2,
-									"key": "attack_prime_attack"
+									"key": "attack_right_attack",
+									"equipSlot": "hand_right"
 								},
 								{
 									"id": "human_hand_attack_left",
-									"key": "attack_seco_attack",
+									"key": "attack_left_attack",
 									"tweenType": 0,
 									"sizeX": 1,
 									"sizeY": 0.4,
@@ -269,7 +279,8 @@
 									"offsetZ": 8,
 									"cooldown": 3.4,
 									"duration": 0.35,
-									"endX": 2
+									"endX": 2,
+									"equipSlot": "hand_left"
 								}
 							]
 						}
@@ -326,16 +337,22 @@
 					"id": "walk"
 				},
 				{
-					"id": "attack_prime_idle"
+					"id": "attack_right_idle"
 				},
 				{
-					"id": "attack_prime_attack"
+					"id": "attack_right_raised"
 				},
 				{
-					"id": "attack_seco_idle"
+					"id": "attack_right_attack"
 				},
 				{
-					"id": "attack_seco_attack"
+					"id": "attack_left_raised"
+				},
+				{
+					"id": "attack_left_idle"
+				},
+				{
+					"id": "attack_left_attack"
 				}
 			],
 			"separators": [],
@@ -580,6 +597,12 @@
 					"name": "type",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "priority",
+					"kind": null,
+					"defaultValue": 0
 				}
 			]
 		},
@@ -604,6 +627,21 @@
 				{
 					"typeStr": "5:Linear",
 					"name": "tweenType",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "cooldown",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "duration",
+					"kind": null
+				},
+				{
+					"typeStr": "6:equipItemType",
+					"name": "equipSlot",
 					"kind": null
 				},
 				{
@@ -634,16 +672,6 @@
 				{
 					"typeStr": "4",
 					"name": "offsetZ",
-					"kind": null
-				},
-				{
-					"typeStr": "4",
-					"name": "cooldown",
-					"kind": null
-				},
-				{
-					"typeStr": "4",
-					"name": "duration",
 					"kind": null
 				},
 				{
@@ -713,7 +741,16 @@
 								}
 							],
 							"id": "human_attack_prime_idle",
-							"key": "attack_prime_idle"
+							"key": "attack_right_idle"
+						},
+						{
+							"id": "human_attack_prime_raised",
+							"key": "attack_right_raised",
+							"animations": [
+								{
+									"key": "right_hand_raised"
+								}
+							]
 						},
 						{
 							"animations": [
@@ -722,7 +759,7 @@
 								}
 							],
 							"id": "human_attack_prime_attack",
-							"key": "attack_prime_attack"
+							"key": "attack_right_attack"
 						},
 						{
 							"animations": [
@@ -731,7 +768,16 @@
 								}
 							],
 							"id": "human_attack_seco_idle",
-							"key": "attack_seco_idle"
+							"key": "attack_left_idle"
+						},
+						{
+							"id": "human_attack_seco_raised",
+							"key": "attack_left_raised",
+							"animations": [
+								{
+									"key": "left_hand_raised"
+								}
+							]
 						},
 						{
 							"animations": [
@@ -740,7 +786,7 @@
 								}
 							],
 							"id": "human_attack_seco_attack",
-							"key": "attack_seco_attack"
+							"key": "attack_left_attack"
 						}
 					]
 				},
@@ -861,10 +907,10 @@
 						"equippable": true,
 						"equipSlots": [
 							{
-								"type": "hand_main"
+								"type": "hand_right"
 							},
 							{
-								"type": "hand_seco"
+								"type": "hand_left"
 							}
 						]
 					},
@@ -949,11 +995,29 @@
 					"file": "voxel/items/club/equip/club.enco",
 					"animations": [
 						{
-							"id": "club_idle",
-							"key": "idle",
+							"id": "club_prime_idle",
+							"key": "attack_right_idle",
 							"animations": [
 								{
 									"key": "idle"
+								}
+							]
+						},
+						{
+							"id": "club_prime_raised",
+							"key": "attack_right_raised",
+							"animations": [
+								{
+									"key": "attack_prime_raised"
+								}
+							]
+						},
+						{
+							"id": "club_prime_action",
+							"key": "attack_right_attack",
+							"animations": [
+								{
+									"key": "attack_prime_attack"
 								}
 							]
 						}
@@ -1020,16 +1084,16 @@
 					"id": "neck"
 				},
 				{
-					"id": "hand_main"
+					"id": "hand_right"
 				},
 				{
-					"id": "hand_palm_main"
+					"id": "hand_palm_right"
 				},
 				{
-					"id": "hand_seco"
+					"id": "hand_left"
 				},
 				{
-					"id": "hand_palm_seco"
+					"id": "hand_palm_left"
 				},
 				{
 					"id": "leg_right"
@@ -1204,6 +1268,20 @@
 						"location"
 					]
 				}
+			}
+		},
+		{
+			"name": "plstSpecialObjDF",
+			"columns": [
+				{
+					"typeStr": "9:PLSTSpecialType",
+					"name": "type",
+					"kind": null
+				}
+			],
+			"separators": [],
+			"props": {
+				"dataFiles": "plstSpecialObjDF"
 			}
 		},
 		{
@@ -1389,6 +1467,20 @@
 				{
 					"name": "Equippable",
 					"args": []
+				}
+			]
+		},
+		{
+			"name": "PLSTSpecialType",
+			"cases": [
+				{
+					"name": "Mountpoint",
+					"args": [
+						{
+							"name": "equip",
+							"typeStr": "6:equipItemType"
+						}
+					]
 				}
 			]
 		}

@@ -12,7 +12,6 @@ class EntityAnimations {
 	public final byKey : Map<AnimationKey, EntityAnimationState> = [];
 
 	public function new( animations : cdb.Types.ArrayRead<Data.EntityView_animations> ) {
-
 		for ( animation in animations ) {
 			var key : AnimationKey = AnimationKey.fromCdb( animation.key );
 

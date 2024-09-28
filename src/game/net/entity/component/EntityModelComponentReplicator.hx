@@ -16,7 +16,8 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		super.followComponentServer( component );
 
 		var modelComp = Std.downcast( component, EntityModelComponent );
-		equipReplicator = new EntityEquipReplicator( modelComp.equip, this );
+		var entityRepl = CoreReplicator.inst.getEntityReplicator( entity );
+		equipReplicator = new EntityEquipReplicator( modelComp.equip, entityRepl, this );
 		inventoryReplicator = new EntityInventoryReplicator( modelComp.inventory, this );
 	}
 

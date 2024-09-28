@@ -33,10 +33,8 @@ class EntityReplicator extends NetNode {
 		id = entity.id;
 
 		transformRepl = new EntityTransformReplicator( this );
-		transformRepl.followEntityServer( entity );
 
 		componentsRepl = new EntityComponentsReplicator( this );
-		componentsRepl.followEntityServer( entity );
 
 		entity.location.addOnValueImmediately( onLocationChanged );
 
@@ -47,6 +45,11 @@ class EntityReplicator extends NetNode {
 		super.unregister( host, ctx );
 		transformRepl.unregister( host, ctx );
 		componentsRepl.unregister( host, ctx );
+	}
+
+	public function followServer() {
+		componentsRepl.followEntityServer( entity.result );
+		transformRepl.followEntityServer( entity.result );
 	}
 
 	#if client

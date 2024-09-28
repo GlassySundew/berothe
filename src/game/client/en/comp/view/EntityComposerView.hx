@@ -1,5 +1,9 @@
 package game.client.en.comp.view;
 
+import util.Assert;
+import haxe.exceptions.NotImplementedException;
+import core.NodeBase;
+import plugins.bodyparts_animations.src.customObj.PlayStates;
 import game.client.en.comp.view.anim.AttackAnimationState;
 import game.domain.overworld.entity.component.combat.EntityAttackListItem;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
@@ -11,14 +15,22 @@ import game.data.storage.entity.body.view.AnimationKey;
 import plugins.bodyparts_animations.src.customObj.EntityComposer;
 import graphics.ThreeDObjectNode;
 
-class EntityComposerView implements IEntityView {
+class EntityComposerView extends NodeBase<EntityComposerView> implements IEntityView {
 
 	static final attackKeyList = [
-		{ idle : ATTACK_PRIME_IDLE, active : ATTACK_PRIME_ATTACK },
-		{ idle : ATTACK_SECO_IDLE, active : ATTACK_SECO_ATTACK }
+		{
+			idle : ATTACK_RIGHT_IDLE,
+			raised : ATTACK_RIGHT_RAISED,
+			active : ATTACK_RIGHT_ATTACK
+		},
+		{
+			idle : ATTACK_LEFT_IDLE,
+			raised : ATTACK_LEFT_RAISED,
+			active : ATTACK_LEFT_ATTACK
+		}
 	];
 
-	final entityComposer : EntityComposer;
+	public final entityComposer : EntityComposer;
 	final object : ThreeDObjectNode;
 	final stateListeners : Map<AnimationKey, AnimationState> = [];
 	final viewComponent : EntityViewComponent;
@@ -33,6 +45,7 @@ class EntityComposerView implements IEntityView {
 		file : String,
 		animations : EntityAnimations
 	) {
+		super( null );
 		this.viewComponent = viewComponent;
 		this.animations = animations;
 		this.file = file;
@@ -59,8 +72,24 @@ class EntityComposerView implements IEntityView {
 		return object;
 	}
 
+	public function addChildView( view : IEntityView ) @:privateAccess {
+		getGraphics().heapsObject.children[0].addChild( view.getGraphics().heapsObject );
+
+		switch Type.getClass( view ) {
+			case EntityComposerView:
+				addChild( Std.downcast( view, EntityComposerView ) );
+
+			case EntityStaticBoxView: throw new NotImplementedException();
+		}
+	}
+
 	function update( dt, tmod ) {
-		entityComposer?.animationManager.update( dt );
+		if ( entityComposer.animationManager == null ) {
+			trace( "animation manager keeps being null" );
+			return;
+		}
+
+		entityComposer.animationManager.update( dt );
 
 		for ( key => listener in stateListeners ) {
 			if ( listener.listener() ) {
@@ -74,6 +103,10 @@ class EntityComposerView implements IEntityView {
 	}
 
 	function playAnimation( animationKey : AnimationKey, listener : AnimationState, tmod : Float ) {
+		Assert.notNull(
+			animations.byKey[animationKey],
+			"animation node: " + animationKey + " not found in file: " + file
+		);
 		for ( animation in animations.byKey[animationKey].keys ) {
 			var animationContainer = entityComposer.animationManager.animationGroups[animation];
 			if ( animationContainer == null ) {
@@ -82,6 +115,12 @@ class EntityComposerView implements IEntityView {
 			}
 			animationContainer.setPlay( true, listener.getSpeed() / tmod );
 			listener.playedOnContainer( animationContainer );
+
+			for ( child in children ) {
+				if ( child.animations.byKey[animationKey] != null ) {
+					child.playAnimation( animationKey, listener, tmod );
+				}
+			}
 		}
 	}
 
@@ -96,13 +135,16 @@ class EntityComposerView implements IEntityView {
 			EntityAttackListComponent,
 			( cl, component ) -> {
 				for ( attackAnimItem in attackKeyList ) {
+					var attackItem = component.getItemByAnimationKey( attackAnimItem.active );
+					if ( attackItem == null ) continue;
+
 					if ( animations.byKey.get( attackAnimItem.idle ) != null ) {
-						var attackItem = component.getItemByAnimationKey( attackAnimItem.active );
-						if ( attackItem == null ) continue;
 						stateListeners[attackAnimItem.idle] = new AnimationState( attackIdleListener.bind( attackItem ) );
 					}
+					if ( animations.byKey.get( attackAnimItem.raised ) != null ) {
+						stateListeners[attackAnimItem.raised] = new AnimationState( attackRaisedListener.bind( attackItem ) );
+					}
 					if ( animations.byKey.get( attackAnimItem.active ) != null ) {
-						var attackItem = component.getItemByAnimationKey( attackAnimItem.active );
 						stateListeners[attackAnimItem.active] = new AttackAnimationState( attackItem );
 					}
 				}
@@ -119,6 +161,10 @@ class EntityComposerView implements IEntityView {
 	}
 
 	inline function attackIdleListener( attackItem : EntityAttackListItem ) : Bool {
-		return !attackItem.isAttacking();
+		return !attackItem.isAttacking() && !attackItem.isRaised;
+	}
+
+	inline function attackRaisedListener( attackItem : EntityAttackListItem ) : Bool {
+		return !attackItem.isAttacking() && attackItem.isRaised;
 	}
 }

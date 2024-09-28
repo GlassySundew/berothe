@@ -13,8 +13,9 @@ class EntityInventory extends EntityItemHolderBase {
 
 	public function new( baseInventorySize : Int ) {
 		this.baseInventorySize = baseInventorySize;
-
 		inventorySlots = createInventorySlots( baseInventorySize );
+
+		super();
 	}
 
 	function createInventorySlots( size : Int ) : Array<ItemSlot> {
@@ -23,7 +24,7 @@ class EntityInventory extends EntityItemHolderBase {
 		}];
 	}
 
-	function getItemSlotIterator() : Iterator<IItemContainer> {
+	function getItemSlotIterator() : Iterator<ItemSlot> {
 		return inventorySlots.iterator();
 	}
 }

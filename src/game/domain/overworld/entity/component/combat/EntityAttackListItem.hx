@@ -13,6 +13,8 @@ class EntityAttackListItem {
 
 	public final onAttackPerformed = new Signal();
 
+	public var isRaised( default, null ) : Bool = false;
+
 	var emitter : AttackTweenBoxCastEmitter;
 	var entity : OverworldEntity;
 
@@ -24,6 +26,7 @@ class EntityAttackListItem {
 		if ( !ignoreCooldown && emitter.isOnCooldown() ) return;
 		if ( emitter.isInAction() ) return;
 
+		isRaised = true;
 		emitter.performCasting();
 		onAttackPerformed.dispatch();
 	}
