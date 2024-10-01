@@ -1,5 +1,8 @@
 package game.domain.overworld.entity.component.combat;
 
+import game.domain.overworld.entity.component.model.EntityModelComponent;
+import core.IProperty;
+import core.MutableProperty;
 import signals.Signal;
 import game.domain.overworld.location.Location;
 import game.data.storage.entity.body.properties.AttackListItem;
@@ -10,10 +13,9 @@ import game.data.storage.entity.body.view.AttackTranslationTween;
 class EntityAttackListItem {
 
 	public final desc : AttackListItem;
-
 	public final onAttackPerformed = new Signal();
 
-	public var isRaised( default, null ) : Bool = false;
+	public final isRaised : MutableProperty<Bool> = new MutableProperty();
 
 	var emitter : AttackTweenBoxCastEmitter;
 	var entity : OverworldEntity;
@@ -26,7 +28,7 @@ class EntityAttackListItem {
 		if ( !ignoreCooldown && emitter.isOnCooldown() ) return;
 		if ( emitter.isInAction() ) return;
 
-		isRaised = true;
+		isRaised.val = true;
 		emitter.performCasting();
 		onAttackPerformed.dispatch();
 	}

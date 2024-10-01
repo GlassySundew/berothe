@@ -210,44 +210,89 @@
 							"equipment": [
 								{
 									"type": "head",
-									"priority": 0
+									"priority": 0,
+									"links": []
 								},
 								{
 									"type": "neck",
-									"priority": 0
+									"priority": 0,
+									"links": []
+								},
+								{
+									"priority": 0,
+									"type": "ring_right",
+									"links": [
+										{
+											"type": "hand_right"
+										}
+									]
+								},
+								{
+									"type": "ring_left",
+									"priority": 0,
+									"links": [
+										{
+											"type": "hand_left"
+										}
+									]
 								},
 								{
 									"type": "hand_left",
-									"priority": 0
+									"priority": 0,
+									"links": []
 								},
 								{
 									"type": "hand_palm_left",
-									"priority": 0
+									"priority": 0,
+									"links": [
+										{
+											"type": "hand_left"
+										}
+									]
 								},
 								{
 									"type": "hand_right",
-									"priority": 1
+									"priority": 1,
+									"links": []
 								},
 								{
 									"type": "hand_palm_right",
-									"priority": 1
+									"priority": 1,
+									"links": [
+										{
+											"type": "hand_right"
+										}
+									]
 								},
 								{
 									"type": "leg_right",
-									"priority": 0
+									"priority": 0,
+									"links": []
 								},
 								{
 									"type": "leg_left",
-									"priority": 0
+									"priority": 0,
+									"links": []
 								},
 								{
 									"type": "waist",
-									"priority": 0
+									"priority": 0,
+									"links": []
 								}
 							],
 							"baseHp": 5,
 							"id": "humanModel",
-							"baseInventorySize": 4
+							"baseInventorySize": 4,
+							"baseAttack": [
+								{
+									"attack": "human_hand_attack_right",
+									"amount": 1
+								},
+								{
+									"attack": "human_hand_attack_left",
+									"amount": 1
+								}
+							]
 						},
 						"attack": {
 							"id": "human_attack",
@@ -319,6 +364,27 @@
 					"id": "club"
 				}
 			],
+			"props": {}
+		},
+		{
+			"name": "entityAdditiveStat",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "attack"
+				},
+				{
+					"id": "defence"
+				}
+			],
+			"separators": [],
 			"props": {}
 		},
 		{
@@ -555,6 +621,12 @@
 					"name": "baseInventorySize",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "baseAttack",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -593,16 +665,55 @@
 			"lines": [],
 			"columns": [
 				{
-					"typeStr": "6:equipItemType",
-					"name": "type",
-					"opt": true,
-					"kind": null
+					"typeStr": "6:equipSlotType",
+					"name": "type"
 				},
 				{
 					"typeStr": "3",
 					"name": "priority",
 					"kind": null,
 					"defaultValue": 0
+				},
+				{
+					"typeStr": "8",
+					"name": "links",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@model@equipment@links",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:equipSlotType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@model@baseAttack",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:entityProperty@properties@attack@attackList",
+					"name": "attack",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "amount",
+					"kind": null,
+					"defaultValue": 1
 				}
 			]
 		},
@@ -640,7 +751,7 @@
 					"kind": null
 				},
 				{
-					"typeStr": "6:equipItemType",
+					"typeStr": "6:equipSlotType",
 					"name": "equipSlot",
 					"kind": null
 				},
@@ -912,6 +1023,12 @@
 							{
 								"type": "hand_left"
 							}
+						],
+						"equipStats": [
+							{
+								"type": "attack",
+								"amount": 3
+							}
 						]
 					},
 					"type": 3
@@ -951,6 +1068,11 @@
 					"name": "equipSlots",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "equipStats",
+					"opt": true
 				}
 			]
 		},
@@ -963,9 +1085,30 @@
 			"lines": [],
 			"columns": [
 				{
-					"typeStr": "6:equipItemType",
+					"typeStr": "6:equipSlotType",
 					"name": "type",
 					"kind": null
+				}
+			]
+		},
+		{
+			"name": "item@props@equipStats",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:entityAdditiveStat",
+					"name": "type",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "amount",
+					"kind": null,
+					"defaultValue": 1
 				}
 			]
 		},
@@ -1067,7 +1210,7 @@
 			]
 		},
 		{
-			"name": "equipItemType",
+			"name": "equipSlotType",
 			"columns": [
 				{
 					"typeStr": "0",
@@ -1082,6 +1225,12 @@
 				},
 				{
 					"id": "neck"
+				},
+				{
+					"id": "ring_right"
+				},
+				{
+					"id": "ring_left"
 				},
 				{
 					"id": "hand_right"
@@ -1478,7 +1627,7 @@
 					"args": [
 						{
 							"name": "equip",
-							"typeStr": "6:equipItemType"
+							"typeStr": "6:equipSlotType"
 						}
 					]
 				}

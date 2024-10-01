@@ -16,7 +16,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"y": 0.2,
@@ -46,7 +46,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.3,
@@ -71,7 +71,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.4,
@@ -96,7 +96,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.5,
@@ -121,7 +121,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.5,
@@ -146,7 +146,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.5,
@@ -171,7 +171,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.4,
@@ -190,23 +190,23 @@
 					"name": "parallelPlay",
 					"children": [
 						{
-							"type": "model",
-							"name": "human_14_right_hand_attack",
-							"source": "voxel/characters/human/obj/fbx/human_14_right_hand_attack.fbx"
-						},
-						{
 							"type": "object",
 							"name": "last_attk_mount",
 							"props": {
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.3,
 							"y": 0.2,
 							"z": 0.7
+						},
+						{
+							"type": "model",
+							"name": "human_14_right_hand_attack",
+							"source": "voxel/characters/human/obj/fbx/human_14_right_hand_attack.fbx"
 						}
 					]
 				}
@@ -232,7 +232,7 @@
 								"$cdbtype": "plstSpecialObjDF",
 								"type": [
 									0,
-									"hand_main"
+									"hand_right"
 								]
 							},
 							"x": 0.3,

@@ -12,6 +12,7 @@ class EntityModelComponent extends EntityComponent {
 
 	public final inventory : EntityInventory;
 	public final equip : EntityEquip;
+	public final stats : EntityStats;
 
 	final desc : EntityModelDescription;
 
@@ -19,8 +20,9 @@ class EntityModelComponent extends EntityComponent {
 		super( desc );
 		this.desc = desc;
 
-		equip = new EntityEquip( desc.equipSlots );
+		equip = new EntityEquip( this, desc.equipSlots );
 		inventory = new EntityInventory( desc.baseInventorySize );
+		stats = new EntityStats( desc );
 	}
 
 	public function tryPickupItem( item : Item ) : ItemPickupAttemptResult {
@@ -36,5 +38,10 @@ class EntityModelComponent extends EntityComponent {
 		if ( inventory.hasSpaceForItem( itemDesc, amount ) ) return true;
 
 		return false;
+	}
+
+	override function attachToEntity( entity : OverworldEntity ) {
+		super.attachToEntity( entity );
+		stats.attachToEntity( entity );
 	}
 }

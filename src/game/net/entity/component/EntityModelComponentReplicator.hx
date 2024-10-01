@@ -12,11 +12,10 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s var equipReplicator : EntityEquipReplicator;
 	@:s var inventoryReplicator : EntityInventoryReplicator;
 
-	override function followComponentServer( component : EntityComponent ) {
-		super.followComponentServer( component );
+	override function followComponentServer( component : EntityComponent, entityRepl ) {
+		super.followComponentServer( component, entityRepl );
 
 		var modelComp = Std.downcast( component, EntityModelComponent );
-		var entityRepl = CoreReplicator.inst.getEntityReplicator( entity );
 		equipReplicator = new EntityEquipReplicator( modelComp.equip, entityRepl, this );
 		inventoryReplicator = new EntityInventoryReplicator( modelComp.inventory, this );
 	}

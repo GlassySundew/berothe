@@ -7,7 +7,7 @@ import game.net.entity.EntityComponentReplicatorBase;
 
 class EntityViewComponentReplicator extends EntityComponentReplicatorBase {
 
-	override function followComponentClient( entity : OverworldEntity ) {
+	override function followComponentClient( entity ) {
 		super.followComponentClient( entity );
 
 		followedComponent.then( ( component ) -> {

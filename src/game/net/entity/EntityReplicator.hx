@@ -48,8 +48,8 @@ class EntityReplicator extends NetNode {
 	}
 
 	public function followServer() {
-		componentsRepl.followEntityServer( entity.result );
-		transformRepl.followEntityServer( entity.result );
+		componentsRepl.followEntityServer( this );
+		transformRepl.followEntityServer( this );
 	}
 
 	#if client
@@ -68,8 +68,6 @@ class EntityReplicator extends NetNode {
 				onEntityDisposed();
 			}
 		);
-
-		trace( entity.result.chunk.getValue() );
 	}
 
 	@:rpc( clients )
@@ -82,17 +80,15 @@ class EntityReplicator extends NetNode {
 
 		var desc = DataStorage.inst.entityStorage.getDescriptionById( entityDescriptionId );
 		var entityLocal = new OverworldEntity( desc, id );
-		componentsRepl.followEntityClient( entityLocal );
-		transformRepl.followEntityClient( entityLocal );
-
-		EntityFactory.createAndAttachClientComponentsFromProperties( desc, entityLocal );
 
 		entity.resolve( entityLocal );
+		EntityFactory.createAndAttachClientComponentsFromProperties( desc, entityLocal );
+		
+		componentsRepl.followEntityClient( this );
+		transformRepl.followEntityClient( this );
 	}
 
 	function onEntityDisposed( ?v ) {
-		trace( "entity net disposed" );
-
 		unregister( NetworkHost.current );
 		componentsRepl.dispose();
 		parent?.removeChild( this );

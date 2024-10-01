@@ -5,12 +5,12 @@ import game.data.storage.entity.model.EntityEquipmentSlotType;
 
 class EquipItemSlot extends ItemSlot {
 
-	public final equipType : EntityEquipSlotDescription;
+	public final desc : EntityEquipSlotDescription;
 
-	public function new( equipType : EntityEquipSlotDescription, ?restriction ) {
-		super( equipType.priority, restriction );
-		this.equipType = equipType;
+	public function new( desc : EntityEquipSlotDescription, ?restriction ) {
+		super( desc.priority, restriction );
+		this.desc = desc;
 		this.restriction.isEquipment = true;
-		this.restriction.equipmentType = equipType.type;
+		this.restriction.equipmentType = desc.type;
 	}
 }

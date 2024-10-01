@@ -1,5 +1,6 @@
 package game.data.storage.entity.body.properties;
 
+import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.domain.overworld.entity.component.combat.EntityAttackListItem;
 import net.NetNode;
 import game.net.entity.EntityComponentReplicatorBase;
@@ -13,7 +14,12 @@ class AttackListItem {
 		attack : Data.EntityProperty_properties_attack_attackList
 	) : AttackListItem {
 		return new AttackListItem(
+			attack.id.toString(),
 			AnimationKey.fromCdb( attack.key ),
+			attack.cooldown,
+			attack.duration,
+			attack.equipSlot == null ? null : EntityEquipmentSlotType.fromCdb( attack.equipSlot ),
+			attack.endX,
 			AttackTranslationTween.fromCdb( attack.tweenType ),
 			attack.offsetX,
 			attack.offsetY,
@@ -21,31 +27,33 @@ class AttackListItem {
 			attack.sizeX,
 			attack.sizeY,
 			attack.sizeZ,
-			attack.cooldown,
-			attack.duration,
-			attack.endX,
-			attack.id.toString(),
 		);
 	}
 
+	public final id : String;
+
 	public final key : AnimationKey;
-	public final transition : AttackTranslationTween;
 	public final cooldown : Float;
 	public final duration : Float;
-	public final endX : Float;
 	public final tweenType : AttackTranslationTween;
 
+	public final transition : AttackTranslationTween;
 	public final offsetX : Float = 0;
 	public final offsetY : Float = 0;
 	public final offsetZ : Float = 0;
 	public final sizeX : Float = 0;
 	public final sizeY : Float = 0;
 	public final sizeZ : Float = 0;
-
-	public final id : String;
+	public final endX : Float;
+	public final equipSlotType : Null<EntityEquipmentSlotType>;
 
 	public inline function new(
+		id : String,
 		key : AnimationKey,
+		cooldown : Float,
+		duration : Float,
+		equipSlotType : Null<EntityEquipmentSlotType>,
+		endX : Float,
 		tweenType : AttackTranslationTween,
 		offsetX : Float,
 		offsetY : Float,
@@ -53,12 +61,7 @@ class AttackListItem {
 		sizeX : Float,
 		sizeY : Float,
 		sizeZ : Float,
-		cooldown : Float,
-		duration : Float,
-		endX : Float,
-		id : String
 	) {
-
 		this.id = id;
 
 		this.offsetX = offsetX;
@@ -67,12 +70,13 @@ class AttackListItem {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.sizeZ = sizeZ;
+		this.endX = endX;
 
 		this.tweenType = tweenType;
 		this.transition = tweenType;
 		this.key = key;
 		this.cooldown = cooldown;
 		this.duration = duration;
-		this.endX = endX;
+		this.equipSlotType = equipSlotType;
 	}
 }

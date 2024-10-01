@@ -10,11 +10,11 @@ class ItemSlot implements IItemContainer {
 	public final restriction : ItemRestriction;
 	public final priority : Int;
 
+	final item : MutableProperty<Item> = new MutableProperty();
 	public var itemProp( get, never ) : IProperty<Item>;
 	function get_itemProp() : IProperty<Item> {
 		return item;
 	}
-	final item : MutableProperty<Item> = new MutableProperty();
 
 	public function new(
 		?priority : Int = 0,
@@ -42,6 +42,7 @@ class ItemSlot implements IItemContainer {
 	public function removeItem( amount : Int = 1 ) {
 		// todo make item amount reduce
 
+		item.val.setContainer( null );
 		item.val = null;
 	}
 

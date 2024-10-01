@@ -21,10 +21,9 @@ import game.client.item.ItemEquipView;
 
 class EntityEquipReplicator extends NetNode {
 
-	@:s final entityRepl : EntityReplicator;
-
 	final entityEquip : EntityEquip;
-
+	
+	@:s final entityRepl : EntityReplicator;
 	@:s var slots : NSArray<EquipSlotReplicator> = new NSArray();
 
 	public function new(
@@ -71,7 +70,6 @@ class EntityEquipReplicator extends NetNode {
 		type : EntityEquipmentSlotType
 	) {
 		if ( itemRepl == null ) return;
-		trace( "item repl change detected" );
 
 		var viewComp = entityRepl.entity.result.components.get( EntityViewComponent );
 		Assert.notNull( viewComp );

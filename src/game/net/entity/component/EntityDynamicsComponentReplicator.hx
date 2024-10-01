@@ -9,7 +9,7 @@ class EntityDynamicsComponentReplicator extends EntityComponentReplicatorBase {
 
 	@:s public var isMovementApplied : NSMutableProperty<Bool> = new NSMutableProperty();
 
-	override function followComponentClient( entity : OverworldEntity ) {
+	override function followComponentClient( entity : EntityReplicator ) {
 		super.followComponentClient( entity );
 		followedComponent.then( ( component ) -> {
 			networkToModel( Std.downcast( component, EntityDynamicsComponent ) );
@@ -17,8 +17,11 @@ class EntityDynamicsComponentReplicator extends EntityComponentReplicatorBase {
 		} );
 	}
 
-	override function followComponentServer( component : EntityComponent ) {
-		super.followComponentServer( component );
+	override function followComponentServer(
+		component : EntityComponent,
+		entityRepl
+	) {
+		super.followComponentServer( component, entityRepl );
 		modelToNetwork( Std.downcast( component, EntityDynamicsComponent ) );
 		networkToModel( Std.downcast( component, EntityDynamicsComponent ) );
 	}

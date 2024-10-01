@@ -34,8 +34,7 @@ class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 		var entityRepl = CoreReplicator.inst.getEntityReplicatorById( entityReplId );
 		pickableComponent.pickupBy( entityRepl.entity.result );
 
-		var thisEntity = CoreReplicator.inst.getEntityReplicator( entity );
-		thisEntity.__host = null;
+		this.entityRepl.__host = null;
 	}
 
 	override public function networkAllow(
@@ -51,11 +50,11 @@ class EntityPickableComponentReplicator extends EntityComponentReplicatorBase {
 	}
 
 	#if client
-	override function followComponentClient( entity : OverworldEntity ) {
-		super.followComponentClient( entity );
+	override function followComponentClient( entityRepl : EntityReplicator ) {
+		super.followComponentClient( entityRepl );
 
 		followedComponent.then( ( component ) -> {
-			entity.components.onAppear(
+			entityRepl.entity.result.components.onAppear(
 				EntityViewComponent,
 				( _, viewComp ) -> createInteractor( viewComp )
 			);

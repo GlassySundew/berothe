@@ -20,7 +20,7 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 	public var component( default, null ) : EntityComponent;
 
 	@:s var componentDescId : NSMutableProperty<String> = new NSMutableProperty();
-	var entity : OverworldEntity;
+	var entityRepl : EntityReplicator;
 
 	override function init() {
 		classType = Type.getClass( this );
@@ -39,15 +39,18 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 		} );
 	}
 
-	public function followComponentClient( entity : OverworldEntity ) {
-		this.entity = entity;
+	public function followComponentClient( entityRepl ) {
+		this.entityRepl = entityRepl;
 		followedComponent.then( ( component ) -> {
-			entity.components.add( component );
+			entityRepl.entity.result.components.add( component );
 		} );
 	}
 
-	public function followComponentServer( component : EntityComponent ) : Void {
-		entity = component.entity;
+	public function followComponentServer(
+		component : EntityComponent,
+		entityRepl : EntityReplicator
+	) : Void {
+		this.entityRepl = entityRepl;
 		this.component = component;
 		componentDescId.val = component.description.id.toString();
 		followedComponent.resolve( component );

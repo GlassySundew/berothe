@@ -1,16 +1,23 @@
 package game.data.storage.item;
 
+import game.data.storage.entity.model.EntityAdditiveStatType;
 import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.data.storage.entity.body.view.IEntityViewProvider;
 import game.data.storage.entity.body.view.EntityComposerViewProvider;
 
+typedef EquipStat = {
+	var type : EntityAdditiveStatType;
+	var amount : Int;
+}
+
 class ItemDescription extends DescriptionBase {
 
 	public final types : Array<ItemType>;
-	
+
 	public final equippable : Bool;
 	public final equipAsset : Null<IEntityViewProvider>;
 	public final equipSlots : Null<Array<EntityEquipmentSlotType>>;
+	public final equipStats : Null<Array<EquipStat>>;
 
 	public function new( entry : Data.Item ) {
 		super( entry.id.toString() );
@@ -26,6 +33,14 @@ class ItemDescription extends DescriptionBase {
 			equipSlots = [
 				for ( slot in entry.props.equipSlots ) {
 					EntityEquipmentSlotType.fromCdb( slot.type );
+				}
+			];
+			equipStats = [
+				for ( stat in entry.props.equipStats ) {
+					{
+						type : EntityAdditiveStatType.fromCdb( stat.type ),
+						amount : stat.amount
+					}
 				}
 			];
 		}

@@ -24,22 +24,22 @@ class EntityTransformReplicator extends NetNode {
 	public var modelToNetworkStream( default, null ) : Composite;
 	public var networkToModelStream( default, null ) : Composite;
 
-	var entity : OverworldEntity;
+	var entityRepl : EntityReplicator;
 
 	public function new( ?parent ) {
 		super( parent );
 	}
 
-	public function followEntityServer( entity : OverworldEntity ) {
-		this.entity = entity;
+	public function followEntityServer( entityRepl : EntityReplicator ) {
+		this.entityRepl = entityRepl;
 
 		// entity.transform.x.addOnValue( val -> trace( "got player x repl as " + val ) );
 
 		setupServerSyncronization();
 	}
 
-	public function followEntityClient( entity : OverworldEntity ) {
-		this.entity = entity;
+	public function followEntityClient( entityRepl : EntityReplicator ) {
+		this.entityRepl = entityRepl;
 
 		setupClientSyncronization();
 	}
@@ -48,6 +48,8 @@ class EntityTransformReplicator extends NetNode {
 		modelToNetworkStream?.unsubscribe();
 		modelToNetworkStream = new Composite();
 
+		var entity = entityRepl.entity.result;
+		
 		modelToNetworkStream.add( entity.transform.x.subscribeProp( x ) );
 		modelToNetworkStream.add( entity.transform.y.subscribeProp( y ) );
 		modelToNetworkStream.add( entity.transform.z.subscribeProp( z ) );
@@ -64,6 +66,8 @@ class EntityTransformReplicator extends NetNode {
 	public function createNetworkToModelStream() {
 		networkToModelStream?.unsubscribe();
 		networkToModelStream = new Composite();
+		
+		var entity = entityRepl.entity.result;
 
 		networkToModelStream.add( x.subscribeProp( entity.transform.x ) );
 		networkToModelStream.add( y.subscribeProp( entity.transform.y ) );

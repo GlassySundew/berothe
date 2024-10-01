@@ -161,10 +161,10 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 	}
 
 	inline function attackIdleListener( attackItem : EntityAttackListItem ) : Bool {
-		return !attackItem.isAttacking() && !attackItem.isRaised;
+		return !attackItem.isAttacking() && !attackItem.isRaised.getValue();
 	}
 
 	inline function attackRaisedListener( attackItem : EntityAttackListItem ) : Bool {
-		return !attackItem.isAttacking() && attackItem.isRaised;
+		return !attackItem.isAttacking() && attackItem.isRaised.getValue();
 	}
 }

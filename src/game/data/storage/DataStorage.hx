@@ -14,7 +14,6 @@ class DataStorage {
 	public final locationStorage : LocationDescriptionStorage = new LocationDescriptionStorage();
 	public final entityPresetStorage : EntityPresetDescriptionStorage = new EntityPresetDescriptionStorage();
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
-	public final entityEquip : ItemDescriptionStorage = new ItemDescriptionStorage();
 	public final itemStorage : ItemDescriptionStorage = new ItemDescriptionStorage();
 	public final rule : RuleStorage;
 

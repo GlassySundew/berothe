@@ -21,24 +21,24 @@ class EntityComponentsReplicator extends NetNode {
 		Class<EntityComponentReplicatorBase>,
 		EntityComponentReplicatorBase> = new NSClassMap();
 
-	var entity : OverworldEntity;
+	var entityRepl : EntityReplicator;
 	var isMappingFinished = false;
 
 	public function new( ?parent ) {
 		super( parent );
 	}
 
-	public function followEntityServer( entity : OverworldEntity ) {
-		Assert.isNull( this.entity, "double entity following for single replicator of components" );
+	public function followEntityServer( entityRepl : EntityReplicator ) {
+		Assert.isNull( this.entityRepl, "double entity following for single replicator of components" );
 
-		this.entity = entity;
+		this.entityRepl = entityRepl;
 
-		entity.components.map( onComponentAdded );
+		entityRepl.entity.result.components.map( onComponentAdded );
 		isMappingFinished = true;
-		entity.components.onComponentAdded.add( onComponentAdded );
+		entityRepl.entity.result.components.onComponentAdded.add( onComponentAdded );
 	}
 
-	public function followEntityClient( entity : OverworldEntity ) {
+	public function followEntityClient( entity : EntityReplicator ) {
 		components.subscribleWithMapping( ( classType, component ) -> {
 			Assert.notNull( component );
 			component.followComponentClient( entity );
@@ -54,12 +54,12 @@ class EntityComponentsReplicator extends NetNode {
 
 	function onComponentAdded( component : EntityComponent ) {
 		var replicator = component.description.buildCompReplicator( this );
-		replicator?.followComponentServer( component );
+		replicator?.followComponentServer( component, entityRepl );
 		if ( replicator != null ) components[replicator.classType] = replicator;
 
 		if (
 			isMappingFinished
-			&& entity.components.get( component.classType ) != null
+			&& entityRepl.entity.result.components.get( component.classType ) != null
 		)
 			trace( "apparently bad logic, double component set: " + component.classType );
 
