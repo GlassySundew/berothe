@@ -1,5 +1,6 @@
 package game.net.entity.component;
 
+import game.net.entity.component.model.EntityStatsReplicator;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import game.net.entity.component.model.EntityInventoryReplicator;
 import hxbit.NetworkHost;
@@ -9,6 +10,8 @@ import game.domain.overworld.entity.EntityComponent;
 
 class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
+	@:s public var statsRepl : EntityStatsReplicator;
+	
 	@:s var equipReplicator : EntityEquipReplicator;
 	@:s var inventoryReplicator : EntityInventoryReplicator;
 
@@ -16,6 +19,8 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		super.followComponentServer( component, entityRepl );
 
 		var modelComp = Std.downcast( component, EntityModelComponent );
+
+		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipReplicator = new EntityEquipReplicator( modelComp.equip, entityRepl, this );
 		inventoryReplicator = new EntityInventoryReplicator( modelComp.inventory, this );
 	}

@@ -18,7 +18,7 @@ var typeConversion : Map<Data.EquipSlotTypeKind, EntityEquipmentSlotType> = //
 		leg_left => EQUIP_LEG_LEFT,
 	];
 
-enum abstract EntityEquipmentSlotType( Int ) {
+enum abstract EntityEquipmentSlotType( Int ) from Int to Int {
 
 	var EQUIP_HEAD;
 	var EQUIP_NECK;

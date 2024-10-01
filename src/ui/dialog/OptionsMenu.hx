@@ -9,7 +9,7 @@ import hxd.Event;
 import h2d.Object;
 import h2d.Flow;
 
-class OptionsMenu extends FocusMenu {
+class OptionsMenu extends PopupBase {
 
 	var nicknameInput : TextInput;
 

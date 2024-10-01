@@ -12,11 +12,11 @@ import dn.Process;
 import h2d.Flow;
 import h2d.Graphics;
 import h2d.Object;
-import ui.dialog.FocusMenu;
+import ui.dialog.PopupBase;
 import ui.dialog.OptionsMenu;
 import ui.dialog.SaveManager;
 
-class PauseMenu extends FocusMenu {
+class PauseMenu extends PopupBase {
 
 	public static var inst : PauseMenu;
 

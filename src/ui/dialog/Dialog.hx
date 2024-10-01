@@ -2,4 +2,4 @@ package ui.dialog;
 
 
 
-class Dialog extends FocusMenu {}
+class Dialog extends PopupBase {}

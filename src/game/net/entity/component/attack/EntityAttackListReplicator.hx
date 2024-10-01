@@ -1,5 +1,7 @@
 package game.net.entity.component.attack;
 
+import game.data.storage.entity.model.EntityEquipmentSlotType;
+import game.net.entity.component.model.EntityStatsReplicator;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable;
@@ -34,17 +36,15 @@ class EntityAttackListReplicator extends EntityComponentReplicatorBase {
 
 	// override function followComponentServer( component : EntityComponent ) {
 	// 	super.followComponentServer( component );
-
 	// 	entity.components.onAppear(
 	// 		EntityModelComponent,
 	// 		( cl, modelComp ) -> {
-				
 	// 		}
 	// 	);
 	// }
 
-	override function followComponentClient( entity : EntityReplicator ) {
-		super.followComponentClient( entity );
+	override function followComponentClient( entityRepl : EntityReplicator ) {
+		super.followComponentClient( entityRepl );
 
 		followedComponent.then( comp -> {
 			var attackList = Std.downcast( comp, EntityAttackListComponent );
@@ -52,8 +52,20 @@ class EntityAttackListReplicator extends EntityComponentReplicatorBase {
 				isRaised.subscribeProp( attackItem.isRaised );
 				attackItem.onAttackPerformed.add( onPlayerAttacked.bind( attackItem.desc.id ) );
 			}
-		} );
 
+			entityRepl.componentsRepl.components.onAppear(
+				EntityModelComponentReplicator,
+				( _, modelCompRepl ) -> {
+					var attackMap = modelCompRepl.statsRepl.attacks;
+					for ( key => attack in attackMap.keyValueIterator() ) {
+						var equipSlotType : EntityEquipmentSlotType = key;
+						var attackItem = attackList.getItemByEquipSlotType( equipSlotType );
+						Assert.notNull( attackItem );
+						attack.addOnValue( ( _, val ) -> trace( val ) );
+					}
+				}
+			);
+		} );
 	}
 
 	@:rpc( all )

@@ -59,7 +59,7 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 	}
 }
 
-class ConnectMenu extends FocusMenu {
+class ConnectMenu extends PopupBase {
 
 	public var textInput : TextInput;
 

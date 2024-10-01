@@ -39,7 +39,7 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 		} );
 	}
 
-	public function followComponentClient( entityRepl ) {
+	public function followComponentClient( entityRepl : EntityReplicator ) {
 		this.entityRepl = entityRepl;
 		followedComponent.then( ( component ) -> {
 			entityRepl.entity.result.components.add( component );

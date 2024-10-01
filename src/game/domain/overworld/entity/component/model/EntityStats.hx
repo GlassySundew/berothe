@@ -10,9 +10,12 @@ import game.data.storage.entity.body.model.EntityModelDescription;
 
 class EntityStats {
 
-	final modelDesc : EntityModelDescription;
-
-	final limbAttacks : Map<EntityEquipmentSlotType, EntityStatHolder> = [];
+	public final modelDesc : EntityModelDescription;
+	
+	public final limbAttacks : Map<EntityEquipmentSlotType, EntityStatHolder> = [];
+	// todo
+	// public final defence
+	// public final hp
 
 	var entity( default, null ) : OverworldEntity;
 

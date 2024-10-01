@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.combat;
 
+import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.view.AnimationKey;
 
@@ -28,11 +29,26 @@ class EntityAttackListComponent extends EntityComponent {
 		return null;
 	}
 
-	public function getItemByItemDescId( id : String ) {
+	public inline function getItemByItemDescId( id : String ) : Null<EntityAttackListItem> {
+		var result = null;
 		for ( listItem in attackComponents ) {
-			if ( listItem.desc.id == id ) return listItem;
+			if ( listItem.desc.id == id ) {
+				result = listItem;
+				break;
+			}
 		}
-		return null;
+		return result;
+	}
+
+	public inline function getItemByEquipSlotType( type : EntityEquipmentSlotType ) : Null<EntityAttackListItem> {
+		var result = null;
+		for ( listItem in attackComponents ) {
+			if ( listItem.desc.equipSlotType == type ) {
+				result = listItem;
+				break;
+			}
+		}
+		return result;
 	}
 
 	function createAttackList() : Array<EntityAttackListItem> {

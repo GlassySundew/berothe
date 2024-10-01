@@ -7,7 +7,7 @@ import ui.domkit.element.ShadowedTextComp;
 import ui.domkit.element.TextButtonComp;
 
 
-class ConfirmDialog extends FocusMenu {
+class ConfirmDialog extends PopupBase {
 
 	public function new( message : String, onOkBtn : Event -> Void, ?onCancelBtn : Event -> Void, ?parent : Object ) {
 		super( parent );

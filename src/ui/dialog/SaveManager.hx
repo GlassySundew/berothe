@@ -23,7 +23,7 @@ import h2d.col.Bounds;
 import h2d.col.Point;
 import hxd.Event;
 import net.ClientController;
-import ui.dialog.FocusMenu;
+import ui.dialog.PopupBase;
 import ui.domkit.SaveManagerComp;
 
 enum Mode {
@@ -32,7 +32,7 @@ enum Mode {
 	NewSaveEntry;
 }
 
-class SaveManager extends FocusMenu {
+class SaveManager extends PopupBase {
 
 	public static var inst : SaveManager;
 
@@ -240,7 +240,7 @@ class SaveEntry extends Process {
 		super( Main.inst );
 		thisObject = new Object( parent );
 
-		var syncDialog = ( dialog : FocusMenu ) -> {
+		var syncDialog = ( dialog : PopupBase ) -> {
 			Main.inst.root.add( dialog.h2dObject, Const.DP_UI + 2 );
 			dialog.h2dObject.x = saveMan.h2dObject.x;
 			dialog.h2dObject.y = thisObject.y - saveMan.scrollArea.scrollY + thisObject.getSize().height;

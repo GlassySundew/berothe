@@ -21,7 +21,6 @@ class EntityControl {
 	final ca : ControllerAccess<ControllerAction>;
 
 	public function new( entity : OverworldEntity, entityRepl : EntityReplicator ) {
-
 		ca = Main.inst.controller.createAccess();
 
 		entity.components.add( new EntityCameraFollowComponent() );

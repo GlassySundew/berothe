@@ -11,9 +11,9 @@ import h2d.Object;
 import h2d.Tile;
 import ui.core.OnSceneAddedObject;
 
-class FocusMenu extends Process {
+class PopupBase extends Process {
 
-	static var menus : Array<FocusMenu> = [];
+	static var menus : Array<PopupBase> = [];
 
 	var overlayFlow : Flow;
 

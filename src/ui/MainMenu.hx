@@ -1,6 +1,5 @@
 package ui;
 
-import rx.Observable;
 import dn.Process;
 import dn.Tweenie.TType;
 import dn.heaps.slib.HSprite;
@@ -9,25 +8,15 @@ import h2d.Flow;
 import h2d.Object;
 import h2d.Tile;
 import h3d.Vector4;
-import h3d.Vector;
 import h3d.mat.Texture;
 import hxd.System;
-import rx.ObservableFactory;
-import rx.Observer;
-import rx.Scheduler;
-import rx.observables.MakeScheduled.SubscribeInterval;
 import util.Assets;
 import util.Const;
 import util.GameUtil;
-import util.Util;
-import util.tools.Settings;
 import ui.core.Button;
-import ui.core.ShadowedText;
 import ui.core.TextButton;
 import ui.dialog.ConnectMenu;
-import ui.dialog.NewSaveDialog;
 import ui.dialog.OptionsMenu;
-import ui.dialog.SaveManager;
 
 class MainMenu extends Process {
 
@@ -38,8 +27,6 @@ class MainMenu extends Process {
 	var socialFlow : Flow;
 	var planetFlow : Object;
 	var blackOverlay : Bitmap;
-
-	var isHostDebug : ShadowedText;
 
 	public static function spawn( ?parent ) {
 		if ( inst != null ) {

@@ -17,7 +17,7 @@ import game.net.entity.EntityComponentReplicatorBase;
 **/
 class EntityComponentsReplicator extends NetNode {
 
-	@:s public var components : NSClassMap<
+	@:s public final components : NSClassMap<
 		Class<EntityComponentReplicatorBase>,
 		EntityComponentReplicatorBase> = new NSClassMap();
 
@@ -47,7 +47,7 @@ class EntityComponentsReplicator extends NetNode {
 
 	public function dispose() {
 		@:privateAccess
-		for ( key => component in components.map ) {
+		for ( component in components.map ) {
 			component.dispose();
 		}
 	}
