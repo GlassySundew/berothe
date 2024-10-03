@@ -132,12 +132,12 @@ class Client extends Process {
 
 	function connectionClosed() {
 		disconnect();
-		Main.inst.root.add(
-			new ConfirmDialog(
-				"Connection closed",
-				( e ) -> MainMenu.spawn( Boot.inst.s2d )
-			).h2dObject,
-			Const.DP_UI
+		new ConfirmDialog(
+			"Connection closed",
+			( e ) -> {
+				new MainMenu( Main.inst.root );
+			},
+			Main.inst.root
 		);
 		trace( "connection closed" );
 		onConnectionClosed.dispatch();

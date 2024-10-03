@@ -40,6 +40,8 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 	var tweenCombinator : TweenCombinator;
 
+	var attackRange : Float;
+
 	public function new(
 		desc : AttackListItem,
 		sourceTransform : ITransform,
@@ -50,6 +52,8 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		this.physics = physics;
 		this.emitTransform = new OimoTransform();
 		this.cooldown = new Cooldown( hxd.Timer.wantedFPS );
+
+		attackRange = desc.endX;
 
 		var geom = GeometryAbstractFactory.box( desc.sizeX, desc.sizeY, desc.sizeZ );
 		var shapeConfig = ShapeConfigFactory.create();
@@ -77,6 +81,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		tweenSizeZ = desc.sizeZ;
 	}
 
+	public inline function setAttackRange( amount : Float ) {
+		attackRange = amount;
+	}
+
 	public inline function isOnCooldown() : Bool {
 		return cooldown.has( '$ATTACK_CD_KEY' );
 	}
@@ -94,7 +102,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	}
 
 	public function performCasting() {
-		// ? y and z maybe because now its only x (forward direction)
+		// ? y and z maybe because? coz now its only x (forward direction)
 
 		if ( isInAction() ) throw "double cast attacking";
 		cooldown.setS(
@@ -107,13 +115,13 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		var currentTween = tween.createS(
 			tweenSizeX,
-			desc.endX,
+			attackRange,
 			type,
 			desc.duration
 		);
 		tweenCombinator.attachTween( currentTween );
 		var currentTween = currentTween.chainMs(
-			desc.sizeX,
+			desc.sizeX - desc.endX + attackRange,
 			type,
 			desc.duration * 1000
 		);

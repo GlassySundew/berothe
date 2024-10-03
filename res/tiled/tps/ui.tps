@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>6</int>
         <key>texturePackerVersion</key>
-        <string>7.0.3</string>
+        <string>7.4.0</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -58,9 +58,9 @@
             <key>filtering</key>
             <struct type="LibGDXFiltering">
                 <key>x</key>
-                <enum type="LibGDXFiltering::Filtering">Linear</enum>
+                <enum type="LibGDXFiltering::Filtering">Nearest</enum>
                 <key>y</key>
-                <enum type="LibGDXFiltering::Filtering">Linear</enum>
+                <enum type="LibGDXFiltering::Filtering">Nearest</enum>
             </struct>
         </struct>
         <key>shapePadding</key>
@@ -124,7 +124,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../atlas/ui.atlas</filename>
+                <filename>../atlas/ui.atlas</filename>
             </struct>
         </map>
         <key>multiPackMode</key>
@@ -189,10 +189,26 @@
                 <false/>
             </struct>
             <key type="filename">../separated/ui/asteroid0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,14,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">../separated/ui/asteroid1.png</key>
             <key type="filename">../separated/ui/asteroid2.png</key>
             <key type="filename">../separated/ui/asteroid3.png</key>
             <key type="filename">../separated/ui/body_selected.png</key>
+            <key type="filename">../separated/ui/close_but_0.png</key>
+            <key type="filename">../separated/ui/close_but_1.png</key>
             <key type="filename">../separated/ui/discord0.png</key>
             <key type="filename">../separated/ui/discord1.png</key>
             <key type="filename">../separated/ui/discord2.png</key>

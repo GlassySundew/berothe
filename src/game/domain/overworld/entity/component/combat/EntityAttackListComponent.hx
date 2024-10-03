@@ -1,5 +1,8 @@
 package game.domain.overworld.entity.component.combat;
 
+import util.Assert;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
+import be.Constant;
 import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.view.AnimationKey;
@@ -8,6 +11,8 @@ class EntityAttackListComponent extends EntityComponent {
 
 	public final attackListDesc : AttackListDescription;
 	public final attackComponents : Array<EntityAttackListItem>;
+
+	public var leadingAttack( default, null ) : EntityEquipmentSlotType;
 
 	public function new( description : AttackListDescription ) {
 		super( description );
@@ -40,7 +45,9 @@ class EntityAttackListComponent extends EntityComponent {
 		return result;
 	}
 
-	public inline function getItemByEquipSlotType( type : EntityEquipmentSlotType ) : Null<EntityAttackListItem> {
+	public inline function getItemByEquipSlotType(
+		type : EntityEquipmentSlotType
+	) : Null<EntityAttackListItem> {
 		var result = null;
 		for ( listItem in attackComponents ) {
 			if ( listItem.desc.equipSlotType == type ) {
@@ -52,11 +59,23 @@ class EntityAttackListComponent extends EntityComponent {
 	}
 
 	function createAttackList() : Array<EntityAttackListItem> {
+		var leadingEquip = null;
+		var lowestCD = Floats.MAX;
 		var result = [
-			for ( attackDesc in attackListDesc.attackList ) {
-				new EntityAttackListItem( attackDesc );
+			for ( attackItem in attackListDesc.attackList ) {
+				if ( attackItem.cooldown < lowestCD ) {
+					leadingEquip = attackItem.equipSlotType;
+					lowestCD = attackItem.cooldown;
+				}
+				new EntityAttackListItem( attackItem );
 			}
 		];
+		leadingAttack = leadingEquip;
+
+		result.sort(
+			( item1, item2 ) ->
+				Reflect.compare( item1.desc.cooldown, item2.desc.cooldown )
+		);
 
 		return result;
 	}
@@ -67,5 +86,28 @@ class EntityAttackListComponent extends EntityComponent {
 		for ( component in attackComponents ) {
 			component.attachToEntity( entity );
 		}
+
+		entity.components.onAppear(
+			EntityModelComponent,
+			( _, modelCompRepl ) -> {
+				var attackMap = modelCompRepl.stats.limbAttacks;
+				for ( equipSlotType =>
+					attackStatHolder in attackMap.keyValueIterator() ) {
+					var attackItem = getItemByEquipSlotType( equipSlotType );
+					Assert.notNull( attackItem );
+					attackStatHolder.amount.addOnValue(
+						( _, val ) -> attackItem.setAttack( val )
+					);
+				}
+				var weaponRanges = modelCompRepl.stats.weaponRanges;
+				for ( equipSlotType => weaponRangeStatHolder in weaponRanges ) {
+					var attackItem = getItemByEquipSlotType( equipSlotType );
+					Assert.notNull( attackItem );
+					weaponRangeStatHolder.amount.addOnValue(
+						( _, val ) -> attackItem.setRange( val )
+					);
+				}
+			}
+		);
 	}
 }

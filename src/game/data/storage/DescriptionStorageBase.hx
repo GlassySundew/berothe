@@ -1,5 +1,6 @@
 package game.data.storage;
 
+import haxe.exceptions.PosException;
 import util.Assert;
 import game.data.storage.DescriptionBase;
 import haxe.exceptions.NotImplementedException;
@@ -25,7 +26,9 @@ abstract class DescriptionStorageBase<T : DescriptionBase, CdbType> {
 		return items[id];
 	}
 
-	public function parseItem( entry : CdbType ) : Void {}
+	public function parseItem( entry : CdbType ) : Void {
+		throw new PosException( "should be overriden" );
+	}
 
 	function addItem( item : T ) {
 		Assert.isNull(

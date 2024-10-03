@@ -75,7 +75,7 @@ class SaveManager extends PopupBase {
 
 		return;
 
-		var generalFlow = new Flow( h2dObject );
+		var generalFlow = new Flow( root );
 		generalFlow.layout = Vertical;
 		generalFlow.horizontalAlign = Middle;
 
@@ -96,7 +96,7 @@ class SaveManager extends PopupBase {
 		areaBarFlow.overflow = Limit;
 
 		scrollArea = new FixedScrollArea( colWidth, 0, 16, areaBarFlow );
-		scrollArea.height = Std.int( GameUtil.hScaled - h2dObject.y - 20 );
+		scrollArea.height = Std.int( GameUtil.hScaled - root.y - 20 );
 		backgroundScroll = new EventInteractive( 0, 0, scrollArea );
 
 		saveEntriesFlow = new Flow( scrollArea );
@@ -107,7 +107,7 @@ class SaveManager extends PopupBase {
 
 		sliderBack = new Bitmap( Tile.fromColor( 0x222222, 10, 10, 1 ), areaBarFlow );
 
-		grid = new ScaleGrid( Tile.fromColor( 0x8f8f8f, 1, 1, 1 ), 1, 1, 1, 1, h2dObject );
+		grid = new ScaleGrid( Tile.fromColor( 0x8f8f8f, 1, 1, 1 ), 1, 1, 1, 1, root );
 		slider = new VerticalSlider( 10, scrollArea.height, grid, sliderBack );
 
 		scrollVoid = ( e : Event ) -> {
@@ -116,15 +116,6 @@ class SaveManager extends PopupBase {
 		};
 
 		slider.onWheelEvent.add( scrollVoid );
-
-		addOnSceneAddedCb( refreshEntries );
-	}
-
-	public function refreshEntries() {
-		for ( e in entries ) e.destroy();
-		entries = [];
-		saveEntriesFlow.removeChildren();
-		displaySaveEntries();
 	}
 
 	function displaySaveEntries() {
@@ -241,9 +232,9 @@ class SaveEntry extends Process {
 		thisObject = new Object( parent );
 
 		var syncDialog = ( dialog : PopupBase ) -> {
-			Main.inst.root.add( dialog.h2dObject, Const.DP_UI + 2 );
-			dialog.h2dObject.x = saveMan.h2dObject.x;
-			dialog.h2dObject.y = thisObject.y - saveMan.scrollArea.scrollY + thisObject.getSize().height;
+			Main.inst.root.add( dialog.root, Const.DP_UI + 2 );
+			dialog.root.x = saveMan.root.x;
+			dialog.root.y = thisObject.y - saveMan.scrollArea.scrollY + thisObject.getSize().height;
 		}
 
 		// save/load file

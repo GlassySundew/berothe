@@ -13,8 +13,8 @@ import net.NetNode;
 
 class ItemSlotReplicator extends NetNode {
 
-	public final itemSlot : ItemSlot;
-	final binder : Composite;
+	public var itemSlot( default, null ) : ItemSlot;
+	var binder : Composite = new Composite();
 
 	@:s final itemReplicator : NSMutableProperty<ItemReplicator>;
 	public var itemReplicatorProp( get, default ) : IProperty<ItemReplicator>;
@@ -26,10 +26,24 @@ class ItemSlotReplicator extends NetNode {
 		super( parent );
 
 		itemReplicator = new NSMutableProperty( null, this );
-		binder = new Composite();
 		this.itemSlot = itemSlot;
 
 		addOnItem( onItemChanged );
+	}
+
+	public function followSlotClient( itemSlot : ItemSlot ) {
+		this.itemSlot = itemSlot;
+		binder.add(
+			itemReplicator.addOnValueImmediately(
+				( oldItem, newItem ) -> {
+					if ( newItem == null ) {
+						itemSlot.removeItem();
+					} else {
+						newItem.item.then( ( item ) -> itemSlot.giveItem( item ) );
+					}
+				}
+			)
+		);
 	}
 
 	function addOnItem( cb : ( oldItem : Item, item : Item ) -> Void ) {

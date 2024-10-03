@@ -1,9 +1,10 @@
 package game.net.client;
 
+#if client
+import ui.dialog.ConnectMenu;
 import signals.Signal;
 import net.NetNode;
 import hxbit.NetworkSerializable;
-#if client
 import core.IProperty;
 import core.MutableProperty;
 import dn.Process;

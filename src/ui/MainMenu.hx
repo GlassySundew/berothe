@@ -1,6 +1,5 @@
 package ui;
 
-import dn.Process;
 import dn.Tweenie.TType;
 import dn.heaps.slib.HSprite;
 import h2d.Bitmap;
@@ -11,53 +10,34 @@ import h3d.Vector4;
 import h3d.mat.Texture;
 import hxd.System;
 import util.Assets;
-import util.Const;
 import util.GameUtil;
 import ui.core.Button;
 import ui.core.TextButton;
 import ui.dialog.ConnectMenu;
 import ui.dialog.OptionsMenu;
+import ui.dialog.PopupBase;
 
-class MainMenu extends Process {
+class MainMenu extends PopupBase {
 
 	static var inst : MainMenu;
 
-	var parentFlow : Flow;
 	var vertFlow : Flow;
 	var socialFlow : Flow;
 	var planetFlow : Object;
 	var blackOverlay : Bitmap;
 
-	public static function spawn( ?parent ) {
-		if ( inst != null ) {
-			inst.root.visible = true;
-			return inst;
-		} else {
-			return new MainMenu( parent );
-		}
-	}
+	public function new( ?parent : Object ) {
+		super( parent );
+		
+		escapableByKey = false;
 
-	public static function hide() {
-		if ( inst != null )
-			inst.root.visible = false;
-	}
+		vertFlow = new Flow( contentFlow );
+		socialFlow = new Flow( contentFlow );
+		planetFlow = new Object( contentFlow );
 
-	function new( ?parent : Object ) {
-		super( Main.inst );
-
-		if ( inst != null ) inst.destroy();
-		inst = this;
-
-		createRoot( Main.inst.root );
-		parentFlow = new Flow( root );
-
-		vertFlow = new Flow( parentFlow );
-		socialFlow = new Flow( parentFlow );
-		planetFlow = new Object( parentFlow );
-
-		parentFlow.getProperties( vertFlow ).isAbsolute = true;
-		parentFlow.getProperties( socialFlow ).isAbsolute = true;
-		parentFlow.getProperties( planetFlow ).isAbsolute = true;
+		contentFlow.getProperties( vertFlow ).isAbsolute = true;
+		contentFlow.getProperties( socialFlow ).isAbsolute = true;
+		contentFlow.getProperties( planetFlow ).isAbsolute = true;
 
 		vertFlow.paddingLeft = 10;
 		vertFlow.verticalAlign = Middle;
@@ -68,13 +48,13 @@ class MainMenu extends Process {
 
 		new TextButton(
 			"connect",
-			( _ ) -> new ConnectMenu( parentFlow ),
+			( _ ) -> new ConnectMenu( contentFlow ),
 			vertFlow
 		);
 
 		new TextButton(
 			"options",
-			( _ ) -> root.add( new OptionsMenu().h2dObject, Const.DP_UI ),
+			( _ ) -> new OptionsMenu( root ),
 			vertFlow
 		);
 
@@ -84,15 +64,15 @@ class MainMenu extends Process {
 			vertFlow
 		);
 
-		createAppearFlash();
+		// createAppearFlash();
 
 		// Boot.inst.engine.backgroundColor = 0x0c0c0c;
 
 		#if debug
 		// delayer.addF(() -> {
 		// 	var client = new DebugClient();
-		// 	isHostDebug = new ShadowedText( parentFlow );
-		// 	parentFlow.getProperties( isHostDebug ).isAbsolute = true;
+		// 	isHostDebug = new ShadowedText( contentFlow );
+		// 	contentFlow.getProperties( isHostDebug ).isAbsolute = true;
 		// 	client.onConnection.add(() -> {
 		// 		client.requestServerStatus( ( msg : Message ) -> {
 		// 			switch msg {
@@ -202,28 +182,33 @@ class MainMenu extends Process {
 	function createAppearFlash() {
 		blackOverlay = new Bitmap( Tile.fromColor( 0x000000, GameUtil.wScaled, GameUtil.hScaled ) );
 
-		parentFlow.addChildAt( blackOverlay, 1000 );
-		parentFlow.getProperties( blackOverlay ).isAbsolute = true;
+		contentFlow.addChildAt( blackOverlay, 1000 );
+		contentFlow.getProperties( blackOverlay ).isAbsolute = true;
 
 		Main.inst.tw.createS( blackOverlay.alpha, 1 > 0, TType.TBackOut, 2 ).end(() -> {
 			blackOverlay.remove();
 			blackOverlay = null;
+			trace( "asdasdasd" );
 		} );
 	}
 
 	override function onResize() {
 		super.onResize();
 
-		planetFlow.x = Std.int( GameUtil.wScaled * 0.74 );
-		planetFlow.y = Std.int( GameUtil.hScaled * 0.35 );
-		planetFlow.scaleX = planetFlow.scaleY = Math.floor( w() / 720 + 1 );
-		vertFlow.minHeight = vertFlow.maxHeight = socialFlow.minHeight = socialFlow.maxHeight = parentFlow.minHeight = parentFlow.maxHeight = Std.int( GameUtil.hScaled );
-		vertFlow.minWidth = vertFlow.maxWidth = socialFlow.minWidth = socialFlow.maxWidth = parentFlow.minWidth = parentFlow.maxWidth = Std.int( GameUtil.wScaled );
+		if ( vertFlow == null ) return;
+
+		vertFlow.minHeight = //
+			vertFlow.maxHeight = //
+				socialFlow.minHeight = //
+					socialFlow.maxHeight = //
+						contentFlow.minHeight = //
+							contentFlow.maxHeight = Std.int( GameUtil.hScaled );
+		vertFlow.minWidth = vertFlow.maxWidth = socialFlow.minWidth = socialFlow.maxWidth = contentFlow.minWidth = contentFlow.maxWidth = Std.int( GameUtil.wScaled );
 	}
 
 	override function onDispose() {
 		super.onDispose();
-		parentFlow.remove();
+		contentFlow.remove();
 		inst = null;
 		if ( blackOverlay != null ) blackOverlay.remove();
 	}

@@ -80,11 +80,11 @@ class Main extends Process {
 		}
 
 		new Client();
-		MainMenu.spawn( Boot.inst.s2d );
+		new MainMenu( Main.inst.root );
 
 		#if debug
 		Boot.inst.createServer();
-		Engine.getCurrent().backgroundColor = 0xff393939;
+		Engine.getCurrent().backgroundColor = 0xff121212;
 		#end
 
 		var dir = new h3d.scene.fwd.DirLight( new h3d.Vector( -0.3, -0.2, -1 ), Boot.inst.s3d );

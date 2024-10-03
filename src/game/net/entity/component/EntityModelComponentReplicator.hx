@@ -10,10 +10,9 @@ import game.domain.overworld.entity.EntityComponent;
 
 class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
-	@:s public var statsRepl : EntityStatsReplicator;
-	
-	@:s var equipReplicator : EntityEquipReplicator;
-	@:s var inventoryReplicator : EntityInventoryReplicator;
+	@:s var statsRepl : EntityStatsReplicator;
+	@:s var equipRepl : EntityEquipReplicator;
+	@:s var inventoryRepl : EntityInventoryReplicator;
 
 	override function followComponentServer( component : EntityComponent, entityRepl ) {
 		super.followComponentServer( component, entityRepl );
@@ -21,13 +20,25 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		var modelComp = Std.downcast( component, EntityModelComponent );
 
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
-		equipReplicator = new EntityEquipReplicator( modelComp.equip, entityRepl, this );
-		inventoryReplicator = new EntityInventoryReplicator( modelComp.inventory, this );
+		equipRepl = new EntityEquipReplicator( modelComp.equip, entityRepl, this );
+		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
 	}
+
+	#if client
+	override function followComponentClient( entityRepl : EntityReplicator ) {
+		super.followComponentClient( entityRepl );
+
+		followedComponent.then( ( comp ) -> {
+			var modelComp : EntityModelComponent = Std.downcast( comp, EntityModelComponent );
+			equipRepl.followClient( modelComp.equip, entityRepl );
+			
+		} );
+	}
+	#end
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
 		super.unregister( host, ctx );
-		equipReplicator.unregister( host, ctx );
-		inventoryReplicator.unregister( host, ctx );
+		equipRepl.unregister( host, ctx );
+		inventoryRepl.unregister( host, ctx );
 	}
 }

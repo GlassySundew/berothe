@@ -4,10 +4,8 @@ import game.data.storage.location.LocationDescription;
 
 class LocationDescriptionStorage extends DescriptionStorageBase<LocationDescription, Data.Location> {
 
-	public static final PLAYER_START_LOCATION_ID = Data.LocationKind.start.toString();
-
 	public function getStartLocationDescription() : LocationDescription {
-		return getDescriptionById( PLAYER_START_LOCATION_ID );
+		return getDescriptionById( DataStorage.inst.rule.playerStartLocation );
 	}
 
 	override function parseItem( entry : Data.Location ) {

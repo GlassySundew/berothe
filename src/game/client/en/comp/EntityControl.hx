@@ -1,5 +1,7 @@
 package game.client.en.comp;
 
+import game.client.en.comp.view.ui.EntityStatsHudMediator;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 import haxe.zip.Uncompress;
 import game.net.entity.EntityComponentReplicatorBase;
 import haxe.zip.Compress;
@@ -27,11 +29,21 @@ class EntityControl {
 		entity.components.add( new EntityMovementControlComponent( entityRepl, ca ) );
 		entity.components.add( new EntityAttackControlComponent( entityRepl, ca ) );
 
-		entityRepl.transformRepl.createModelToNetworkStream();
+		entity.components.onAppear(
+			EntityModelComponent,
+			( _, modelComp ) -> {
+				new EntityStatsHudMediator(
+					modelComp.stats,
+					entity,
+				);
+			}
+		);
 
 		entity.components.onAppear( EntityRigidBodyComponent, ( key, rbComp ) -> {
 			rbComp.claimOwnage();
 		} );
+
+		entityRepl.transformRepl.createModelToNetworkStream();
 
 		entityRepl.componentsRepl.components.onAppear(
 			EntityAttackListReplicator,

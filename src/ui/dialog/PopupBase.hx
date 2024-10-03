@@ -1,5 +1,9 @@
 package ui.dialog;
 
+import signals.Signal;
+import ui.core.Button;
+import util.Assets;
+import dn.heaps.slib.HSprite;
 import util.GameUtil;
 import util.Util;
 import util.Const;
@@ -13,42 +17,36 @@ import ui.core.OnSceneAddedObject;
 
 class PopupBase extends Process {
 
-	static var menus : Array<PopupBase> = [];
+	static var popups : Array<PopupBase> = [];
 
-	var overlayFlow : Flow;
+	public static function destroyByPopupType( popupCl : Class<PopupBase> ) {
+		getPopupByClass( popupCl ).destroy();
+	}
+
+	public static function getPopupByClass<T : PopupBase>( popupCl : Class<T> ) : T {
+		return cast popups.filter( m -> return Type.getClass( m ) == cast popupCl )[0];
+	}
 
 	var ca : ControllerAccess<ControllerAction>;
 
-	public var h2dObject : Object;
+	final contentFlow : Flow;
+	final onResizeSignal = new Signal();
 
-	var onSceneAddedObject : OnSceneAddedObject;
-	var contentFlow : Flow;
+	var overlayFlow : Flow;
 	var centrized = false;
 	var contentTopPadding( get, never ) : Int;
+	var escapableByKey = true;
 
 	function get_contentTopPadding() : Int
 		return 0;
 
-	// return -Std.int( GameUtil.hScaled / 4 );
-
 	public function new( ?parent : Object, ?parentProcess : Process ) {
 		super( parentProcess );
+		popups.push( this );
 
-		menus.push( this );
+		createRoot( parent );
 
-		h2dObject = new Object();
-
-		if ( parent == null )
-			Main.inst.root.add( h2dObject, Const.DP_UI );
-		else
-			parent.addChild( h2dObject );
-
-		overlayFlow = new Flow( h2dObject );
-		overlayFlow.backgroundTile = Tile.fromColor( 0x000000, 1, 1, 0.75 );
-		overlayFlow.enableInteractive = true;
-		overlayFlow.interactive.onClick = backgroundOnClick;
-
-		contentFlow = new Flow( h2dObject );
+		contentFlow = new Flow( root );
 		contentFlow.verticalSpacing = 5;
 		contentFlow.verticalAlign = Middle;
 
@@ -56,9 +54,7 @@ class PopupBase extends Process {
 		ca.takeExclusivity();
 		ca.lock( 0.1 );
 
-		onSceneAddedObject = new OnSceneAddedObject( h2dObject );
-
-		onResize();
+		onResizeCb = onResizeSignal.dispatch;
 	}
 
 	function centrizeContent( ?paddingLeft = 80 ) {
@@ -71,22 +67,15 @@ class PopupBase extends Process {
 	override function update() {
 		super.update();
 
-		if ( ca.isPressed( Escape ) ) {
+		if (
+			escapableByKey
+			&& ca.isPressed( Escape ) //
+		) {
 			destroy();
 		}
 	}
 
-	function backgroundOnClick( e ) {
-		destroy();
-	}
-
-	function addOnSceneAddedCb( cb : Void -> Void ) {
-		if ( h2dObject.getScene() != null ) {
-			cb();
-		} else {
-			onSceneAddedObject.onAddedToSceneEvent.add( cb );
-		}
-	}
+	function backgroundOnClick( e ) {}
 
 	override function onDispose() {
 		super.onDispose();
@@ -94,14 +83,12 @@ class PopupBase extends Process {
 		ca.releaseExclusivity();
 		ca.dispose();
 
-		menus.remove( this );
+		popups.remove( this );
 
-		if ( menus.length > 0 ) {
-			menus[menus.length - 1].ca.takeExclusivity();
-			menus[menus.length - 1].onFocus();
+		if ( popups.length > 0 ) {
+			popups[popups.length - 1].ca.takeExclusivity();
+			popups[popups.length - 1].onFocus();
 		}
-
-		h2dObject.remove();
 	}
 
 	function onFocus() {}
@@ -109,13 +96,41 @@ class PopupBase extends Process {
 	override function onResize() {
 		super.onResize();
 
-		overlayFlow.minHeight = GameUtil.hScaled;
-		overlayFlow.minWidth = GameUtil.wScaled;
+		if ( overlayFlow != null ) {
+			overlayFlow.minHeight = GameUtil.hScaled + 1;
+			overlayFlow.minWidth = GameUtil.wScaled;
+		}
 
 		if ( centrized ) {
-			contentFlow.minHeight = contentFlow.maxHeight = Std.int( GameUtil.hScaled );
-			contentFlow.minWidth = contentFlow.maxWidth = Std.int( GameUtil.wScaled );
+			contentFlow.minHeight = contentFlow.maxHeight = GameUtil.hScaled;
+			contentFlow.minWidth = contentFlow.maxWidth = GameUtil.wScaled;
 			contentFlow.paddingTop = contentTopPadding;
 		}
+	}
+
+	function createBg() {
+		overlayFlow = new Flow();
+		root.addChildAt( overlayFlow, Const.DP_BG );
+		overlayFlow.backgroundTile = Tile.fromColor( 0x000000, 1, 1, 0.75 );
+		overlayFlow.enableInteractive = true;
+		overlayFlow.interactive.onClick = backgroundOnClick;
+	}
+
+	function createCloseButton() {
+		var flow = new Flow( contentFlow );
+		onResizeSignal.add(() -> {
+			flow.minHeight = GameUtil.hScaled;
+			flow.minWidth = GameUtil.wScaled;
+		} );
+		onResizeSignal.fireOnAdd();
+
+		var close0 = new HSprite( Assets.ui, "close_but_0" );
+		var close1 = new HSprite( Assets.ui, "close_but_1" );
+		var startButton = new Button( [close0.tile, close1.tile, close0.tile], flow );
+		var flowProps = flow.getProperties( startButton );
+		flowProps.align( Top, Right );
+		flowProps.paddingTop = flowProps.paddingRight = 30;
+		contentFlow.getProperties( flow ).isAbsolute = true;
+		startButton.onClickEvent.add( ( e ) -> destroy() );
 	}
 }

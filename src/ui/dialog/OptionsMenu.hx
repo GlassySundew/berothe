@@ -16,7 +16,9 @@ class OptionsMenu extends PopupBase {
 	public function new( ?parent : Object ) {
 		super( parent );
 
+		createBg();
 		centrizeContent();
+		createCloseButton();
 
 		contentFlow.verticalSpacing = 5;
 
@@ -47,17 +49,5 @@ class OptionsMenu extends PopupBase {
 		// 		if ( onRemoveEvent != null ) onRemoveEvent();
 		// 	}
 		// }
-	}
-
-	override function update() {
-		super.update();
-
-		// if ( Main.inst.ca.isPressed( Escape ) ) {
-		// 	remove();
-		// }
-	}
-
-	override function onResize() {
-		super.onResize();
 	}
 }

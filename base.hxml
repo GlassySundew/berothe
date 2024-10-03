@@ -31,6 +31,6 @@
 -D hxbit_visibility
 
 # -D dump=pretty
-
+--macro Init.setup()
 
 plugins.bodyparts_animations.src.HideImports

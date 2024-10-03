@@ -42,7 +42,7 @@ class ItemSlot implements IItemContainer {
 	public function removeItem( amount : Int = 1 ) {
 		// todo make item amount reduce
 
-		item.val.setContainer( null );
+		item.val?.setContainer( null );
 		item.val = null;
 	}
 

@@ -30,7 +30,7 @@ class Const {
 	public static var DP_IMGUI = inc++;
 
 	public static var LEVELS_PATH = "levels/";
-	public static var ATLAS_PATH = "atlas/";
+	public static var ATLAS_PATH = "tiled/atlas/";
 	public static var SAVEFILE_EXT = ".zhopa";
 
 	public static final worldGravity = new Vec3( 0, 0, -9.8 );

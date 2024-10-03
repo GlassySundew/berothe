@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.domain.overworld.entity.component.model.stat.EntityWeaponRangeStat;
 import haxe.exceptions.NotImplementedException;
 import game.data.storage.entity.body.model.EntityEquipSlotDescription;
 import game.domain.overworld.item.model.EquipItemSlot;
@@ -11,12 +12,13 @@ import game.data.storage.entity.body.model.EntityModelDescription;
 class EntityStats {
 
 	public final modelDesc : EntityModelDescription;
-	
+
 	public final limbAttacks : Map<EntityEquipmentSlotType, EntityStatHolder> = [];
+	public final weaponRanges : Map<EntityEquipmentSlotType, EntityStatHolder> = [];
+
 	// todo
 	// public final defence
 	// public final hp
-
 	var entity( default, null ) : OverworldEntity;
 
 	public function new( modelDesc : EntityModelDescription ) {
@@ -41,8 +43,11 @@ class EntityStats {
 	) {
 		for ( stat in stats ) {
 			switch stat.type {
-				case ATTACK: addAttackStat( Std.downcast( stat, EntityAttackStat ), slot );
+				case ATTACK:
+					addAttackLimbStat( stat, limbAttacks, slot );
 				case DEFENCE: throw new NotImplementedException();
+				case WEAPON_RANGE:
+					addAttackLimbStat( stat, weaponRanges, slot );
 			}
 		}
 	}
@@ -54,29 +59,33 @@ class EntityStats {
 			var baseAttackModel = modelDesc.baseAttacks.filter(
 				item -> item.attackId == desc.id
 			)[0];
-
 			holder.addStat( new EntityAttackStat( baseAttackModel.amount ) );
+
+			var holder = new EntityStatHolder();
+			weaponRanges[desc.equipSlotType] = holder;
+			holder.addStat( new EntityAttackStat( desc.endX ) );
 		}
 	}
 
-	inline function addAttackStat(
-		attStat : EntityAttackStat,
+	inline function addAttackLimbStat(
+		stat : EntityAdditiveStatBase,
+		statMap : Map<EntityEquipmentSlotType, EntityStatHolder>,
 		?slot : EquipItemSlot
 	) {
 		if ( slot == null ) {
 			// add attack to all attack limbs
-			for ( attack in limbAttacks ) {
-				attack.addStat( attStat );
+			for ( attack in statMap ) {
+				attack.addStat( stat );
 			}
 		} else {
-			if ( limbAttacks.exists( slot.desc.type ) ) {
-				limbAttacks[slot.desc.type].addStat( attStat );
+			if ( statMap.exists( slot.desc.type ) ) {
+				statMap[slot.desc.type].addStat( stat );
 			} else {
 				var linkedSlot = getLinkedSlot( slot.desc );
 				if ( linkedSlot == null ) {
 					trace( "bad logic, slot " + slot.desc.type + " is not a valid attack stat key" );
 				} else {
-					limbAttacks[linkedSlot].addStat( attStat );
+					statMap[linkedSlot].addStat( stat );
 				}
 			}
 		}

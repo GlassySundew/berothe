@@ -66,13 +66,18 @@ class ConnectMenu extends PopupBase {
 	public function new( ?parent : Object ) {
 		super( parent );
 		centrizeContent();
+		createCloseButton();
+
+		createBg();
 
 		var connectComp = new ConnectComp( contentFlow );
 		connectComp.connect.onClick = ( e ) -> {
-			MainMenu.hide();
+			PopupBase.destroyByPopupType( MainMenu );
 
-			Client.inst.connect( connectComp.ipInput.text,
-				() -> trace( "failed connection" ) );
+			Client.inst.connect(
+				connectComp.ipInput.text,
+				() -> trace( "failed connection" )
+			);
 			destroy();
 		}
 

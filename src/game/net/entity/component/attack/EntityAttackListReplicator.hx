@@ -52,19 +52,6 @@ class EntityAttackListReplicator extends EntityComponentReplicatorBase {
 				isRaised.subscribeProp( attackItem.isRaised );
 				attackItem.onAttackPerformed.add( onPlayerAttacked.bind( attackItem.desc.id ) );
 			}
-
-			entityRepl.componentsRepl.components.onAppear(
-				EntityModelComponentReplicator,
-				( _, modelCompRepl ) -> {
-					var attackMap = modelCompRepl.statsRepl.attacks;
-					for ( key => attack in attackMap.keyValueIterator() ) {
-						var equipSlotType : EntityEquipmentSlotType = key;
-						var attackItem = attackList.getItemByEquipSlotType( equipSlotType );
-						Assert.notNull( attackItem );
-						attack.addOnValue( ( _, val ) -> trace( val ) );
-					}
-				}
-			);
 		} );
 	}
 

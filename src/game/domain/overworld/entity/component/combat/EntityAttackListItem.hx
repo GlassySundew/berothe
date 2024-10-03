@@ -19,6 +19,7 @@ class EntityAttackListItem {
 
 	var emitter : AttackTweenBoxCastEmitter;
 	var entity : OverworldEntity;
+	var damageAmount : Float;
 
 	public function new( desc : AttackListItem ) {
 		this.desc = desc;
@@ -48,6 +49,14 @@ class EntityAttackListItem {
 	public function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;
 		entity.location.onAppear( onAttachedToLocation );
+	}
+
+	public inline function setAttack( amount : Float ) {
+		damageAmount = amount;
+	}
+
+	public inline function setRange( amount : Float ) {
+		emitter.setAttackRange( amount );
 	}
 
 	function onAttachedToLocation( location : Location ) {

@@ -27,6 +27,12 @@
 					"value": {
 						"float": 40
 					}
+				},
+				{
+					"id": "playerStartLocation",
+					"value": {
+						"location": "start"
+					}
 				}
 			],
 			"separators": [],
@@ -44,6 +50,12 @@
 				{
 					"typeStr": "4",
 					"name": "float",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "6:location",
+					"name": "location",
 					"opt": true,
 					"kind": null
 				}
@@ -379,6 +391,9 @@
 			"lines": [
 				{
 					"id": "attack"
+				},
+				{
+					"id": "weaponRange"
 				},
 				{
 					"id": "defence"
@@ -1028,6 +1043,10 @@
 							{
 								"type": "attack",
 								"amount": 3
+							},
+							{
+								"type": "weaponRange",
+								"amount": 1
 							}
 						]
 					},

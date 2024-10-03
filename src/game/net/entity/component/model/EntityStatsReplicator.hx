@@ -5,9 +5,12 @@ import net.NSIntMap;
 import game.domain.overworld.entity.component.model.EntityStats;
 import net.NetNode;
 
+/**
+	don't need to replicate attack numbers as they are count from actual model on-client
+**/
 class EntityStatsReplicator extends NetNode {
 
-	@:s public var attacks : NSIntMap<NSMutableProperty<Float>> = new NSIntMap();
+	var entityStats : EntityStats;
 
 	public function new(
 		entityStats : EntityStats,
@@ -15,12 +18,16 @@ class EntityStatsReplicator extends NetNode {
 		?parent
 	) {
 		super( parent );
+		this.entityStats = entityStats;
 
-		for ( equipSlotType => attack in entityStats.limbAttacks ) {
-			attacks[equipSlotType] = new NSMutableProperty();
-			attack.amount.addOnValue(
-				( old, newVal ) -> attacks[equipSlotType].val = newVal
-			);
+	}
+
+	public function followClient(
+		entityStats : EntityStats
+	) {
+		this.entityStats = entityStats;
+		for ( equipSlotType => limbAttack in entityStats.limbAttacks ) {
+			// limbAttack.setReceiver( attacks[equipSlotType] );
 		}
 	}
 }

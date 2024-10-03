@@ -10,6 +10,5 @@ class EquipSlotReplicator extends ItemSlotReplicator {
 	public function new( slotType : EntityEquipmentSlotType, itemSlot : ItemSlot, ?parent ) {
 		super( itemSlot, parent );
 		this.slotType = slotType;
-		
 	}
 }

@@ -1,5 +1,6 @@
 package pass;
 
+import h3d.pass.Blur;
 import h3d.Engine;
 import util.Util;
 import h3d.scene.Mesh;
@@ -48,15 +49,26 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 	public var emissive : pass.Emissive;
 	public var fxaa : h3d.pass.FXAA;
 	public var post : pass.PostProcessing;
+	public var overlayBlur : Blur;
 	public var depthColorMap( default, set ) : h3d.mat.Texture;
 
 	public static var inst : CustomRenderer;
+
+	public var overlayBlurEnabled = false;
 
 	var depthColorMapId : Int;
 	var depthColorMax : Int;
 	var out : h3d.mat.Texture;
 	var composite : h3d.pass.ScreenFx<DefaultForwardComposite>;
 	var outlineBlur = new h3d.pass.Blur( 5, 1.2 );
+
+	public var overlayBlurRadius( get, set ) : Float;
+	inline function set_overlayBlurRadius( value : Float ) : Float {
+		return overlayBlur.radius = value;
+	}
+	inline function get_overlayBlurRadius() : Float {
+		return overlayBlur.radius;
+	}
 
 	public function new() {
 		super();
@@ -104,6 +116,7 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 
 		// emissive.blur.sigma = 2;
 		post = new pass.PostProcessing();
+		overlayBlur = new Blur( 0, 1 );
 
 		composite = new h3d.pass.ScreenFx( new DefaultForwardComposite() );
 
@@ -129,15 +142,15 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		var colorTex = allocTarget( "color" );
 		var depthTex = allocTarget( "depth" );
 		var normalTex = allocTarget( "normal" );
-		// var additiveTex = allocTarget( "additive" );
+		// var additiveTex = allocTarget( "additive" );``````````````
 		setTargets( [colorTex, depthTex, normalTex /*, additiveTex*/] );
 		clear( Engine.getCurrent().backgroundColor, 1 );
 		mrt.draw( get( "default" ) );
 		mrt.draw( get( "alpha" ), backToFront );
 		// !additive
-		mrt.draw(get( "overlay" ), backToFront);
-		mrt.draw(get( "ui" ), backToFront);
-		
+		mrt.draw( get( "overlay" ), backToFront );
+		mrt.draw( get( "ui" ), backToFront );
+
 		resetTarget();
 
 		var saoTarget = allocTarget( "sao" );
@@ -150,6 +163,7 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		else copy( colorTex, null );
 
 		post.apply( colorTex, ctx.time );
+		if ( overlayBlurEnabled ) overlayBlur.apply( ctx, colorTex );
 
 		var outlineTex = allocTarget( "outlineBlur", false );
 		var outlineSrcTex = allocTarget( "outline", true );

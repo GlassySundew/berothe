@@ -1,5 +1,7 @@
 package game.net.entity.component.model;
 
+import game.domain.overworld.item.Item;
+import net.NSIntMap;
 import util.Assert;
 import game.client.en.comp.view.EntityViewComponent;
 import game.domain.overworld.entity.OverworldEntity;
@@ -14,17 +16,16 @@ import hxbit.NetworkHost;
 import hxbit.NetworkSerializable.NetworkSerializer;
 import game.domain.overworld.entity.component.model.EntityEquip;
 import net.NetNode;
-
 #if client
 import game.client.item.ItemEquipView;
 #end
 
 class EntityEquipReplicator extends NetNode {
 
-	final entityEquip : EntityEquip;
-	
-	@:s final entityRepl : EntityReplicator;
-	@:s var slots : NSArray<EquipSlotReplicator> = new NSArray();
+	var entityEquip : EntityEquip;
+
+	var entityRepl : EntityReplicator;
+	@:s var slots : NSIntMap<EquipSlotReplicator> = new NSIntMap();
 
 	public function new(
 		entityEquip : EntityEquip,
@@ -46,37 +47,40 @@ class EntityEquipReplicator extends NetNode {
 	function initializeSlots() {
 		for ( slotType => slot in entityEquip.equipSlots ) {
 			var slotRepl = new EquipSlotReplicator( slotType, slot, this );
-			// not sure if I need this
-			// slotRepl.itemReplicatorProp.addOnValueImmediately(
-			// 	equipSlotItemChanged.bind( _, _, slotType )
-			// );
-			slots.push( slotRepl );
+			slots[slotType] = slotRepl;
 		}
 	}
 
 	#if client
-	override function alive() {
-		super.alive();
-		slots.subscribleWithMapping( ( elem ) -> {
-			elem.itemReplicatorProp.addOnValueImmediately(
-				equipSlotItemChanged.bind( _, _, elem.slotType )
+	public function followClient(
+		entityEquip : EntityEquip,
+		entityRepl : EntityReplicator
+	) {
+		this.entityEquip = entityEquip;
+		this.entityRepl = entityRepl;
+
+		for ( key => slot in slots.keyValueIterator() ) {
+			slot.followSlotClient( entityEquip.equipSlots[key] );
+		}
+
+		for ( equipSlotType => slot in entityEquip.equipSlots ) {
+			slot.itemProp.addOnValueImmediately(
+				equipSlotItemChanged.bind( _, _, equipSlotType )
 			);
-		} );
+		}
 	}
 
 	function equipSlotItemChanged(
-		oldItemRepl,
-		itemRepl : ItemReplicator,
+		oldItem : Item,
+		item : Item,
 		type : EntityEquipmentSlotType
 	) {
-		if ( itemRepl == null ) return;
+		if ( item == null ) return;
 
 		var viewComp = entityRepl.entity.result.components.get( EntityViewComponent );
 		Assert.notNull( viewComp );
 
-		itemRepl.item.then( ( item ) -> {
-			new ItemEquipView( item, type, viewComp );
-		} );
+		new ItemEquipView( item, type, viewComp );
 	}
 	#end
 }
