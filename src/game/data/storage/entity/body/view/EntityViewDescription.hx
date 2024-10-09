@@ -16,7 +16,7 @@ class EntityViewDescription extends EntityComponentDescription {
 		this.viewProvider = viewProvider;
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public function buildComponent() : EntityComponent {
 		return new EntityViewComponent( this );
 	}
 

@@ -22,11 +22,16 @@ class Chunks {
 			z : entity.transform.z.val
 		} );
 
-		validateChunkAccess(
+		var chunk = validateChunkAccess(
 			Std.int( chunkIdx.x ),
 			Std.int( chunkIdx.y ),
 			Std.int( chunkIdx.z )
-		).removeEntity( entity );
+		);
+		#if client
+		if ( !chunk.entities.contains( entity ) ) return;
+		#end
+
+		chunk.removeEntity( entity );
 	}
 
 	public function addEntity( entity : OverworldEntity ) {

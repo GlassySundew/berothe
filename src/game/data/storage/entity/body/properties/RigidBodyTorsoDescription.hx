@@ -13,19 +13,44 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 		entry : Data.EntityProperty_properties_rigidBodyTorso
 	) : RigidBodyTorsoDescription {
 		if ( entry == null ) return null;
-		
+
 		return new RigidBodyTorsoDescription(
-			0,
-			0,
+			entry.offsetX,
+			entry.offsetY,
 			entry.offsetZ,
 			entry.sizeX,
 			entry.sizeY,
 			entry.sizeZ,
+			entry.hasFeet,
 			entry.id.toString()
 		);
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public final hasFeet : Bool;
+
+	public function new(
+		offsetX : Float,
+		offsetY : Float,
+		offsetZ : Float,
+		sizeX : Float,
+		sizeY : Float,
+		sizeZ : Float,
+		hasFeet : Bool,
+		id : String
+	) {
+		super(
+			offsetX,
+			offsetY,
+			offsetZ,
+			sizeX,
+			sizeY,
+			sizeZ,
+			id,
+		);
+		this.hasFeet = hasFeet;
+	}
+
+	public function buildComponent() : EntityComponent {
 		return new EntityRigidBodyComponent( this );
 	}
 

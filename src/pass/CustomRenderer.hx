@@ -95,10 +95,15 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		fog = new pass.Fog();
 
 		fxaa = new h3d.pass.FXAA();
-		shadow.power = 4.6;
+
+		var shadowLum = 0.7;
+		shadow.color = new Vector( shadowLum, shadowLum, shadowLum );
+		shadow.power = 35;
 		shadow.blur.quality = 1.0;
 		shadow.size = Std.int( Math.pow( 2, Std.int( 9 ) ) );
-		shadow.blur.radius = 2.9;
+		shadow.blur.radius = 1.5;
+		shadow.samplingKind = ESM;
+		shadow.blur.shader.isDepthDependant = false;
 
 		sao.shader.numSamples = 32;
 		sao.shader.bias = 0.008;
@@ -142,28 +147,45 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		var colorTex = allocTarget( "color" );
 		var depthTex = allocTarget( "depth" );
 		var normalTex = allocTarget( "normal" );
-		// var additiveTex = allocTarget( "additive" );``````````````
-		setTargets( [colorTex, depthTex, normalTex /*, additiveTex*/] );
+		var additiveTex = allocTarget( "additive" );
+		setTargets( [colorTex, depthTex, normalTex, additiveTex] );
 		clear( Engine.getCurrent().backgroundColor, 1 );
 		mrt.draw( get( "default" ) );
 		mrt.draw( get( "alpha" ), backToFront );
-		// !additive
 		mrt.draw( get( "overlay" ), backToFront );
 		mrt.draw( get( "ui" ), backToFront );
-
 		resetTarget();
+
+		setTarget( additiveTex );
+		clear( 0 );
+		draw( "additive" );
+		resetTarget();
+
+		emissive.setContext( ctx );
+		emissive.draw( get( "emissive" ) );
 
 		var saoTarget = allocTarget( "sao" );
 		setTarget( saoTarget );
 		sao.apply( depthTex, normalTex, ctx.camera );
 		resetTarget();
 		saoBlur.apply( ctx, saoTarget );
-		if ( enableFXAA )
-			fxaa.apply( colorTex )
-		else copy( colorTex, null );
+		copy( saoTarget, colorTex, Multiply );
+
+		h3d.pass.Copy.run( emissive.outputTex, colorTex, Add );
+		h3d.pass.Copy.run( additiveTex, colorTex, Add );
+
+		if ( overlayBlurEnabled ) {
+			resetTarget();
+			overlayBlur.apply( ctx, colorTex );
+		}
+
+		var t = allocTarget( "fxaaOut", false );
+		setTarget( t );
+		fxaa.apply( colorTex );
+		resetTarget();
+		colorTex = t;
 
 		post.apply( colorTex, ctx.time );
-		if ( overlayBlurEnabled ) overlayBlur.apply( ctx, colorTex );
 
 		var outlineTex = allocTarget( "outlineBlur", false );
 		var outlineSrcTex = allocTarget( "outline", true );
@@ -174,22 +196,14 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		resetTarget();
 		outlineBlur.apply( ctx, outlineSrcTex, outlineTex );
 		composite.shader.outline = outlineTex;
-
 		resetTarget();
 		composite.shader.texture = colorTex;
 		composite.render();
-
-		copy( saoTarget, null, Multiply );
 	}
 
 	public function flash( color : Int, duration : Float ) {
 		post.flash( color, ctx.time, duration );
 	}
-
-	// @:access( h3d.scene.Object )
-	// public override function depthSort( frontToBack : Bool, passes : PassList ) {
-	// 	passes.sort( sortPasses );
-	// }
 
 	function sortPasses( p1 : PassObject, p2 : PassObject ) {
 		return

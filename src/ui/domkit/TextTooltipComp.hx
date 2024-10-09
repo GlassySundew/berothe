@@ -9,15 +9,15 @@ import h2d.filter.Shader;
 import shader.CornersRounder;
 import ui.domkit.element.ShadowedTextComp;
 
-@:uiComp( "textLabel" )
-class TextLabelComp extends h2d.Flow implements h2d.domkit.Object {
+@:uiComp( "textTooltip" )
+class TextTooltipComp extends h2d.Flow implements h2d.domkit.Object {
 
 	// @formatter:off
 	static var SRC =
-		<textLabel id="labelThis">
+		<textTooltip id="labelThis">
 			// <shadowed-text(text, font) public id="shadowed_text" />
 			<shadowed-text(text, font) text='$text' public id="shadowed_text" />
-		</textLabel>;
+		</textTooltip>;
 
 	// @formatter:on
 	public var label( get, set ) : String;
@@ -49,18 +49,10 @@ class TextLabelComp extends h2d.Flow implements h2d.domkit.Object {
 		label = text;
 
 		style = style == null ? new h2d.domkit.Style() : style;
-		style.load( hxd.Res.domkit.textlabel );
+		style.load( hxd.Res.domkit.textTooltip );
 		style.addObject( this );
 
 		cornersRounder = new CornersRounder();
 		filter = new Shader( cornersRounder );
-	}
-
-	override function sync( ctx : RenderContext ) {
-		// if( forceDecrHeight != null )
-		// 	@:privateAccess
-		// 	shadowed_text.calcYMin = forceDecrHeight;
-
-		super.sync( ctx );
 	}
 }

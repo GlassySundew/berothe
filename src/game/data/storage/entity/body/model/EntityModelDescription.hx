@@ -70,7 +70,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		this.baseInventorySize = baseInventorySize;
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public function buildComponent() : EntityComponent {
 		return new EntityModelComponent( this );
 	}
 

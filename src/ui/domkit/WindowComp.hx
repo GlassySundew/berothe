@@ -36,7 +36,7 @@ class WindowComp extends Flow implements h2d.domkit.Object implements WindowComp
 	static var SRC = <window class="window_root" layout="vertical">
 			<flow class="dragable_comp" public id="dragable_comp" />
 			<flow class="close_button" public id="close_button" />
-			<textLabel("window", null, style) class="windowLabel" public id="windowLabel" />
+			<textTooltip("window", null, style) class="windowLabel" public id="windowLabel" />
 		</window>;
 
 	public function new( tile : h2d.Tile, bl : Int, bt : Int, br : Int, bb : Int, parent : Null<h2d.Object> ) {

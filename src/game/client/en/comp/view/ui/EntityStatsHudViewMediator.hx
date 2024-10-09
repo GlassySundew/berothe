@@ -1,17 +1,12 @@
 package game.client.en.comp.view.ui;
 
-import ui.CustomFlow;
-import h3d.mat.Texture;
-import hxsl.Output;
-import util.GameUtil;
-import h2d.RenderContext;
 import h2d.Object;
+import ui.CustomFlow;
 import ui.domkit.element.ShadowedTextComp;
-import h2d.Flow;
 
 class EntityStatsHudViewMediator {
 
-	final comp : EntityStatsHudComp;
+	public final comp : EntityStatsHudComp;
 	final mediator : EntityStatsHudMediator;
 
 	public function new(

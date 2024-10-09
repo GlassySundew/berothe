@@ -36,7 +36,8 @@ class InteractorFactory {
 			createHighlight( graphics, int, interactorVO.highlightColor );
 		}
 
-		TooltipManager.attach3d( interactorVO.tooltipVO, int );
+		if ( interactorVO.tooltipVO != null )
+			TooltipManager.attach3d( interactorVO.tooltipVO, int );
 
 		return int;
 	}
@@ -47,7 +48,7 @@ class InteractorFactory {
 			for ( mesh in meshes ) mesh.getCollider()
 		] );
 
-		var int = new h3d.scene.Interactive( collider ) ;
+		var int = new h3d.scene.Interactive( collider );
 
 		return ThrEventInteractive.fromHeaps( int );
 	}

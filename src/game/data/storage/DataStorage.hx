@@ -1,7 +1,6 @@
 package game.data.storage;
 
 import game.data.storage.item.ItemDescription;
-import game.data.storage.entity.body.EntityPropertiesStorage;
 import game.data.storage.entity.EntityDescriptionStorage;
 import game.data.storage.item.ItemDescriptionStorage;
 import game.data.storage.entity.body.EntityPresetDescriptionStorage;
@@ -16,8 +15,6 @@ class DataStorage {
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
 	public final itemStorage : ItemDescriptionStorage = new ItemDescriptionStorage();
 	public final rule : RuleStorage;
-
-	public final entityPropertiesStorage : EntityPropertiesStorage = new EntityPropertiesStorage();
 
 	public function new() {
 		inst = this;

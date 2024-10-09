@@ -84,10 +84,10 @@ class Main extends Process {
 
 		#if debug
 		Boot.inst.createServer();
-		Engine.getCurrent().backgroundColor = 0xff121212;
+		Engine.getCurrent().backgroundColor = 0xff212121;
 		#end
 
-		var dir = new h3d.scene.fwd.DirLight( new h3d.Vector( -0.3, -0.2, -1 ), Boot.inst.s3d );
+		var dir = new h3d.scene.fwd.DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
 		dir.color.set( 0.5, 0.5, 0.5 );
 	}
 
@@ -103,7 +103,10 @@ class Main extends Process {
 	}
 
 	function createFpsCounter() {
-		var fps = new Text( Assets.fontPixel16, Boot.inst.s2d );
+		var fps = new Text( Assets.fontPixel16 );
+		fps.scale( .5 );
+
+		root.add( fps, Const.DP_UI );
 
 		onUpdate.add(() -> @:privateAccess {
 			fps.text = 'fps: ${Boot.inst.engine.fps}\ndraw calls: ${Boot.inst.engine.drawCalls}';

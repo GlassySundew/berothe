@@ -37,7 +37,7 @@ class EntityHitboxComponent extends EntityRigidBodyComponentBase {
 		rigidBodyLocal.setLinearDamping( { x : 100, y : 100, z : 100 } );
 		rigidBodyLocal.setGravityScale( 0 );
 
-		torsoShape.moveLocally( 0, 0, desc.offsetZ - ( desc.sizeX / 2 ) % 1 );
+		torsoShape.moveLocally( desc.offsetX, desc.offsetY, desc.offsetZ );
 
 		return rigidBodyLocal;
 	}

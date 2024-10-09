@@ -1,0 +1,23 @@
+{
+	"type": "playStates",
+	"name": "iron_bars_door",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "idle",
+			"children": [
+				{
+					"type": "object",
+					"name": "object",
+					"children": [
+						{
+							"type": "model",
+							"name": "iron_bars_door",
+							"source": "voxel/structures/iron_bars_door/entity/obj/fbx/iron_bars_door.fbx"
+						}
+					]
+				}
+			]
+		}
+	]
+}

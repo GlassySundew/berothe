@@ -34,15 +34,6 @@ class EntityAttackListReplicator extends EntityComponentReplicatorBase {
 		}
 	}
 
-	// override function followComponentServer( component : EntityComponent ) {
-	// 	super.followComponentServer( component );
-	// 	entity.components.onAppear(
-	// 		EntityModelComponent,
-	// 		( cl, modelComp ) -> {
-	// 		}
-	// 	);
-	// }
-
 	override function followComponentClient( entityRepl : EntityReplicator ) {
 		super.followComponentClient( entityRepl );
 

@@ -103,7 +103,7 @@ class EntityAttackListComponent extends EntityComponent {
 				for ( equipSlotType => weaponRangeStatHolder in weaponRanges ) {
 					var attackItem = getItemByEquipSlotType( equipSlotType );
 					Assert.notNull( attackItem );
-					weaponRangeStatHolder.amount.addOnValue(
+					weaponRangeStatHolder.amount.addOnValueImmediately(
 						( _, val ) -> attackItem.setRange( val )
 					);
 				}

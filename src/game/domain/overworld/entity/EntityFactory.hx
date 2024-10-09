@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import game.data.storage.entity.component.EntityComponentDescription;
 import util.Assert;
 import signals.Signal;
 import game.data.location.objects.LocationSpawnVO;
@@ -15,15 +16,11 @@ class EntityFactory {
 		entity : OverworldEntity
 	) {
 		var properties = entityDesc.getBodyDescription();
-		var components = EntityComponentsFactory.fromPropertyDescriptions(
+		createAndAttachComps(
+			entityDesc,
+			entity,
 			properties.clientPropertyDescs
 		);
-
-		for ( component in components ) {
-			Assert.notNull( component, "null component came from body property factory" );
-			if ( component != null )
-				entity.components.add( component );
-		}
 	}
 
 	public static function createAndAttachComponentsFromProperties(
@@ -31,9 +28,19 @@ class EntityFactory {
 		entity : OverworldEntity
 	) {
 		var properties = entityDesc.getBodyDescription();
-		var components = EntityComponentsFactory.fromPropertyDescriptions(
+		createAndAttachComps(
+			entityDesc,
+			entity,
 			properties.propertyDescs
 		);
+	}
+
+	static function createAndAttachComps(
+		entityDesc : EntityDescription,
+		entity : OverworldEntity,
+		compDescs : Array<EntityComponentDescription>
+	) {
+		var components = EntityComponentsFactory.fromPropertyDescriptions( compDescs );
 
 		for ( component in components ) {
 			Assert.notNull( component, "null component came from body property factory" );
@@ -70,6 +77,8 @@ class EntityFactory {
 		createAndAttachComponentsFromProperties( entityDesc, entity );
 
 		onEntityCreated.dispatch( entity );
+
+		entity.components.map( ( comp ) -> comp.claimOwnage() );
 
 		return entity;
 	}

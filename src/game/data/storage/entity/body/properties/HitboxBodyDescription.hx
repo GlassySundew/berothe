@@ -23,7 +23,7 @@ class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 		);
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public function buildComponent() : EntityComponent {
 		return new EntityHitboxComponent( this );
 	}
 

@@ -30,7 +30,7 @@ class AttackListDescription extends EntityComponentDescription {
 		this.attackList = attackList;
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public function buildComponent() : EntityComponent {
 		return new EntityAttackListComponent( this );
 	}
 

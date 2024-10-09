@@ -1,8 +1,8 @@
 package game.data.storage.entity.body;
 
-class EntityPresetDescriptionStorage extends DescriptionStorageBase<EntityPropertiesDescription, Data.EntityPreset> {
+class EntityPresetDescriptionStorage extends DescriptionStorageBase<EntityPresetDescription, Data.EntityPreset> {
 
 	override function parseItem( entry : Data.EntityPreset ) {
-		addItem( new EntityPropertiesDescription( entry ) );
+		addItem( new EntityPresetDescription( entry ) );
 	}
 }

@@ -32,7 +32,8 @@ abstract class DescriptionStorageBase<T : DescriptionBase, CdbType> {
 
 	function addItem( item : T ) {
 		Assert.isNull(
-			items[item.id], 'overlapping id set: ${item.id}, $item, current present: ${items[item.id]}'
+			items[item.id],
+			'id collision in description storage: $this, item id: ${item.id}, for item: $item, current present: ${items[item.id]}'
 		);
 		items[item.id] = item;
 	}

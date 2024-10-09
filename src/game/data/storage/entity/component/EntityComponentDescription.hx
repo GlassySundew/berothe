@@ -6,6 +6,6 @@ import game.domain.overworld.entity.EntityComponent;
 
 abstract class EntityComponentDescription extends DescriptionBase {
 
-	abstract public function buildComponennt() : EntityComponent;
+	abstract public function buildComponent() : EntityComponent;
 	abstract public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase;
 }

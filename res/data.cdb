@@ -82,10 +82,6 @@
 			],
 			"lines": [
 				{
-					"id": "point",
-					"preset": "block"
-				},
-				{
 					"id": "graybox",
 					"preset": "block"
 				},
@@ -106,12 +102,16 @@
 				{
 					"id": "club",
 					"preset": "club"
+				},
+				{
+					"id": "orc_prison_door",
+					"preset": "orc_prison_door"
 				}
 			],
 			"separators": [
 				{
 					"title": "blocks",
-					"id": "point"
+					"id": "graybox"
 				},
 				{
 					"title": "characters",
@@ -120,6 +120,10 @@
 				{
 					"title": "items",
 					"id": "club"
+				},
+				{
+					"title": "structures",
+					"id": "orc_prison_door"
 				}
 			],
 			"props": {}
@@ -158,11 +162,16 @@
 					"id": "club",
 					"properties": "club",
 					"view": "club"
+				},
+				{
+					"id": "orc_prison_door",
+					"properties": "orc_prison_door",
+					"view": "orc_prison_door"
 				}
 			],
 			"separators": [
 				{
-					"title": "static blocks",
+					"title": "static",
 					"id": "block"
 				},
 				{
@@ -172,6 +181,10 @@
 				{
 					"title": "items",
 					"id": "club"
+				},
+				{
+					"title": "structures",
+					"id": "orc_prison_door"
 				}
 			]
 		},
@@ -208,7 +221,8 @@
 							"sizeY": 3,
 							"sizeZ": 10,
 							"offsetZ": 11,
-							"id": "humanTorso"
+							"id": "humanTorso",
+							"hasFeet": true
 						},
 						"dynamics": true,
 						"bodyHitbox": {
@@ -347,17 +361,66 @@
 					"id": "club",
 					"properties": {
 						"dynamics": true,
-						"pickable": {
-							"item": "club",
-							"id": "clubProp",
-							"tooltipLocale": "Club"
-						},
 						"rigidBodyTorso": {
 							"sizeX": 4,
 							"sizeY": 1,
 							"sizeZ": 1,
-							"offsetZ": 0,
 							"id": "clubRigidBody"
+						},
+						"interactable": {
+							"actionsQueue": [
+								{
+									"action": {
+										"pickupItem": {
+											"item": "club"
+										}
+									}
+								}
+							],
+							"tooltipLocale": "Club",
+							"id": "club_interact"
+						}
+					}
+				},
+				{
+					"id": "orc_prison_door",
+					"properties": {
+						"dynamics": true,
+						"interactable": {
+							"itemRequired": {
+								"item": "orc_prison_key"
+							},
+							"removeChance": 1,
+							"actionsQueue": [
+								{
+									"action": {
+										"toggleEntityTransformInList": [
+											{
+												"transform": {
+													"angle": {
+														"z": -70
+													}
+												}
+											}
+										]
+									}
+								},
+								{
+									"action": {
+										"setInteractivity": false
+									}
+								}
+							],
+							"id": "orc_prison_door_interactable"
+						},
+						"rigidBodyTorso": {
+							"sizeX": 1,
+							"sizeZ": 21,
+							"sizeY": 19,
+							"id": "orc_prison_door_rb",
+							"offsetZ": 10,
+							"hasFeet": false,
+							"offsetY": -9.5
 						}
 					}
 				}
@@ -374,6 +437,10 @@
 				{
 					"title": "items",
 					"id": "club"
+				},
+				{
+					"title": "structures",
+					"id": "orc_prison_door"
 				}
 			],
 			"props": {}
@@ -436,7 +503,12 @@
 					"id": "attack_left_attack"
 				}
 			],
-			"separators": [],
+			"separators": [
+				{
+					"title": "character",
+					"id": "idle"
+				}
+			],
 			"props": {}
 		},
 		{
@@ -483,9 +555,8 @@
 				},
 				{
 					"typeStr": "17",
-					"name": "pickable",
-					"opt": true,
-					"kind": null
+					"name": "interactable",
+					"opt": true
 				}
 			]
 		},
@@ -500,7 +571,17 @@
 			"columns": [
 				{
 					"typeStr": "0",
-					"name": "id",
+					"name": "id"
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetX",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetY",
 					"opt": true,
 					"kind": null
 				},
@@ -525,6 +606,12 @@
 				{
 					"typeStr": "4",
 					"name": "sizeZ",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "2",
+					"name": "hasFeet",
 					"opt": true,
 					"kind": null
 				}
@@ -646,7 +733,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@pickable",
+			"name": "entityProperty@properties@interactable",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -657,17 +744,172 @@
 				{
 					"typeStr": "0",
 					"name": "id",
+					"opt": true,
 					"kind": null
 				},
 				{
-					"typeStr": "6:item",
-					"name": "item"
+					"typeStr": "8",
+					"name": "actionsQueue",
+					"opt": true
+				},
+				{
+					"typeStr": "17",
+					"name": "itemRequired",
+					"opt": true
+				},
+				{
+					"typeStr": "4",
+					"name": "removeChance",
+					"display": 1,
+					"opt": true
 				},
 				{
 					"typeStr": "1",
 					"name": "tooltipLocale",
 					"opt": true,
 					"kind": "localizable"
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@itemRequired",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:item",
+					"name": "item",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@actionsQueue",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "17",
+					"name": "action",
+					"documentation": "ONLY ONE PROPERTY PER ELEMENT\n"
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@actionsQueue@action",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "8",
+					"name": "toggleEntityTransformInList",
+					"opt": true
+				},
+				{
+					"typeStr": "2",
+					"name": "setInteractivity",
+					"opt": true
+				},
+				{
+					"typeStr": "17",
+					"name": "pickupItem",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@actionsQueue@action@toggleEntityTransformInList",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "17",
+					"name": "transform"
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@actionsQueue@action@pickupItem",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:item",
+					"name": "item",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@actionsQueue@action@toggleEntityTransformInList@transform",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "17",
+					"name": "angle",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "position",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@interactable@actionsQueue@action@toggleEntityTransformInList@transform@angle",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "4",
+					"name": "x",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "y",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "z",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -933,6 +1175,24 @@
 							]
 						}
 					]
+				},
+				{
+					"id": "orc_prison_door",
+					"type": [
+						0,
+						"orc_prison_door"
+					],
+					"animations": [
+						{
+							"id": "idle",
+							"key": "idle",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							]
+						}
+					]
 				}
 			],
 			"separators": [],
@@ -1001,6 +1261,14 @@
 				{
 					"id": "club",
 					"file": "voxel/items/club/entity/club.enco"
+				},
+				{
+					"id": "orc_prison_key",
+					"file": ""
+				},
+				{
+					"id": "orc_prison_door",
+					"file": "voxel/structures/iron_bars_door/iron_bars_door.enco"
 				}
 			],
 			"separators": [],
@@ -1026,6 +1294,11 @@
 				}
 			],
 			"lines": [
+				{
+					"id": "orc_prison_key",
+					"type": 0,
+					"props": {}
+				},
 				{
 					"id": "club",
 					"props": {
@@ -1337,7 +1610,13 @@
 				}
 			],
 			"separators": [],
-			"props": {}
+			"props": {
+				"editor": {
+					"categories": [
+						"legacy"
+					]
+				}
+			}
 		},
 		{
 			"name": "location",
@@ -1458,11 +1737,6 @@
 				{
 					"typeStr": "6:entity",
 					"name": "spawnedEntity"
-				},
-				{
-					"typeStr": "6:entity",
-					"name": "blockEntity",
-					"kind": null
 				}
 			],
 			"separators": [],

@@ -20,7 +20,7 @@ class IngredComp extends Flow implements Object implements WindowCompI {
 	    <ingred-comp class="ingred-comp">
 		    <window(backgroundTile, bl, bt, br, bb) public id="window">
 		        <bitmap src={iconSpr.tile} class="icon" />
-		        <textLabel(Std.string(ingred.amount)) class="amount-label" public id="amount-label"
+		        <textTooltip(Std.string(ingred.amount)) class="amount-label" public id="amount-label"
 		            scale={{y : 1 / Const.UI_SCALE, x : 1 / Const.UI_SCALE}} />
 		        </window>
 		</ingred-comp>;

@@ -37,6 +37,22 @@ class EntityDynamicsComponent extends EntityComponent {
 				onMoveInvalidate = true;
 			}
 		);
+
+		entity.transform.rotationX.addOnValue(
+			( _, _ ) -> {
+				onMoveInvalidate = true;
+			}
+		);
+		entity.transform.rotationY.addOnValue(
+			( _, _ ) -> {
+				onMoveInvalidate = true;
+			}
+		);
+		entity.transform.rotationZ.addOnValue(
+			( _, _ ) -> {
+				onMoveInvalidate = true;
+			}
+		);
 	}
 
 	function onFrame( dt, tmod : Float ) {

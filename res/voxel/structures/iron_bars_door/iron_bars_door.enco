@@ -1,0 +1,22 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "object",
+			"name": "object",
+			"x": -0.5,
+			"y": -9,
+			"z": -0.5,
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
+			"children": [
+				{
+					"type": "reference",
+					"name": "iron_bars_door",
+					"source": "voxel/structures/iron_bars_door/iron_bars_door.plst"
+				}
+			]
+		}
+	]
+}

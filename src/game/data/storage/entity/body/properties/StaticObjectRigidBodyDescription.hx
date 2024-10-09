@@ -15,7 +15,7 @@ class StaticObjectRigidBodyDescription extends EntityComponentDescription {
 		return new StaticObjectRigidBodyDescription( entry.id.toString() );
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public function buildComponent() : EntityComponent {
 		return new StaticObjectRigidBodyComponent( this );
 	}
 

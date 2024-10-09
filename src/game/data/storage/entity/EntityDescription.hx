@@ -1,6 +1,6 @@
 package game.data.storage.entity;
 
-import game.data.storage.entity.body.EntityPropertiesDescription;
+import game.data.storage.entity.body.EntityPresetDescription;
 
 class EntityDescription extends DescriptionBase {
 
@@ -11,7 +11,7 @@ class EntityDescription extends DescriptionBase {
 		presetId = entry.presetId.toString();
 	}
 
-	public function getBodyDescription() : EntityPropertiesDescription {
+	public function getBodyDescription() : EntityPresetDescription {
 		return DataStorage.inst.entityPresetStorage.getDescriptionById( presetId );
 	}
 

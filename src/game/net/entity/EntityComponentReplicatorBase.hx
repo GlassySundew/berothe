@@ -19,8 +19,8 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 	public var followedComponent( default, null ) : Future<EntityComponent> = new Future();
 	public var component( default, null ) : EntityComponent;
 
-	@:s var componentDescId : NSMutableProperty<String> = new NSMutableProperty();
-	var entityRepl : EntityReplicator;
+	@:s var componentDescId : String;
+	@:s var entityRepl : EntityReplicator;
 
 	override function init() {
 		classType = Type.getClass( this );
@@ -32,11 +32,9 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 	override function alive() {
 		super.alive();
 
-		componentDescId.onAppear( descId -> {
-			var desc = DataStorage.inst.entityPropertiesStorage.getDescriptionById( descId );
-			component = desc.buildComponennt();
-			followedComponent.resolve( component );
-		} );
+		var desc = entityRepl.entity.result.desc.getBodyDescription().getComponentDescription( componentDescId );
+		component = desc.buildComponent();
+		followedComponent.resolve( component );
 	}
 
 	public function followComponentClient( entityRepl : EntityReplicator ) {
@@ -52,7 +50,7 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 	) : Void {
 		this.entityRepl = entityRepl;
 		this.component = component;
-		componentDescId.val = component.description.id.toString();
+		componentDescId = component.description.id.toString();
 		followedComponent.resolve( component );
 	}
 }

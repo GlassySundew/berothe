@@ -1,13 +1,13 @@
 package game.data.location.objects;
 
-import hrt.prefab.l3d.Instance;
+import hrt.prefab.Object3D;
 import game.data.storage.DataStorage;
 import game.data.storage.entity.EntityDescription;
 
-class LocationSpawnVO extends LocationEntityVO {
+class LocationSpawnVO extends LocationObjectVO {
 
 	public static function fromPrefabInstance(
-		instance : Instance,
+		instance : Object3D,
 		cdbEntry : Data.EntitySpawnPointDFDef
 	) : LocationSpawnVO {
 
@@ -22,7 +22,6 @@ class LocationSpawnVO extends LocationEntityVO {
 			instance.y,
 			instance.z,
 			instance.name,
-			cdbEntry.blockEntity,
 			cdbEntry.spawnedEntity
 		);
 	}
@@ -40,7 +39,6 @@ class LocationSpawnVO extends LocationEntityVO {
 		y : Float,
 		z : Float,
 		name : String,
-		blockEntityId : Data.EntityKind,
 		spawnedEntityId : Data.EntityKind
 	) {
 		super(
@@ -53,8 +51,8 @@ class LocationSpawnVO extends LocationEntityVO {
 			x,
 			y,
 			z,
-			name,
-			blockEntityId );
+			name
+		);
 		spawnedEntityDesc = DataStorage.inst.entityStorage.getDescriptionById( spawnedEntityId.toString() );
 	}
 }

@@ -3,39 +3,7 @@
 	"children": [
 		{
 			"type": "instance",
-			"name": "player",
-			"props": {
-				"id": "player",
-				"entity": "player",
-				"$cdbtype": "entitySpawnPointDF",
-				"entitySpawned": "player",
-				"blockEntity": "point",
-				"spawnedEntity": "player",
-				"e": {
-					"file": "../../../Downloads/144-Cryptoplanets-1536x1534.png",
-					"size": 16,
-					"x": 0,
-					"y": 0
-				}
-			},
-			"x": -28,
-			"y": 18,
-			"children": [
-				{
-					"type": "text",
-					"name": "text",
-					"locked": true,
-					"blendMode": "Alpha",
-					"color": 0,
-					"size": 22,
-					"pathFont": "fonts/alagard.fnt",
-					"text": "player"
-				}
-			]
-		},
-		{
-			"type": "instance",
-			"name": "global",
+			"name": "g",
 			"props": {
 				"type": "global",
 				"$cdbtype": "locationObjContainerTypeDF"
@@ -50,6 +18,7 @@
 					},
 					"x": -19,
 					"y": 9,
+					"z": 1.09,
 					"scaleX": 95,
 					"scaleY": 95
 				},
@@ -70,13 +39,23 @@
 		},
 		{
 			"type": "instance",
-			"name": "club",
+			"name": "player",
 			"props": {
-				"entity": "club",
-				"$cdbtype": "locationEntityDF"
+				"id": "player",
+				"entity": "player",
+				"$cdbtype": "entitySpawnPointDF",
+				"entitySpawned": "player",
+				"blockEntity": "point",
+				"spawnedEntity": "player",
+				"e": {
+					"file": "../../../Downloads/144-Cryptoplanets-1536x1534.png",
+					"size": 16,
+					"x": 0,
+					"y": 0
+				}
 			},
-			"x": -29,
-			"y": 6,
+			"x": -39.42,
+			"y": 31.14,
 			"children": [
 				{
 					"type": "text",
@@ -86,9 +65,38 @@
 					"color": 0,
 					"size": 22,
 					"pathFont": "fonts/alagard.fnt",
-					"text": "club"
+					"text": "player"
 				}
 			]
+		},
+		{
+			"type": "reference",
+			"name": "iron_bars_door",
+			"source": "voxel/structures/iron_bars_door/iron_bars_door.enco",
+			"props": {
+				"entity": "orc_prison_door",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -13.15,
+			"y": 36.5,
+			"z": 38.8,
+			"rotationZ": -80
+		},
+		{
+			"type": "model",
+			"name": "club_0_idle",
+			"source": "voxel/items/club/equip/obj/fbx/club_0_idle.fbx",
+			"props": {
+				"entity": "club",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -7.93,
+			"y": 26.92,
+			"z": 4.67,
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
+			"rotationZ": -71.9
 		}
 	]
 }

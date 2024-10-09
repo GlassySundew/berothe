@@ -1,7 +1,6 @@
 package game.domain.overworld.entity;
 
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.data.storage.entity.body.EntityPropertiesDescription;
 
 class EntityComponentsFactory {
 
@@ -11,7 +10,7 @@ class EntityComponentsFactory {
 		var result = [];
 
 		for ( property in bodyDescriptions ) {
-			result.push( property.buildComponennt() );
+			result.push( property.buildComponent() );
 		}
 
 		return result;

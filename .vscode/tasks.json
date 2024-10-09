@@ -51,7 +51,7 @@
 				"focus": false,
 				"panel": "shared",
 				"showReuseMessage": true,
-				"clear": false
+				"clear": true
 			},
 			"dependsOn": [
 				"server_connect_compile",
@@ -139,8 +139,7 @@
 			"type": "shell",
 			"command": "clear && hl bin/game.hl",
 			"runOptions": {
-				"instanceLimit": 4,
-				"reevaluateOnRerun": false
+				"instanceLimit": 4
 			},
 			"presentation": {
 				"echo": true,
@@ -159,9 +158,17 @@
 			"command": "hl bin/server.hl"
 		},
 		{
-			"type": "shell",
 			"label": "kill hl",
-			"command": "taskkill /IM hl.exe /F"
+			"type": "shell",
+			"command": "taskkill /IM hl.exe /F",
+			"presentation": {
+				"echo": false,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
 		}
 	]
 }

@@ -14,8 +14,9 @@ class EntityAttackListItem {
 
 	public final desc : AttackListItem;
 	public final onAttackPerformed = new Signal();
-
 	public final isRaised : MutableProperty<Bool> = new MutableProperty();
+
+	final attackRange : MutableProperty<Float> = new MutableProperty();
 
 	var emitter : AttackTweenBoxCastEmitter;
 	var entity : OverworldEntity;
@@ -55,8 +56,9 @@ class EntityAttackListItem {
 		damageAmount = amount;
 	}
 
-	public inline function setRange( amount : Float ) {
-		emitter.setAttackRange( amount );
+	#if !debug inline #end
+	public function setRange( amount : Float ) {
+		attackRange.val = amount;
 	}
 
 	function onAttachedToLocation( location : Location ) {
@@ -69,6 +71,10 @@ class EntityAttackListItem {
 						rigidBody.transform,
 						location.physics
 					);
+					attackRange.addOnValueImmediately(
+						( old, newVal ) -> emitter.setAttackRange( newVal )
+					);
+
 					entity.onFrame.add( update );
 
 					emitter.getCallbackContainer().beginCB.add(

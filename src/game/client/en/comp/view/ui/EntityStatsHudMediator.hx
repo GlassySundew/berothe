@@ -23,7 +23,8 @@ class EntityStatsHudMediator {
 	) {
 		this.stats = stats;
 		this.entity = entity;
-		clip = new EntityStatsHudViewMediator( this, Main.inst.root );
+		clip = new EntityStatsHudViewMediator( this );
+		Main.inst.root.add( clip.comp, util.Const.DP_UI );
 
 		entity.components.onAppear(
 			EntityAttackListComponent,

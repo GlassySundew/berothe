@@ -6,25 +6,29 @@ import game.data.storage.entity.body.model.EntityModelDescription;
 import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
+import game.data.storage.entity.body.properties.InteractableDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.data.storage.item.EntityPickablePropertyDescription;
 
-class EntityPropertiesDescription extends DescriptionBase {
+class EntityPresetDescription extends DescriptionBase {
+
+	public final map : Map<String, EntityComponentDescription> = [];
 
 	public var propertyDescs( default, null ) : Array<EntityComponentDescription> = [];
 	public var clientPropertyDescs( default, null ) : Array<EntityComponentDescription> = [];
 
+	// character
 	public var dynamics( default, null ) : Null<DynamicsDescription>;
 	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
 	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 
-	public var pickable( default, null ) : Null<EntityPickablePropertyDescription>;
+	// structure
+	public var interactabeDesc( default, null ) : Null<InteractableDescription>;
 
 	public var model : Null<EntityModelDescription>;
 	public var view : Null<EntityViewDescription>;
@@ -35,24 +39,29 @@ class EntityPropertiesDescription extends DescriptionBase {
 		createPropDescriptions( entry );
 
 		for ( propertyDesc in propertyDescs ) {
-			DataStorage.inst.entityPropertiesStorage.provideExistingDescription( propertyDesc );
+			map[propertyDesc.id] = propertyDesc;
 		}
+	}
+
+	public inline function getComponentDescription( id : String ) {
+		return map[id];
 	}
 
 	function createPropDescriptions( entry : Data.EntityPreset ) {
 		propertyDescs = ArrayExtensions.deNullify(( [
 
+			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
+
+			// character
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
-
-			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
-
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
 
-			pickable = EntityPickablePropertyDescription.fromCdb( entry.properties.properties.pickable )
-
+			// structure
+			interactabeDesc = InteractableDescription.fromCdb(entry.properties.properties.interactable),
+			
 		] : Array<EntityComponentDescription> ) );
 
 		clientPropertyDescs = ArrayExtensions.deNullify(( [

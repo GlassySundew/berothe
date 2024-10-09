@@ -53,8 +53,6 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		this.emitTransform = new OimoTransform();
 		this.cooldown = new Cooldown( hxd.Timer.wantedFPS );
 
-		attackRange = desc.endX;
-
 		var geom = GeometryAbstractFactory.box( desc.sizeX, desc.sizeY, desc.sizeZ );
 		var shapeConfig = ShapeConfigFactory.create();
 		shapeConfig.setGeometry( geom );

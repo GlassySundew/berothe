@@ -86,9 +86,6 @@ class ChunkReplicator extends NetNode {
 	function onEntityRemovedFromChunk( entity : OverworldEntity ) {
 		var entityReplicator = coreReplicator.getEntityReplicator( entity );
 		entities.remove( entityReplicator );
-		
-		// if ( entity.disposed.isTriggered )
-		// 	entityReplicator.unregister( NetworkHost.current );
 	}
 
 	#if( client && debug )

@@ -48,7 +48,9 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		drawable.scale( 1 / Const.UI_SCALE );
 		rootNode = new WindowNode( "game debug" );
 
-		GameClient.inst.root.add( drawable, Const.DP_IMGUI );
+		// rootNode.addChild( new ImGuiDemo() );
+
+		Main.inst.root.add( drawable, Const.DP_IMGUI );
 		var cameraHeader = new CollapsingHeaderNode( "camera", rootNode );
 
 		new DragDoubleNode( "zNear", new ZNearAccessor(), 0.1, 0.1, 10000, cameraHeader );

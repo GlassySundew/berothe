@@ -13,7 +13,7 @@ class DynamicsDescription extends EntityComponentDescription {
 		super( id );
 	}
 
-	public function buildComponennt() : EntityComponent {
+	public function buildComponent() : EntityComponent {
 		return new EntityDynamicsComponent( this );
 	}
 

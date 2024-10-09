@@ -17,7 +17,7 @@ class Chunk {
 	public final onEntityRemoved : Signal<OverworldEntity> = new Signal<OverworldEntity>();
 	public final entityStream : Observable<OverworldEntity>;
 
-	var entities : Array<OverworldEntity> = [];
+	public var entities( default, null ) : Array<OverworldEntity> = [];
 
 	public function new( x : Int, y : Int, z : Int, size : Int, location : Location ) {
 		this.x = x;
@@ -49,7 +49,7 @@ class Chunk {
 		if ( entities.remove( entity ) ) {
 			onEntityRemoved.dispatch( entity );
 		} else {
-			throw "entity was not found in the chunk it has to be removed from";
+			throw "entity: " + entity + " was not found in the chunk it has to be removed from";
 		}
 	}
 

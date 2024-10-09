@@ -70,11 +70,6 @@ class EntityReplicator extends NetNode {
 		);
 	}
 
-	@:rpc( clients )
-	function test() {
-		trace( entity.result, __host );
-	}
-
 	override function alive() {
 		super.alive();
 
@@ -83,7 +78,7 @@ class EntityReplicator extends NetNode {
 
 		entity.resolve( entityLocal );
 		EntityFactory.createAndAttachClientComponentsFromProperties( desc, entityLocal );
-		
+
 		componentsRepl.followEntityClient( this );
 		transformRepl.followEntityClient( this );
 	}
@@ -96,5 +91,10 @@ class EntityReplicator extends NetNode {
 
 	function onLocationChanged( _, location : Location ) {
 		locationDescId = location?.locationDesc.id.toString();
+	}
+
+	@:keep
+	public function toString() : String {
+		return "EntityReplicator: " + entity?.result;
 	}
 }

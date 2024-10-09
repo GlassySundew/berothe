@@ -1,5 +1,6 @@
 package game.data.location.prefab;
 
+import hrt.prefab.Object3D;
 import util.Const;
 import game.data.storage.DataStorage;
 import hrt.prefab.Prefab;
@@ -10,7 +11,6 @@ import game.domain.overworld.location.ILocationObjectsDataProvider;
 import game.data.location.objects.LocationEntityVO;
 import game.data.location.objects.LocationSpawnVO;
 import game.data.storage.entity.EntityDescription;
-
 
 class LocationPrefabSource implements ILocationObjectsDataProvider {
 
@@ -53,15 +53,15 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	}
 
 	function parsePrefabElement( localPrefab : Prefab ) {
-		switch ( Type.getClass( localPrefab ) ) {
-			case Instance: resolveInstance( Std.downcast( localPrefab, Instance ) );
-			case e:
-				trace( "object: " + e + " is not supported while parsing root location objects" );
+		if ( localPrefab is Object3D ) {
+			resolveInstance( Std.downcast( localPrefab, Object3D ) );
+		} else {
+			trace( "object: " + localPrefab + " is not supported while parsing root location objects" );
 		}
 		return false;
 	}
 
-	function resolveInstance( instance : Instance ) {
+	function resolveInstance( instance : Object3D ) {
 		var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( instance.props, Const.cdbTypeIdent ) );
 
 		switch cdbSheetId {
