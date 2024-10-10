@@ -23,9 +23,9 @@
 					}
 				},
 				{
-					"id": "pickupRange",
+					"id": "interactionRange",
 					"value": {
-						"float": 40
+						"float": 20
 					}
 				},
 				{
@@ -388,9 +388,9 @@
 						"dynamics": true,
 						"interactable": {
 							"itemRequired": {
-								"item": "orc_prison_key"
+								"item": "orc_prison_key",
+								"removeChance": 1
 							},
-							"removeChance": 1,
 							"actionsQueue": [
 								{
 									"action": {
@@ -398,7 +398,7 @@
 											{
 												"transform": {
 													"angle": {
-														"z": -70
+														"z": -2
 													}
 												}
 											}
@@ -420,7 +420,8 @@
 							"id": "orc_prison_door_rb",
 							"offsetZ": 10,
 							"hasFeet": false,
-							"offsetY": -9.5
+							"offsetY": -9.5,
+							"isStatic": true
 						}
 					}
 				}
@@ -614,6 +615,12 @@
 					"name": "hasFeet",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "2",
+					"name": "isStatic",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -758,12 +765,6 @@
 					"opt": true
 				},
 				{
-					"typeStr": "4",
-					"name": "removeChance",
-					"display": 1,
-					"opt": true
-				},
-				{
 					"typeStr": "1",
 					"name": "tooltipLocale",
 					"opt": true,
@@ -784,6 +785,18 @@
 					"typeStr": "6:item",
 					"name": "item",
 					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "amount",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "removeChance",
+					"display": 1,
 					"kind": null
 				}
 			]

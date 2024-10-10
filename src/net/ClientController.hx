@@ -73,7 +73,7 @@ class ClientController extends NetNode {
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
 		entityRepl.entity.then( entity -> new EntityControl( entity, entityRepl ) );
-		GameClient.inst.controlledEntity = entityRepl;
+		GameClient.inst.controlledEntity.val = entityRepl;
 		#end
 	}
 

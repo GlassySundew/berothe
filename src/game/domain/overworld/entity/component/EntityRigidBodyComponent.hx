@@ -76,13 +76,16 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 
-		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, DYNAMIC );
+		var rigidBodyLocal = RigidBodyAbstractFactory.create(
+			torsoShape,
+			rigidBodyDesc.isStatic ? STATIC : DYNAMIC
+		);
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBodyLocal.setLinearDamping( { x : 9999, y : 9999, z : 9999 } );
 
 		rigidBodyLocal.setGravityScale( 0 );
 
-		torsoShape.moveLocally( rigidBodyDesc.offsetX, rigidBodyDesc.offsetY, rigidBodyDesc.offsetZ  );
+		torsoShape.moveLocally( rigidBodyDesc.offsetX, rigidBodyDesc.offsetY, rigidBodyDesc.offsetZ );
 
 		return rigidBodyLocal;
 	}
@@ -120,7 +123,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 	function onRayCollide( shape : IRigidBodyShape, rayCastHit : RayCastHit ) {
 		if ( shape.getCollisionGroup() & torsoShape.getCollisionMask() == 0 ) return;
 
-		rigidBody.move( 0, 0, ( 1 - rayCastHit.fraction ) * rigidBodyDesc.offsetZ  );
+		rigidBody.move( 0, 0, ( 1 - rayCastHit.fraction ) * rigidBodyDesc.offsetZ );
 
 		rigidBody.velZ.val = 0;
 		if ( rigidBody.velX.val == 0 && rigidBody.velY.val == 0 ) {

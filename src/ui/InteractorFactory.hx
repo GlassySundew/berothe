@@ -1,15 +1,13 @@
 package ui;
 
-import h3d.prim.Cube;
-import ui.tooltip.TooltipManager;
-import shader.OutlineExtruder;
-import h3d.shader.FixedColor;
-import dn.Col;
-import h3d.scene.Mesh;
-import h3d.col.Collider;
-import h2d.domkit.Object;
-import graphics.ThreeDObjectNode;
+import signals.Signal;
+import core.IProperty;
 import graphics.ThrEventInteractive;
+import graphics.ThreeDObjectNode;
+import h3d.col.Collider;
+import h3d.shader.FixedColor;
+import util.BoolList;
+import ui.tooltip.TooltipManager;
 import ui.tooltip.TooltipMediatorBase;
 
 class InteractorVO {
@@ -24,9 +22,10 @@ class InteractorVO {
 
 class InteractorFactory {
 
-	public static function create(
+	public static function create<Pred>(
 		interactorVO : InteractorVO,
-		graphics : ThreeDObjectNode
+		graphics : ThreeDObjectNode,
+		?visibilitySignal : Signal<Bool>
 	) : ThrEventInteractive {
 
 		var int = createInteractor( graphics );
@@ -38,6 +37,10 @@ class InteractorFactory {
 
 		if ( interactorVO.tooltipVO != null )
 			TooltipManager.attach3d( interactorVO.tooltipVO, int );
+
+		visibilitySignal?.add( ( val ) -> {
+			int.visible = val;
+		} );
 
 		return int;
 	}
@@ -56,7 +59,7 @@ class InteractorFactory {
 	static function createHighlight(
 		graphics : ThreeDObjectNode,
 		int : ThrEventInteractive,
-		color : Int
+		color : Int,
 	) {
 		var materials = graphics.heapsObject.getMaterials();
 		for ( material in materials ) {

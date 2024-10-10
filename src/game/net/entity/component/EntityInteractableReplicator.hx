@@ -1,5 +1,17 @@
 package game.net.entity.component;
 
+import game.domain.overworld.entity.EntityComponent;
+import rx.disposables.Composite;
+import hxbit.NetworkHost;
+import hxbit.NetworkSerializable.NetworkSerializer;
+import net.NSMutableProperty;
+import core.MutableProperty;
+import signals.Signal;
+import future.Future;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import game.data.storage.DataStorage;
+import util.MathUtil;
+import dn.M;
 #if client
 import game.net.client.GameClient;
 import ui.InteractorFactory;
@@ -17,6 +29,8 @@ class EntityInteractableReplicator extends EntityComponentReplicatorBase {
 		return Std.downcast( component, EntityInteractableComponent );
 	}
 
+	@:s var isTurnedOn : NSMutableProperty<Bool> = new NSMutableProperty<Bool>( true );
+
 	override public function networkAllow(
 		op : hxbit.NetworkSerializable.Operation,
 		propId : Int,
@@ -25,19 +39,30 @@ class EntityInteractableReplicator extends EntityComponentReplicatorBase {
 		return true;
 	}
 
+	override function followComponentServer( component : EntityComponent, entityRepl : EntityReplicator ) {
+		super.followComponentServer( component, entityRepl );
+		Std.downcast( component, EntityInteractableComponent ).isTurnedOn.subscribeProp( isTurnedOn );
+	}
+
+	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
+		super.unregister( host, ctx );
+		isTurnedOn.unregister( host, ctx );
+	}
+
 	#if client
 	override function followComponentClient( entityRepl : EntityReplicator ) {
 		super.followComponentClient( entityRepl );
 
-		followedComponent.then( ( component ) -> {
-			entityRepl.entity.result.components.onAppear(
-				EntityViewComponent,
-				( _, viewComp ) -> createInteractor( viewComp )
+		var viewFut = entityRepl.entity.result.components.onAppearFut( EntityViewComponent );
+		Future.sequence( followedComponent, viewFut )
+			.then(
+				results -> createInteractor( results[1] )
 			);
-		} );
 	}
 
 	function createInteractor( viewComp : EntityViewComponent ) {
+		if ( !isTurnedOn.val ) return;
+
 		var interactorVO = new InteractorVO();
 		interactorVO.doHighlight = true;
 		interactorVO.highlightColor = 0xD9D9D9;
@@ -47,23 +72,52 @@ class EntityInteractableReplicator extends EntityComponentReplicatorBase {
 				interactableComponent.desc.tooltipLocale
 			);
 
-		viewComp.view.then( ( view ) -> {
-			var int = InteractorFactory.create(
-				interactorVO,
-				view.getGraphics()
-			);
+		GameClient.inst.controlledEntity.onAppear( ctrlEnt -> {
+			ctrlEnt.entity.result.components.onAppear(
+				EntityDynamicsComponent,
+				( _, dynamics ) -> {
 
-			int.onClick.add( ( e ) -> {
-				useBy( GameClient.inst.controlledEntity );
-			} );
+					var sub = Composite.create();
+					var predicamentSignal = new Signal<Bool>();
+					sub.add( dynamics.onMove.add(() -> {
+						predicamentSignal.dispatch(
+							interactableComponent.checkDistance(
+								ctrlEnt.entity.result
+							)
+						);
+					} ) );
+
+					viewComp.view.then( ( view ) -> {
+						var int = InteractorFactory.create(
+							interactorVO,
+							view.getGraphics(),
+							predicamentSignal
+						);
+
+						int.onClick.add( ( e ) -> {
+							useBy( GameClient.inst.controlledEntity.val );
+						} );
+
+						sub.add( isTurnedOn.addOnValueImmediately(
+							( old, newV ) -> {
+								trace( newV );
+								if ( newV ) return;
+
+								predicamentSignal.destroy();
+								sub.unsubscribe();
+
+								int.remove();
+							}
+						) );
+					} );
+				}
+			);
 		} );
 	}
 	#end
 
 	@:rpc( server )
 	function useBy( entityRepl : EntityReplicator ) : Void {
-		#if client throw "should not be called on client"; #end
-
 		interactableComponent.useBy( entityRepl.entity.result );
 	}
 }

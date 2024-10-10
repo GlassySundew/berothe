@@ -22,11 +22,13 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 			entry.sizeY,
 			entry.sizeZ,
 			entry.hasFeet,
+			entry.isStatic,
 			entry.id.toString()
 		);
 	}
 
 	public final hasFeet : Bool;
+	public final isStatic : Bool;
 
 	public function new(
 		offsetX : Float,
@@ -36,6 +38,7 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 		sizeY : Float,
 		sizeZ : Float,
 		hasFeet : Bool,
+		isStatic : Bool,
 		id : String
 	) {
 		super(
@@ -48,6 +51,7 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 			id,
 		);
 		this.hasFeet = hasFeet;
+		this.isStatic = isStatic;
 	}
 
 	public function buildComponent() : EntityComponent {

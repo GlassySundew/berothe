@@ -18,9 +18,10 @@ class SetInteractivityAction extends BodyActionBase {
 		var interactComp = self.components.get( EntityInteractableComponent );
 		interactComp.interactionBoolList.removeLambda( predicament );
 		interactComp.interactionBoolList.addLambda( predicament );
+		interactComp.isTurnedOn.val = false;
 	}
 
-	function predicament() : Bool {
+	function predicament(e) : Bool {
 		return value;
 	}
 }

@@ -10,6 +10,11 @@ import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.net.entity.component.EntityInteractableReplicator;
 
+typedef ItemRequirement = {
+	itemDescId : String,
+	breakChance : Float
+}
+
 class InteractableDescription extends EntityComponentDescription {
 
 	#if !debug inline #end
@@ -23,21 +28,32 @@ class InteractableDescription extends EntityComponentDescription {
 			[for ( action in cdbEntry.actionsQueue ) {
 				ActionsFactory.fromCdb( action.action );
 			}],
-			cdbEntry.id.toString()
+			cdbEntry.itemRequired.itemId.toString(),
+			cdbEntry.itemRequired.removeChance,
+			cdbEntry.id.toString(),
 		);
 	}
 
 	public final actionQueue : Array<Lazy<BodyActionBase>>;
 	public final tooltipLocale : Null<String>;
+	public final itemRequired : ItemRequirement;
 
+	
 	public function new(
 		?tooltipLocale : Null<String>,
 		actionQueue : Array<Lazy<BodyActionBase>>,
+		?itemRequiredId : Null<String>,
+		?itemRequiredBreakChance : Null<Float>,
 		id : String
 	) {
 		super( id );
 		this.tooltipLocale = tooltipLocale;
 		this.actionQueue = actionQueue;
+
+		itemRequired = itemRequiredId == null ? null : {
+			itemDescId : itemRequiredId,
+			breakChance: itemRequiredBreakChance ?? 0
+		};
 	}
 
 	public function buildComponent() : EntityComponent {

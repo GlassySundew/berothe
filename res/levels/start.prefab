@@ -77,26 +77,9 @@
 				"entity": "orc_prison_door",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": -13.15,
-			"y": 36.5,
-			"z": 38.8,
-			"rotationZ": -80
-		},
-		{
-			"type": "model",
-			"name": "club_0_idle",
-			"source": "voxel/items/club/equip/obj/fbx/club_0_idle.fbx",
-			"props": {
-				"entity": "club",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -7.93,
-			"y": 26.92,
-			"z": 4.67,
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
-			"rotationZ": -71.9
+			"x": -12.62,
+			"y": 39.56,
+			"z": 2.2
 		}
 	]
 }

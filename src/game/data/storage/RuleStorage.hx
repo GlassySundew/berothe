@@ -5,7 +5,7 @@ import cdb.Types.IndexId;
 class RuleStorage {
 
 	public var entityGravityScale( default, null ) : Float;
-	public var pickupRange( default, null ) : Float;
+	public var interactionRange( default, null ) : Float;
 	public var playerStartLocation( default, null ) : String;
 
 	public function new( rules : IndexId<Data.Rule, Data.RuleKind> ) {

@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import future.Future;
 import rx.disposables.ISubscription;
 import game.domain.overworld.entity.EntityComponent;
 import signals.Signal;
@@ -48,5 +49,12 @@ class EntityComponents {
 		cb : Class<T> -> T -> Void
 	) : Null<ISubscription> {
 		return components.onAppear( cast key, cast cb );
+	}
+
+	#if !debug inline #end
+	public function onAppearFut<T:EntityComponent>( cl : Class<T> ) : Future<T> {
+		var future = new Future<T>();
+		onAppear( cl, ( cl, val ) -> future.resolve( val ) );
+		return future;
 	}
 }

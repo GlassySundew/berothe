@@ -42,7 +42,7 @@ class GameClient extends Process {
 	public final core : GameCore = new GameCore();
 
 	public var cameraProc : CameraProcess;
-	public var controlledEntity : EntityReplicator;
+	public final controlledEntity : MutableProperty<EntityReplicator> = new MutableProperty();
 
 	final currentLocationSelf : MutableProperty<Location> = new MutableProperty();
 	public var currentLocation( get, never ) : IProperty<Location>;

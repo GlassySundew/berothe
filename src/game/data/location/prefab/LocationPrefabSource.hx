@@ -54,7 +54,9 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 
 	function parsePrefabElement( localPrefab : Prefab ) {
 		if ( localPrefab is Object3D ) {
-			resolveInstance( Std.downcast( localPrefab, Object3D ) );
+			if ( !prefab.editorOnly && prefab.enabled ) {
+				resolveInstance( Std.downcast( localPrefab, Object3D ) );
+			}
 		} else {
 			trace( "object: " + localPrefab + " is not supported while parsing root location objects" );
 		}
@@ -62,6 +64,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	}
 
 	function resolveInstance( instance : Object3D ) {
+
 		var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( instance.props, Const.cdbTypeIdent ) );
 
 		switch cdbSheetId {

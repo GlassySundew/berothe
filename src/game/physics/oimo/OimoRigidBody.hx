@@ -49,7 +49,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public var isSleeping( default, null ) : MutableProperty<Bool> = new MutableProperty( false );
 
-	var rotationInvalidate = false;
+	var rotationInvalidate = true;
 
 	public inline function new( rigidBody : RigidBody ) {
 		this.rigidBody = rigidBody;
@@ -77,6 +77,7 @@ class OimoRigidBody implements IRigidBody {
 		function wakeByRotation( _, _ ) {
 			rotationInvalidate = true;
 			wakeUp();
+			onUpdated( false );
 		}
 
 		rotationX.addOnValue( wakeByRotation );
@@ -102,7 +103,7 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody._sleeping.subscribeProp( isSleeping );
 		isSleeping.addOnValue( ( _, _ ) -> onUpdated() );
 		onUpdated();
-		rigidBody.onUpdated.add( onUpdated );
+		rigidBody.onUpdated.add( onUpdated.bind( true ) );
 	}
 
 	public inline function addShape( shape : IRigidBodyShape ) {
@@ -151,7 +152,7 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody._autoSleep = value;
 	}
 
-	function onUpdated() {
+	function onUpdated( ?doRoundSleep = true ) {
 		if ( rotationInvalidate ) {
 			rigidBody.setRotationXyz(
 				new Vec3(
@@ -181,9 +182,10 @@ class OimoRigidBody implements IRigidBody {
 			#end
 
 		if (
-			M.fabs( velX.val ) < 0.0005 * tmod
-			&& M.fabs( velY.val ) < 0.0005 * tmod
-			&& M.fabs( velZ.val ) < 0.0005 * tmod
+			doRoundSleep
+			&& M.fabs( velX.val ) < 0.005 * tmod
+			&& M.fabs( velY.val ) < 0.005 * tmod
+			&& M.fabs( velZ.val ) < 0.005 * tmod
 		) {
 			rigidBody.sleep();
 		}
