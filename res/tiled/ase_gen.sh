@@ -29,3 +29,7 @@ done
 cd structures
 
 aseprite -b ../../ase/door.ase --save-as "{slice}0.png"
+
+cd ../../
+
+sh atlas_gen.sh

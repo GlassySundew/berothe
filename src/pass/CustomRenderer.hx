@@ -106,7 +106,7 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		shadow.blur.shader.isDepthDependant = false;
 
 		sao.shader.numSamples = 32;
-		sao.shader.bias = 0.008;
+		sao.shader.bias = 0.013;
 		sao.shader.intensity = 5.5;
 		sao.shader.sampleRadius = 6;
 		saoBlur.radius = 6.6;

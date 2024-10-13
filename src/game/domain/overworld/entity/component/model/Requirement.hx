@@ -27,7 +27,11 @@ class Requirement {
 		} );
 	}
 
-	public function isFulfilled() {
-		
+	public function isFulfilled( model : EntityModelComponent ) {
+		for ( itemReq in items ) {
+			if ( !model.inventory.hasItem( itemReq.desc, itemReq.amount ) ) return false;
+		}
+
+		return true;
 	}
 }

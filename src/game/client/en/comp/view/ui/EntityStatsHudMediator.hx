@@ -10,7 +10,7 @@ class EntityStatsHudMediator {
 
 	public final onAttackChanged = new Signal<String>();
 
-	final clip : EntityStatsHudViewMediator;
+	final view : EntityStatsHudViewMediator;
 	final stats : EntityStats;
 	final entity : OverworldEntity;
 
@@ -23,8 +23,8 @@ class EntityStatsHudMediator {
 	) {
 		this.stats = stats;
 		this.entity = entity;
-		clip = new EntityStatsHudViewMediator( this );
-		Main.inst.root.add( clip.comp, util.Const.DP_UI );
+		view = new EntityStatsHudViewMediator( this );
+		Main.inst.root.add( view.comp, util.Const.DP_UI );
 
 		entity.components.onAppear(
 			EntityAttackListComponent,

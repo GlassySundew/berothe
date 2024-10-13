@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 import game.domain.overworld.entity.component.model.Requirement;
 import game.data.storage.DataStorage;
 import util.MathUtil;
@@ -38,13 +39,24 @@ class EntityInteractableComponent extends EntityComponent {
 	}
 
 	public function useBy( entity : OverworldEntity ) {
-		if ( !interactionBoolList.computeAnd( entity ) ) {
+		var modelComp = entity.components.get( EntityModelComponent );
+
+		if (
+			!interactionBoolList.computeAnd( entity )
+			|| !interactionReq.isFulfilled( modelComp ) //
+		) {
 			trace( "forbidding use from " + entity );
 			return;
 		}
 
 		for ( action in actions ) {
 			action.perform( this.entity, entity );
+		}
+
+		if ( desc.itemRequired == null ) return;
+		if ( desc.itemRequired.breakChance > Math.random() ) {
+			var itemDesc = DataStorage.inst.itemStorage.getDescriptionById( desc.itemRequired.itemDescId );
+			modelComp.inventory.removeItem( itemDesc, 1 );
 		}
 	}
 

@@ -12,7 +12,9 @@ absPath = os.path.abspath(".")
 
 for (dirpath, dirnames, filenames) in walk:
 	for file in filenames:
-		if (not (dirpath.endswith("/fbx") or dirpath.endswith("\\fbx")) and ( file.endswith('.fbx') or file.endswith('.obj')) ):
+		if ( dirpath.endswith("/fbx") or dirpath.endswith("\\fbx") ): 
+			continue
+		if ( file.endswith('.fbx') or file.endswith('.obj') ):
 			os.chdir(dirpath)
 			resultFilePath = file
 			

@@ -1,0 +1,16 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "reference",
+			"name": "key",
+			"source": "voxel/items/orc_prison_key/entity/key.plst",
+			"x": 0.5,
+			"y": -0.5,
+			"z": -1.5,
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10
+		}
+	]
+}

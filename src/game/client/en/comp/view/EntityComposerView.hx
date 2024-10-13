@@ -107,7 +107,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 			animations.byKey[animationKey],
 			"animation node: " + animationKey + " not found in file: " + file
 		);
-		for ( animation in animations.byKey[animationKey].keys ) {
+		for ( animation in animations.byKey[animationKey] ) {
 			var animationContainer = entityComposer.animationManager.animationGroups[animation];
 			if ( animationContainer == null ) {
 				trace( 'cannot find animation node with id: $animation in enco: $file ' );

@@ -18,12 +18,14 @@ class ItemDescription extends DescriptionBase {
 	public final equipAsset : Null<IEntityViewProvider>;
 	public final equipSlots : Null<Array<EntityEquipmentSlotType>>;
 	public final equipStats : Null<Array<EquipStat>>;
+	public final iconAsset : String;
 
 	public function new( entry : Data.Item ) {
 		super( entry.id.toString() );
 
 		types = createTypes( entry );
 		equippable = entry.props.equippable;
+		iconAsset = entry.iconAsset;
 
 		if ( equippable ) {
 			equipAsset = new EntityComposerViewProvider(
@@ -58,5 +60,10 @@ class ItemDescription extends DescriptionBase {
 				case Weapon: WEAPON;
 			}
 		}];
+	}
+
+	@:keep
+	public function toString() : String {
+		return "ItemDescription: " + id;
 	}
 }

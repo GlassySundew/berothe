@@ -55,7 +55,10 @@ class ItemSlotReplicator extends NetNode {
 			var itemReplicator = CoreReplicator.inst.getItemReplicator( oldItem );
 			removeChild( itemReplicator );
 		}
-		if ( item == null ) return;
+		if ( item == null ) {
+			itemReplicator.val = null;
+			return;
+		}
 
 		itemReplicator.val = CoreReplicator.inst.getItemReplicator( item );
 		addChild( itemReplicator );

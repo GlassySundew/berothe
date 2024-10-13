@@ -14,7 +14,7 @@ import game.net.item.ItemSlotReplicator;
 import net.NSArray;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable.NetworkSerializer;
-import game.domain.overworld.entity.component.model.EntityEquip;
+import game.domain.overworld.entity.component.model.EntityInventory;
 import net.NetNode;
 #if client
 import game.client.item.ItemEquipView;
@@ -22,13 +22,13 @@ import game.client.item.ItemEquipView;
 
 class EntityEquipReplicator extends NetNode {
 
-	var entityEquip : EntityEquip;
+	var entityEquip : EntityInventory;
 
 	var entityRepl : EntityReplicator;
 	@:s var slots : NSIntMap<EquipSlotReplicator> = new NSIntMap();
 
 	public function new(
-		entityEquip : EntityEquip,
+		entityEquip : EntityInventory,
 		entityRepl : EntityReplicator,
 		?parent
 	) {
@@ -41,6 +41,7 @@ class EntityEquipReplicator extends NetNode {
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
 		super.unregister( host, ctx );
+		slots.unregister( host, ctx );
 	}
 
 	// server-only
@@ -53,7 +54,7 @@ class EntityEquipReplicator extends NetNode {
 
 	#if client
 	public function followClient(
-		entityEquip : EntityEquip,
+		entityEquip : EntityInventory,
 		entityRepl : EntityReplicator
 	) {
 		this.entityEquip = entityEquip;

@@ -7,28 +7,8 @@
 			"children": [
 				{
 					"type": "model",
-					"name": "iron_bars_door",
-					"source": "voxel/structures/iron_bars_door/entity/obj/fbx/iron_bars_door.fbx"
-				}
-			]
-		},
-		{
-			"type": "fbfAnimationNode",
-			"name": "open",
-			"children": [
-				{
-					"type": "object",
-					"name": "object",
-					"y": 0.85,
-					"rotationZ": -60,
-					"children": [
-						{
-							"type": "model",
-							"name": "iron_bars_door",
-							"source": "voxel/structures/iron_bars_door/entity/obj/fbx/iron_bars_door.fbx",
-							"y": -0.85
-						}
-					]
+					"name": "orc_prison_key",
+					"source": "voxel/items/orc_prison_key/entity/obj/fbx/orc_prison_key.fbx"
 				}
 			]
 		}

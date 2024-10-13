@@ -1,5 +1,6 @@
 package game.net.item;
 
+import hxbit.NetworkHost;
 import game.data.storage.DataStorage;
 import future.Future;
 import game.domain.overworld.item.Item;
@@ -18,6 +19,15 @@ class ItemReplicator extends NetNode {
 		this.item.resolve( item );
 		itemDescriptionId = item.desc.id.toString();
 		id = item.id;
+
+		item.disposed.then( _ -> {
+			onItemDisposed();
+		} );
+	}
+
+	function onItemDisposed() {
+		unregister( NetworkHost.current );
+		parent?.removeChild( this );
 	}
 
 	override function alive() {
@@ -31,6 +41,6 @@ class ItemReplicator extends NetNode {
 
 	@:keep
 	public function toString() : String {
-		return "ItemReplicator: " + item?.result.desc.id;
+		return "ItemReplicator: " + item?.result?.desc.id;
 	}
 }

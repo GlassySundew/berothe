@@ -11,7 +11,6 @@ class EntityModelComponent extends EntityComponent {
 	public final hp : MutableProperty<Float> = new MutableProperty( 1. );
 
 	public final inventory : EntityInventory;
-	public final equip : EntityEquip;
 	public final stats : EntityStats;
 
 	final desc : EntityModelDescription;
@@ -20,21 +19,15 @@ class EntityModelComponent extends EntityComponent {
 		super( desc );
 		this.desc = desc;
 
-		equip = new EntityEquip( this, desc.equipSlots );
-		inventory = new EntityInventory( desc.baseInventorySize );
+		inventory = new EntityInventory( this, desc.baseInventorySize, desc.equipSlots );
 		stats = new EntityStats( desc );
 	}
 
 	public function tryPickupItem( item : Item ) : ItemPickupAttemptResult {
-		var result = equip.tryPickupItem( item );
-		if ( result.status == SUCCESS ) return result;
-
-		result = inventory.tryPickupItem( item );
-		return result;
+		return inventory.tryPickupItem( item );
 	}
 
 	public function hasSpaceForItemDesc( itemDesc : ItemDescription, amount = 1 ) : Bool {
-		if ( equip.hasSpaceForItem( itemDesc, amount ) ) return true;
 		if ( inventory.hasSpaceForItem( itemDesc, amount ) ) return true;
 
 		return false;

@@ -1,5 +1,6 @@
 package game.client.en.comp;
 
+import game.client.en.comp.view.ui.EntityInventoryHudMediator;
 import game.client.en.comp.view.ui.EntityStatsHudMediator;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import haxe.zip.Uncompress;
@@ -35,6 +36,9 @@ class EntityControl {
 				new EntityStatsHudMediator(
 					modelComp.stats,
 					entity,
+				);
+				new EntityInventoryHudMediator(
+					modelComp.inventory
 				);
 			}
 		);

@@ -8,10 +8,30 @@ import game.domain.overworld.item.model.ItemSlot;
 
 abstract class EntityItemHolderBase {
 
+	/**
+		слоты сервиса
+	**/
 	var slots : Array<ItemSlot>;
 
 	public function new() {
 		updateSlots();
+	}
+
+	#if !debug inline #end
+	public function hasItem( desc : ItemDescription, amount = 1 ) {
+		var result = false;
+		for ( slot in slots ) {
+			var item = slot.itemProp.getValue();
+			if (
+				item != null
+				&& item.desc == desc
+				&& item.amount >= amount
+			) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
 
 	public function tryPickupItem( item : Item ) {
@@ -22,6 +42,25 @@ abstract class EntityItemHolderBase {
 			}
 		}
 		return ItemPickupAttemptResult.failure();
+	}
+
+	#if !debug inline #end
+	public function removeItem( itemDesc : ItemDescription, amount = 1 ) : Int {
+		var amountLeftToRemove = amount;
+		for ( slot in slots ) {
+			var item = slot.itemProp.getValue();
+			if ( item == null || item.desc != itemDesc ) continue;
+
+			if ( item.amount >= amountLeftToRemove ) {
+				item.amount -= amountLeftToRemove;
+				amountLeftToRemove = 0;
+				break;
+			} else {
+				amountLeftToRemove -= item.amount;
+				item.amount = 0;
+			}
+		}
+		return amountLeftToRemove;
 	}
 
 	public function hasSpaceForItem( item : ItemDescription, amount = 1 ) : Bool {

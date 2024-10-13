@@ -100,7 +100,6 @@ class EntityInteractableReplicator extends EntityComponentReplicatorBase {
 
 						sub.add( isTurnedOn.addOnValueImmediately(
 							( old, newV ) -> {
-								trace( newV );
 								if ( newV ) return;
 
 								predicamentSignal.destroy();

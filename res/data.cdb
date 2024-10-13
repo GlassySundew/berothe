@@ -104,6 +104,10 @@
 					"preset": "club"
 				},
 				{
+					"id": "orc_prison_key",
+					"preset": "orc_prison_key"
+				},
+				{
 					"id": "orc_prison_door",
 					"preset": "orc_prison_door"
 				}
@@ -162,6 +166,11 @@
 					"id": "club",
 					"properties": "club",
 					"view": "club"
+				},
+				{
+					"id": "orc_prison_key",
+					"properties": "orc_prison_key",
+					"view": "orc_prison_key"
 				},
 				{
 					"id": "orc_prison_door",
@@ -383,13 +392,37 @@
 					}
 				},
 				{
+					"id": "orc_prison_key",
+					"properties": {
+						"dynamics": true,
+						"rigidBodyTorso": {
+							"id": "orc_prison_key_rb",
+							"sizeX": 1,
+							"sizeY": 5,
+							"sizeZ": 3
+						},
+						"interactable": {
+							"actionsQueue": [
+								{
+									"action": {
+										"pickupItem": {
+											"item": "orc_prison_key"
+										}
+									}
+								}
+							],
+							"id": "orc_prison_key_interact"
+						}
+					}
+				},
+				{
 					"id": "orc_prison_door",
 					"properties": {
 						"dynamics": true,
 						"interactable": {
 							"itemRequired": {
-								"item": "orc_prison_key",
-								"removeChance": 1
+								"removeChance": 1,
+								"item": "orc_prison_key"
 							},
 							"actionsQueue": [
 								{
@@ -750,9 +783,7 @@
 			"columns": [
 				{
 					"typeStr": "0",
-					"name": "id",
-					"opt": true,
-					"kind": null
+					"name": "id"
 				},
 				{
 					"typeStr": "8",
@@ -1103,7 +1134,6 @@
 									"key": "torso_stand"
 								}
 							],
-							"id": "human_idle",
 							"key": "idle"
 						},
 						{
@@ -1112,7 +1142,6 @@
 									"key": "torso_walk"
 								}
 							],
-							"id": "human_walk",
 							"key": "walk"
 						},
 						{
@@ -1121,11 +1150,9 @@
 									"key": "right_hand_idle"
 								}
 							],
-							"id": "human_attack_prime_idle",
 							"key": "attack_right_idle"
 						},
 						{
-							"id": "human_attack_prime_raised",
 							"key": "attack_right_raised",
 							"animations": [
 								{
@@ -1139,7 +1166,6 @@
 									"key": "right_hand_attack"
 								}
 							],
-							"id": "human_attack_prime_attack",
 							"key": "attack_right_attack"
 						},
 						{
@@ -1148,11 +1174,9 @@
 									"key": "left_hand_idle"
 								}
 							],
-							"id": "human_attack_seco_idle",
 							"key": "attack_left_idle"
 						},
 						{
-							"id": "human_attack_seco_raised",
 							"key": "attack_left_raised",
 							"animations": [
 								{
@@ -1166,7 +1190,6 @@
 									"key": "left_hand_attack"
 								}
 							],
-							"id": "human_attack_seco_attack",
 							"key": "attack_left_attack"
 						}
 					]
@@ -1179,7 +1202,6 @@
 					],
 					"animations": [
 						{
-							"id": "club_idle",
 							"key": "idle",
 							"animations": [
 								{
@@ -1197,7 +1219,23 @@
 					],
 					"animations": [
 						{
-							"id": "idle",
+							"key": "idle",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							]
+						}
+					]
+				},
+				{
+					"id": "orc_prison_key",
+					"type": [
+						0,
+						"orc_prison_key"
+					],
+					"animations": [
+						{
 							"key": "idle",
 							"animations": [
 								{
@@ -1219,11 +1257,6 @@
 			"separators": [],
 			"lines": [],
 			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null
-				},
 				{
 					"typeStr": "6:entityViewState",
 					"name": "key",
@@ -1277,7 +1310,7 @@
 				},
 				{
 					"id": "orc_prison_key",
-					"file": ""
+					"file": "voxel/items/orc_prison_key/entity/key.enco"
 				},
 				{
 					"id": "orc_prison_door",
@@ -1304,13 +1337,19 @@
 					"typeStr": "17",
 					"name": "props",
 					"kind": null
+				},
+				{
+					"typeStr": "1",
+					"name": "iconAsset",
+					"kind": null
 				}
 			],
 			"lines": [
 				{
 					"id": "orc_prison_key",
 					"type": 0,
-					"props": {}
+					"props": {},
+					"iconAsset": "orc_prison_key"
 				},
 				{
 					"id": "club",
@@ -1336,12 +1375,14 @@
 							}
 						]
 					},
-					"type": 3
+					"type": 3,
+					"iconAsset": ""
 				},
 				{
 					"id": "sword",
 					"props": {},
-					"type": 5
+					"type": 5,
+					"iconAsset": ""
 				}
 			],
 			"separators": [],

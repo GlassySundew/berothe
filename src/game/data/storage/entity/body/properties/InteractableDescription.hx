@@ -28,8 +28,8 @@ class InteractableDescription extends EntityComponentDescription {
 			[for ( action in cdbEntry.actionsQueue ) {
 				ActionsFactory.fromCdb( action.action );
 			}],
-			cdbEntry.itemRequired.itemId.toString(),
-			cdbEntry.itemRequired.removeChance,
+			cdbEntry.itemRequired?.itemId.toString(),
+			cdbEntry.itemRequired?.removeChance,
 			cdbEntry.id.toString(),
 		);
 	}

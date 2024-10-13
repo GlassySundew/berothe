@@ -20,7 +20,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		var modelComp = Std.downcast( component, EntityModelComponent );
 
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
-		equipRepl = new EntityEquipReplicator( modelComp.equip, entityRepl, this );
+		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
 	}
 
@@ -30,8 +30,8 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
 		followedComponent.then( ( comp ) -> {
 			var modelComp : EntityModelComponent = Std.downcast( comp, EntityModelComponent );
-			equipRepl.followClient( modelComp.equip, entityRepl );
-			
+			equipRepl.followClient( modelComp.inventory, entityRepl );
+			inventoryRepl.followClient( modelComp.inventory );
 		} );
 	}
 	#end
