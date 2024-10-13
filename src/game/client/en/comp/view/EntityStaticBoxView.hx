@@ -14,9 +14,10 @@ import h3d.scene.Object;
 class EntityStaticBoxView implements IEntityView {
 
 	final object : ThreeDObjectNode;
+	final prim : Cube;
 
 	public function new( size : ThreeDeeVector ) {
-		var prim = new Cube( size.x, size.y, size.z );
+		prim = new Cube( size.x, size.y, size.z );
 		prim.translate(-size.x / 2, -size.y / 2, -size.z / 2 );
 		prim.unindex();
 		prim.addNormals();
@@ -28,6 +29,12 @@ class EntityStaticBoxView implements IEntityView {
 		mesh.material.mainPass.depth( true, LessEqual );
 
 		object = ThreeDObjectNode.fromHeaps( mesh );
+	}
+
+	public inline function provideSize( vec : ThreeDeeVector ) {
+		object.heapsObject.scaleX = vec.x;
+		object.heapsObject.scaleY = vec.y;
+		object.heapsObject.scaleZ = vec.z;
 	}
 
 	public function dispose() {

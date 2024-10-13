@@ -16,7 +16,7 @@ class EntityComposerViewProvider implements IEntityViewProvider {
 		animations : EitherType<
 			cdb.Types.ArrayRead<Data.EntityView_animations>,
 			cdb.Types.ArrayRead<Data.ItemEquipAsset_animations>
-		>
+			>
 	) {
 		this.animations = new EntityAnimations( animations );
 		this.file = file;
@@ -24,7 +24,7 @@ class EntityComposerViewProvider implements IEntityViewProvider {
 
 	public function createView(
 		viewComponent : EntityViewComponent,
-		setting : EntityViewExtraInitSetting = None
+		setting : Array<EntityViewExtraInitSetting>
 	) : IEntityView {
 		return new EntityComposerView( viewComponent, file, animations );
 	}

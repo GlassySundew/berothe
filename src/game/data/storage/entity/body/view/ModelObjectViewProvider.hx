@@ -1,12 +1,12 @@
 package game.data.storage.entity.body.view;
 
 import util.Assert;
-import game.client.en.comp.view.EntityViewComponent;
-import game.client.en.comp.view.EntityStaticBoxView;
-import game.client.en.comp.view.IEntityView;
+import game.client.en.comp.view.EntityModelView;
 import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
+import game.client.en.comp.view.EntityViewComponent;
+import game.client.en.comp.view.IEntityView;
 
-class StaticObjectGrayboxViewProvider implements IEntityViewProvider {
+class ModelObjectViewProvider implements IEntityViewProvider {
 
 	public function new() {}
 
@@ -17,8 +17,8 @@ class StaticObjectGrayboxViewProvider implements IEntityViewProvider {
 		var view = null;
 		for ( setting in settings ) {
 			switch setting {
-				case Size( x, y, z ):
-					view = new EntityStaticBoxView( { x : x, y : y, z : z } );
+				case File( value ): 
+					view = new EntityModelView( value );
 					break;
 				default: null;
 			}

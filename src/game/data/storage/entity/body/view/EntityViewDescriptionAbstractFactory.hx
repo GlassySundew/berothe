@@ -9,6 +9,8 @@ class EntityViewDescriptionAbstractFactory {
 					new EntityComposerViewProvider( file.file, entry.animations );
 				case Graybox:
 					new StaticObjectGrayboxViewProvider();
+				case Model:
+					new ModelObjectViewProvider();
 				case e:
 					trace( '$e is not supported as IEntityViewProvider' );
 					null;

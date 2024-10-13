@@ -10,8 +10,10 @@ import game.data.storage.entity.body.properties.InteractableDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
 import game.data.storage.entity.body.view.EntityViewDescription;
-import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.component.EntityComponentDescription;
+#if client
+import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
+#end
 
 class EntityPresetDescription extends DescriptionBase {
 
@@ -60,13 +62,15 @@ class EntityPresetDescription extends DescriptionBase {
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
 
 			// structure
-			interactabeDesc = InteractableDescription.fromCdb(entry.properties.properties.interactable),
-			
+			interactabeDesc = InteractableDescription.fromCdb( entry.properties.properties.interactable ),
+
 		] : Array<EntityComponentDescription> ) );
 
+		#if client
 		clientPropertyDescs = ArrayExtensions.deNullify(( [
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
 
 		] : Array<EntityComponentDescription> ) );
+		#end
 	}
 }

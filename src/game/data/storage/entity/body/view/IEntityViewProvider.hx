@@ -7,12 +7,13 @@ import graphics.ThreeDObjectNode;
 enum EntityViewExtraInitSetting {
 	None;
 	Size( x : Float, y : Float, z : Float );
+	File( value : String );
 }
 
 interface IEntityViewProvider {
 
 	function createView(
 		viewComponent : EntityViewComponent,
-		?setting : Null<EntityViewExtraInitSetting>
+		setting : Array<EntityViewExtraInitSetting>
 	) : IEntityView;
 }

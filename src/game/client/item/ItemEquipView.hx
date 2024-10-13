@@ -20,7 +20,7 @@ class ItemEquipView {
 		parentViewComp : EntityViewComponent
 	) {
 		this.item = item;
-		var itemView = item.desc.equipAsset.createView( parentViewComp );
+		var itemView = item.desc.equipAsset.createView( parentViewComp, [] );
 
 		parentViewComp.addChildComponent( itemView );
 

@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import future.Future;
 import game.client.en.comp.view.IEntityView;
 import game.data.storage.entity.body.view.EntityViewDescription;
@@ -15,7 +16,7 @@ class EntityViewComponent extends EntityComponent {
 
 	final viewDescription : EntityViewDescription;
 
-	var viewExtraConfig : EntityViewExtraInitSetting = None;
+	var viewExtraConfig : Array<EntityViewExtraInitSetting> = [];
 
 	public function new( viewDescription : EntityViewDescription ) {
 		super( viewDescription );
@@ -28,7 +29,7 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	public function provideExtraViewConfig( config : EntityViewExtraInitSetting ) {
-		viewExtraConfig = config;
+		viewExtraConfig.push( config );
 	}
 
 	#if client
@@ -45,7 +46,17 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function createView() : IEntityView {
-		return viewDescription.viewProvider?.createView( this, viewExtraConfig );
+		var view = viewDescription.viewProvider?.createView( this, viewExtraConfig );
+
+		for ( setting in viewExtraConfig ) {
+			switch setting {
+				case Size( x, y, z ):
+					view.provideSize( new ThreeDeeVector( x, y, z ) );
+				default:
+			}
+		}
+
+		return view;
 	}
 
 	function onAttachedToLocation( location : Location ) {

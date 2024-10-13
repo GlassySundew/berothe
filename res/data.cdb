@@ -86,6 +86,10 @@
 					"preset": "block"
 				},
 				{
+					"id": "model",
+					"preset": "model"
+				},
+				{
 					"id": "rogue",
 					"control": [
 						0
@@ -158,6 +162,11 @@
 					"properties": "block"
 				},
 				{
+					"id": "model",
+					"properties": "model",
+					"view": "model"
+				},
+				{
 					"id": "human",
 					"view": "human",
 					"properties": "human"
@@ -220,6 +229,12 @@
 						"staticObjectRigidBody": {
 							"id": "blockRigidBody"
 						}
+					}
+				},
+				{
+					"id": "model",
+					"properties": {
+						"dynamics": false
 					}
 				},
 				{
@@ -1122,6 +1137,12 @@
 					]
 				},
 				{
+					"id": "model",
+					"type": [
+						2
+					]
+				},
+				{
 					"id": "human",
 					"type": [
 						0,
@@ -1936,6 +1957,10 @@
 				},
 				{
 					"name": "Graybox",
+					"args": []
+				},
+				{
+					"name": "Model",
 					"args": []
 				}
 			]

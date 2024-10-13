@@ -25,11 +25,13 @@ class LocationEntityVO extends LocationObjectVO {
 			instance.y,
 			instance.z,
 			instance.name,
+			instance,
 			cdbEntry.entity.id
 		);
 	}
 
 	public final entityDesc : EntityDescription;
+	public final prefab : Object3D;
 
 	public function new(
 		sizeX : Float,
@@ -42,6 +44,7 @@ class LocationEntityVO extends LocationObjectVO {
 		y : Float,
 		z : Float,
 		name : String,
+		prefab : Object3D,
 		entityCdb : Data.EntityKind
 	) {
 		super(
@@ -56,7 +59,8 @@ class LocationEntityVO extends LocationObjectVO {
 			z,
 			name
 		);
-		
+
+		this.prefab = prefab;
 		entityDesc = DataStorage.inst.entityStorage.getDescriptionById( entityCdb.toString() );
 
 		Assert.notNull( entityDesc, "entity block description: " + entityCdb + " is null" );

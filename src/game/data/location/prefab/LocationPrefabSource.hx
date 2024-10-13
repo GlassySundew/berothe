@@ -91,7 +91,9 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 		var result = [];
 
 		function parsePrefabElementsLocal( prefabLocal : Prefab ) : Bool {
-			result.push( LocationObjectFactory.fromPrefab( prefabLocal ) );
+			var obj3D = Std.downcast( prefabLocal, Object3D );
+			if ( obj3D != null )
+				result.push( LocationObjectFactory.fromPrefab( obj3D ) );
 			return false;
 		}
 

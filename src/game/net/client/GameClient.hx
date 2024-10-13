@@ -1,5 +1,6 @@
 package game.net.client;
 
+import util.threeD.ModelCache;
 #if client
 import ui.dialog.ConnectMenu;
 import signals.Signal;
@@ -40,9 +41,9 @@ class GameClient extends Process {
 
 	public final onUpdate : Signal = new Signal();
 	public final core : GameCore = new GameCore();
-
-	public var cameraProc : CameraProcess;
 	public final controlledEntity : MutableProperty<EntityReplicator> = new MutableProperty();
+	public final cameraProc : CameraProcess;
+	public final modelCache : ModelCache = new ModelCache();
 
 	final currentLocationSelf : MutableProperty<Location> = new MutableProperty();
 	public var currentLocation( get, never ) : IProperty<Location>;

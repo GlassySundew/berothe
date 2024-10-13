@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import hrt.prefab.Model;
 import game.client.en.comp.view.EntityViewComponent;
 import util.Assert;
 import game.domain.overworld.entity.component.block.StaticObjectRigidBodyComponent;
@@ -30,13 +31,7 @@ class OverworldStaticObjectsFactory {
 		entity.transform.setPosition( objectDesc.x, objectDesc.y, objectDesc.z );
 		entity.transform.setRotation( objectDesc.rotationX, objectDesc.rotationY, objectDesc.rotationZ );
 
-		var staticRBComponent = entity.components.get( StaticObjectRigidBodyComponent );
-		Assert.notNull( staticRBComponent );
-		staticRBComponent.provideConfiguration( {
-			sizeX : objectDesc.sizeX,
-			sizeY : objectDesc.sizeY,
-			sizeZ : objectDesc.sizeZ
-		} );
+		provideSizeToStatic( entity, objectDesc );
 
 		if ( !isAuth ) {
 			EntityFactory.createAndAttachClientComponentsFromProperties(
@@ -46,6 +41,11 @@ class OverworldStaticObjectsFactory {
 
 			var viewComponent = entity.components.get( EntityViewComponent );
 			Assert.notNull( viewComponent );
+			if ( objectDesc.prefab is Model ) {
+				viewComponent.provideExtraViewConfig(
+					File( Std.downcast( objectDesc.prefab, Model ).source )
+				);
+			}
 			viewComponent.provideExtraViewConfig(
 				Size(
 					objectDesc.sizeX,
@@ -56,5 +56,18 @@ class OverworldStaticObjectsFactory {
 		}
 
 		return entity;
+	}
+
+	inline function provideSizeToStatic(
+		entity : OverworldEntity,
+		objectDesc : LocationEntityVO
+	) {
+		var staticRBComponent = entity.components.get( StaticObjectRigidBodyComponent );
+		if ( staticRBComponent != null )
+			staticRBComponent.provideConfiguration( {
+				sizeX : objectDesc.sizeX,
+				sizeY : objectDesc.sizeY,
+				sizeZ : objectDesc.sizeZ
+			} );
 	}
 }
