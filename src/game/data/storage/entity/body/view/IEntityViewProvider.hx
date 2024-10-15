@@ -2,7 +2,7 @@ package game.data.storage.entity.body.view;
 
 import game.client.en.comp.view.EntityViewComponent;
 import game.client.en.comp.view.IEntityView;
-import graphics.ThreeDObjectNode;
+import graphics.ObjectNode3D;
 
 enum EntityViewExtraInitSetting {
 	None;

@@ -1,7 +1,7 @@
 package game.domain.overworld.location.physics;
 
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
-import graphics.ThreeDObjectNode;
+import graphics.ObjectNode3D;
 
 class RayCastHit {
 

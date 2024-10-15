@@ -14,7 +14,7 @@ import game.data.storage.entity.body.view.EntityAnimations;
 import game.client.en.comp.view.anim.AnimationState;
 import game.data.storage.entity.body.view.AnimationKey;
 import plugins.bodyparts_animations.src.customObj.EntityComposer;
-import graphics.ThreeDObjectNode;
+import graphics.ObjectNode3D;
 
 class EntityComposerView extends NodeBase<EntityComposerView> implements IEntityView {
 
@@ -32,7 +32,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 	];
 
 	public final entityComposer : EntityComposer;
-	final object : ThreeDObjectNode;
+	final object : ObjectNode3D;
 	final stateListeners : Map<AnimationKey, AnimationState> = [];
 	final viewComponent : EntityViewComponent;
 
@@ -53,7 +53,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 
 		var prefabSource = Std.downcast( hxd.Res.load( file ).toPrefab().load(), EntityComposer );
 		entityComposer = prefabSource.make();
-		object = ThreeDObjectNode.fromHeaps( entityComposer.local3d );
+		object = ObjectNode3D.fromHeaps( entityComposer.local3d );
 
 		viewComponent.entity.onFrame.add( update );
 
@@ -69,7 +69,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 		object.remove();
 	}
 
-	public function getGraphics() : ThreeDObjectNode {
+	public function getGraphics() : ObjectNode3D {
 		return object;
 	}
 
@@ -79,8 +79,8 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 		object.heapsObject.scaleZ = vec.z;
 	}
 
-	public function addChildView( view : IEntityView ) @:privateAccess {
-		getGraphics().heapsObject.children[0].addChild( view.getGraphics().heapsObject );
+	public function addChildView( view : IEntityView ) {
+		addChildObject( view.getGraphics() );
 
 		switch Type.getClass( view ) {
 			case EntityComposerView:
@@ -88,6 +88,10 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 
 			case EntityStaticBoxView: throw new NotImplementedException();
 		}
+	}
+
+	public function addChildObject( object : ObjectNode3D ) @:privateAccess {
+		getGraphics().heapsObject.children[0].addChild( object.heapsObject );
 	}
 
 	function update( dt, tmod ) {

@@ -84,11 +84,11 @@ class Main extends Process {
 
 		#if debug
 		Boot.inst.createServer();
-		Engine.getCurrent().backgroundColor = 0xff212121;
+		// Engine.getCurrent().backgroundColor = 0xff212121;
 		#end
 
-		var dir = new h3d.scene.fwd.DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
-		dir.color.set( 0.5, 0.5, 0.5 );
+		// var dir = new h3d.scene.fwd.DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
+		// dir.color.set( 0.5, 0.5, 0.5 );
 	}
 
 	function createUi() {

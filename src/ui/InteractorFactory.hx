@@ -4,7 +4,7 @@ import shader.DepthOffset;
 import signals.Signal;
 import core.IProperty;
 import graphics.ThrEventInteractive;
-import graphics.ThreeDObjectNode;
+import graphics.ObjectNode3D;
 import h3d.col.Collider;
 import h3d.shader.FixedColor;
 import util.BoolList;
@@ -25,7 +25,7 @@ class InteractorFactory {
 
 	public static function create<Pred>(
 		interactorVO : InteractorVO,
-		graphics : ThreeDObjectNode,
+		graphics : ObjectNode3D,
 		?visibilitySignal : Signal<Bool>
 	) : ThrEventInteractive {
 
@@ -46,7 +46,7 @@ class InteractorFactory {
 		return int;
 	}
 
-	static function createInteractor( graphics : ThreeDObjectNode ) {
+	static function createInteractor( graphics : ObjectNode3D ) {
 		var meshes = graphics.heapsObject.getMeshes();
 		var collider = new GroupCollider( [
 			for ( mesh in meshes ) mesh.getCollider()
@@ -58,7 +58,7 @@ class InteractorFactory {
 	}
 
 	static function createHighlight(
-		graphics : ThreeDObjectNode,
+		graphics : ObjectNode3D,
 		int : ThrEventInteractive,
 		color : Int,
 	) {

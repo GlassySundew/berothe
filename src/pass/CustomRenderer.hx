@@ -102,7 +102,7 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		shadow.color = new Vector( shadowLum, shadowLum, shadowLum );
 		shadow.power = 100;
 		shadow.blur.quality = 1.0;
-		shadow.size = Std.int( Math.pow( 2, Std.int( 12 ) ) );
+		shadow.size = Std.int( Math.pow( 2, Std.int( 13 ) ) );
 		shadow.blur.radius = 1.5;
 		shadow.samplingKind = ESM;
 		shadow.blur.shader.isDepthDependant = false;

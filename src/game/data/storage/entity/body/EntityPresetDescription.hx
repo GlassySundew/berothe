@@ -13,6 +13,7 @@ import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.component.EntityComponentDescription;
 #if client
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
+import game.data.storage.entity.body.view.EntityLightSourceDescription;
 #end
 
 class EntityPresetDescription extends DescriptionBase {
@@ -33,7 +34,11 @@ class EntityPresetDescription extends DescriptionBase {
 	public var interactabeDesc( default, null ) : Null<InteractableDescription>;
 
 	public var model : Null<EntityModelDescription>;
+
+	#if client
 	public var view : Null<EntityViewDescription>;
+	public var lightSource : Null<EntityLightSourceDescription>;
+	#end
 
 	public function new( entry : Data.EntityPreset ) {
 		super( entry.id.toString() );
@@ -69,6 +74,7 @@ class EntityPresetDescription extends DescriptionBase {
 		#if client
 		clientPropertyDescs = ArrayExtensions.deNullify(( [
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
+			lightSource = EntityLightSourceDescription.fromCdb( entry.properties.properties.lightSource ),
 
 		] : Array<EntityComponentDescription> ) );
 		#end

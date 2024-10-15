@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import graphics.ObjectNode3D;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import future.Future;
 import game.client.en.comp.view.IEntityView;
@@ -39,6 +40,12 @@ class EntityViewComponent extends EntityComponent {
 		} );
 	}
 
+	public function addChildObject( object : ObjectNode3D ) {
+		view.then( ( viewResult ) -> {
+			viewResult.addChildObject( object );
+		} );
+	}
+
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
@@ -61,10 +68,10 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function onAttachedToLocation( location : Location ) {
-
 		if ( view == null ) return;
 		var viewGraphics = createView();
 		if ( viewGraphics == null ) return;
+		
 		view.resolve( viewGraphics );
 		var node = view.result.getGraphics();
 

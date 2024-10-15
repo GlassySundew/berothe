@@ -7,13 +7,13 @@ import h3d.mat.Texture;
 import h3d.mat.Material;
 import h3d.scene.Mesh;
 import h3d.prim.Cube;
-import graphics.ThreeDObjectNode;
+import graphics.ObjectNode3D;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import h3d.scene.Object;
 
 class EntityStaticBoxView implements IEntityView {
 
-	final object : ThreeDObjectNode;
+	final object : ObjectNode3D;
 	final prim : Cube;
 
 	public function new( size : ThreeDeeVector ) {
@@ -28,7 +28,7 @@ class EntityStaticBoxView implements IEntityView {
 		var mesh = new Mesh( prim, Material.create( Texture.fromColor( 0xffffff ) ) );
 		mesh.material.mainPass.depth( true, LessEqual );
 
-		object = ThreeDObjectNode.fromHeaps( mesh );
+		object = ObjectNode3D.fromHeaps( mesh );
 	}
 
 	public inline function provideSize( vec : ThreeDeeVector ) {
@@ -41,11 +41,15 @@ class EntityStaticBoxView implements IEntityView {
 		object.remove();
 	}
 
-	public function getGraphics() : ThreeDObjectNode {
+	public function getGraphics() : ObjectNode3D {
 		return object;
 	}
 
 	public function addChildView( view : IEntityView ) {
+		throw new NotImplementedException();
+	}
+
+	public function addChildObject(object:ObjectNode3D) {
 		throw new NotImplementedException();
 	}
 }

@@ -1,14 +1,11 @@
 package game.client.item;
 
-import util.Assert;
 import hrt.prefab.Object3D;
-import util.Const;
-import haxe.exceptions.NotImplementedException;
-import game.data.location.DataSheetIdent;
+import util.Assert;
 import game.client.en.comp.view.EntityComposerView;
 import game.client.en.comp.view.EntityViewComponent;
-import game.domain.overworld.item.Item;
 import game.data.storage.entity.model.EntityEquipmentSlotType;
+import game.domain.overworld.item.Item;
 
 class ItemEquipView {
 

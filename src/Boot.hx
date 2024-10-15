@@ -1,7 +1,7 @@
 import tink.CoreApi.CallbackLink;
 import tink.CoreApi.Future;
 import rx.disposables.Composite;
-import graphics.ThreeDObjectNode;
+import graphics.ObjectNode3D;
 import rx.schedulers.Test.TestBase;
 import oimo.common.Vec3;
 import oimo.m.IVec3;
@@ -28,7 +28,7 @@ class Boot extends hxd.App {
 
 	public static var inst( default, null ) : Boot;
 
-	public var root3D( default, null ) : ThreeDObjectNode;
+	public var root3D( default, null ) : ObjectNode3D;
 
 	public var renderer : CustomRenderer;
 	public var deltaTime( default, null ) : Float;
@@ -46,7 +46,7 @@ class Boot extends hxd.App {
 
 	override function setup() {
 		super.setup();
-		root3D = ThreeDObjectNode.fromHeaps( s3d );
+		root3D = ObjectNode3D.fromHeaps( s3d );
 	}
 
 	// Engine ready

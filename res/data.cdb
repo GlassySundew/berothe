@@ -494,7 +494,11 @@
 				{
 					"id": "wall_torch",
 					"properties": {
-						"dynamics": false
+						"dynamics": false,
+						"lightSource": {
+							"equipSource": "head",
+							"id": "wall_torch_light"
+						}
 					}
 				}
 			],
@@ -606,6 +610,12 @@
 					"typeStr": "17",
 					"name": "interactable",
 					"opt": true
+				},
+				{
+					"typeStr": "17",
+					"name": "lightSource",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -815,6 +825,27 @@
 					"name": "tooltipLocale",
 					"opt": true,
 					"kind": "localizable"
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@lightSource",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				},
+				{
+					"typeStr": "6:equipSlotType",
+					"name": "equipSource",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},

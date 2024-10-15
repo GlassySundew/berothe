@@ -19,7 +19,35 @@
 					},
 					"x": -58.84,
 					"y": 0.83,
-					"z": 12.98
+					"z": 12.98,
+					"children": [
+						{
+							"type": "light",
+							"name": "light",
+							"x": 0.85,
+							"y": 1.16,
+							"z": 7.23,
+							"rotationZ": 87.5,
+							"color": 10912001,
+							"power": 8.47,
+							"occlusionFactor": 0.88,
+							"range": 100,
+							"size": 0.17,
+							"zNear": 3.97,
+							"length": 10,
+							"debugDisplay": false,
+							"shadows": {
+								"mode": "Dynamic",
+								"size": 256,
+								"radius": 0,
+								"quality": 1,
+								"bias": 0.1,
+								"samplingMode": {
+									"kind": "None"
+								}
+							}
+						}
+					]
 				},
 				{
 					"type": "model",
@@ -1298,9 +1326,9 @@
 			"type": "light",
 			"name": "light",
 			"editorOnly": true,
-			"x": -56.47,
-			"y": 59.89,
-			"z": 64.51,
+			"x": -46.21,
+			"y": 90.84,
+			"z": 52.57,
 			"rotationX": -69.8,
 			"rotationY": 146.7,
 			"rotationZ": -12.1,

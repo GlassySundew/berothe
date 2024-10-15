@@ -88,7 +88,7 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		new SeparatorTextNode( "Shadow", renderHeader );
 
 		new DragDoubleNode( "shadow power", new ShadowPowerAccessor(), 0.1, 0, 80, renderHeader );
-		new DragIntNode( "shadow size", new ShadowSizeAccessor(), 1, 6, 12, renderHeader );
+		new DragIntNode( "shadow size", new ShadowSizeAccessor(), 1, 6, 13, renderHeader );
 		new DragDoubleNode( "shadow blur quality", new ShadowBlurQualityAccessor(), 0.1, 0, 2, renderHeader );
 		new DragDoubleNode( "shadow blur radius", new ShadowBlurRadiusAccessor(), 0.1, 0, 10, renderHeader );
 	}
