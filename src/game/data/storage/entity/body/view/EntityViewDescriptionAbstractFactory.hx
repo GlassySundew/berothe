@@ -11,6 +11,8 @@ class EntityViewDescriptionAbstractFactory {
 					new StaticObjectGrayboxViewProvider();
 				case Model:
 					new ModelObjectViewProvider();
+				case None:
+					new NoView();
 				case e:
 					trace( '$e is not supported as IEntityViewProvider' );
 					null;

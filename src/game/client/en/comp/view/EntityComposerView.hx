@@ -110,17 +110,18 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 	}
 
 	function playAnimation( animationKey : AnimationKey, listener : AnimationState, tmod : Float ) {
+		var animationDesc = animations.byKey[animationKey];
 		Assert.notNull(
-			animations.byKey[animationKey],
+			animationDesc,
 			"animation node: " + animationKey + " not found in file: " + file
 		);
-		for ( animation in animations.byKey[animationKey] ) {
+		for ( animation in animationDesc.keys ) {
 			var animationContainer = entityComposer.animationManager.animationGroups[animation];
 			if ( animationContainer == null ) {
 				trace( 'cannot find animation node with id: $animation in enco: $file ' );
 				continue;
 			}
-			animationContainer.setPlay( true, listener.getSpeed() / tmod );
+			animationContainer.setPlay( true, animationDesc.speedMult * listener.getSpeed() / tmod );
 			listener.playedOnContainer( animationContainer );
 
 			for ( child in children ) {

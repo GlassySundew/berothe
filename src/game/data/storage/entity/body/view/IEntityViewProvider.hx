@@ -15,5 +15,5 @@ interface IEntityViewProvider {
 	function createView(
 		viewComponent : EntityViewComponent,
 		setting : Array<EntityViewExtraInitSetting>
-	) : IEntityView;
+	) : Null<IEntityView>;
 }

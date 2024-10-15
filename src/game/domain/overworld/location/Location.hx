@@ -136,5 +136,6 @@ class Location {
 
 	function addGlobalEntity( entity : OverworldEntity ) {
 		entity.addToLocation( this );
+		entities.push( entity );
 	}
 }

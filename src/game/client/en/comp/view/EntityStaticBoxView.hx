@@ -17,8 +17,8 @@ class EntityStaticBoxView implements IEntityView {
 	final prim : Cube;
 
 	public function new( size : ThreeDeeVector ) {
-		prim = new Cube( size.x, size.y, size.z );
-		prim.translate(-size.x / 2, -size.y / 2, -size.z / 2 );
+		prim = new Cube();
+		prim.translate( -.5, -.5, -.5 );
 		prim.unindex();
 		prim.addNormals();
 		prim.addUVs();

@@ -1,5 +1,6 @@
 package ui;
 
+import shader.DepthOffset;
 import signals.Signal;
 import core.IProperty;
 import graphics.ThrEventInteractive;
@@ -62,14 +63,17 @@ class InteractorFactory {
 		color : Int,
 	) {
 		var materials = graphics.heapsObject.getMaterials();
+		var shader = new FixedColor( color );
+		var shader2 = new h3d.shader.FixedColor( 0xff8000 );
 		for ( material in materials ) {
 			var m = material;
 			var p = m.allocPass( "highlight" );
 			p.culling = None;
 			p.depthWrite = false;
 			p.depthTest = LessEqual;
+			p.addShader( shader );
 		}
-		var shader = new FixedColor( color );
+
 		int.onOver.add( ( e ) -> {
 			for ( m in materials ) {
 				var pass = m.getPass( "highlight" );

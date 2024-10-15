@@ -78,7 +78,9 @@ class EntityFactory {
 
 		onEntityCreated.dispatch( entity );
 
-		entity.components.map( ( comp ) -> comp.claimOwnage() );
+		for ( comp in entity.components.components ) {
+			comp.claimOwnage();
+		}
 
 		return entity;
 	}

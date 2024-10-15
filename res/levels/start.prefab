@@ -10,17 +10,1251 @@
 			},
 			"children": [
 				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": -58.84,
+					"y": 0.83,
+					"z": 12.98
+				},
+				{
 					"type": "model",
 					"name": "orc_prison",
 					"source": "voxel/levels/orc_prison/fbx/orc_prison.fbx",
 					"locked": true,
 					"props": {
-						"blockEntity": "model",
-						"$cdbtype": "locationStaticObjDF"
+						"entity": "model",
+						"$cdbtype": "locationEntityDF"
 					},
 					"scaleX": 10,
 					"scaleY": 10,
 					"scaleZ": 10
+				},
+				{
+					"type": "object",
+					"name": "collider walls",
+					"children": [
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -82.2,
+							"y": -42.85,
+							"z": 0.49,
+							"scaleX": 295.86,
+							"scaleY": 266.75
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -142.03,
+							"y": 58.43,
+							"z": 6.92,
+							"scaleY": 35.34,
+							"scaleZ": 38.07,
+							"rotationZ": 4.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -139.44,
+							"y": 37.29,
+							"z": 6.92,
+							"scaleY": 8.51,
+							"scaleZ": 38.07
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -140.69,
+							"y": 26.57,
+							"z": 6.92,
+							"scaleY": 18.74,
+							"scaleZ": 38.07,
+							"rotationZ": -4.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -135.47,
+							"y": 13.91,
+							"z": 6.92,
+							"scaleY": 15.11,
+							"scaleZ": 38.07,
+							"rotationZ": 56.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -125.07,
+							"y": 13.6,
+							"z": 6.92,
+							"scaleY": 15.11,
+							"scaleZ": 38.07,
+							"rotationZ": 106.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -110.59,
+							"y": 13.36,
+							"z": 6.92,
+							"scaleY": 15.22,
+							"scaleZ": 38.07,
+							"rotationZ": 70.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -90.55,
+							"y": 11.83,
+							"z": 6.92,
+							"scaleY": 48.11,
+							"scaleZ": 38.07,
+							"rotationZ": 89.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -139.6,
+							"y": 80.62,
+							"z": 6.92,
+							"scaleY": 13.48,
+							"scaleZ": 38.07,
+							"rotationZ": 146.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -124.17,
+							"y": 83.66,
+							"z": 6.92,
+							"scaleX": 0.73,
+							"scaleY": 10.82,
+							"scaleZ": 38.07,
+							"rotationZ": 90.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -132.71,
+							"y": 84.57,
+							"z": 6.92,
+							"scaleX": 0.73,
+							"scaleY": 29.42,
+							"scaleZ": 38.07,
+							"rotationZ": 90.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -117.58,
+							"y": 85.36,
+							"z": 6.92,
+							"scaleX": 0.73,
+							"scaleY": 10.82,
+							"scaleZ": 38.07,
+							"rotationZ": 91.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -113.13,
+							"y": 82.52,
+							"z": 6.92,
+							"scaleY": 8.99,
+							"scaleZ": 38.07,
+							"rotationZ": 45.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -103.99,
+							"y": 81.12,
+							"z": 6.92,
+							"scaleY": 12.25,
+							"scaleZ": 38.07,
+							"rotationZ": 92.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -93.9,
+							"y": 82.9,
+							"z": 6.92,
+							"scaleY": 12.25,
+							"scaleZ": 38.07,
+							"rotationZ": 114.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -91.21,
+							"y": 84.61,
+							"z": 6.92,
+							"scaleY": 12.25,
+							"scaleZ": 38.07,
+							"rotationZ": 45.1
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -76.23,
+							"y": 80.05,
+							"z": 6.92,
+							"scaleY": 21.69,
+							"scaleZ": 38.07,
+							"rotationZ": 89.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -72.37,
+							"y": 78.68,
+							"z": 6.92,
+							"scaleY": 10.62,
+							"scaleZ": 38.07,
+							"rotationZ": 51.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -68.5,
+							"y": 66,
+							"z": 6.92,
+							"scaleY": 24,
+							"scaleZ": 38.07
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -57.47,
+							"y": 78.7,
+							"z": 6.92,
+							"scaleY": 24,
+							"scaleZ": 38.07,
+							"rotationZ": 96.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -39.49,
+							"y": 81.38,
+							"z": 6.92,
+							"scaleY": 15.05,
+							"scaleZ": 38.07,
+							"rotationZ": 93.1
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -30.82,
+							"y": 72.07,
+							"z": 6.92,
+							"scaleY": 26.31,
+							"scaleZ": 38.07,
+							"rotationZ": 24.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -28.15,
+							"y": 56.24,
+							"z": 6.92,
+							"scaleY": 13.7,
+							"scaleZ": 38.07,
+							"rotationZ": -2.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -30.17,
+							"y": 45.67,
+							"z": 6.92,
+							"scaleY": 2.91,
+							"scaleZ": 38.07,
+							"rotationZ": -2.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -28.38,
+							"y": 44.32,
+							"z": 6.92,
+							"scaleY": 31.52,
+							"scaleZ": 38.07
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -27.48,
+							"y": 20.65,
+							"z": 6.92,
+							"scaleY": 17.6,
+							"scaleZ": 38.07
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -26.15,
+							"y": 4.19,
+							"z": 6.92,
+							"scaleY": 17.6,
+							"scaleZ": 38.07
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -29.19,
+							"y": -5.63,
+							"z": 6.92,
+							"scaleY": 17.6,
+							"scaleZ": 38.07,
+							"rotationZ": -30.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -34.99,
+							"y": -17.69,
+							"z": 6.92,
+							"scaleY": 9.81,
+							"scaleZ": 38.07,
+							"rotationZ": -20.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -35.51,
+							"y": -25.19,
+							"z": 6.92,
+							"scaleY": 9.81,
+							"scaleZ": 38.07,
+							"rotationZ": -0.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -40.95,
+							"y": -31.63,
+							"z": 6.92,
+							"scaleY": 19.15,
+							"scaleZ": 38.07,
+							"rotationZ": -41.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -49.92,
+							"y": -41.6,
+							"z": 6.92,
+							"scaleY": 10.54,
+							"scaleZ": 38.07,
+							"rotationZ": -55.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -55.53,
+							"y": -43.07,
+							"z": 6.92,
+							"scaleY": 10.54,
+							"scaleZ": 38.07,
+							"rotationZ": -84.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -71.5,
+							"y": -53.98,
+							"z": 6.92,
+							"scaleY": 32.33,
+							"scaleZ": 38.07,
+							"rotationZ": -46.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -85.96,
+							"y": -77.5,
+							"z": 6.92,
+							"scaleY": 26.84,
+							"scaleZ": 38.07,
+							"rotationZ": -12.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -84.74,
+							"y": -103.13,
+							"z": 6.92,
+							"scaleY": 26.84,
+							"scaleZ": 38.07,
+							"rotationZ": 5.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -83.5,
+							"y": -118.52,
+							"z": 6.92,
+							"scaleY": 8.65,
+							"scaleZ": 38.07,
+							"rotationZ": 22.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -77.39,
+							"y": -122.82,
+							"z": 6.92,
+							"scaleY": 8.65,
+							"scaleZ": 38.07,
+							"rotationZ": 76.1
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -69.49,
+							"y": -122.03,
+							"z": 6.92,
+							"scaleY": 8.65,
+							"scaleZ": 38.07,
+							"rotationZ": 124.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -65.58,
+							"y": -115.56,
+							"z": 6.92,
+							"scaleY": 8.65,
+							"scaleZ": 38.07,
+							"rotationZ": 171.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -68.2,
+							"y": -99.32,
+							"z": 6.92,
+							"scaleY": 25.56,
+							"scaleZ": 38.07,
+							"rotationZ": -165
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -73.16,
+							"y": -81.6,
+							"z": 6.92,
+							"scaleY": 25.56,
+							"scaleZ": 38.07,
+							"rotationZ": -172.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -68.32,
+							"y": -63.08,
+							"z": 6.92,
+							"scaleY": 25.56,
+							"scaleZ": 38.07,
+							"rotationZ": 142.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -55.58,
+							"y": -53.65,
+							"z": 6.92,
+							"scaleY": 25.56,
+							"scaleZ": 38.07,
+							"rotationZ": 108.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -41.68,
+							"y": -50.75,
+							"z": 6.92,
+							"scaleY": 8.99,
+							"scaleZ": 38.07,
+							"rotationZ": 90.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -32.46,
+							"y": -47.63,
+							"z": 6.92,
+							"scaleY": 10.48,
+							"scaleZ": 38.07,
+							"rotationZ": 126.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -26.2,
+							"y": -44.8,
+							"z": 6.92,
+							"scaleY": 5.9,
+							"scaleZ": 38.07,
+							"rotationZ": 82.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -24.21,
+							"y": -45.8,
+							"z": 6.92,
+							"scaleY": 5.9,
+							"scaleZ": 38.07,
+							"rotationZ": 17.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -20.37,
+							"y": -49.44,
+							"z": 6.92,
+							"scaleY": 5.9,
+							"scaleZ": 38.07,
+							"rotationZ": 67.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -13.25,
+							"y": -49.91,
+							"z": 6.92,
+							"scaleY": 9.6,
+							"scaleZ": 38.07,
+							"rotationZ": -84.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -5.96,
+							"y": -47.27,
+							"z": 6.92,
+							"scaleY": 9.6,
+							"scaleZ": 38.07,
+							"rotationZ": -64.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.07,
+							"y": -45.8,
+							"z": 6.92,
+							"scaleY": 9.6,
+							"scaleZ": 38.07,
+							"rotationZ": -90.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 7.71,
+							"y": -48.88,
+							"z": 6.92,
+							"scaleY": 9.6,
+							"scaleZ": 38.07,
+							"rotationZ": -126.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 22.05,
+							"y": -62.28,
+							"z": 6.92,
+							"scaleX": 0.51,
+							"scaleY": 34.38,
+							"scaleZ": 38.07,
+							"rotationZ": -137.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 21.55,
+							"y": -62.57,
+							"z": 6.92,
+							"scaleY": 34.38,
+							"scaleZ": 38.07,
+							"rotationZ": -137.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 20.44,
+							"y": -63.81,
+							"z": 6.92,
+							"scaleY": 18.23,
+							"scaleZ": 38.07,
+							"rotationZ": -136.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 43.73,
+							"y": -78.56,
+							"z": 6.92,
+							"scaleY": 23.95,
+							"scaleZ": 38.07,
+							"rotationZ": -107.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 41.44,
+							"y": -90.95,
+							"z": 6.92,
+							"scaleY": 18.23,
+							"scaleZ": 38.07,
+							"rotationZ": -77.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 27.21,
+							"y": -88.36,
+							"z": 6.92,
+							"scaleY": 18.23,
+							"scaleZ": 38.07,
+							"rotationZ": -117.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 13.67,
+							"y": -82.6,
+							"z": 6.92,
+							"scaleY": 10.94,
+							"scaleZ": 38.07,
+							"rotationZ": -104.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 5.16,
+							"y": -82.89,
+							"z": 6.92,
+							"scaleY": 7.77,
+							"scaleZ": 38.07,
+							"rotationZ": -66.1
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.81,
+							"y": -96.26,
+							"z": 6.92,
+							"scaleY": 24.55,
+							"scaleZ": 38.07,
+							"rotationZ": -12.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -4,
+							"y": -110.59,
+							"z": 6.92,
+							"scaleX": 1.19,
+							"scaleY": 6.72,
+							"scaleZ": 38.07,
+							"rotationZ": -15.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -25.58,
+							"y": -133.57,
+							"z": 6.92,
+							"scaleY": 40.51,
+							"scaleZ": 38.07,
+							"rotationZ": -50.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -44.49,
+							"y": -146.41,
+							"z": 6.92,
+							"scaleY": 17.44,
+							"scaleZ": 38.07,
+							"rotationZ": -66.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -87.41,
+							"y": -152.17,
+							"z": 6.92,
+							"scaleY": 71.41,
+							"scaleZ": 38.07,
+							"rotationZ": -85.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -81.42,
+							"y": -150.42,
+							"z": 6.92,
+							"scaleY": 16.92,
+							"scaleZ": 38.07,
+							"rotationZ": -85.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -127.87,
+							"y": -152.71,
+							"z": 6.92,
+							"scaleY": 29.72,
+							"scaleZ": 38.07,
+							"rotationZ": -103.9
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -142.26,
+							"y": -140.48,
+							"z": 6.92,
+							"scaleY": 16.82,
+							"scaleZ": 38.07,
+							"rotationZ": -174.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -139.47,
+							"y": -120.63,
+							"z": 6.92,
+							"scaleY": 28.33,
+							"scaleZ": 38.07,
+							"rotationZ": 160.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -135.6,
+							"y": -102.35,
+							"z": 6.92,
+							"scaleY": 14.51,
+							"scaleZ": 38.07,
+							"rotationZ": -166.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -141.14,
+							"y": -89.2,
+							"z": 6.92,
+							"scaleY": 14.51,
+							"scaleZ": 38.07,
+							"rotationZ": -146.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -144.5,
+							"y": -80.2,
+							"z": 6.92,
+							"scaleY": 14.51,
+							"scaleZ": 38.07,
+							"rotationZ": -179.8
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -138.96,
+							"y": -69.65,
+							"z": 6.92,
+							"scaleY": 24.98,
+							"scaleZ": 38.07,
+							"rotationZ": 143.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -122.84,
+							"y": -56.14,
+							"z": 6.92,
+							"scaleY": 24.98,
+							"scaleZ": 38.07,
+							"rotationZ": 119.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -107.58,
+							"y": -47.6,
+							"z": 6.92,
+							"scaleY": 9.57,
+							"scaleZ": 38.07,
+							"rotationZ": 129.2
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -103.44,
+							"y": -41.22,
+							"z": 6.92,
+							"scaleY": 9.57,
+							"scaleZ": 38.07,
+							"rotationZ": 158.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -88.33,
+							"y": -34.61,
+							"z": 6.92,
+							"scaleY": 39.52,
+							"scaleZ": 38.07,
+							"rotationZ": 108.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -67.63,
+							"y": -25.21,
+							"z": 6.92,
+							"scaleY": 6.25,
+							"scaleZ": 38.07,
+							"rotationZ": 139.5
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -61.21,
+							"y": -3.22,
+							"z": 6.92,
+							"scaleY": 13.44,
+							"scaleZ": 38.07,
+							"rotationZ": 179.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -65.23,
+							"y": -13.45,
+							"z": 6.92,
+							"scaleY": 13.44,
+							"scaleZ": 38.07,
+							"rotationZ": 142.7
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -65.6,
+							"y": -16.85,
+							"z": 6.92,
+							"scaleY": 13.44,
+							"scaleZ": 38.07,
+							"rotationZ": -178.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -63.38,
+							"y": 7.37,
+							"z": 6.92,
+							"scaleY": 10.95,
+							"scaleZ": 38.07,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -8.33,
+							"y": -117.3,
+							"z": 6.92,
+							"scaleY": 12.83,
+							"scaleZ": 38.07,
+							"rotationZ": -41.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -88.49,
+							"y": -94.04,
+							"z": 6.92,
+							"scaleY": 6.63,
+							"scaleZ": 38.07,
+							"rotationZ": 1.4
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -86.36,
+							"y": -99.17,
+							"z": 6.92,
+							"scaleY": 6.63,
+							"scaleZ": 38.07,
+							"rotationZ": 17.3
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -68.5,
+							"y": 23,
+							"z": 6.92,
+							"scaleY": 24,
+							"scaleZ": 38.07
+						}
+					]
 				}
 			]
 		},
@@ -71,17 +1305,20 @@
 			"rotationY": 146.7,
 			"rotationZ": -12.1,
 			"kind": "Directional",
-			"power": 9.78,
+			"power": 2.53,
 			"range": 10,
 			"zNear": 0.02,
 			"shadows": {
 				"mode": "Mixed",
-				"size": 4096,
-				"radius": 20,
+				"size": 2048,
+				"radius": 0.45,
 				"quality": 1,
-				"bias": 0.1,
+				"bias": 0.02,
 				"samplingMode": {
-					"kind": "None"
+					"kind": "PCF",
+					"quality": 1,
+					"scale": 0.29,
+					"bias": 0.1
 				}
 			}
 		}

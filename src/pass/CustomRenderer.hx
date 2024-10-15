@@ -1,5 +1,7 @@
 package pass;
 
+import h3d.pass.ScreenFx;
+import h3d.shader.Bloom;
 import h3d.pass.Blur;
 import h3d.Engine;
 import util.Util;
@@ -98,9 +100,9 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 
 		var shadowLum = 0.7;
 		shadow.color = new Vector( shadowLum, shadowLum, shadowLum );
-		shadow.power = 35;
+		shadow.power = 100;
 		shadow.blur.quality = 1.0;
-		shadow.size = Std.int( Math.pow( 2, Std.int( 9 ) ) );
+		shadow.size = Std.int( Math.pow( 2, Std.int( 12 ) ) );
 		shadow.blur.radius = 1.5;
 		shadow.samplingKind = ESM;
 		shadow.blur.shader.isDepthDependant = false;
@@ -116,7 +118,6 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 
 		emissive = new pass.Emissive( "emissive" );
 		emissive.reduceSize = 1;
-		// emissive.blur.passes = 5;
 		emissive.blur.quality = 4;
 
 		// emissive.blur.sigma = 2;
@@ -161,9 +162,6 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		draw( "additive" );
 		resetTarget();
 
-		emissive.setContext( ctx );
-		emissive.draw( get( "emissive" ) );
-
 		var saoTarget = allocTarget( "sao" );
 		setTarget( saoTarget );
 		sao.apply( depthTex, normalTex, ctx.camera );
@@ -171,13 +169,15 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		saoBlur.apply( ctx, saoTarget );
 		copy( saoTarget, colorTex, Multiply );
 
-		h3d.pass.Copy.run( emissive.outputTex, colorTex, Add );
-		h3d.pass.Copy.run( additiveTex, colorTex, Add );
-
 		if ( overlayBlurEnabled ) {
 			resetTarget();
 			overlayBlur.apply( ctx, colorTex );
 		}
+
+		emissive.setContext( ctx );
+		emissive.draw( get( "emissive" ) );
+		h3d.pass.Copy.run( emissive.outputTex, colorTex, Add );
+		h3d.pass.Copy.run( additiveTex, colorTex, Add );
 
 		var t = allocTarget( "fxaaOut", false );
 		setTarget( t );
@@ -191,11 +191,11 @@ class CustomRenderer extends h3d.scene.fwd.Renderer {
 		var outlineSrcTex = allocTarget( "outline", true );
 		setTarget( outlineSrcTex );
 		clear( 0 );
-		// draw("highlightBack");
 		draw( "highlight" );
 		resetTarget();
 		outlineBlur.apply( ctx, outlineSrcTex, outlineTex );
 		composite.shader.outline = outlineTex;
+
 		resetTarget();
 		composite.shader.texture = colorTex;
 		composite.render();

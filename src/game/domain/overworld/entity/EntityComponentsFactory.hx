@@ -10,7 +10,7 @@ class EntityComponentsFactory {
 		var result = [];
 
 		for ( property in bodyDescriptions ) {
-			result.push( property.buildComponent() );
+			if ( property != null ) result.push( property.buildComponent() );
 		}
 
 		return result;

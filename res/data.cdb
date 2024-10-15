@@ -86,6 +86,10 @@
 					"preset": "block"
 				},
 				{
+					"id": "collider_box",
+					"preset": "collider_box"
+				},
+				{
 					"id": "model",
 					"preset": "model"
 				},
@@ -114,6 +118,10 @@
 				{
 					"id": "orc_prison_door",
 					"preset": "orc_prison_door"
+				},
+				{
+					"id": "wall_torch",
+					"preset": "wall_torch"
 				}
 			],
 			"separators": [
@@ -162,6 +170,11 @@
 					"properties": "block"
 				},
 				{
+					"id": "collider_box",
+					"properties": "block",
+					"view": "none"
+				},
+				{
 					"id": "model",
 					"properties": "model",
 					"view": "model"
@@ -185,6 +198,11 @@
 					"id": "orc_prison_door",
 					"properties": "orc_prison_door",
 					"view": "orc_prison_door"
+				},
+				{
+					"id": "wall_torch",
+					"properties": "wall_torch",
+					"view": "wall_torch"
 				}
 			],
 			"separators": [
@@ -472,6 +490,12 @@
 							"isStatic": true
 						}
 					}
+				},
+				{
+					"id": "wall_torch",
+					"properties": {
+						"dynamics": false
+					}
 				}
 			],
 			"separators": [
@@ -492,30 +516,6 @@
 					"id": "orc_prison_door"
 				}
 			],
-			"props": {}
-		},
-		{
-			"name": "entityAdditiveStat",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				}
-			],
-			"lines": [
-				{
-					"id": "attack"
-				},
-				{
-					"id": "weaponRange"
-				},
-				{
-					"id": "defence"
-				}
-			],
-			"separators": [],
 			"props": {}
 		},
 		{
@@ -1119,8 +1119,7 @@
 				},
 				{
 					"typeStr": "9:EntityViewType",
-					"name": "type",
-					"kind": null
+					"name": "type"
 				},
 				{
 					"typeStr": "8",
@@ -1131,21 +1130,27 @@
 			],
 			"lines": [
 				{
-					"id": "grayboxView",
+					"id": "none",
 					"type": [
-						1
+						0
 					]
 				},
 				{
-					"id": "model",
+					"id": "grayboxView",
 					"type": [
 						2
 					]
 				},
 				{
+					"id": "model",
+					"type": [
+						3
+					]
+				},
+				{
 					"id": "human",
 					"type": [
-						0,
+						1,
 						"human"
 					],
 					"animations": [
@@ -1155,7 +1160,8 @@
 									"key": "torso_stand"
 								}
 							],
-							"key": "idle"
+							"key": "idle",
+							"speedMult": 1
 						},
 						{
 							"animations": [
@@ -1163,7 +1169,8 @@
 									"key": "torso_walk"
 								}
 							],
-							"key": "walk"
+							"key": "walk",
+							"speedMult": 1
 						},
 						{
 							"animations": [
@@ -1171,7 +1178,8 @@
 									"key": "right_hand_idle"
 								}
 							],
-							"key": "attack_right_idle"
+							"key": "attack_right_idle",
+							"speedMult": 1
 						},
 						{
 							"key": "attack_right_raised",
@@ -1179,7 +1187,8 @@
 								{
 									"key": "right_hand_raised"
 								}
-							]
+							],
+							"speedMult": 1
 						},
 						{
 							"animations": [
@@ -1187,7 +1196,8 @@
 									"key": "right_hand_attack"
 								}
 							],
-							"key": "attack_right_attack"
+							"key": "attack_right_attack",
+							"speedMult": 1
 						},
 						{
 							"animations": [
@@ -1195,7 +1205,8 @@
 									"key": "left_hand_idle"
 								}
 							],
-							"key": "attack_left_idle"
+							"key": "attack_left_idle",
+							"speedMult": 1
 						},
 						{
 							"key": "attack_left_raised",
@@ -1203,7 +1214,8 @@
 								{
 									"key": "left_hand_raised"
 								}
-							]
+							],
+							"speedMult": 1
 						},
 						{
 							"animations": [
@@ -1211,14 +1223,15 @@
 									"key": "left_hand_attack"
 								}
 							],
-							"key": "attack_left_attack"
+							"key": "attack_left_attack",
+							"speedMult": 1
 						}
 					]
 				},
 				{
 					"id": "club",
 					"type": [
-						0,
+						1,
 						"club"
 					],
 					"animations": [
@@ -1228,14 +1241,15 @@
 								{
 									"key": "idle"
 								}
-							]
+							],
+							"speedMult": 1
 						}
 					]
 				},
 				{
 					"id": "orc_prison_door",
 					"type": [
-						0,
+						1,
 						"orc_prison_door"
 					],
 					"animations": [
@@ -1245,14 +1259,15 @@
 								{
 									"key": "idle"
 								}
-							]
+							],
+							"speedMult": 1
 						}
 					]
 				},
 				{
 					"id": "orc_prison_key",
 					"type": [
-						0,
+						1,
 						"orc_prison_key"
 					],
 					"animations": [
@@ -1262,48 +1277,32 @@
 								{
 									"key": "idle"
 								}
-							]
+							],
+							"speedMult": 1
+						}
+					]
+				},
+				{
+					"id": "wall_torch",
+					"type": [
+						1,
+						"wall_torch"
+					],
+					"animations": [
+						{
+							"key": "idle",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							],
+							"speedMult": 2
 						}
 					]
 				}
 			],
 			"separators": [],
 			"props": {}
-		},
-		{
-			"name": "entityView@animations",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "6:entityViewState",
-					"name": "key",
-					"kind": null
-				},
-				{
-					"typeStr": "8",
-					"name": "animations",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "entityView@animations@animations",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "1",
-					"name": "key",
-					"kind": null
-				}
-			]
 		},
 		{
 			"name": "entityComposed",
@@ -1336,10 +1335,78 @@
 				{
 					"id": "orc_prison_door",
 					"file": "voxel/structures/iron_bars_door/iron_bars_door.enco"
+				},
+				{
+					"id": "wall_torch",
+					"file": "voxel/structures/wall_torch/entity/wall_torch.enco"
 				}
 			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "entityAdditiveStat",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "attack"
+				},
+				{
+					"id": "weaponRange"
+				},
+				{
+					"id": "defence"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "entityView@animations",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:entityViewState",
+					"name": "key",
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "speedMult",
+					"defaultValue": 1
+				},
+				{
+					"typeStr": "8",
+					"name": "animations",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityView@animations@animations",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "key",
+					"kind": null
+				}
+			]
 		},
 		{
 			"name": "item",
@@ -1721,7 +1788,7 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 35,
+					"chunkSize": 45,
 					"level": [
 						0,
 						"start"
@@ -1865,25 +1932,6 @@
 			}
 		},
 		{
-			"name": "locationStaticObjDF",
-			"columns": [
-				{
-					"typeStr": "6:entity",
-					"name": "blockEntity",
-					"kind": null
-				}
-			],
-			"separators": [],
-			"props": {
-				"dataFiles": "locationStaticObjDF",
-				"editor": {
-					"categories": [
-						"df"
-					]
-				}
-			}
-		},
-		{
 			"name": "tileset@sequences",
 			"props": {
 				"hide": true
@@ -1947,6 +1995,10 @@
 			"name": "EntityViewType",
 			"cases": [
 				{
+					"name": "None",
+					"args": []
+				},
+				{
 					"name": "EntityComposer",
 					"args": [
 						{
@@ -2000,6 +2052,20 @@
 						{
 							"name": "equip",
 							"typeStr": "6:equipSlotType"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "EnCoProperty",
+			"cases": [
+				{
+					"name": "SetMaterialName",
+					"args": [
+						{
+							"name": "value",
+							"typeStr": "1"
 						}
 					]
 				}

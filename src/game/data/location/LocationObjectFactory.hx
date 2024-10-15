@@ -11,8 +11,8 @@ class LocationObjectFactory {
 		if ( prefab.props != null ) {
 			var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( prefab.props, Const.cdbTypeIdent ) );
 			switch cdbSheetId {
-				case LOCATION_STATIC_OBJ_DF:
-					var entry : Data.LocationStaticObjDFDef = cast prefab.props;
+				case LOCATION_ENTITY_PRESENT:
+					var entry : Data.LocationEntityDF = cast prefab.props;
 					return new LocationEntityVO(
 						prefab.scaleX,
 						prefab.scaleY,
@@ -25,10 +25,10 @@ class LocationObjectFactory {
 						prefab.z,
 						prefab.name,
 						prefab,
-						entry.blockEntity
+						entry.entityId
 					);
 				case e:
-					trace( "static location object instance : " + e + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
+					trace( "static location object instance : " + e + " " + " sheet id: " + cdbSheetId + "; is not supported" );
 			}
 		}
 		return null;

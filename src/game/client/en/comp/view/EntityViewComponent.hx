@@ -47,6 +47,7 @@ class EntityViewComponent extends EntityComponent {
 
 	function createView() : IEntityView {
 		var view = viewDescription.viewProvider?.createView( this, viewExtraConfig );
+		if ( view == null ) return null;
 
 		for ( setting in viewExtraConfig ) {
 			switch setting {
@@ -62,9 +63,11 @@ class EntityViewComponent extends EntityComponent {
 	function onAttachedToLocation( location : Location ) {
 
 		if ( view == null ) return;
-
-		view.resolve( createView() );
+		var viewGraphics = createView();
+		if ( viewGraphics == null ) return;
+		view.resolve( viewGraphics );
 		var node = view.result.getGraphics();
+
 		Boot.inst.root3D.addChild( node );
 
 		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );

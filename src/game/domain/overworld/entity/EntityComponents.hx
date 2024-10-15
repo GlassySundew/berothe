@@ -10,9 +10,9 @@ import util.Assert;
 class EntityComponents {
 
 	public final onComponentAdded : Signal<EntityComponent> = new Signal<EntityComponent>();
+	public final components : ClassMap<Class<EntityComponent>, EntityComponent> = new ClassMap();
 	final entity : OverworldEntity;
 
-	var components : ClassMap<Class<EntityComponent>, EntityComponent> = new ClassMap();
 
 	public function new( entity : OverworldEntity ) {
 		this.entity = entity;

@@ -1,0 +1,66 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "idle",
+			"children": [
+				{
+					"type": "model",
+					"name": "wall_torch_1_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_1_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_2_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_2_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_3_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_3_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_4_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_4_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_5_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_5_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_6_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_6_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_7_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_7_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_8_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_8_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_9_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_9_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_10_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_10_flames.fbx"
+				},
+				{
+					"type": "model",
+					"name": "wall_torch_11_flames",
+					"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_11_flames.fbx"
+				}
+			]
+		}
+	]
+}

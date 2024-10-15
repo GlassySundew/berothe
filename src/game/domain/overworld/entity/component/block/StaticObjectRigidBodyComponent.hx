@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.block;
 
+import game.domain.overworld.location.Location;
 import game.domain.overworld.entity.component.EntityRigidBodyComponentBase;
 import util.Assert;
 import util.Const;
@@ -29,6 +30,20 @@ class StaticObjectRigidBodyComponent extends EntityRigidBodyComponentBase {
 		this.config = config;
 	}
 
+	override function onAttachedToLocation( location : Location ) {
+		super.onAttachedToLocation( location );
+
+		entity.transform.x.subscribeProp( rigidBody.x, true );
+		entity.transform.y.subscribeProp( rigidBody.y, true );
+		entity.transform.z.subscribeProp( rigidBody.z, true );
+		entity.transform.velX.subscribeProp( rigidBody.velX, true );
+		entity.transform.velY.subscribeProp( rigidBody.velY, true );
+		entity.transform.velZ.subscribeProp( rigidBody.velZ, true );
+		entity.transform.rotationX.subscribeProp( rigidBody.rotationX, true );
+		entity.transform.rotationY.subscribeProp( rigidBody.rotationY, true );
+		entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ, true );
+	}
+	
 	function createRigidBody() : IRigidBody {
 		Assert.notNull( config );
 

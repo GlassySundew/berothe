@@ -83,7 +83,8 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 					LocationEntityVO.fromPrefabInstance( instance, entry )
 				);
 			case e:
-				trace( "Prefab instance: " + e + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
+				trace( prefab.editorOnly, prefab.enabled );
+				trace( "Prefab instance: " + instance + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
 		}
 	}
 
@@ -92,9 +93,9 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 
 		function parsePrefabElementsLocal( prefabLocal : Prefab ) : Bool {
 			var obj3D = Std.downcast( prefabLocal, Object3D );
-			if ( obj3D != null )
+			if ( obj3D != null && obj3D.props != null )
 				result.push( LocationObjectFactory.fromPrefab( obj3D ) );
-			return false;
+			return true;
 		}
 
 		HideUtil.mapPrefabChildrenWithDerefRec( prefab, parsePrefabElementsLocal );
