@@ -1,0 +1,62 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "idle",
+			"children": [
+				{
+					"type": "model",
+					"name": "orc_24_torso_stand",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_24_torso_stand.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "walk",
+			"children": [
+				{
+					"type": "model",
+					"name": "orc_2_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_2_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_3_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_3_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_4_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_4_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_5_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_5_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_6_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_6_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_7_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_7_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_8_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_8_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_9_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_9_torso_walk.fbx"
+				}
+			]
+		}
+	]
+}

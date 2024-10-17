@@ -5,15 +5,6 @@ import core.MutableProperty;
 import core.IProperty;
 import game.domain.overworld.entity.component.model.stat.EntityAdditiveStatBase;
 
-/**
-	works in 2 ways:
-
-	*	server: collects stats and recalculates result into `amount` once they've been changed
-	*	client: when needed extra syncronization, will work as a property to hold value sent from server
-
-	the behaviour is determined between these 2 by field `receiver` property,
-	if not null then its client
-**/
 class EntityStatHolder {
 
 	public final stats : Array<EntityAdditiveStatBase> = [];
@@ -28,13 +19,14 @@ class EntityStatHolder {
 
 	public function new() {}
 
-	public function setReceiver( property : IProperty<Float> ) {
-		Assert.notNull( property );
-		Assert.isNull( receiver );
+	// @:deprecated
+	// private final function setReceiver( property : IProperty<Float> ) {
+	// 	Assert.notNull( property );
+	// 	Assert.isNull( receiver );
 
-		untyped stats.length = 0;
-		receiver = property;
-	}
+	// 	untyped stats.length = 0;
+	// 	receiver = property;
+	// }
 
 	public function recalculate() {
 		Assert.isNull( receiver );

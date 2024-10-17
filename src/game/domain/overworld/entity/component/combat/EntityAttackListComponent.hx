@@ -73,8 +73,7 @@ class EntityAttackListComponent extends EntityComponent {
 		leadingAttack = leadingEquip;
 
 		result.sort(
-			( item1, item2 ) ->
-				Reflect.compare( item1.desc.cooldown, item2.desc.cooldown )
+			( item1, item2 ) -> Reflect.compare( item1.desc.cooldown, item2.desc.cooldown )
 		);
 
 		return result;
@@ -91,17 +90,18 @@ class EntityAttackListComponent extends EntityComponent {
 			EntityModelComponent,
 			( _, modelCompRepl ) -> {
 				var attackMap = modelCompRepl.stats.limbAttacks;
-				for ( equipSlotType =>
-					attackStatHolder in attackMap.keyValueIterator() ) {
-					var attackItem = getItemByEquipSlotType( equipSlotType );
+				for ( attackStatHolder in attackMap ) {
+					if ( attackStatHolder.limb == null ) continue;
+					var attackItem = getItemByEquipSlotType( attackStatHolder.limb );
 					Assert.notNull( attackItem );
 					attackStatHolder.amount.addOnValue(
 						( _, val ) -> attackItem.setAttack( val )
 					);
 				}
 				var weaponRanges = modelCompRepl.stats.weaponRanges;
-				for ( equipSlotType => weaponRangeStatHolder in weaponRanges ) {
-					var attackItem = getItemByEquipSlotType( equipSlotType );
+				for ( weaponRangeStatHolder in weaponRanges ) {
+					if ( weaponRangeStatHolder.limb == null ) continue;
+					var attackItem = getItemByEquipSlotType( weaponRangeStatHolder.limb );
 					Assert.notNull( attackItem );
 					weaponRangeStatHolder.amount.addOnValueImmediately(
 						( _, val ) -> attackItem.setRange( val )

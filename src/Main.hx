@@ -1,3 +1,4 @@
+import h3d.scene.pbr.DirLight;
 import rx.disposables.Assignable;
 import rx.disposables.Boolean;
 import rx.Subscription;
@@ -54,7 +55,6 @@ class Main extends Process {
 		inst = this;
 		createRoot( s );
 
-		setupResources();
 		setupRenderer();
 
 		Assets.init();
@@ -113,28 +113,10 @@ class Main extends Process {
 		} );
 	}
 
-	function setupResources() {
-		#if( hl && pak )
-		hxd.Res.initPak();
-		#elseif( hl )
-		hxd.res.Resource.LIVE_UPDATE = true;
-		hxd.Res.initLocal();
-		#end
-
-		#if debug
-		hxd.Res.data.watch( function () {
-			Data.load( hxd.Res.data.entry.getBytes().toString() );
-			// if ( GameServer.inst != null ) GameServer.inst.onCdbReload();
-		} );
-		#end
-	}
-
 	function setupRenderer() {
-		var renderer = new CustomRenderer();
-		renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
-		Std.downcast( Boot.inst.s3d.lightSystem, h3d.scene.fwd.LightSystem ).ambientLight.set( .5, .5, .5 );
 
-		Boot.inst.s3d.renderer = Boot.inst.renderer = renderer;
+		// var light = new DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
+		// light.power = 0.4;
 	}
 
 	function initGamePadController() {

@@ -108,6 +108,10 @@
 					"preset": "human"
 				},
 				{
+					"id": "orc",
+					"preset": "block"
+				},
+				{
 					"id": "club",
 					"preset": "club"
 				},
@@ -183,6 +187,11 @@
 					"id": "human",
 					"view": "human",
 					"properties": "human"
+				},
+				{
+					"id": "orc",
+					"properties": "block",
+					"view": "none"
 				},
 				{
 					"id": "club",
@@ -400,6 +409,150 @@
 					}
 				},
 				{
+					"id": "orc",
+					"properties": {
+						"rigidBodyTorso": {
+							"sizeX": 3,
+							"sizeY": 3,
+							"sizeZ": 10,
+							"offsetZ": 11,
+							"id": "torso",
+							"hasFeet": true
+						},
+						"dynamics": true,
+						"bodyHitbox": {
+							"sizeX": 4,
+							"sizeY": 4,
+							"sizeZ": 16,
+							"offsetZ": 7.5,
+							"id": "torsoHitbox"
+						},
+						"model": {
+							"equipment": [
+								{
+									"type": "head",
+									"priority": 0,
+									"links": []
+								},
+								{
+									"type": "neck",
+									"priority": 0,
+									"links": []
+								},
+								{
+									"priority": 0,
+									"type": "ring_right",
+									"links": [
+										{
+											"type": "hand_right"
+										}
+									]
+								},
+								{
+									"type": "ring_left",
+									"priority": 0,
+									"links": [
+										{
+											"type": "hand_left"
+										}
+									]
+								},
+								{
+									"type": "hand_left",
+									"priority": 0,
+									"links": []
+								},
+								{
+									"type": "hand_palm_left",
+									"priority": 0,
+									"links": [
+										{
+											"type": "hand_left"
+										}
+									]
+								},
+								{
+									"type": "hand_right",
+									"priority": 1,
+									"links": []
+								},
+								{
+									"type": "hand_palm_right",
+									"priority": 1,
+									"links": [
+										{
+											"type": "hand_right"
+										}
+									]
+								},
+								{
+									"type": "leg_right",
+									"priority": 0,
+									"links": []
+								},
+								{
+									"type": "leg_left",
+									"priority": 0,
+									"links": []
+								},
+								{
+									"type": "waist",
+									"priority": 0,
+									"links": []
+								}
+							],
+							"baseHp": 5,
+							"id": "model",
+							"baseInventorySize": 4,
+							"baseAttack": [
+								{
+									"attack": "human_hand_attack_right",
+									"amount": 1
+								},
+								{
+									"attack": "human_hand_attack_left",
+									"amount": 1
+								}
+							]
+						},
+						"attack": {
+							"id": "attack",
+							"attackList": [
+								{
+									"id": "human_hand_attack_right",
+									"tweenType": 0,
+									"sizeX": 1,
+									"sizeY": 0.4,
+									"sizeZ": 4,
+									"offsetX": -1.5,
+									"offsetY": 2.4,
+									"offsetZ": 8,
+									"cooldown": 0.7,
+									"duration": 0.35,
+									"endX": 2,
+									"key": "attack_right_attack",
+									"equipSlot": "hand_right"
+								},
+								{
+									"id": "human_hand_attack_left",
+									"key": "attack_left_attack",
+									"tweenType": 0,
+									"sizeX": 1,
+									"sizeY": 0.4,
+									"sizeZ": 4,
+									"offsetX": -1.5,
+									"offsetY": -2.4,
+									"offsetZ": 8,
+									"cooldown": 3.4,
+									"duration": 0.35,
+									"endX": 2,
+									"equipSlot": "hand_left"
+								}
+							]
+						}
+					}
+				},
+				{
 					"id": "club",
 					"properties": {
 						"dynamics": true,
@@ -496,8 +649,9 @@
 					"properties": {
 						"dynamics": false,
 						"lightSource": {
+							"id": "light",
 							"equipSource": "head",
-							"id": "wall_torch_light"
+							"prefab": "voxel/structures/wall_torch/entity/light.prefab"
 						}
 					}
 				}
@@ -554,6 +708,12 @@
 				},
 				{
 					"id": "attack_left_attack"
+				},
+				{
+					"id": "awake"
+				},
+				{
+					"id": "sleep"
 				}
 			],
 			"separators": [
@@ -630,7 +790,8 @@
 			"columns": [
 				{
 					"typeStr": "0",
-					"name": "id"
+					"name": "id",
+					"scope": 2
 				},
 				{
 					"typeStr": "4",
@@ -694,7 +855,7 @@
 				{
 					"typeStr": "0",
 					"name": "id",
-					"kind": null
+					"scope": 2
 				},
 				{
 					"typeStr": "4",
@@ -750,7 +911,8 @@
 			"columns": [
 				{
 					"typeStr": "0",
-					"name": "id"
+					"name": "id",
+					"scope": 2
 				},
 				{
 					"typeStr": "8",
@@ -771,7 +933,7 @@
 					"typeStr": "0",
 					"name": "id",
 					"opt": true,
-					"kind": null
+					"scope": 2
 				},
 				{
 					"typeStr": "8",
@@ -844,6 +1006,12 @@
 				{
 					"typeStr": "6:equipSlotType",
 					"name": "equipSource",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "13",
+					"name": "prefab",
 					"opt": true,
 					"kind": null
 				}
@@ -1075,7 +1243,7 @@
 				{
 					"typeStr": "0",
 					"name": "id",
-					"kind": null
+					"scope": 3
 				},
 				{
 					"typeStr": "6:entityViewState",
@@ -1100,7 +1268,7 @@
 				{
 					"typeStr": "6:equipSlotType",
 					"name": "equipSlot",
-					"kind": null
+					"opt": true
 				},
 				{
 					"typeStr": "4",
@@ -1260,10 +1428,17 @@
 					]
 				},
 				{
-					"id": "club",
+					"id": "orc",
 					"type": [
 						1,
-						"club"
+						"orc"
+					]
+				},
+				{
+					"id": "wall_torch",
+					"type": [
+						1,
+						"wall_torch"
 					],
 					"animations": [
 						{
@@ -1273,7 +1448,7 @@
 									"key": "idle"
 								}
 							],
-							"speedMult": 1
+							"speedMult": 2
 						}
 					]
 				},
@@ -1314,10 +1489,10 @@
 					]
 				},
 				{
-					"id": "wall_torch",
+					"id": "club",
 					"type": [
 						1,
-						"wall_torch"
+						"club"
 					],
 					"animations": [
 						{
@@ -1327,12 +1502,25 @@
 									"key": "idle"
 								}
 							],
-							"speedMult": 2
+							"speedMult": 1
 						}
 					]
 				}
 			],
-			"separators": [],
+			"separators": [
+				{
+					"title": "characters",
+					"id": "human"
+				},
+				{
+					"title": "structures",
+					"id": "wall_torch"
+				},
+				{
+					"title": "items",
+					"id": "orc_prison_key"
+				}
+			],
 			"props": {}
 		},
 		{
@@ -1356,6 +1544,10 @@
 					"file": "voxel/characters/human/human.enco"
 				},
 				{
+					"id": "orc",
+					"file": "voxel/characters/orc/entity/orc.enco"
+				},
+				{
 					"id": "club",
 					"file": "voxel/items/club/entity/club.enco"
 				},
@@ -1372,7 +1564,20 @@
 					"file": "voxel/structures/wall_torch/entity/wall_torch.enco"
 				}
 			],
-			"separators": [],
+			"separators": [
+				{
+					"title": "characters",
+					"id": "human"
+				},
+				{
+					"title": "items",
+					"id": "club"
+				},
+				{
+					"title": "structures",
+					"id": "orc_prison_door"
+				}
+			],
 			"props": {}
 		},
 		{

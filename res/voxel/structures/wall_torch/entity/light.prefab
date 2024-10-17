@@ -1,0 +1,28 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "light",
+			"name": "light",
+			"locked": true,
+			"color": 15116288,
+			"power": 6.17,
+			"occlusionFactor": 0,
+			"range": 100,
+			"size": 0,
+			"zNear": 0.02,
+			"shadows": {
+				"mode": "Mixed",
+				"size": 512,
+				"radius": 11,
+				"quality": 0.69,
+				"bias": 0.71,
+				"samplingMode": {
+					"kind": "ESM",
+					"power": 6.89,
+					"bias": 0.1
+				}
+			}
+		}
+	]
+}

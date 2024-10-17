@@ -6,7 +6,7 @@
 
 // 	public var rootContext : hrt.prefab.Prefab.ContextMake;
 
-// 	#if editor
+// 	#if (editor && !none_hide)
 
 // 	var updates : Array<Float->Void> = [];
 

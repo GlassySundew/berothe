@@ -1,20 +1,20 @@
 package game.domain.overworld.entity.component.model;
 
-import game.domain.overworld.entity.component.model.stat.EntityWeaponRangeStat;
 import haxe.exceptions.NotImplementedException;
 import game.data.storage.entity.body.model.EntityEquipSlotDescription;
-import game.domain.overworld.item.model.EquipItemSlot;
+import game.data.storage.entity.body.model.EntityModelDescription;
+import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.domain.overworld.entity.component.model.stat.EntityAdditiveStatBase;
 import game.domain.overworld.entity.component.model.stat.EntityAttackStat;
-import game.data.storage.entity.model.EntityEquipmentSlotType;
-import game.data.storage.entity.body.model.EntityModelDescription;
+import game.domain.overworld.entity.component.model.stat.EntityWeaponRangeStat;
+import game.domain.overworld.item.model.EquipItemSlot;
 
 class EntityStats {
 
 	public final modelDesc : EntityModelDescription;
 
-	public final limbAttacks : Map<EntityEquipmentSlotType, EntityStatHolder> = [];
-	public final weaponRanges : Map<EntityEquipmentSlotType, EntityStatHolder> = [];
+	public final limbAttacks : Array<EntityLimbedStatHolder> = [];
+	public final weaponRanges : Array<EntityLimbedStatHolder> = [];
 
 	// todo
 	// public final defence
@@ -54,53 +54,49 @@ class EntityStats {
 
 	function createAttackStat() {
 		for ( desc in entity.desc.getBodyDescription().attackDesc.attackList ) {
-			var holder = new EntityStatHolder();
-			limbAttacks[desc.equipSlotType] = holder;
+			var holder = new EntityLimbedStatHolder( desc.equipSlotType );
+			limbAttacks.push( holder );
 			var baseAttackModel = modelDesc.baseAttacks.filter(
 				item -> item.attackId == desc.id
 			)[0];
 			holder.addStat( new EntityAttackStat( baseAttackModel.amount ) );
 
-			var holder = new EntityStatHolder();
-			weaponRanges[desc.equipSlotType] = holder;
+			var holder = new EntityLimbedStatHolder( desc.equipSlotType );
+			weaponRanges.push( holder );
 			holder.addStat( new EntityAttackStat( desc.endX ) );
 		}
 	}
 
 	inline function addAttackLimbStat(
 		stat : EntityAdditiveStatBase,
-		statMap : Map<EntityEquipmentSlotType, EntityStatHolder>,
+		statHolders : Array<EntityLimbedStatHolder>,
 		?slot : EquipItemSlot
 	) {
 		if ( slot == null ) {
 			// add attack to all attack limbs
-			for ( attack in statMap ) {
+			for ( attack in statHolders ) {
 				attack.addStat( stat );
 			}
-		} else {
-			if ( statMap.exists( slot.desc.type ) ) {
-				statMap[slot.desc.type].addStat( stat );
+		} else if ( slot != null ) {
+			var limbedStat = statHolders.filter( statHolder -> statHolder.limb == slot.desc.type )[0];
+
+			if ( limbedStat != null ) {
+				limbedStat.addStat( stat );
 			} else {
-				var linkedSlot = getLinkedSlot( slot.desc );
-				if ( linkedSlot == null ) {
-					trace( "bad logic, slot " + slot.desc.type + " is not a valid attack stat key" );
-				} else {
-					statMap[linkedSlot].addStat( stat );
+				var linkedSlots = getLinkedSlots( slot.desc, statHolders );
+				for ( linkedSlot in linkedSlots ) {
+					linkedSlot.addStat(stat);
 				}
 			}
 		}
 	}
 
-	inline function getLinkedSlot(
-		slotDesc : EntityEquipSlotDescription
-	) : Null<EntityEquipmentSlotType> {
-		var result = null;
-		for ( link in slotDesc.links ) {
-			if ( limbAttacks.exists( link ) ) {
-				result = link;
-				break;
-			}
-		}
-		return result;
+	inline function getLinkedSlots(
+		slotDesc : EntityEquipSlotDescription,
+		statHolders : Array<EntityLimbedStatHolder>
+	) : Array<EntityLimbedStatHolder> {
+		var linkedStats = statHolders.filter( statHolder -> slotDesc.links.contains( statHolder.limb ) );
+
+		return linkedStats;
 	}
 }

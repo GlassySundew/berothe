@@ -46,7 +46,8 @@ class EntityStatsHudMediator {
 
 		for ( attackListItem in attackListComp.attackComponents ) {
 			var equipSlotType = attackListItem.desc.equipSlotType;
-			var limbAttack = stats.limbAttacks[equipSlotType];
+			if ( equipSlotType == null ) continue;
+			var limbAttack = stats.limbAttacks.filter( limbAttack -> limbAttack.limb == equipSlotType )[0];
 			switch equipSlotType {
 				case EQUIP_HAND_LEFT
 					| EQUIP_HAND_RIGHT:

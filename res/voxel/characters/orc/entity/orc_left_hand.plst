@@ -1,0 +1,247 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_attack",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_17_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_17_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.3,
+							"y": -0.4,
+							"z": 0.9
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_18_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_18_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.4,
+							"y": -0.4,
+							"z": 0.9
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_19_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_19_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.5,
+							"y": -0.4,
+							"z": 0.9
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_20_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_20_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.5,
+							"y": -0.4,
+							"z": 1
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_21_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_21_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.5,
+							"y": -0.4,
+							"z": 0.9
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_22_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_22_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.4,
+							"y": -0.4,
+							"z": 0.9
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_23_left_hand_attack",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_23_left_hand_attack.fbx"
+						},
+						{
+							"type": "object",
+							"name": "last_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.3,
+							"y": -0.4,
+							"z": 0.9
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_idle",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_26_left_hand_idle",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_26_left_hand_idle.fbx"
+						},
+						{
+							"type": "object",
+							"name": "mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"y": -0.4,
+							"z": 0.8
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_raised",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_28_left_hand_raised",
+							"source": "voxel/characters/orc/entity/obj/fbx/orc_28_left_hand_raised.fbx"
+						},
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 0.2,
+							"y": -0.4,
+							"z": 0.8
+						}
+					]
+				}
+			]
+		}
+	]
+}

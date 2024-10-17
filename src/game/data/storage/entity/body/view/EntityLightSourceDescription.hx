@@ -15,18 +15,22 @@ class EntityLightSourceDescription extends EntityComponentDescription {
 		if ( entry == null ) return null;
 		return new EntityLightSourceDescription(
 			entry.id.toString(),
-			EntityEquipmentSlotType.fromCdb( entry.equipSource )
+			EntityEquipmentSlotType.fromCdb( entry.equipSource ),
+			entry.prefab
 		);
 	}
 
 	public final equipSource : EntityEquipmentSlotType;
+	public final lightPrefabPath : String;
 
 	public function new(
 		id : String,
-		equipSource : EntityEquipmentSlotType
+		equipSource : EntityEquipmentSlotType,
+		lightPrefabPath : String
 	) {
 		super( id );
 		this.equipSource = equipSource;
+		this.lightPrefabPath = lightPrefabPath;
 	}
 
 	public function buildComponent() : EntityComponent {

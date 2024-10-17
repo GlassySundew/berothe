@@ -17,37 +17,8 @@
 						"entity": "wall_torch",
 						"$cdbtype": "locationEntityDF"
 					},
-					"x": -58.84,
-					"y": 0.83,
-					"z": 12.98,
-					"children": [
-						{
-							"type": "light",
-							"name": "light",
-							"x": 0.85,
-							"y": 1.16,
-							"z": 7.23,
-							"rotationZ": 87.5,
-							"color": 10912001,
-							"power": 8.47,
-							"occlusionFactor": 0.88,
-							"range": 100,
-							"size": 0.17,
-							"zNear": 3.97,
-							"length": 10,
-							"debugDisplay": false,
-							"shadows": {
-								"mode": "Dynamic",
-								"size": 256,
-								"radius": 0,
-								"quality": 1,
-								"bias": 0.1,
-								"samplingMode": {
-									"kind": "None"
-								}
-							}
-						}
-					]
+					"x": -59,
+					"z": 14
 				},
 				{
 					"type": "model",
@@ -65,6 +36,7 @@
 				{
 					"type": "object",
 					"name": "collider walls",
+					"editorOnly": true,
 					"children": [
 						{
 							"type": "customBox",
@@ -1306,9 +1278,8 @@
 				"spawnedEntity": "player",
 				"$cdbtype": "entitySpawnPointDF"
 			},
-			"x": -125.49,
-			"y": 60.65,
-			"z": 1.57
+			"x": -122.26,
+			"y": 58.14
 		},
 		{
 			"type": "reference",
@@ -1318,34 +1289,33 @@
 				"entity": "orc_prison_key",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": -60.13,
-			"y": 43.95,
-			"z": 3.5
+			"x": -60.71,
+			"y": 47.15,
+			"z": 2.5
 		},
 		{
 			"type": "light",
-			"name": "light",
+			"name": "lightos",
 			"editorOnly": true,
 			"x": -46.21,
 			"y": 90.84,
 			"z": 52.57,
-			"rotationX": -69.8,
-			"rotationY": 146.7,
-			"rotationZ": -12.1,
+			"rotationX": -46.2,
+			"rotationY": 147.8,
+			"rotationZ": -34.6,
 			"kind": "Directional",
-			"power": 2.53,
+			"power": 2.05,
 			"range": 10,
 			"zNear": 0.02,
 			"shadows": {
 				"mode": "Mixed",
-				"size": 2048,
-				"radius": 0.45,
+				"size": 1024,
+				"radius": 0,
 				"quality": 1,
-				"bias": 0.02,
+				"bias": 0.03,
 				"samplingMode": {
-					"kind": "PCF",
-					"quality": 1,
-					"scale": 0.29,
+					"kind": "ESM",
+					"power": 50,
 					"bias": 0.1
 				}
 			}

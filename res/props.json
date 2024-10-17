@@ -10,5 +10,5 @@
 		"3D|hrt.prefab.Object3D",
 		"RFX|hrt.prefab.rfx.RendererFX"
 	],
-	"debug.displayErrors" : false
+	"debug.displayErrors" : true
 }

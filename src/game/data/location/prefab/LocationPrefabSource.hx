@@ -1,16 +1,14 @@
 package game.data.location.prefab;
 
 import hrt.prefab.Object3D;
-import util.Const;
-import game.data.storage.DataStorage;
 import hrt.prefab.Prefab;
-import hrt.prefab.l3d.Instance;
 import hxd.res.Loader;
+import util.Const;
 import util.HideUtil;
-import game.domain.overworld.location.ILocationObjectsDataProvider;
 import game.data.location.objects.LocationEntityVO;
 import game.data.location.objects.LocationSpawnVO;
 import game.data.storage.entity.EntityDescription;
+import game.domain.overworld.location.ILocationObjectsDataProvider;
 
 class LocationPrefabSource implements ILocationObjectsDataProvider {
 
@@ -54,7 +52,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 
 	function parsePrefabElement( localPrefab : Prefab ) {
 		if ( localPrefab is Object3D ) {
-			if ( !prefab.editorOnly && prefab.enabled ) {
+			if ( !localPrefab.editorOnly && localPrefab.enabled ) {
 				resolveInstance( Std.downcast( localPrefab, Object3D ) );
 			}
 		} else {
@@ -83,7 +81,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 					LocationEntityVO.fromPrefabInstance( instance, entry )
 				);
 			case e:
-				trace( prefab.editorOnly, prefab.enabled );
+				trace( instance.editorOnly, instance.enabled );
 				trace( "Prefab instance: " + instance + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
 		}
 	}

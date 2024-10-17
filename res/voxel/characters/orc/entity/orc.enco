@@ -1,0 +1,34 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "object",
+			"name": "object",
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
+			"children": [
+				{
+					"type": "reference",
+					"name": "orc_torso",
+					"source": "voxel/characters/orc/entity/orc_torso.plst"
+				},
+				{
+					"type": "reference",
+					"name": "orc_left_hand",
+					"source": "voxel/characters/orc/entity/orc_left_hand.plst"
+				},
+				{
+					"type": "reference",
+					"name": "orc_right_hand",
+					"source": "voxel/characters/orc/entity/orc_right_hand.plst"
+				},
+				{
+					"type": "reference",
+					"name": "orc_eyes",
+					"source": "voxel/characters/orc/entity/orc_eyes.plst"
+				}
+			]
+		}
+	]
+}

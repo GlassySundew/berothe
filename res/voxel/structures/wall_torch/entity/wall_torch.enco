@@ -1,44 +1,26 @@
 {
 	"type": "entityComposer",
+	"name": "wall_torch",
+	"x": -59,
+	"y": -0.36,
+	"z": 14.48,
 	"children": [
 		{
 			"type": "object",
 			"name": "object",
+			"scaleX": 10,
+			"scaleY": 10,
+			"scaleZ": 10,
 			"children": [
 				{
 					"type": "reference",
 					"name": "wall_torch_flame",
-					"source": "voxel/structures/wall_torch/entity/wall_torch_flame.plst",
-					"scaleX": 10,
-					"scaleY": 10,
-					"scaleZ": 10,
-					"children": [
-						{
-							"type": "material",
-							"name": "material",
-							"props": {
-								"PBR": {
-									"mode": "PBR",
-									"blend": "None",
-									"shadows": true,
-									"culling": "Back",
-									"depthTest": "Less",
-									"colorMask": 15,
-									"enableStencil": false
-								}
-							},
-							"materialName": "any",
-							"mainPassName": "emissive"
-						}
-					]
+					"source": "voxel/structures/wall_torch/entity/wall_torch_flame.plst"
 				},
 				{
 					"type": "reference",
 					"name": "wall_torch_handle",
-					"source": "voxel/structures/wall_torch/entity/wall_torch_handle.plst",
-					"scaleX": 10,
-					"scaleY": 10,
-					"scaleZ": 10
+					"source": "voxel/structures/wall_torch/entity/wall_torch_handle.plst"
 				}
 			]
 		}

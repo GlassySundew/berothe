@@ -1,5 +1,6 @@
 {
 	"type": "playStates",
+	"name": "wall_torch_flame",
 	"children": [
 		{
 			"type": "fbfAnimationNode",
@@ -19,9 +20,9 @@
 									"head"
 								]
 							},
-							"x": 0.05,
-							"y": 0.11,
-							"z": 0.65
+							"x": 0.22,
+							"y": 0.17,
+							"z": 0.88
 						},
 						{
 							"type": "model",
@@ -44,9 +45,9 @@
 									"head"
 								]
 							},
-							"x": 0.05,
-							"y": 0.11,
-							"z": 0.65
+							"x": 0.2,
+							"y": 0.13,
+							"z": 0.86
 						},
 						{
 							"type": "model",
@@ -60,6 +61,20 @@
 					"name": "parallelPlay",
 					"children": [
 						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.15,
+							"z": 0.88
+						},
+						{
 							"type": "model",
 							"name": "wall_torch_3_flames",
 							"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_3_flames.fbx"
@@ -70,6 +85,20 @@
 					"type": "parallelPlay",
 					"name": "parallelPlay",
 					"children": [
+						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.16,
+							"z": 0.93
+						},
 						{
 							"type": "model",
 							"name": "wall_torch_4_flames",
@@ -82,6 +111,20 @@
 					"name": "parallelPlay",
 					"children": [
 						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.17,
+							"z": 0.94
+						},
+						{
 							"type": "model",
 							"name": "wall_torch_5_flames",
 							"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_5_flames.fbx"
@@ -92,6 +135,20 @@
 					"type": "parallelPlay",
 					"name": "parallelPlay",
 					"children": [
+						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.15,
+							"z": 0.9
+						},
 						{
 							"type": "model",
 							"name": "wall_torch_6_flames",
@@ -104,6 +161,20 @@
 					"name": "parallelPlay",
 					"children": [
 						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.17,
+							"z": 0.9
+						},
+						{
 							"type": "model",
 							"name": "wall_torch_7_flames",
 							"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_7_flames.fbx"
@@ -114,6 +185,20 @@
 					"type": "parallelPlay",
 					"name": "parallelPlay",
 					"children": [
+						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.2,
+							"y": 0.13,
+							"z": 0.86
+						},
 						{
 							"type": "model",
 							"name": "wall_torch_8_flames",
@@ -126,6 +211,20 @@
 					"name": "parallelPlay",
 					"children": [
 						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.19,
+							"y": 0.16,
+							"z": 0.83
+						},
+						{
 							"type": "model",
 							"name": "wall_torch_9_flames",
 							"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_9_flames.fbx"
@@ -137,6 +236,20 @@
 					"name": "parallelPlay",
 					"children": [
 						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.16,
+							"z": 0.84
+						},
+						{
 							"type": "model",
 							"name": "wall_torch_10_flames",
 							"source": "voxel/structures/wall_torch/entity/obj/fbx/wall_torch_10_flames.fbx"
@@ -147,6 +260,20 @@
 					"type": "parallelPlay",
 					"name": "parallelPlay",
 					"children": [
+						{
+							"type": "object",
+							"name": "light",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"head"
+								]
+							},
+							"x": 0.21,
+							"y": 0.18,
+							"z": 0.85
+						},
 						{
 							"type": "model",
 							"name": "wall_torch_11_flames",

@@ -1,0 +1,27 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "awake",
+			"children": [
+				{
+					"type": "model",
+					"name": "orc_1_eyes_awake",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_1_eyes_awake.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "sleep",
+			"children": [
+				{
+					"type": "model",
+					"name": "orc_0_eyes_sleep",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_0_eyes_sleep.fbx"
+				}
+			]
+		}
+	]
+}

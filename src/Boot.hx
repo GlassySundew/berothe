@@ -1,3 +1,5 @@
+import hxd.Res;
+import pass.PbrSetup;
 import tink.CoreApi.CallbackLink;
 import tink.CoreApi.Future;
 import rx.disposables.Composite;
@@ -45,6 +47,23 @@ class Boot extends hxd.App {
 	}
 
 	override function setup() {
+		
+		#if( hl && pak )
+		hxd.Res.initPak();
+		#elseif( hl )
+		hxd.res.Resource.LIVE_UPDATE = true;
+		hxd.Res.initLocal();
+		#end
+
+		#if debug
+		hxd.Res.data.watch( function () {
+			Data.load( hxd.Res.data.entry.getBytes().toString() );
+			// if ( GameServer.inst != null ) GameServer.inst.onCdbReload();
+		} );
+		#end
+
+		h3d.mat.MaterialSetup.current = new PbrSetup( "PBR" );
+		
 		super.setup();
 		root3D = ObjectNode3D.fromHeaps( s3d );
 	}
@@ -77,6 +96,9 @@ class Boot extends hxd.App {
 		new Main( s2d );
 
 		onResize();
+
+		// var prefab = Res.levels.start.load().make();
+		// Boot.inst.s3d.addChild(prefab.findFirstLocal3d());
 	}
 
 	override function onResize() {

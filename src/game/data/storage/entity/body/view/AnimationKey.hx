@@ -12,6 +12,8 @@ enum abstract AnimationKey( String ) from String to String {
 	var ATTACK_LEFT_IDLE;
 	var ATTACK_LEFT_RAISED;
 	var ATTACK_LEFT_ATTACK;
+	var AWAKE;
+	var SLEEP;
 
 	public inline static function fromCdb( animation : Data.EntityViewState ) : AnimationKey {
 		var key = switch animation.id {
@@ -23,6 +25,8 @@ enum abstract AnimationKey( String ) from String to String {
 			case attack_left_idle: ATTACK_LEFT_IDLE;
 			case attack_left_raised: ATTACK_LEFT_RAISED;
 			case attack_left_attack: ATTACK_LEFT_ATTACK;
+			case awake: AWAKE;
+			case sleep: SLEEP;
 		}
 
 		Assert.notNull( key, "failed to recognize animation: " + animation );

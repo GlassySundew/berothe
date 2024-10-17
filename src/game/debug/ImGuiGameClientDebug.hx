@@ -59,7 +59,8 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		new DragDoubleNode( "zFarK", new ZFarKAccessor(), 0.1, 0.01, 9999, cameraHeader );
 		new DragDoubleNode( "fov", new FovAccessor(), 0.1, 0.000, 180, cameraHeader );
 		new ButtonNode( "untarget", GameClient.inst.cameraProc.untarget, cameraHeader );
-		new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
+		
+		// new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
 
 		var physicsHeader = new CollapsingHeaderNode( "physics", rootNode );
 		new CheckboxNode(
@@ -75,22 +76,24 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 			networkHeader
 		);
 
-		var renderHeader = new CollapsingHeaderNode( "render", rootNode );
-		new DragIntNode( "sao samples", new SAOSamplesAccessor(), 2, 101, renderHeader );
-		new DragDoubleNode( "sao bias", new SAOBiasAccessor(), 0.0005, 0, 1, renderHeader );
-		new DragDoubleNode( "sao intensity", new SAOIntensityAccessor(), 0.1, 0, 10, renderHeader );
-		new DragDoubleNode( "sao sample radius", new SAORadiusAccessor(), 0.1, -100, 100, renderHeader );
+		if ( Boot.inst.renderer != null ) {
+			var renderHeader = new CollapsingHeaderNode( "render", rootNode );
+			new DragIntNode( "sao samples", new SAOSamplesAccessor(), 2, 101, renderHeader );
+			new DragDoubleNode( "sao bias", new SAOBiasAccessor(), 0.0005, 0, 1, renderHeader );
+			new DragDoubleNode( "sao intensity", new SAOIntensityAccessor(), 0.1, 0, 10, renderHeader );
+			new DragDoubleNode( "sao sample radius", new SAORadiusAccessor(), 0.1, -100, 100, renderHeader );
 
-		new DragDoubleNode( "sao blur radius", new SAOBlurRadiusAccessor(), 0.1, 0, 10, renderHeader );
-		new DragDoubleNode( "sao blur quality", new SAOBlurQualityAccessor(), 0.1, -20, 20, renderHeader );
-		new DragDoubleNode( "sao blur linearity", new SAOBlurLinearityAccessor(), 0.1, -20, 20, renderHeader );
+			new DragDoubleNode( "sao blur radius", new SAOBlurRadiusAccessor(), 0.1, 0, 10, renderHeader );
+			new DragDoubleNode( "sao blur quality", new SAOBlurQualityAccessor(), 0.1, -20, 20, renderHeader );
+			new DragDoubleNode( "sao blur linearity", new SAOBlurLinearityAccessor(), 0.1, -20, 20, renderHeader );
 
-		new SeparatorTextNode( "Shadow", renderHeader );
+			new SeparatorTextNode( "Shadow", renderHeader );
 
-		new DragDoubleNode( "shadow power", new ShadowPowerAccessor(), 0.1, 0, 80, renderHeader );
-		new DragIntNode( "shadow size", new ShadowSizeAccessor(), 1, 6, 13, renderHeader );
-		new DragDoubleNode( "shadow blur quality", new ShadowBlurQualityAccessor(), 0.1, 0, 2, renderHeader );
-		new DragDoubleNode( "shadow blur radius", new ShadowBlurRadiusAccessor(), 0.1, 0, 10, renderHeader );
+			new DragDoubleNode( "shadow power", new ShadowPowerAccessor(), 0.1, 0, 80, renderHeader );
+			new DragIntNode( "shadow size", new ShadowSizeAccessor(), 1, 6, 13, renderHeader );
+			new DragDoubleNode( "shadow blur quality", new ShadowBlurQualityAccessor(), 0.1, 0, 2, renderHeader );
+			new DragDoubleNode( "shadow blur radius", new ShadowBlurRadiusAccessor(), 0.1, 0, 10, renderHeader );
+		}
 	}
 
 	override function update() {

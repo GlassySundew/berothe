@@ -1,0 +1,116 @@
+{
+	"materials": {
+		"PBR": {
+			"palette.037": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.040": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.041": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.042": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.043": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.044": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.039": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.038": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.047": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.046": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"palette.045": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			}
+		}
+	}
+}
