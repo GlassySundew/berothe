@@ -102,14 +102,11 @@
 				},
 				{
 					"id": "player",
-					"control": [
-						1
-					],
 					"preset": "human"
 				},
 				{
 					"id": "orc",
-					"preset": "block"
+					"preset": "orc"
 				},
 				{
 					"id": "club",
@@ -190,8 +187,8 @@
 				},
 				{
 					"id": "orc",
-					"properties": "block",
-					"view": "none"
+					"properties": "orc",
+					"view": "orc"
 				},
 				{
 					"id": "club",
@@ -1432,6 +1429,98 @@
 					"type": [
 						1,
 						"orc"
+					],
+					"animations": [
+						{
+							"animations": [
+								{
+									"key": "idle"
+								}
+							],
+							"key": "idle",
+							"speedMult": 1
+						},
+						{
+							"animations": [
+								{
+									"key": "walk"
+								}
+							],
+							"key": "walk",
+							"speedMult": 1
+						},
+						{
+							"animations": [
+								{
+									"key": "right_hand_idle"
+								}
+							],
+							"key": "attack_right_idle",
+							"speedMult": 1
+						},
+						{
+							"key": "attack_right_raised",
+							"animations": [
+								{
+									"key": "right_hand_raised"
+								}
+							],
+							"speedMult": 1
+						},
+						{
+							"animations": [
+								{
+									"key": "right_hand_attack"
+								}
+							],
+							"key": "attack_right_attack",
+							"speedMult": 1
+						},
+						{
+							"animations": [
+								{
+									"key": "left_hand_idle"
+								}
+							],
+							"key": "attack_left_idle",
+							"speedMult": 1
+						},
+						{
+							"key": "attack_left_raised",
+							"animations": [
+								{
+									"key": "left_hand_raised"
+								}
+							],
+							"speedMult": 1
+						},
+						{
+							"animations": [
+								{
+									"key": "left_hand_attack"
+								}
+							],
+							"key": "attack_left_attack",
+							"speedMult": 1
+						},
+						{
+							"key": "awake",
+							"speedMult": 1,
+							"animations": [
+								{
+									"key": "awake"
+								}
+							]
+						},
+						{
+							"key": "sleep",
+							"speedMult": 1,
+							"animations": [
+								{
+									"key": "sleep"
+								}
+							]
+						}
 					]
 				},
 				{
@@ -2094,6 +2183,22 @@
 					]
 				}
 			}
+		},
+		{
+			"name": "npcBehavior",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				}
+			],
+			"lines": [
+				{
+					"id": "sleepyPointGuard"
+				}
+			],
+			"separators": [],
+			"props": {}
 		},
 		{
 			"name": "plstSpecialObjDF",

@@ -1,7 +1,7 @@
 {
 	"materials": {
 		"PBR": {
-			"palette.037": {
+			"flames": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -11,7 +11,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.040": {
+			"flames.001": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -21,7 +21,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.041": {
+			"flames.002": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -31,7 +31,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.042": {
+			"flames.003": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -41,7 +41,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.043": {
+			"flames.004": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -51,7 +51,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.044": {
+			"flames.005": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -61,7 +61,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.039": {
+			"flames.006": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -71,7 +71,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.038": {
+			"flames.007": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -81,7 +81,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.047": {
+			"flames.008": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -91,7 +91,7 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.046": {
+			"flames.009": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,
@@ -101,7 +101,17 @@
 				"enableStencil": false,
 				"emissive": 10
 			},
-			"palette.045": {
+			"flames.010": {
+				"mode": "PBR",
+				"blend": "None",
+				"shadows": false,
+				"culling": "Back",
+				"depthTest": "Less",
+				"colorMask": 15,
+				"enableStencil": false,
+				"emissive": 10
+			},
+			"flames.011": {
 				"mode": "PBR",
 				"blend": "None",
 				"shadows": false,

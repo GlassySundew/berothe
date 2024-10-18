@@ -1,11 +1,14 @@
 package game.data.storage.entity.body.view;
 
+import util.Assert;
+
 class EntityViewDescriptionAbstractFactory {
 
 	public static function fromCdb( entry : Data.EntityView ) : EntityViewDescription {
 		var description : IEntityViewProvider = //
 			switch entry.type {
 				case EntityComposer( file ):
+					Assert.notNull( entry.animations, "entity view " + entry.id + " is lacking of animations" );
 					new EntityComposerViewProvider( file.file, entry.animations );
 				case Graybox:
 					new StaticObjectGrayboxViewProvider();

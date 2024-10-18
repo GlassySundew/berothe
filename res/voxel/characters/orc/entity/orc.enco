@@ -4,10 +4,12 @@
 		{
 			"type": "object",
 			"name": "object",
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
 			"children": [
+				{
+					"type": "model",
+					"name": "orc_0_body",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_0_body.fbx"
+				},
 				{
 					"type": "reference",
 					"name": "orc_torso",

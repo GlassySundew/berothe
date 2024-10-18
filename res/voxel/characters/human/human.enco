@@ -6,9 +6,6 @@
 			"name": "group",
 			"x": -0.5,
 			"y": -0.5,
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
 			"children": [
 				{
 					"type": "reference",

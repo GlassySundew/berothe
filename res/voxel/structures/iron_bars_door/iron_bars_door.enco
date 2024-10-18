@@ -7,9 +7,6 @@
 			"x": -0.5,
 			"y": -9,
 			"z": -0.5,
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
 			"children": [
 				{
 					"type": "reference",

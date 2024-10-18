@@ -8,9 +8,6 @@
 		{
 			"type": "object",
 			"name": "object",
-			"scaleX": 10,
-			"scaleY": 10,
-			"scaleZ": 10,
 			"children": [
 				{
 					"type": "reference",

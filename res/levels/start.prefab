@@ -28,10 +28,7 @@
 					"props": {
 						"entity": "model",
 						"$cdbtype": "locationEntityDF"
-					},
-					"scaleX": 10,
-					"scaleY": 10,
-					"scaleZ": 10
+					}
 				},
 				{
 					"type": "object",
@@ -1319,6 +1316,17 @@
 					"bias": 0.1
 				}
 			}
+		},
+		{
+			"type": "reference",
+			"name": "orc",
+			"source": "voxel/characters/orc/entity/orc.enco",
+			"props": {
+				"entity": "orc",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -61.49,
+			"y": 22.32
 		}
 	]
 }

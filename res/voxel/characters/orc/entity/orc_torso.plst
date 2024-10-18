@@ -7,8 +7,8 @@
 			"children": [
 				{
 					"type": "model",
-					"name": "orc_24_torso_stand",
-					"source": "voxel/characters/orc/entity/obj/fbx/orc_24_torso_stand.fbx"
+					"name": "orc_25_torso_stand",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_25_torso_stand.fbx"
 				}
 			]
 		},
@@ -16,11 +16,6 @@
 			"type": "fbfAnimationNode",
 			"name": "walk",
 			"children": [
-				{
-					"type": "model",
-					"name": "orc_2_torso_walk",
-					"source": "voxel/characters/orc/entity/obj/fbx/orc_2_torso_walk.fbx"
-				},
 				{
 					"type": "model",
 					"name": "orc_3_torso_walk",
@@ -55,6 +50,11 @@
 					"type": "model",
 					"name": "orc_9_torso_walk",
 					"source": "voxel/characters/orc/entity/obj/fbx/orc_9_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "orc_10_torso_walk",
+					"source": "voxel/characters/orc/entity/obj/fbx/orc_10_torso_walk.fbx"
 				}
 			]
 		}

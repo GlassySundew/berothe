@@ -24,9 +24,16 @@ for (dirpath, dirnames, filenames) in walk:
 				bpy.ops.import_scene.obj(filepath=file) 
 				resultFilePath = file.replace(".obj", ".fbx")
 
+			# фикс того что блендер добавляет инкремент ко всем конфликтующим по имени материалам 
+			# (даже после того как все объекты удалили!)
+			for o in bpy.data.objects:
+				for ms in o.material_slots:
+					ms.material.name = o.name
+
 			if not os.path.isdir("fbx"):
 				os.mkdir("fbx")
-			bpy.ops.export_scene.fbx(filepath="fbx/" + resultFilePath.replace("-", "_") )
+			bpy.ops.export_scene.fbx(filepath="fbx/" + resultFilePath.replace("-", "_"), global_scale=10 )
+			bpy.ops.object.select_all(action="SELECT")
 			bpy.ops.collection.objects_remove_all()
 			os.chdir(absPath)
 
