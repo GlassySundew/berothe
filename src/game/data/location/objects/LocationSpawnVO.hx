@@ -53,6 +53,6 @@ class LocationSpawnVO extends LocationObjectVO {
 			z,
 			name
 		);
-		spawnedEntityDesc = DataStorage.inst.entityStorage.getDescriptionById( spawnedEntityId.toString() );
+		spawnedEntityDesc = DataStorage.inst.entityStorage.getById( spawnedEntityId.toString() );
 	}
 }

@@ -22,7 +22,7 @@ abstract class DescriptionStorageBase<T : DescriptionBase, CdbType> {
 		return items[untyped cdb.id.toString()];
 	}
 
-	public function getDescriptionById( id : String ) : T {
+	public function getById( id : String ) : T {
 		return items[id];
 	}
 

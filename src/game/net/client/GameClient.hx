@@ -77,7 +77,7 @@ class GameClient extends Process {
 
 	public function onLocationProvided( locationRepl : LocationReplicator ) {
 		currentLocationSelf.val = core.getOrCreateLocationByDesc(
-			DataStorage.inst.locationStorage.getDescriptionById(
+			DataStorage.inst.locationStorage.getById(
 				locationRepl.locationDescriptionId
 			)
 		);

@@ -33,7 +33,7 @@ class EntityInteractableComponent extends EntityComponent {
 
 		interactionBoolList.addLambda( checkDistance );
 		if ( desc.itemRequired != null ) {
-			var itemDesc = DataStorage.inst.itemStorage.getDescriptionById( desc.itemRequired.itemDescId );
+			var itemDesc = DataStorage.inst.itemStorage.getById( desc.itemRequired.itemDescId );
 			interactionReq.addItem( itemDesc );
 		}
 	}
@@ -55,7 +55,7 @@ class EntityInteractableComponent extends EntityComponent {
 
 		if ( desc.itemRequired == null ) return;
 		if ( desc.itemRequired.breakChance > Math.random() ) {
-			var itemDesc = DataStorage.inst.itemStorage.getDescriptionById( desc.itemRequired.itemDescId );
+			var itemDesc = DataStorage.inst.itemStorage.getById( desc.itemRequired.itemDescId );
 			modelComp.inventory.removeItem( itemDesc, 1 );
 		}
 	}

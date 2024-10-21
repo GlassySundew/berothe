@@ -53,6 +53,8 @@ class EntityComponentsReplicator extends NetNode {
 	}
 
 	function onComponentAdded( component : EntityComponent ) {
+		if ( !component.description.replicable ) return;
+
 		var replicator = component.description.buildCompReplicator( this );
 		replicator?.followComponentServer( component, entityRepl );
 		if ( replicator != null ) components[replicator.classType] = replicator;

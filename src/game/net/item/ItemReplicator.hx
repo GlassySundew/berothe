@@ -33,7 +33,7 @@ class ItemReplicator extends NetNode {
 	override function alive() {
 		super.alive();
 
-		var desc = DataStorage.inst.itemStorage.getDescriptionById( itemDescriptionId );
+		var desc = DataStorage.inst.itemStorage.getById( itemDescriptionId );
 		var itemLocal = new Item( desc, id );
 
 		item.resolve( itemLocal );

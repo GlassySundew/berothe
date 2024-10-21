@@ -1,5 +1,6 @@
 package game.data.storage;
 
+import game.data.storage.faction.FactionDescriptionStorage;
 import game.data.storage.item.ItemDescription;
 import game.data.storage.entity.EntityDescriptionStorage;
 import game.data.storage.item.ItemDescriptionStorage;
@@ -13,6 +14,7 @@ class DataStorage {
 	public final locationStorage : LocationDescriptionStorage = new LocationDescriptionStorage();
 	public final entityPresetStorage : EntityPresetDescriptionStorage = new EntityPresetDescriptionStorage();
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
+	public final factionStorage : FactionDescriptionStorage = new FactionDescriptionStorage();
 	public final itemStorage : ItemDescriptionStorage = new ItemDescriptionStorage();
 	public final rule : RuleStorage;
 
@@ -25,5 +27,6 @@ class DataStorage {
 		entityPresetStorage.init( Data.entityPreset );
 		entityStorage.init( Data.entity );
 		itemStorage.init( Data.item );
+		factionStorage.init( Data.faction );
 	}
 }

@@ -18,7 +18,16 @@
 						"$cdbtype": "locationEntityDF"
 					},
 					"x": -59,
-					"z": 14
+					"z": 14,
+					"children": [
+						{
+							"type": "reference",
+							"name": "light",
+							"source": "voxel/structures/wall_torch/entity/light.prefab",
+							"z": 9.96,
+							"editMode": true
+						}
+					]
 				},
 				{
 					"type": "model",

@@ -14,12 +14,12 @@
 			"shadows": {
 				"mode": "Mixed",
 				"size": 512,
-				"radius": 11,
-				"quality": 0.69,
-				"bias": 0.71,
+				"radius": 16.09,
+				"quality": 0.67,
+				"bias": 0.76,
 				"samplingMode": {
 					"kind": "ESM",
-					"power": 6.89,
+					"power": 13.86,
 					"bias": 0.1
 				}
 			}

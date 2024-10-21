@@ -61,7 +61,7 @@ class LocationEntityVO extends LocationObjectVO {
 		);
 
 		this.prefab = prefab;
-		entityDesc = DataStorage.inst.entityStorage.getDescriptionById( entityCdb.toString() );
+		entityDesc = DataStorage.inst.entityStorage.getById( entityCdb.toString() );
 
 		Assert.notNull( entityDesc, "entity block description: " + entityCdb + " is null" );
 	}

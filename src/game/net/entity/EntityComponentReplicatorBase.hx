@@ -1,12 +1,8 @@
 package game.net.entity;
 
-import game.client.en.comp.view.EntityViewComponent;
 import future.Future;
-import net.NSMutableProperty;
 import net.NetNode;
 import game.domain.overworld.entity.EntityComponent;
-import game.domain.overworld.entity.OverworldEntity;
-import game.data.storage.DataStorage;
 
 /**
 	когда базовый класс `EntityComponentReplicator` реплицируется на клиент, 

@@ -96,7 +96,8 @@
 				{
 					"id": "rogue",
 					"control": [
-						0
+						0,
+						"sleepyPointGuard"
 					],
 					"preset": "human"
 				},
@@ -366,7 +367,8 @@
 									"attack": "human_hand_attack_left",
 									"amount": 1
 								}
-							]
+							],
+							"faction": "humans"
 						},
 						"attack": {
 							"id": "human_attack",
@@ -510,7 +512,8 @@
 									"attack": "human_hand_attack_left",
 									"amount": 1
 								}
-							]
+							],
+							"faction": "orcs"
 						},
 						"attack": {
 							"id": "attack",
@@ -953,6 +956,11 @@
 					"name": "baseAttack",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "6:faction",
+					"name": "faction",
+					"opt": true
 				}
 			]
 		},
@@ -2131,6 +2139,64 @@
 			}
 		},
 		{
+			"name": "faction",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "8",
+					"name": "hostileTo",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "orcs",
+					"hostileTo": [
+						{
+							"faction": "humans"
+						}
+					]
+				},
+				{
+					"id": "humans",
+					"hostileTo": [
+						{
+							"faction": "orcs"
+						}
+					]
+				},
+				{
+					"id": "bats",
+					"hostileTo": []
+				},
+				{
+					"id": "undeads",
+					"hostileTo": []
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "faction@hostileTo",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:faction",
+					"name": "faction"
+				}
+			]
+		},
+		{
 			"name": "locationContainerType",
 			"columns": [
 				{
@@ -2363,11 +2429,12 @@
 			"cases": [
 				{
 					"name": "AI",
-					"args": []
-				},
-				{
-					"name": "PlayerControl",
-					"args": []
+					"args": [
+						{
+							"name": "type",
+							"typeStr": "6:npcBehavior"
+						}
+					]
 				}
 			]
 		},

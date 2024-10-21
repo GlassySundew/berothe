@@ -80,7 +80,7 @@ class EntityReplicator extends NetNode {
 	override function alive() {
 		super.alive();
 
-		var desc = DataStorage.inst.entityStorage.getDescriptionById( entityDescriptionId );
+		var desc = DataStorage.inst.entityStorage.getById( entityDescriptionId );
 		var entityLocal = new OverworldEntity( desc, id );
 
 		entity.resolve( entityLocal );

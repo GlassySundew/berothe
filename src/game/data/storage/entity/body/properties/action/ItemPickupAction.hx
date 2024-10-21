@@ -17,7 +17,7 @@ class ItemPickupAction extends BodyActionBase {
 		self : OverworldEntity,
 		user : OverworldEntity
 	) {
-		var itemDesc = DataStorage.inst.itemStorage.getDescriptionById( itemDescId );
+		var itemDesc = DataStorage.inst.itemStorage.getById( itemDescId );
 		var model = user.components.get( EntityModelComponent );
 		var hasSpace = model.hasSpaceForItemDesc( itemDesc, 1 );
 		if ( !hasSpace ) return;
