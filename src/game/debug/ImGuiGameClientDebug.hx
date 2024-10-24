@@ -60,7 +60,7 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		new DragDoubleNode( "fov", new FovAccessor(), 0.1, 0.000, 180, cameraHeader );
 		new ButtonNode( "untarget", GameClient.inst.cameraProc.untarget, cameraHeader );
 		
-		// new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
+		new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
 
 		var physicsHeader = new CollapsingHeaderNode( "physics", rootNode );
 		new CheckboxNode(

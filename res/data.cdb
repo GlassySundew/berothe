@@ -73,11 +73,6 @@
 				{
 					"typeStr": "6:entityPreset",
 					"name": "preset"
-				},
-				{
-					"typeStr": "9:EntityControlType",
-					"name": "control",
-					"opt": true
 				}
 			],
 			"lines": [
@@ -95,10 +90,6 @@
 				},
 				{
 					"id": "rogue",
-					"control": [
-						0,
-						"sleepyPointGuard"
-					],
 					"preset": "human"
 				},
 				{
@@ -184,7 +175,7 @@
 				{
 					"id": "human",
 					"view": "human",
-					"properties": "human"
+					"properties": "player"
 				},
 				{
 					"id": "orc",
@@ -263,7 +254,7 @@
 					}
 				},
 				{
-					"id": "human",
+					"id": "player",
 					"properties": {
 						"rigidBodyTorso": {
 							"sizeX": 3,
@@ -368,7 +359,8 @@
 									"amount": 1
 								}
 							],
-							"faction": "humans"
+							"faction": "humans",
+							"hideNameByDefault": false
 						},
 						"attack": {
 							"id": "human_attack",
@@ -513,7 +505,8 @@
 									"amount": 1
 								}
 							],
-							"faction": "orcs"
+							"faction": "orcs",
+							"displayName": "Orc"
 						},
 						"attack": {
 							"id": "attack",
@@ -547,6 +540,14 @@
 									"duration": 0.35,
 									"endX": 2,
 									"equipSlot": "hand_left"
+								}
+							]
+						},
+						"behaviour": {
+							"type": "sleepyPointGuard",
+							"params": [
+								{
+									"param": "sleepy_orc_wake_trigger"
 								}
 							]
 						}
@@ -663,7 +664,7 @@
 				},
 				{
 					"title": "characters",
-					"id": "human"
+					"id": "player"
 				},
 				{
 					"title": "items",
@@ -774,6 +775,12 @@
 				{
 					"typeStr": "17",
 					"name": "lightSource",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "behaviour",
 					"opt": true,
 					"kind": null
 				}
@@ -961,6 +968,17 @@
 					"typeStr": "6:faction",
 					"name": "faction",
 					"opt": true
+				},
+				{
+					"typeStr": "1",
+					"name": "displayName",
+					"opt": true
+				},
+				{
+					"typeStr": "2",
+					"name": "hideNameByDefault",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -1017,6 +1035,45 @@
 				{
 					"typeStr": "13",
 					"name": "prefab",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@behaviour",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:npcBehaviour",
+					"name": "type",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "params",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityProperty@properties@behaviour@params",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "param",
 					"opt": true,
 					"kind": null
 				}
@@ -2209,6 +2266,9 @@
 			"lines": [
 				{
 					"id": "global"
+				},
+				{
+					"id": "entityCollisionTrigger"
 				}
 			],
 			"separators": [],
@@ -2251,7 +2311,7 @@
 			}
 		},
 		{
-			"name": "npcBehavior",
+			"name": "npcBehaviour",
 			"columns": [
 				{
 					"typeStr": "0",
@@ -2305,6 +2365,12 @@
 				{
 					"typeStr": "6:locationContainerType",
 					"name": "type",
+					"kind": null
+				},
+				{
+					"typeStr": "1",
+					"name": "extra",
+					"opt": true,
 					"kind": null
 				}
 			],
@@ -2432,7 +2498,7 @@
 					"args": [
 						{
 							"name": "type",
-							"typeStr": "6:npcBehavior"
+							"typeStr": "6:npcBehaviour"
 						}
 					]
 				}

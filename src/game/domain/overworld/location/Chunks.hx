@@ -8,7 +8,7 @@ class Chunks {
 
 	final chunkSize : Int;
 	final location : Location;
-	final chunks : Map<Int, Map<Int, Map<Int, Chunk>>> = [];
+	public final chunks : Map<Int, Map<Int, Map<Int, Chunk>>> = [];
 
 	public function new( location : Location, chunkSize : Int ) {
 		this.chunkSize = chunkSize;

@@ -11,9 +11,13 @@ import game.domain.overworld.location.physics.IRigidBody;
 
 class RigidBodyAbstractFactory {
 
-	public static function create( shape : IRigidBodyShape, type : RigidBodyType ) : IRigidBody {
+	public static function create(
+		shape : IRigidBodyShape,
+		type : RigidBodyType,
+		?props : Any
+	) : IRigidBody {
 		// ask global resources for engine presence
-		
-		return OimoRigidBody.create( shape, type );
+
+		return OimoRigidBody.create( shape, type, props );
 	}
 }

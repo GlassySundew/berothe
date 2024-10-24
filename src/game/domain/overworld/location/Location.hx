@@ -20,6 +20,8 @@ class Location {
 
 	public final chunks : Chunks;
 
+	public final triggers : Map<String, EntityTrigger> = [];
+
 	/** not replicated but created via `location id` -> `geting through DataStorage on client` **/
 	public final globalObjects : Array<OverworldEntity> = [];
 	public final objectFactory : OverworldStaticObjectsFactory;
@@ -89,6 +91,7 @@ class Location {
 		// TODO async
 		loadData();
 
+		createAndAttachTriggers();
 		createAndAttachStaticObjects();
 		createAndAttachPresentEntities();
 	}
@@ -97,6 +100,7 @@ class Location {
 		// TODO async
 		loadData();
 
+		#if debug createAndAttachTriggers(); #end
 		createAndAttachStaticObjects( false );
 	}
 
@@ -131,6 +135,13 @@ class Location {
 				entityVO.rotationZ
 			);
 			addEntity( entity );
+		}
+	}
+
+	function createAndAttachTriggers() {
+		for ( triggerVO in locationDataProvider.getTriggers() ) {
+			Assert.notExistsInMap( triggerVO.triggerId, triggers );
+			triggers[triggerVO.triggerId] = new EntityTrigger( triggerVO, this );
 		}
 	}
 

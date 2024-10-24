@@ -1,5 +1,7 @@
 package game.data.storage.entity.body;
 
+import game.domain.overworld.entity.component.ai.EntityAIComponent;
+import game.data.storage.entity.body.properties.EntityAIDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.model.EntityModelDescription;
@@ -29,6 +31,7 @@ class EntityPresetDescription extends DescriptionBase {
 	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
+	public var ai( default, null ) : Null<EntityAIDescription>;
 
 	// structure
 	public var interactabeDesc( default, null ) : Null<InteractableDescription>;
@@ -65,6 +68,7 @@ class EntityPresetDescription extends DescriptionBase {
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
+			ai = EntityAIDescription.fromCdb( entry.properties.properties.behaviour ),
 
 			// structure
 			interactabeDesc = InteractableDescription.fromCdb( entry.properties.properties.interactable ),

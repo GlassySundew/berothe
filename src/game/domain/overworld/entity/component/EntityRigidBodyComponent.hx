@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import game.physics.oimo.EntityRigidBodyProps;
 import oimo.common.Vec3;
 import game.physics.oimo.ContactCallbackWrapper;
 import game.physics.oimo.RayCastCallback;
@@ -78,7 +79,8 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		var rigidBodyLocal = RigidBodyAbstractFactory.create(
 			torsoShape,
-			rigidBodyDesc.isStatic ? STATIC : DYNAMIC
+			rigidBodyDesc.isStatic ? STATIC : DYNAMIC,
+			new EntityRigidBodyProps( entity )
 		);
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBodyLocal.setLinearDamping( { x : 9999, y : 9999, z : 9999 } );

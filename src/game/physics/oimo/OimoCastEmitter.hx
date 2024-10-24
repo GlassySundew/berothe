@@ -8,7 +8,7 @@ import game.domain.overworld.location.physics.IGeometry;
 import game.domain.overworld.location.physics.IPhysicsEngine;
 
 /**
-	manages rb that is `CASTED`
+	manages rb that is `TRIGGER`
 **/
 class OimoCastEmitter {
 

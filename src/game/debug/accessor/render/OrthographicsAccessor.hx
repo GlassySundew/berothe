@@ -1,5 +1,8 @@
 package game.debug.accessor.render;
 
+import util.threeD.Camera.CamController;
+import util.threeD.Camera.OrthoController;
+import game.net.client.GameClient;
 import h3d.col.Bounds;
 import util.Settings;
 import core.MutableProperty.MutablePropertyBase;
@@ -12,10 +15,12 @@ class OrthographicsAccessor extends MutablePropertyBase<Bool> {
 
 	override function set_val( val : Bool ) : Bool {
 		Settings.inst.params.orthographics.val = val;
-		if ( val && Boot.inst.s3d.camera.orthoBounds == null ) {
-			Boot.inst.s3d.camera.orthoBounds = val ? new Bounds() : null;
+		if ( val && ( GameClient.inst.cameraProc.camera is CamController ) ) {
+			GameClient.inst.cameraProc.setOrthoCam();
 		}
-		if ( !val ) Boot.inst.s3d.camera.orthoBounds = null;
+		if ( !val && ( GameClient.inst.cameraProc.camera is OrthoController ) ) {
+			GameClient.inst.cameraProc.setPerspCam();
+		}
 		return super.set_val( val );
 	}
 

@@ -17,7 +17,12 @@ class OimoRigidBody implements IRigidBody {
 
 	public final transform : ITransform;
 
-	public static function create( shape : IRigidBodyShape, type : RigidBodyType ) : IRigidBody {
+	public static function create(
+		shape : IRigidBodyShape,
+		type : RigidBodyType,
+		?props : Any
+	) : IRigidBody {
+		
 		Assert.isOfType( shape, OimoRigidBodyShape );
 		var unwrapShape = Std.downcast( shape, OimoRigidBodyShape ).shape;
 
@@ -26,11 +31,12 @@ class OimoRigidBody implements IRigidBody {
 			case DYNAMIC: oimo.dynamics.rigidbody.RigidBodyType.DYNAMIC;
 			case STATIC: oimo.dynamics.rigidbody.RigidBodyType.STATIC;
 			case KINEMATIC: oimo.dynamics.rigidbody.RigidBodyType.KINEMATIC;
-			case CASTED: oimo.dynamics.rigidbody.RigidBodyType.CASTED;
+			case TRIGGER: oimo.dynamics.rigidbody.RigidBodyType.TRIGGER;
 		}
 
 		var rigidBody = new RigidBody( config );
 		rigidBody.addShape( unwrapShape );
+		rigidBody.userData = props;
 
 		return new OimoRigidBody( rigidBody );
 	}

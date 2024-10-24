@@ -1,21 +1,29 @@
 package game.client.en.comp.view;
 
-import graphics.ObjectNode3D;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import dn.Cooldown;
 import future.Future;
+import graphics.ObjectNode3D;
+import h3d.scene.Object;
 import game.client.en.comp.view.IEntityView;
+import game.client.en.comp.view.ui.EntitySleepSpeech;
+import game.client.en.comp.view.ui.EntityStatusBarContainer;
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
 import game.domain.overworld.entity.EntityComponent;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 import game.domain.overworld.location.Location;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
 class EntityViewComponent extends EntityComponent {
 
 	public final view : Future<IEntityView> = new Future();
-
+	public final cooldown : Cooldown = new Cooldown( hxd.Timer.wantedFPS );
+	final statusBar3dPoint = new Object();
 	final viewDescription : EntityViewDescription;
+
+	public var statusBar( default, null ) : EntityStatusBarContainer;
 
 	var viewExtraConfig : Array<EntityViewExtraInitSetting> = [];
 
@@ -27,6 +35,7 @@ class EntityViewComponent extends EntityComponent {
 	override function dispose() {
 		super.dispose();
 		view.result?.dispose();
+		statusBar?.root.remove();
 	}
 
 	public function provideExtraViewConfig( config : EntityViewExtraInitSetting ) {
@@ -50,6 +59,7 @@ class EntityViewComponent extends EntityComponent {
 		super.attachToEntity( entity );
 
 		entity.location.onAppear( onAttachedToLocation );
+		entity.onFrame.add( ( dt, tmod ) -> cooldown.update( tmod ) );
 	}
 
 	function createView() : IEntityView {
@@ -71,10 +81,11 @@ class EntityViewComponent extends EntityComponent {
 		if ( view == null ) return;
 		var viewGraphics = createView();
 		if ( viewGraphics == null ) return;
-		
+
 		view.resolve( viewGraphics );
 		var node = view.result.getGraphics();
 
+		viewGraphics.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
 		Boot.inst.root3D.addChild( node );
 
 		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
@@ -96,6 +107,31 @@ class EntityViewComponent extends EntityComponent {
 				} );
 			}
 		);
+
+		updateStatusBar3DPointPosition();
+
+		entity.components.onAppear(
+			EntityModelComponent,
+			( cl, modelComp ) -> {
+				createStatusBar( modelComp );
+				EntitySleepSpeech.subscribe( this );
+			}
+		);
+	}
+
+	function createStatusBar( modelComp : EntityModelComponent ) {
+		statusBar = new EntityStatusBarContainer( statusBar3dPoint, this );
+		Main.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
+		modelComp.displayName.addOnValueImmediately(
+			( oldVal, newVal ) -> {
+				statusBar.setDisplayNameVisibility( newVal != null && newVal != "" );
+				statusBar.setDisplayName( newVal );
+			}
+		);
+	}
+
+	function updateStatusBar3DPointPosition() {
+		statusBar3dPoint.z = view.result.getGraphics().heapsObject.getBounds().zMax + 5;
 	}
 	#end
 }

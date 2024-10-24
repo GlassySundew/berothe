@@ -1,5 +1,7 @@
 package game.net.entity.component;
 
+import net.NSMutableProperty;
+import core.MutableProperty;
 import game.data.storage.DataStorage;
 import net.NSArray;
 import game.net.entity.component.model.EntityStatsReplicator;
@@ -13,6 +15,7 @@ import game.domain.overworld.entity.EntityComponent;
 class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
 	@:s final factionsRepl : NSArray<String> = new NSArray();
+	@:s final isSleeping : NSMutableProperty<Bool> = new NSMutableProperty<Bool>();
 	@:s var statsRepl : EntityStatsReplicator;
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
@@ -26,6 +29,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
 		modelComp.factions.subscribe( ( i, val ) -> factionsRepl[i] = val.id );
+		modelComp.isSleeping.subscribeProp( isSleeping );
 	}
 
 	#if client
@@ -39,9 +43,9 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 			factionsRepl.subscribleWithMapping(
 				( i, faction ) -> {
 					modelComp.factions.set( i, DataStorage.inst.factionStorage.getById( faction ) );
-					trace(faction);
 				}
 			);
+			isSleeping.subscribeProp( modelComp.isSleeping );
 		} );
 	}
 	#end

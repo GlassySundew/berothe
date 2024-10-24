@@ -66,16 +66,6 @@ class Console extends h2d.Console {
 			GameClient.inst.cameraProc.untarget();
 		} );
 
-		this.addCommand( "toggleOrtho", [], function ( ?k : String ) {
-			var s3dCam = Boot.inst.s3d.camera;
-			if ( s3dCam.orthoBounds != null ) {
-				s3dCam.orthoBounds = null;
-			} else {
-				s3dCam.orthoBounds = new Bounds();
-				GameClient.inst.cameraProc.refreshOrtho();
-			}
-		} );
-
 		this.addCommand( "loadlvl", [{ name : "k", t : AString }], function ( name : String, ?manual : Bool = true ) {
 			// GameClient.inst.startLevel(name + ".tmx", { manual : true });
 		} );

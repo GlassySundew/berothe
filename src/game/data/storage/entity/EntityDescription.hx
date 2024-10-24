@@ -6,7 +6,6 @@ class EntityDescription extends DescriptionBase {
 
 	public static function fromCdb( entry : Data.Entity ) : EntityDescription {
 		return new EntityDescription(
-			// entry.control.
 			entry.presetId.toString(),
 			entry.id.toString()
 		);
@@ -14,7 +13,10 @@ class EntityDescription extends DescriptionBase {
 
 	final presetId : String;
 
-	public function new( presetId : String, id : String ) {
+	public function new(
+		presetId : String,
+		id : String
+	) {
 		super( id );
 		this.presetId = presetId;
 	}

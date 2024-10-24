@@ -1,20 +1,20 @@
 package game.client.en.comp.view;
 
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
-import util.Assert;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 import haxe.exceptions.NotImplementedException;
 import core.NodeBase;
-import plugins.bodyparts_animations.src.customObj.PlayStates;
-import game.client.en.comp.view.anim.AttackAnimationState;
-import game.domain.overworld.entity.component.combat.EntityAttackListItem;
-import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
-import game.client.en.comp.view.anim.WalkAnimationState;
-import game.domain.overworld.entity.component.EntityDynamicsComponent;
-import game.data.storage.entity.body.view.EntityAnimations;
-import game.client.en.comp.view.anim.AnimationState;
-import game.data.storage.entity.body.view.AnimationKey;
-import plugins.bodyparts_animations.src.customObj.EntityComposer;
 import graphics.ObjectNode3D;
+import plugins.bodyparts_animations.src.customObj.EntityComposer;
+import util.Assert;
+import game.client.en.comp.view.anim.AnimationState;
+import game.client.en.comp.view.anim.AttackAnimationState;
+import game.client.en.comp.view.anim.WalkAnimationState;
+import game.data.storage.entity.body.view.AnimationKey;
+import game.data.storage.entity.body.view.EntityAnimations;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
+import game.domain.overworld.entity.component.combat.EntityAttackListItem;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
 class EntityComposerView extends NodeBase<EntityComposerView> implements IEntityView {
 
@@ -162,6 +162,17 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 				}
 			}
 		);
+		viewComponent.entity.components.onAppear(
+			EntityModelComponent,
+			( cl, modelComp ) -> {
+				if ( animations.byKey.get( SLEEP ) != null ) {
+					stateListeners[SLEEP] = new AnimationState( sleepListener.bind( modelComp ) );
+				}
+				if ( animations.byKey.get( AWAKE ) != null ) {
+					stateListeners[AWAKE] = new AnimationState( awakeListener.bind( modelComp ) );
+				}
+			}
+		);
 	}
 
 	inline function walkListener() : Bool {
@@ -178,5 +189,13 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 
 	inline function attackRaisedListener( attackItem : EntityAttackListItem ) : Bool {
 		return !attackItem.isAttacking() && attackItem.isRaised.getValue();
+	}
+
+	inline function sleepListener( modelComp : EntityModelComponent ) : Bool {
+		return modelComp.isSleeping.getValue();
+	}
+
+	inline function awakeListener( modelComp : EntityModelComponent ) : Bool {
+		return !modelComp.isSleeping.getValue();
 	}
 }

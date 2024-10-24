@@ -1,5 +1,6 @@
 package game.data.location.prefab;
 
+import game.data.location.objects.LocationEntityTriggerVO;
 import hrt.prefab.Object3D;
 import hrt.prefab.Prefab;
 import hxd.res.Loader;
@@ -15,6 +16,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	var spawns : Array<LocationSpawnVO> = [];
 	var globalObjects : Array<LocationEntityVO> = [];
 	var presentEntities : Array<LocationEntityVO> = [];
+	var triggers : Array<LocationEntityTriggerVO> = [];
 
 	var file : String;
 	var prefab : Prefab;
@@ -38,12 +40,16 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 		} );
 	}
 
-	public function getGlobalObjects() {
+	public inline function getGlobalObjects() {
 		return globalObjects;
 	}
 
-	public function getPresentEntities() : Array<LocationEntityVO> {
+	public inline function getPresentEntities() : Array<LocationEntityVO> {
 		return presentEntities;
+	}
+
+	public inline function getTriggers() : Array<LocationEntityTriggerVO> {
+		return triggers;
 	}
 
 	function parse() {
@@ -74,6 +80,8 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 				switch entry.type {
 					case global:
 						globalObjects = globalObjects.concat( resolveContainer( instance ) );
+					case entityCollisionTrigger:
+						triggers.push( LocationEntityTriggerVO.fromPrefabInstance( instance, entry ) );
 				}
 			case LOCATION_ENTITY_PRESENT:
 				var entry : Data.LocationEntityDF = instance.props;

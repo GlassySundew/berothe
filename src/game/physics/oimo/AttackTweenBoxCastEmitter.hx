@@ -62,7 +62,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		shape.setCollisionMask( util.Const.G_HITBOX );
 		shape.setContactCallback( new ContactCallbackWrapper() );
 
-		rigidBody = RigidBodyAbstractFactory.create( shape, CASTED );
+		rigidBody = RigidBodyAbstractFactory.create( shape, TRIGGER );
 		rigidBody.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBody.setLinearDamping( { x : 100, y : 100, z : 100 } );
 		rigidBody.setGravityScale( 0 );

@@ -31,7 +31,6 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 
 	public function new( env ) {
 		super( env );
-		// outline.pass.setBlendMode( Alpha );
 	}
 
 	override function getPassByName( name : String ) : h3d.pass.Output {
@@ -49,11 +48,6 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 	}
 
 	override function end() {
-		switch ( currentStep ) {
-			case Overlay:
-				renderPass( defaultPass, get( "ui" ), backToFront );
-			default:
-		}
 		renderOutlines();
 		super.end();
 	}
@@ -72,6 +66,8 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 		outlineBlur.apply( ctx, outlineTex, outlineBlurTex );
 		outline.shader.texture = outlineBlurTex;
 		outline.render();
+
+		renderPass( defaultPass, get( "ui" ), backToFront );
 	}
 }
 

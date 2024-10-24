@@ -16,10 +16,10 @@
 				"size": 512,
 				"radius": 16.09,
 				"quality": 0.67,
-				"bias": 0.76,
+				"bias": 1,
 				"samplingMode": {
 					"kind": "ESM",
-					"power": 13.86,
+					"power": 14.77,
 					"bias": 0.1
 				}
 			}

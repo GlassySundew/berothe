@@ -35,6 +35,6 @@ class EntityModelView implements IEntityView {
 	}
 
 	public function addChildObject( object : ObjectNode3D ) {
-		object.addChild( object );
+		this.object.addChild( object );
 	}
 }

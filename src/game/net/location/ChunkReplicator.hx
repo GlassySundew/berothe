@@ -50,6 +50,7 @@ class ChunkReplicator extends NetNode {
 		?ctx : NetworkSerializer
 	) @:privateAccess {
 		for ( entity in entities ) {
+			if ( entity == null ) continue;
 			entity.unregister( host, ctx );
 		}
 		entities.unregister( host, ctx );
@@ -66,6 +67,7 @@ class ChunkReplicator extends NetNode {
 
 		#if client
 		entities.subscribleWithMapping( ( i, entityReplicator ) -> {
+			if ( entityReplicator == null ) return;
 			GameClient.inst.currentLocation.onAppear( ( location ) -> {
 				entityReplicator.entity.then( ( entity ) -> {
 					Assert.notNull( entity );

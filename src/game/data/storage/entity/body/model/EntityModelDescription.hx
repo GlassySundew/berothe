@@ -48,6 +48,8 @@ class EntityModelDescription extends EntityComponentDescription {
 			equipSlots,
 			baseAttacks,
 			entry.factionId.toString(),
+			entry.displayName,
+			entry.hideNameByDefault,
 			entry.id.toString(),
 		);
 	}
@@ -57,6 +59,8 @@ class EntityModelDescription extends EntityComponentDescription {
 	public final equipSlots : Array<EntityEquipSlotDescription>;
 	public final baseAttacks : Array<EntityBaseAttackItem>;
 	public final factionId : String;
+	public final displayName : String;
+	public final hideNameByDefault : Bool;
 
 	public function new(
 		baseHp : Int,
@@ -64,6 +68,8 @@ class EntityModelDescription extends EntityComponentDescription {
 		equipSlots : Array<EntityEquipSlotDescription>,
 		baseAttacks : Array<EntityBaseAttackItem>,
 		factionId : String,
+		displayName : String,
+		hideNameByDefault : Bool,
 		id : String
 	) {
 		super( id );
@@ -72,6 +78,8 @@ class EntityModelDescription extends EntityComponentDescription {
 		this.baseAttacks = baseAttacks;
 		this.baseInventorySize = baseInventorySize;
 		this.factionId = factionId;
+		this.displayName = displayName;
+		this.hideNameByDefault = hideNameByDefault;
 	}
 
 	public function buildComponent() : EntityComponent {
