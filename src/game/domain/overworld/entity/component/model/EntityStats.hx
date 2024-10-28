@@ -27,7 +27,6 @@ class EntityStats {
 
 	public function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;
-		// entity.desc.getBodyDescription().attackDesc
 		createAttackStat();
 	}
 
@@ -46,6 +45,7 @@ class EntityStats {
 				case ATTACK:
 					addAttackLimbStat( stat, limbAttacks, slot );
 				case DEFENCE: throw new NotImplementedException();
+				case SPEED: throw new NotImplementedException();
 				case WEAPON_RANGE:
 					addAttackLimbStat( stat, weaponRanges, slot );
 			}
@@ -56,10 +56,7 @@ class EntityStats {
 		for ( desc in entity.desc.getBodyDescription().attackDesc.attackList ) {
 			var holder = new EntityLimbedStatHolder( desc.equipSlotType );
 			limbAttacks.push( holder );
-			var baseAttackModel = modelDesc.baseAttacks.filter(
-				item -> item.attackId == desc.id
-			)[0];
-			holder.addStat( new EntityAttackStat( baseAttackModel.amount ) );
+			holder.addStat( new EntityAttackStat( desc.baseAttack ) );
 
 			var holder = new EntityLimbedStatHolder( desc.equipSlotType );
 			weaponRanges.push( holder );

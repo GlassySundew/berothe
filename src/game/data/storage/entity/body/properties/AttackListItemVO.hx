@@ -8,16 +8,17 @@ import game.data.storage.entity.body.view.AnimationKey;
 import game.data.storage.entity.body.view.AttackTranslationTween;
 import game.domain.overworld.entity.EntityComponent;
 
-class AttackListItem {
+class AttackListItemVO {
 
 	public static function fromCdb(
 		attack : Data.EntityProperty_properties_attack_attackList
-	) : AttackListItem {
-		return new AttackListItem(
+	) : AttackListItemVO {
+		return new AttackListItemVO(
 			attack.id.toString(),
 			AnimationKey.fromCdb( attack.key ),
 			attack.cooldown,
 			attack.duration,
+			attack.baseAttack,
 			attack.equipSlot == null ? null : EntityEquipmentSlotType.fromCdb( attack.equipSlot ),
 			attack.endX,
 			AttackTranslationTween.fromCdb( attack.tweenType ),
@@ -31,13 +32,14 @@ class AttackListItem {
 	}
 
 	public final id : String;
-
 	public final key : AnimationKey;
 	public final cooldown : Float;
 	public final duration : Float;
-	public final tweenType : AttackTranslationTween;
+	public final baseAttack : Int;
 
+	public final tweenType : AttackTranslationTween;
 	public final transition : AttackTranslationTween;
+
 	public final offsetX : Float = 0;
 	public final offsetY : Float = 0;
 	public final offsetZ : Float = 0;
@@ -52,6 +54,7 @@ class AttackListItem {
 		key : AnimationKey,
 		cooldown : Float,
 		duration : Float,
+		baseAttack : Int,
 		equipSlotType : Null<EntityEquipmentSlotType>,
 		endX : Float,
 		tweenType : AttackTranslationTween,
@@ -60,7 +63,7 @@ class AttackListItem {
 		offsetZ : Float,
 		sizeX : Float,
 		sizeY : Float,
-		sizeZ : Float,
+		sizeZ : Float
 	) {
 		this.id = id;
 
@@ -75,6 +78,7 @@ class AttackListItem {
 		this.tweenType = tweenType;
 		this.transition = tweenType;
 		this.key = key;
+		this.baseAttack = baseAttack;
 		this.cooldown = cooldown;
 		this.duration = duration;
 		this.equipSlotType = equipSlotType;

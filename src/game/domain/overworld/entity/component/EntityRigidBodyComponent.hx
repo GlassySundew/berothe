@@ -1,5 +1,7 @@
 package game.domain.overworld.entity.component;
 
+import dn.M;
+import dn.phys.Velocity;
 import game.physics.oimo.EntityRigidBodyProps;
 import oimo.common.Vec3;
 import game.physics.oimo.ContactCallbackWrapper;
@@ -16,7 +18,8 @@ import game.physics.oimo.OimoRigidBody;
 
 class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
-	public var isOwned( default, null ) : Bool = false;
+	static final rotationApplicationVelMin = 4;
+
 
 	final rigidBodyDesc : RigidBodyTorsoDescription;
 
@@ -32,8 +35,6 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 	override public function claimOwnage() {
 		entity.location.onAppear( loc -> {
 			rigidBodyFuture.then( rigidBody -> {
-				isOwned = true;
-
 				rigidBody.setGravityScale( DataStorage.inst.rule.entityGravityScale );
 				rigidBody.setLinearDamping( { x : 25, y : 25, z : 0 } );
 
@@ -69,13 +70,22 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 	}
 
 	function createRigidBody() {
-		torsoShape = ShapeAbstractFactory.box(
-			rigidBodyDesc.sizeX,
-			rigidBodyDesc.sizeY,
-			rigidBodyDesc.sizeZ
-		);
+		torsoShape = switch rigidBodyDesc.geometry {
+			case BOX:
+				ShapeAbstractFactory.box(
+					rigidBodyDesc.sizeX,
+					rigidBodyDesc.sizeY,
+					rigidBodyDesc.sizeZ
+				);
+			case CAPSULE:
+				ShapeAbstractFactory.capsule(
+					rigidBodyDesc.sizeX,
+					rigidBodyDesc.sizeZ
+				);
+		}
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
+		torsoShape.moveLocally( rigidBodyDesc.offsetX, rigidBodyDesc.offsetY, rigidBodyDesc.offsetZ );
 
 		var rigidBodyLocal = RigidBodyAbstractFactory.create(
 			torsoShape,
@@ -84,10 +94,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		);
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
 		rigidBodyLocal.setLinearDamping( { x : 9999, y : 9999, z : 9999 } );
-
 		rigidBodyLocal.setGravityScale( 0 );
-
-		torsoShape.moveLocally( rigidBodyDesc.offsetX, rigidBodyDesc.offsetY, rigidBodyDesc.offsetZ );
 
 		return rigidBodyLocal;
 	}
@@ -100,7 +107,12 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		dynamicsComponent.onMove.add(() -> {
 			rigidBody.wakeUp();
-			setRotationBasedOffVelocities();
+			if (
+				Math.abs( rigidBody.velX.val ) > rotationApplicationVelMin
+				|| Math.abs( rigidBody.velY.val ) > rotationApplicationVelMin
+			) {
+				setRotationBasedOffVelocities();
+			}
 
 			var start = torsoShape.getPosition();
 			var end = start.clone();

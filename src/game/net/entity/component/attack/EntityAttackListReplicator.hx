@@ -15,22 +15,20 @@ class EntityAttackListReplicator extends EntityComponentReplicatorBase {
 
 	@:s final isRaised : NSMutableProperty<Bool> = new NSMutableProperty<Bool>();
 
-	var isOwned : Bool = #if server true #else false #end;
+	override function followComponentServer(
+		component : EntityComponent,
+		entityRepl : EntityReplicator
+	) {
+		super.followComponentServer( component, entityRepl );
 
-	public function claimOwnage() {
-		followedComponent.then( onComponentAppeared );
-		isOwned = true;
-	}
-
-	function onComponentAppeared( comp : EntityComponent ) {
 		#if debug
-		Assert.isOfType( comp, EntityAttackListComponent );
+		Assert.isOfType( component, EntityAttackListComponent );
 		#end
 
-		var attackList = Std.downcast( comp, EntityAttackListComponent );
-		for ( attackItem in attackList.attackComponents ) {
+		var attackList = Std.downcast( component, EntityAttackListComponent );
+		for ( attackItem in attackList.attacksList ) {
 			attackItem.isRaised.subscribeProp( isRaised );
-			attackItem.onAttackPerformed.add( onPlayerAttacked.bind( attackItem.desc.id ) );
+			attackItem.onAttackPerformed.add( onEntityAttacked.bind( attackItem.desc.id ) );
 		}
 	}
 
@@ -39,16 +37,16 @@ class EntityAttackListReplicator extends EntityComponentReplicatorBase {
 
 		followedComponent.then( comp -> {
 			var attackList = Std.downcast( comp, EntityAttackListComponent );
-			for ( attackItem in attackList.attackComponents ) {
+			for ( attackItem in attackList.attacksList ) {
 				isRaised.subscribeProp( attackItem.isRaised );
-				attackItem.onAttackPerformed.add( onPlayerAttacked.bind( attackItem.desc.id ) );
+				attackItem.onAttackPerformed.add( onEntityAttacked.bind( attackItem.desc.id ) );
 			}
 		} );
 	}
 
 	@:rpc( all )
-	function onPlayerAttacked( attackItemId : String ) {
-		if ( isOwned ) return;
+	function onEntityAttacked( attackItemId : String ) {
+		// if ( component.isOwned ) return;
 
 		var attackList = Std.downcast( component, EntityAttackListComponent );
 		attackList.getItemByItemDescId( attackItemId ).attack( true );

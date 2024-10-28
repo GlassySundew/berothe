@@ -12,10 +12,11 @@ class EntityStatHolder {
 	final amountProp : MutableProperty<Float> = new MutableProperty();
 	public var amount( get, default ) : IProperty<Float>;
 	inline function get_amount() {
-		return receiver != null ? receiver : amountProp;
+		// return receiver != null ? receiver : amountProp;
+		return amountProp;
 	}
 
-	var receiver : Null<IProperty<Float>>;
+	// var receiver : Null<IProperty<Float>>;
 
 	public function new() {}
 
@@ -23,13 +24,12 @@ class EntityStatHolder {
 	// private final function setReceiver( property : IProperty<Float> ) {
 	// 	Assert.notNull( property );
 	// 	Assert.isNull( receiver );
-
 	// 	untyped stats.length = 0;
 	// 	receiver = property;
 	// }
 
 	public function recalculate() {
-		Assert.isNull( receiver );
+		// Assert.isNull( receiver );
 		amountProp.val = Lambda.fold(
 			stats,
 			( item, result ) -> item.amount + result,
@@ -38,7 +38,7 @@ class EntityStatHolder {
 	}
 
 	public function addStat( stat : EntityAdditiveStatBase ) {
-		Assert.isNull( receiver );
+		// Assert.isNull( receiver );
 		stats.push( stat );
 		recalculate();
 	}

@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import oimo.common.Vec3;
 import util.Assert;
 import game.physics.oimo.ContactCallbackWrapper;
 import game.domain.overworld.location.physics.IRigidBodyShape;
@@ -39,6 +40,10 @@ class OimoRigidBodyShape implements IRigidBodyShape {
 		shape._localTransform._positionX += x;
 		shape._localTransform._positionY += y;
 		shape._localTransform._positionZ += z;
+	}
+
+	public inline function setLocalRotation( x : Float, y : Float, z : Float ) {
+		shape._localTransform.setRotationXyz( new Vec3( x, y, z ) );
 	}
 
 	public function getPosition() : ThreeDeeVector {

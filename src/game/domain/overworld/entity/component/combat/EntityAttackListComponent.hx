@@ -10,7 +10,7 @@ import game.data.storage.entity.body.view.AnimationKey;
 class EntityAttackListComponent extends EntityComponent {
 
 	public final attackListDesc : AttackListDescription;
-	public final attackComponents : Array<EntityAttackListItem>;
+	public final attacksList : Array<EntityAttackListItem>;
 
 	public var leadingAttack( default, null ) : EntityEquipmentSlotType;
 
@@ -18,17 +18,17 @@ class EntityAttackListComponent extends EntityComponent {
 		super( description );
 		this.attackListDesc = description;
 
-		attackComponents = createAttackList();
+		attacksList = createAttackList();
 	}
 
 	public function attack() {
-		for ( attackComponent in attackComponents ) {
+		for ( attackComponent in attacksList ) {
 			attackComponent.attack();
 		}
 	}
 
 	public function getItemByAnimationKey( key : AnimationKey ) {
-		for ( listItem in attackComponents ) {
+		for ( listItem in attacksList ) {
 			if ( listItem.desc.key == key ) return listItem;
 		}
 		return null;
@@ -36,7 +36,7 @@ class EntityAttackListComponent extends EntityComponent {
 
 	public inline function getItemByItemDescId( id : String ) : Null<EntityAttackListItem> {
 		var result = null;
-		for ( listItem in attackComponents ) {
+		for ( listItem in attacksList ) {
 			if ( listItem.desc.id == id ) {
 				result = listItem;
 				break;
@@ -49,7 +49,7 @@ class EntityAttackListComponent extends EntityComponent {
 		type : EntityEquipmentSlotType
 	) : Null<EntityAttackListItem> {
 		var result = null;
-		for ( listItem in attackComponents ) {
+		for ( listItem in attacksList ) {
 			if ( listItem.desc.equipSlotType == type ) {
 				result = listItem;
 				break;
@@ -82,7 +82,7 @@ class EntityAttackListComponent extends EntityComponent {
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
-		for ( component in attackComponents ) {
+		for ( component in attacksList ) {
 			component.attachToEntity( entity );
 		}
 
@@ -90,15 +90,8 @@ class EntityAttackListComponent extends EntityComponent {
 			EntityModelComponent,
 			( _, modelCompRepl ) -> {
 				var attackMap = modelCompRepl.stats.limbAttacks;
-				for ( attackStatHolder in attackMap ) {
-					if ( attackStatHolder.limb == null ) continue;
-					var attackItem = getItemByEquipSlotType( attackStatHolder.limb );
-					Assert.notNull( attackItem );
-					attackStatHolder.amount.addOnValue(
-						( _, val ) -> attackItem.setAttack( val )
-					);
-				}
 				var weaponRanges = modelCompRepl.stats.weaponRanges;
+				
 				for ( weaponRangeStatHolder in weaponRanges ) {
 					if ( weaponRangeStatHolder.limb == null ) continue;
 					var attackItem = getItemByEquipSlotType( weaponRangeStatHolder.limb );
@@ -109,5 +102,12 @@ class EntityAttackListComponent extends EntityComponent {
 				}
 			}
 		);
+	}
+
+	override function claimOwnage() {
+		super.claimOwnage();
+		for ( item in attacksList ) {
+			item.claimOwnage();
+		}
 	}
 }

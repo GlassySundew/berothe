@@ -5,7 +5,6 @@ import future.Future;
 import graphics.ObjectNode3D;
 import h3d.scene.Object;
 import game.client.en.comp.view.IEntityView;
-import game.client.en.comp.view.ui.EntitySleepSpeech;
 import game.client.en.comp.view.ui.EntityStatusBarContainer;
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.IEntityViewProvider.EntityViewExtraInitSetting;
@@ -15,6 +14,9 @@ import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import game.domain.overworld.location.Location;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+#if client
+import game.client.en.comp.view.ui.EntitySleepSpeech;
+#end
 
 class EntityViewComponent extends EntityComponent {
 
@@ -35,6 +37,7 @@ class EntityViewComponent extends EntityComponent {
 	override function dispose() {
 		super.dispose();
 		view.result?.dispose();
+
 		statusBar?.root.remove();
 	}
 
@@ -128,6 +131,9 @@ class EntityViewComponent extends EntityComponent {
 				statusBar.setDisplayName( newVal );
 			}
 		);
+		modelComp.onDamaged.add( ( damage, type ) -> {
+			statusBar.sayChatMessage( Std.string( damage ) );
+		} );
 	}
 
 	function updateStatusBar3DPointPosition() {

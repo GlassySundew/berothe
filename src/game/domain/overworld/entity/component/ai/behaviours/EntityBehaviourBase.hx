@@ -1,5 +1,8 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import dn.M;
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
+import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Location;
 import util.MathUtil;
 import game.domain.overworld.location.Chunk;
@@ -7,23 +10,73 @@ import game.domain.overworld.entity.component.model.EntityModelComponent;
 
 enum State {
 	CALM;
-	AGRO;
+	AGRO( enemy : OverworldEntity );
 }
 
 abstract class EntityBehaviourBase {
 
-	var entity( default, null ) : OverworldEntity;
+	static final enemyContactRange = 5;
 
-	public function new() {}
+	var dynamics : EntityDynamicsComponent;
+	var model : EntityModelComponent;
+	var attackComp : EntityAttackListComponent;
+	var entity( default, null ) : OverworldEntity;
+	var state : State;
+
+	public function new() {
+		state = CALM;
+	}
 
 	public function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;
 		entity.location.onAppear( onAttachedToLocation );
+		entity.components.onAppear(
+			EntityDynamicsComponent,
+			( cl, dynComp ) -> this.dynamics = dynComp
+		);
+		entity.components.onAppear(
+			EntityModelComponent,
+			( cl, model ) -> this.model = model
+		);
+		entity.components.onAppear(
+			EntityAttackListComponent,
+			( cl, attackComp ) -> this.attackComp = attackComp
+		);
 	}
 
-	public function update() {}
+	public function update( dt : Float, tmod : Float ) {
+		switch state {
+			case CALM:
+			case AGRO( enemy ):
+				// find angle to enemy
+				if ( //
+					M.dist(
+						entity.transform.x,
+						entity.transform.y,
+						enemy.transform.x,
+						enemy.transform.y
+					) > enemyContactRange //
+				) {
 
-	function onAttachedToLocation( location : Location ) {}
+					var angle = Math.atan2(
+						enemy.transform.y.val - entity.transform.y.val,
+						enemy.transform.x.val - entity.transform.x.val
+					);
+					var s = model.speed.amount.getValue() * tmod;
+					var inputDirX = Math.cos( angle ) * s;
+					var inputDirY = Math.sin( angle ) * s;
+					entity.transform.velX.val += inputDirX;
+					entity.transform.velY.val += inputDirY;
+					dynamics.isMovementApplied.val = true;
+				}
+
+				attackComp.attack();
+		}
+	}
+
+	function onAttachedToLocation( location : Location ) {
+		location.behaviourManager.attachBehaviour( this );
+	}
 
 	final function sleep() {
 		entity.components.get( EntityModelComponent ).sleep();
@@ -37,13 +90,17 @@ abstract class EntityBehaviourBase {
 	function seekForEnemy() {
 		var enemyEntity = null;
 		mapSurroundingEntities( ( enemy ) -> {
-			if ( enemy == entity ) return true;
+			if ( enemy == entity ) {
+				trace( "found same entity, " + enemy );
+				return true;
+			}
 			if ( entity.components.get( EntityModelComponent ).isEnemy( enemy ) ) {
-				enemyEntity = entity;
+				enemyEntity = enemy;
 				return false;
 			}
 			return true;
 		} );
+		return enemyEntity;
 	}
 
 	function mapSurroundingEntities( fn : ( entity : OverworldEntity ) -> Bool ) {

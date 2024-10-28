@@ -44,7 +44,7 @@ class EntityStatsHudMediator {
 	function handler_onAttackChanged( _, _ ) {
 		var result = "Attack:" + " ";
 
-		for ( attackListItem in attackListComp.attackComponents ) {
+		for ( attackListItem in attackListComp.attacksList ) {
 			var equipSlotType = attackListItem.desc.equipSlotType;
 			if ( equipSlotType == null ) continue;
 			var limbAttack = stats.limbAttacks.filter( limbAttack -> limbAttack.limb == equipSlotType )[0];

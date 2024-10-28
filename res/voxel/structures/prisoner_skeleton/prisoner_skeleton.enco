@@ -1,0 +1,10 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "model",
+			"name": "prisoner_skeleton",
+			"source": "voxel/structures/prisoner_skeleton/obj/fbx/prisoner_skeleton.fbx"
+		}
+	]
+}

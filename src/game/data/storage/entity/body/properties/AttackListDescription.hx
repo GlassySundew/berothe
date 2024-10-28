@@ -15,15 +15,15 @@ class AttackListDescription extends EntityComponentDescription {
 		if ( attackDesc == null ) return null;
 		var attackDescriptions = [
 			for ( attackEntry in attackDesc.attackList )
-				AttackListItem.fromCdb( attackEntry )
+				AttackListItemVO.fromCdb( attackEntry )
 		];
 		return new AttackListDescription( attackDescriptions, attackDesc.id.toString() );
 	}
 
-	public final attackList : Array<AttackListItem>;
+	public final attackList : Array<AttackListItemVO>;
 
 	public function new(
-		attackList : Array<AttackListItem>,
+		attackList : Array<AttackListItemVO>,
 		id : String
 	) {
 		super( id );

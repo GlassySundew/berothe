@@ -1,0 +1,62 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "sleep",
+			"children": [
+				{
+					"type": "model",
+					"name": "bat_0_sleep",
+					"source": "voxel/characters/bat/obj/fbx/bat_0_sleep.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "walk",
+			"children": [
+				{
+					"type": "model",
+					"name": "bat_1_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_1_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_2_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_2_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_3_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_3_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_4_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_4_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_5_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_5_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_6_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_6_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_7_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_7_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "bat_8_walk",
+					"source": "voxel/characters/bat/obj/fbx/bat_8_walk.fbx"
+				}
+			]
+		}
+	]
+}

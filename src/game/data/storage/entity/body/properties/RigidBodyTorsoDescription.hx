@@ -7,6 +7,11 @@ import game.data.storage.entity.body.properties.VolumetricBodyDescriptionBase;
 import game.net.entity.EntityComponentReplicatorBase;
 import game.net.entity.component.EntityRigidBodyComponentReplicator;
 
+enum GeometryType {
+	BOX;
+	CAPSULE;
+}
+
 class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 
 	public inline static function fromCdb(
@@ -14,7 +19,16 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 	) : RigidBodyTorsoDescription {
 		if ( entry == null ) return null;
 
+		var geometry = switch entry.geometry {
+			case box: BOX;
+			case capsule:
+				if ( entry.sizeY != null && entry.sizeY != 0 )
+					trace( "WARNING: rigid body capsule geometry does not take sizeY param, id: " + entry.id );
+				CAPSULE;
+		}
+
 		return new RigidBodyTorsoDescription(
+			geometry,
 			entry.offsetX,
 			entry.offsetY,
 			entry.offsetZ,
@@ -29,8 +43,10 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 
 	public final hasFeet : Bool;
 	public final isStatic : Bool;
+	public final geometry : GeometryType;
 
 	public function new(
+		geometry : GeometryType,
 		offsetX : Float,
 		offsetY : Float,
 		offsetZ : Float,
@@ -50,6 +66,7 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 			sizeZ,
 			id,
 		);
+		this.geometry = geometry;
 		this.hasFeet = hasFeet;
 		this.isStatic = isStatic;
 	}

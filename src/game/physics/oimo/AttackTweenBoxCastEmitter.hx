@@ -12,7 +12,7 @@ import dn.Cooldown;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import game.domain.overworld.location.physics.IPhysicsEngine;
 import game.domain.overworld.location.physics.ITransform;
-import game.data.storage.entity.body.properties.AttackListItem;
+import game.data.storage.entity.body.properties.AttackListItemVO;
 import game.domain.overworld.location.physics.geom.IBoxGeometry;
 import dn.Tweenie;
 import hxd.Timer;
@@ -23,7 +23,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	public inline static final ATTACK_CD_KEY : String = "attack";
 
 	final type : TType;
-	final desc : AttackListItem;
+	final desc : AttackListItemVO;
 
 	final boxGeom : IBoxGeometry;
 	final sourceTransform : ITransform;
@@ -43,7 +43,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	var attackRange : Float;
 
 	public function new(
-		desc : AttackListItem,
+		desc : AttackListItemVO,
 		sourceTransform : ITransform,
 		physics : IPhysicsEngine
 	) {
@@ -58,7 +58,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		shapeConfig.setGeometry( geom );
 
 		shape = OimoRigidBodyShape.create( shapeConfig );
-		shape.setCollisionGroup( 0 );
+		shape.setCollisionGroup( util.Const.G_HITBOX );
 		shape.setCollisionMask( util.Const.G_HITBOX );
 		shape.setContactCallback( new ContactCallbackWrapper() );
 
@@ -124,7 +124,9 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 			desc.duration * 1000
 		);
 		tweenCombinator.attachTween( currentTween );
-		currentTween.onEnd = () -> physics.removeRigidBody( rigidBody );
+		currentTween.onEnd = () -> {
+			physics.removeRigidBody( rigidBody );
+		};
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {

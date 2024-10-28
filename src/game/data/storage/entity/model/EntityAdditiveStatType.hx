@@ -10,6 +10,7 @@ enum abstract EntityAdditiveStatType( Int ) {
 	var ATTACK;
 	var DEFENCE;
 	var WEAPON_RANGE;
+	var SPEED;
 
 	#if !debug inline #end
 	public static function fromCdb( type : Data.EntityAdditiveStat ) : EntityAdditiveStatType {
@@ -17,6 +18,7 @@ enum abstract EntityAdditiveStatType( Int ) {
 			case attack: ATTACK;
 			case defence: DEFENCE;
 			case weaponRange: WEAPON_RANGE;
+			case speed: SPEED;
 		}
 	}
 
@@ -26,6 +28,7 @@ enum abstract EntityAdditiveStatType( Int ) {
 			case ATTACK: new EntityAttackStat( amount );
 			case DEFENCE: throw new NotImplementedException();
 			case WEAPON_RANGE: new EntityWeaponRangeStat( amount );
+			case SPEED: new EntityWeaponRangeStat( amount );
 		}
 	}
 }

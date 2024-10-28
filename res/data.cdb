@@ -101,6 +101,10 @@
 					"preset": "orc"
 				},
 				{
+					"id": "bat",
+					"preset": "bat"
+				},
+				{
 					"id": "club",
 					"preset": "club"
 				},
@@ -111,6 +115,10 @@
 				{
 					"id": "orc_prison_door",
 					"preset": "orc_prison_door"
+				},
+				{
+					"id": "skeleton_prisoner",
+					"preset": "skeleton_prisoner"
 				},
 				{
 					"id": "wall_torch",
@@ -183,6 +191,11 @@
 					"view": "orc"
 				},
 				{
+					"id": "bat",
+					"properties": "bat",
+					"view": "bat"
+				},
+				{
 					"id": "club",
 					"properties": "club",
 					"view": "club"
@@ -196,6 +209,11 @@
 					"id": "orc_prison_door",
 					"properties": "orc_prison_door",
 					"view": "orc_prison_door"
+				},
+				{
+					"id": "skeleton_prisoner",
+					"properties": "skeleton_prisoner",
+					"view": "skeleton_prisoner"
 				},
 				{
 					"id": "wall_torch",
@@ -258,11 +276,11 @@
 					"properties": {
 						"rigidBodyTorso": {
 							"sizeX": 3,
-							"sizeY": 3,
 							"sizeZ": 10,
 							"offsetZ": 11,
 							"id": "humanTorso",
-							"hasFeet": true
+							"hasFeet": true,
+							"geometry": 1
 						},
 						"dynamics": true,
 						"bodyHitbox": {
@@ -349,37 +367,13 @@
 							"baseHp": 5,
 							"id": "humanModel",
 							"baseInventorySize": 4,
-							"baseAttack": [
-								{
-									"attack": "human_hand_attack_right",
-									"amount": 1
-								},
-								{
-									"attack": "human_hand_attack_left",
-									"amount": 1
-								}
-							],
 							"faction": "humans",
-							"hideNameByDefault": false
+							"hideNameByDefault": false,
+							"baseSpeed": 9
 						},
 						"attack": {
 							"id": "human_attack",
 							"attackList": [
-								{
-									"id": "human_hand_attack_right",
-									"tweenType": 0,
-									"sizeX": 1,
-									"sizeY": 0.4,
-									"sizeZ": 4,
-									"offsetX": -1.5,
-									"offsetY": 2.4,
-									"offsetZ": 8,
-									"cooldown": 0.7,
-									"duration": 0.35,
-									"endX": 2,
-									"key": "attack_right_attack",
-									"equipSlot": "hand_right"
-								},
 								{
 									"id": "human_hand_attack_left",
 									"key": "attack_left_attack",
@@ -393,9 +387,49 @@
 									"cooldown": 3.4,
 									"duration": 0.35,
 									"endX": 2,
-									"equipSlot": "hand_left"
+									"equipSlot": "hand_left",
+									"baseAttack": 1
+								},
+								{
+									"id": "human_hand_attack_right",
+									"tweenType": 0,
+									"sizeX": 1,
+									"sizeY": 0.4,
+									"sizeZ": 4,
+									"offsetX": -1.5,
+									"offsetY": 2.4,
+									"offsetZ": 8,
+									"cooldown": 0.7,
+									"duration": 0.35,
+									"endX": 2,
+									"key": "attack_right_attack",
+									"equipSlot": "hand_right",
+									"baseAttack": 2
 								}
 							]
+						}
+					}
+				},
+				{
+					"id": "bat",
+					"properties": {
+						"dynamics": true,
+						"model": {
+							"baseHp": 4,
+							"id": "model"
+						},
+						"attack": {
+							"id": "bat_head_attack",
+							"attackList": []
+						},
+						"rigidBodyTorso": {
+							"id": "torso",
+							"hasFeet": true,
+							"offsetZ": 10,
+							"sizeX": 1,
+							"sizeY": 3,
+							"sizeZ": 1,
+							"geometry": 0
 						}
 					}
 				},
@@ -403,20 +437,22 @@
 					"id": "orc",
 					"properties": {
 						"rigidBodyTorso": {
-							"sizeX": 3,
-							"sizeY": 3,
+							"sizeX": 7,
 							"sizeZ": 10,
 							"offsetZ": 11,
-							"id": "torso",
-							"hasFeet": true
+							"id": "orc_torso",
+							"hasFeet": true,
+							"geometry": 1,
+							"offsetX": -1
 						},
 						"dynamics": true,
 						"bodyHitbox": {
-							"sizeX": 4,
-							"sizeY": 4,
+							"sizeX": 8,
+							"sizeY": 9,
 							"sizeZ": 16,
 							"offsetZ": 7.5,
-							"id": "torsoHitbox"
+							"id": "torsoHitbox",
+							"offsetX": 1
 						},
 						"model": {
 							"equipment": [
@@ -495,24 +531,15 @@
 							"baseHp": 5,
 							"id": "model",
 							"baseInventorySize": 4,
-							"baseAttack": [
-								{
-									"attack": "human_hand_attack_right",
-									"amount": 1
-								},
-								{
-									"attack": "human_hand_attack_left",
-									"amount": 1
-								}
-							],
 							"faction": "orcs",
-							"displayName": "Orc"
+							"displayName": "Orc",
+							"baseSpeed": 11
 						},
 						"attack": {
 							"id": "attack",
 							"attackList": [
 								{
-									"id": "human_hand_attack_right",
+									"id": "orc_hand_attack_right",
 									"tweenType": 0,
 									"sizeX": 1,
 									"sizeY": 0.4,
@@ -524,10 +551,11 @@
 									"duration": 0.35,
 									"endX": 2,
 									"key": "attack_right_attack",
-									"equipSlot": "hand_right"
+									"equipSlot": "hand_right",
+									"baseAttack": 1
 								},
 								{
-									"id": "human_hand_attack_left",
+									"id": "orc_hand_attack_left",
 									"key": "attack_left_attack",
 									"tweenType": 0,
 									"sizeX": 1,
@@ -539,7 +567,8 @@
 									"cooldown": 3.4,
 									"duration": 0.35,
 									"endX": 2,
-									"equipSlot": "hand_left"
+									"equipSlot": "hand_left",
+									"baseAttack": 1
 								}
 							]
 						},
@@ -561,7 +590,8 @@
 							"sizeX": 4,
 							"sizeY": 1,
 							"sizeZ": 1,
-							"id": "clubRigidBody"
+							"id": "clubRigidBody",
+							"geometry": 0
 						},
 						"interactable": {
 							"actionsQueue": [
@@ -586,7 +616,8 @@
 							"id": "orc_prison_key_rb",
 							"sizeX": 1,
 							"sizeY": 5,
-							"sizeZ": 3
+							"sizeZ": 3,
+							"geometry": 0
 						},
 						"interactable": {
 							"actionsQueue": [
@@ -641,8 +672,15 @@
 							"offsetZ": 10,
 							"hasFeet": false,
 							"offsetY": -9.5,
-							"isStatic": true
+							"isStatic": true,
+							"geometry": 0
 						}
+					}
+				},
+				{
+					"id": "skeleton_prisoner",
+					"properties": {
+						"dynamics": false
 					}
 				},
 				{
@@ -673,54 +711,6 @@
 				{
 					"title": "structures",
 					"id": "orc_prison_door"
-				}
-			],
-			"props": {}
-		},
-		{
-			"name": "entityViewState",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id"
-				}
-			],
-			"lines": [
-				{
-					"id": "idle"
-				},
-				{
-					"id": "walk"
-				},
-				{
-					"id": "attack_right_idle"
-				},
-				{
-					"id": "attack_right_raised"
-				},
-				{
-					"id": "attack_right_attack"
-				},
-				{
-					"id": "attack_left_raised"
-				},
-				{
-					"id": "attack_left_idle"
-				},
-				{
-					"id": "attack_left_attack"
-				},
-				{
-					"id": "awake"
-				},
-				{
-					"id": "sleep"
-				}
-			],
-			"separators": [
-				{
-					"title": "character",
-					"id": "idle"
 				}
 			],
 			"props": {}
@@ -801,6 +791,11 @@
 					"scope": 2
 				},
 				{
+					"typeStr": "5:box,capsule",
+					"name": "geometry",
+					"opt": true
+				},
+				{
 					"typeStr": "4",
 					"name": "offsetX",
 					"opt": true,
@@ -863,6 +858,18 @@
 					"typeStr": "0",
 					"name": "id",
 					"scope": 2
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetX",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "offsetY",
+					"opt": true,
+					"kind": null
 				},
 				{
 					"typeStr": "4",
@@ -950,17 +957,11 @@
 				{
 					"typeStr": "3",
 					"name": "baseHp",
-					"kind": null
+					"opt": true
 				},
 				{
 					"typeStr": "3",
 					"name": "baseInventorySize",
-					"opt": true,
-					"kind": null
-				},
-				{
-					"typeStr": "8",
-					"name": "baseAttack",
 					"opt": true,
 					"kind": null
 				},
@@ -979,6 +980,11 @@
 					"name": "hideNameByDefault",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "baseSpeed",
+					"opt": true
 				}
 			]
 		},
@@ -1274,27 +1280,6 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@model@baseAttack",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "6:entityProperty@properties@attack@attackList",
-					"name": "attack",
-					"kind": null
-				},
-				{
-					"typeStr": "3",
-					"name": "amount",
-					"kind": null,
-					"defaultValue": 1
-				}
-			]
-		},
-		{
 			"name": "entityProperty@properties@attack@attackList",
 			"props": {
 				"hide": true
@@ -1311,6 +1296,12 @@
 					"typeStr": "6:entityViewState",
 					"name": "key",
 					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "baseAttack",
+					"kind": null,
+					"defaultValue": 1
 				},
 				{
 					"typeStr": "5:Linear",
@@ -1431,7 +1422,7 @@
 								}
 							],
 							"key": "walk",
-							"speedMult": 1
+							"speedMult": 0.1
 						},
 						{
 							"animations": [
@@ -1512,7 +1503,7 @@
 								}
 							],
 							"key": "walk",
-							"speedMult": 1
+							"speedMult": 0.06
 						},
 						{
 							"animations": [
@@ -1589,6 +1580,42 @@
 					]
 				},
 				{
+					"id": "bat",
+					"type": [
+						1,
+						"bat"
+					],
+					"animations": [
+						{
+							"key": "idle",
+							"speedMult": 1,
+							"animations": [
+								{
+									"key": "walk"
+								}
+							]
+						},
+						{
+							"key": "walk",
+							"speedMult": 1,
+							"animations": [
+								{
+									"key": "walk"
+								}
+							]
+						},
+						{
+							"key": "sleep",
+							"speedMult": 1,
+							"animations": [
+								{
+									"key": "sleep"
+								}
+							]
+						}
+					]
+				},
+				{
 					"id": "wall_torch",
 					"type": [
 						1,
@@ -1604,6 +1631,13 @@
 							],
 							"speedMult": 2
 						}
+					]
+				},
+				{
+					"id": "skeleton_prisoner",
+					"type": [
+						1,
+						"skeleton_prisoner"
 					]
 				},
 				{
@@ -1702,6 +1736,10 @@
 					"file": "voxel/characters/orc/entity/orc.enco"
 				},
 				{
+					"id": "bat",
+					"file": "voxel/characters/bat/bat.enco"
+				},
+				{
 					"id": "club",
 					"file": "voxel/items/club/entity/club.enco"
 				},
@@ -1712,6 +1750,10 @@
 				{
 					"id": "orc_prison_door",
 					"file": "voxel/structures/iron_bars_door/iron_bars_door.enco"
+				},
+				{
+					"id": "skeleton_prisoner",
+					"file": "voxel/structures/prisoner_skeleton/prisoner_skeleton.enco"
 				},
 				{
 					"id": "wall_torch",
@@ -1730,6 +1772,54 @@
 				{
 					"title": "structures",
 					"id": "orc_prison_door"
+				}
+			],
+			"props": {}
+		},
+		{
+			"name": "entityViewState",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id"
+				}
+			],
+			"lines": [
+				{
+					"id": "idle"
+				},
+				{
+					"id": "walk"
+				},
+				{
+					"id": "attack_right_idle"
+				},
+				{
+					"id": "attack_right_raised"
+				},
+				{
+					"id": "attack_right_attack"
+				},
+				{
+					"id": "attack_left_raised"
+				},
+				{
+					"id": "attack_left_idle"
+				},
+				{
+					"id": "attack_left_attack"
+				},
+				{
+					"id": "awake"
+				},
+				{
+					"id": "sleep"
+				}
+			],
+			"separators": [
+				{
+					"title": "character",
+					"id": "idle"
 				}
 			],
 			"props": {}
@@ -2178,7 +2268,7 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 45,
+					"chunkSize": 55,
 					"level": [
 						0,
 						"start"

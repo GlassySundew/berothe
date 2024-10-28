@@ -8,11 +8,6 @@ import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.net.entity.component.EntityModelComponentReplicator;
 
-typedef EntityBaseAttackItem = {
-	amount : Int,
-	attackId : String
-}
-
 class EntityModelDescription extends EntityComponentDescription {
 
 	public static function fromCdb(
@@ -20,7 +15,7 @@ class EntityModelDescription extends EntityComponentDescription {
 	) : EntityModelDescription {
 		if ( entry == null ) return null;
 
-		var equipSlots = [
+		var equipSlots = entry.equipment != null ? [
 			for ( equipSlot in entry.equipment ) {
 				new EntityEquipSlotDescription(
 					EntityEquipmentSlotType.fromCdb( equipSlot.type ),
@@ -31,22 +26,13 @@ class EntityModelDescription extends EntityComponentDescription {
 					]
 				);
 			}
-		];
-
-		var baseAttacks : Array<EntityBaseAttackItem> = [
-			for ( baseAttackElem in entry.baseAttack ) {
-				{
-					amount : baseAttackElem.amount,
-					attackId : baseAttackElem.attackId.toString(),
-				}
-			}
-		];
+		] : [];
 
 		return new EntityModelDescription(
 			entry.baseHp,
 			entry.baseInventorySize,
+			entry.baseSpeed,
 			equipSlots,
-			baseAttacks,
 			entry.factionId.toString(),
 			entry.displayName,
 			entry.hideNameByDefault,
@@ -56,8 +42,8 @@ class EntityModelDescription extends EntityComponentDescription {
 
 	public final baseHp : Int;
 	public final baseInventorySize : Int;
+	public final baseSpeed : Float;
 	public final equipSlots : Array<EntityEquipSlotDescription>;
-	public final baseAttacks : Array<EntityBaseAttackItem>;
 	public final factionId : String;
 	public final displayName : String;
 	public final hideNameByDefault : Bool;
@@ -65,17 +51,17 @@ class EntityModelDescription extends EntityComponentDescription {
 	public function new(
 		baseHp : Int,
 		baseInventorySize : Int,
+		baseSpeed : Float,
 		equipSlots : Array<EntityEquipSlotDescription>,
-		baseAttacks : Array<EntityBaseAttackItem>,
 		factionId : String,
 		displayName : String,
 		hideNameByDefault : Bool,
 		id : String
 	) {
-		super( id );
+		super( id ?? "model" );
 		this.baseHp = baseHp;
 		this.equipSlots = equipSlots;
-		this.baseAttacks = baseAttacks;
+		this.baseSpeed = baseSpeed;
 		this.baseInventorySize = baseInventorySize;
 		this.factionId = factionId;
 		this.displayName = displayName;

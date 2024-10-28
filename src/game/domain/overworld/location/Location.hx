@@ -17,10 +17,9 @@ class Location {
 	public final id : String;
 	public final physics : IPhysicsEngine;
 	public final entityFactory : EntityFactory;
-
 	public final chunks : Chunks;
-
 	public final triggers : Map<String, EntityTrigger> = [];
+	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
 
 	/** not replicated but created via `location id` -> `geting through DataStorage on client` **/
 	public final globalObjects : Array<OverworldEntity> = [];
@@ -85,6 +84,7 @@ class Location {
 		for ( entity in entities ) {
 			entity.update( dt, tmod );
 		}
+		behaviourManager.update( dt, tmod );
 	}
 
 	public function loadAuthoritative() {

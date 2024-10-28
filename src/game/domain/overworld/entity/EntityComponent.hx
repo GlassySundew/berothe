@@ -8,13 +8,16 @@ abstract class EntityComponent {
 	public final description : EntityComponentDescription;
 
 	public var entity( default, null ) : OverworldEntity;
+	public var isOwned( default, null ) : Bool = false;
 
 	public function new( description : EntityComponentDescription ) {
 		classType = Type.getClass( this );
 		this.description = description;
 	}
 
-	public function claimOwnage() : Void {}
+	public function claimOwnage() : Void {
+		isOwned = true;
+	}
 
 	public function dispose() {}
 

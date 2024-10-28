@@ -1,11 +1,9 @@
 package game.client.en.comp.view.ui;
 
 import dn.Col;
-import h2d.ObjectFollower;
-import h2d.RenderContext;
-import h3d.scene.Object;
-import ui.tooltip.text.TooltipTextRendererClip;
 import h2d.Flow;
+import h2d.ObjectFollower;
+import h3d.scene.Object;
 import ui.domkit.TextTooltipComp;
 
 class EntityStatusBarContainer {
@@ -33,13 +31,21 @@ class EntityStatusBarContainer {
 
 		content = new Flow( root );
 		content.horizontalAlign = Middle;
-		content.verticalAlign = Bottom;
+		// content.verticalAlign = Top;
 		content.layout = Vertical;
 		content.verticalSpacing = 4;
 
 		createNameLabel();
 
 		colorEnemy();
+
+		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
+		// sayChatMessage( "adsdasdasdasdasdasdasd" );
+		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
+		// sayChatMessage( "adsdasdasdasdasdasdasd" );
+		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
+		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
+		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
 	}
 
 	public function colorEnemy() {
@@ -55,12 +61,17 @@ class EntityStatusBarContainer {
 	}
 
 	public function sayChatMessage( text : String ) {
-		var text = new TextTooltipComp( text );
-		text.scale( 0.5 );
-		content.addChild( text );
-		var chatMessageCdId = 'chatmessage_${chatMessagesAmount++}';
-		viewComp.cooldown.setS( '$chatMessageCdId', 6 );
-		viewComp.cooldown.onComplete( '$chatMessageCdId', text.remove );
+		var textComp = new TextTooltipComp( text );
+		textComp.scale( 0.5 );
+		content.addChild( textComp );
+		viewComp.cooldown.setS(
+			"chatMessage" + chatMessagesAmount++,
+			5,
+			() -> {
+				textComp.remove();
+				// chatMessagesAmount--;
+			}
+		);
 	}
 
 	function createNameLabel() {

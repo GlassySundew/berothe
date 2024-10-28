@@ -11,16 +11,18 @@ class EntityAnimations {
 	**/
 	public final byKey : Map<AnimationKey, EntityAnimationState> = [];
 
-	public function new( animations : cdb.Types.ArrayRead<Data.EntityView_animations> ) {
-		for ( animation in animations ) {
-			var key : AnimationKey = AnimationKey.fromCdb( animation.key );
+	public function new( animations : Null<cdb.Types.ArrayRead<Data.EntityView_animations>> ) {
+		if ( animations != null ) {
+			for ( animation in animations ) {
+				var key : AnimationKey = AnimationKey.fromCdb( animation.key );
 
-			Assert.isNull( byKey[key], 'unsupported behaviour: by key ($key) animation node doubled' );
+				Assert.isNull( byKey[key], 'unsupported behaviour: by key ($key) animation node doubled' );
 
-			byKey[key] = new EntityAnimationState(
-				animation.speedMult,
-				[for ( anim in animation.animations ) anim.key]
-			);
+				byKey[key] = new EntityAnimationState(
+					animation.speedMult,
+					[for ( anim in animation.animations ) anim.key]
+				);
+			}
 		}
 	}
 }

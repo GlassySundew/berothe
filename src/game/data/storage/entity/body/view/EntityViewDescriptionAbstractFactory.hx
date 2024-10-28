@@ -8,7 +8,6 @@ class EntityViewDescriptionAbstractFactory {
 		var description : IEntityViewProvider = //
 			switch entry.type {
 				case EntityComposer( file ):
-					Assert.notNull( entry.animations, "entity view " + entry.id + " is lacking of animations" );
 					new EntityComposerViewProvider( file.file, entry.animations );
 				case Graybox:
 					new StaticObjectGrayboxViewProvider();

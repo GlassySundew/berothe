@@ -11,6 +11,18 @@
 			"children": [
 				{
 					"type": "reference",
+					"name": "prisoner_skeleton",
+					"source": "voxel/structures/prisoner_skeleton/prisoner_skeleton.enco",
+					"props": {
+						"entity": "skeleton_prisoner",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": -137,
+					"y": 23,
+					"z": 4
+				},
+				{
+					"type": "reference",
 					"name": "wall_torch",
 					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
 					"props": {
@@ -18,18 +30,45 @@
 						"$cdbtype": "locationEntityDF"
 					},
 					"x": -59,
+					"z": 14
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": -102,
+					"y": -44,
+					"z": 14
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": -89,
+					"y": -102,
 					"z": 14,
-					"children": [
-						{
-							"type": "reference",
-							"name": "light",
-							"source": "voxel/structures/wall_torch/entity/light.prefab",
-							"editorOnly": true,
-							"y": 1.75,
-							"z": 9.96,
-							"editMode": true
-						}
-					]
+					"rotationZ": 180
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": -6,
+					"y": -107,
+					"z": 14,
+					"rotationZ": 180
 				},
 				{
 					"type": "model",
@@ -1322,9 +1361,7 @@
 				"quality": 1,
 				"bias": 0.03,
 				"samplingMode": {
-					"kind": "ESM",
-					"power": 50,
-					"bias": 0.1
+					"kind": "None"
 				}
 			}
 		},
@@ -1352,6 +1389,18 @@
 			"scaleX": 46.01,
 			"scaleZ": 49.51,
 			"rotationZ": -41.7
+		},
+		{
+			"type": "reference",
+			"name": "bat",
+			"source": "voxel/characters/bat/bat.enco",
+			"editorOnly": true,
+			"props": {
+				"entity": "bat",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -45.5,
+			"y": -95.5
 		}
 	]
 }

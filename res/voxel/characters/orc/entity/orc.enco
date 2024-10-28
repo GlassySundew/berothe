@@ -4,6 +4,7 @@
 		{
 			"type": "object",
 			"name": "object",
+			"y": -0.5,
 			"children": [
 				{
 					"type": "model",

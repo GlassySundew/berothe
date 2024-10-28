@@ -30,8 +30,8 @@ class EntityComponents {
 		#end
 
 		onComponentAdded.dispatch( component );
-		components[component.classType] = component;
 		component.attachToEntity( entity );
+		components[component.classType] = component;
 	}
 
 	public function get<T : EntityComponent>( compClass : Class<T> ) : T {

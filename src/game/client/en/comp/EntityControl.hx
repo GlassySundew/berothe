@@ -49,15 +49,5 @@ class EntityControl {
 
 		entityRepl.transformRepl.createModelToNetworkStream();
 
-		entityRepl.componentsRepl.components.onAppear(
-			EntityAttackListReplicator,
-			( key, compRepl ) -> {
-				#if debug
-				Assert.isOfType( compRepl, EntityAttackListReplicator );
-				#end
-
-				Std.downcast( compRepl, EntityAttackListReplicator ).claimOwnage();
-			}
-		);
 	}
 }

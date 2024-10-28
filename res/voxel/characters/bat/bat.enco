@@ -1,0 +1,10 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "reference",
+			"name": "body",
+			"source": "voxel/characters/bat/body.plst"
+		}
+	]
+}

@@ -20,6 +20,7 @@ class SleepyPointGuard extends EntityBehaviourBase {
 	}
 
 	override function onAttachedToLocation( location : Location ) {
+		super.onAttachedToLocation( location );
 		sleep();
 		entity.components.onAppear(
 			EntityModelComponent,
@@ -28,13 +29,17 @@ class SleepyPointGuard extends EntityBehaviourBase {
 				sub = modelComp.isSleeping.addOnValue(
 					( _, val ) -> //
 						if ( !val ) {
-							seekForEnemy();
-							sub.unsubscribe();
+							var enemy = seekForEnemy();
+							if ( enemy != null ) {
+								state = AGRO( enemy );
+								sub.unsubscribe();
+							}
 						}
 				);
 
 				if ( triggerId == null || location.triggers[triggerId] == null ) return;
 
+				// seeking for entity trigger on location
 				var sub : ISubscription = null;
 				sub = location.triggers[triggerId].cb.postSolveCB.add( cb -> {
 					inline function someEntityTriggered( enemyMaybe : OverworldEntity ) {

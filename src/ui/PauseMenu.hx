@@ -53,13 +53,13 @@ class PauseMenu extends PopupBase {
 			destroy();
 		}, contentFlow );
 
-		Boot.inst.renderer.overlayBlurEnabled = true;
-		tw.createS(
-			Boot.inst.renderer.overlayBlurRadius,
-			12,
-			TLinear,
-			0.6
-		);
+		// Boot.inst.renderer.overlayBlurEnabled = true;
+		// tw.createS(
+		// 	Boot.inst.renderer.overlayBlurRadius,
+		// 	12,
+		// 	TLinear,
+		// 	0.6
+		// );
 	}
 
 	override function onDispose() {
@@ -67,8 +67,8 @@ class PauseMenu extends PopupBase {
 
 		pausableProcess.resume();
 
-		Boot.inst.renderer.overlayBlurRadius = 0;
-		Boot.inst.renderer.overlayBlurEnabled = false;
+		// Boot.inst.renderer.overlayBlurRadius = 0;
+		// Boot.inst.renderer.overlayBlurEnabled = false;
 	}
 
 	override function onResize() {

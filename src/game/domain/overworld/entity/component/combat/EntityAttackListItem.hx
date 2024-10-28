@@ -1,50 +1,50 @@
 package game.domain.overworld.entity.component.combat;
 
+import game.physics.oimo.EntityRigidBodyProps;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import core.IProperty;
 import core.MutableProperty;
 import signals.Signal;
 import game.domain.overworld.location.Location;
-import game.data.storage.entity.body.properties.AttackListItem;
+import game.data.storage.entity.body.properties.AttackListItemVO;
 import game.physics.oimo.AttackTweenBoxCastEmitter;
 import oimo.collision.geometry.BoxGeometry;
 import game.data.storage.entity.body.view.AttackTranslationTween;
 
 class EntityAttackListItem {
 
-	public final desc : AttackListItem;
+	public final desc : AttackListItemVO;
 	public final onAttackPerformed = new Signal();
 	public final isRaised : MutableProperty<Bool> = new MutableProperty();
 
 	final attackRange : MutableProperty<Float> = new MutableProperty();
+	final emitter : MutableProperty<AttackTweenBoxCastEmitter> = new MutableProperty();
 
-	var emitter : AttackTweenBoxCastEmitter;
 	var entity : OverworldEntity;
-	var damageAmount : Float;
 
-	public function new( desc : AttackListItem ) {
+	public function new( desc : AttackListItemVO ) {
 		this.desc = desc;
 	}
 
 	public function attack( ignoreCooldown = false ) {
-		if ( !ignoreCooldown && emitter.isOnCooldown() ) return;
-		if ( emitter.isInAction() ) return;
+		if ( !ignoreCooldown && emitter.val.isOnCooldown() ) return;
+		if ( emitter.val.isInAction() ) return;
 
 		isRaised.val = true;
-		emitter.performCasting();
+		emitter.val.performCasting();
 		onAttackPerformed.dispatch();
 	}
 
 	public inline function isOnCooldown() {
-		return emitter.isOnCooldown();
+		return emitter.val.isOnCooldown();
 	}
 
 	public inline function isAttacking() : Bool {
-		return emitter.isInAction();
+		return emitter.val.isInAction();
 	}
 
 	public inline function getCurrentAttackTime() : Float {
-		return emitter.getCurrentTimelapseRatio();
+		return emitter.val.getCurrentTimelapseRatio();
 	}
 
 	public function attachToEntity( entity : OverworldEntity ) {
@@ -52,13 +52,26 @@ class EntityAttackListItem {
 		entity.location.onAppear( onAttachedToLocation );
 	}
 
-	public inline function setAttack( amount : Float ) {
-		damageAmount = amount;
-	}
-
 	#if !debug inline #end
 	public function setRange( amount : Float ) {
 		attackRange.val = amount;
+	}
+
+	#if !debug inline #end
+	public function claimOwnage() {
+		emitter.onAppear( emitter -> {
+			emitter.getCallbackContainer().beginCB.add(
+				( contact ) -> {
+					var maybeEnemy1 = Std.downcast( contact._b1.userData, EntityRigidBodyProps )?.entity;
+					var maybeEnemy2 = Std.downcast( contact._b2.userData, EntityRigidBodyProps )?.entity;
+					if ( maybeEnemy1 != null && maybeEnemy1 != entity ) {
+						EntityDamageService.entityDamageWithAttackListItem( entity, maybeEnemy1, desc );
+					}
+					if ( maybeEnemy2 != null && maybeEnemy2 != entity ) {
+						EntityDamageService.entityDamageWithAttackListItem( entity, maybeEnemy2, desc );
+					}
+				} );
+		} );
 	}
 
 	function onAttachedToLocation( location : Location ) {
@@ -66,31 +79,22 @@ class EntityAttackListItem {
 			EntityRigidBodyComponent,
 			( cl, rigidBodyComp ) -> {
 				rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
-					emitter = new AttackTweenBoxCastEmitter(
+					emitter.val = new AttackTweenBoxCastEmitter(
 						desc,
 						rigidBody.transform,
 						location.physics
 					);
 					attackRange.addOnValueImmediately(
-						( old, newVal ) -> emitter.setAttackRange( newVal )
+						( old, newVal ) -> emitter.val.setAttackRange( newVal )
 					);
 
 					entity.onFrame.add( update );
-
-					emitter.getCallbackContainer().beginCB.add(
-						( contact ) -> {
-							trace(
-								contact._b1._shapeList.getCollisionGroup(),
-								contact._b1._shapeList.getCollisionMask(),
-								Math.random()
-							);
-						} );
 				} );
 			}
 		);
 	}
 
 	inline function update( dt, tmod ) {
-		emitter.update( dt, tmod );
+		emitter.val.update( dt, tmod );
 	}
 }

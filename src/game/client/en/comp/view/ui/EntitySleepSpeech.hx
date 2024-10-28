@@ -20,7 +20,7 @@ class EntitySleepSpeech {
 			}
 			emitMessage();
 
-			return Repeater.repeatSeconds( emitMessage, 8 );
+			return Repeater.repeatSeconds( emitMessage, 6 );
 		}
 
 		model.isSleeping.addOnValueImmediately( ( oldVal, val ) -> {

@@ -1,5 +1,7 @@
 package game.net.entity.component;
 
+import game.client.en.comp.view.EntityViewComponent;
+import game.domain.overworld.entity.component.combat.EntityDamageType;
 import net.NSMutableProperty;
 import core.MutableProperty;
 import game.data.storage.DataStorage;
@@ -28,8 +30,9 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
-		modelComp.factions.subscribe( ( i, val ) -> factionsRepl[i] = val.id );
+		modelComp.factions.subscribe( ( i, val ) -> if ( val != null ) factionsRepl[i] = val.id );
 		modelComp.isSleeping.subscribeProp( isSleeping );
+		modelComp.onDamaged.add( onDamaged );
 	}
 
 	#if client
@@ -49,6 +52,12 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		} );
 	}
 	#end
+
+	@:rpc( clients )
+	function onDamaged( amount : Float, type : EntityDamageType ) {
+		var view = entityRepl.entity.result.components.get( EntityViewComponent );
+		view.statusBar?.sayChatMessage( Std.string( amount ) );
+	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
 		super.unregister( host, ctx );

@@ -1,5 +1,8 @@
 package game.domain.overworld.entity.component.model;
 
+import signals.Signal;
+import game.domain.overworld.entity.component.combat.EntityDamageType;
+import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
 import game.data.storage.DataStorage;
 import game.data.storage.faction.FactionDescription;
 import game.domain.overworld.item.Item;
@@ -12,11 +15,13 @@ import core.DispArray;
 class EntityModelComponent extends EntityComponent {
 
 	public final hp : MutableProperty<Float> = new MutableProperty( 1. );
+	public final onDamaged = new Signal<Float, EntityDamageType>();
 	public final inventory : EntityInventory;
 	public final stats : EntityStats;
 	public final factions : DispArray<FactionDescription>;
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
 	public final displayName = new MutableProperty<String>();
+	public final speed : EntityStatHolder = new EntityStatHolder();
 
 	public var desc( get, never ) : EntityModelDescription;
 	inline function get_desc() : EntityModelDescription {
@@ -32,6 +37,7 @@ class EntityModelComponent extends EntityComponent {
 		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
 
 		if ( desc.displayName != null ) displayName.val = desc.displayName;
+		if ( desc.baseSpeed != 0 ) speed.addStat( new EntitySpeedStat( desc.baseSpeed ) );
 	}
 
 	public function tryPickupItem( item : Item ) : ItemPickupAttemptResult {
@@ -63,6 +69,10 @@ class EntityModelComponent extends EntityComponent {
 		}
 
 		return false;
+	}
+
+	public function getDamagedWith( damage : Float, type : EntityDamageType ) {
+		onDamaged.dispatch( damage, type );
 	}
 
 	override function attachToEntity( entity : OverworldEntity ) {

@@ -1,5 +1,6 @@
 package game.client.en.comp.control;
 
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 #if client
 import core.IProperty;
 import core.MutableProperty;
@@ -14,16 +15,12 @@ import game.net.entity.component.EntityDynamicsComponentReplicator;
 
 class EntityMovementControlComponent extends EntityClientComponent {
 
-	public var inputDirX( default, null ) : Float = 0;
-	public var inputDirY( default, null ) : Float = 0;
-
 	final entityReplicator : EntityReplicator;
 	final ca : ControllerAccess<ControllerAction>;
 
 	var dynamicsComponent : EntityDynamicsComponent;
 
-	// TODO temp
-	var speed = 8;
+	var model : EntityModelComponent;
 
 	final isMovementAppliedSelf : MutableProperty<Bool> = new MutableProperty( false );
 	public var isMovementApplied( get, never ) : IProperty<Bool>;
@@ -49,6 +46,10 @@ class EntityMovementControlComponent extends EntityClientComponent {
 				isMovementAppliedSelf.subscribeProp( dynamicsComponent.isMovementApplied );
 			}
 		);
+		entity.components.onAppear(
+			EntityModelComponent,
+			( cl, model ) -> this.model = model
+		);
 	}
 
 	function update( dt : Float, tmod : Float ) {
@@ -65,18 +66,12 @@ class EntityMovementControlComponent extends EntityClientComponent {
 		var leftAng = Math.atan2( ly, lx );
 
 		if ( isMovementAppliedSelf.val ) {
-			var s = leftDist * speed * Main.inst.tmod;
-			inputDirX = Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-			inputDirY = -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			var s = leftDist * model.speed.amount.getValue() * Main.inst.tmod;
+			var inputDirX = Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
+			var inputDirY = -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
 			entity.transform.velX.val += inputDirX;
 			entity.transform.velY.val += inputDirY;
 		}
-
-		// for ( i in haxe.CallStack.callStack() )
-		// 	for ( i in haxe.CallStack.callStack() )
-		// 		// for ( i in haxe.CallStack.callStack() )
-		// 		for ( i in haxe.CallStack.callStack() )
-		// 			Std.parseFloat( ".0123" );
 	}
 }
 #end
