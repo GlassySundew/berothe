@@ -20,6 +20,7 @@ class EntityAnimations {
 
 				byKey[key] = new EntityAnimationState(
 					animation.speedMult,
+					animation.isAffectedByStats,
 					[for ( anim in animation.animations ) anim.key]
 				);
 			}
@@ -30,13 +31,16 @@ class EntityAnimations {
 class EntityAnimationState {
 
 	public final speedMult : Float;
+	public final isAffectedByStats : Bool;
 	public final keys : Array<AnimationKey>;
 
 	public inline function new(
 		speedMult : Float,
+		isAffectedByStats : Bool,
 		keys : Array<String>
 	) {
 		this.speedMult = speedMult;
+		this.isAffectedByStats = isAffectedByStats;
 		this.keys = keys;
 	}
 }

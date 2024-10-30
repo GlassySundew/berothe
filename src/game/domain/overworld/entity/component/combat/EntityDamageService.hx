@@ -15,10 +15,11 @@ class EntityDamageService {
 		var equipType = sourceAttackListItem.equipSlotType;
 		var sourceModel = sourceEntity.components.get( EntityModelComponent );
 		var targetModel = targetEntity.components.get( EntityModelComponent );
-		// todo weapon archetype consideration
-		var itemEquipped = sourceModel.inventory.equipSlots[equipType].itemProp.getValue();
+		// todo weapon archetype consideration is through stat holders
 
-		var attackStat = sourceModel.stats.limbAttacks.filter( limbAttk -> limbAttk.limb == equipType )[0];
+		var attackStat = sourceModel.stats.limbAttacks.filter(
+			limbAttk -> limbAttk.desc.equipSlotType == equipType
+		)[0];
 		attackStat.amount;
 
 		targetModel.getDamagedWith( 1, PHYSICAL );

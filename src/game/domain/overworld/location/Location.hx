@@ -1,5 +1,7 @@
 package game.domain.overworld.location;
 
+import rx.Observable;
+import rx.ObservableFactory;
 import game.domain.overworld.entity.EntityFactory;
 import signals.Signal;
 import util.Assert;
@@ -27,9 +29,11 @@ class Location {
 
 	public final onChunkCreated = new Signal<Chunk>();
 	public final onEntityAdded = new Signal<OverworldEntity>();
+	public final entityStream : Observable<OverworldEntity>;
 
 	var locationDataProvider : ILocationObjectsDataProvider;
-	var entities : Array<OverworldEntity> = [];
+	final entities : Array<OverworldEntity> = [];
+	final globalEntities : Array<OverworldEntity> = [];
 
 	public function new(
 		locationDesc : LocationDescription,
@@ -44,6 +48,9 @@ class Location {
 
 		chunks = new Chunks( this, locationDesc.chunkSize );
 		physics = PhysicsEngineAbstractFactory.create();
+
+		entityStream = ObservableFactory.ofIterable( entities )
+			.append( ObservableFactory.fromSignal( onEntityAdded ) );
 	}
 
 	public function addEntity( entity : OverworldEntity ) {
@@ -82,6 +89,9 @@ class Location {
 	public function update( dt : Float, tmod : Float ) {
 		physics.update( dt );
 		for ( entity in entities ) {
+			entity.update( dt, tmod );
+		}
+		for ( entity in globalEntities ) {
 			entity.update( dt, tmod );
 		}
 		behaviourManager.update( dt, tmod );
@@ -147,6 +157,6 @@ class Location {
 
 	function addGlobalEntity( entity : OverworldEntity ) {
 		entity.addToLocation( this );
-		entities.push( entity );
+		globalEntities.push( entity );
 	}
 }

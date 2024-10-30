@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.combat;
 
+import game.data.storage.entity.body.properties.AttackListItemVO;
 import util.Assert;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import be.Constant;
@@ -45,12 +46,12 @@ class EntityAttackListComponent extends EntityComponent {
 		return result;
 	}
 
-	public inline function getItemByEquipSlotType(
-		type : EntityEquipmentSlotType
+	public inline function getItemByDesc(
+		desc : AttackListItemVO
 	) : Null<EntityAttackListItem> {
 		var result = null;
 		for ( listItem in attacksList ) {
-			if ( listItem.desc.equipSlotType == type ) {
+			if ( listItem.desc == desc ) {
 				result = listItem;
 				break;
 			}
@@ -89,12 +90,12 @@ class EntityAttackListComponent extends EntityComponent {
 		entity.components.onAppear(
 			EntityModelComponent,
 			( _, modelCompRepl ) -> {
-				var attackMap = modelCompRepl.stats.limbAttacks;
 				var weaponRanges = modelCompRepl.stats.weaponRanges;
-				
+
+				Assert.isTrue( weaponRanges.length > 0 );
+
 				for ( weaponRangeStatHolder in weaponRanges ) {
-					if ( weaponRangeStatHolder.limb == null ) continue;
-					var attackItem = getItemByEquipSlotType( weaponRangeStatHolder.limb );
+					var attackItem = getItemByDesc( weaponRangeStatHolder.desc );
 					Assert.notNull( attackItem );
 					weaponRangeStatHolder.amount.addOnValueImmediately(
 						( _, val ) -> attackItem.setRange( val )

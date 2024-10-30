@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties;
 import game.physics.oimo.EntityRigidBodyProps;
 import util.Assert;
 import rx.disposables.ISubscription;
@@ -10,13 +11,9 @@ class SleepyPointGuard extends EntityBehaviourBase {
 
 	final triggerId : String;
 
-	public function new( triggerId : String ) {
-		super();
-		this.triggerId = triggerId;
-	}
-
-	override function attachToEntity( entity : OverworldEntity ) {
-		super.attachToEntity( entity );
+	public function new( params : AIProperties ) {
+		super(params);
+		this.triggerId = params.triggerId;
 	}
 
 	override function onAttachedToLocation( location : Location ) {

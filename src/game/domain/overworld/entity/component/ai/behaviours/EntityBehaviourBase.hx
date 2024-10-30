@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties;
 import dn.M;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.domain.overworld.entity.OverworldEntity;
@@ -17,19 +18,23 @@ abstract class EntityBehaviourBase {
 
 	static final enemyContactRange = 5;
 
+	final agroRange : Float = 25;
+
 	var dynamics : EntityDynamicsComponent;
 	var model : EntityModelComponent;
 	var attackComp : EntityAttackListComponent;
 	var entity( default, null ) : OverworldEntity;
 	var state : State;
 
-	public function new() {
+	public function new( params : AIProperties ) {
 		state = CALM;
+		if ( params?.agroRange != null ) agroRange = params.agroRange;
 	}
+
+	public function dispose( _ ) {}
 
 	public function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;
-		entity.location.onAppear( onAttachedToLocation );
 		entity.components.onAppear(
 			EntityDynamicsComponent,
 			( cl, dynComp ) -> this.dynamics = dynComp
@@ -42,13 +47,14 @@ abstract class EntityBehaviourBase {
 			EntityAttackListComponent,
 			( cl, attackComp ) -> this.attackComp = attackComp
 		);
+		entity.location.onAppear( onAttachedToLocation );
+		entity.disposed.then( dispose );
 	}
 
 	public function update( dt : Float, tmod : Float ) {
 		switch state {
 			case CALM:
 			case AGRO( enemy ):
-				// find angle to enemy
 				if ( //
 					M.dist(
 						entity.transform.x,
@@ -57,25 +63,31 @@ abstract class EntityBehaviourBase {
 						enemy.transform.y
 					) > enemyContactRange //
 				) {
-
-					var angle = Math.atan2(
-						enemy.transform.y.val - entity.transform.y.val,
-						enemy.transform.x.val - entity.transform.x.val
-					);
-					var s = model.speed.amount.getValue() * tmod;
-					var inputDirX = Math.cos( angle ) * s;
-					var inputDirY = Math.sin( angle ) * s;
-					entity.transform.velX.val += inputDirX;
-					entity.transform.velY.val += inputDirY;
-					dynamics.isMovementApplied.val = true;
+					walkTo( enemy.transform.x.val, enemy.transform.y.val, tmod );
+				} else {
+					dynamics.isMovementApplied.val = false;
 				}
 
 				attackComp.attack();
 		}
 	}
 
+	inline function walkTo( x : Float, y : Float, tmod : Float ) {
+		var angle = Math.atan2(
+			y - entity.transform.y.val,
+			x - entity.transform.x.val
+		);
+		var s = model.speed.amount.getValue() * tmod;
+		var inputDirX = Math.cos( angle ) * s;
+		var inputDirY = Math.sin( angle ) * s;
+		entity.transform.velX.val += inputDirX;
+		entity.transform.velY.val += inputDirY;
+		dynamics.isMovementApplied.val = true;
+	}
+
 	function onAttachedToLocation( location : Location ) {
-		location.behaviourManager.attachBehaviour( this );
+		location.behaviourManager.attachBehaviour( this, entity );
+		initializeAttackComponent();
 	}
 
 	final function sleep() {
@@ -84,6 +96,40 @@ abstract class EntityBehaviourBase {
 
 	final function wake() {
 		entity.components.get( EntityModelComponent ).wake();
+	}
+
+	function initializeAttackComponent() {
+		trace( entity );
+		if ( attackComp == null ) return;
+		if ( model.factions.length == 0 || !model.hasEnemy() ) return;
+
+		entity.location.getValue().entityStream.observe(
+			enemy -> {
+				if ( enemy == entity ) return;
+				var enemyModel = enemy.components.get( EntityModelComponent );
+				if ( enemyModel == null || !model.isEnemy( enemy ) ) return;
+
+				var dynamics = enemy.components.get( EntityDynamicsComponent );
+				dynamics.onMove.add( onEnemyEntityMove.bind( enemy ) );
+			}
+		);
+	}
+
+	function onEnemyEntityMove( enemy : OverworldEntity ) {
+		if ( model.isSleeping ) return;
+		switch state {
+			case AGRO( enemy ): return;
+			default:
+		}
+		if ( M.dist(
+			enemy.transform.x,
+			enemy.transform.y,
+			entity.transform.x,
+			entity.transform.y
+		) < agroRange ) {
+			state = AGRO( enemy );
+			trace( "agroed on: " + enemy );
+		}
 	}
 
 	// called when have no aggro in list and not sleeping

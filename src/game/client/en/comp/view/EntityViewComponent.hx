@@ -127,7 +127,13 @@ class EntityViewComponent extends EntityComponent {
 		Main.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
 		modelComp.displayName.addOnValueImmediately(
 			( oldVal, newVal ) -> {
-				statusBar.setDisplayNameVisibility( newVal != null && newVal != "" );
+				statusBar.setDisplayNameVisibility(
+					!modelComp.desc.hideNameByDefault
+					&& (
+						newVal != null
+						&& newVal != ""
+					)
+				);
 				statusBar.setDisplayName( newVal );
 			}
 		);

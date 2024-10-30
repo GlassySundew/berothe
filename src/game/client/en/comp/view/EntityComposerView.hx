@@ -141,7 +141,11 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 			stateListeners[IDLE] = new AnimationState( idleListener );
 		}
 		if ( animations.byKey.get( WALK ) != null ) {
-			stateListeners[WALK] = new WalkAnimationState( viewComponent.entity, walkListener );
+			stateListeners[WALK] = new WalkAnimationState(
+				viewComponent.entity,
+				walkListener,
+				animations.byKey[WALK].isAffectedByStats
+			);
 		}
 		viewComponent.entity.components.onAppear(
 			EntityAttackListComponent,

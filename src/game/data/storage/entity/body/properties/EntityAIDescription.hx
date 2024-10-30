@@ -6,16 +6,29 @@ import game.domain.overworld.entity.EntityComponent;
 import net.NetNode;
 import game.data.storage.entity.component.EntityComponentDescription;
 
+class AIProperties {
+
+	public final triggerId : Null<String>;
+	public final agroRange : Null<Float>;
+
+	public inline function new( entry : Data.EntityProperty_properties_behaviour_params ) {
+		triggerId = entry.triggerId;
+		agroRange = entry.agroRange;
+	}
+}
+
 inline function getTypeFromCdb( cdbEntry : Data.NpcBehaviour ) : EntityBehaviourType {
 	return
 		switch cdbEntry.id {
 			case sleepyPointGuard: SLEEPY_POINT_GUARD;
+			case randomRoaming: RANDOM_ROAMING;
 		}
 }
 
 enum abstract EntityBehaviourType( String ) to String {
 
 	var SLEEPY_POINT_GUARD;
+	var RANDOM_ROAMING;
 }
 
 class EntityAIDescription extends EntityComponentDescription {
@@ -28,16 +41,16 @@ class EntityAIDescription extends EntityComponentDescription {
 		if ( entry == null ) return null;
 		return new EntityAIDescription(
 			getTypeFromCdb( entry.type ),
-			[for ( param in entry.params ) param.param]
+			entry.params != null ? new AIProperties( entry.params ) : null
 		);
 	}
 
 	public final type : EntityBehaviourType;
-	public final params : Array<String>;
+	public final params : AIProperties;
 
 	public function new(
 		id : EntityBehaviourType,
-		params : Array<String>
+		params : AIProperties
 	) {
 		super( id );
 		type = id;

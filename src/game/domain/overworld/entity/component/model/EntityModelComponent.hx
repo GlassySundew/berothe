@@ -14,8 +14,8 @@ import core.DispArray;
 
 class EntityModelComponent extends EntityComponent {
 
-	public final hp : MutableProperty<Float> = new MutableProperty( 1. );
-	public final onDamaged = new Signal<Float, EntityDamageType>();
+	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
+	public final onDamaged = new Signal<Int, EntityDamageType>();
 	public final inventory : EntityInventory;
 	public final stats : EntityStats;
 	public final factions : DispArray<FactionDescription>;
@@ -35,6 +35,9 @@ class EntityModelComponent extends EntityComponent {
 		stats = new EntityStats( desc );
 		factions = new DispArray();
 		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
+
+		if ( desc.baseHp != 0 ) hp.val = desc.baseHp;
+		hp.addOnValueImmediately( onHpChanged );
 
 		if ( desc.displayName != null ) displayName.val = desc.displayName;
 		if ( desc.baseSpeed != 0 ) speed.addStat( new EntitySpeedStat( desc.baseSpeed ) );
@@ -71,12 +74,29 @@ class EntityModelComponent extends EntityComponent {
 		return false;
 	}
 
-	public function getDamagedWith( damage : Float, type : EntityDamageType ) {
+	public function hasEnemy() {
+		for ( faction in factions ) {
+			if ( faction.hostileFactions.get().length > 0 ) {
+				return true;
+				break;
+			}
+		}
+		return false;
+	}
+
+	public function getDamagedWith( damage : Int, type : EntityDamageType ) {
+		hp.val -= damage;
 		onDamaged.dispatch( damage, type );
 	}
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 		stats.attachToEntity( entity );
+	}
+
+	function onHpChanged( oldVal : Int, newVal : Int ) {
+		if ( newVal <= 0 ) {
+			entity.dispose();
+		}
 	}
 }

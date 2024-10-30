@@ -10,14 +10,19 @@ class WalkAnimationState extends AnimationState {
 	final entity : OverworldEntity;
 	final entityModel : EntityModelComponent;
 
-	public function new( entity : OverworldEntity, listener ) {
-		super( listener );
+	public function new(
+		entity : OverworldEntity,
+		listener,
+		ignoreStats
+	) {
+		super( listener, ignoreStats );
 
 		this.entity = entity;
 		entityModel = entity.components.get( EntityModelComponent );
 	}
 
 	override function getSpeed() : Float {
-		return M.dist( 0, 0, entity.transform.velX, entity.transform.velY );
+		return
+			isAffectedByStats ? M.dist( 0, 0, entity.transform.velX, entity.transform.velY ) : 1;
 	}
 }

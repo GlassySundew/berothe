@@ -41,7 +41,7 @@ class PlayerReplicationService {
 	/** chunks that are currently visible by a player **/
 	final chunks : Map<Int, Map<Int, Map<Int, PlayerSubscribedChunk>>> = [];
 
-	// final chunksSubscriptions:
+	final sub = Composite.create();
 
 	public function new(
 		playerEntity : OverworldEntity,
@@ -58,10 +58,14 @@ class PlayerReplicationService {
 	}
 
 	function init() {
-		playerEntity.chunk.addOnValueImmediately( onAddedToChunk );
+		sub.add( playerEntity.chunk.addOnValueImmediately( onAddedToChunk ) );
+		sub.add( playerEntity.location.addOnValueImmediately( onAddedToLocation ) );
+		playerEntity.disposed.then( _ -> {
+			trace( "player removed" );
+			sub.unsubscribe();
+		} );
 		cliCon.addChild( playerEntityReplicator );
 		cliCon.giveControlOverEntity( playerEntityReplicator );
-		playerEntity.location.addOnValueImmediately( onAddedToLocation );
 
 		var transform = playerEntityReplicator.transformRepl;
 		transform.x.syncBackOwner = cliCon;
@@ -126,18 +130,19 @@ class PlayerReplicationService {
 	}
 
 	function wipeAllChunks() {
-		for ( z in chunks ) {
-			for ( y in z ) {
-				for ( chunk in y ) {
-					trace( "todo" );
-					// cliCon.unregisterChild(
-					// 	chunk,
-					// 	NetworkHost.current
-					// );
+		for ( zChunkRow in chunks ) {
+			for ( yChunkRow in zChunkRow ) {
+				for ( xi => xChunkRepl in yChunkRow ) {
+					xChunkRepl.subscription.unsubscribe();
+					cliCon.removeChild( xChunkRepl.replicator );
+					xChunkRepl.replicator.unregister(
+						NetworkHost.current,
+						cliCon.networkClient.ctx
+					);
 				}
 			}
 		}
-		untyped chunks.length = 0;
+		chunks.clear();
 	}
 
 	function clearChunksOutOfRange( oldChunk : Chunk, newChunk : Chunk ) {
@@ -199,6 +204,11 @@ class PlayerReplicationService {
 	}
 
 	function onAddedToChunk( oldChunk : Chunk, chunk : Chunk ) {
+		if ( chunk == null ) {
+			wipeAllChunks();
+			return;
+		}
+
 		if ( oldChunk.location != chunk.location ) {
 			wipeAllChunks();
 		} else {

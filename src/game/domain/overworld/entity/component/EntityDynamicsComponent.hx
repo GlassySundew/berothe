@@ -77,7 +77,6 @@ class EntityDynamicsComponent extends EntityComponent {
 		isResting.val = !onMoveInvalidate;
 		
 		if ( onMoveInvalidate ) {
-			// trace( "onMoving" );
 			onMoveInvalidate = false;
 			onMove.dispatch();
 		}

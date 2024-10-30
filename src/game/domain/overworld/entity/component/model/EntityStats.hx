@@ -13,8 +13,8 @@ class EntityStats {
 
 	public final modelDesc : EntityModelDescription;
 
-	public final limbAttacks : Array<EntityLimbedStatHolder> = [];
-	public final weaponRanges : Array<EntityLimbedStatHolder> = [];
+	public final limbAttacks : Array<EntityAttkItemStatHolder> = [];
+	public final weaponRanges : Array<EntityAttkItemStatHolder> = [];
 
 	// todo
 	// public final defence
@@ -53,12 +53,14 @@ class EntityStats {
 	}
 
 	function createAttackStat() {
+		var attkList = entity.desc.getBodyDescription().attackDesc?.attackList;
+		if ( attkList == null ) return;
 		for ( desc in entity.desc.getBodyDescription().attackDesc.attackList ) {
-			var holder = new EntityLimbedStatHolder( desc.equipSlotType );
+			var holder = new EntityAttkItemStatHolder( desc );
 			limbAttacks.push( holder );
 			holder.addStat( new EntityAttackStat( desc.baseAttack ) );
 
-			var holder = new EntityLimbedStatHolder( desc.equipSlotType );
+			var holder = new EntityAttkItemStatHolder( desc );
 			weaponRanges.push( holder );
 			holder.addStat( new EntityAttackStat( desc.endX ) );
 		}
@@ -66,7 +68,7 @@ class EntityStats {
 
 	inline function addAttackLimbStat(
 		stat : EntityAdditiveStatBase,
-		statHolders : Array<EntityLimbedStatHolder>,
+		statHolders : Array<EntityAttkItemStatHolder>,
 		?slot : EquipItemSlot
 	) {
 		if ( slot == null ) {
@@ -75,14 +77,14 @@ class EntityStats {
 				attack.addStat( stat );
 			}
 		} else if ( slot != null ) {
-			var limbedStat = statHolders.filter( statHolder -> statHolder.limb == slot.desc.type )[0];
+			var limbedStat = statHolders.filter( statHolder -> statHolder.desc.equipSlotType == slot.desc.type )[0];
 
 			if ( limbedStat != null ) {
 				limbedStat.addStat( stat );
 			} else {
 				var linkedSlots = getLinkedSlots( slot.desc, statHolders );
 				for ( linkedSlot in linkedSlots ) {
-					linkedSlot.addStat(stat);
+					linkedSlot.addStat( stat );
 				}
 			}
 		}
@@ -90,9 +92,11 @@ class EntityStats {
 
 	inline function getLinkedSlots(
 		slotDesc : EntityEquipSlotDescription,
-		statHolders : Array<EntityLimbedStatHolder>
-	) : Array<EntityLimbedStatHolder> {
-		var linkedStats = statHolders.filter( statHolder -> slotDesc.links.contains( statHolder.limb ) );
+		statHolders : Array<EntityAttkItemStatHolder>
+	) : Array<EntityAttkItemStatHolder> {
+		var linkedStats = statHolders.filter(
+			statHolder -> slotDesc.links.contains( statHolder.desc.equipSlotType )
+		);
 
 		return linkedStats;
 	}

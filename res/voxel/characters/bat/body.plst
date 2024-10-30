@@ -15,6 +15,7 @@
 		{
 			"type": "fbfAnimationNode",
 			"name": "walk",
+			"z": 11,
 			"children": [
 				{
 					"type": "model",
@@ -50,11 +51,6 @@
 					"type": "model",
 					"name": "bat_7_walk",
 					"source": "voxel/characters/bat/obj/fbx/bat_7_walk.fbx"
-				},
-				{
-					"type": "model",
-					"name": "bat_8_walk",
-					"source": "voxel/characters/bat/obj/fbx/bat_8_walk.fbx"
 				}
 			]
 		}

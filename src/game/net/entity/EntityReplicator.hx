@@ -71,9 +71,9 @@ class EntityReplicator extends NetNode {
 	}
 
 	function onEntityDisposed( ?v ) {
-		unregister( NetworkHost.current );
 		componentsRepl.dispose();
 		parent?.removeChild( this );
+		unregister( NetworkHost.current );
 		__host = null;
 	}
 
@@ -88,6 +88,8 @@ class EntityReplicator extends NetNode {
 
 		componentsRepl.followEntityClient( this );
 		transformRepl.followEntityClient( this );
+
+		trace( "alived entity: " + entity.result );
 	}
 
 	function onLocationChanged( _, location : Location ) {

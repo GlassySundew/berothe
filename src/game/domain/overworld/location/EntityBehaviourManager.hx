@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.component.ai.behaviours.EntityBehaviourBase;
 
 class EntityBehaviourManager {
@@ -11,8 +12,9 @@ class EntityBehaviourManager {
 
 	public function new() {}
 
-	public function attachBehaviour( behaviour : EntityBehaviourBase ) {
+	public function attachBehaviour( behaviour : EntityBehaviourBase, entity : OverworldEntity ) {
 		behaviours.push( behaviour );
+		entity.disposed.then( ( _ ) -> behaviours.remove( behaviour ) );
 	}
 
 	public function update( dt : Float, tmod : Float ) {

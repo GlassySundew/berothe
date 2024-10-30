@@ -1,5 +1,10 @@
 package pass;
 
+import h2d.Tile;
+import h2d.Bitmap;
+import h3d.Vector;
+import game.net.client.GameClient;
+import h3d.Camera;
 import hxd.Res;
 import h3d.mat.Texture;
 
@@ -29,8 +34,18 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 	var outline = new h3d.pass.ScreenFx( new ScreenOutline() );
 	var outlineBlur = new h3d.pass.Blur( 4 );
 
+	var controlCharDepth : Texture;
+
+	final controlCharacterPos : h3d.Vector = new Vector();
+	final controlCam : h3d.Camera = new Camera();
+	final characterDepth : CharacterDepth = new CharacterDepth();
+
 	public function new( env ) {
 		super( env );
+
+		controlCam.zNear = 0.1;
+		controlCam.zFar = 10000;
+		controlCam.fovY = 179;
 	}
 
 	override function getPassByName( name : String ) : h3d.pass.Output {
@@ -47,6 +62,113 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 		return props;
 	}
 
+	public function renderCharacterDepth() {
+
+		var transform = GameClient.inst.controlledEntity.val?.entity.result?.transform;
+		if ( transform == null ) return;
+		controlCharacterPos.set( transform.x, transform.y, transform.z );
+		characterDepth.shader.characterPos.x = transform.x;
+		characterDepth.shader.characterPos.y = transform.y;
+		characterDepth.shader.characterPos.z = transform.z;
+
+		controlCam.pos.x = controlCharacterPos.x;
+		controlCam.pos.y = controlCharacterPos.y;
+		controlCam.pos.z = controlCharacterPos.z;
+
+		var mainCam = ctx.camera;
+		ctx.setCamera( controlCam );
+		initGlobals();
+
+		setTarget( controlCharDepth );
+		ctx.engine.clearF( new h3d.Vector4( 1 ) );
+		renderPass( output, get( "default" ) );
+
+		ctx.setCamera( mainCam );
+		initGlobals();
+	}
+
+	override function initTextures() {
+		super.initTextures();
+		// controlCharDepth = allocTarget( "characterDepth", true, 1., R32F );
+
+		// new Bitmap( Tile.fromTexture( controlCharDepth ), Boot.inst.s2d ).scale( 0.25 );
+	}
+
+	override function render() {
+		beginPbr();
+		// renderCharacterDepth();
+
+		setTarget( textures.depth );
+		ctx.engine.clearF( new h3d.Vector4( 1 ) );
+
+		setTargets( getPbrRenderTargets( false ) );
+		clear( 0, 1, 0 );
+
+		setTargets( getPbrRenderTargets( true ) );
+
+		begin( MainDraw );
+		renderPass( output, get( "terrain" ) );
+		drawPbrDecals( "terrainDecal" );
+		renderPass( output, get( "default" ), frontToBack );
+		renderPass( output, get( "alpha" ), backToFront );
+		renderPass( output, get( "additive" ) );
+		end();
+
+		begin( Decals );
+		drawPbrDecals( "decal" );
+		drawEmissiveDecals( "emissiveDecal" );
+		end();
+
+		setTarget( textures.hdr );
+		clear( 0 );
+		lighting();
+
+		begin( Forward );
+		var ls = Std.downcast( getLightSystem(), h3d.scene.pbr.LightSystem );
+		ls.forwardMode = true;
+		setTargets( [textures.hdr, getPbrDepth()] );
+		renderPass( colorDepthOutput, get( "forward" ) );
+		setTarget( textures.hdr );
+		renderPass( defaultPass, get( "forwardAlpha" ), backToFront );
+		ls.forwardMode = false;
+		end();
+
+		if ( renderMode == LightProbe ) {
+			resetTarget();
+			copy( textures.hdr, null );
+			// no warnings
+			for ( p in passObjects ) if ( p != null ) p.rendered = true;
+			return;
+		}
+
+		begin( BeforeTonemapping );
+		draw( "beforeTonemappingDecal" );
+		draw( "beforeTonemapping" );
+		end();
+
+		setTarget( textures.ldr );
+		tonemap.render();
+
+		begin( AfterTonemapping );
+		draw( "afterTonemappingDecal" );
+		draw( "afterTonemapping" );
+		end();
+
+		begin( Overlay );
+		draw( "overlay" );
+		end();
+
+		endPbr();
+	}
+	override function endPbr() {
+		// resetTarget();
+		switch ( displayMode ) {
+			case Pbr, Env, MatCap:
+				// characterDepth.apply( controlCharDepth );
+			default:
+		}
+		super.endPbr();
+	}
 	override function end() {
 		renderOutlines();
 		super.end();
@@ -72,14 +194,13 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 }
 
 class ScreenOutline extends h3d.shader.ScreenShader {
+
 	static var SRC = {
-
-		@param var texture: Sampler2D;
-
+		@param var texture : Sampler2D;
 		function fragment() {
-			var outval = texture.get(calculatedUV).rgb;
+			var outval = texture.get( calculatedUV ).rgb;
 			pixelColor.a = outval.r > 0.1 && outval.r < 0.5 ? 1.0 : 0.0;
-			pixelColor.rgb = (outval.r > outval.g ? 0.5 : 1.0).xxx;
+			pixelColor.rgb = ( outval.r > outval.g ? 0.5 : 1.0 ).xxx;
 		}
 	};
 }

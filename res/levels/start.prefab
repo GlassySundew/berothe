@@ -1325,8 +1325,8 @@
 				"spawnedEntity": "player",
 				"$cdbtype": "entitySpawnPointDF"
 			},
-			"x": -122.26,
-			"y": 58.14
+			"x": -51.67,
+			"y": -75.67
 		},
 		{
 			"type": "reference",
@@ -1394,7 +1394,6 @@
 			"type": "reference",
 			"name": "bat",
 			"source": "voxel/characters/bat/bat.enco",
-			"editorOnly": true,
 			"props": {
 				"entity": "bat",
 				"$cdbtype": "locationEntityDF"
