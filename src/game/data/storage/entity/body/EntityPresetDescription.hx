@@ -14,6 +14,7 @@ import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.component.EntityComponentDescription;
 #if client
+import game.data.storage.entity.body.view.EntityViewComponentExtensionsFactory;
 import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.body.view.EntityLightSourceDescription;
 #end
@@ -79,8 +80,10 @@ class EntityPresetDescription extends DescriptionBase {
 		clientPropertyDescs = ArrayExtensions.deNullify(( [
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
 			lightSource = EntityLightSourceDescription.fromCdb( entry.properties.properties.lightSource ),
-
-		] : Array<EntityComponentDescription> ) );
+		] : Array<EntityComponentDescription> )
+			.concat(
+				EntityViewComponentExtensionsFactory.fromCdb( entry.view.viewComps )
+			) );
 		#end
 	}
 }

@@ -662,6 +662,15 @@
 					}
 				},
 				{
+					"id": "gold_piece",
+					"properties": {
+						"dynamics": true,
+						"interactable": {
+							"id": "gold_pickup"
+						}
+					}
+				},
+				{
 					"id": "orc_prison_door",
 					"properties": {
 						"dynamics": true,
@@ -1409,6 +1418,11 @@
 					"name": "type"
 				},
 				{
+					"typeStr": "17",
+					"name": "viewComps",
+					"kind": null
+				},
+				{
 					"typeStr": "8",
 					"name": "animations",
 					"opt": true,
@@ -1420,19 +1434,22 @@
 					"id": "none",
 					"type": [
 						0
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "grayboxView",
 					"type": [
 						2
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "model",
 					"type": [
 						3
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "human",
@@ -1521,7 +1538,8 @@
 							"speedMult": 1,
 							"isAffectedByStats": true
 						}
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "orc",
@@ -1630,7 +1648,8 @@
 							],
 							"isAffectedByStats": true
 						}
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "bat",
@@ -1669,7 +1688,8 @@
 							],
 							"isAffectedByStats": true
 						}
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "wall_torch",
@@ -1688,14 +1708,16 @@
 							"speedMult": 2,
 							"isAffectedByStats": true
 						}
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "skeleton_prisoner",
 					"type": [
 						1,
 						"skeleton_prisoner"
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "orc_prison_door",
@@ -1714,6 +1736,19 @@
 							"speedMult": 1,
 							"isAffectedByStats": true
 						}
+					],
+					"viewComps": {}
+				},
+				{
+					"id": "gold_piece",
+					"viewComps": {
+						"colorRandomShift": {
+							"radius": 10
+						}
+					},
+					"type": [
+						1,
+						"gold_piece"
 					]
 				},
 				{
@@ -1733,7 +1768,8 @@
 							"speedMult": 1,
 							"isAffectedByStats": true
 						}
-					]
+					],
+					"viewComps": {}
 				},
 				{
 					"id": "club",
@@ -1752,7 +1788,8 @@
 							"speedMult": 1,
 							"isAffectedByStats": true
 						}
-					]
+					],
+					"viewComps": {}
 				}
 			],
 			"separators": [
@@ -1766,10 +1803,42 @@
 				},
 				{
 					"title": "items",
-					"id": "orc_prison_key"
+					"id": "gold_piece"
 				}
 			],
 			"props": {}
+		},
+		{
+			"name": "entityView@viewComps",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "17",
+					"name": "colorRandomShift",
+					"opt": true
+				}
+			]
+		},
+		{
+			"name": "entityView@viewComps@colorRandomShift",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "3",
+					"name": "radius",
+					"opt": true
+				}
+			]
 		},
 		{
 			"name": "entityComposed",
@@ -1802,6 +1871,10 @@
 				{
 					"id": "club",
 					"file": "voxel/items/club/entity/club.enco"
+				},
+				{
+					"id": "gold_piece",
+					"file": "voxel/items/gold_piece/gold_piece.enco"
 				},
 				{
 					"id": "orc_prison_key",
@@ -1978,6 +2051,12 @@
 				}
 			],
 			"lines": [
+				{
+					"id": "gold",
+					"type": 0,
+					"props": {},
+					"iconAsset": ""
+				},
 				{
 					"id": "orc_prison_key",
 					"type": 0,

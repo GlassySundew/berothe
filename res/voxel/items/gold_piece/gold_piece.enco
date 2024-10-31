@@ -1,0 +1,10 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "model",
+			"name": "gold_piece",
+			"source": "voxel/items/gold_piece/obj/fbx/gold_piece.fbx"
+		}
+	]
+}
