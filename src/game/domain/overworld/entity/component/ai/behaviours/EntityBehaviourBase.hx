@@ -77,7 +77,7 @@ abstract class EntityBehaviourBase {
 			y - entity.transform.y.val,
 			x - entity.transform.x.val
 		);
-		var s = model.speed.amount.getValue() * tmod;
+		var s = model.stats.speed.amount.getValue() * tmod;
 		var inputDirX = Math.cos( angle ) * s;
 		var inputDirY = Math.sin( angle ) * s;
 		entity.transform.velX.val += inputDirX;
@@ -99,7 +99,6 @@ abstract class EntityBehaviourBase {
 	}
 
 	function initializeAttackComponent() {
-		trace( entity );
 		if ( attackComp == null ) return;
 		if ( model.factions.length == 0 || !model.hasEnemy() ) return;
 
@@ -128,7 +127,6 @@ abstract class EntityBehaviourBase {
 			entity.transform.y
 		) < agroRange ) {
 			state = AGRO( enemy );
-			trace( "agroed on: " + enemy );
 		}
 	}
 

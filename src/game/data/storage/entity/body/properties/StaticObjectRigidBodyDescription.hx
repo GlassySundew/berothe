@@ -9,7 +9,7 @@ import net.NetNode;
 class StaticObjectRigidBodyDescription extends EntityComponentDescription {
 
 	public static function fromCdb(
-		entry : Data.EntityProperty_properties_staticObjectRigidBody
+		entry : Data.EntityPropertySetup_properties_staticObjectRigidBody
 	) : StaticObjectRigidBodyDescription {
 		if ( entry == null ) return null;
 		return new StaticObjectRigidBodyDescription( entry.id.toString() );

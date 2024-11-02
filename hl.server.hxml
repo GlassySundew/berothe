@@ -5,4 +5,4 @@ base.hxml
 -main ServerBoot
 
 -D hl-ver=1.14.0
--hl bin/server.hl
+

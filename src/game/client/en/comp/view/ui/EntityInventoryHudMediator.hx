@@ -9,7 +9,7 @@ class EntityInventoryHudMediator {
 
 	final inventory : EntityInventory;
 	final view : EntityInventoryHudViewMediator;
-	
+
 	public var inventorySlots : Array<ItemSlot>;
 
 	public function new( inventory : EntityInventory ) {
@@ -27,6 +27,7 @@ class EntityInventoryHudMediator {
 		for ( slot in inventory.inventorySlots ) {
 			// todo temp
 			if ( slot is EquipItemSlot ) continue;
+			if ( slot.restriction.types.contains( GOLD ) ) continue;
 
 			inventorySlots.push( slot );
 		}

@@ -87,7 +87,6 @@ class Location {
 	}
 
 	public function update( dt : Float, tmod : Float ) {
-		physics.update( dt );
 		for ( entity in entities ) {
 			entity.update( dt, tmod );
 		}
@@ -95,6 +94,7 @@ class Location {
 			entity.update( dt, tmod );
 		}
 		behaviourManager.update( dt, tmod );
+		physics.update( dt );
 	}
 
 	public function loadAuthoritative() {

@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import future.Future;
 import signals.Signal;
 import game.domain.overworld.entity.component.combat.EntityDamageType;
 import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
@@ -14,14 +15,14 @@ import core.DispArray;
 
 class EntityModelComponent extends EntityComponent {
 
-	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
-	public final onDamaged = new Signal<Int, EntityDamageType>();
 	public final inventory : EntityInventory;
 	public final stats : EntityStats;
 	public final factions : DispArray<FactionDescription>;
+	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
+	public final onDamaged = new Signal<Int, EntityDamageType>();
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
 	public final displayName = new MutableProperty<String>();
-	public final speed : EntityStatHolder = new EntityStatHolder();
+	public final onDeath : Future<Bool> = new Future();
 
 	public var desc( get, never ) : EntityModelDescription;
 	inline function get_desc() : EntityModelDescription {
@@ -40,11 +41,10 @@ class EntityModelComponent extends EntityComponent {
 		hp.addOnValueImmediately( onHpChanged );
 
 		if ( desc.displayName != null ) displayName.val = desc.displayName;
-		if ( desc.baseSpeed != 0 ) speed.addStat( new EntitySpeedStat( desc.baseSpeed ) );
 	}
 
-	public function tryPickupItem( item : Item ) : ItemPickupAttemptResult {
-		return inventory.tryPickupItem( item );
+	public function tryGiveItem( item : Item ) : ItemPickupAttemptResult {
+		return inventory.tryGiveItem( item );
 	}
 
 	public function hasSpaceForItemDesc( itemDesc : ItemDescription, amount = 1 ) : Bool {
@@ -89,6 +89,11 @@ class EntityModelComponent extends EntityComponent {
 		onDamaged.dispatch( damage, type );
 	}
 
+	override function claimOwnage() {
+		super.claimOwnage();
+		inventory.claimOwnage();
+	}
+
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 		stats.attachToEntity( entity );
@@ -96,6 +101,7 @@ class EntityModelComponent extends EntityComponent {
 
 	function onHpChanged( oldVal : Int, newVal : Int ) {
 		if ( newVal <= 0 ) {
+			onDeath.resolve( true );
 			entity.dispose();
 		}
 	}

@@ -20,7 +20,6 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	static final rotationApplicationVelMin = 4;
 
-
 	final rigidBodyDesc : RigidBodyTorsoDescription;
 
 	var torsoShape : IRigidBodyShape;

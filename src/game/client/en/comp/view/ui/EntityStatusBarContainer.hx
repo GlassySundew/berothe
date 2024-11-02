@@ -62,7 +62,7 @@ class EntityStatusBarContainer {
 
 	public function sayChatMessage( text : String ) {
 		var textComp = new TextTooltipComp( text );
-		textComp.scale( 0.5 );
+		// textComp.scale( 0.5 );
 		content.addChild( textComp );
 		viewComp.cooldown.setS(
 			"chatMessage" + chatMessagesAmount++,

@@ -49,7 +49,7 @@ class Chunk {
 		if ( entities.remove( entity ) ) {
 			onEntityRemoved.dispatch( entity );
 		} else {
-			throw "entity: " + entity + " was not found in the chunk it has to be removed from";
+			// throw "entity: " + entity + " was not found in the chunk it has to be removed from";
 		}
 	}
 

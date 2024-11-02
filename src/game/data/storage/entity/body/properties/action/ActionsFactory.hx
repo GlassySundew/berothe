@@ -13,7 +13,7 @@ class ActionsFactory {
 
 	#if !debug inline #end
 	public static function fromCdb(
-		action : Data.EntityProperty_properties_interactable_actionsQueue_action
+		action : Data.EntityPropertySetup_properties_interactable_actionsQueue_action
 	) : Lazy<BodyActionBase> {
 		return Lazy.ofFunc(
 			(() -> {

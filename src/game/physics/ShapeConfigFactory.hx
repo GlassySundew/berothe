@@ -7,7 +7,7 @@ import game.domain.overworld.location.physics.IShapeConfig;
 class ShapeConfigFactory {
 
 	public static function create() : IShapeConfig {
-
-		return new OimoShapeConfig( new ShapeConfig() );
+		var config = new ShapeConfig();
+		return new OimoShapeConfig(config);
 	}
 }

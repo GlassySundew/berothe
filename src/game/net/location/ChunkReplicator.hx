@@ -76,7 +76,9 @@ class ChunkReplicator extends NetNode {
 				} );
 			} );
 		} );
+		#if debug
 		drawDebug();
+		#end
 		#end
 	}
 

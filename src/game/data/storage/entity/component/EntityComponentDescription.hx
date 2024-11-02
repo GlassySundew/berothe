@@ -6,7 +6,7 @@ import game.domain.overworld.entity.EntityComponent;
 
 abstract class EntityComponentDescription extends DescriptionBase {
 
-	public var replicable( default, null ) = true;
+	public var isReplicable( default, null ) = true;
 
 	abstract public function buildComponent() : EntityComponent;
 	abstract public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase;

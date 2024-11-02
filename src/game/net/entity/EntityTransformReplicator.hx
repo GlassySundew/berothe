@@ -33,8 +33,6 @@ class EntityTransformReplicator extends NetNode {
 	public function followEntityServer( entityRepl : EntityReplicator ) {
 		this.entityRepl = entityRepl;
 
-		// entity.transform.x.addOnValue( val -> trace( "got player x repl as " + val ) );
-
 		setupServerSyncronization();
 	}
 
@@ -49,7 +47,7 @@ class EntityTransformReplicator extends NetNode {
 		modelToNetworkStream = new Composite();
 
 		var entity = entityRepl.entity.result;
-		
+
 		modelToNetworkStream.add( entity.transform.x.subscribeProp( x ) );
 		modelToNetworkStream.add( entity.transform.y.subscribeProp( y ) );
 		modelToNetworkStream.add( entity.transform.z.subscribeProp( z ) );
@@ -66,7 +64,7 @@ class EntityTransformReplicator extends NetNode {
 	public function createNetworkToModelStream() {
 		networkToModelStream?.unsubscribe();
 		networkToModelStream = new Composite();
-		
+
 		var entity = entityRepl.entity.result;
 
 		networkToModelStream.add( x.subscribeProp( entity.transform.x ) );
@@ -93,7 +91,6 @@ class EntityTransformReplicator extends NetNode {
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
-		super.unregister( host, ctx );
 		x.unregister( host, ctx );
 		y.unregister( host, ctx );
 		z.unregister( host, ctx );
@@ -103,5 +100,6 @@ class EntityTransformReplicator extends NetNode {
 		rotationX.unregister( host, ctx );
 		rotationY.unregister( host, ctx );
 		rotationZ.unregister( host, ctx );
+		super.unregister( host, ctx );
 	}
 }

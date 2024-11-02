@@ -14,7 +14,7 @@
 			"shadows": {
 				"mode": "Mixed",
 				"size": 512,
-				"radius": 16.09,
+				"radius": 0.09,
 				"quality": 0.67,
 				"bias": 1,
 				"samplingMode": {

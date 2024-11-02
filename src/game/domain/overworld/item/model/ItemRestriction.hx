@@ -10,7 +10,7 @@ class ItemRestriction {
 	public var isEquipment : Bool;
 	public var equipmentType : EntityEquipmentSlotType;
 
-	final types : Array<ItemType>;
+	public final types : Array<ItemType>;
 
 	public function new( ?types : Array<ItemType> ) {
 		this.types = types ?? [];
@@ -18,8 +18,8 @@ class ItemRestriction {
 
 	public function isFulfilledByItem( itemDesc : ItemDescription ) : Bool {
 		var typesComparison = Util.isArrayCompletePartOfAnother( types, itemDesc.types );
-		var equipFulfil = !isEquipment
-			|| (
+		var equipFulfil = //
+			!isEquipment || (
 				itemDesc.equippable
 				&& itemDesc.equipSlots.contains( equipmentType )
 			);

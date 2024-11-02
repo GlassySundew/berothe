@@ -1,5 +1,9 @@
 package game.domain.overworld.entity.component.model;
 
+import game.domain.overworld.item.model.ItemRestriction;
+import util.MathUtil;
+import game.data.storage.DataStorage;
+import hxd.Rand;
 import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.domain.overworld.item.model.EquipItemSlot;
 import game.data.storage.entity.body.model.EntityEquipSlotDescription;
@@ -16,7 +20,6 @@ class EntityInventory extends EntityItemHolderBase {
 	public var inventorySlots( default, null ) : Array<ItemSlot>;
 
 	final baseInventorySize : Int;
-	final model : EntityModelComponent;
 	final equipSlotsDesc : Array<EntityEquipSlotDescription>;
 
 	public function new(
@@ -26,15 +29,44 @@ class EntityInventory extends EntityItemHolderBase {
 	) {
 		this.equipSlotsDesc = equipSlotsDesc;
 		this.baseInventorySize = baseInventorySize;
-		this.model = model;
 
 		createSlots();
 
-		super();
+		super( model );
+	}
+
+	public function claimOwnage() {
+		// todo она должна знать что сущность не загружается, а создаётся с нуля. для spawnInventory
+		addItemsOnEntityCreation();
+		model.onDeath.then( _ -> dropInventory() );
+	}
+
+	inline function addItemsOnEntityCreation() {
+		for ( elem in model.desc.spawnInventory ) {
+			var itemDesc = DataStorage.inst.itemStorage.getById( elem.itemDescId );
+			var amount = //
+				if ( elem.botEdgeRnd == elem.topEdgeRnd ) {
+					elem.botEdgeRnd;
+				} else {
+					switch elem.distribution {
+						case LINEAR:
+							Random.int( elem.botEdgeRnd, elem.topEdgeRnd );
+						case SKEW( power ):
+							Std.int(
+								MathUtil.randomSkew( elem.botEdgeRnd, elem.topEdgeRnd, power )
+							);
+					};
+				}
+			var item = GameCore.inst.itemFactory.createItem( itemDesc );
+			item.amount.val = amount;
+			tryGiveItem( item );
+		}
 	}
 
 	function createSlots() {
 		inventorySlots = [];
+
+		inventorySlots.push( new ItemSlot( 99, new ItemRestriction( [GOLD] ) ) );
 
 		for ( equipSlotDesc in equipSlotsDesc ) {
 			var slot = new EquipItemSlot( equipSlotDesc );
@@ -43,7 +75,7 @@ class EntityInventory extends EntityItemHolderBase {
 
 			inventorySlots.push( slot );
 		}
-		
+
 		for ( i in 0...baseInventorySize ) {
 			inventorySlots.push( new ItemSlot() );
 		}

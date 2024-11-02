@@ -9,7 +9,7 @@ import game.domain.overworld.entity.EntityComponent;
 class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 
 	public static function fromCdb(
-		entry : Data.EntityProperty_properties_bodyHitbox
+		entry : Data.EntityPropertySetup_properties_bodyHitbox
 	) : HitboxBodyDescription {
 		if ( entry == null ) return null;
 		return new HitboxBodyDescription(

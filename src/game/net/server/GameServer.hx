@@ -49,9 +49,9 @@ class GameServer extends Process {
 		onClientAuthMessage.add( onNewClientConnected );
 
 		#if debug
-		onGetServerStatusMessage.add( ( client ) -> {
-			server.host.sendMessage( net.Message.ServerStatus( server.host.isAuth ), client );
-		} );
+		// onGetServerStatusMessage.add( ( client ) -> {
+		// 	server.host.sendMessage( net.Message.ServerStatus( server.host.isAuth ), client );
+		// } );
 		#end
 	}
 

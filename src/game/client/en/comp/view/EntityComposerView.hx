@@ -125,7 +125,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 				trace( 'cannot find animation node with id: $animation in enco: $file ' );
 				continue;
 			}
-			animationContainer.setPlay( true, animationDesc.speedMult * listener.getSpeed() / tmod );
+			animationContainer.setPlay( true, animationDesc.speedMult * listener.getSpeed() / 15 * tmod );
 			listener.playedOnContainer( animationContainer );
 
 			for ( child in children ) {

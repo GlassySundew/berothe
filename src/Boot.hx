@@ -1,3 +1,4 @@
+import hxd.Timer;
 import hxd.Res;
 import pass.PbrSetup;
 import tink.CoreApi.CallbackLink;
@@ -47,7 +48,7 @@ class Boot extends hxd.App {
 	}
 
 	override function setup() {
-		
+
 		#if( hl && pak )
 		hxd.Res.initPak();
 		#elseif( hl )
@@ -63,7 +64,7 @@ class Boot extends hxd.App {
 		#end
 
 		h3d.mat.MaterialSetup.current = new PbrSetup( "PBR" );
-		
+
 		super.setup();
 		root3D = ObjectNode3D.fromHeaps( s3d );
 	}
@@ -107,12 +108,9 @@ class Boot extends hxd.App {
 		onResizeSignal.dispatch();
 	}
 
-	var speed = 1.0;
-
 	override function update( dt : Float ) {
 		this.deltaTime = dt;
-		var tmod = hxd.Timer.tmod * speed;
-		dn.Process.updateAll( tmod );
+		dn.Process.updateAll( hxd.Timer.tmod );
 		super.update( dt );
 	}
 
@@ -121,7 +119,7 @@ class Boot extends hxd.App {
 			#if debug
 			Sys.command( "hl bin/server.hl" );
 			#else
-			Sys.command( "./hl server.hl" );
+			Sys.command( "hl.exe server.hl" );
 			#end
 		} );
 	}

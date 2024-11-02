@@ -8,10 +8,22 @@ import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.net.entity.component.EntityModelComponentReplicator;
 
+enum RandomDistributionType {
+	LINEAR;
+	SKEW( power : Float );
+}
+
+typedef SpawnInventory = {
+	var itemDescId : String;
+	var distribution : RandomDistributionType;
+	var botEdgeRnd : Int;
+	var topEdgeRnd : Int;
+}
+
 class EntityModelDescription extends EntityComponentDescription {
 
 	public static function fromCdb(
-		entry : Data.EntityProperty_properties_model
+		entry : Data.EntityPropertySetup_properties_model
 	) : EntityModelDescription {
 		if ( entry == null ) return null;
 
@@ -28,6 +40,18 @@ class EntityModelDescription extends EntityComponentDescription {
 			}
 		] : [];
 
+		var spawnInventory = entry.spawnInventory == null ? [] : [
+			for ( element in entry.spawnInventory ) {
+				itemDescId : element.item.id.toString(),
+				distribution : switch element.distribution {
+					case Linear: LINEAR;
+					case Skew( power ): SKEW( power );
+				},
+				botEdgeRnd : element.botEdgeRnd,
+				topEdgeRnd : element.topEdgeRnd
+			}
+		];
+
 		return new EntityModelDescription(
 			entry.baseHp,
 			entry.baseInventorySize,
@@ -36,6 +60,7 @@ class EntityModelDescription extends EntityComponentDescription {
 			entry.factionId.toString(),
 			entry.displayName,
 			entry.hideNameByDefault,
+			spawnInventory,
 			entry.id.toString(),
 		);
 	}
@@ -47,6 +72,7 @@ class EntityModelDescription extends EntityComponentDescription {
 	public final factionId : String;
 	public final displayName : String;
 	public final hideNameByDefault : Bool;
+	public final spawnInventory : Array<SpawnInventory>;
 
 	public function new(
 		baseHp : Int,
@@ -56,6 +82,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		factionId : String,
 		displayName : String,
 		hideNameByDefault : Bool,
+		spawnInventory : Array<SpawnInventory>,
 		id : String
 	) {
 		super( id ?? "model" );
@@ -66,6 +93,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		this.factionId = factionId;
 		this.displayName = displayName;
 		this.hideNameByDefault = hideNameByDefault;
+		this.spawnInventory = spawnInventory;
 	}
 
 	public function buildComponent() : EntityComponent {

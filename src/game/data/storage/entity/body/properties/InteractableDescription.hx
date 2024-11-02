@@ -19,15 +19,16 @@ class InteractableDescription extends EntityComponentDescription {
 
 	#if !debug inline #end
 	public static function fromCdb(
-		cdbEntry : Data.EntityProperty_properties_interactable
+		cdbEntry : Data.EntityPropertySetup_properties_interactable
 	) : InteractableDescription {
 		if ( cdbEntry == null ) return null;
 
 		return new InteractableDescription(
 			cdbEntry.tooltipLocale,
-			[for ( action in cdbEntry.actionsQueue ) {
-				ActionsFactory.fromCdb( action.action );
-			}],
+			cdbEntry.actionsQueue == null ? [] : //
+				[for ( action in cdbEntry.actionsQueue ) {
+					ActionsFactory.fromCdb( action.action );
+				}],
 			cdbEntry.itemRequired?.itemId.toString(),
 			cdbEntry.itemRequired?.removeChance,
 			cdbEntry.id.toString(),
@@ -38,7 +39,6 @@ class InteractableDescription extends EntityComponentDescription {
 	public final tooltipLocale : Null<String>;
 	public final itemRequired : ItemRequirement;
 
-	
 	public function new(
 		?tooltipLocale : Null<String>,
 		actionQueue : Array<Lazy<BodyActionBase>>,
@@ -52,7 +52,7 @@ class InteractableDescription extends EntityComponentDescription {
 
 		itemRequired = itemRequiredId == null ? null : {
 			itemDescId : itemRequiredId,
-			breakChance: itemRequiredBreakChance ?? 0
+			breakChance : itemRequiredBreakChance ?? 0
 		};
 	}
 

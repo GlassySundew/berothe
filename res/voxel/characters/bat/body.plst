@@ -15,7 +15,7 @@
 		{
 			"type": "fbfAnimationNode",
 			"name": "walk",
-			"z": 11,
+			"z": 8,
 			"children": [
 				{
 					"type": "model",

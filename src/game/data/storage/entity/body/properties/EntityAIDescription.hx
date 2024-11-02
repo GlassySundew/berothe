@@ -11,7 +11,7 @@ class AIProperties {
 	public final triggerId : Null<String>;
 	public final agroRange : Null<Float>;
 
-	public inline function new( entry : Data.EntityProperty_properties_behaviour_params ) {
+	public inline function new( entry : Data.EntityPropertySetup_properties_behaviour_params ) {
 		triggerId = entry.triggerId;
 		agroRange = entry.agroRange;
 	}
@@ -35,7 +35,7 @@ class EntityAIDescription extends EntityComponentDescription {
 
 	#if !debug inline #end
 	public static function fromCdb(
-		entry : Data.EntityProperty_properties_behaviour
+		entry : Data.EntityPropertySetup_properties_behaviour
 	) : Null<EntityAIDescription> {
 
 		if ( entry == null ) return null;
@@ -55,7 +55,7 @@ class EntityAIDescription extends EntityComponentDescription {
 		super( id );
 		type = id;
 		this.params = params;
-		replicable = false;
+		isReplicable = false;
 	}
 
 	public function buildComponent() : EntityComponent {

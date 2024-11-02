@@ -66,11 +66,11 @@ class EntityMovementControlComponent extends EntityClientComponent {
 		var leftAng = Math.atan2( ly, lx );
 
 		if ( isMovementAppliedSelf.val ) {
-			var s = leftDist * model.speed.amount.getValue() * Main.inst.tmod;
+			var s = leftDist * model.stats.speed.amount.getValue();
 			var inputDirX = Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
 			var inputDirY = -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-			entity.transform.velX.val += inputDirX;
-			entity.transform.velY.val += inputDirY;
+			entity.transform.velX.val += inputDirX * tmod;
+			entity.transform.velY.val += inputDirY * tmod;
 		}
 	}
 }

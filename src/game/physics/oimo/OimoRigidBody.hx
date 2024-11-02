@@ -158,7 +158,7 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody._autoSleep = value;
 	}
 
-	function onUpdated( ?doRoundSleep = true ) {
+	public function onUpdated( ?doRoundSleep = true ) {
 		if ( rotationInvalidate ) {
 			rigidBody.setRotationXyz(
 				new Vec3(

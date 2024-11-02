@@ -21,11 +21,7 @@ class Item {
 		return itemContainer;
 	}
 
-	public var amount( default, set ) : Int;
-	inline function set_amount( value : Int ) : Int {
-		if ( value == 0 ) dispose();
-		return amount = value;
-	}
+	public final amount : MutableProperty<Int> = new MutableProperty( 1 );
 
 	public function new(
 		itemDesc : ItemDescription,
@@ -34,13 +30,17 @@ class Item {
 	) {
 		this.desc = itemDesc;
 		this.id = id;
-		this.amount = 1;
 
 		if ( itemDesc.equippable ) {
 			stats = [for ( stat in itemDesc.equipStats ) {
 				EntityAdditiveStatType.build( stat.type, stat.amount );
 			}];
 		}
+
+		this.amount.addOnValue( ( old, nw ) -> {
+			if ( nw == 0 ) dispose();
+			if ( nw < 0 ) throw "unsupported logic: " + toString() + " amount less than zero";
+		} );
 	}
 
 	public function dispose() {

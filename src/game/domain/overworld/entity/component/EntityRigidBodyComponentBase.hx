@@ -12,7 +12,7 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 
 	public override function dispose() {
 		super.dispose();
-		physics.removeRigidBody( rigidBody );
+		physics?.removeRigidBody( rigidBody );
 		rigidBody = null;
 		physics = null;
 	}

@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
 import haxe.exceptions.NotImplementedException;
 import game.data.storage.entity.body.model.EntityEquipSlotDescription;
 import game.data.storage.entity.body.model.EntityModelDescription;
@@ -15,6 +16,7 @@ class EntityStats {
 
 	public final limbAttacks : Array<EntityAttkItemStatHolder> = [];
 	public final weaponRanges : Array<EntityAttkItemStatHolder> = [];
+	public final speed : EntityStatHolder = new EntityStatHolder();
 
 	// todo
 	// public final defence
@@ -23,6 +25,8 @@ class EntityStats {
 
 	public function new( modelDesc : EntityModelDescription ) {
 		this.modelDesc = modelDesc;
+		if ( modelDesc.baseSpeed != 0 )
+			speed.addStat( new EntitySpeedStat( modelDesc.baseSpeed ) );
 	}
 
 	public function attachToEntity( entity : OverworldEntity ) {

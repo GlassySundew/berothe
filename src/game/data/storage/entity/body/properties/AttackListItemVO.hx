@@ -11,7 +11,7 @@ import game.domain.overworld.entity.EntityComponent;
 class AttackListItemVO {
 
 	public static function fromCdb(
-		attack : Data.EntityProperty_properties_attack_attackList
+		attack : Data.EntityPropertySetup_properties_attack_attackList
 	) : AttackListItemVO {
 		return new AttackListItemVO(
 			attack.id.toString(),

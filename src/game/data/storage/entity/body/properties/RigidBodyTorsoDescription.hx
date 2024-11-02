@@ -15,7 +15,7 @@ enum GeometryType {
 class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 
 	public inline static function fromCdb(
-		entry : Data.EntityProperty_properties_rigidBodyTorso
+		entry : Data.EntityPropertySetup_properties_rigidBodyTorso
 	) : RigidBodyTorsoDescription {
 		if ( entry == null ) return null;
 

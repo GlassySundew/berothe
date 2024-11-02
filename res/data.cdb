@@ -109,6 +109,10 @@
 					"preset": "club"
 				},
 				{
+					"id": "gold_piece",
+					"preset": "gold_piece"
+				},
+				{
 					"id": "orc_prison_key",
 					"preset": "orc_prison_key"
 				},
@@ -153,7 +157,7 @@
 					"name": "id"
 				},
 				{
-					"typeStr": "6:entityProperty",
+					"typeStr": "6:entityPropertySetup",
 					"name": "properties",
 					"kind": null
 				},
@@ -201,6 +205,11 @@
 					"view": "club"
 				},
 				{
+					"id": "gold_piece",
+					"properties": "gold_piece",
+					"view": "gold_piece"
+				},
+				{
 					"id": "orc_prison_key",
 					"properties": "orc_prison_key",
 					"view": "orc_prison_key"
@@ -241,7 +250,7 @@
 			]
 		},
 		{
-			"name": "entityProperty",
+			"name": "entityPropertySetup",
 			"columns": [
 				{
 					"typeStr": "0",
@@ -369,7 +378,7 @@
 							"baseInventorySize": 4,
 							"faction": "humans",
 							"hideNameByDefault": false,
-							"baseSpeed": 9
+							"baseSpeed": 12
 						},
 						"attack": {
 							"id": "human_attack",
@@ -415,12 +424,23 @@
 					"properties": {
 						"dynamics": true,
 						"model": {
-							"baseHp": 4,
+							"baseHp": 3,
 							"id": "model",
 							"hideNameByDefault": true,
 							"displayName": "Bat",
 							"faction": "bats",
-							"baseSpeed": 7
+							"baseSpeed": 7,
+							"spawnInventory": [
+								{
+									"item": "gold",
+									"distribution": [
+										1,
+										1.5
+									],
+									"botEdgeRnd": 2,
+									"topEdgeRnd": 10
+								}
+							]
 						},
 						"rigidBodyTorso": {
 							"id": "torso",
@@ -461,7 +481,18 @@
 									"baseAttack": 1
 								}
 							]
-						}
+						},
+						"spawnInventory": [
+							{
+								"item": "gold",
+								"botEdgeRnd": 2,
+								"topEdgeRnd": 10,
+								"distrubution": [
+									1,
+									1.5
+								]
+							}
+						]
 					}
 				},
 				{
@@ -633,7 +664,8 @@
 							],
 							"tooltipLocale": "Club",
 							"id": "club_interact"
-						}
+						},
+						"ofItem": true
 					}
 				},
 				{
@@ -658,7 +690,8 @@
 								}
 							],
 							"id": "orc_prison_key_interact"
-						}
+						},
+						"ofItem": true
 					}
 				},
 				{
@@ -666,8 +699,25 @@
 					"properties": {
 						"dynamics": true,
 						"interactable": {
-							"id": "gold_pickup"
-						}
+							"id": "gold_pickup",
+							"actionsQueue": [
+								{
+									"action": {
+										"pickupItem": {
+											"item": "gold"
+										}
+									}
+								}
+							]
+						},
+						"rigidBodyTorso": {
+							"id": "goldRigidBody",
+							"geometry": 0,
+							"sizeX": 1,
+							"sizeY": 1,
+							"sizeZ": 1
+						},
+						"ofItem": true
 					}
 				},
 				{
@@ -753,7 +803,7 @@
 			"props": {}
 		},
 		{
-			"name": "entityProperty@properties",
+			"name": "entityPropertySetup@properties",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -810,11 +860,23 @@
 					"name": "behaviour",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "spawnInventory",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "2",
+					"name": "ofItem",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
 		{
-			"name": "entityProperty@properties@rigidBodyTorso",
+			"name": "entityPropertySetup@properties@rigidBodyTorso",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -883,7 +945,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@bodyHitbox",
+			"name": "entityPropertySetup@properties@bodyHitbox",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -935,7 +997,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@staticObjectRigidBody",
+			"name": "entityPropertySetup@properties@staticObjectRigidBody",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -952,7 +1014,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@attack",
+			"name": "entityPropertySetup@properties@attack",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -972,7 +1034,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@model",
+			"name": "entityPropertySetup@properties@model",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1022,11 +1084,17 @@
 					"typeStr": "4",
 					"name": "baseSpeed",
 					"opt": true
+				},
+				{
+					"typeStr": "8",
+					"name": "spawnInventory",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable",
+			"name": "entityPropertySetup@properties@interactable",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1057,7 +1125,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@lightSource",
+			"name": "entityPropertySetup@properties@lightSource",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1084,7 +1152,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@behaviour",
+			"name": "entityPropertySetup@properties@behaviour",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1107,7 +1175,37 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@behaviour@params",
+			"name": "entityPropertySetup@properties@spawnInventory",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:item",
+					"name": "item",
+					"kind": null
+				},
+				{
+					"typeStr": "9:ItemRandomDistributionType",
+					"name": "distrubution",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "botEdgeRnd"
+				},
+				{
+					"typeStr": "3",
+					"name": "topEdgeRnd",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityPropertySetup@properties@behaviour@params",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1130,7 +1228,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@itemRequired",
+			"name": "entityPropertySetup@properties@interactable@itemRequired",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1159,7 +1257,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@actionsQueue",
+			"name": "entityPropertySetup@properties@interactable@actionsQueue",
 			"props": {
 				"hide": true
 			},
@@ -1174,7 +1272,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@actionsQueue@action",
+			"name": "entityPropertySetup@properties@interactable@actionsQueue@action",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1201,7 +1299,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@actionsQueue@action@toggleEntityTransformInList",
+			"name": "entityPropertySetup@properties@interactable@actionsQueue@action@toggleEntityTransformInList",
 			"props": {
 				"hide": true
 			},
@@ -1215,7 +1313,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@actionsQueue@action@pickupItem",
+			"name": "entityPropertySetup@properties@interactable@actionsQueue@action@pickupItem",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1232,7 +1330,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@actionsQueue@action@toggleEntityTransformInList@transform",
+			"name": "entityPropertySetup@properties@interactable@actionsQueue@action@toggleEntityTransformInList@transform",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1255,7 +1353,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@interactable@actionsQueue@action@toggleEntityTransformInList@transform@angle",
+			"name": "entityPropertySetup@properties@interactable@actionsQueue@action@toggleEntityTransformInList@transform@angle",
 			"props": {
 				"hide": true,
 				"isProps": true
@@ -1284,7 +1382,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@model@equipment",
+			"name": "entityPropertySetup@properties@model@equipment",
 			"props": {
 				"hide": true
 			},
@@ -1309,7 +1407,35 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@model@equipment@links",
+			"name": "entityPropertySetup@properties@model@spawnInventory",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:item",
+					"name": "item",
+					"kind": null
+				},
+				{
+					"typeStr": "9:ItemRandomDistributionType",
+					"name": "distribution"
+				},
+				{
+					"typeStr": "3",
+					"name": "botEdgeRnd",
+					"kind": null
+				},
+				{
+					"typeStr": "3",
+					"name": "topEdgeRnd"
+				}
+			]
+		},
+		{
+			"name": "entityPropertySetup@properties@model@equipment@links",
 			"props": {
 				"hide": true
 			},
@@ -1324,7 +1450,7 @@
 			]
 		},
 		{
-			"name": "entityProperty@properties@attack@attackList",
+			"name": "entityPropertySetup@properties@attack@attackList",
 			"props": {
 				"hide": true
 			},
@@ -1475,7 +1601,7 @@
 								}
 							],
 							"key": "walk",
-							"speedMult": 0.1,
+							"speedMult": 0.06,
 							"isAffectedByStats": true
 						},
 						{
@@ -1743,7 +1869,7 @@
 					"id": "gold_piece",
 					"viewComps": {
 						"colorRandomShift": {
-							"radius": 10
+							"radius": 126
 						}
 					},
 					"type": [
@@ -2036,8 +2162,18 @@
 					"scope": null
 				},
 				{
-					"typeStr": "10:Weapon,Blunt,Sharp,AnimalPart,Potion,Scroll,Food",
+					"typeStr": "10:Weapon,Blunt,Sharp,AnimalPart,Potion,Scroll,Food,Gold",
 					"name": "type"
+				},
+				{
+					"typeStr": "6:entity",
+					"name": "overworldPresentation",
+					"kind": null
+				},
+				{
+					"typeStr": "2",
+					"name": "isSplittable",
+					"kind": null
 				},
 				{
 					"typeStr": "17",
@@ -2053,15 +2189,19 @@
 			"lines": [
 				{
 					"id": "gold",
-					"type": 0,
+					"type": 128,
 					"props": {},
-					"iconAsset": ""
+					"iconAsset": "",
+					"overworldPresentation": "gold_piece",
+					"isSplittable": true
 				},
 				{
 					"id": "orc_prison_key",
 					"type": 0,
 					"props": {},
-					"iconAsset": "orc_prison_key"
+					"iconAsset": "orc_prison_key",
+					"overworldPresentation": "orc_prison_key",
+					"isSplittable": false
 				},
 				{
 					"id": "club",
@@ -2088,13 +2228,17 @@
 						]
 					},
 					"type": 3,
-					"iconAsset": ""
+					"iconAsset": "",
+					"overworldPresentation": "club",
+					"isSplittable": false
 				},
 				{
 					"id": "sword",
 					"props": {},
 					"type": 5,
-					"iconAsset": ""
+					"iconAsset": "",
+					"overworldPresentation": "bat",
+					"isSplittable": false
 				}
 			],
 			"separators": [],
@@ -2777,6 +2921,24 @@
 						{
 							"name": "value",
 							"typeStr": "1"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ItemRandomDistributionType",
+			"cases": [
+				{
+					"name": "Linear",
+					"args": []
+				},
+				{
+					"name": "Skew",
+					"args": [
+						{
+							"name": "power",
+							"typeStr": "4"
 						}
 					]
 				}

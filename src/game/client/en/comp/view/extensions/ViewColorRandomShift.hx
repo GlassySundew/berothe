@@ -1,5 +1,8 @@
 package game.client.en.comp.view.extensions;
 
+import format.hl.Tools;
+import seedyrng.Random;
+import h3d.Matrix;
 import h3d.shader.ColorAdd;
 import h3d.shader.ColorMatrix;
 import game.data.storage.entity.body.view.extensions.ViewColorRandomShiftDescription;
@@ -18,7 +21,12 @@ class ViewColorRandomShift extends EntityViewExtensionComponentBase {
 	override function onViewCompAppeared() {
 		super.onViewCompAppeared();
 		viewComp.view.then( ( view ) -> {
-			var shader = new ColorAdd( Std.int( hxd.Math.random( 2 * desc.radius ) - desc.radius ) );
+			var shader = new ColorAdd();
+			var rand = new Random( Tools.hash( entity.id ) );
+			var displace = rand.randomInt(-desc.radius, desc.radius ) / 255;
+			shader.color.x = displace;
+			shader.color.y = displace;
+			shader.color.z = displace;
 			for ( mat in view.getGraphics().heapsObject.getMaterials() ) {
 				mat.mainPass.addShader( shader );
 			}

@@ -25,17 +25,24 @@ class ItemSlot implements IItemContainer {
 	}
 
 	public function giveItem( item : Item ) {
+		if ( this.item.val != null ) {
+			if ( this.item.val.desc == item.desc ) {
+				// todo partial pouring (incomplete amount transfer)
+				this.item.val.amount.val += item.amount.val;
+			} else {
+				trace( "ERROR: TRYING TO PICKUP ITEM TO OCCUPIED CELL WITH NON-COMPATIBLE ITEM: " + this.item, item );
+			}
+			return;
+		}
+
 		item.setContainer( this );
 		this.item.val = item;
 
 		item.itemContainerProp.addOnValue(
 			( oldCont, newCont ) -> {
-				if ( oldCont != this ) {
-					throw "bad logic, setting not persistent container for item";
-				}
+				if ( newCont == this ) return;
 				this.item.val = null;
-			},
-			1
+			}, 1
 		);
 	}
 
@@ -52,13 +59,15 @@ class ItemSlot implements IItemContainer {
 	}
 
 	public function hasSpaceForItem(
-		item : ItemDescription,
+		itemDesc : ItemDescription,
 		amount : Null<Int> = 1
 	) : Bool {
 		// TODO container item insides check
 
 		return
-			this.item.val == null
-			&& restriction.isFulfilledByItem( item );
+			( this.item.val == null
+				|| ( this.item.val.desc == itemDesc // todo also require stack size
+				) )
+				&& restriction.isFulfilledByItem( itemDesc );
 	}
 }

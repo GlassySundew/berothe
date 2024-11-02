@@ -1,5 +1,6 @@
 package game.data.storage.entity.body.properties.action;
 
+import game.domain.overworld.item.model.EntityOfItemComponent;
 import game.domain.overworld.GameCore;
 import game.data.storage.item.ItemDescription;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
@@ -22,9 +23,15 @@ class ItemPickupAction extends BodyActionBase {
 		var hasSpace = model.hasSpaceForItemDesc( itemDesc, 1 );
 		if ( !hasSpace ) return;
 
-		var item = GameCore.inst.itemFactory.createItem( itemDesc );
+		var ofItem = self.components.get( EntityOfItemComponent );
+		var item = //
+			if ( ofItem != null && ofItem.item != null ) {
+				ofItem.item;
+			} else {
+				GameCore.inst.itemFactory.createItem( itemDesc );
+			}
 
-		model.tryPickupItem( item );
+		model.tryGiveItem( item );
 		self.dispose();
 	}
 }

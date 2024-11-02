@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.domain.overworld.item.model.EntityOfItemComponent;
 import game.domain.overworld.item.model.ItemSlot;
 import game.data.storage.item.ItemDescription;
 import game.domain.overworld.item.model.ItemPickupAttemptResult;
@@ -12,9 +13,11 @@ abstract class EntityItemHolderBase {
 		слоты сервиса
 	**/
 	var slots : Array<ItemSlot>;
+	final model : EntityModelComponent;
 
-	public function new() {
+	public function new( model : EntityModelComponent ) {
 		updateSlots();
+		this.model = model;
 	}
 
 	#if !debug inline #end
@@ -25,7 +28,7 @@ abstract class EntityItemHolderBase {
 			if (
 				item != null
 				&& item.desc == desc
-				&& item.amount >= amount
+				&& item.amount.val >= amount
 			) {
 				result = true;
 				break;
@@ -34,7 +37,7 @@ abstract class EntityItemHolderBase {
 		return result;
 	}
 
-	public function tryPickupItem( item : Item ) {
+	public function tryGiveItem( item : Item ) {
 		for ( equipSlot in slots ) {
 			if ( equipSlot.hasSpaceForItem( item.desc, item.amount ) ) {
 				equipSlot.giveItem( item );
@@ -51,13 +54,13 @@ abstract class EntityItemHolderBase {
 			var item = slot.itemProp.getValue();
 			if ( item == null || item.desc != itemDesc ) continue;
 
-			if ( item.amount >= amountLeftToRemove ) {
-				item.amount -= amountLeftToRemove;
+			if ( item.amount.val >= amountLeftToRemove ) {
+				item.amount.val -= amountLeftToRemove;
 				amountLeftToRemove = 0;
 				break;
 			} else {
-				amountLeftToRemove -= item.amount;
-				item.amount = 0;
+				amountLeftToRemove -= item.amount.val;
+				item.amount.val = 0;
 			}
 		}
 		return amountLeftToRemove;
@@ -70,6 +73,38 @@ abstract class EntityItemHolderBase {
 			}
 		}
 		return false;
+	}
+
+	public function dropInventory() {
+		var torsoDesc = model.entity.desc.getBodyDescription().rigidBodyTorsoDesc;
+		var sizeZ = Std.int( torsoDesc.sizeZ + torsoDesc.offsetZ / 2 );
+		var sizeHLFY = Std.int( torsoDesc.sizeY / 2 );
+		var sizeHLFX = Std.int( torsoDesc.sizeX / 2 );
+
+		for ( slot in slots ) {
+			var item = slot.itemProp.getValue();
+			if ( item == null ) continue;
+
+			inline function createEntityForItem( item : Item ) {
+				var entityItem = GameCore.inst.entityFactory.createEntity(
+					item.desc.getOverworldReprEntityDesc()
+				);
+
+				entityItem.components.get( EntityOfItemComponent ).provideItem( item );
+				entityItem.transform.x.val = model.entity.transform.x.val + Random.int(-sizeHLFX, sizeHLFX );
+				entityItem.transform.y.val = model.entity.transform.y.val + Random.int(-sizeHLFY, sizeHLFY );
+				entityItem.transform.z.val = model.entity.transform.z.val + Random.int(0, sizeZ );
+
+				model.entity.location.getValue().addEntity( entityItem );
+			}
+			if ( item.amount.val > 1 && item.desc.isSplittable ) {
+				for ( splittedItem in GameCore.inst.itemFactory.split( item ) ) {
+					createEntityForItem( splittedItem );
+				}
+			} else {
+				createEntityForItem( item );
+			}
+		}
 	}
 
 	function updateSlots() {

@@ -26,9 +26,13 @@ class EntityAttackListItem {
 		this.desc = desc;
 	}
 
+	public function dispose() {
+		emitter?.val?.dispose();
+	}
+
 	public function attack( ignoreCooldown = false ) {
 		if ( !ignoreCooldown && emitter.val.isOnCooldown() ) return;
-		if ( emitter.val.isInAction() ) return;
+		if ( emitter.val == null || emitter.val.isInAction() ) return;
 
 		isRaised.val = true;
 		emitter.val.performCasting();
@@ -50,6 +54,7 @@ class EntityAttackListItem {
 	public function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;
 		entity.location.onAppear( onAttachedToLocation );
+		entity.disposed.then( _ -> dispose() );
 	}
 
 	#if !debug inline #end
@@ -66,9 +71,13 @@ class EntityAttackListItem {
 					var maybeEnemy2 = Std.downcast( contact._b2.userData, EntityRigidBodyProps )?.entity;
 					if ( maybeEnemy1 != null && maybeEnemy1 != entity ) {
 						EntityDamageService.entityDamageWithAttackListItem( entity, maybeEnemy1, desc );
+						emitter.removeEmitter();
+						return;
 					}
 					if ( maybeEnemy2 != null && maybeEnemy2 != entity ) {
 						EntityDamageService.entityDamageWithAttackListItem( entity, maybeEnemy2, desc );
+						emitter.removeEmitter();
+						return;
 					}
 				} );
 		} );

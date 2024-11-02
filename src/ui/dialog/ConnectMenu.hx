@@ -44,10 +44,6 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 		super( parent );
 		initComponent();
 
-		#if !debug
-		localConnect.visible = false;
-		#end
-
 		style = new Style();
 		style.load( Res.domkit.connectMenu );
 		style.addObject( this );

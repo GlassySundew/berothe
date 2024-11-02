@@ -42,6 +42,8 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 	var attackRange : Float;
 
+	var currentTween : Tween;
+
 	public function new(
 		desc : AttackListItemVO,
 		sourceTransform : ITransform,
@@ -79,6 +81,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		tweenSizeZ = desc.sizeZ;
 	}
 
+	public function dispose() {
+		removeEmitter();
+	}
+
 	public inline function setAttackRange( amount : Float ) {
 		attackRange = amount;
 	}
@@ -88,7 +94,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	}
 
 	public inline function isInAction() : Bool {
-		return tween.count() != 0;
+		return tween.count() != 0 || isOnCooldown();
 	}
 
 	public inline function getCurrentTimelapseRatio() : Float {
@@ -111,21 +117,21 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		tweenCombinator = new TweenCombinator();
 
-		var currentTween = tween.createS(
+		currentTween = tween.createS(
 			tweenSizeX,
 			attackRange,
 			type,
 			desc.duration
 		);
 		tweenCombinator.attachTween( currentTween );
-		var currentTween = currentTween.chainMs(
+		currentTween = currentTween.chainMs(
 			desc.sizeX - desc.endX + attackRange,
 			type,
 			desc.duration * 1000
 		);
 		tweenCombinator.attachTween( currentTween );
 		currentTween.onEnd = () -> {
-			physics.removeRigidBody( rigidBody );
+			removeEmitter();
 		};
 	}
 
@@ -155,6 +161,14 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 		rigidBody.transform.copyFrom( emitTransform );
 		rigidBody.updateTransform();
+	}
+
+	public inline function removeEmitter() {
+		if ( isInAction() && currentTween != null ) {
+			physics.removeRigidBody( rigidBody );
+			currentTween?.endWithoutCallbacks();
+			currentTween = null;
+		}
 	}
 }
 

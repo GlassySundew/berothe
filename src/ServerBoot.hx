@@ -26,8 +26,6 @@ class ServerBoot {
 	function mainLoop() {
 		Sys.sleep(( thousandSlashSixty - Timer.dt ) / 1000 );
 		hxd.Timer.update();
-		var dt = hxd.Timer.dt;
-
 		var tmod = hxd.Timer.tmod * speed;
 		dn.Process.updateAll( tmod );
 	}
@@ -48,7 +46,12 @@ class ServerBoot {
 				hxd.System.setLoop( mainLoop );
 
 				server = new Server();
+
+
 			} );
+			#if !debug
+			hl.UI.closeConsole();
+			#end
 		} );
 	}
 }

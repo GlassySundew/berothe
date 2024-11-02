@@ -10,7 +10,7 @@ import game.data.storage.entity.component.EntityComponentDescription;
 class EntityLightSourceDescription extends EntityComponentDescription {
 
 	public static function fromCdb(
-		entry : Data.EntityProperty_properties_lightSource
+		entry : Data.EntityPropertySetup_properties_lightSource
 	) : EntityLightSourceDescription {
 		if ( entry == null ) return null;
 		return new EntityLightSourceDescription(

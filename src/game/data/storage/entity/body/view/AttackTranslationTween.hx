@@ -5,7 +5,7 @@ enum abstract AttackTranslationTween( String ) from String {
 	var LINEAR = "linear";
 
 	public inline static function fromCdb(
-		entry : Data.EntityProperty_properties_attack_attackList_tweenType
+		entry : Data.EntityPropertySetup_properties_attack_attackList_tweenType
 	) : AttackTranslationTween {
 		return switch entry {
 			case Linear: LINEAR;
