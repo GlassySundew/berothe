@@ -1,5 +1,9 @@
 package game.domain.overworld.location.physics;
 
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.combat.EntityDamageService;
+import game.physics.oimo.EntityRigidBodyProps;
+import oimo.dynamics.Contact;
 import h3d.Quat;
 import dn.Col;
 import oimo.common.Vec3;
@@ -102,4 +106,17 @@ enum RigidBodyType {
 	STATIC;
 	KINEMATIC;
 	TRIGGER;
+}
+
+class EntityCollisionsService {
+
+	public static inline function unwrapContact(
+		contact : Contact,
+		cb : ( entity1 : OverworldEntity, entity2 : OverworldEntity ) -> Void
+	) {
+		var maybeEntity1 = Std.downcast( contact._b1.userData, EntityRigidBodyProps )?.entity;
+		var maybeEntity2 = Std.downcast( contact._b2.userData, EntityRigidBodyProps )?.entity;
+
+		if ( maybeEntity1 != null || maybeEntity2 != null ) cb( maybeEntity1, maybeEntity2 );
+	}
 }

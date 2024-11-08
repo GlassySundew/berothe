@@ -50,14 +50,16 @@ class EntityInteractableReplicator extends EntityComponentReplicatorBase {
 	}
 
 	#if client
-	override function followComponentClient( entityRepl : EntityReplicator ) {
+	override function followComponentClient( entity : EntityReplicator ) {
 		super.followComponentClient( entityRepl );
 
-		var viewFut = entityRepl.entity.result.components.onAppearFut( EntityViewComponent );
-		Future.sequence( followedComponent, viewFut )
-			.then(
-				results -> createInteractor( results[1] )
-			);
+		entityRepl.entity.then( ( entity ) -> {
+			var viewFut = entity.components.onAppearFut( EntityViewComponent );
+			Future.sequence( followedComponent, viewFut )
+				.then(
+					results -> createInteractor( results[1] )
+				);
+		} );
 	}
 
 	function createInteractor( viewComp : EntityViewComponent ) {

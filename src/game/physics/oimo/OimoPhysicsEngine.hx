@@ -49,6 +49,10 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		world.removeRigidBody( Std.downcast( rigidBody, OimoRigidBody ).rigidBody );
 	}
 
+	public inline function getDebugDraw() : IDebugDraw {
+		return debugDraw;
+	}
+	
 	public function setDebugDraw( debugDraw : IDebugDraw ) {
 		Assert.isNull( this.debugDraw );
 		Assert.isOfType( debugDraw, DebugDraw );

@@ -1,5 +1,7 @@
 package game.domain.overworld.entity;
 
+import rx.ObservableFactory;
+import rx.Observable;
 import future.Future;
 import rx.disposables.ISubscription;
 import game.domain.overworld.entity.EntityComponent;
@@ -11,11 +13,15 @@ class EntityComponents {
 
 	public final onComponentAdded : Signal<EntityComponent> = new Signal<EntityComponent>();
 	public final components : ClassMap<Class<EntityComponent>, EntityComponent> = new ClassMap();
+	public final componentStream : Observable<EntityComponent>;
 	final entity : OverworldEntity;
 
 
 	public function new( entity : OverworldEntity ) {
 		this.entity = entity;
+
+		componentStream = ObservableFactory.ofIterable( components )
+			.append( ObservableFactory.fromSignal( onComponentAdded ) );
 	}
 
 	public function dispose() {

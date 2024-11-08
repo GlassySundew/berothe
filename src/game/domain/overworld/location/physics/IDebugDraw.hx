@@ -4,6 +4,7 @@ import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
 interface IDebugDraw {
 
+	function remove() : Void;
 	function setVisibility( value : Bool ) : Void;
 	function point( v : ThreeDeeVector, color : ThreeDeeVector ) : Void;
 	function triangle(

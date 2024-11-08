@@ -36,20 +36,19 @@ class Chunk {
 		#end
 
 		var oldChunk = entity.chunk.getValue();
-
-		onEntityAdded.dispatch( entity );
+		if ( oldChunk == this ) return;
+		oldChunk?.removeEntity( entity );
 
 		entities.push( entity );
 		entity.addToChunk( this );
-
-		oldChunk?.removeEntity( entity );
+		onEntityAdded.dispatch( entity );
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
 		if ( entities.remove( entity ) ) {
 			onEntityRemoved.dispatch( entity );
 		} else {
-			// throw "entity: " + entity + " was not found in the chunk it has to be removed from";
+			throw "entity: " + entity + " was not found in the chunk it has to be removed from";
 		}
 	}
 

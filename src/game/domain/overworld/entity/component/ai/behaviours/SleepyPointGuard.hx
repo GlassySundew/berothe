@@ -34,11 +34,13 @@ class SleepyPointGuard extends EntityBehaviourBase {
 						}
 				);
 
-				if ( triggerId == null || location.triggers[triggerId] == null ) return;
+				var collisionTrigger = location.getTriggerByIdent(triggerId);
+				
+				if ( triggerId == null || collisionTrigger == null ) return;
 
 				// seeking for entity trigger on location
 				var sub : ISubscription = null;
-				sub = location.triggers[triggerId].cb.postSolveCB.add( cb -> {
+				sub = collisionTrigger.cb.postSolveCB.add( cb -> {
 					inline function someEntityTriggered( enemyMaybe : OverworldEntity ) {
 						if ( modelComp.isEnemy( enemyMaybe ) ) {
 							sub.unsubscribe();

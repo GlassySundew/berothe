@@ -7,6 +7,11 @@ import game.domain.overworld.entity.EntityComponent;
 
 class EntityCameraFollowComponent extends EntityClientComponent {
 
+	public function recenter() {
+		GameClient.inst.cameraProc.recenterCamera();
+
+	}
+	
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 		GameClient.inst.cameraProc.targetEntity.val = entity;

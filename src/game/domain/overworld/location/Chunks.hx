@@ -1,5 +1,8 @@
 package game.domain.overworld.location;
 
+import rx.disposables.SingleAssignment;
+import rx.disposables.Boolean;
+import rx.disposables.ISubscription;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.physics.Types;
@@ -10,12 +13,17 @@ class Chunks {
 	final location : Location;
 	public final chunks : Map<Int, Map<Int, Map<Int, Chunk>>> = [];
 
+	final entitySubscribtions : Map<OverworldEntity, ISubscription> = [];
+
 	public function new( location : Location, chunkSize : Int ) {
 		this.chunkSize = chunkSize;
 		this.location = location;
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
+		entitySubscribtions[entity]?.unsubscribe();
+		entitySubscribtions.remove( entity );
+
 		var chunkIdx = getChunkIdxFromAbsolute( {
 			x : entity.transform.x.val,
 			y : entity.transform.y.val,
@@ -27,16 +35,23 @@ class Chunks {
 			Std.int( chunkIdx.y ),
 			Std.int( chunkIdx.z )
 		);
-		#if client
-		if ( !chunk.entities.contains( entity ) ) return;
-		#end
 
 		chunk.removeEntity( entity );
+		entity.removeChunk();
 	}
 
 	public function addEntity( entity : OverworldEntity ) {
-		entity.components.get( EntityDynamicsComponent )?.onMove.add( onEntityMove.bind( entity ) );
+		var dynamics = entity.components.get( EntityDynamicsComponent );
+		if ( dynamics != null ) {
+			var sub = dynamics.onMove.add( onEntityMove.bind( entity ) );
+			var assignment = SingleAssignment.create();
+			assignment.set( sub );
+			entitySubscribtions[entity] = assignment;
+		}
 		onEntityMove( entity );
+		trace( "adding entity " + entity , entity.transform.x.val,
+		entity.transform.y.val,
+		entity.transform.z.val);
 	}
 
 	public function validateChunkAccess( x : Int, y : Int, z : Int ) {

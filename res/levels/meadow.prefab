@@ -1,0 +1,448 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "object",
+			"name": "global",
+			"props": {
+				"type": "global",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"props": {}
+			},
+			"children": [
+				{
+					"type": "model",
+					"name": "meadow",
+					"source": "voxel/levels/meadow/obj/fbx/meadow.fbx",
+					"locked": true,
+					"props": {
+						"entity": "model",
+						"$cdbtype": "locationEntityDF"
+					}
+				},
+				{
+					"type": "object",
+					"name": "collider",
+					"children": [
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -9.86,
+							"y": -4.26,
+							"z": -18,
+							"scaleX": 590,
+							"scaleY": 558.8,
+							"scaleZ": 38
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"y": 141,
+							"z": 94.93,
+							"scaleX": 337,
+							"scaleY": 26,
+							"scaleZ": 318
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -117.77,
+							"y": 10.5,
+							"z": 94.93,
+							"scaleX": 337,
+							"scaleY": 26,
+							"scaleZ": 318,
+							"rotationZ": 90
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 142,
+							"y": 19,
+							"z": 94.93,
+							"scaleX": 337,
+							"scaleY": 26,
+							"scaleZ": 318,
+							"rotationZ": 90
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -1,
+							"y": -141,
+							"z": 94.93,
+							"scaleX": 337,
+							"scaleY": 26,
+							"scaleZ": 318
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -26.41,
+							"y": 105.52,
+							"z": 94.93,
+							"scaleX": 179,
+							"scaleY": 65,
+							"scaleZ": 318,
+							"rotationZ": 172.7
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 68.29,
+							"y": 77.54,
+							"z": 54.25,
+							"scaleX": 8.21,
+							"scaleY": 26.71,
+							"scaleZ": 120.03,
+							"rotationZ": 177.4
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -116.32,
+							"y": 29.33,
+							"z": 52.9,
+							"scaleX": 43.43,
+							"scaleY": 36.27,
+							"scaleZ": 278.73,
+							"rotationZ": 23.7
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -114.31,
+							"y": 79.28,
+							"z": 51.83,
+							"scaleX": 28.09,
+							"scaleY": 36.27,
+							"scaleZ": 278.73,
+							"rotationZ": 141.3
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -121.12,
+							"y": -23.26,
+							"z": 53.69,
+							"scaleX": 43.91,
+							"scaleY": 101.33,
+							"scaleZ": 278.73,
+							"rotationZ": -12.2
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -100,
+							"y": -111.47,
+							"z": 55.41,
+							"scaleX": 58.75,
+							"scaleY": 79.44,
+							"scaleZ": 278.73,
+							"rotationZ": 65.4
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -46.95,
+							"y": -117.96,
+							"z": 56.54,
+							"scaleX": 46.73,
+							"scaleY": 48.87,
+							"scaleZ": 278.73,
+							"rotationZ": 90.4
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 69,
+							"y": -115,
+							"z": 5,
+							"scaleX": 33,
+							"scaleY": 184,
+							"scaleZ": 40,
+							"rotationZ": 90.4
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 23.67,
+							"y": -81,
+							"z": 8,
+							"scaleX": 95,
+							"scaleY": 70,
+							"scaleZ": 34
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -112.01,
+							"y": -42.81,
+							"z": 52.97,
+							"scaleX": 8.21,
+							"scaleY": 119.51,
+							"scaleZ": 278.73,
+							"rotationX": 0.4,
+							"rotationY": 9.6,
+							"rotationZ": 179.1
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 86.37,
+							"y": 123.15,
+							"z": 54.33,
+							"scaleX": 8.21,
+							"scaleY": 56.37,
+							"scaleZ": 120.03,
+							"rotationZ": -93.7
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 116.82,
+							"y": 127.54,
+							"z": 54.33,
+							"scaleX": 8.21,
+							"scaleY": 15.58,
+							"scaleZ": 120.03,
+							"rotationZ": -47.5
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 69.64,
+							"y": 117.53,
+							"z": 54.33,
+							"scaleX": 8.21,
+							"scaleY": 15.58,
+							"scaleZ": 120.03,
+							"rotationZ": -27.5
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 65.81,
+							"y": 59.29,
+							"z": 53.31,
+							"scaleX": 8.21,
+							"scaleY": 15.45,
+							"scaleZ": 120.03,
+							"rotationZ": -55.7
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 54.11,
+							"y": 61.19,
+							"z": 53.31,
+							"scaleX": 8.21,
+							"scaleY": 21.4,
+							"scaleZ": 120.03,
+							"rotationZ": -117.3
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "box",
+			"name": "town_transition",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "meadow"
+				}
+			},
+			"x": 69.74,
+			"y": -56.54,
+			"z": 7,
+			"scaleX": 4.44,
+			"scaleY": 11.96,
+			"scaleZ": 22.77,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false
+						}
+					},
+					"color": [
+						0.5176470588235293,
+						0.14509803921568626,
+						0.9019607843137255,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "box",
+			"name": "batcave_transition",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "meadow"
+				}
+			},
+			"x": 64.97,
+			"y": 101.29,
+			"z": 13.94,
+			"scaleX": 4.44,
+			"scaleY": 18.9,
+			"scaleZ": 27.3,
+			"rotationZ": 1,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false
+						}
+					},
+					"color": [
+						0.5176470588235293,
+						0.14509803921568626,
+						0.9019607843137255,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "orc cave exit",
+			"props": {
+				"type": "entityTransitionExit",
+				"props": {
+					"location": "start"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": -106.32,
+			"y": -71.66,
+			"z": 78.93
+		},
+		{
+			"type": "object",
+			"name": "orc cave exit",
+			"props": {
+				"type": "entityTransitionExit",
+				"props": {
+					"location": "start"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": -109.1,
+			"y": 59.74,
+			"z": 78.93
+		}
+	]
+}

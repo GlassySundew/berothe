@@ -1,5 +1,9 @@
 package game.domain.overworld.location;
 
+import rx.Subscription;
+import rx.disposables.ISubscription;
+import game.data.storage.DataStorage;
+import game.domain.overworld.location.physics.Types.EntityCollisionsService;
 import rx.Observable;
 import rx.ObservableFactory;
 import game.domain.overworld.entity.EntityFactory;
@@ -20,7 +24,7 @@ class Location {
 	public final physics : IPhysicsEngine;
 	public final entityFactory : EntityFactory;
 	public final chunks : Chunks;
-	public final triggers : Map<String, EntityTrigger> = [];
+	public final triggers : Array<EntityTrigger> = [];
 	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
 
 	/** not replicated but created via `location id` -> `geting through DataStorage on client` **/
@@ -29,11 +33,13 @@ class Location {
 
 	public final onChunkCreated = new Signal<Chunk>();
 	public final onEntityAdded = new Signal<OverworldEntity>();
+	public final onEntityRemoved : Signal<OverworldEntity> = new Signal<OverworldEntity>();
 	public final entityStream : Observable<OverworldEntity>;
 
-	var locationDataProvider : ILocationObjectsDataProvider;
+	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
 	final entities : Array<OverworldEntity> = [];
 	final globalEntities : Array<OverworldEntity> = [];
+	final entitySubscribtions : Map<OverworldEntity, ISubscription> = [];
 
 	public function new(
 		locationDesc : LocationDescription,
@@ -53,29 +59,49 @@ class Location {
 			.append( ObservableFactory.fromSignal( onEntityAdded ) );
 	}
 
+	public function dispose() {
+		for ( staticObj in globalEntities ) {
+			staticObj.dispose();
+		}
+		for ( trigger in triggers ) {
+			trigger.dispose();
+		}
+	}
+
 	public function addEntity( entity : OverworldEntity ) {
 		#if debug
 		Assert.notExistsInArray( entity, entities, 'trying to add an already existing entity: $entity onto a location' );
 		#end
 
-		if ( entity.location.getValue() != null ) {
-			entity.location.getValue().removeEntity( entity );
-		}
+		entity.location.getValue()?.removeEntity( entity );
 
 		entities.push( entity );
 		chunks.addEntity( entity );
-		entity.addToLocation( this );
+		entity.setLocation( this );
 		onEntityAdded.dispatch( entity );
 
-		entity.disposed.then( ( _ ) -> {
+		#if debug
+		Assert.notExistsInMap( entity, entitySubscribtions );
+		#end
+		var sub = entity.disposed.then( _ -> {
 			removeEntity( entity );
-			entity.removeChunk();
+			// entity.removeChunk();
 		} );
+		entitySubscribtions[entity] = Subscription.create(() -> sub.cancel() );
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
-		chunks.removeEntity( entity );
-		entities.remove( entity );
+		Assert.isTrue( entity.location.getValue() == this );
+		if ( entities.contains( entity ) ) {
+			chunks.removeEntity( entity );
+			entities.remove( entity );
+			onEntityRemoved.dispatch( entity );
+
+			entitySubscribtions[entity].unsubscribe();
+			entitySubscribtions.remove( entity );
+		} else {
+			trace( "location " + this + " did not contain entity: " + entity );
+		}
 	}
 
 	public function hasEntity( entity : OverworldEntity ) : Bool {
@@ -87,6 +113,7 @@ class Location {
 	}
 
 	public function update( dt : Float, tmod : Float ) {
+		physics.update( dt );
 		for ( entity in entities ) {
 			entity.update( dt, tmod );
 		}
@@ -94,7 +121,6 @@ class Location {
 			entity.update( dt, tmod );
 		}
 		behaviourManager.update( dt, tmod );
-		physics.update( dt );
 	}
 
 	public function loadAuthoritative() {
@@ -102,6 +128,7 @@ class Location {
 		loadData();
 
 		createAndAttachTriggers();
+		setupLocationTransitionTriggers();
 		createAndAttachStaticObjects();
 		createAndAttachPresentEntities();
 	}
@@ -114,9 +141,74 @@ class Location {
 		createAndAttachStaticObjects( false );
 	}
 
+	public function getTriggerByIdent( ident : String ) : Null<EntityTrigger> {
+		for ( trigger in triggers ) {
+			if ( trigger.vo.triggerId == ident ) return trigger;
+		}
+		return null;
+	}
+
 	function loadData() {
 		locationDataProvider = locationDesc.createLocationDataResolver().objectsDataProvider;
 		locationDataProvider.load();
+	}
+
+	function createAndAttachTriggers() {
+		for ( triggerVO in locationDataProvider.getTriggers() ) {
+			triggers.push( new EntityTrigger( triggerVO, this ) );
+		}
+	}
+
+	function setupLocationTransitionTriggers() {
+		for ( trigger in triggers ) {
+			if ( trigger.vo.props.locationTransitionId != null ) {
+				trigger.cb.postSolveCB.add(
+					EntityCollisionsService.unwrapContact.bind( _,
+						( entity1, entity2 ) -> {
+							var entity = entity1 ?? entity2;
+							if (
+								entity == null
+								|| !entity.desc.getBodyDescription().canChangeLocation
+							) return;
+
+							var locationDesc = DataStorage.inst.locationStorage.getById(
+								trigger.vo.props.locationTransitionId
+							);
+							moveEntityToAnotherLocation( entity, locationDesc );
+						}
+					)
+				);
+			}
+		}
+	}
+
+	function moveEntityToAnotherLocation(
+		entity : OverworldEntity,
+		targetLocationDesc : LocationDescription
+	) {
+		removeEntity( entity );
+
+		var targetLocation = GameCore.inst.getOrCreateLocationByDesc( targetLocationDesc, true );
+		targetLocation.addEntity( entity );
+		var exitPoint = Random.fromArray(
+			targetLocation.locationDataProvider.getLocationTransitionExits().filter(
+				( obj ) -> obj.locationDescId == locationDesc.id
+			)
+		);
+
+		if ( exitPoint == null ) {
+			trace(
+				"exit point was not found, from: "
+				+ locationDesc.id
+				+ " to: " + targetLocationDesc.id
+			);
+			return;
+		}
+
+		trace( exitPoint.x, exitPoint.y, exitPoint.z );
+
+		
+		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
 	}
 
 	function createAndAttachStaticObjects( isAuth = true ) {
@@ -148,15 +240,13 @@ class Location {
 		}
 	}
 
-	function createAndAttachTriggers() {
-		for ( triggerVO in locationDataProvider.getTriggers() ) {
-			Assert.notExistsInMap( triggerVO.triggerId, triggers );
-			triggers[triggerVO.triggerId] = new EntityTrigger( triggerVO, this );
-		}
+	function addGlobalEntity( entity : OverworldEntity ) {
+		entity.setLocation( this );
+		globalEntities.push( entity );
 	}
 
-	function addGlobalEntity( entity : OverworldEntity ) {
-		entity.addToLocation( this );
-		globalEntities.push( entity );
+	@:keep
+	function toString() : String {
+		return "Location: " + locationDesc.id;
 	}
 }

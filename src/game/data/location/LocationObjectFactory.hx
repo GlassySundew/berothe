@@ -13,22 +13,13 @@ class LocationObjectFactory {
 			switch cdbSheetId {
 				case LOCATION_ENTITY_PRESENT:
 					var entry : Data.LocationEntityDF = cast prefab.props;
-					return new LocationEntityVO(
-						prefab.scaleX,
-						prefab.scaleY,
-						prefab.scaleZ,
-						prefab.rotationX,
-						prefab.rotationY,
-						prefab.rotationZ,
-						prefab.x,
-						prefab.y,
-						prefab.z,
-						prefab.name,
-						prefab,
-						entry.entityId
-					);
+					return LocationEntityVO.fromPrefabInstance( prefab, entry );
 				case e:
-					trace( "static location object instance : " + e + " " + " sheet id: " + cdbSheetId + "; is not supported" );
+					trace(
+						"static location object instance : "
+						+ e + " " + " sheet id: "
+						+ cdbSheetId + "; is not supported"
+					);
 			}
 		}
 		return null;

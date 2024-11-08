@@ -19,7 +19,7 @@
 				{
 					"id": "entityGravityScale",
 					"value": {
-						"float": 2
+						"float": 3
 					}
 				},
 				{
@@ -388,10 +388,10 @@
 									"key": "attack_left_attack",
 									"tweenType": 0,
 									"sizeX": 1,
-									"sizeY": 0.4,
+									"sizeY": 0.65,
 									"sizeZ": 4,
 									"offsetX": -1.5,
-									"offsetY": -2.4,
+									"offsetY": -2.1,
 									"offsetZ": 8,
 									"cooldown": 3.4,
 									"duration": 0.35,
@@ -403,10 +403,10 @@
 									"id": "human_hand_attack_right",
 									"tweenType": 0,
 									"sizeX": 1,
-									"sizeY": 0.4,
+									"sizeY": 0.65,
 									"sizeZ": 4,
 									"offsetX": -1.5,
-									"offsetY": 2.4,
+									"offsetY": 2.1,
 									"offsetZ": 8,
 									"cooldown": 0.7,
 									"duration": 0.35,
@@ -416,7 +416,8 @@
 									"baseAttack": 1
 								}
 							]
-						}
+						},
+						"canChangeLocation": true
 					}
 				},
 				{
@@ -814,6 +815,11 @@
 				{
 					"typeStr": "2",
 					"name": "dynamics"
+				},
+				{
+					"typeStr": "2",
+					"name": "canChangeLocation",
+					"opt": true
 				},
 				{
 					"typeStr": "17",
@@ -2153,6 +2159,64 @@
 			]
 		},
 		{
+			"name": "faction",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "8",
+					"name": "hostileTo",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "orcs",
+					"hostileTo": [
+						{
+							"faction": "humans"
+						}
+					]
+				},
+				{
+					"id": "humans",
+					"hostileTo": []
+				},
+				{
+					"id": "bats",
+					"hostileTo": [
+						{
+							"faction": "humans"
+						}
+					]
+				},
+				{
+					"id": "undeads",
+					"hostileTo": []
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "faction@hostileTo",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:faction",
+					"name": "faction"
+				}
+			]
+		},
+		{
 			"name": "item",
 			"columns": [
 				{
@@ -2543,6 +2607,11 @@
 					"kind": null
 				},
 				{
+					"typeStr": "2",
+					"name": "isOpen",
+					"kind": null
+				},
+				{
 					"typeStr": "3",
 					"name": "chunkSize",
 					"kind": null
@@ -2561,7 +2630,18 @@
 						0,
 						"start"
 					],
-					"instancing": 0
+					"instancing": 0,
+					"isOpen": false
+				},
+				{
+					"id": "meadow",
+					"instancing": 2,
+					"chunkSize": 55,
+					"level": [
+						0,
+						"meadow"
+					],
+					"isOpen": true
 				}
 			],
 			"separators": [],
@@ -2569,91 +2649,6 @@
 				"editor": {
 					"categories": [
 						"location"
-					]
-				}
-			}
-		},
-		{
-			"name": "faction",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				},
-				{
-					"typeStr": "8",
-					"name": "hostileTo",
-					"kind": null
-				}
-			],
-			"lines": [
-				{
-					"id": "orcs",
-					"hostileTo": [
-						{
-							"faction": "humans"
-						}
-					]
-				},
-				{
-					"id": "humans",
-					"hostileTo": []
-				},
-				{
-					"id": "bats",
-					"hostileTo": [
-						{
-							"faction": "humans"
-						}
-					]
-				},
-				{
-					"id": "undeads",
-					"hostileTo": []
-				}
-			],
-			"separators": [],
-			"props": {}
-		},
-		{
-			"name": "faction@hostileTo",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "6:faction",
-					"name": "faction"
-				}
-			]
-		},
-		{
-			"name": "locationContainerType",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				}
-			],
-			"lines": [
-				{
-					"id": "global"
-				},
-				{
-					"id": "entityCollisionTrigger"
-				}
-			],
-			"separators": [],
-			"props": {
-				"editor": {
-					"categories": [
-						"locationDF"
 					]
 				}
 			}
@@ -2677,6 +2672,10 @@
 				{
 					"id": "start",
 					"file": "levels/start.prefab"
+				},
+				{
+					"id": "meadow",
+					"file": "levels/meadow.prefab"
 				}
 			],
 			"separators": [],
@@ -2684,6 +2683,36 @@
 				"editor": {
 					"categories": [
 						"location"
+					]
+				}
+			}
+		},
+		{
+			"name": "locationContainerType",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "global"
+				},
+				{
+					"id": "entityCollisionTrigger"
+				},
+				{
+					"id": "entityTransitionExit"
+				}
+			],
+			"separators": [],
+			"props": {
+				"editor": {
+					"categories": [
+						"locationDF"
 					]
 				}
 			}
@@ -2749,10 +2778,8 @@
 					"kind": null
 				},
 				{
-					"typeStr": "1",
-					"name": "extra",
-					"opt": true,
-					"kind": null
+					"typeStr": "17",
+					"name": "props"
 				}
 			],
 			"separators": [],
@@ -2765,6 +2792,29 @@
 					]
 				}
 			}
+		},
+		{
+			"name": "locationObjContainerTypeDF@props",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:location",
+					"name": "location",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "1",
+					"name": "ident",
+					"opt": true,
+					"kind": null
+				}
+			]
 		},
 		{
 			"name": "locationEntityDF",

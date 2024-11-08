@@ -1,21 +1,16 @@
 package game.client.en.comp;
 
+import game.net.client.GameClient;
+import dn.heaps.input.ControllerAccess;
+import rx.disposables.Composite;
+import game.client.en.comp.control.EntityAttackControlComponent;
+import game.client.en.comp.control.EntityCameraFollowComponent;
+import game.client.en.comp.control.EntityMovementControlComponent;
 import game.client.en.comp.view.ui.EntityInventoryHudMediator;
 import game.client.en.comp.view.ui.EntityStatsHudMediator;
-import game.domain.overworld.entity.component.model.EntityModelComponent;
-import haxe.zip.Uncompress;
-import game.net.entity.EntityComponentReplicatorBase;
-import haxe.zip.Compress;
-import haxe.zip.FlushMode;
-import util.Assert;
-import game.net.entity.component.attack.EntityAttackListReplicator;
-import game.domain.overworld.entity.component.EntityRigidBodyComponent;
-import game.client.en.comp.control.EntityAttackControlComponent;
-import dn.heaps.input.ControllerAccess;
-import game.client.en.comp.control.EntityMovementControlComponent;
-import game.client.en.comp.control.EntityCameraFollowComponent;
-import game.net.entity.EntityReplicator;
 import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
+import game.net.entity.EntityReplicator;
 
 class EntityControl {
 
@@ -26,7 +21,8 @@ class EntityControl {
 	public function new( entity : OverworldEntity, entityRepl : EntityReplicator ) {
 		ca = Main.inst.controller.createAccess();
 
-		entity.components.add( new EntityCameraFollowComponent() );
+		var cameraFollow = new EntityCameraFollowComponent();
+		entity.components.add( cameraFollow );
 		entity.components.add( new EntityMovementControlComponent( entityRepl, ca ) );
 		entity.components.add( new EntityAttackControlComponent( entityRepl, ca ) );
 
@@ -43,11 +39,19 @@ class EntityControl {
 			}
 		);
 
-		entity.components.onAppear( EntityRigidBodyComponent, ( key, rbComp ) -> {
-			rbComp.claimOwnage();
+		var sub = null;
+		entity.location.addOnValueImmediately( ( oldLoc, newLoc ) -> {
+			sub?.unsubscribe();
+			sub = Composite.create();
+			sub.add( entity.components.componentStream.observe( comp -> {
+				comp.claimOwnage();
+			} ) );
+			// waiting for coordinates to syncronize
+			GameClient.inst.delayer.addF(() -> {
+				cameraFollow.recenter();
+			}, 1 );
 		} );
 
 		entityRepl.transformRepl.createModelToNetworkStream();
-
 	}
 }

@@ -32,6 +32,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 	}
 
 	override public function claimOwnage() {
+		super.claimOwnage();
 		entity.location.onAppear( loc -> {
 			rigidBodyFuture.then( rigidBody -> {
 				rigidBody.setGravityScale( DataStorage.inst.rule.entityGravityScale );
@@ -104,21 +105,22 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		this.dynamicsComponent = dynamicsComponent;
 
-		dynamicsComponent.onMove.add(() -> {
-			rigidBody.wakeUp();
-			if (
-				Math.abs( rigidBody.velX.val ) > rotationApplicationVelMin
-				|| Math.abs( rigidBody.velY.val ) > rotationApplicationVelMin
-			) {
-				setRotationBasedOffVelocities();
-			}
+		subscribition.add(
+			dynamicsComponent.onMove.add(() -> {
+				rigidBody.wakeUp();
+				if (
+					Math.abs( rigidBody.velX.val ) > rotationApplicationVelMin
+					|| Math.abs( rigidBody.velY.val ) > rotationApplicationVelMin
+				) {
+					setRotationBasedOffVelocities();
+				}
 
-			var start = torsoShape.getPosition();
-			var end = start.clone();
-			end.z -= rigidBodyDesc.offsetZ;
+				var start = torsoShape.getPosition();
+				var end = start.clone();
+				end.z -= rigidBodyDesc.offsetZ;
 
-			physics.rayCast( start, end, standRayCastCallback );
-		} );
+				physics.rayCast( start, end, standRayCastCallback );
+			} ) );
 
 		dynamicsComponent.invalidateMove();
 	}

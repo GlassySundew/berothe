@@ -1,5 +1,7 @@
 package game.net.player;
 
+import game.net.server.GameServer;
+import rx.disposables.ISubscription;
 import hxbit.NetworkHost;
 import net.ClientController;
 import rx.disposables.Composite;
@@ -43,6 +45,8 @@ class PlayerReplicationService {
 
 	final sub = Composite.create();
 
+	var locationSub : ISubscription;
+
 	public function new(
 		playerEntity : OverworldEntity,
 		playerEntityReplicator : EntityReplicator,
@@ -64,6 +68,7 @@ class PlayerReplicationService {
 			trace( "player removed" );
 			sub.unsubscribe();
 		} );
+
 		cliCon.addChild( playerEntityReplicator );
 		cliCon.giveControlOverEntity( playerEntityReplicator );
 
@@ -80,22 +85,43 @@ class PlayerReplicationService {
 		transform.rotationY.syncBackOwner = cliCon;
 		transform.rotationZ.syncBackOwner = cliCon;
 
+		playerEntity.transform.onTakeControl.add( takeControl );
+		playerEntity.transform.onReleaseControl.add( giveControl );
+
 		giveControl();
 	}
 
 	function giveControl() {
+		// wait for network flushed
+		GameServer.inst.delayer.addF(() -> {
+			var transform = playerEntityReplicator.transformRepl;
+			transform.x.syncBack = false;
+			transform.y.syncBack = false;
+			transform.z.syncBack = false;
+
+			transform.velX.syncBack = false;
+			transform.velY.syncBack = false;
+			transform.velZ.syncBack = false;
+
+			transform.rotationX.syncBack = false;
+			transform.rotationY.syncBack = false;
+			transform.rotationZ.syncBack = false;
+		}, 1 );
+	}
+
+	function takeControl() {
 		var transform = playerEntityReplicator.transformRepl;
-		transform.x.syncBack = false;
-		transform.y.syncBack = false;
-		transform.z.syncBack = false;
+		transform.x.syncBack = true;
+		transform.y.syncBack = true;
+		transform.z.syncBack = true;
 
-		transform.velX.syncBack = false;
-		transform.velY.syncBack = false;
-		transform.velZ.syncBack = false;
+		transform.velX.syncBack = true;
+		transform.velY.syncBack = true;
+		transform.velZ.syncBack = true;
 
-		transform.rotationX.syncBack = false;
-		transform.rotationY.syncBack = false;
-		transform.rotationZ.syncBack = false;
+		transform.rotationX.syncBack = true;
+		transform.rotationY.syncBack = true;
+		transform.rotationZ.syncBack = true;
 	}
 
 	function validateChunkAccess( x : Int, y : Int, z : Int ) : Bool {
@@ -189,12 +215,12 @@ class PlayerReplicationService {
 
 	function onEntityRemovedFromChunk( entity ) {
 		if ( entity == playerEntity ) return;
+
 		if ( !areChunksInRange(
 			entity.chunk.getValue(),
 			playerEntity.chunk.getValue(),
 			PLAYER_VISION_RANGE_CHUNKS
 		) ) {
-
 			var entityReplicator = coreReplicator.getEntityReplicator( entity );
 			entityReplicator.unregister(
 				NetworkHost.current,
@@ -205,23 +231,35 @@ class PlayerReplicationService {
 
 	function onAddedToChunk( oldChunk : Chunk, chunk : Chunk ) {
 		if ( chunk == null ) {
-			wipeAllChunks();
 			return;
 		}
 
-		if ( oldChunk.location != chunk.location ) {
-			wipeAllChunks();
-		} else {
-			clearChunksOutOfRange( oldChunk, chunk );
-		}
+		clearChunksOutOfRange( oldChunk, chunk );
 
 		attachVisibleChunks( chunk );
 	}
 
-	function onAddedToLocation( _, location : Location ) {
+	function onAddedToLocation( oldLoc : Location, location : Location ) {
+		trace( "setting location: " + location, "old one: " + oldLoc, "equality: " + ( oldLoc == location ) );
 		if ( location == null ) return;
+
+		if ( oldLoc != null ) wipeAllChunks();
 
 		var locationRepl = coreReplicator.getLocationReplicator( location );
 		cliCon.onControlledEntityLocationChange( locationRepl );
+
+		attachVisibleChunks( playerEntity.chunk.getValue() );
+		oldLoc?.onEntityRemoved.remove( locationOnEntityRemoved );
+		location.onEntityRemoved.add( locationOnEntityRemoved );
+	}
+
+	function locationOnEntityRemoved( entity : OverworldEntity ) {
+		if ( entity == playerEntity ) return;
+
+		var entityReplicator = coreReplicator.getEntityReplicator( entity );
+		entityReplicator.unregister(
+			NetworkHost.current,
+			cliCon.networkClient.ctx
+		);
 	}
 }

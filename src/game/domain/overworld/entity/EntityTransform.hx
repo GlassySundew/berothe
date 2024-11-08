@@ -1,27 +1,33 @@
 package game.domain.overworld.entity;
 
+import signals.Signal;
 import core.MutableProperty;
 
 class EntityTransform {
 
-	public var x( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
-	public var y( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
-	public var z( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public final x = new MutableProperty( 0. );
+	public final y = new MutableProperty( 0. );
+	public final z = new MutableProperty( 0. );
 
-	public var velX( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
-	public var velY( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
-	public var velZ( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public final velX = new MutableProperty( 0. );
+	public final velY = new MutableProperty( 0. );
+	public final velZ = new MutableProperty( 0. );
 
-	public var rotationX( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
-	public var rotationY( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
-	public var rotationZ( default, null ) : MutableProperty<Float> = new MutableProperty( 0. );
+	public final rotationX = new MutableProperty( 0. );
+	public final rotationY = new MutableProperty( 0. );
+	public final rotationZ = new MutableProperty( 0. );
+
+	public final onTakeControl = new Signal();
+	public final onReleaseControl = new Signal();
 
 	public function new() {}
 
 	public function setPosition( x : Float, y : Float, z : Float ) {
+		onTakeControl.dispatch();
 		this.x.val = x;
 		this.y.val = y;
 		this.z.val = z;
+		onReleaseControl.dispatch();
 	}
 
 	public function setRotation( x : Float, y : Float, z : Float ) {

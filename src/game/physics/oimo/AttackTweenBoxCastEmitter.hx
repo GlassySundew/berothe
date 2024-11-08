@@ -94,7 +94,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	}
 
 	public inline function isInAction() : Bool {
-		return tween.count() != 0 || isOnCooldown();
+		return tween.count() != 0;
 	}
 
 	public inline function getCurrentTimelapseRatio() : Float {

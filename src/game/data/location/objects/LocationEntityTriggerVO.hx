@@ -3,6 +3,10 @@ package game.data.location.objects;
 import util.Assert;
 import hrt.prefab.Object3D;
 
+typedef TriggerProperties = {
+	var ?locationTransitionId : String;
+}
+
 class LocationEntityTriggerVO extends LocationObjectVO {
 	
 	public static function fromPrefabInstance(
@@ -10,6 +14,10 @@ class LocationEntityTriggerVO extends LocationObjectVO {
 		cdbEntry : Data.LocationObjContainerTypeDFDef
 	) : LocationEntityTriggerVO {
 
+		var props : TriggerProperties = {
+			locationTransitionId : cdbEntry.props.location.toString()
+		};
+		
 		return new LocationEntityTriggerVO(
 			instance.scaleX,
 			instance.scaleY,
@@ -21,13 +29,15 @@ class LocationEntityTriggerVO extends LocationObjectVO {
 			instance.y,
 			instance.z,
 			instance.name,
-			cdbEntry.extra,
+			cdbEntry.props.ident,
+			props,
 			instance
 		);
 	}
 
 	public final prefab : Object3D;
 	public final triggerId : String;
+	public final props : TriggerProperties;
 
 	public function new(
 		sizeX : Float,
@@ -41,6 +51,7 @@ class LocationEntityTriggerVO extends LocationObjectVO {
 		z : Float,
 		name : String,
 		triggerId : String,
+		props : TriggerProperties,
 		prefab : Object3D
 	) {
 		super(
@@ -56,6 +67,7 @@ class LocationEntityTriggerVO extends LocationObjectVO {
 			name
 		);
 
+		this.props = props;
 		this.triggerId = triggerId;
 		this.prefab = prefab;
 	}

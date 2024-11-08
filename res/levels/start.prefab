@@ -889,6 +889,20 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
+							"x": 51.48,
+							"y": -86.46,
+							"z": 6.92,
+							"scaleY": 11.14,
+							"scaleZ": 38.07,
+							"rotationZ": -5.1
+						},
+						{
+							"type": "customBox",
+							"name": "floor",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
 							"x": 41.44,
 							"y": -90.95,
 							"z": 6.92,
@@ -1326,8 +1340,8 @@
 				"spawnedEntity": "player",
 				"$cdbtype": "entitySpawnPointDF"
 			},
-			"x": -130.68,
-			"y": 67.38,
+			"x": 25.74,
+			"y": -79.94,
 			"rotationZ": -45
 		},
 		{
@@ -1338,8 +1352,8 @@
 				"entity": "orc_prison_key",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": -60.71,
-			"y": 47.15,
+			"x": -124.11,
+			"y": 51.47,
 			"z": 2.5
 		},
 		{
@@ -1357,6 +1371,7 @@
 			"type": "reference",
 			"name": "bat",
 			"source": "voxel/characters/bat/bat.enco",
+			"editorOnly": true,
 			"props": {
 				"entity": "bat",
 				"$cdbtype": "locationEntityDF"
@@ -1383,7 +1398,7 @@
 				"size": 1024,
 				"radius": 0,
 				"quality": 1,
-				"bias": 0.03,
+				"bias": 0.02,
 				"samplingMode": {
 					"kind": "None"
 				}
@@ -1395,13 +1410,75 @@
 			"props": {
 				"type": "entityCollisionTrigger",
 				"$cdbtype": "locationObjContainerTypeDF",
-				"extra": "sleepy_orc_wake_trigger"
+				"extra": "sleepy_orc_wake_trigger",
+				"id": "sleepy_orc_wake_trigger",
+				"props": {
+					"ident": "sleepy_orc_wake_trigger"
+				}
 			},
-			"x": -67.61,
-			"y": -33.17,
-			"scaleX": 46.01,
+			"x": -66.51,
+			"y": -36.36,
+			"z": 20.21,
+			"scaleX": 27.84,
 			"scaleZ": 49.51,
-			"rotationZ": -41.7
+			"rotationZ": -54.6
+		},
+		{
+			"type": "box",
+			"name": "meadow_transition",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "meadow"
+				}
+			},
+			"x": 50.12,
+			"y": -84.71,
+			"z": 7.13,
+			"scaleX": 20.49,
+			"scaleY": 4.14,
+			"scaleZ": 49.51,
+			"rotationZ": -88.8
+		},
+		{
+			"type": "renderProps",
+			"name": "renderProps",
+			"editorOnly": true,
+			"props": {
+				"PBR": {
+					"mode": "Pbr",
+					"emissive": 1,
+					"exposure": 0,
+					"sky": "Background",
+					"tone": "Linear",
+					"occlusion": 1,
+					"a": 2.51,
+					"b": 0.03,
+					"c": 2.43,
+					"d": 0.59,
+					"e": 0.14,
+					"forceDirectDiscard": false
+				}
+			},
+			"isDefault": true,
+			"children": [
+				{
+					"type": "rfx.sao",
+					"name": "sao",
+					"size": 0.72,
+					"blur": 8.41,
+					"samples": 30,
+					"radius": 3.62,
+					"intensity": 4.41,
+					"bias": 0.08
+				}
+			]
 		}
 	]
 }

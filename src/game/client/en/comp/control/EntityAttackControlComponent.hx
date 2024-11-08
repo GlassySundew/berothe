@@ -28,7 +28,6 @@ class EntityAttackControlComponent extends EntityClientComponent {
 			( key, attackList ) -> {
 				this.attackList = attackList;
 				entity.onFrame.add( update );
-				// attackList.claimOwnage();
 			}
 		);
 	}

@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.combat;
 
+import game.domain.overworld.location.physics.Types.EntityCollisionsService;
 import game.physics.oimo.EntityRigidBodyProps;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import core.IProperty;
@@ -66,20 +67,20 @@ class EntityAttackListItem {
 	public function claimOwnage() {
 		emitter.onAppear( emitter -> {
 			emitter.getCallbackContainer().beginCB.add(
-				( contact ) -> {
-					var maybeEnemy1 = Std.downcast( contact._b1.userData, EntityRigidBodyProps )?.entity;
-					var maybeEnemy2 = Std.downcast( contact._b2.userData, EntityRigidBodyProps )?.entity;
-					if ( maybeEnemy1 != null && maybeEnemy1 != entity ) {
-						EntityDamageService.entityDamageWithAttackListItem( entity, maybeEnemy1, desc );
+				EntityCollisionsService.unwrapContact.bind(
+					_,
+					( entity1, entity2 ) -> {
+						var enemy = //
+							if ( entity1 != null && entity1 != this.entity ) {
+								entity1;
+							} else if ( entity2 != null && entity2 != this.entity ) {
+								entity2;
+							} else null;
+						if ( enemy == null ) return;
+						EntityDamageService.entityDamageWithAttackListItem( entity, enemy, desc );
 						emitter.removeEmitter();
-						return;
 					}
-					if ( maybeEnemy2 != null && maybeEnemy2 != entity ) {
-						EntityDamageService.entityDamageWithAttackListItem( entity, maybeEnemy2, desc );
-						emitter.removeEmitter();
-						return;
-					}
-				} );
+				) );
 		} );
 	}
 

@@ -73,6 +73,15 @@ class GameClient extends Process {
 		Client.inst.onConnectionClosed.add( destroy );
 		Client.inst.onConnectionClosed.repeat( 1 );
 		Client.inst.onUnregister.add( onUnregister );
+
+		currentLocationSelf.addOnValue( ( oldLoc, newLoc ) -> {
+			if ( oldLoc != null ) {
+				oldLoc.dispose();
+				oldLoc.update( 0, 0 );
+				oldLoc.physics.getDebugDraw().remove();
+			}
+			
+		} );
 	}
 
 	public function onLocationProvided( locationRepl : LocationReplicator ) {
@@ -133,46 +142,50 @@ class GameClient extends Process {
 	function onUnregister( o : NetworkSerializable ) {
 		Std.downcast( o, NetNode )?.onUnregisteredClient();
 	}
+}
+
+#if debug
+class AxesHelper extends h3d.scene.Graphics {
+
+	public function new( ?parent : h3d.scene.Object, size = 2.0, colorX = 0xEB304D, colorY = 0x7FC309, colorZ = 0x288DF9, lineWidth = 2.0 ) {
+		super( parent );
+
+		lineShader.width = lineWidth;
+
+		setColor( colorX );
+		lineTo( size, 0, 0 );
+
+		setColor( colorY );
+		moveTo( 0, 0, 0 );
+		lineTo( 0, size, 0 );
+
+		setColor( colorZ );
+		moveTo( 0, 0, 0 );
+		lineTo( 0, 0, size );
 	}
-	#if debug
-	class AxesHelper extends h3d.scene.Graphics {
-		public function new( ?parent : h3d.scene.Object, size = 2.0, colorX = 0xEB304D, colorY = 0x7FC309, colorZ = 0x288DF9, lineWidth = 2.0 ) {
-			super( parent );
+}
 
-			lineShader.width = lineWidth;
+class GridHelper extends h3d.scene.Graphics {
 
-			setColor( colorX );
-			lineTo( size, 0, 0 );
+	public function new( ?parent : Object, size = 10.0, divisions = 10, color1 = 0x444444, color2 = 0x888888, lineWidth = 1.0 ) {
+		super( parent );
 
-			setColor( colorY );
-			moveTo( 0, 0, 0 );
-			lineTo( 0, size, 0 );
+		material.props = h3d.mat.MaterialSetup.current.getDefaults( "ui" );
 
-			setColor( colorZ );
-			moveTo( 0, 0, 0 );
-			lineTo( 0, 0, size );
+		lineShader.width = lineWidth;
+
+		var hsize = size / 2;
+		var csize = size / divisions;
+		var center = divisions / 2;
+		for ( i in 0...divisions + 1 ) {
+			var p = i * csize;
+			setColor(( i != 0 && i != divisions && i % center == 0 ) ? color2 : color1 );
+			moveTo(-hsize + p, -hsize, 0 );
+			lineTo(-hsize + p, -hsize + size, 0 );
+			moveTo(-hsize, -hsize + p, 0 );
+			lineTo(-hsize + size, -hsize + p, 0 );
 		}
 	}
-	class GridHelper extends h3d.scene.Graphics {
-		public function new( ?parent : Object, size = 10.0, divisions = 10, color1 = 0x444444, color2 = 0x888888, lineWidth = 1.0 ) {
-			super( parent );
-
-			material.props = h3d.mat.MaterialSetup.current.getDefaults( "ui" );
-
-			lineShader.width = lineWidth;
-
-			var hsize = size / 2;
-			var csize = size / divisions;
-			var center = divisions / 2;
-			for ( i in 0...divisions + 1 ) {
-				var p = i * csize;
-				setColor(( i != 0 && i != divisions && i % center == 0 ) ? color2 : color1 );
-				moveTo(-hsize + p, -hsize, 0 );
-				lineTo(-hsize + p, -hsize + size, 0 );
-				moveTo(-hsize, -hsize + p, 0 );
-				lineTo(-hsize + size, -hsize + p, 0 );
-			}
-		}
-	}
-	#end
-	#end
+}
+#end
+#end

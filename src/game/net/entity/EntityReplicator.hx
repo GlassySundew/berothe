@@ -38,10 +38,11 @@ class EntityReplicator extends NetNode {
 
 		entity.location.addOnValueImmediately( onLocationChanged );
 
-		entity.disposed.then( onEntityUnregister );
+		entity.disposed.then( onEntityDisposed );
 	}
 
 	override public function unregister( host : NetworkHost, ?ctx ) {
+		trace( "unregistering " + entity.result );
 		super.unregister( host, ctx );
 		transformRepl.unregister( host, ctx );
 		componentsRepl.unregister( host, ctx );
@@ -49,7 +50,7 @@ class EntityReplicator extends NetNode {
 
 	public function followServer() {
 		componentsRepl.followEntityServer( this );
-		transformRepl.followEntityServer( this );
+		transformRepl.followEntityServer( entity.result );
 	}
 
 	#if client
@@ -59,22 +60,19 @@ class EntityReplicator extends NetNode {
 	}
 	#end
 
-	function onEntityUnregister( ?v ) {
+	function onEntityDisposed( ?v ) {
 		// entity has to be disconnected ONLY AFTER it was detached from the chunk
 		// (and also from any other network channel)
 		entity.result.chunk.addOnValue(
 			( oldChunk, newChunk ) -> {
 				if ( newChunk != null ) throw "setting new chunk for disposed entity";
-				onEntityDisposed();
+				trace( "removing entity" );
+				componentsRepl.dispose();
+				parent?.removeChild( this );
+				unregister( NetworkHost.current );
+				__host = null;
 			}
 		);
-	}
-
-	function onEntityDisposed( ?v ) {
-		componentsRepl.dispose();
-		parent?.removeChild( this );
-		unregister( NetworkHost.current );
-		__host = null;
 	}
 
 	override function alive() {
@@ -83,13 +81,14 @@ class EntityReplicator extends NetNode {
 		var desc = DataStorage.inst.entityStorage.getById( entityDescriptionId );
 		var entityLocal = new OverworldEntity( desc, id );
 
-		entity.resolve( entityLocal );
 		EntityFactory.createAndAttachClientComponentsFromProperties( desc, entityLocal );
 
 		componentsRepl.followEntityClient( this );
-		transformRepl.followEntityClient( this );
+		transformRepl.followEntityClient( entityLocal );
 
-		// trace( "alived entity: " + entity.result );
+		entity.resolve( entityLocal );
+		
+		trace( "alived entity: " + entity.result );
 	}
 
 	function onLocationChanged( _, location : Location ) {

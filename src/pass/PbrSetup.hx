@@ -31,9 +31,11 @@ class PbrSetup extends h3d.mat.PbrMaterialSetup {
 
 class PbrRenderer extends h3d.scene.pbr.Renderer {
 
+	public var saoBlur : h3d.pass.Blur;
+	public var sao : h3d.pass.ScalableAO;
+
 	var outline = new h3d.pass.ScreenFx( new ScreenOutline() );
 	var outlineBlur = new h3d.pass.Blur( 4 );
-
 	var controlCharDepth : Texture;
 
 	final controlCharacterPos : h3d.Vector = new Vector();
@@ -42,6 +44,11 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 
 	public function new( env ) {
 		super( env );
+
+		sao = new h3d.pass.ScalableAO();
+		saoBlur = new h3d.pass.Blur();
+		sao.shader.sampleRadius = 0.2;
+		sao.shader.numSamples = 30;
 
 		controlCam.zNear = 0.1;
 		controlCam.zFar = 10000;
@@ -113,6 +120,18 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 		renderPass( output, get( "alpha" ), backToFront );
 		renderPass( output, get( "additive" ) );
 		end();
+		
+		// var saoTarget = allocTarget( "sao" );
+		// setTarget( saoTarget );
+		// sao.apply(
+		// 	ctx.getGlobal( "depthMap" ).texture,
+		// 	ctx.getGlobal( "normalMap" ).texture,
+		// 	ctx.camera
+		// );
+		// resetTarget();
+		// saoBlur.apply( ctx, saoTarget );
+		// copy( ctx.getGlobal( "depthMap" ), null );
+		// copy( saoTarget, null, Multiply );
 
 		begin( Decals );
 		drawPbrDecals( "decal" );
@@ -160,15 +179,19 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 
 		endPbr();
 	}
+
 	override function endPbr() {
 		// resetTarget();
 		switch ( displayMode ) {
 			case Pbr, Env, MatCap:
 				// characterDepth.apply( controlCharDepth );
+
 			default:
 		}
+
 		super.endPbr();
 	}
+
 	override function end() {
 		renderOutlines();
 		super.end();

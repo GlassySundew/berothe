@@ -1,8 +1,10 @@
 package game.domain.overworld.location;
 
+import game.data.location.objects.LocationLinkObjectVO;
 import game.data.location.objects.LocationEntityTriggerVO;
 import game.data.location.objects.LocationEntityVO;
 import game.data.location.objects.LocationSpawnVO;
+import game.data.location.objects.LocationObjectVO;
 import game.data.storage.entity.EntityDescription;
 
 interface ILocationObjectsDataProvider {
@@ -12,4 +14,5 @@ interface ILocationObjectsDataProvider {
 	function getGlobalObjects() : Array<LocationEntityVO>;
 	function getPresentEntities() : Array<LocationEntityVO>;
 	function getTriggers() : Array<LocationEntityTriggerVO>;
+	function getLocationTransitionExits() : Array<LocationLinkObjectVO>;
 }

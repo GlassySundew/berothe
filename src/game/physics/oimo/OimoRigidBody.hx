@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import oimo.common.Mat3;
 import dn.M;
 import game.domain.overworld.location.physics.ITransform;
 import core.MutableProperty;
@@ -22,7 +23,7 @@ class OimoRigidBody implements IRigidBody {
 		type : RigidBodyType,
 		?props : Any
 	) : IRigidBody {
-		
+
 		Assert.isOfType( shape, OimoRigidBodyShape );
 		var unwrapShape = Std.downcast( shape, OimoRigidBodyShape ).shape;
 
@@ -160,12 +161,15 @@ class OimoRigidBody implements IRigidBody {
 
 	public function onUpdated( ?doRoundSleep = true ) {
 		if ( rotationInvalidate ) {
-			rigidBody.setRotationXyz(
-				new Vec3(
-					rotationX.val,
-					rotationY.val,
-					rotationZ.val
-				)
+			var quat = new Quat();
+			quat.initRotation(
+				rotationX.val,
+				rotationY.val,
+				rotationZ.val
+			);
+			var quatMat = quat.toMatrix();
+			rigidBody.setRotation(
+				new Mat3().fromQuat( new oimo.common.Quat( quat.x, quat.y, quat.z, quat.w ) )
 			);
 		}
 
@@ -175,10 +179,17 @@ class OimoRigidBody implements IRigidBody {
 		velX.val = rigidBody._velX;
 		velY.val = rigidBody._velY;
 		velZ.val = rigidBody._velZ;
-		var vector = rigidBody._transform.getOrientation().toMat3().toEulerXyz();
-		rotationX.val = vector.x;
-		rotationY.val = vector.y;
-		rotationZ.val = vector.z;
+		var oimoQuat = rigidBody._transform.getRotation().toQuat();
+		var hpsRotation = new Quat(
+			oimoQuat.x,
+			oimoQuat.y,
+			oimoQuat.z,
+			oimoQuat.w
+		).toMatrix()
+			.getEulerAngles();
+		rotationX.val = hpsRotation.x;
+		rotationY.val = hpsRotation.y;
+		rotationZ.val = hpsRotation.z;
 
 		var tmod =
 			#if server

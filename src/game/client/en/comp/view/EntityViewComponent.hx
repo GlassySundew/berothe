@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import rx.disposables.ISubscription;
 import dn.Cooldown;
 import future.Future;
 import graphics.ObjectNode3D;
@@ -20,7 +21,7 @@ import game.client.en.comp.view.ui.EntitySleepSpeech;
 
 class EntityViewComponent extends EntityComponent {
 
-	public final view : Future<IEntityView> = new Future();
+	public var view( default, null ) : Future<IEntityView> = new Future();
 	public final cooldown : Cooldown = new Cooldown( hxd.Timer.wantedFPS );
 	final statusBar3dPoint = new Object();
 	final viewDescription : EntityViewDescription;
@@ -28,6 +29,8 @@ class EntityViewComponent extends EntityComponent {
 	public var statusBar( default, null ) : EntityStatusBarContainer;
 
 	var viewExtraConfig : Array<EntityViewExtraInitSetting> = [];
+
+	var subscription : ISubscription;
 
 	public function new( viewDescription : EntityViewDescription ) {
 		super( viewDescription );
@@ -81,14 +84,17 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		if ( view == null ) return;
+		subscription?.unsubscribe();
+		if ( view.result != null ) {
+			view.result.dispose();
+			view = new Future();
+		}
 		var viewGraphics = createView();
 		if ( viewGraphics == null ) return;
 
 		view.resolve( viewGraphics );
 		var node = view.result.getGraphics();
 
-		viewGraphics.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
 		Boot.inst.root3D.addChild( node );
 
 		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
@@ -96,7 +102,7 @@ class EntityViewComponent extends EntityComponent {
 		entity.components.onAppear(
 			EntityDynamicsComponent,
 			( _, dynamics ) -> {
-				dynamics.onMove.add(() -> {
+				subscription = dynamics.onMove.add(() -> {
 					node.setRotation(
 						entity.transform.rotationX,
 						entity.transform.rotationY,
@@ -111,13 +117,13 @@ class EntityViewComponent extends EntityComponent {
 			}
 		);
 
-		updateStatusBar3DPointPosition();
-
 		entity.components.onAppear(
 			EntityModelComponent,
 			( cl, modelComp ) -> {
+				viewGraphics.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
 				createStatusBar( modelComp );
 				EntitySleepSpeech.subscribe( this );
+				updateStatusBar3DPointPosition();
 			}
 		);
 	}

@@ -1,5 +1,6 @@
 package game.data.location.prefab;
 
+import game.data.location.objects.LocationLinkObjectVO;
 import game.data.location.objects.LocationEntityTriggerVO;
 import hrt.prefab.Object3D;
 import hrt.prefab.Prefab;
@@ -8,6 +9,7 @@ import util.Const;
 import util.HideUtil;
 import game.data.location.objects.LocationEntityVO;
 import game.data.location.objects.LocationSpawnVO;
+import game.data.location.objects.LocationObjectVO;
 import game.data.storage.entity.EntityDescription;
 import game.domain.overworld.location.ILocationObjectsDataProvider;
 
@@ -17,6 +19,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	var globalObjects : Array<LocationEntityVO> = [];
 	var presentEntities : Array<LocationEntityVO> = [];
 	var triggers : Array<LocationEntityTriggerVO> = [];
+	var locationTransitionExits : Array<LocationLinkObjectVO> = [];
 
 	var file : String;
 	var prefab : Prefab;
@@ -52,6 +55,10 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 		return triggers;
 	}
 
+	public inline function getLocationTransitionExits() : Array<LocationLinkObjectVO> {
+		return locationTransitionExits;
+	}
+
 	function parse() {
 		HideUtil.mapPrefabChildrenWithDerefRec( prefab, parsePrefabElement );
 	}
@@ -68,9 +75,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 	}
 
 	function resolveInstance( instance : Object3D ) {
-
 		var cdbSheetId : DataSheetIdent = Std.string( Reflect.field( instance.props, Const.cdbTypeIdent ) );
-
 		switch cdbSheetId {
 			case ENTITY_SPAWNPOINT:
 				var entry : Data.EntitySpawnPointDFDef = instance.props;
@@ -82,6 +87,10 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 						globalObjects = globalObjects.concat( resolveContainer( instance ) );
 					case entityCollisionTrigger:
 						triggers.push( LocationEntityTriggerVO.fromPrefabInstance( instance, entry ) );
+					case entityTransitionExit:
+						locationTransitionExits.push(
+							LocationLinkObjectVO.fromPrefabInstance( instance, entry )
+						);
 				}
 			case LOCATION_ENTITY_PRESENT:
 				var entry : Data.LocationEntityDF = instance.props;

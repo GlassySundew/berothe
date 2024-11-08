@@ -1,3 +1,5 @@
+import hrt.prefab.rfx.Sao;
+import hrt.prefab.Object3D;
 import h3d.scene.pbr.DirLight;
 import rx.disposables.Assignable;
 import rx.disposables.Boolean;
@@ -85,6 +87,8 @@ class Main extends Process {
 		// #if debug
 		Boot.inst.createServer();
 		// #end
+
+		var sao = new Sao(null, null).make();
 	}
 
 	function createUi() {

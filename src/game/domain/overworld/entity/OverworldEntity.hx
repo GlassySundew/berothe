@@ -48,7 +48,7 @@ class OverworldEntity {
 		onFrame.dispatch( dt, tmod );
 	}
 
-	public function addToLocation( location : Location ) {
+	public function setLocation( location : Location ) {
 		locationSelf.val = location;
 	}
 

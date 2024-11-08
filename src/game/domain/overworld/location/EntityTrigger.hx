@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import game.domain.overworld.location.physics.IRigidBody;
 import game.physics.oimo.ContactCallbackWrapper;
 import game.physics.ShapeAbstractFactory;
 import game.physics.RigidBodyAbstractFactory;
@@ -9,8 +10,9 @@ class EntityTrigger {
 
 	public var cb( default, null ) : ContactCallbackWrapper;
 
-	final vo : LocationEntityTriggerVO;
+	public final vo : LocationEntityTriggerVO;
 	final location : Location;
+	var rigidBody : IRigidBody;
 
 	public function new( vo : LocationEntityTriggerVO, location : Location ) {
 		this.vo = vo;
@@ -18,10 +20,14 @@ class EntityTrigger {
 		init();
 	}
 
+	public function dispose() {
+		location.physics.removeRigidBody( rigidBody );
+	}
+
 	#if !debug inline #end
 	function init() {
 		cb = new ContactCallbackWrapper();
-		
+
 		var torsoShape = ShapeAbstractFactory.box(
 			vo.sizeX,
 			vo.sizeY,
@@ -31,7 +37,7 @@ class EntityTrigger {
 		torsoShape.setCollisionMask( util.Const.G_PHYSICS );
 		torsoShape.setContactCallback( cb );
 
-		var rigidBody = RigidBodyAbstractFactory.create(
+		rigidBody = RigidBodyAbstractFactory.create(
 			torsoShape,
 			TRIGGER
 		);
