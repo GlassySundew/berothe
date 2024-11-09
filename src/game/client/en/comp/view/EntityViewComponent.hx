@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import core.MutableProperty;
 import rx.disposables.ISubscription;
 import dn.Cooldown;
 import future.Future;
@@ -23,6 +24,7 @@ class EntityViewComponent extends EntityComponent {
 
 	public var view( default, null ) : Future<IEntityView> = new Future();
 	public final cooldown : Cooldown = new Cooldown( hxd.Timer.wantedFPS );
+	public final isBatched : MutableProperty<Bool> = new MutableProperty();
 	final statusBar3dPoint = new Object();
 	final viewDescription : EntityViewDescription;
 
@@ -91,31 +93,30 @@ class EntityViewComponent extends EntityComponent {
 		}
 		var viewGraphics = createView();
 		if ( viewGraphics == null ) return;
-
 		view.resolve( viewGraphics );
 		var node = view.result.getGraphics();
 
-		Boot.inst.root3D.addChild( node );
+		addViewToScene( node );
 
-		node.setPosition( entity.transform.x, entity.transform.y, entity.transform.z );
-
+		function onMove() {
+			node.setRotation(
+				entity.transform.rotationX,
+				entity.transform.rotationY,
+				entity.transform.rotationZ
+			);
+			node.setPosition(
+				entity.transform.x,
+				entity.transform.y,
+				entity.transform.z
+			);
+		}
 		entity.components.onAppear(
 			EntityDynamicsComponent,
 			( _, dynamics ) -> {
-				subscription = dynamics.onMove.add(() -> {
-					node.setRotation(
-						entity.transform.rotationX,
-						entity.transform.rotationY,
-						entity.transform.rotationZ
-					);
-					node.setPosition(
-						entity.transform.x,
-						entity.transform.y,
-						entity.transform.z
-					);
-				} );
+				subscription = dynamics.onMove.add( onMove );
 			}
 		);
+		onMove();
 
 		entity.components.onAppear(
 			EntityModelComponent,
@@ -126,6 +127,15 @@ class EntityViewComponent extends EntityComponent {
 				updateStatusBar3DPointPosition();
 			}
 		);
+	}
+
+	function addViewToScene( node : ObjectNode3D ) {
+		if ( !isBatched.val ) {
+			Boot.inst.root3D.addChild( node );
+			return;
+		}
+
+		view.result.batcherize();
 	}
 
 	function createStatusBar( modelComp : EntityModelComponent ) {

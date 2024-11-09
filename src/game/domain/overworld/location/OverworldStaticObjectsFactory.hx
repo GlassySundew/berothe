@@ -29,7 +29,11 @@ class OverworldStaticObjectsFactory {
 		EntityFactory.createAndAttachComponentsFromProperties( objectDesc.entityDesc, entity );
 
 		entity.transform.setPosition( objectDesc.x, objectDesc.y, objectDesc.z );
-		entity.transform.setRotation( objectDesc.rotationX, objectDesc.rotationY, objectDesc.rotationZ );
+		entity.transform.setRotation(
+			objectDesc.rotationX,
+			objectDesc.rotationY,
+			objectDesc.rotationZ
+		);
 
 		provideSizeToStatic( entity, objectDesc );
 

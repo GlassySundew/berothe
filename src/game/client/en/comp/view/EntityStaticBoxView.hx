@@ -49,7 +49,11 @@ class EntityStaticBoxView implements IEntityView {
 		throw new NotImplementedException();
 	}
 
-	public function addChildObject(object:ObjectNode3D) {
+	public function addChildObject( object : ObjectNode3D ) {
+		throw new NotImplementedException();
+	}
+
+	public function batcherize() {
 		throw new NotImplementedException();
 	}
 }

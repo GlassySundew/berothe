@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import game.client.en.comp.view.EntityViewComponent;
 import rx.Subscription;
 import rx.disposables.ISubscription;
 import game.data.storage.DataStorage;
@@ -207,14 +208,23 @@ class Location {
 
 		trace( exitPoint.x, exitPoint.y, exitPoint.z );
 
-		
 		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
 	}
 
 	function createAndAttachStaticObjects( isAuth = true ) {
-		var objects = locationDataProvider.getGlobalObjects();
-		for ( object in objects ) {
-			globalObjects.push( objectFactory.createByDesc( object, isAuth ) );
+		var objectsVOs = locationDataProvider.getGlobalObjects();
+		for ( objectVO in objectsVOs ) {
+			if ( objectVO == null ) continue;
+			var entity = objectFactory.createByDesc( objectVO, isAuth );
+			if ( objectVO.isBatched ) {
+				entity.components.onAppear(
+					EntityViewComponent,
+					( _, viewComp ) -> {
+						viewComp.isBatched.val = true;
+					}
+				);
+			}
+			globalObjects.push( entity );
 		}
 
 		for ( globalObject in globalObjects ) {
@@ -237,6 +247,14 @@ class Location {
 				entityVO.rotationZ
 			);
 			addEntity( entity );
+			if ( entityVO.isBatched ) {
+				entity.components.onAppear(
+					EntityViewComponent,
+					( _, viewComp ) -> {
+						viewComp.isBatched.val = true;
+					}
+				);
+			}
 		}
 	}
 

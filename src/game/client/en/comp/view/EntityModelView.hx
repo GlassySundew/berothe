@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import haxe.exceptions.NotImplementedException;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import h3d.scene.Object;
 import game.net.client.GameClient;
@@ -36,5 +37,9 @@ class EntityModelView implements IEntityView {
 
 	public function addChildObject( object : ObjectNode3D ) {
 		this.object.addChild( object );
+	}
+
+	public function batcherize() {
+		throw new NotImplementedException();
 	}
 }

@@ -1,5 +1,9 @@
 package game.net.client;
 
+import h3d.scene.Mesh;
+import hxd.Res;
+import graphics.BatchRenderer;
+import h3d.scene.pbr.DirLight;
 import util.threeD.ModelCache;
 #if client
 import ui.dialog.ConnectMenu;
@@ -51,6 +55,7 @@ class GameClient extends Process {
 		return currentLocationSelf;
 	}
 
+	var locationLights : DirLight;
 	var ca : ControllerAccess<ControllerAction>;
 	var cam : CameraController;
 
@@ -80,14 +85,25 @@ class GameClient extends Process {
 				oldLoc.update( 0, 0 );
 				oldLoc.physics.getDebugDraw().remove();
 			}
-			
+			if ( newLoc.locationDesc.isOpenAir ) {
+				locationLights?.remove();
+				locationLights = new DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
+				locationLights.power = 1;
+				locationLights.shadows.mode = Dynamic;
+				locationLights.shadows.blur.radius = 0.2;
+				locationLights.shadows.bias = 0.02;
+			} else {
+				locationLights?.remove();
+				locationLights = null;
+			}
 		} );
+		new graphics.BatchRenderer( Boot.inst.s3d );
 	}
 
-	public function onLocationProvided( locationRepl : LocationReplicator ) {
+	public function onLocationProvided( locationDescId : String ) {
 		currentLocationSelf.val = core.getOrCreateLocationByDesc(
 			DataStorage.inst.locationStorage.getById(
-				locationRepl.locationDescriptionId
+				locationDescId
 			)
 		);
 
@@ -129,6 +145,8 @@ class GameClient extends Process {
 
 		currentLocationSelf.val?.update( hxd.Timer.dt, tmod );
 		onUpdate.dispatch();
+
+		BatchRenderer.inst?.emitBatches();
 	}
 
 	override function pause() {

@@ -7,7 +7,6 @@ import util.Repeater;
 #if client
 import game.client.en.comp.EntityControl;
 #end
-import game.net.location.LocationReplicator;
 import game.net.entity.EntityReplicator;
 import game.net.client.GameClient;
 import hxbit.NetworkHost;
@@ -78,11 +77,11 @@ class ClientController extends NetNode {
 	}
 
 	@:rpc( owner )
-	public function onControlledEntityLocationChange( locationRepl : LocationReplicator ) {
+	public function onControlledEntityLocationChange( locationDescId : String ) {
 		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
-		GameClient.inst.onLocationProvided( locationRepl );
+		GameClient.inst.onLocationProvided( locationDescId );
 		#end
 	}
 

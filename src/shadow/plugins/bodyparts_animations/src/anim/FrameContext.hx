@@ -50,6 +50,8 @@ class FrameContext {
 							mountpoints[slotType] ?? ( mountpoints[slotType] = createObservable() );
 
 						mpObservable.signal.dispatch( prefab );
+					case CollisionBox:
+						throw "collision box is not yet supported in animation frames";
 				}
 
 			case e:

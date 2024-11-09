@@ -32,6 +32,7 @@ class LocationEntityVO extends LocationObjectVO {
 
 	public final entityDesc : EntityDescription;
 	public final prefab : Object3D;
+	public var isBatched : Bool = false;
 
 	public function new(
 		sizeX : Float,

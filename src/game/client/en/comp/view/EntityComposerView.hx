@@ -1,5 +1,10 @@
 package game.client.en.comp.view;
 
+import dn.M;
+import hxd.fs.LocalFileSystem.LocalEntry;
+import h3d.prim.HMDModel;
+import graphics.BatchRenderer;
+import graphics.BatchElement;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import haxe.exceptions.NotImplementedException;
 import core.NodeBase;
@@ -85,13 +90,35 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 		switch Type.getClass( view ) {
 			case EntityComposerView:
 				addChild( Std.downcast( view, EntityComposerView ) );
-
 			case EntityStaticBoxView: throw new NotImplementedException();
 		}
 	}
 
 	public function addChildObject( object : ObjectNode3D ) @:privateAccess {
 		getGraphics().heapsObject.children[0].addChild( object.heapsObject );
+	}
+
+	public function batcherize() {
+		var meshes = entityComposer.local3d.getMeshes();
+		for ( mesh in meshes ) {
+			var meshParent = mesh.parent;
+			mesh.remove();
+
+			var model = Std.downcast( mesh.primitive, HMDModel );
+			var path = if ( model != null ) {
+				mesh.scale( 10 );
+				mesh.rotate( M.toRad( 90 ), 0, 0 );
+				@:privateAccess
+				Std.downcast( model.lib.resource.entry, LocalEntry ).file;
+			} else {
+				Std.string( Type.getClass( mesh.primitive ) );
+			}
+
+			var batchElement = BatchRenderer.inst.provideMesh( path, mesh );
+			meshParent.addChild( batchElement );
+			batchElement.setTransform( mesh.getTransform() );
+			batchElement.visible = mesh.visible;
+		}
 	}
 
 	function update( dt, tmod ) {

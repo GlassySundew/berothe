@@ -84,13 +84,16 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 				var entry : Data.LocationObjContainerTypeDFDef = instance.props;
 				switch entry.type {
 					case global:
-						globalObjects = globalObjects.concat( resolveContainer( instance ) );
+						globalObjects = globalObjects.concat(
+							LocationObjectFactory.parseGlobalContainer( instance )
+						);
 					case entityCollisionTrigger:
 						triggers.push( LocationEntityTriggerVO.fromPrefabInstance( instance, entry ) );
 					case entityTransitionExit:
 						locationTransitionExits.push(
 							LocationLinkObjectVO.fromPrefabInstance( instance, entry )
 						);
+					case e: trace( "entity container type: " + e + " is not supported" );
 				}
 			case LOCATION_ENTITY_PRESENT:
 				var entry : Data.LocationEntityDF = instance.props;
@@ -98,23 +101,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 					LocationEntityVO.fromPrefabInstance( instance, entry )
 				);
 			case e:
-				trace( instance.editorOnly, instance.enabled );
 				trace( "Prefab instance: " + instance + " " + " sheet id: " + cdbSheetId + "; is not suppported" );
 		}
-	}
-
-	function resolveContainer( prefab : Prefab ) : Array<LocationEntityVO> {
-		var result = [];
-
-		function parsePrefabElementsLocal( prefabLocal : Prefab ) : Bool {
-			var obj3D = Std.downcast( prefabLocal, Object3D );
-			if ( obj3D != null && obj3D.props != null )
-				result.push( LocationObjectFactory.fromPrefab( obj3D ) );
-			return true;
-		}
-
-		HideUtil.mapPrefabChildrenWithDerefRec( prefab, parsePrefabElementsLocal );
-
-		return result;
 	}
 }

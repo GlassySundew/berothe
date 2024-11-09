@@ -57,6 +57,7 @@ class EntityReplicator extends NetNode {
 	override function onUnregisteredClient() {
 		super.onUnregisteredClient();
 		entity.result.dispose();
+		trace( "disposing entity " + entity.result );
 	}
 	#end
 
@@ -87,7 +88,7 @@ class EntityReplicator extends NetNode {
 		transformRepl.followEntityClient( entityLocal );
 
 		entity.resolve( entityLocal );
-		
+
 		trace( "alived entity: " + entity.result );
 	}
 

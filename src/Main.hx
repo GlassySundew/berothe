@@ -87,8 +87,6 @@ class Main extends Process {
 		// #if debug
 		Boot.inst.createServer();
 		// #end
-
-		var sao = new Sao(null, null).make();
 	}
 
 	function createUi() {

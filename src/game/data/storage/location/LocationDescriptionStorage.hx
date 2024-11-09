@@ -9,6 +9,6 @@ class LocationDescriptionStorage extends DescriptionStorageBase<LocationDescript
 	}
 
 	override function parseItem( entry : Data.Location ) {
-		addItem( new LocationDescription( entry ) );
+		addItem( LocationDescription.fromCdb( entry ) );
 	}
 }

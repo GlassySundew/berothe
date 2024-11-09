@@ -10,4 +10,5 @@ interface IEntityView {
 	function addChildView( view : IEntityView ) : Void;
 	function addChildObject( object : ObjectNode3D ) : Void;
 	function provideSize( vec : ThreeDeeVector ) : Void;
+	function batcherize() : Void;
 }

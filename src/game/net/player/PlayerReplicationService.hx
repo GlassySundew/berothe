@@ -69,7 +69,7 @@ class PlayerReplicationService {
 			sub.unsubscribe();
 		} );
 
-		cliCon.addChild( playerEntityReplicator );
+		cliCon.connect( playerEntityReplicator );
 		cliCon.giveControlOverEntity( playerEntityReplicator );
 
 		var transform = playerEntityReplicator.transformRepl;
@@ -156,6 +156,7 @@ class PlayerReplicationService {
 	}
 
 	function wipeAllChunks() {
+		trace( "wiping all chunks" );
 		for ( zChunkRow in chunks ) {
 			for ( yChunkRow in zChunkRow ) {
 				for ( xi => xChunkRepl in yChunkRow ) {
@@ -213,24 +214,28 @@ class PlayerReplicationService {
 		}
 	}
 
-	function onEntityRemovedFromChunk( entity ) {
+	function onEntityRemovedFromChunk( entity : OverworldEntity ) {
 		if ( entity == playerEntity ) return;
 
-		if ( !areChunksInRange(
-			entity.chunk.getValue(),
-			playerEntity.chunk.getValue(),
-			PLAYER_VISION_RANGE_CHUNKS
-		) ) {
-			var entityReplicator = coreReplicator.getEntityReplicator( entity );
-			entityReplicator.unregister(
-				NetworkHost.current,
-				cliCon.networkClient.ctx
-			);
-		}
+		// допущение: мы полагаем что `entity` пока не поменял свой чанк и
+		// он поменяется после выполнения этой функции
+		entity.chunk.addOnValue( ( _, entityChunk ) -> {
+			if ( !areChunksInRange(
+				entityChunk,
+				playerEntity.chunk.getValue(),
+				PLAYER_VISION_RANGE_CHUNKS
+			) ) {
+				var entityReplicator = coreReplicator.getEntityReplicator( entity );
+				entityReplicator.unregister(
+					NetworkHost.current,
+					cliCon.networkClient.ctx
+				);
+			}
+		}, 1 );
 	}
 
 	function onAddedToChunk( oldChunk : Chunk, chunk : Chunk ) {
-		if ( chunk == null ) {
+		if ( chunk == null || playerEntity.location.getValue() == null ) {
 			return;
 		}
 
@@ -245,8 +250,7 @@ class PlayerReplicationService {
 
 		if ( oldLoc != null ) wipeAllChunks();
 
-		var locationRepl = coreReplicator.getLocationReplicator( location );
-		cliCon.onControlledEntityLocationChange( locationRepl );
+		cliCon.onControlledEntityLocationChange( location.locationDesc.id );
 
 		attachVisibleChunks( playerEntity.chunk.getValue() );
 		oldLoc?.onEntityRemoved.remove( locationOnEntityRemoved );
