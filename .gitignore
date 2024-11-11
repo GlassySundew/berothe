@@ -16,3 +16,4 @@ res/.tmp
 imgui.ini
 
 .haxelib
+*.fbx

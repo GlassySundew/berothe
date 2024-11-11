@@ -1,0 +1,25 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "customBox",
+			"name": "customBox",
+			"editorOnly": true,
+			"props": {
+				"$cdbtype": "plstSpecialObjDF"
+			},
+			"z": 34.17,
+			"scaleX": 20.55,
+			"scaleY": 22.03,
+			"scaleZ": 26.49
+		},
+		{
+			"type": "model",
+			"name": "tree",
+			"source": "voxel/structures/tree/obj/fbx/tree.fbx",
+			"x": 1,
+			"y": 2,
+			"retargetAnim": true
+		}
+	]
+}

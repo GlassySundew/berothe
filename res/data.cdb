@@ -127,6 +127,10 @@
 				{
 					"id": "wall_torch",
 					"preset": "wall_torch"
+				},
+				{
+					"id": "tree",
+					"preset": "tree"
 				}
 			],
 			"separators": [
@@ -228,6 +232,11 @@
 					"id": "wall_torch",
 					"properties": "wall_torch",
 					"view": "wall_torch"
+				},
+				{
+					"id": "tree",
+					"properties": "tree",
+					"view": "tree"
 				}
 			],
 			"separators": [
@@ -779,6 +788,21 @@
 							"id": "light",
 							"equipSource": "head",
 							"prefab": "voxel/structures/wall_torch/entity/light.prefab"
+						}
+					}
+				},
+				{
+					"id": "tree",
+					"properties": {
+						"dynamics": false,
+						"rigidBodyTorso": {
+							"id": "tree_body",
+							"geometry": 0,
+							"hasFeet": false,
+							"isStatic": true,
+							"sizeX": 3,
+							"sizeY": 3,
+							"sizeZ": 13
 						}
 					}
 				}
@@ -1872,6 +1896,14 @@
 					"viewComps": {}
 				},
 				{
+					"id": "tree",
+					"viewComps": {},
+					"type": [
+						1,
+						"tree"
+					]
+				},
+				{
 					"id": "gold_piece",
 					"viewComps": {
 						"colorRandomShift": {
@@ -2023,6 +2055,10 @@
 				{
 					"id": "wall_torch",
 					"file": "voxel/structures/wall_torch/entity/wall_torch.enco"
+				},
+				{
+					"id": "tree",
+					"file": "voxel/structures/tree/tree.enco"
 				}
 			],
 			"separators": [
@@ -2706,6 +2742,9 @@
 				},
 				{
 					"id": "entityTransitionExit"
+				},
+				{
+					"id": "entityInstancedRenderGroup"
 				}
 			],
 			"separators": [],
@@ -2959,6 +2998,10 @@
 							"typeStr": "6:equipSlotType"
 						}
 					]
+				},
+				{
+					"name": "CollisionBox",
+					"args": []
 				}
 			]
 		},
