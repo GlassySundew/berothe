@@ -1,5 +1,8 @@
 package game.net.entity;
 
+import rx.disposables.ISubscription;
+import h3d.Vector;
+import haxe.Timer;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable.NetworkSerializer;
 import rx.disposables.Composite;
@@ -8,6 +11,8 @@ import net.NSMutableProperty;
 import net.NetNode;
 
 class EntityTransformReplicator extends NetNode {
+
+	static final maxInterpolationTime = 100;
 
 	@:s public final x : NSMutableProperty<Float> = new NSMutableProperty( 0. );
 	@:s public final y : NSMutableProperty<Float> = new NSMutableProperty( 0. );
@@ -26,18 +31,25 @@ class EntityTransformReplicator extends NetNode {
 
 	var entity : OverworldEntity;
 
+	// interpolation
+	var lastUpdateTS : Float;
+	var lastSyncX : Float;
+	var lastSyncY : Float;
+	var lastSyncZ : Float;
+	var interpolationSub : ISubscription;
+
 	public function new( ?parent ) {
 		super( parent );
 	}
 
 	public function followEntityServer( entity : OverworldEntity ) {
-		this.entity = entity;
+		followEntity( entity );
 
 		setupServerSyncronization();
 	}
 
 	public function followEntityClient( entity : OverworldEntity ) {
-		this.entity = entity;
+		followEntity( entity );
 
 		setupClientSyncronization();
 	}
@@ -74,6 +86,50 @@ class EntityTransformReplicator extends NetNode {
 		networkToModelStream.add( rotationX.subscribeProp( entity.transform.rotationX ) );
 		networkToModelStream.add( rotationY.subscribeProp( entity.transform.rotationY ) );
 		networkToModelStream.add( rotationZ.subscribeProp( entity.transform.rotationZ ) );
+	}
+
+	function followEntity( entity : OverworldEntity ) {
+		this.entity = entity;
+
+		var isInterpolating = false;
+		x.addOnValue( ( oldVal, newVal ) -> {
+			lastUpdateTS = Timer.stamp();
+			lastSyncX = oldVal;
+		} );
+		y.addOnValue( ( oldVal, newVal ) -> {
+			lastUpdateTS = Timer.stamp();
+			lastSyncY = oldVal;
+		} );
+		z.addOnValue( ( oldVal, newVal ) -> {
+			lastUpdateTS = Timer.stamp();
+			lastSyncZ = oldVal;
+		} );
+		entity.transform.x.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncX = newVal );
+		entity.transform.y.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncY = newVal );
+		entity.transform.z.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncZ = newVal );
+
+		interpolationSub = entity.onFrame.add( ( dt, tmod ) -> {
+			// var timeSinceLastUpd = ( Timer.stamp() - lastUpdateTS ) * 1000;
+			// x.mutePropagation = true;
+			// y.mutePropagation = true;
+			// z.mutePropagation = true;
+			// isInterpolating = true;
+
+			// var interpRatio = timeSinceLastUpd / maxInterpolationTime;
+
+			// entity.transform.x.val = hxd.Math.lerp( lastSyncX, x.val, interpRatio );
+			// entity.transform.y.val = hxd.Math.lerp( lastSyncY, y.val, interpRatio );
+			// entity.transform.z.val = hxd.Math.lerp( lastSyncZ, z.val, interpRatio );
+
+			// x.mutePropagation = false;
+			// y.mutePropagation = false;
+			// z.mutePropagation = false;
+			// isInterpolating = false;
+		} );
+	}
+
+	public function claimOwnage() {
+		interpolationSub.unsubscribe();
 	}
 
 	function setupServerSyncronization() {

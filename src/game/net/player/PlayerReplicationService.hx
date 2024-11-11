@@ -67,6 +67,7 @@ class PlayerReplicationService {
 		playerEntity.disposed.then( _ -> {
 			trace( "player removed" );
 			sub.unsubscribe();
+			wipeAllChunks();
 		} );
 
 		cliCon.connect( playerEntityReplicator );
@@ -220,16 +221,18 @@ class PlayerReplicationService {
 		// допущение: мы полагаем что `entity` пока не поменял свой чанк и
 		// он поменяется после выполнения этой функции
 		entity.chunk.addOnValue( ( _, entityChunk ) -> {
-			if ( !areChunksInRange(
-				entityChunk,
-				playerEntity.chunk.getValue(),
-				PLAYER_VISION_RANGE_CHUNKS
-			) ) {
-				var entityReplicator = coreReplicator.getEntityReplicator( entity );
-				entityReplicator.unregister(
-					NetworkHost.current,
-					cliCon.networkClient.ctx
-				);
+			if (
+				entityChunk != null
+				&& !areChunksInRange(
+					entityChunk,
+					playerEntity.chunk.getValue(),
+					PLAYER_VISION_RANGE_CHUNKS
+				) ) {
+					var entityReplicator = coreReplicator.getEntityReplicator( entity );
+					entityReplicator.unregister(
+						NetworkHost.current,
+						cliCon.networkClient.ctx
+					);
 			}
 		}, 1 );
 	}
@@ -258,7 +261,7 @@ class PlayerReplicationService {
 	}
 
 	function locationOnEntityRemoved( entity : OverworldEntity ) {
-		if ( entity == playerEntity ) return;
+		if ( entity == playerEntity || entity.disposed.isTriggered ) return;
 
 		var entityReplicator = coreReplicator.getEntityReplicator( entity );
 		entityReplicator.unregister(

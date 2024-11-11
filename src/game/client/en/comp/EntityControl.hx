@@ -53,5 +53,6 @@ class EntityControl {
 		} );
 
 		entityRepl.transformRepl.createModelToNetworkStream();
+		entityRepl.transformRepl.claimOwnage();
 	}
 }

@@ -38,7 +38,6 @@ class EntityModelComponent extends EntityComponent {
 		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
 
 		if ( desc.baseHp != 0 ) hp.val = desc.baseHp;
-		hp.addOnValueImmediately( onHpChanged );
 
 		if ( desc.displayName != null ) displayName.val = desc.displayName;
 	}
@@ -91,6 +90,7 @@ class EntityModelComponent extends EntityComponent {
 
 	override function claimOwnage() {
 		super.claimOwnage();
+		hp.addOnValueImmediately( onHpChanged );
 		inventory.claimOwnage();
 	}
 

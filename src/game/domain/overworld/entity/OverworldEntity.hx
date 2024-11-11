@@ -19,6 +19,7 @@ class OverworldEntity {
 
 	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 	public final disposed : Future<Bool> = new Future();
+	public final postDisposed : Future<Bool> = new Future();
 
 	var chunkSelf : MutableProperty<Chunk> = new MutableProperty<Chunk>();
 	public var chunk( get, never ) : IProperty<Chunk>;
@@ -42,6 +43,7 @@ class OverworldEntity {
 		if ( disposed.isTriggered ) throw "entity double dispose";
 		components.dispose();
 		disposed.resolve( true );
+		postDisposed.resolve( true );
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {

@@ -38,7 +38,7 @@ class EntityReplicator extends NetNode {
 
 		entity.location.addOnValueImmediately( onLocationChanged );
 
-		entity.disposed.then( onEntityDisposed );
+		entity.postDisposed.then( onEntityDisposed );
 	}
 
 	override public function unregister( host : NetworkHost, ?ctx ) {
@@ -62,18 +62,11 @@ class EntityReplicator extends NetNode {
 	#end
 
 	function onEntityDisposed( ?v ) {
-		// entity has to be disconnected ONLY AFTER it was detached from the chunk
-		// (and also from any other network channel)
-		entity.result.chunk.addOnValue(
-			( oldChunk, newChunk ) -> {
-				if ( newChunk != null ) throw "setting new chunk for disposed entity";
-				trace( "removing entity" );
-				componentsRepl.dispose();
-				parent?.removeChild( this );
-				unregister( NetworkHost.current );
-				__host = null;
-			}
-		);
+		trace( "removing entity" );
+		componentsRepl.dispose();
+		parent?.removeChild( this );
+		unregister( NetworkHost.current );
+		__host = null;
 	}
 
 	override function alive() {
@@ -88,8 +81,6 @@ class EntityReplicator extends NetNode {
 		transformRepl.followEntityClient( entityLocal );
 
 		entity.resolve( entityLocal );
-
-		trace( "alived entity: " + entity.result );
 	}
 
 	function onLocationChanged( _, location : Location ) {
