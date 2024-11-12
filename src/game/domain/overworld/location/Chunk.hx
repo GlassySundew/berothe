@@ -35,7 +35,7 @@ class Chunk {
 		Assert.notExistsInArray( entity, entities );
 		#end
 
-		//! важно что сначала убираем сущность из чанка, потом добавляем её в другой
+		// ! важно что сначала убираем сущность из чанка, потом добавляем её в другой
 		var oldChunk = entity.chunk.getValue();
 		if ( oldChunk == this ) return;
 		oldChunk?.removeEntity( entity );

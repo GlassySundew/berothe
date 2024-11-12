@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import rx.disposables.Composite;
 import dn.M;
 import dn.phys.Velocity;
 import game.physics.oimo.EntityRigidBodyProps;
@@ -55,18 +56,19 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		super.onAttachedToLocation( location );
 
 		if ( rigidBodyDesc.hasFeet ) {
-			entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
+			var maybeSub = entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
+			if ( maybeSub != null ) subscription.add( maybeSub );
 		}
 
-		entity.transform.x.subscribeProp( rigidBody.x, true );
-		entity.transform.y.subscribeProp( rigidBody.y, true );
-		entity.transform.z.subscribeProp( rigidBody.z, true );
-		entity.transform.velX.subscribeProp( rigidBody.velX, true );
-		entity.transform.velY.subscribeProp( rigidBody.velY, true );
-		entity.transform.velZ.subscribeProp( rigidBody.velZ, true );
-		entity.transform.rotationX.subscribeProp( rigidBody.rotationX, true );
-		entity.transform.rotationY.subscribeProp( rigidBody.rotationY, true );
-		entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ, true );
+		subscription.add( entity.transform.x.subscribeProp( rigidBody.x, true ) );
+		subscription.add( entity.transform.y.subscribeProp( rigidBody.y, true ) );
+		subscription.add( entity.transform.z.subscribeProp( rigidBody.z, true ) );
+		subscription.add( entity.transform.velX.subscribeProp( rigidBody.velX, true ) );
+		subscription.add( entity.transform.velY.subscribeProp( rigidBody.velY, true ) );
+		subscription.add( entity.transform.velZ.subscribeProp( rigidBody.velZ, true ) );
+		subscription.add( entity.transform.rotationX.subscribeProp( rigidBody.rotationX, true ) );
+		subscription.add( entity.transform.rotationY.subscribeProp( rigidBody.rotationY, true ) );
+		subscription.add( entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ, true ) );
 	}
 
 	function createRigidBody() {
@@ -105,7 +107,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		this.dynamicsComponent = dynamicsComponent;
 
-		subscribition.add(
+		subscription.add(
 			dynamicsComponent.onMove.add(() -> {
 				rigidBody.wakeUp();
 				if (

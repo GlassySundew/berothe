@@ -2638,9 +2638,8 @@
 					"scope": null
 				},
 				{
-					"typeStr": "5:PerPlayerPerRealm,Singleton,PerRealm",
-					"name": "instancing",
-					"kind": null
+					"typeStr": "5:PerPlayer,Singleton,PerRealm",
+					"name": "instancing"
 				},
 				{
 					"typeStr": "2",

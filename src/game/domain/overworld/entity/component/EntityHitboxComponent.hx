@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import rx.disposables.Composite;
 import game.physics.oimo.EntityRigidBodyProps;
 import game.physics.oimo.ContactCallbackWrapper;
 import oimo.dynamics.callback.ContactCallback;
@@ -49,20 +50,15 @@ class EntityHitboxComponent extends EntityRigidBodyComponentBase {
 	override function onAttachedToLocation( location : Location ) {
 		super.onAttachedToLocation( location );
 
-		entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
+		var maybeSub = entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
+		if ( maybeSub != null ) subscription.add( maybeSub );
 
-		entity.transform.x.subscribeProp( rigidBody.x );
-		entity.transform.y.subscribeProp( rigidBody.y );
-		entity.transform.z.subscribeProp( rigidBody.z );
-		// entity.transform.velX.subscribeProp( rigidBody.velX );
-		// entity.transform.velY.subscribeProp( rigidBody.velY );
-		// entity.transform.velZ.subscribeProp( rigidBody.velZ );
-		// entity.transform.rotationX.subscribeProp( rigidBody.rotationX );
-		// entity.transform.rotationY.subscribeProp( rigidBody.rotationY );
-		// entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ );
+		subscription.add( entity.transform.x.subscribeProp( rigidBody.x ) );
+		subscription.add( entity.transform.y.subscribeProp( rigidBody.y ) );
+		subscription.add( entity.transform.z.subscribeProp( rigidBody.z ) );
 	}
 
 	function onDynamicsAppeared( _, dynamics : EntityDynamicsComponent ) {
-		dynamics.onMove.add(() -> rigidBody.wakeUp() );
+		subscription.add( dynamics.onMove.add(() -> rigidBody.wakeUp() ) );
 	}
 }

@@ -55,19 +55,24 @@ class GameServer extends Process {
 		#end
 	}
 
-	public function getLevel( locationDesc : LocationDescription ) : Location {
-		return core.getOrCreateLocationByDesc( locationDesc, true );
+	public function getLevel(
+		locationDesc : LocationDescription,
+		requesterEntity : OverworldEntity
+	) : Location {
+		return core.getOrCreateLocationByDesc( locationDesc, requesterEntity, true );
 	}
 
 	function createPlayer() : EntityReplicator {
-		var location = getLevel(
-			DataStorage.inst.locationStorage.getStartLocationDescription()
-		);
-
-		var entity = core.entityFactory.createEntityBySpawnPointEntityDesc(
-			location,
+		var playerEntity = core.entityFactory.createEntity(
 			DataStorage.inst.entityStorage.getPlayerDescription()
 		);
+
+		var location = getLevel(
+			DataStorage.inst.locationStorage.getStartLocationDescription(),
+			playerEntity
+		);
+
+		var entity = core.entityFactory.placeEntityBySpawnPointEntityDesc( location, playerEntity );
 
 		return coreReplicator.getEntityReplicator( entity );
 	}

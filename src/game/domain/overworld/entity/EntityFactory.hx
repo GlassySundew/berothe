@@ -56,13 +56,13 @@ class EntityFactory {
 	/**
 		call this when we do not care by which spawnpoint entity will be created
 	**/
-	public function createEntityBySpawnPointEntityDesc(
+	public function placeEntityBySpawnPointEntityDesc(
 		location : Location,
-		entityDesc : EntityDescription
+		entity : OverworldEntity
 	) : OverworldEntity {
+		var entityDesc = entity.desc;
 		var spawnPointDesc : LocationSpawnVO = location.getSpawnByEntityDesc( entityDesc );
 
-		var entity = createEntity( entityDesc );
 		entity.transform.setPosition(
 			spawnPointDesc.x,
 			spawnPointDesc.y,

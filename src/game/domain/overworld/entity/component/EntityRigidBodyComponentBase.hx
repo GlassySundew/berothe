@@ -11,20 +11,21 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 	public var rigidBodyFuture( default, null ) : Future<IRigidBody> = new Future();
 	public var rigidBody( default, null ) : IRigidBody;
 
-	var subscribition : Composite;
+	var subscription : Composite;
 
 	public override function dispose() {
 		super.dispose();
+		subscription?.unsubscribe();
 		detach();
 	}
 
 	override function onAttachedToLocation( location : Location ) {
+		subscription?.unsubscribe();
 		if ( rigidBody != null ) {
 			detach();
-			subscribition.unsubscribe();
 			rigidBodyFuture = new Future();
 		}
-		subscribition = Composite.create();
+		subscription = Composite.create();
 
 		super.onAttachedToLocation( location );
 

@@ -50,4 +50,8 @@ class HeapsOimophysicsDebugDraw extends DebugDraw implements IDebugDraw {
 
 		graphics.drawLine( new Point( v1.x, v1.y, v1.z ), new Point( v2.x, v2.y, v2.z ) );
 	}
+
+	public function update() {
+		graphics.clear();
+	}
 }

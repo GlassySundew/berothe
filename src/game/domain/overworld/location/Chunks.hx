@@ -13,7 +13,7 @@ class Chunks {
 	final location : Location;
 	public final chunks : Map<Int, Map<Int, Map<Int, Chunk>>> = [];
 
-	final entitySubscribtions : Map<OverworldEntity, ISubscription> = [];
+	final entitySubscriptions : Map<OverworldEntity, ISubscription> = [];
 
 	public function new( location : Location, chunkSize : Int ) {
 		this.chunkSize = chunkSize;
@@ -21,8 +21,8 @@ class Chunks {
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
-		entitySubscribtions[entity]?.unsubscribe();
-		entitySubscribtions.remove( entity );
+		entitySubscriptions[entity]?.unsubscribe();
+		entitySubscriptions.remove( entity );
 
 		var chunkIdx = getChunkIdxFromAbsolute( {
 			x : entity.transform.x.val,
@@ -43,10 +43,7 @@ class Chunks {
 	public function addEntity( entity : OverworldEntity ) {
 		var dynamics = entity.components.get( EntityDynamicsComponent );
 		if ( dynamics != null ) {
-			var sub = dynamics.onMove.add( onEntityMove.bind( entity ) );
-			var assignment = SingleAssignment.create();
-			assignment.set( sub );
-			entitySubscribtions[entity] = assignment;
+			entitySubscriptions[entity] = dynamics.onMove.add( onEntityMove.bind( entity ) );
 		}
 		onEntityMove( entity );
 		trace( "adding entity " + entity , entity.transform.x.val,

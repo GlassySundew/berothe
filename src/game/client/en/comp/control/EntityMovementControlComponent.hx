@@ -22,12 +22,6 @@ class EntityMovementControlComponent extends EntityClientComponent {
 
 	var model : EntityModelComponent;
 
-	final isMovementAppliedSelf : MutableProperty<Bool> = new MutableProperty( false );
-	public var isMovementApplied( get, never ) : IProperty<Bool>;
-	inline function get_isMovementApplied() : IProperty<Bool> {
-		return isMovementAppliedSelf;
-	}
-
 	public function new( entityReplicator : EntityReplicator, ca : ControllerAccess<ControllerAction> ) {
 		super();
 
@@ -43,7 +37,6 @@ class EntityMovementControlComponent extends EntityClientComponent {
 			( key, dynamicsComponent ) -> {
 				this.dynamicsComponent = dynamicsComponent;
 				entity.onFrame.add( update );
-				isMovementAppliedSelf.subscribeProp( dynamicsComponent.isMovementApplied );
 			}
 		);
 		entity.components.onAppear(
@@ -62,10 +55,10 @@ class EntityMovementControlComponent extends EntityClientComponent {
 		}
 
 		var leftDist = M.dist( 0, 0, lx, ly );
-		isMovementAppliedSelf.val = leftDist >= 0.3;
+		dynamicsComponent.isMovementApplied.val = leftDist >= 0.3;
 		var leftAng = Math.atan2( ly, lx );
 
-		if ( isMovementAppliedSelf.val ) {
+		if ( dynamicsComponent.isMovementApplied.val ) {
 			var s = leftDist * model.stats.speed.amount.getValue();
 			var inputDirX = Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
 			var inputDirY = -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;

@@ -74,7 +74,6 @@
 					"type": "model",
 					"name": "orc_prison",
 					"source": "voxel/levels/orc_prison/fbx/orc_prison.fbx",
-					"locked": true,
 					"props": {
 						"entity": "model",
 						"$cdbtype": "locationEntityDF"
@@ -1373,40 +1372,8 @@
 				"entity": "bat",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": -49.42,
-			"y": -102.84
-		},
-		{
-			"type": "light",
-			"name": "lightos",
-			"editorOnly": true,
-			"x": -46.21,
-			"y": 90.84,
-			"z": 52.57,
-			"rotationX": -46.2,
-			"rotationY": 147.8,
-			"rotationZ": -34.6,
-			"kind": "Directional",
-			"power": 3.14,
-			"range": 10,
-			"zNear": 0.02,
-			"cascadeNbr": 4,
-			"cascadePow": 1.94,
-			"firstCascadeSize": 13.49,
-			"minPixelSize": 0,
-			"castingMaxDist": 118.82,
-			"transitionFraction": 0.11,
-			"debugDisplay": false,
-			"shadows": {
-				"mode": "Dynamic",
-				"size": 1024,
-				"radius": 0.45,
-				"quality": 1,
-				"bias": 0.02,
-				"samplingMode": {
-					"kind": "None"
-				}
-			}
+			"x": -43.61,
+			"y": -86.72
 		},
 		{
 			"type": "box",
@@ -1449,28 +1416,6 @@
 			"scaleY": 4.14,
 			"scaleZ": 49.51,
 			"rotationZ": -88.8
-		},
-		{
-			"type": "renderProps",
-			"name": "renderProps",
-			"editorOnly": true,
-			"props": {
-				"PBR": {
-					"mode": "Pbr",
-					"emissive": 1,
-					"exposure": 0,
-					"sky": "Background",
-					"tone": "Linear",
-					"occlusion": 1,
-					"a": 2.51,
-					"b": 0.03,
-					"c": 2.43,
-					"d": 0.59,
-					"e": 0.14,
-					"forceDirectDiscard": false
-				}
-			},
-			"isDefault": true
 		}
 	]
 }

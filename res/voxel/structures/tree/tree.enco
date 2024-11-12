@@ -4,10 +4,11 @@
 		{
 			"type": "customBox",
 			"name": "customBox",
-			"editorOnly": true,
 			"props": {
 				"$cdbtype": "plstSpecialObjDF"
 			},
+			"x": 0.53,
+			"y": -0.61,
 			"z": 34.17,
 			"scaleX": 20.55,
 			"scaleY": 22.03,

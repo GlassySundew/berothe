@@ -1,5 +1,8 @@
 package game.domain.overworld;
 
+import game.domain.overworld.location.LocationPerRealmContainer;
+import game.domain.overworld.location.LocationPerPlayerContainer;
+import game.domain.overworld.location.ILocationContainer;
 import game.domain.overworld.item.Item;
 import game.domain.overworld.item.ItemFactory;
 import game.domain.IUpdatable;
@@ -9,6 +12,23 @@ import signals.Signal;
 import game.domain.overworld.location.Location;
 import game.domain.overworld.location.LocationFactory;
 import game.data.storage.location.LocationDescription;
+
+class LocationContainerFactory {
+
+	public static function create(
+		locationDesc : LocationDescription,
+		locationFactory : LocationFactory,
+		auth : Bool
+	) : ILocationContainer {
+		return switch locationDesc.instancing {
+			case PerPlayer:
+				new LocationPerPlayerContainer( locationDesc, locationFactory );
+			case PerRealm:
+				new LocationPerRealmContainer( locationDesc, locationFactory, auth );
+			case e: throw e + " is a not supported location instancing type";
+		}
+	}
+}
 
 class GameCore implements IUpdatable {
 
@@ -33,7 +53,7 @@ class GameCore implements IUpdatable {
 	public final itemFactory : ItemFactory;
 	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 	final locationFactory : LocationFactory;
-	final locations : Map<String, Location> = [];
+	final locations : Map<String, ILocationContainer> = [];
 
 	public function new() {
 		inst = this;
@@ -44,13 +64,19 @@ class GameCore implements IUpdatable {
 
 	public function getOrCreateLocationByDesc(
 		locationDesc : LocationDescription,
+		requester : OverworldEntity,
 		auth = false
 	) : Location {
 		if ( locations[locationDesc.id] == null ) {
-			var location = locations[locationDesc.id] = locationFactory.createLocation( locationDesc );
-			auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
+			var locationContainer = LocationContainerFactory.create(
+				locationDesc,
+				locationFactory,
+				auth
+			);
+			locations[locationDesc.id] = locationContainer;
+			var location = locationContainer.request( requester, auth );
 		}
-		return locations[locationDesc.id];
+		return locations[locationDesc.id].request( requester, auth );
 	}
 
 	public function update( dt : Float, tmod : Float ) {

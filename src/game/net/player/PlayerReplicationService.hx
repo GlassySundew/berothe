@@ -1,5 +1,6 @@
 package game.net.player;
 
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.net.server.GameServer;
 import rx.disposables.ISubscription;
 import hxbit.NetworkHost;

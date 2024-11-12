@@ -110,12 +110,13 @@ enum RigidBodyType {
 
 class EntityCollisionsService {
 
-	public static inline function unwrapContact(
+	#if !debug inline #end
+	public static function unwrapContact(
 		contact : Contact,
 		cb : ( entity1 : OverworldEntity, entity2 : OverworldEntity ) -> Void
 	) {
-		var maybeEntity1 = Std.downcast( contact._b1.userData, EntityRigidBodyProps )?.entity;
-		var maybeEntity2 = Std.downcast( contact._b2.userData, EntityRigidBodyProps )?.entity;
+		var maybeEntity1 = Std.downcast( contact._b1?.userData, EntityRigidBodyProps )?.entity;
+		var maybeEntity2 = Std.downcast( contact._b2?.userData, EntityRigidBodyProps )?.entity;
 
 		if ( maybeEntity1 != null || maybeEntity2 != null ) cb( maybeEntity1, maybeEntity2 );
 	}

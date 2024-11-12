@@ -1,5 +1,6 @@
 package game.net.client;
 
+import future.Future;
 import h3d.scene.Mesh;
 import hxd.Res;
 import graphics.BatchRenderer;
@@ -101,13 +102,18 @@ class GameClient extends Process {
 	}
 
 	public function onLocationProvided( locationDescId : String ) {
-		currentLocationSelf.val = core.getOrCreateLocationByDesc(
-			DataStorage.inst.locationStorage.getById(
-				locationDescId
-			)
-		);
+		controlledEntity.onAppear( ( playerRepl ) -> {
+			currentLocationSelf.val = core.getOrCreateLocationByDesc(
+				DataStorage.inst.locationStorage.getById(
+					locationDescId
+				),
+				playerRepl.entity.result
+			);
 
-		#if debug debugDraw(); #end
+			currentLocationSelf.val.addEntity(playerRepl.entity.result);
+
+			#if debug debugDraw(); #end
+		} );
 	}
 
 	#if( client && debug )
@@ -138,6 +144,7 @@ class GameClient extends Process {
 
 	override function update() {
 		super.update();
+		currentLocationSelf.val?.physics.getDebugDraw().update();
 
 		if ( ca.isPressed( Escape ) ) {
 			new PauseMenu( this, Main.inst.root, Main.inst );
@@ -147,6 +154,7 @@ class GameClient extends Process {
 		onUpdate.dispatch();
 
 		BatchRenderer.inst?.emitBatches();
+
 	}
 
 	override function pause() {

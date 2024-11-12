@@ -40,7 +40,7 @@ class OverworldEntity {
 	}
 
 	public function dispose() {
-		if ( disposed.isTriggered ) throw "entity double dispose";
+		if ( disposed.isTriggered ) throw this + " entity double dispose";
 		components.dispose();
 		disposed.resolve( true );
 		postDisposed.resolve( true );

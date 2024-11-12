@@ -91,45 +91,45 @@ class EntityTransformReplicator extends NetNode {
 	function followEntity( entity : OverworldEntity ) {
 		this.entity = entity;
 
-		var isInterpolating = false;
-		x.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncX = oldVal;
-		} );
-		y.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncY = oldVal;
-		} );
-		z.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncZ = oldVal;
-		} );
-		entity.transform.x.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncX = newVal );
-		entity.transform.y.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncY = newVal );
-		entity.transform.z.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncZ = newVal );
+		// var isInterpolating = false;
+		// x.addOnValue( ( oldVal, newVal ) -> {
+		// 	lastUpdateTS = Timer.stamp();
+		// 	lastSyncX = oldVal;
+		// } );
+		// y.addOnValue( ( oldVal, newVal ) -> {
+		// 	lastUpdateTS = Timer.stamp();
+		// 	lastSyncY = oldVal;
+		// } );
+		// z.addOnValue( ( oldVal, newVal ) -> {
+		// 	lastUpdateTS = Timer.stamp();
+		// 	lastSyncZ = oldVal;
+		// } );
+		// entity.transform.x.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncX = newVal );
+		// entity.transform.y.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncY = newVal );
+		// entity.transform.z.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncZ = newVal );
 
-		interpolationSub = entity.onFrame.add( ( dt, tmod ) -> {
-			// var timeSinceLastUpd = ( Timer.stamp() - lastUpdateTS ) * 1000;
-			// x.mutePropagation = true;
-			// y.mutePropagation = true;
-			// z.mutePropagation = true;
-			// isInterpolating = true;
+		// interpolationSub = entity.onFrame.add( ( dt, tmod ) -> {
+		// var timeSinceLastUpd = ( Timer.stamp() - lastUpdateTS ) * 1000;
+		// x.mutePropagation = true;
+		// y.mutePropagation = true;
+		// z.mutePropagation = true;
+		// isInterpolating = true;
 
-			// var interpRatio = timeSinceLastUpd / maxInterpolationTime;
+		// var interpRatio = timeSinceLastUpd / maxInterpolationTime;
 
-			// entity.transform.x.val = hxd.Math.lerp( lastSyncX, x.val, interpRatio );
-			// entity.transform.y.val = hxd.Math.lerp( lastSyncY, y.val, interpRatio );
-			// entity.transform.z.val = hxd.Math.lerp( lastSyncZ, z.val, interpRatio );
+		// entity.transform.x.val = hxd.Math.lerp( lastSyncX, x.val, interpRatio );
+		// entity.transform.y.val = hxd.Math.lerp( lastSyncY, y.val, interpRatio );
+		// entity.transform.z.val = hxd.Math.lerp( lastSyncZ, z.val, interpRatio );
 
-			// x.mutePropagation = false;
-			// y.mutePropagation = false;
-			// z.mutePropagation = false;
-			// isInterpolating = false;
-		} );
+		// x.mutePropagation = false;
+		// y.mutePropagation = false;
+		// z.mutePropagation = false;
+		// isInterpolating = false;
+		// } );
 	}
 
 	public function claimOwnage() {
-		interpolationSub.unsubscribe();
+		interpolationSub?.unsubscribe();
 	}
 
 	function setupServerSyncronization() {

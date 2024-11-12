@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import rx.disposables.Composite;
 import core.MutableProperty;
 import rx.disposables.ISubscription;
 import dn.Cooldown;
@@ -32,7 +33,7 @@ class EntityViewComponent extends EntityComponent {
 
 	var viewExtraConfig : Array<EntityViewExtraInitSetting> = [];
 
-	var subscription : ISubscription;
+	var subscription : Composite;
 
 	public function new( viewDescription : EntityViewDescription ) {
 		super( viewDescription );
@@ -43,6 +44,7 @@ class EntityViewComponent extends EntityComponent {
 		super.dispose();
 		view.result?.dispose();
 
+		subscription?.unsubscribe();
 		statusBar?.root.remove();
 	}
 
@@ -87,6 +89,8 @@ class EntityViewComponent extends EntityComponent {
 
 	function onAttachedToLocation( location : Location ) {
 		subscription?.unsubscribe();
+		subscription = Composite.create();
+
 		if ( view.result != null ) {
 			view.result.dispose();
 			view = new Future();
@@ -112,9 +116,7 @@ class EntityViewComponent extends EntityComponent {
 		}
 		entity.components.onAppear(
 			EntityDynamicsComponent,
-			( _, dynamics ) -> {
-				subscription = dynamics.onMove.add( onMove );
-			}
+			( _, dynamics ) -> subscription.add( dynamics.onMove.add( onMove ) )
 		);
 		onMove();
 

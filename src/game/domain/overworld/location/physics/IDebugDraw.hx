@@ -21,4 +21,5 @@ interface IDebugDraw {
 		v2 : ThreeDeeVector,
 		color : ThreeDeeVector
 	) : Void;
+	function update() : Void;
 }

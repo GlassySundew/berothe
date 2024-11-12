@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import rx.disposables.Composite;
 import core.MutableProperty;
 import dn.M;
 import signals.Signal;
@@ -13,46 +14,50 @@ class EntityDynamicsComponent extends EntityComponent {
 
 	var onMoveInvalidate = true;
 
+	var subscription : Composite;
+
 	public inline function invalidateMove() {
 		onMoveInvalidate = true;
 	}
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
+		
+		subscription?.unsubscribe();
+		subscription = Composite.create();
 
-		entity.onFrame.add( onFrame );
+		subscription.add( entity.onFrame.add( onFrame ) );
 
-		entity.transform.x.addOnValue(
+		subscription.add( entity.transform.x.addOnValue(
 			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
-		);
-		entity.transform.y.addOnValue(
+		) );
+		subscription.add( entity.transform.y.addOnValue(
 			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
-		);
-		entity.transform.z.addOnValue(
+		) );
+		subscription.add( entity.transform.z.addOnValue(
 			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
-		);
-
-		entity.transform.rotationX.addOnValue(
+		) );
+		subscription.add( entity.transform.rotationX.addOnValue(
 			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
-		);
-		entity.transform.rotationY.addOnValue(
+		) );
+		subscription.add( entity.transform.rotationY.addOnValue(
 			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
-		);
-		entity.transform.rotationZ.addOnValue(
+		) );
+		subscription.add( entity.transform.rotationZ.addOnValue(
 			( _, _ ) -> {
 				onMoveInvalidate = true;
 			}
-		);
+		) );
 	}
 
 	function onFrame( dt, tmod : Float ) {

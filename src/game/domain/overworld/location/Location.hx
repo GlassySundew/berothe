@@ -40,7 +40,7 @@ class Location {
 	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
 	final entities : Array<OverworldEntity> = [];
 	final globalEntities : Array<OverworldEntity> = [];
-	final entitySubscribtions : Map<OverworldEntity, ISubscription> = [];
+	final entitySubscriptions : Map<OverworldEntity, ISubscription> = [];
 
 	public function new(
 		locationDesc : LocationDescription,
@@ -82,13 +82,13 @@ class Location {
 		onEntityAdded.dispatch( entity );
 
 		#if debug
-		Assert.notExistsInMap( entity, entitySubscribtions );
+		Assert.notExistsInMap( entity, entitySubscriptions );
 		#end
 		var sub = entity.disposed.then( _ -> {
 			removeEntity( entity );
 			// entity.removeChunk();
 		} );
-		entitySubscribtions[entity] = Subscription.create(() -> sub.cancel() );
+		entitySubscriptions[entity] = Subscription.create(() -> sub.cancel() );
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
@@ -98,8 +98,8 @@ class Location {
 			entities.remove( entity );
 			onEntityRemoved.dispatch( entity );
 
-			entitySubscribtions[entity].unsubscribe();
-			entitySubscribtions.remove( entity );
+			entitySubscriptions[entity].unsubscribe();
+			entitySubscriptions.remove( entity );
 		} else {
 			trace( "location " + this + " did not contain entity: " + entity );
 		}
@@ -189,7 +189,11 @@ class Location {
 	) {
 		removeEntity( entity );
 
-		var targetLocation = GameCore.inst.getOrCreateLocationByDesc( targetLocationDesc, true );
+		var targetLocation = GameCore.inst.getOrCreateLocationByDesc(
+			targetLocationDesc,
+			entity,
+			true
+		);
 		targetLocation.addEntity( entity );
 		var exitPoint = Random.fromArray(
 			targetLocation.locationDataProvider.getLocationTransitionExits().filter(
@@ -234,6 +238,7 @@ class Location {
 
 	function createAndAttachPresentEntities() {
 		var entityVOs = locationDataProvider.getPresentEntities();
+		trace( "parsing present entities " );
 		for ( entityVO in entityVOs ) {
 			var entity = entityFactory.createEntity( entityVO.entityDesc );
 			entity.transform.setPosition(
