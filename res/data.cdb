@@ -1695,7 +1695,11 @@
 							"isAffectedByStats": true
 						}
 					],
-					"viewComps": {}
+					"viewComps": {
+						"stencil": {
+							"type": 1
+						}
+					}
 				},
 				{
 					"id": "orc",
@@ -1897,7 +1901,11 @@
 				},
 				{
 					"id": "tree",
-					"viewComps": {},
+					"viewComps": {
+						"stencil": {
+							"type": 0
+						}
+					},
 					"type": [
 						1,
 						"tree"
@@ -1907,7 +1915,7 @@
 					"id": "gold_piece",
 					"viewComps": {
 						"colorRandomShift": {
-							"radius": 126
+							"radius": 300
 						}
 					},
 					"type": [
@@ -1985,6 +1993,12 @@
 					"typeStr": "17",
 					"name": "colorRandomShift",
 					"opt": true
+				},
+				{
+					"typeStr": "17",
+					"name": "stencil",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -2001,6 +2015,23 @@
 					"typeStr": "3",
 					"name": "radius",
 					"opt": true
+				}
+			]
+		},
+		{
+			"name": "entityView@viewComps@stencil",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "5:Closer,Further",
+					"name": "type",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},

@@ -1,0 +1,72 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "model",
+			"name": "tree",
+			"source": "voxel/structures/tree/obj/fbx/tree.fbx",
+			"x": 15.5,
+			"y": 17.62,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": false,
+							"culling": "Back",
+							"depthTest": "LessEqual",
+							"colorMask": 15,
+							"enableStencil": true,
+							"stencilFailOp": "Keep",
+							"depthFailOp": "Replace",
+							"stencilPassOp": "Replace",
+							"stencilCompare": "Always",
+							"stencilValue": 1,
+							"stencilReadMask": 255,
+							"stencilWriteMask": 255,
+							"alphaKill": false,
+							"depthWrite": "Off"
+						}
+					}
+				}
+			]
+		},
+		{
+			"type": "model",
+			"name": "human_0_torso_walk",
+			"source": "voxel/characters/human/obj/fbx/human_0_torso_walk.fbx",
+			"x": -10.3,
+			"y": -5.6,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Forward",
+							"blend": "None",
+							"shadows": false,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": true,
+							"stencilFailOp": "Keep",
+							"depthFailOp": "Increment",
+							"stencilPassOp": "Replace",
+							"stencilCompare": "LessEqual",
+							"stencilValue": 1,
+							"stencilReadMask": 255,
+							"stencilWriteMask": 0,
+							"alphaKill": false
+						}
+					},
+					"materialName": "torso_walk",
+					"mainPassName": "alpha"
+				}
+			]
+		}
+	]
+}

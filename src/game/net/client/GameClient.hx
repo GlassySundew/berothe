@@ -1,5 +1,6 @@
 package game.net.client;
 
+import haxe.EnumFlags;
 import future.Future;
 import h3d.scene.Mesh;
 import hxd.Res;
@@ -109,8 +110,6 @@ class GameClient extends Process {
 				),
 				playerRepl.entity.result
 			);
-
-			currentLocationSelf.val.addEntity(playerRepl.entity.result);
 
 			#if debug debugDraw(); #end
 		} );

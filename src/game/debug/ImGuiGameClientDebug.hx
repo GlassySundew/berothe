@@ -45,7 +45,7 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		super( parent );
 
 		this.drawable = new ImGuiDrawable( GameClient.inst.root );
-		drawable.scale( 1 / Const.UI_SCALE );
+		// drawable.scale( 1 / Const.UI_SCALE );
 		rootNode = new WindowNode( "game debug" );
 
 		// rootNode.addChild( new ImGuiDemo() );

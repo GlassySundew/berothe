@@ -159,7 +159,9 @@ class Main extends Process {
 		// else if ( Const.AUTO_SCALE_TARGET_HEI > 0 )
 		// 	Const.UI_SCALE = M.floor(h() / Const.AUTO_SCALE_TARGET_HEI);
 
-		root.setScale( Const.UI_SCALE );
+		// Boot.inst.s2d.scaleX = Boot.inst.s2d.scaleY = 2;
+		Boot.inst.s2d.scaleMode = Zoom(2);
+		// root.setScale( Const.UI_SCALE );
 
 		onResizeEvent.dispatch();
 	}

@@ -341,7 +341,8 @@
 							"x": -29.93,
 							"y": 61.6,
 							"z": 1,
-							"rotationZ": -17.3
+							"rotationZ": -17.3,
+							"editMode": true
 						},
 						{
 							"type": "reference",
@@ -691,6 +692,15 @@
 			"z": 78.93
 		},
 		{
+			"type": "reference",
+			"name": "human",
+			"source": "voxel/characters/human/human.enco",
+			"x": -67.6,
+			"y": 26.9,
+			"z": -0.1,
+			"editMode": true
+		},
+		{
 			"type": "renderProps",
 			"name": "renderProps",
 			"editorOnly": true,
@@ -699,7 +709,7 @@
 					"mode": "Pbr",
 					"emissive": 0,
 					"exposure": 0,
-					"sky": "CustomColor",
+					"sky": "Background",
 					"tone": "Linear",
 					"occlusion": 0,
 					"a": 2.51,
@@ -714,7 +724,7 @@
 				{
 					"type": "environment",
 					"name": "environment",
-					"power": 1.08,
+					"power": 0.8,
 					"sourceMapPath": "defaultEnv.jpg"
 				}
 			]

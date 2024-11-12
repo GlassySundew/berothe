@@ -1,5 +1,9 @@
 {
 	"type": "entityComposer",
+	"name": "human",
+	"x": -67.6,
+	"y": 26.9,
+	"z": -0.1,
 	"children": [
 		{
 			"type": "object",
@@ -7,6 +11,30 @@
 			"x": -0.5,
 			"y": -0.5,
 			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": false,
+							"culling": "Front",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": true,
+							"stencilFailOp": "Keep",
+							"depthFailOp": "Keep",
+							"stencilPassOp": "Keep",
+							"stencilCompare": "LessEqual",
+							"stencilValue": 128,
+							"stencilReadMask": 255,
+							"stencilWriteMask": 0
+						}
+					},
+					"materialName": "any",
+					"mainPassName": "alpha"
+				},
 				{
 					"type": "reference",
 					"name": "left_hand",

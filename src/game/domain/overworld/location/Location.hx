@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import tink.CoreApi.CallbackLink;
 import game.client.en.comp.view.EntityViewComponent;
 import rx.Subscription;
 import rx.disposables.ISubscription;
@@ -84,11 +85,12 @@ class Location {
 		#if debug
 		Assert.notExistsInMap( entity, entitySubscriptions );
 		#end
-		var sub = entity.disposed.then( _ -> {
+		var sub : CallbackLink = null;
+		entitySubscriptions[entity] = Subscription.create(() -> sub.cancel() );
+		sub = entity.disposed.then( _ -> {
 			removeEntity( entity );
 			// entity.removeChunk();
 		} );
-		entitySubscriptions[entity] = Subscription.create(() -> sub.cancel() );
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
@@ -189,12 +191,12 @@ class Location {
 	) {
 		removeEntity( entity );
 
+		
 		var targetLocation = GameCore.inst.getOrCreateLocationByDesc(
 			targetLocationDesc,
 			entity,
 			true
 		);
-		targetLocation.addEntity( entity );
 		var exitPoint = Random.fromArray(
 			targetLocation.locationDataProvider.getLocationTransitionExits().filter(
 				( obj ) -> obj.locationDescId == locationDesc.id
@@ -213,6 +215,8 @@ class Location {
 		trace( exitPoint.x, exitPoint.y, exitPoint.z );
 
 		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
+		
+		targetLocation.addEntity( entity );
 	}
 
 	function createAndAttachStaticObjects( isAuth = true ) {

@@ -25,8 +25,9 @@ class EntityStatusBarContainer {
 		this.viewComp = view;
 
 		root = new ObjectFollower( followObj3d, parent );
-		root.horizontalAlign = Right;
+		root.horizontalAlign = Middle;
 		root.verticalAlign = Bottom;
+		root.cameraRelative = true;
 		root.pixelSnap = false;
 
 		content = new Flow( root );
