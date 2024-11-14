@@ -93,7 +93,8 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		return cooldown.has( '$ATTACK_CD_KEY' );
 	}
 
-	public inline function isInAction() : Bool {
+	#if !debug inline #end
+	public function isInAction() : Bool {
 		return tween.count() != 0;
 	}
 

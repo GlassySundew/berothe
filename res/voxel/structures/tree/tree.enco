@@ -15,8 +15,6 @@
 					1
 				]
 			},
-			"x": 3,
-			"y": 3,
 			"z": 34,
 			"scaleX": 23,
 			"scaleY": 23,
@@ -27,8 +25,8 @@
 			"type": "model",
 			"name": "tree",
 			"source": "voxel/structures/tree/obj/fbx/tree.fbx",
-			"x": 1,
-			"y": 1,
+			"x": -0.41,
+			"y": -1.22,
 			"retargetAnim": true
 		}
 	]

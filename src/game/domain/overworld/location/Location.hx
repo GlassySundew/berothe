@@ -102,6 +102,8 @@ class Location {
 
 			entitySubscriptions[entity].unsubscribe();
 			entitySubscriptions.remove( entity );
+
+			entity.setLocation( null );
 		} else {
 			trace( "location " + this + " did not contain entity: " + entity );
 		}
@@ -210,8 +212,6 @@ class Location {
 			);
 			return;
 		}
-
-		trace( exitPoint.x, exitPoint.y, exitPoint.z );
 
 		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
 

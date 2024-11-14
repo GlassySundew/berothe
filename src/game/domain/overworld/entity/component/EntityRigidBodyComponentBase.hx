@@ -19,15 +19,19 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 		detach();
 	}
 
-	override function onAttachedToLocation( location : Location ) {
+	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
 		subscription?.unsubscribe();
 		if ( rigidBody != null ) {
+			trace( "entity rb location detached " );
 			detach();
 			rigidBodyFuture = new Future();
 		}
+
+		if ( location == null ) return;
+
 		subscription = Composite.create();
 
-		super.onAttachedToLocation( location );
+		super.onAttachedToLocation( oldLoc, location );
 
 		rigidBody = tryCreateRigidBody();
 		rigidBody.setPosition( { x : entity.transform.x, y : entity.transform.y, z : entity.transform.z } );

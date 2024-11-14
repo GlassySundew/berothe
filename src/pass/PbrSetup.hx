@@ -11,7 +11,7 @@ import h3d.mat.Texture;
 class PbrSetup extends h3d.mat.PbrMaterialSetup {
 
 	override function createRenderer() {
-		var env = new h3d.scene.pbr.Environment( Res.defaultEnv_jpg.toTexture() );
+		var env = new h3d.scene.pbr.Environment( Res.defaultEnv.toTexture() );
 		env.power = 0.4;
 		env.compute();
 		return new PbrRenderer( env );

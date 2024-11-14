@@ -47,8 +47,9 @@ class EntityHitboxComponent extends EntityRigidBodyComponentBase {
 		return rigidBodyLocal;
 	}
 
-	override function onAttachedToLocation( location : Location ) {
-		super.onAttachedToLocation( location );
+	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
+		super.onAttachedToLocation( oldLoc, location );
+		if ( location == null ) return;
 
 		var maybeSub = entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
 		if ( maybeSub != null ) subscription.add( maybeSub );

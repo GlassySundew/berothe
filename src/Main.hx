@@ -1,3 +1,4 @@
+import hxd.Event;
 import sdl.Window;
 import hrt.prefab.rfx.Sao;
 import hrt.prefab.Object3D;
@@ -52,6 +53,8 @@ class Main extends Process {
 	#if game_tmod
 	var stats : h2d.Text;
 	#end
+
+	var attackPadBind : PadButton;
 
 	public function new( s : h2d.Scene ) {
 		super();
@@ -135,6 +138,19 @@ class Main extends Process {
 		controller.bindKeyboard( Attack, Key.F );
 
 		controller.bindKeyboard( Escape, Key.ESCAPE );
+
+		controller.bindPad( Attack, X );
+
+		Boot.inst.s3d.addEventListener( onSceneEvent );
+
+		// saving confinured attack pad code for emulation with mouse click
+		@:privateAccess
+		for ( binding in controller.bindings[Attack] ) {
+			if ( binding.padButton != null ) {
+				attackPadBind = binding.padButton;
+				break;
+			}
+		}
 	}
 
 	public function toggleFullscreen() {
@@ -143,6 +159,22 @@ class Main extends Process {
 		s.displayMode = s.displayMode == Fullscreen ? Windowed : Fullscreen;
 		Settings.inst.params.fullscreen = s.displayMode == Fullscreen;
 		#end
+	}
+
+	function onSceneEvent( e : Event ) {
+		switch ( e.kind ) {
+			case EPush:
+				if ( e.button == 0 ) {
+					@:privateAccess
+					controller.pad._setButton( controller.getPadButtonId( attackPadBind ), true );
+				}
+			case ERelease:
+				if ( e.button == 0 ) {
+					@:privateAccess
+					controller.pad._setButton( controller.getPadButtonId( attackPadBind ), false );
+				}
+			default:
+		}
 	}
 
 	override function onDispose() {

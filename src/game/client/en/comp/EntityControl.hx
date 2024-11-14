@@ -1,5 +1,6 @@
 package game.client.en.comp;
 
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.net.client.GameClient;
 import dn.heaps.input.ControllerAccess;
 import rx.disposables.Composite;
@@ -44,6 +45,7 @@ class EntityControl {
 			sub?.unsubscribe();
 			sub = Composite.create();
 			sub.add( entity.components.componentStream.observe( comp -> {
+				if ( Std.isOfType( comp, EntityAttackListComponent ) ) return;
 				comp.claimOwnage();
 			} ) );
 			// waiting for coordinates to syncronize

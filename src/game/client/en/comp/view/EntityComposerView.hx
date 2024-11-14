@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import hxd.fmt.pak.FileSystem;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import hrt.prefab.Object3D;
 import game.data.location.objects.LocationCollisionObjectVO;
@@ -116,7 +117,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 				mesh.scale( 10 );
 				mesh.rotate( M.toRad( 90 ), 0, 0 );
 				@:privateAccess
-				Std.downcast( model.lib.resource.entry, LocalEntry ).file;
+				model.lib.resource.entry.path;
 			} else {
 				Std.string( Type.getClass( mesh.primitive ) );
 			}
@@ -268,7 +269,8 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 		return !attackItem.isAttacking() && !attackItem.isRaised.getValue();
 	}
 
-	inline function attackRaisedListener( attackItem : EntityAttackListItem ) : Bool {
+	#if !debug inline #end
+	function attackRaisedListener( attackItem : EntityAttackListItem ) : Bool {
 		return !attackItem.isAttacking() && attackItem.isRaised.getValue();
 	}
 

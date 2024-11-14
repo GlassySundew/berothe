@@ -85,7 +85,9 @@ class GameClient extends Process {
 			if ( oldLoc != null ) {
 				oldLoc.dispose();
 				oldLoc.update( 0, 0 );
-				oldLoc.physics.getDebugDraw().remove();
+				#if debug
+				oldLoc.physics.getDebugDraw()?.remove();
+				#end
 			}
 			if ( newLoc.locationDesc.isOpenAir ) {
 				locationLights?.remove();
@@ -143,7 +145,7 @@ class GameClient extends Process {
 
 	override function update() {
 		super.update();
-		currentLocationSelf.val?.physics.getDebugDraw().update();
+		currentLocationSelf.val?.physics.getDebugDraw()?.update();
 
 		if ( ca.isPressed( Escape ) ) {
 			new PauseMenu( this, Main.inst.root, Main.inst );

@@ -9,10 +9,11 @@ abstract class EntityPhysicsComponentBase extends EntityComponent {
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
-		entity.location.onAppear( onAttachedToLocation );
+		entity.location.addOnValueImmediately( onAttachedToLocation );
 	}
 
-	function onAttachedToLocation( location : Location ) {
+	function onAttachedToLocation( oldLoc : Location, location : Location ) {
+		if ( location == null ) return;
 		physics = location.physics;
 	}
 }

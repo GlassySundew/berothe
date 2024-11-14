@@ -30,8 +30,9 @@ class StaticObjectRigidBodyComponent extends EntityRigidBodyComponentBase {
 		this.config = config;
 	}
 
-	override function onAttachedToLocation( location : Location ) {
-		super.onAttachedToLocation( location );
+	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
+		super.onAttachedToLocation( oldLoc, location );
+		if ( location == null ) return;
 
 		entity.transform.x.subscribeProp( rigidBody.x, true );
 		entity.transform.y.subscribeProp( rigidBody.y, true );

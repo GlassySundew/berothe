@@ -21,7 +21,6 @@ class Chunks {
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
-		trace( "removing entity " + entity, "subs: " + entitySubscriptions[entity] );
 		entitySubscriptions[entity]?.unsubscribe();
 		entitySubscriptions.remove( entity );
 

@@ -70,14 +70,18 @@ class ChunkReplicator extends NetNode {
 		binderUnregClient.add(
 			entities.subscribleWithMapping( ( i, entityReplicator ) -> {
 				if ( entityReplicator == null ) return;
-				binderUnregClient.add( GameClient.inst.currentLocation.onAppear( ( location ) -> {
-					entityReplicator.entity.then( ( entity ) -> {
-						Assert.notNull( entity );
-						if ( !location.hasEntity( entity ) ) {
-							location.addEntity( entity );
-						}
-					} );
-				} ) );
+				binderUnregClient.add(
+					GameClient.inst.currentLocation.addOnValueImmediately(
+						( oldLoc, location ) -> {
+							if ( location == null ) return;
+							entityReplicator.entity.then( ( entity ) -> {
+								Assert.notNull( entity );
+								if ( !location.hasEntity( entity ) ) {
+									location.addEntity( entity );
+								}
+							} );
+						} )
+				);
 			} ) );
 
 		#if debug

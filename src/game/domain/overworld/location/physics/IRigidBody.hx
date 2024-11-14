@@ -1,5 +1,6 @@
 package game.domain.overworld.location.physics;
 
+import game.domain.overworld.location.physics.Types.RigidBodyType;
 import core.IMutableProperty;
 import core.IProperty;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
@@ -30,6 +31,7 @@ interface IRigidBody {
 	function setLinearDamping( vec : ThreeDeeVector ) : Void;
 	function setGravityScale( value : Float ) : Void;
 	function setPosition( pos : ThreeDeeVector ) : Void;
+	function setType( type : RigidBodyType ) : Void;
 	function updateTransform() : Void;
 	function sleep() : Void;
 	function wakeUp() : Void;

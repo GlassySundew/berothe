@@ -35,10 +35,12 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	override public function claimOwnage() {
 		super.claimOwnage();
-		entity.location.onAppear( loc -> {
+		entity.location.addOnValueImmediately( ( oldLoc, loc ) -> {
+			if ( loc == null ) return;
 			rigidBodyFuture.then( rigidBody -> {
 				rigidBody.setGravityScale( DataStorage.inst.rule.entityGravityScale );
 				rigidBody.setLinearDamping( { x : 25, y : 25, z : 0 } );
+				rigidBody.setType( DYNAMIC );
 
 				rigidBody.x.subscribeProp( entity.transform.x );
 				rigidBody.y.subscribeProp( entity.transform.y );
@@ -55,7 +57,6 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	public function provideExtraShapes( objs : Array<LocationCollisionObjectVO> ) {
 		rigidBodyFuture.then( ( rb ) -> {
-			// rb.addShape();
 			for ( obj in objs ) {
 				var shape = switch obj.geometry {
 					case BOX:
@@ -73,8 +74,9 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		} );
 	}
 
-	override function onAttachedToLocation( location : Location ) {
-		super.onAttachedToLocation( location );
+	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
+		super.onAttachedToLocation( oldLoc, location );
+		if ( location == null ) return;
 
 		if ( rigidBodyDesc.hasFeet ) {
 			var maybeSub = entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
@@ -112,7 +114,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		var rigidBodyLocal = RigidBodyAbstractFactory.create(
 			torsoShape,
-			rigidBodyDesc.isStatic ? STATIC : DYNAMIC,
+			rigidBodyDesc.isStatic ? STATIC : KINEMATIC,
 			new EntityRigidBodyProps( entity )
 		);
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );

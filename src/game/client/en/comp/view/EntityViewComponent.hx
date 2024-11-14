@@ -120,7 +120,7 @@ class EntityViewComponent extends EntityComponent {
 		}
 		entity.components.onAppear(
 			EntityDynamicsComponent,
-			( _, dynamics ) -> subscription.add( dynamics.onMove.add( onMove ) )
+			( _, dynamics ) -> subscription.add( entity.onFrame.add((e, q)-> onMove() ) )
 		);
 		onMove();
 

@@ -250,9 +250,12 @@ class PlayerReplicationService {
 
 	function onAddedToLocation( oldLoc : Location, location : Location ) {
 		trace( "setting location: " + location, "old one: " + oldLoc, "equality: " + ( oldLoc == location ) );
-		if ( location == null ) return;
 
 		if ( oldLoc != null ) wipeAllChunks();
+
+		if ( location == null ) {
+			return;
+		}
 
 		cliCon.onControlledEntityLocationChange( location.locationDesc.id );
 

@@ -800,9 +800,10 @@
 							"geometry": 0,
 							"hasFeet": false,
 							"isStatic": true,
-							"sizeX": 3,
-							"sizeY": 3,
-							"sizeZ": 13
+							"sizeX": 5,
+							"sizeY": 5,
+							"sizeZ": 22,
+							"offsetZ": 11
 						}
 					}
 				}

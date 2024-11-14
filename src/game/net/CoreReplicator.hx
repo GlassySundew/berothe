@@ -74,13 +74,6 @@ class CoreReplicator {
 		var entityReplicator = new EntityReplicator( entity );
 		entities[entity.id] = entityReplicator;
 
-		// entity.location.addOnValue(
-		// 	( oldLoc, newLocation ) -> {
-		// 		if ( newLocation == null ) return;
-
-		// 	}
-		// );
-
 		entityReplicator.followServer();
 	}
 

@@ -11,7 +11,7 @@ class EntityViewExtensionComponentBase extends EntityComponent {
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
-		entity.location.addOnValue( ( oldLoc, newLoc ) -> {
+		entity.location.addOnValueImmediately( ( oldLoc, newLoc ) -> {
 			onAttachedToLocation( newLoc );
 		} );
 	}

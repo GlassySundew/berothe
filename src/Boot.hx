@@ -1,3 +1,4 @@
+import core.MutableProperty;
 import hxd.Timer;
 import hxd.Res;
 import pass.PbrSetup;
@@ -100,6 +101,7 @@ class Boot extends hxd.App {
 
 		// var prefab = Res.levels.start.load().make();
 		// Boot.inst.s3d.addChild(prefab.findFirstLocal3d());
+
 	}
 
 	override function onResize() {

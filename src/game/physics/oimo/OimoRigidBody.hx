@@ -134,6 +134,15 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody.setPosition( pos.toOimo() );
 	}
 
+	public inline function setType( type : RigidBodyType ) {
+		rigidBody.setType( switch type {
+			case DYNAMIC: oimo.dynamics.rigidbody.RigidBodyType._DYNAMIC;
+			case KINEMATIC: oimo.dynamics.rigidbody.RigidBodyType._KINEMATIC;
+			case STATIC: oimo.dynamics.rigidbody.RigidBodyType._STATIC;
+			case TRIGGER: oimo.dynamics.rigidbody.RigidBodyType._TRIGGER;
+		} );
+	}
+
 	public inline function updateTransform() {
 		@:privateAccess
 		rigidBody.updateTransformExt();

@@ -1,5 +1,8 @@
 package game.domain.overworld.entity.component.combat;
 
+import rx.Subscription;
+import rx.disposables.Composite;
+import rx.disposables.ISubscription;
 import game.domain.overworld.location.physics.Types.EntityCollisionsService;
 import game.physics.oimo.EntityRigidBodyProps;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
@@ -23,6 +26,8 @@ class EntityAttackListItem {
 
 	var entity : OverworldEntity;
 
+	var subscription : Composite;
+
 	public function new( desc : AttackListItemVO ) {
 		this.desc = desc;
 	}
@@ -44,8 +49,9 @@ class EntityAttackListItem {
 		return emitter.val.isOnCooldown();
 	}
 
-	public inline function isAttacking() : Bool {
-		return emitter.val.isInAction();
+	#if !debug inline #end
+	public function isAttacking() : Bool {
+		return emitter.val?.isInAction();
 	}
 
 	public inline function getCurrentAttackTime() : Float {
@@ -54,7 +60,7 @@ class EntityAttackListItem {
 
 	public function attachToEntity( entity : OverworldEntity ) {
 		this.entity = entity;
-		entity.location.onAppear( onAttachedToLocation );
+		entity.location.addOnValueImmediately( onAttachedToLocation );
 		entity.disposed.then( _ -> dispose() );
 	}
 
@@ -84,24 +90,33 @@ class EntityAttackListItem {
 		} );
 	}
 
-	function onAttachedToLocation( location : Location ) {
-		entity.components.onAppear(
+	function onAttachedToLocation( oldLoc : Location, location : Location ) {
+		if ( location == null ) return;
+
+		subscription?.unsubscribe();
+		subscription = Composite.create();
+		var maybeSub = entity.components.onAppear(
 			EntityRigidBodyComponent,
 			( cl, rigidBodyComp ) -> {
-				rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
+				var sub = rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
+					trace( "emitter added " + entity );
+
 					emitter.val = new AttackTweenBoxCastEmitter(
 						desc,
 						rigidBody.transform,
 						location.physics
 					);
-					attackRange.addOnValueImmediately(
+					subscription.add( attackRange.addOnValueImmediately(
 						( old, newVal ) -> emitter.val.setAttackRange( newVal )
-					);
+					) );
 
-					entity.onFrame.add( update );
+					subscription.add( entity.onFrame.add( update ) );
 				} );
+				subscription.add( Subscription.create(() -> sub.cancel() ) );
 			}
 		);
+
+		if ( maybeSub != null ) subscription.add( maybeSub );
 	}
 
 	inline function update( dt, tmod ) {

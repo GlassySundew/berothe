@@ -573,6 +573,7 @@
 		{
 			"type": "box",
 			"name": "town_transition",
+			"editorOnly": true,
 			"props": {
 				"type": "entityCollisionTrigger",
 				"$cdbtype": "locationObjContainerTypeDF",
@@ -618,6 +619,7 @@
 		{
 			"type": "box",
 			"name": "batcave_transition",
+			"editorOnly": true,
 			"props": {
 				"type": "entityCollisionTrigger",
 				"$cdbtype": "locationObjContainerTypeDF",
@@ -697,35 +699,6 @@
 			"y": 26.9,
 			"z": -0.1,
 			"editMode": true
-		},
-		{
-			"type": "renderProps",
-			"name": "renderProps",
-			"editorOnly": true,
-			"props": {
-				"PBR": {
-					"mode": "Pbr",
-					"emissive": 0,
-					"exposure": 0,
-					"sky": "Background",
-					"tone": "Linear",
-					"occlusion": 0,
-					"a": 2.51,
-					"b": 0.03,
-					"c": 2.43,
-					"d": 0.59,
-					"e": 0.14,
-					"forceDirectDiscard": false
-				}
-			},
-			"children": [
-				{
-					"type": "environment",
-					"name": "environment",
-					"power": 0.8,
-					"sourceMapPath": "defaultEnv.jpg"
-				}
-			]
 		}
 	]
 }
