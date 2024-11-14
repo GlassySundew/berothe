@@ -81,6 +81,8 @@ class EntityReplicator extends NetNode {
 		transformRepl.followEntityClient( entityLocal );
 
 		entity.resolve( entityLocal );
+
+		trace( "alived entity: " + this );
 	}
 
 	function onLocationChanged( _, location : Location ) {

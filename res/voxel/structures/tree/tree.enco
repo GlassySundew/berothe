@@ -9,27 +9,26 @@
 		{
 			"type": "customBox",
 			"name": "customBox",
-			"enabled": false,
-			"editorOnly": true,
 			"props": {
 				"$cdbtype": "plstSpecialObjDF",
 				"type": [
 					1
 				]
 			},
-			"x": 0.53,
-			"y": -0.61,
-			"z": 34.17,
-			"scaleX": 20.55,
-			"scaleY": 22.03,
-			"scaleZ": 26.49
+			"x": 3,
+			"y": 3,
+			"z": 34,
+			"scaleX": 23,
+			"scaleY": 23,
+			"scaleZ": 26,
+			"isCollidable": false
 		},
 		{
 			"type": "model",
 			"name": "tree",
 			"source": "voxel/structures/tree/obj/fbx/tree.fbx",
 			"x": 1,
-			"y": 2,
+			"y": 1,
 			"retargetAnim": true
 		}
 	]

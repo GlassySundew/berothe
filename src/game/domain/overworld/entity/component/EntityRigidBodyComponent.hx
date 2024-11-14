@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import game.data.location.objects.LocationCollisionObjectVO;
 import rx.disposables.Composite;
 import dn.M;
 import dn.phys.Velocity;
@@ -49,6 +50,26 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 				rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
 				rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
 			} );
+		} );
+	}
+
+	public function provideExtraShapes( objs : Array<LocationCollisionObjectVO> ) {
+		rigidBodyFuture.then( ( rb ) -> {
+			// rb.addShape();
+			for ( obj in objs ) {
+				var shape = switch obj.geometry {
+					case BOX:
+						ShapeAbstractFactory.box(
+							obj.sizeX,
+							obj.sizeY,
+							obj.sizeZ
+						);
+				}
+				shape.moveLocally( obj.x, obj.y, obj.z );
+				shape.setCollisionGroup( Const.G_PHYSICS );
+				shape.setCollisionMask( Const.G_PHYSICS );
+				rb.addShape( shape );
+			}
 		} );
 	}
 

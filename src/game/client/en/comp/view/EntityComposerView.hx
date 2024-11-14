@@ -1,5 +1,10 @@
 package game.client.en.comp.view;
 
+import game.domain.overworld.entity.component.EntityRigidBodyComponent;
+import hrt.prefab.Object3D;
+import game.data.location.objects.LocationCollisionObjectVO;
+import game.data.location.DataSheetIdent;
+import util.HideUtil;
 import dn.M;
 import hxd.fs.LocalFileSystem.LocalEntry;
 import h3d.prim.HMDModel;
@@ -66,6 +71,8 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 			EntityDynamicsComponent,
 			( key, dynamics ) -> this.dynamics = dynamics
 		);
+
+		searchForPhysicsObjectsAndProvideThem();
 
 		initListeners();
 	}
@@ -137,6 +144,49 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 					tmod
 				);
 			}
+		}
+	}
+
+	function searchForPhysicsObjectsAndProvideThem() {
+		var physObjs = [];
+		HideUtil.mapPrefabChildrenWithDerefRec(
+			entityComposer,
+			true,
+			( prefab ) -> {
+				if ( prefab.props == null ) return true;
+				var cdbSheetId : DataSheetIdent = Std.string(
+					Reflect.field( prefab.props, util.Const.cdbTypeIdent )
+				);
+				switch cdbSheetId {
+					case PLST_SPECIAL_OBJ:
+						var plstCtrl : Data.PlstSpecialObjDFDef = prefab.props;
+						var enumType = plstCtrl.type[0];
+
+						var plstEnum = Type.createEnumIndex(
+							Data.PLSTSpecialType,
+							enumType,
+							[for ( i in 1...plstCtrl.type.length ) plstCtrl.type[i]]
+						);
+						switch plstEnum {
+							case CollisionBox:
+								physObjs.push( LocationCollisionObjectVO.fromPrefabInstance(
+									Std.downcast( prefab, Object3D ), plstEnum
+								) );
+							default:
+						}
+						prefab.parent.children.remove( prefab );
+						prefab.findFirstLocal3d().remove();
+					default:
+				}
+				return true;
+			} );
+		if ( physObjs.length > 0 ) {
+			viewComponent.entity.components.onAppear(
+				EntityRigidBodyComponent,
+				( cl, rbComp ) -> {
+					rbComp.provideExtraShapes( physObjs );
+				}
+			);
 		}
 	}
 

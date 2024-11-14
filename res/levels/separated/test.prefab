@@ -17,7 +17,7 @@
 							"blend": "None",
 							"shadows": false,
 							"culling": "Back",
-							"depthTest": "LessEqual",
+							"depthTest": "Less",
 							"colorMask": 15,
 							"enableStencil": true,
 							"stencilFailOp": "Keep",
@@ -28,7 +28,7 @@
 							"stencilReadMask": 255,
 							"stencilWriteMask": 255,
 							"alphaKill": false,
-							"depthWrite": "Off"
+							"depthWrite": "On"
 						}
 					},
 					"mainPassName": "default"
@@ -50,24 +50,31 @@
 							"mode": "Forward",
 							"blend": "None",
 							"shadows": false,
-							"culling": "Back",
-							"depthTest": "Less",
+							"culling": "Front",
+							"depthTest": "Greater",
 							"colorMask": 15,
 							"enableStencil": true,
 							"stencilFailOp": "Keep",
 							"depthFailOp": "Keep",
 							"stencilPassOp": "Replace",
-							"stencilCompare": "LessEqual",
+							"stencilCompare": "Always",
 							"stencilValue": 1,
 							"stencilReadMask": 255,
 							"stencilWriteMask": 0,
-							"alphaKill": false
+							"alphaKill": false,
+							"depthWrite": "On"
 						}
 					},
-					"materialName": "torso_walk",
-					"mainPassName": "alpha"
+					"materialName": "torso_walk"
 				}
 			]
+		},
+		{
+			"type": "model",
+			"name": "human_0_torso_walk",
+			"source": "voxel/characters/human/obj/fbx/human_0_torso_walk.fbx",
+			"x": 2.07,
+			"y": -23.93
 		}
 	]
 }

@@ -294,7 +294,7 @@
 					"properties": {
 						"rigidBodyTorso": {
 							"sizeX": 3,
-							"sizeZ": 10,
+							"sizeZ": 8,
 							"offsetZ": 11,
 							"id": "humanTorso",
 							"hasFeet": true,
