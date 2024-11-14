@@ -165,16 +165,22 @@ class Main extends Process {
 		switch ( e.kind ) {
 			case EPush:
 				if ( e.button == 0 ) {
-					@:privateAccess
-					controller.pad._setButton( controller.getPadButtonId( attackPadBind ), true );
+					setAttackToggle( true );
 				}
 			case ERelease:
 				if ( e.button == 0 ) {
-					@:privateAccess
-					controller.pad._setButton( controller.getPadButtonId( attackPadBind ), false );
+					setAttackToggle( false );
 				}
+			case EFocusLost:
+				setAttackToggle( false );
 			default:
 		}
+	}
+
+	#if !debug inline #end
+	function setAttackToggle( value : Bool ) {
+		@:privateAccess
+		controller.pad._setButton( controller.getPadButtonId( attackPadBind ), value );
 	}
 
 	override function onDispose() {

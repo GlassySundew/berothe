@@ -53,7 +53,7 @@ class GameCore implements IUpdatable {
 	public final itemFactory : ItemFactory;
 	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 	final locationFactory : LocationFactory;
-	final locations : Map<String, ILocationContainer> = [];
+	final locationContainers : Map<String, ILocationContainer> = [];
 
 	public function new() {
 		inst = this;
@@ -67,20 +67,20 @@ class GameCore implements IUpdatable {
 		requester : OverworldEntity,
 		auth = false
 	) : Location {
-		if ( locations[locationDesc.id] == null ) {
+		if ( locationContainers[locationDesc.id] == null ) {
 			var locationContainer = LocationContainerFactory.create(
 				locationDesc,
 				locationFactory,
 				auth
 			);
-			locations[locationDesc.id] = locationContainer;
+			locationContainers[locationDesc.id] = locationContainer;
 			var location = locationContainer.request( requester, auth );
 		}
-		return locations[locationDesc.id].request( requester, auth );
+		return locationContainers[locationDesc.id].request( requester, auth );
 	}
 
 	public function update( dt : Float, tmod : Float ) {
-		for ( location in locations ) {
+		for ( location in locationContainers ) {
 			location.update( dt, tmod );
 		}
 		onFrame.dispatch( dt, tmod );

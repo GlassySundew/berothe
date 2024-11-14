@@ -426,7 +426,8 @@
 								}
 							]
 						},
-						"canChangeLocation": true
+						"canChangeLocation": true,
+						"isAnchor": true
 					}
 				},
 				{
@@ -845,6 +846,12 @@
 					"typeStr": "2",
 					"name": "canChangeLocation",
 					"opt": true
+				},
+				{
+					"typeStr": "2",
+					"name": "isAnchor",
+					"opt": true,
+					"documentation": "location will be disposed when all anchor entities will be removed from it"
 				},
 				{
 					"typeStr": "17",

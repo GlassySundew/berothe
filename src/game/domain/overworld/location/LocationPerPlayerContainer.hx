@@ -24,6 +24,7 @@ class LocationPerPlayerContainer implements ILocationContainer {
 		if ( perPlayerLocations[requester.id] == null ) {
 			var location = perPlayerLocations[requester.id] = locationFactory.createLocation( locationDesc );
 			auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
+			location.disposed.then( ( _ ) -> perPlayerLocations.remove( requester.id ) );
 		}
 
 		return perPlayerLocations[requester.id];

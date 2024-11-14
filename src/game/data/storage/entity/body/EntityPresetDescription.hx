@@ -33,6 +33,7 @@ class EntityPresetDescription extends DescriptionBase {
 	// character
 	public var dynamics( default, null ) : Null<DynamicsDescription>;
 	public var canChangeLocation( default, null ) : Bool;
+	public var isAnchor( default, null ) : Bool;
 	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
 	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
@@ -67,6 +68,7 @@ class EntityPresetDescription extends DescriptionBase {
 
 	function createPropDescriptions( entry : Data.EntityPreset ) {
 		canChangeLocation = entry.properties.properties.canChangeLocation;
+		isAnchor = entry.properties.properties.isAnchor;
 
 		propertyDescs = ArrayExtensions.deNullify(( [
 

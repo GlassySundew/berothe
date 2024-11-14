@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import future.Future;
 import tink.CoreApi.CallbackLink;
 import game.client.en.comp.view.EntityViewComponent;
 import rx.Subscription;
@@ -21,6 +22,8 @@ import game.physics.PhysicsEngineAbstractFactory;
 
 class Location {
 
+	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
+
 	public final locationDesc : LocationDescription;
 	public final id : String;
 	public final physics : IPhysicsEngine;
@@ -36,11 +39,15 @@ class Location {
 	public final onEntityAdded = new Signal<OverworldEntity>();
 	public final onEntityRemoved : Signal<OverworldEntity> = new Signal<OverworldEntity>();
 	public final entityStream : Observable<OverworldEntity>;
+	public final disposed : Future<Bool> = new Future();
 
-	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
+	public final onNoMoreAnchorEntitiesLeft = new Signal();
+
 	final entities : Array<OverworldEntity> = [];
 	final globalEntities : Array<OverworldEntity> = [];
 	final entitySubscriptions : Map<OverworldEntity, ISubscription> = [];
+
+	var anchorEntitiesPresent : Int = 0;
 
 	public function new(
 		locationDesc : LocationDescription,
@@ -67,6 +74,7 @@ class Location {
 		for ( trigger in triggers ) {
 			trigger.dispose();
 		}
+		disposed.resolve( true );
 	}
 
 	public function addEntity( entity : OverworldEntity ) {
@@ -91,6 +99,8 @@ class Location {
 			removeEntity( entity );
 			// entity.removeChunk();
 		} );
+
+		if ( entity.desc.getBodyDescription().isAnchor ) anchorEntitiesPresent++;
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
@@ -98,14 +108,19 @@ class Location {
 		if ( entities.contains( entity ) ) {
 			chunks.removeEntity( entity );
 			entities.remove( entity );
-			onEntityRemoved.dispatch( entity );
 
 			entitySubscriptions[entity].unsubscribe();
 			entitySubscriptions.remove( entity );
 
 			entity.setLocation( null );
+
+			onEntityRemoved.dispatch( entity );
 		} else {
 			trace( "location " + this + " did not contain entity: " + entity );
+		}
+
+		if ( entity.desc.getBodyDescription().isAnchor && --anchorEntitiesPresent == 0 ) {
+			onNoMoreAnchorEntitiesLeft.dispatch();
 		}
 	}
 
@@ -131,6 +146,8 @@ class Location {
 	public function loadAuthoritative() {
 		// TODO async
 		loadData();
+
+		onNoMoreAnchorEntitiesLeft.add( dispose );
 
 		createAndAttachTriggers();
 		setupLocationTransitionTriggers();
