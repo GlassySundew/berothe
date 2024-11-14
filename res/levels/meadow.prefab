@@ -341,8 +341,7 @@
 							"x": -29.93,
 							"y": 61.6,
 							"z": 1,
-							"rotationZ": -17.3,
-							"editMode": true
+							"rotationZ": -17.3
 						},
 						{
 							"type": "reference",

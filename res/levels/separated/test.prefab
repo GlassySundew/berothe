@@ -30,7 +30,8 @@
 							"alphaKill": false,
 							"depthWrite": "Off"
 						}
-					}
+					},
+					"mainPassName": "default"
 				}
 			]
 		},
@@ -54,7 +55,7 @@
 							"colorMask": 15,
 							"enableStencil": true,
 							"stencilFailOp": "Keep",
-							"depthFailOp": "Increment",
+							"depthFailOp": "Keep",
 							"stencilPassOp": "Replace",
 							"stencilCompare": "LessEqual",
 							"stencilValue": 1,

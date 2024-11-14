@@ -11,7 +11,7 @@ class EntityViewComponentExtensionsFactory {
 		var result : Array<EntityComponentDescription> = [];
 
 		if ( entry.colorRandomShift != null ) {
-			result.push( ViewColorRandomShiftDescription.fromCdb( entry.colorRandomShift ) );
+			// result.push(  );
 		}
 
 		return result;

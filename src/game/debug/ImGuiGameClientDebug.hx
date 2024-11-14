@@ -44,13 +44,13 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 	public function new( parent : Process ) {
 		super( parent );
 
-		this.drawable = new ImGuiDrawable( GameClient.inst.root );
-		// drawable.scale( 1 / Const.UI_SCALE );
+		this.drawable = new ImGuiDrawable( Boot.inst.s2d );
+
+		// trace(Boot.inst.s2d.viewportScaleX);
 		rootNode = new WindowNode( "game debug" );
 
 		// rootNode.addChild( new ImGuiDemo() );
 
-		Main.inst.root.add( drawable, Const.DP_IMGUI );
 		var cameraHeader = new CollapsingHeaderNode( "camera", rootNode );
 
 		new DragDoubleNode( "zNear", new ZNearAccessor(), 0.1, 0.1, 10000, cameraHeader );
@@ -59,7 +59,7 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		new DragDoubleNode( "zFarK", new ZFarKAccessor(), 0.1, 0.01, 9999, cameraHeader );
 		new DragDoubleNode( "fov", new FovAccessor(), 0.1, 0.000, 180, cameraHeader );
 		new ButtonNode( "untarget", GameClient.inst.cameraProc.untarget, cameraHeader );
-		
+
 		new CheckboxNode( "toggleOrtho", new OrthographicsAccessor(), cameraHeader );
 
 		var physicsHeader = new CollapsingHeaderNode( "physics", rootNode );
@@ -96,6 +96,10 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		}
 	}
 
+	override function onResize() {
+		super.onResize();
+		drawable.setScale( 1 / Boot.inst.s2d.viewportScaleX );
+	}
 	override function update() {
 		super.update();
 	}

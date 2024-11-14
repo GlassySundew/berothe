@@ -12,7 +12,10 @@
 			"enabled": false,
 			"editorOnly": true,
 			"props": {
-				"$cdbtype": "plstSpecialObjDF"
+				"$cdbtype": "plstSpecialObjDF",
+				"type": [
+					1
+				]
 			},
 			"x": 0.53,
 			"y": -0.61,

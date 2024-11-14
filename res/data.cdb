@@ -1915,7 +1915,7 @@
 					"id": "gold_piece",
 					"viewComps": {
 						"colorRandomShift": {
-							"radius": 300
+							"radius": 150
 						}
 					},
 					"type": [
@@ -2028,10 +2028,9 @@
 			"lines": [],
 			"columns": [
 				{
-					"typeStr": "5:Closer,Further",
+					"typeStr": "5:Obstacle,Objective",
 					"name": "type",
-					"opt": true,
-					"kind": null
+					"opt": true
 				}
 			]
 		},

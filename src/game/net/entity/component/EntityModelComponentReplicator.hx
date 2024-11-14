@@ -55,8 +55,10 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
 	@:rpc( clients )
 	function onDamaged( amount : Float, type : EntityDamageType ) {
+		#if client
 		var view = entityRepl.entity.result.components.get( EntityViewComponent );
 		view.statusBar?.sayChatMessage( Std.string( amount ) );
+		#end
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {

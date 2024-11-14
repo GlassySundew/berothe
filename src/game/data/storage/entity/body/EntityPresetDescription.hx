@@ -1,5 +1,7 @@
 package game.data.storage.entity.body;
 
+import game.data.storage.entity.body.view.extensions.ViewStencilDescription;
+import game.data.storage.entity.body.view.extensions.ViewColorRandomShiftDescription;
 import game.domain.overworld.item.model.EntityOfItemComponent;
 import game.data.storage.item.EntityOfItemComponentDescription;
 import game.domain.overworld.entity.component.ai.EntityAIComponent;
@@ -65,7 +67,7 @@ class EntityPresetDescription extends DescriptionBase {
 
 	function createPropDescriptions( entry : Data.EntityPreset ) {
 		canChangeLocation = entry.properties.properties.canChangeLocation;
-		
+
 		propertyDescs = ArrayExtensions.deNullify(( [
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
@@ -83,17 +85,16 @@ class EntityPresetDescription extends DescriptionBase {
 
 			// item
 			ofItem = new EntityOfItemComponentDescription(),
-			
+
 		] : Array<EntityComponentDescription> ) );
 
 		#if client
 		clientPropertyDescs = ArrayExtensions.deNullify(( [
 			view = EntityViewDescriptionAbstractFactory.fromCdb( entry.view ),
 			lightSource = EntityLightSourceDescription.fromCdb( entry.properties.properties.lightSource ),
-		] : Array<EntityComponentDescription> )
-			.concat(
-				EntityViewComponentExtensionsFactory.fromCdb( entry.view.viewComps )
-			) );
+			ViewColorRandomShiftDescription.fromCdb( entry.view.viewComps.colorRandomShift ),
+			ViewStencilDescription.fromCdb( entry.view.viewComps.stencil ),
+		] : Array<EntityComponentDescription> ) );
 		#end
 	}
 }

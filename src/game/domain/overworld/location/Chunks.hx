@@ -43,12 +43,13 @@ class Chunks {
 	public function addEntity( entity : OverworldEntity ) {
 		var dynamics = entity.components.get( EntityDynamicsComponent );
 		if ( dynamics != null ) {
-			entitySubscriptions[entity] = dynamics.onMove.add( onEntityMove.bind( entity ) );
+			var sub = dynamics.onMove.add( onEntityMove.bind( entity ) );
+			var assignment = SingleAssignment.create();
+			assignment.set( sub );
+			entitySubscriptions[entity] = assignment;
+			// entitySubscriptions[entity] = dynamics.onMove.add( onEntityMove.bind( entity ) );
 		}
 		onEntityMove( entity );
-		trace( "adding entity " + entity , entity.transform.x.val,
-		entity.transform.y.val,
-		entity.transform.z.val);
 	}
 
 	public function validateChunkAccess( x : Int, y : Int, z : Int ) {

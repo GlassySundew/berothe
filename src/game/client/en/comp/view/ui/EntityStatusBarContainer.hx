@@ -29,24 +29,18 @@ class EntityStatusBarContainer {
 		root.verticalAlign = Bottom;
 		root.cameraRelative = true;
 		root.pixelSnap = false;
+		@:privateAccess
+		root.outputScale = 1 / Boot.inst.s2d.viewportScaleX;
 
 		content = new Flow( root );
 		content.horizontalAlign = Middle;
-		// content.verticalAlign = Top;
 		content.layout = Vertical;
-		content.verticalSpacing = 4;
+		content.verticalSpacing = 1;
+		content.y += 15;
 
 		createNameLabel();
 
 		colorEnemy();
-
-		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
-		// sayChatMessage( "adsdasdasdasdasdasdasd" );
-		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
-		// sayChatMessage( "adsdasdasdasdasdasdasd" );
-		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
-		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
-		// sayChatMessage( "adsdasdasdasdasdasdasdasuasdjbasdghjbasdbghjbjbasdjasd" );
 	}
 
 	public function colorEnemy() {

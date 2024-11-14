@@ -30,7 +30,6 @@ class Location {
 	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
 
 	/** not replicated but created via `location id` -> `geting through DataStorage on client` **/
-	public final globalObjects : Array<OverworldEntity> = [];
 	public final objectFactory : OverworldStaticObjectsFactory;
 
 	public final onChunkCreated = new Signal<Chunk>();
@@ -73,6 +72,7 @@ class Location {
 	public function addEntity( entity : OverworldEntity ) {
 		#if debug
 		Assert.notExistsInArray( entity, entities, 'trying to add an already existing entity: $entity onto a location' );
+		Assert.isFalse( entity.disposed.result );
 		#end
 
 		entity.location.getValue()?.removeEntity( entity );
@@ -191,7 +191,6 @@ class Location {
 	) {
 		removeEntity( entity );
 
-		
 		var targetLocation = GameCore.inst.getOrCreateLocationByDesc(
 			targetLocationDesc,
 			entity,
@@ -215,7 +214,7 @@ class Location {
 		trace( exitPoint.x, exitPoint.y, exitPoint.z );
 
 		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
-		
+
 		targetLocation.addEntity( entity );
 	}
 
@@ -232,11 +231,7 @@ class Location {
 					}
 				);
 			}
-			globalObjects.push( entity );
-		}
-
-		for ( globalObject in globalObjects ) {
-			addGlobalEntity( globalObject );
+			addGlobalEntity( entity );
 		}
 	}
 

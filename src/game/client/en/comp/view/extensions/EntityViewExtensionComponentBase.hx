@@ -1,5 +1,6 @@
 package game.client.en.comp.view.extensions;
 
+import game.domain.overworld.location.Location;
 import game.client.en.comp.view.EntityViewComponent;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.EntityComponent;
@@ -10,6 +11,13 @@ class EntityViewExtensionComponentBase extends EntityComponent {
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
+		entity.location.addOnValue( ( oldLoc, newLoc ) -> {
+			onAttachedToLocation( newLoc );
+		} );
+	}
+
+	function onAttachedToLocation( location : Location  ) {
+		if ( location == null ) return;
 		entity.components.onAppear(
 			EntityViewComponent,
 			( cl, viewComp ) -> {

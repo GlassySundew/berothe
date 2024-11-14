@@ -59,6 +59,8 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 		switch ( name ) {
 			case "highlight", "highlightBack":
 				return defaultPass;
+				case "stencil":
+					return output;
 		}
 		return super.getPassByName( name );
 	}
@@ -119,6 +121,7 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 		renderPass( output, get( "default" ), frontToBack );
 		renderPass( output, get( "alpha" ), backToFront );
 		renderPass( output, get( "additive" ) );
+		renderPass( output, get( "stencil" ), frontToBack );
 		end();
 		
 		// var saoTarget = allocTarget( "sao" );

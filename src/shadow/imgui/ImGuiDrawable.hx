@@ -1,5 +1,8 @@
 package imgui;
 
+import h2d.Object;
+import h2d.col.Bounds;
+import hxd.Window;
 import imgui.types.Renderer;
 import imgui.types.ImFontAtlas;
 #if heaps
@@ -66,9 +69,9 @@ class ImGuiDrawableBuffers {
 				var cursorBitmap = new hxd.BitmapData( width + 2, height );
 				for ( y in 0...height ) for ( x in 0...width ) {
 					// 4. Draw `uvBorder` with fill color
-					if ( ( font_pixels.getPixel( x + borderX, y + borderY ) & 0xff000000 ) != 0 ) {
+					if (( font_pixels.getPixel( x + borderX, y + borderY ) & 0xff000000 ) != 0 ) {
 						cursorBitmap.setPixel( x, y, 0xffffffff );
-					} else if ( ( font_pixels.getPixel( x + fillX, y + fillY ) & 0xff000000 ) != 0 ) {
+					} else if (( font_pixels.getPixel( x + fillX, y + fillY ) & 0xff000000 ) != 0 ) {
 						// 3. Draw `uvFill` with border color
 						cursorBitmap.setPixel( x, y, 0xff000000 );
 						// 1. Draw `uvFill` offset by [1,0] with shadow color
@@ -216,8 +219,7 @@ class ImGuiDrawable extends h2d.Drawable {
 		ImGuiDrawableBuffers.instance.initialize();
 
 		var scene = getScene();
-		ImGui.setDisplaySize( scene.width, scene.height );
-		this.scene_size = { width : scene.width, height : scene.height };
+		this.scene_size = { width : 0, height : 0 };
 
 		this.keycode_map = [
 			Key.TAB => ImGuiKey.Tab,
@@ -253,9 +255,11 @@ class ImGuiDrawable extends h2d.Drawable {
 		hxd.System.setCursor = updateCursor;
 		#end
 
-		this.mouse_x = scene.mouseX;
-		this.mouse_y = scene.mouseY;
+		this.mouse_x = scene.mouseX / scaleX;
+		this.mouse_y = scene.mouseY / scaleX;
 		this.wheel_inverted = false;
+
+		update( 0 );
 	}
 
 	public function dispose() {
@@ -263,13 +267,14 @@ class ImGuiDrawable extends h2d.Drawable {
 	}
 
 	public function update( dt : Float ) {
-		ImGui.setEvents( dt, this.mouse_x, this.mouse_y, this.mouse_delta, mouse_down[0], mouse_down[1] );
+		var scene = getScene();
+		ImGui.setEvents( dt, this.mouse_x * scene.viewportScaleX, this.mouse_y * scene.viewportScaleX, this.mouse_delta, mouse_down[0], mouse_down[1] );
 		this.mouse_delta = 0;
 
-		var scene = getScene();
-		if ( scene.width != this.scene_size.width || scene.height != this.scene_size.height ) {
-			ImGui.setDisplaySize( scene.width, scene.height );
-			this.scene_size = { width : scene.width, height : scene.width };
+		var win = Window.getInstance();
+		if ( win.width != this.scene_size.width || win.height != this.scene_size.height ) {
+			this.scene_size = { width : Std.int( win.width), height : Std.int( win.height  ) };
+			ImGui.setDisplaySize( scene_size.width, scene_size.height );
 		}
 		#if hlimgui_cursor
 		// Somewhat hacky solution to enforce a cursor: But that's what we can do.
@@ -280,7 +285,7 @@ class ImGuiDrawable extends h2d.Drawable {
 
 	#if hlimgui_cursor
 	function updateCursor( cursor : hxd.Cursor ) {
-		switch( ImGui.getMouseCursor() ) {
+		switch ( ImGui.getMouseCursor() ) {
 			case None:
 				hxd.System.setNativeCursor( Hide );
 			case Arrow:
@@ -306,7 +311,7 @@ class ImGuiDrawable extends h2d.Drawable {
 
 	private function onEvent( event : hxd.Event ) {
 		try {
-			switch( event.kind ) {
+			switch ( event.kind ) {
 				case EMove:
 					this.mouse_x = event.relX;
 					this.mouse_y = event.relY;

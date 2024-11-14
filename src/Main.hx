@@ -1,3 +1,4 @@
+import sdl.Window;
 import hrt.prefab.rfx.Sao;
 import hrt.prefab.Object3D;
 import h3d.scene.pbr.DirLight;
@@ -102,7 +103,6 @@ class Main extends Process {
 
 	function createFpsCounter() {
 		var fps = new Text( Assets.fontPixel16 );
-		fps.scale( .5 );
 
 		root.add( fps, Const.DP_UI );
 
@@ -159,9 +159,16 @@ class Main extends Process {
 		// else if ( Const.AUTO_SCALE_TARGET_HEI > 0 )
 		// 	Const.UI_SCALE = M.floor(h() / Const.AUTO_SCALE_TARGET_HEI);
 
-		// Boot.inst.s2d.scaleX = Boot.inst.s2d.scaleY = 2;
-		Boot.inst.s2d.scaleMode = Zoom(2);
 		// root.setScale( Const.UI_SCALE );
+
+		// Boot.inst.s2d.scaleX = Boot.inst.s2d.scaleY = 2;
+		Boot.inst.s2d.scaleMode = AutoZoom( 800, 400, true );
+
+		var win = hxd.Window.getInstance();
+		@:privateAccess {
+			Boot.inst.s2d.width = win.width;
+			Boot.inst.s2d.height = win.height;
+		}
 
 		onResizeEvent.dispatch();
 	}

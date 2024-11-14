@@ -64,7 +64,6 @@ class InteractorFactory {
 	) {
 		var materials = graphics.heapsObject.getMaterials();
 		var shader = new FixedColor( color );
-		var shader2 = new h3d.shader.FixedColor( 0xff8000 );
 		for ( material in materials ) {
 			var m = material;
 			var p = m.allocPass( "highlight" );
