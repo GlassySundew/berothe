@@ -19,6 +19,14 @@ class EntityStatsHudViewMediator {
 		mediator.onAttackChanged.add( ( str ) -> {
 			comp.attack_tf.text = str;
 		} );
+		
+		mediator.onDefenceChanged.add( ( str ) -> {
+			comp.defence_tf.text = str;
+		} );
+		
+		mediator.onGoldChanged.add( ( str ) -> {
+			comp.gold_tf.text = str;
+		} );		
 	}
 }
 
@@ -27,11 +35,19 @@ class EntityStatsHudComp extends CustomFlow implements h2d.domkit.Object {
 	// @formatter:off
 	static var SRC = 
 		<entity-stats-hud-comp fill-width="true" >
-			<flow margin="10">
+			<flow margin="10" hspacing="20">
 				<shadowed-text() 
 					public id="attack_tf" 
 					valign="bottom"
 				/>
+				<shadowed-text() 
+					public id="defence_tf" 
+					valign="bottom"
+				/>
+				<shadowed-text() 
+					public id="gold_tf" 
+					valign="bottom"
+				/>				
 			</flow>
 
 		</entity-stats-hud-comp>

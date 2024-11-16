@@ -162,19 +162,7 @@ class Main extends Process {
 	}
 
 	function onSceneEvent( e : Event ) {
-		switch ( e.kind ) {
-			case EPush:
-				if ( e.button == 0 ) {
-					setAttackToggle( true );
-				}
-			case ERelease:
-				if ( e.button == 0 ) {
-					setAttackToggle( false );
-				}
-			case EFocusLost:
-				setAttackToggle( false );
-			default:
-		}
+		setAttackToggle( Key.isDown( Key.MOUSE_LEFT ) );
 	}
 
 	#if !debug inline #end

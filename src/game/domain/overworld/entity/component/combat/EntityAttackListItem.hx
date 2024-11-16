@@ -99,8 +99,6 @@ class EntityAttackListItem {
 			EntityRigidBodyComponent,
 			( cl, rigidBodyComp ) -> {
 				var sub = rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
-					trace( "emitter added " + entity );
-
 					emitter.val = new AttackTweenBoxCastEmitter(
 						desc,
 						rigidBody.transform,

@@ -17,13 +17,6 @@ import util.Settings;
 import util.tools.Save;
 import net.transaction.Transaction;
 
-enum SaveSystemOrderType {
-	CreateNewSave( name : String );
-	// LoadGame( name : String );
-	SaveGame( name : String );
-	DeleteSave( name : String );
-}
-
 /**
 	`ClientController` is a root net node for a singular player's channel
 **/
@@ -86,20 +79,6 @@ class ClientController extends NetNode {
 	}
 
 	@:rpc( server )
-	public function orderSaveSystem( type : SaveSystemOrderType ) : Bool {
-		switch type {
-			case CreateNewSave( name ):
-				Save.inst.makeFreshSave( name );
-			case SaveGame( name ):
-				Save.inst.saveGame( name );
-			case DeleteSave( name ):
-				hxd.File.delete( Settings.inst.SAVEPATH + name + Const.SAVEFILE_EXT );
-		}
-
-		return true;
-	}
-
-	@:rpc( server )
 	public function sendTransaction( t : Transaction ) : TransactionResult {
 		return t.validate();
 	}
@@ -108,8 +87,8 @@ class ClientController extends NetNode {
 		костыль для бага, нужен любой rpc вызов чтобы 
 		подгрузить Level после подключения
 	**/
-	@:rpc
-	function emptyPing() {}
+	// @:rpc
+	// function emptyPing() {}
 }
 
 class TestNetPinger extends NetNode {

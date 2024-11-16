@@ -1,8 +1,10 @@
 package game.client.en.comp.view.ui;
 
+import rx.Subscription;
+import rx.disposables.ISubscription;
 import dn.Col;
 import h2d.Flow;
-import h2d.ObjectFollower;
+import graphics.ObjectFollower;
 import h3d.scene.Object;
 import ui.domkit.TextTooltipComp;
 
@@ -16,6 +18,7 @@ class EntityStatusBarContainer {
 	final viewComp : EntityViewComponent;
 
 	var chatMessagesAmount : Int = 0;
+	var subscription : ISubscription;
 
 	public function new(
 		followObj3d : Object,
@@ -29,8 +32,6 @@ class EntityStatusBarContainer {
 		root.verticalAlign = Bottom;
 		root.cameraRelative = true;
 		root.pixelSnap = false;
-		@:privateAccess
-		root.outputScale = 1 / Boot.inst.s2d.viewportScaleX;
 
 		content = new Flow( root );
 		content.horizontalAlign = Middle;
@@ -39,8 +40,6 @@ class EntityStatusBarContainer {
 		content.y += 15;
 
 		createNameLabel();
-
-		colorEnemy();
 	}
 
 	public function colorEnemy() {

@@ -1,5 +1,6 @@
 package game.net.item;
 
+import net.NSMutableProperty;
 import hxbit.NetworkHost;
 import game.data.storage.DataStorage;
 import future.Future;
@@ -12,6 +13,7 @@ class ItemReplicator extends NetNode {
 
 	@:s var itemDescriptionId : String;
 	@:s var id : String;
+	@:s final amount : NSMutableProperty<Int> = new NSMutableProperty();
 
 	public function new( item : Item, ?parent ) {
 		super( parent );
@@ -19,6 +21,8 @@ class ItemReplicator extends NetNode {
 		this.item.resolve( item );
 		itemDescriptionId = item.desc.id.toString();
 		id = item.id;
+
+		item.amount.subscribeProp( amount );
 
 		item.disposed.then( _ -> {
 			onItemDisposed();
@@ -35,6 +39,8 @@ class ItemReplicator extends NetNode {
 
 		var desc = DataStorage.inst.itemStorage.getById( itemDescriptionId );
 		var itemLocal = new Item( desc, id );
+
+		amount.subscribeProp( itemLocal.amount );
 
 		item.resolve( itemLocal );
 	}

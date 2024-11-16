@@ -36,7 +36,7 @@ class EntityTransformReplicator extends NetNode {
 	var lastSyncX : Float;
 	var lastSyncY : Float;
 	var lastSyncZ : Float;
-	var interpolationSub : ISubscription;
+	var interpolationSub : Composite;
 
 	public function new( ?parent ) {
 		super( parent );
@@ -91,31 +91,47 @@ class EntityTransformReplicator extends NetNode {
 	function followEntity( entity : OverworldEntity ) {
 		this.entity = entity;
 
-		var isInterpolating = false;
-		x.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncX = oldVal;
-		} );
-		y.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncY = oldVal;
-		} );
-		z.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncZ = oldVal;
-		} );
-		entity.transform.x.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncX = newVal );
-		entity.transform.y.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncY = newVal );
-		entity.transform.z.addOnValue( ( _, newVal ) -> if ( !isInterpolating ) lastSyncZ = newVal );
+		interpolationSub?.unsubscribe();
+		interpolationSub = Composite.create();
 
-		interpolationSub = entity.onFrame.add( ( dt, tmod ) -> {
+		var networkSyncInvalidate = false;
+
+		#if client
+		var isInterpolating = false;
+		interpolationSub.add( x.addOnValue( ( oldVal, newVal ) -> {
+			lastUpdateTS = Timer.stamp();
+			lastSyncX = ( Math.abs( newVal - oldVal ) > 5 ) ? newVal : oldVal;
+			networkSyncInvalidate = true;
+		} ) );
+		interpolationSub.add( y.addOnValue( ( oldVal, newVal ) -> {
+			lastUpdateTS = Timer.stamp();
+			lastSyncY = ( Math.abs( newVal - oldVal ) > 5 ) ? newVal : oldVal;
+			networkSyncInvalidate = true;
+		} ) );
+		interpolationSub.add( z.addOnValue( ( oldVal, newVal ) -> {
+			lastUpdateTS = Timer.stamp();
+			lastSyncZ = ( Math.abs( newVal - oldVal ) > 5 ) ? newVal : oldVal;
+			networkSyncInvalidate = true;
+		} ) );
+
+		interpolationSub.add( entity.onFrame.add( ( dt, tmod ) -> {
+
+			if ( networkSyncInvalidate == true ) {
+				lastSyncX = x.val;
+				lastSyncY = y.val;
+				lastSyncZ = z.val;
+				networkSyncInvalidate = false;
+			}
+
 			var timeSinceLastUpd = ( Timer.stamp() - lastUpdateTS ) * 1000;
+			var interpRatio = timeSinceLastUpd / maxInterpolationTime;
+			if ( interpRatio > 1 ) {
+				return;
+			}
 			x.mutePropagation = true;
 			y.mutePropagation = true;
 			z.mutePropagation = true;
 			isInterpolating = true;
-
-			var interpRatio = timeSinceLastUpd / maxInterpolationTime;
 
 			entity.transform.x.val = hxd.Math.lerp( lastSyncX, x.val, interpRatio );
 			entity.transform.y.val = hxd.Math.lerp( lastSyncY, y.val, interpRatio );
@@ -125,7 +141,8 @@ class EntityTransformReplicator extends NetNode {
 			y.mutePropagation = false;
 			z.mutePropagation = false;
 			isInterpolating = false;
-		} );
+		} ) );
+		#end
 	}
 
 	public function claimOwnage() {

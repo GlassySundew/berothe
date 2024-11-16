@@ -680,6 +680,7 @@
 		{
 			"type": "object",
 			"name": "orc cave exit",
+			"editorOnly": true,
 			"props": {
 				"type": "entityTransitionExit",
 				"props": {

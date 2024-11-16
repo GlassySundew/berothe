@@ -1376,6 +1376,18 @@
 			"y": -86.72
 		},
 		{
+			"type": "reference",
+			"name": "club",
+			"source": "voxel/items/club/entity/club.enco",
+			"props": {
+				"entity": "club",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -15.19,
+			"y": -74.69,
+			"z": -0.1
+		},
+		{
 			"type": "box",
 			"name": "sleepy_orc_wake_trigger",
 			"props": {

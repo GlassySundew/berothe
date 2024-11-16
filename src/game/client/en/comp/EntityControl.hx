@@ -1,5 +1,7 @@
 package game.client.en.comp;
 
+import util.Settings;
+import oimo.common.Setting;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.net.client.GameClient;
 import dn.heaps.input.ControllerAccess;
@@ -30,8 +32,10 @@ class EntityControl {
 		entity.components.onAppear(
 			EntityModelComponent,
 			( _, modelComp ) -> {
+				modelComp.displayName.val = Settings.inst.params.nickname;
+
 				new EntityStatsHudMediator(
-					modelComp.stats,
+					modelComp,
 					entity,
 				);
 				new EntityInventoryHudMediator(
@@ -54,7 +58,7 @@ class EntityControl {
 			}, 1 );
 		} );
 
-		entityRepl.transformRepl.createModelToNetworkStream();
 		entityRepl.transformRepl.claimOwnage();
+		entityRepl.transformRepl.createModelToNetworkStream();
 	}
 }

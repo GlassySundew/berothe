@@ -8,7 +8,8 @@ import dn.M;
 class WalkAnimationState extends AnimationState {
 
 	final entity : OverworldEntity;
-	final entityModel : EntityModelComponent;
+
+	var speed : Float;
 
 	public function new(
 		entity : OverworldEntity,
@@ -18,11 +19,16 @@ class WalkAnimationState extends AnimationState {
 		super( listener, ignoreStats );
 
 		this.entity = entity;
-		entityModel = entity.components.get( EntityModelComponent );
+		entity.components.onAppear(
+			EntityModelComponent,
+			( cl, comp ) -> {
+				comp.stats.speed.amount.addOnValueImmediately( ( oldV, newV ) -> speed = newV );
+			}
+		);
 	}
 
 	override function getSpeed() : Float {
 		return
-			isAffectedByStats ? M.dist( 0, 0, entity.transform.velX, entity.transform.velY ) : 1;
+			isAffectedByStats ? speed : 1;
 	}
 }

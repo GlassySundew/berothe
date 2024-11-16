@@ -25,7 +25,7 @@ class EntityInventory extends EntityItemHolderBase {
 	public function new(
 		model : EntityModelComponent,
 		baseInventorySize : Int,
-		equipSlotsDesc : Array<EntityEquipSlotDescription>,
+		equipSlotsDesc : Array<EntityEquipSlotDescription>
 	) {
 		this.equipSlotsDesc = equipSlotsDesc;
 		this.baseInventorySize = baseInventorySize;
@@ -62,11 +62,12 @@ class EntityInventory extends EntityItemHolderBase {
 			tryGiveItem( item );
 		}
 	}
-
+	var goldSlot : ItemSlot;
 	function createSlots() {
 		inventorySlots = [];
 
-		inventorySlots.push( new ItemSlot( 99, new ItemRestriction( [GOLD] ) ) );
+		goldSlot = new ItemSlot( 99, new ItemRestriction( [GOLD] ) );
+		inventorySlots.push( goldSlot );
 
 		for ( equipSlotDesc in equipSlotsDesc ) {
 			var slot = new EquipItemSlot( equipSlotDesc );

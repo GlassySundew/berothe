@@ -15,9 +15,9 @@ import core.DispArray;
 
 class EntityModelComponent extends EntityComponent {
 
-	public final inventory : EntityInventory;
-	public final stats : EntityStats;
-	public final factions : DispArray<FactionDescription>;
+	public var inventory : EntityInventory;
+	public var stats : EntityStats;
+	public var factions : DispArray<FactionDescription>;
 	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
 	public final onDamaged = new Signal<Int, EntityDamageType>();
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
@@ -31,15 +31,6 @@ class EntityModelComponent extends EntityComponent {
 
 	public function new( desc : EntityModelDescription ) {
 		super( desc );
-
-		inventory = new EntityInventory( this, desc.baseInventorySize, desc.equipSlots );
-		stats = new EntityStats( desc );
-		factions = new DispArray();
-		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
-
-		if ( desc.baseHp != 0 ) hp.val = desc.baseHp;
-
-		if ( desc.displayName != null ) displayName.val = desc.displayName;
 	}
 
 	public function tryGiveItem( item : Item ) : ItemPickupAttemptResult {
@@ -96,7 +87,17 @@ class EntityModelComponent extends EntityComponent {
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
+
+		inventory = new EntityInventory( this, desc.baseInventorySize, desc.equipSlots );
+		stats = new EntityStats( desc );
 		stats.attachToEntity( entity );
+		
+		factions = new DispArray();
+		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
+
+		if ( desc.baseHp != 0 ) hp.val = desc.baseHp;
+
+		if ( desc.displayName != null ) displayName.val = desc.displayName;
 	}
 
 	function onHpChanged( oldVal : Int, newVal : Int ) {

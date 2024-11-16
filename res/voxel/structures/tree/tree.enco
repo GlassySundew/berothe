@@ -15,10 +15,12 @@
 					1
 				]
 			},
-			"z": 34,
+			"x": 1,
+			"y": 1,
+			"z": 35.7,
 			"scaleX": 23,
 			"scaleY": 23,
-			"scaleZ": 26,
+			"scaleZ": 28.6,
 			"isCollidable": false
 		},
 		{

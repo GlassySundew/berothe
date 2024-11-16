@@ -91,7 +91,7 @@ class GameClient extends Process {
 			}
 			if ( newLoc.locationDesc.isOpenAir ) {
 				locationLights?.remove();
-				locationLights = new DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
+				locationLights = new DirLight( new h3d.Vector( -0.7, -0.2, -1 ), Boot.inst.s3d );
 				locationLights.power = 1;
 				locationLights.shadows.mode = Dynamic;
 				locationLights.shadows.blur.radius = 0.2;

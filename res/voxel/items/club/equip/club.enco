@@ -4,15 +4,12 @@
 		{
 			"type": "object",
 			"name": "object",
-			"scaleX": 0.99,
-			"scaleY": 0.99,
-			"scaleZ": 0.99,
+			"x": 2,
 			"children": [
 				{
 					"type": "reference",
 					"name": "club",
-					"source": "voxel/items/club/equip/club.plst",
-					"x": 0.2
+					"source": "voxel/items/club/equip/club.plst"
 				}
 			]
 		}

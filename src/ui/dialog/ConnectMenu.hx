@@ -33,7 +33,7 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 			
 			<flow layout="horizontal" hspacing="5">
 				<text-button( "connect" ) public id="connect" />
-				<text-button( "cancel", ( e ) -> {}, 0xFFA54A4A, 0xFF303030 ) public id="cancel" />
+				<text-button( "cancel", ( e ) -> {}, 0xFF2E2E3A, 0xFF231818 ) public id="cancel" />
 			</flow>
 		</connect-comp>
 	

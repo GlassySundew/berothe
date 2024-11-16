@@ -29,6 +29,8 @@ import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
 class EntityComposerView extends NodeBase<EntityComposerView> implements IEntityView {
 
+	public static final GLOBAL_SPEED_MULTIPLIER = 1 / 15;
+
 	static final attackKeyList = [
 		{
 			idle : ATTACK_RIGHT_IDLE,
@@ -203,7 +205,10 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 				trace( 'cannot find animation node with id: $animation in enco: $file ' );
 				continue;
 			}
-			animationContainer.setPlay( true, animationDesc.speedMult * listener.getSpeed() / 15 * tmod );
+			animationContainer.setPlay(
+				true,
+				animationDesc.speedMult * listener.getSpeed() * GLOBAL_SPEED_MULTIPLIER * tmod
+			);
 			listener.playedOnContainer( animationContainer );
 
 			for ( child in children ) {

@@ -16,6 +16,7 @@ import game.domain.overworld.entity.EntityComponent;
 
 class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
+	@:s public final displayName : NSMutableProperty<String> = new NSMutableProperty<String>();
 	@:s final factionsRepl : NSArray<String> = new NSArray();
 	@:s final isSleeping : NSMutableProperty<Bool> = new NSMutableProperty<Bool>();
 	@:s var statsRepl : EntityStatsReplicator;
@@ -32,6 +33,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
 		modelComp.factions.subscribe( ( i, val ) -> if ( val != null ) factionsRepl[i] = val.id );
 		modelComp.isSleeping.subscribeProp( isSleeping );
+		modelComp.displayName.subscribeProp( displayName );
 		modelComp.onDamaged.add( onDamaged );
 	}
 
@@ -49,6 +51,10 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 				}
 			);
 			isSleeping.subscribeProp( modelComp.isSleeping );
+			displayName.subscribeProp( modelComp.displayName );
+
+			// todo this is temporary, remove after 
+			modelComp.displayName.subscribeProp( displayName );
 		} );
 	}
 	#end

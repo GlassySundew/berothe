@@ -41,12 +41,12 @@ class ViewStencil extends EntityViewExtensionComponentBase {
 						var stencil = stencilPass.stencil = new Stencil();
 						stencil.setFunc( Always, 1 );
 						stencil.setOp( Keep, Keep, Replace );
-						mat.mainPass.depthTest = Less;
+						mat.mainPass.depthTest = LessEqual;
 					case Objective:
 						var stencilPass = mat.allocPass( "stencil" );
 						var stencil = stencilPass.stencil = new Stencil();
 						stencilPass.depthTest = Greater;
-						stencil.setFunc( Equal, 1, 0xFF, 0 );
+						stencil.setFunc( LessEqual, 1, 0xFF, 0 );
 						stencil.setOp( Keep, Keep, Replace );
 						stencilPass.enableLights = false;
 						stencilPass.culling = Front;

@@ -387,7 +387,8 @@
 							"baseInventorySize": 4,
 							"faction": "humans",
 							"hideNameByDefault": false,
-							"baseSpeed": 12
+							"baseSpeed": 12,
+							"baseDefence": 1
 						},
 						"attack": {
 							"id": "human_attack",
@@ -854,6 +855,12 @@
 					"documentation": "location will be disposed when all anchor entities will be removed from it"
 				},
 				{
+					"typeStr": "2",
+					"name": "ofItem",
+					"opt": true,
+					"kind": null
+				},
+				{
 					"typeStr": "17",
 					"name": "rigidBodyTorso",
 					"opt": true,
@@ -902,12 +909,6 @@
 				{
 					"typeStr": "8",
 					"name": "spawnInventory",
-					"opt": true,
-					"kind": null
-				},
-				{
-					"typeStr": "2",
-					"name": "ofItem",
 					"opt": true,
 					"kind": null
 				}
@@ -1095,6 +1096,12 @@
 					"typeStr": "3",
 					"name": "baseHp",
 					"opt": true
+				},
+				{
+					"typeStr": "3",
+					"name": "baseDefence",
+					"opt": true,
+					"kind": null
 				},
 				{
 					"typeStr": "3",
@@ -1639,7 +1646,7 @@
 								}
 							],
 							"key": "walk",
-							"speedMult": 0.06,
+							"speedMult": 0.14,
 							"isAffectedByStats": true
 						},
 						{

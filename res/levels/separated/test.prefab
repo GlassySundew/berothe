@@ -39,8 +39,8 @@
 			"type": "model",
 			"name": "human_0_torso_walk",
 			"source": "voxel/characters/human/obj/fbx/human_0_torso_walk.fbx",
-			"x": -10.3,
-			"y": -5.6,
+			"x": 22.01,
+			"y": 24.73,
 			"children": [
 				{
 					"type": "material",

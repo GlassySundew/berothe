@@ -20,8 +20,8 @@ class EntityDynamicsComponent extends EntityComponent {
 		onMoveInvalidate = true;
 	}
 
-	override function attachToEntity( entity : OverworldEntity ) {
-		super.attachToEntity( entity );
+	override function claimOwnage() {
+		super.claimOwnage();
 		
 		subscription?.unsubscribe();
 		subscription = Composite.create();

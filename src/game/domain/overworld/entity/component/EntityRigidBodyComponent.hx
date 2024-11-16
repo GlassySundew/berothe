@@ -51,6 +51,11 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 				rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
 				rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
 				rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
+
+				if ( rigidBodyDesc.hasFeet ) {
+					var maybeSub = entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
+					if ( maybeSub != null ) subscription.add( maybeSub );
+				}
 			} );
 		} );
 	}
@@ -77,11 +82,6 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
 		super.onAttachedToLocation( oldLoc, location );
 		if ( location == null ) return;
-
-		if ( rigidBodyDesc.hasFeet ) {
-			var maybeSub = entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
-			if ( maybeSub != null ) subscription.add( maybeSub );
-		}
 
 		subscription.add( entity.transform.x.subscribeProp( rigidBody.x, true ) );
 		subscription.add( entity.transform.y.subscribeProp( rigidBody.y, true ) );

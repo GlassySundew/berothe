@@ -22,7 +22,6 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
 		subscription?.unsubscribe();
 		if ( rigidBody != null ) {
-			trace( "entity rb location detached " );
 			detach();
 			rigidBodyFuture = new Future();
 		}

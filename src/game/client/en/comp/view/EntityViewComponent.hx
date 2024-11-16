@@ -19,6 +19,7 @@ import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 #if client
 import game.client.en.comp.view.ui.EntityStatusBarContainer;
 import game.client.en.comp.view.ui.EntitySleepSpeech;
+import game.net.client.GameClient;
 #end
 
 class EntityViewComponent extends EntityComponent {
@@ -26,7 +27,7 @@ class EntityViewComponent extends EntityComponent {
 	public var view( default, null ) : Future<IEntityView> = new Future();
 	public final cooldown : Cooldown = new Cooldown( hxd.Timer.wantedFPS );
 	public final isBatched : MutableProperty<Bool> = new MutableProperty();
-	final statusBar3dPoint = new Object();
+	var statusBar3dPoint : Object;
 	final viewDescription : EntityViewDescription;
 
 	#if client
@@ -45,6 +46,7 @@ class EntityViewComponent extends EntityComponent {
 	override function dispose() {
 		super.dispose();
 		view.result?.dispose();
+		cooldown.reset();
 
 		subscription?.unsubscribe();
 		#if client
@@ -92,20 +94,33 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function onAttachedToLocation( location : Location ) {
+		if ( view.result != null ) {
+			dispose();
+			view = new Future();
+		}
+
 		subscription?.unsubscribe();
 		subscription = Composite.create();
 
-		if ( view.result != null ) {
-			view.result.dispose();
-			view = new Future();
-		}
 		var viewGraphics = createView();
 		if ( viewGraphics == null ) return;
 		view.resolve( viewGraphics );
+
+		entity.components.onAppear(
+			EntityModelComponent,
+			( cl, modelComp ) -> {
+				createStatusBar( modelComp );
+				EntitySleepSpeech.subscribe( this );
+				updateStatusBar3DPointPosition();
+			}
+		);
+
 		var node = view.result.getGraphics();
-
+		subscribeMoving( node );
 		addViewToScene( node );
+	}
 
+	function subscribeMoving( node : ObjectNode3D ) {
 		function onMove() {
 			node.setRotation(
 				entity.transform.rotationX,
@@ -118,21 +133,12 @@ class EntityViewComponent extends EntityComponent {
 				entity.transform.z
 			);
 		}
-		entity.components.onAppear(
+		var maybeSub = entity.components.onAppear(
 			EntityDynamicsComponent,
-			( _, dynamics ) -> subscription.add( entity.onFrame.add((e, q)-> onMove() ) )
+			( _, dynamics ) -> subscription.add( entity.onFrame.add( ( e, q ) -> onMove() ) )
 		);
+		if ( maybeSub != null ) subscription.add( maybeSub );
 		onMove();
-
-		entity.components.onAppear(
-			EntityModelComponent,
-			( cl, modelComp ) -> {
-				viewGraphics.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
-				createStatusBar( modelComp );
-				EntitySleepSpeech.subscribe( this );
-				updateStatusBar3DPointPosition();
-			}
-		);
 	}
 
 	function addViewToScene( node : ObjectNode3D ) {
@@ -145,6 +151,8 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function createStatusBar( modelComp : EntityModelComponent ) {
+		statusBar3dPoint = new Object();
+		view.result.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
 		statusBar = new EntityStatusBarContainer( statusBar3dPoint, this );
 		Main.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
 		modelComp.displayName.addOnValueImmediately(
@@ -162,9 +170,17 @@ class EntityViewComponent extends EntityComponent {
 		modelComp.onDamaged.add( ( damage, type ) -> {
 			statusBar.sayChatMessage( Std.string( damage ) );
 		} );
+		inline function checkEnemy() {
+			if ( modelComp.isEnemy( GameClient.inst.controlledEntity.val.entity.result ) ) {
+				statusBar.colorEnemy();
+			}
+		}
+		modelComp.factions.onChanged.add( ( _, _ ) -> checkEnemy() );
+		checkEnemy();
 	}
 
 	function updateStatusBar3DPointPosition() {
+		trace( view.result.getGraphics().heapsObject.getBounds().zMax );
 		statusBar3dPoint.z = view.result.getGraphics().heapsObject.getBounds().zMax + 5;
 	}
 	#end

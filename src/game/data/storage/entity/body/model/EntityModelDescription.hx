@@ -56,6 +56,7 @@ class EntityModelDescription extends EntityComponentDescription {
 			entry.baseHp,
 			entry.baseInventorySize,
 			entry.baseSpeed,
+			entry.baseDefence,
 			equipSlots,
 			entry.factionId.toString(),
 			entry.displayName,
@@ -68,6 +69,7 @@ class EntityModelDescription extends EntityComponentDescription {
 	public final baseHp : Int;
 	public final baseInventorySize : Int;
 	public final baseSpeed : Float;
+	public final baseDefence : Int;
 	public final equipSlots : Array<EntityEquipSlotDescription>;
 	public final factionId : String;
 	public final displayName : String;
@@ -78,6 +80,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		baseHp : Int,
 		baseInventorySize : Int,
 		baseSpeed : Float,
+		baseDefence : Int,
 		equipSlots : Array<EntityEquipSlotDescription>,
 		factionId : String,
 		displayName : String,
@@ -89,6 +92,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		this.baseHp = baseHp;
 		this.equipSlots = equipSlots;
 		this.baseSpeed = baseSpeed;
+		this.baseDefence = baseDefence;
 		this.baseInventorySize = baseInventorySize;
 		this.factionId = factionId;
 		this.displayName = displayName;
