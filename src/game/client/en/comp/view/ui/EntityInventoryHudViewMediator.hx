@@ -1,5 +1,6 @@
 package game.client.en.comp.view.ui;
 
+import rx.disposables.Composite;
 import dn.heaps.slib.HSprite;
 import util.Assets;
 import game.domain.overworld.item.model.ItemSlot;
@@ -26,7 +27,7 @@ class EntityInventoryHudViewMediator {
 		slotsReverse.reverse();
 
 		for ( slot in slotsReverse ) {
-			var slotView = new EntityInventoryCellComp( slot );
+			var slotView = new EntityInventoryCellComp( slot, mediator.subscription );
 			comp.inventory_container.addChild( slotView );
 		}
 	}
@@ -78,13 +79,14 @@ class EntityInventoryCellComp extends Flow implements h2d.domkit.Object {
 
 	public function new(
 		itemSlot : ItemSlot,
+		composite : Composite,
 		?parent : Object
 	) {
 		super( parent );
 		this.itemSlot = itemSlot;
 		initComponent();
 
-		itemSlot.itemProp.addOnValueImmediately(
+		composite.add( itemSlot.itemProp.addOnValueImmediately(
 			( oldItem, newItem ) -> {
 				removeChildren();
 
@@ -92,6 +94,6 @@ class EntityInventoryCellComp extends Flow implements h2d.domkit.Object {
 
 				addChild( new HSprite( Assets.items, newItem.desc.iconAsset ) );
 			}
-		);
+		) );
 	}
 }

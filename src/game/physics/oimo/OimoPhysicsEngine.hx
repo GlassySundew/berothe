@@ -30,6 +30,10 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		world.setGravity( new Vec3( 0, 0, -9.8 ) );
 	}
 
+	public function dispose() {
+		world._rigidBodyList = null;
+	}
+
 	public function update( dt : Float ) {
 		world.step( dt );
 
@@ -52,7 +56,7 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 	public inline function getDebugDraw() : IDebugDraw {
 		return debugDraw;
 	}
-	
+
 	public function setDebugDraw( debugDraw : IDebugDraw ) {
 		Assert.isNull( this.debugDraw );
 		Assert.isOfType( debugDraw, DebugDraw );

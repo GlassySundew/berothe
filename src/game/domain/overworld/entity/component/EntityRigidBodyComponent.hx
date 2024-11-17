@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component;
 
+import rx.disposables.ISubscription;
 import game.data.location.objects.LocationCollisionObjectVO;
 import rx.disposables.Composite;
 import dn.M;

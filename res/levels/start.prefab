@@ -1368,6 +1368,7 @@
 			"type": "reference",
 			"name": "bat",
 			"source": "voxel/characters/bat/bat.enco",
+			"editorOnly": true,
 			"props": {
 				"entity": "bat",
 				"$cdbtype": "locationEntityDF"

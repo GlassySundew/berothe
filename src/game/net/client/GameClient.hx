@@ -1,5 +1,7 @@
 package game.net.client;
 
+import rx.disposables.Composite;
+import domkit.Component;
 import haxe.EnumFlags;
 import future.Future;
 import h3d.scene.Mesh;
@@ -45,17 +47,20 @@ class GameClient extends Process {
 		return inst = game;
 	}
 
-	public final onUpdate : Signal = new Signal();
-	public final core : GameCore = new GameCore();
-	public final controlledEntity : MutableProperty<EntityReplicator> = new MutableProperty();
-	public final cameraProc : CameraProcess;
-	public final modelCache : ModelCache = new ModelCache();
-
 	final currentLocationSelf : MutableProperty<Location> = new MutableProperty();
 	public var currentLocation( get, never ) : IProperty<Location>;
 	inline function get_currentLocation() : IProperty<Location> {
 		return currentLocationSelf;
 	}
+
+	public final onUpdate : Signal = new Signal();
+	public final core : GameCore = new GameCore();
+	public final controlledEntity : MutableProperty<EntityReplicator> = new MutableProperty();
+	public final cameraProc : CameraProcess;
+	public final modelCache : ModelCache = new ModelCache();
+	public final disposed = new Future();
+
+	final subscription = Composite.create();
 
 	var locationLights : DirLight;
 	var ca : ControllerAccess<ControllerAction>;
@@ -77,18 +82,20 @@ class GameClient extends Process {
 		cameraProc = new CameraProcess( this );
 		cameraProc.doRound = false;
 
-		Client.inst.onConnectionClosed.add( destroy );
-		Client.inst.onConnectionClosed.repeat( 1 );
-		Client.inst.onUnregister.add( onUnregister );
+		subscription.add( Client.inst.onUnregister.add( onUnregister ) );
 
 		currentLocationSelf.addOnValue( ( oldLoc, newLoc ) -> {
 			if ( oldLoc != null ) {
+				oldLoc.removeEntity( controlledEntity.getValue().entity.result );
 				oldLoc.dispose();
 				oldLoc.update( 0, 0 );
 				#if debug
 				oldLoc.physics.getDebugDraw()?.remove();
 				#end
 			}
+
+			if ( newLoc == null ) return;
+
 			if ( newLoc.locationDesc.isOpenAir ) {
 				locationLights?.remove();
 				locationLights = new DirLight( new h3d.Vector( -0.7, -0.2, -1 ), Boot.inst.s3d );
@@ -134,13 +141,18 @@ class GameClient extends Process {
 
 		Settings.inst.saveSettings();
 
-		inst = null;
-
 		if ( cameraProc != null ) cameraProc.destroy();
 
 		Client.inst.disconnect();
 
 		ca.dispose();
+
+		currentLocationSelf.val = null;
+		controlledEntity.getValue()?.entity.result?.dispose();
+		subscription.unsubscribe();
+
+		disposed.resolve( true );
+		inst = null;
 	}
 
 	override function update() {
@@ -155,7 +167,6 @@ class GameClient extends Process {
 		onUpdate.dispatch();
 
 		BatchRenderer.inst?.emitBatches();
-
 	}
 
 	override function pause() {

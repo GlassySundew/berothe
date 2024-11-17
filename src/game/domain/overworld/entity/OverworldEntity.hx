@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import util.Assert;
 import future.Future;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.domain.overworld.location.Location;
@@ -40,7 +41,7 @@ class OverworldEntity {
 	}
 
 	public function dispose() {
-		if ( disposed.isTriggered ) throw this + " entity double dispose";
+		Assert.isFalse( disposed.isTriggered, this + " entity double dispose" );
 		components.dispose();
 		disposed.resolve( true );
 		postDisposed.resolve( true );

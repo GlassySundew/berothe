@@ -3,17 +3,12 @@ package net;
 import hxbit.NetworkSerializable;
 import rx.disposables.ISubscription;
 #if client
-import util.Assert;
-import util.Const;
-import signals.Signal;
 import dn.Process;
 import game.net.client.GameClient;
-import h2d.Flow;
+import signals.Signal;
 import ui.MainMenu;
-import ui.core.ShadowedText;
-import ui.core.TextButton;
 import ui.dialog.ConfirmDialog;
-import util.Assets;
+import util.Assert;
 import util.Repeater;
 
 @:build( util.Macros.buildNetworkMessageSignals( net.Message ) )
@@ -29,7 +24,7 @@ class Client extends Process {
 	public final onUnregister : Signal<NetworkSerializable> = new Signal<NetworkSerializable>();
 
 	public var connected( get, never ) : Bool;
-	function get_connected() @:privateAccess return host.connected;
+	function get_connected() @:privateAccess return host?.connected;
 
 	var game : GameClient;
 	var connectionRepeater : ISubscription;
@@ -46,8 +41,6 @@ class Client extends Process {
 				trace( "error occured while disposing client: " + e );
 			}
 		} );
-
-		game = new GameClient();
 	}
 
 	public function repeatConnect( interval = 0.5, repeats = 6 ) {
@@ -93,14 +86,14 @@ class Client extends Process {
 				}
 
 				sendMessage( Message.ClientAuth );
-
 				onConnection.dispatch();
 			}
 		);
 
+		game = new GameClient();
+
 		@:privateAccess
 		host.socket.onError = onError;
-
 		host.onMessage = onMessage;
 	}
 
@@ -110,6 +103,8 @@ class Client extends Process {
 		} catch( e ) {
 			trace( e );
 		}
+
+		host = null;
 	}
 
 	public function addOnConnectionCallback( callback : Void -> Void ) {
@@ -139,8 +134,11 @@ class Client extends Process {
 			},
 			Main.inst.root
 		);
-		trace( "connection closed" );
 		onConnectionClosed.dispatch();
+		game?.destroy();
+		// game?.disposed.then( ( _ ) -> {
+		// 	// game = null;
+		// } );
 	}
 
 	override function postUpdate() {

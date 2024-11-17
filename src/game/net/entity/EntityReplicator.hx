@@ -55,9 +55,9 @@ class EntityReplicator extends NetNode {
 
 	#if client
 	override function onUnregisteredClient() {
+		trace( "entity disconnected " + entity.result );
 		super.onUnregisteredClient();
 		entity.result.dispose();
-		trace( "disposing entity " + entity.result );
 	}
 	#end
 

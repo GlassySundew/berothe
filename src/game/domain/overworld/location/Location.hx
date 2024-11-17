@@ -68,12 +68,19 @@ class Location {
 	}
 
 	public function dispose() {
-		for ( staticObj in globalEntities ) {
+		for ( entity in entities.copy() ) {
+			entity.dispose();
+		}
+		entities.resize( 0 );
+		for ( staticObj in globalEntities.copy() ) {
 			staticObj.dispose();
 		}
-		for ( trigger in triggers ) {
+		globalEntities.resize( 0 );
+		for ( trigger in triggers.copy() ) {
 			trigger.dispose();
 		}
+		triggers.resize( 0 );
+		physics.dispose();
 		disposed.resolve( true );
 	}
 
@@ -105,23 +112,50 @@ class Location {
 
 	public function removeEntity( entity : OverworldEntity ) {
 		Assert.isTrue( entity.location.getValue() == this );
-		if ( entities.contains( entity ) ) {
-			chunks.removeEntity( entity );
-			entities.remove( entity );
 
-			entitySubscriptions[entity].unsubscribe();
-			entitySubscriptions.remove( entity );
+		chunks.removeEntity( entity );
+		entities.remove( entity );
 
-			entity.setLocation( null );
+		entitySubscriptions[entity].unsubscribe();
+		entitySubscriptions.remove( entity );
 
-			onEntityRemoved.dispatch( entity );
-		} else {
-			trace( "location " + this + " did not contain entity: " + entity );
-		}
+		entity.setLocation( null );
+		onEntityRemoved.dispatch( entity );
 
 		if ( entity.desc.getBodyDescription().isAnchor && --anchorEntitiesPresent == 0 ) {
 			onNoMoreAnchorEntitiesLeft.dispatch();
 		}
+	}
+
+	function moveEntityToAnotherLocation(
+		entity : OverworldEntity,
+		targetLocationDesc : LocationDescription
+	) {
+		removeEntity( entity );
+
+		var targetLocation = GameCore.inst.getOrCreateLocationByDesc(
+			targetLocationDesc,
+			entity,
+			true
+		);
+		var exitPoint = Random.fromArray(
+			targetLocation.locationDataProvider.getLocationTransitionExits().filter(
+				( obj ) -> obj.locationDescId == locationDesc.id
+			)
+		);
+
+		if ( exitPoint == null ) {
+			trace(
+				"exit point was not found, from: "
+				+ locationDesc.id
+				+ " to: " + targetLocationDesc.id
+			);
+			return;
+		}
+
+		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
+
+		targetLocation.addEntity( entity );
 	}
 
 	public function hasEntity( entity : OverworldEntity ) : Bool {
@@ -202,37 +236,6 @@ class Location {
 				);
 			}
 		}
-	}
-
-	function moveEntityToAnotherLocation(
-		entity : OverworldEntity,
-		targetLocationDesc : LocationDescription
-	) {
-		removeEntity( entity );
-
-		var targetLocation = GameCore.inst.getOrCreateLocationByDesc(
-			targetLocationDesc,
-			entity,
-			true
-		);
-		var exitPoint = Random.fromArray(
-			targetLocation.locationDataProvider.getLocationTransitionExits().filter(
-				( obj ) -> obj.locationDescId == locationDesc.id
-			)
-		);
-
-		if ( exitPoint == null ) {
-			trace(
-				"exit point was not found, from: "
-				+ locationDesc.id
-				+ " to: " + targetLocationDesc.id
-			);
-			return;
-		}
-
-		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
-
-		targetLocation.addEntity( entity );
 	}
 
 	function createAndAttachStaticObjects( isAuth = true ) {

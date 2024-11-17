@@ -1,5 +1,6 @@
 package game.client.en.comp.view.ui;
 
+import rx.disposables.Composite;
 import rx.disposables.ISubscription;
 import game.domain.overworld.item.model.ItemSlot;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
@@ -23,6 +24,8 @@ class EntityStatsHudMediator {
 	var attackListComp : EntityAttackListComponent;
 	var leadingAttackEquip : EntityEquipmentSlotType;
 
+	final subscribtion = Composite.create();
+	
 	public function new(
 		model : EntityModelComponent,
 		entity : OverworldEntity
@@ -45,6 +48,14 @@ class EntityStatsHudMediator {
 		subscribe();
 	}
 
+	public function dispose() {
+		onAttackChanged.destroy();
+		onDefenceChanged.destroy();
+		onGoldChanged.destroy();
+		subscribtion.unsubscribe();
+		view.comp.remove();
+	}
+	
 	function subscribe() {
 		subscribeAttack();
 		subscribeDefence();

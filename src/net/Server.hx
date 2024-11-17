@@ -94,8 +94,8 @@ class Server extends Process {
 		var clientController = cast( c.ownerObject, ClientController );
 		if ( clientController.__host == null ) return;
 
-		@:privateAccess
-		host.unregister( clientController );
+		clientController.unregister( host );
+		clientController.__host = null;
 	}
 
 	public function log( s : String, ?pos : haxe.PosInfos ) {

@@ -1,5 +1,7 @@
 package game.client.en.comp;
 
+import util.Assert;
+import rx.Subscription;
 import util.Settings;
 import oimo.common.Setting;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
@@ -23,6 +25,7 @@ class EntityControl {
 
 	public function new( entity : OverworldEntity, entityRepl : EntityReplicator ) {
 		ca = Main.inst.controller.createAccess();
+		var entityDestroySub = Composite.create();
 
 		var cameraFollow = new EntityCameraFollowComponent();
 		entity.components.add( cameraFollow );
@@ -34,28 +37,38 @@ class EntityControl {
 			( _, modelComp ) -> {
 				modelComp.displayName.val = Settings.inst.params.nickname;
 
-				new EntityStatsHudMediator(
+				var statsMediator = new EntityStatsHudMediator(
 					modelComp,
 					entity,
 				);
-				new EntityInventoryHudMediator(
+				var inventoryMediator = new EntityInventoryHudMediator(
 					modelComp.inventory
 				);
+
+				entityDestroySub.add( Subscription.create(() -> {
+					statsMediator.dispose();
+					inventoryMediator.dispose();
+				} ) );
 			}
 		);
 
-		var sub = null;
+		entity.components.componentStream.observe( comp -> {
+			if ( Std.isOfType( comp, EntityAttackListComponent ) ) return;
+
+			#if debug Assert.isFalse( comp.isOwned ); #end
+			comp.claimOwnage();
+		} );
+
 		entity.location.addOnValueImmediately( ( oldLoc, newLoc ) -> {
-			sub?.unsubscribe();
-			sub = Composite.create();
-			sub.add( entity.components.componentStream.observe( comp -> {
-				if ( Std.isOfType( comp, EntityAttackListComponent ) ) return;
-				comp.claimOwnage();
-			} ) );
+			if ( newLoc == null ) return;
 			// waiting for coordinates to syncronize
 			GameClient.inst.delayer.addF(() -> {
 				cameraFollow.recenter();
 			}, 1 );
+		} );
+
+		entity.disposed.then( ( _ ) -> {
+			entityDestroySub.unsubscribe();
 		} );
 
 		entityRepl.transformRepl.claimOwnage();

@@ -59,7 +59,7 @@ class ChunkReplicator extends NetNode {
 
 	override function onUnregisteredClient() {
 		super.onUnregisteredClient();
-		binderUnregClient.unsubscribe();
+		binderUnregClient?.unsubscribe();
 		binderUnregClient = null;
 	}
 
@@ -76,6 +76,7 @@ class ChunkReplicator extends NetNode {
 							if ( location == null ) return;
 							entityReplicator.entity.then( ( entity ) -> {
 								Assert.notNull( entity );
+
 								if ( !location.hasEntity( entity ) ) {
 									location.addEntity( entity );
 								}
