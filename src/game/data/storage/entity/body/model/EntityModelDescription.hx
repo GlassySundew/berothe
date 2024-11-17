@@ -52,6 +52,10 @@ class EntityModelDescription extends EntityComponentDescription {
 			}
 		];
 
+		var speechDamaged = entry.speechDamaged == null ? [] : [
+			for ( speech in entry.speechDamaged ) speech.speech
+		];
+
 		return new EntityModelDescription(
 			entry.baseHp,
 			entry.baseInventorySize,
@@ -61,6 +65,7 @@ class EntityModelDescription extends EntityComponentDescription {
 			entry.factionId.toString(),
 			entry.displayName,
 			entry.hideNameByDefault,
+			speechDamaged,
 			spawnInventory,
 			entry.id.toString(),
 		);
@@ -75,6 +80,7 @@ class EntityModelDescription extends EntityComponentDescription {
 	public final displayName : String;
 	public final hideNameByDefault : Bool;
 	public final spawnInventory : Array<SpawnInventory>;
+	public final speechDamaged : Array<String>;
 
 	public function new(
 		baseHp : Int,
@@ -85,6 +91,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		factionId : String,
 		displayName : String,
 		hideNameByDefault : Bool,
+		speechDamaged : Array<String>,
 		spawnInventory : Array<SpawnInventory>,
 		id : String
 	) {
@@ -98,6 +105,7 @@ class EntityModelDescription extends EntityComponentDescription {
 		this.displayName = displayName;
 		this.hideNameByDefault = hideNameByDefault;
 		this.spawnInventory = spawnInventory;
+		this.speechDamaged = speechDamaged;
 	}
 
 	public function buildComponent() : EntityComponent {

@@ -16,7 +16,7 @@ class EntitySleepSpeech {
 
 		inline function createRepeater() : ISubscription {
 			function emitMessage() {
-				view.statusBar.sayChatMessage( "(snort)" );
+				view.statusBarFuture.result.sayChatMessage( "(snort)" );
 			}
 			emitMessage();
 
@@ -28,7 +28,7 @@ class EntitySleepSpeech {
 				sub = createRepeater();
 			} else {
 				if ( sub == null ) return;
-				view.statusBar.sayChatMessage( "(yawn)" );
+				view.statusBarFuture.result.sayChatMessage( "(yawn)" );
 
 				sub?.unsubscribe();
 				sub = null;

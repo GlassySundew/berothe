@@ -31,7 +31,7 @@ class EntityViewComponent extends EntityComponent {
 	final viewDescription : EntityViewDescription;
 
 	#if client
-	public var statusBar( default, null ) : EntityStatusBarContainer;
+	public final statusBarFuture : Future<EntityStatusBarContainer> = new Future();
 	#end
 
 	var viewExtraConfig : Array<EntityViewExtraInitSetting> = [];
@@ -50,7 +50,7 @@ class EntityViewComponent extends EntityComponent {
 
 		subscription?.unsubscribe();
 		#if client
-		statusBar?.root.remove();
+		statusBarFuture.result?.root.remove();
 		#end
 	}
 
@@ -152,8 +152,9 @@ class EntityViewComponent extends EntityComponent {
 
 	function createStatusBar( modelComp : EntityModelComponent ) {
 		statusBar3dPoint = new Object();
-		view.result.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
-		statusBar = new EntityStatusBarContainer( statusBar3dPoint, this );
+		view.then( ( viewResult ) -> viewResult.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) ) );
+		var statusBar = new EntityStatusBarContainer( statusBar3dPoint, this );
+		statusBarFuture.resolve( statusBar );
 		Main.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
 		modelComp.displayName.addOnValueImmediately(
 			( oldVal, newVal ) -> {
@@ -167,13 +168,11 @@ class EntityViewComponent extends EntityComponent {
 				statusBar.setDisplayName( newVal );
 			}
 		);
-		modelComp.onDamaged.add( ( damage, type ) -> {
-			statusBar.sayChatMessage( Std.string( damage ) );
-		} );
+
 		inline function checkEnemy() {
-			if ( modelComp.isEnemy( GameClient.inst.controlledEntity.val.entity.result ) ) {
-				statusBar.colorEnemy();
-			}
+			statusBar.setFriendliness(
+				!modelComp.isEnemy( GameClient.inst.controlledEntity.val.entity.result )
+			);
 		}
 		modelComp.factions.onChanged.add( ( _, _ ) -> checkEnemy() );
 		checkEnemy();

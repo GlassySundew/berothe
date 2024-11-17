@@ -33,6 +33,30 @@
 					"value": {
 						"location": "start"
 					}
+				},
+				{
+					"id": "friendlyDamageTakenColor",
+					"value": {
+						"color": 14540582
+					}
+				},
+				{
+					"id": "unfriendlyDamageTakenColor",
+					"value": {
+						"color": 15434625
+					}
+				},
+				{
+					"id": "friendlyStatusBarColor",
+					"value": {
+						"color": 16777215
+					}
+				},
+				{
+					"id": "unfriendlyStatusBarColor",
+					"value": {
+						"color": 15434625
+					}
 				}
 			],
 			"separators": [],
@@ -56,6 +80,12 @@
 				{
 					"typeStr": "6:location",
 					"name": "location",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "11",
+					"name": "color",
 					"opt": true,
 					"kind": null
 				}
@@ -284,6 +314,12 @@
 					}
 				},
 				{
+					"id": "deathMessage",
+					"properties": {
+						"dynamics": false
+					}
+				},
+				{
 					"id": "model",
 					"properties": {
 						"dynamics": false
@@ -388,7 +424,15 @@
 							"faction": "humans",
 							"hideNameByDefault": false,
 							"baseSpeed": 12,
-							"baseDefence": 1
+							"baseDefence": 1,
+							"speechDamaged": [
+								{
+									"speech": "Ow"
+								},
+								{
+									"speech": "Ouch"
+								}
+							]
 						},
 						"attack": {
 							"id": "human_attack",
@@ -451,6 +495,11 @@
 									],
 									"botEdgeRnd": 2,
 									"topEdgeRnd": 10
+								}
+							],
+							"speechDamaged": [
+								{
+									"speech": "Eeek"
 								}
 							]
 						},
@@ -1088,6 +1137,17 @@
 					"scope": 2
 				},
 				{
+					"typeStr": "2",
+					"name": "hideNameByDefault",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "speechDamaged",
+					"opt": true
+				},
+				{
 					"typeStr": "8",
 					"name": "equipment",
 					"opt": true
@@ -1120,12 +1180,6 @@
 					"opt": true
 				},
 				{
-					"typeStr": "2",
-					"name": "hideNameByDefault",
-					"opt": true,
-					"kind": null
-				},
-				{
 					"typeStr": "4",
 					"name": "baseSpeed",
 					"opt": true
@@ -1135,6 +1189,20 @@
 					"name": "spawnInventory",
 					"opt": true,
 					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityPropertySetup@properties@model@speechDamaged",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "speech"
 				}
 			]
 		},

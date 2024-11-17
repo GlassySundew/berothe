@@ -1,5 +1,6 @@
 package game.net.entity.component;
 
+import game.client.en.comp.view.EntityMessageVO;
 import game.client.en.comp.view.EntityViewComponent;
 import game.domain.overworld.entity.component.combat.EntityDamageType;
 import net.NSMutableProperty;
@@ -22,6 +23,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s var statsRepl : EntityStatsReplicator;
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
+	@:s var statusMessages : NSArray<EntityMessageVO> = new NSArray();
 
 	override function followComponentServer( component : EntityComponent, entityRepl ) {
 		super.followComponentServer( component, entityRepl );
@@ -35,6 +37,9 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		modelComp.isSleeping.subscribeProp( isSleeping );
 		modelComp.displayName.subscribeProp( displayName );
 		modelComp.onDamaged.add( onDamaged );
+		modelComp.statusMessages.subscribeNetwork( statusMessages );
+
+		statusMessages.onSet.add( ( i, ele ) -> trace( "sending message text: " + ele ) );
 	}
 
 	#if client
@@ -53,19 +58,28 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 			isSleeping.subscribeProp( modelComp.isSleeping );
 			displayName.subscribeProp( modelComp.displayName );
 
-			// todo this is temporary, remove after 
+			// todo this is temporary, remove after
 			modelComp.displayName.subscribeProp( displayName );
+
+			statusMessages.subscribleWithMapping(
+				( i, elem ) -> modelComp.statusMessages.set( i, elem ),
+				( i, elem ) -> modelComp.statusMessages.removeByIdx( i )
+			);
+
+			entityRepl.entity.result.components.onAppear(
+				EntityViewComponent,
+				( cl, viewComp ) -> {
+					viewComp.statusBarFuture.then( ( statusBar ) ->
+						modelComp.statusMessages.onChanged.add( statusBar.setChatMessage )
+					);
+				}
+			);
 		} );
 	}
 	#end
 
 	@:rpc( clients )
-	function onDamaged( amount : Float, type : EntityDamageType ) {
-		#if client
-		var view = entityRepl.entity.result.components.get( EntityViewComponent );
-		view.statusBar?.sayChatMessage( Std.string( amount ) );
-		#end
-	}
+	function onDamaged( amount : Float, type : EntityDamageType ) {}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
 		super.unregister( host, ctx );

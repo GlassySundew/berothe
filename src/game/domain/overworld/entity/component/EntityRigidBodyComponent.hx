@@ -115,7 +115,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		var rigidBodyLocal = RigidBodyAbstractFactory.create(
 			torsoShape,
-			rigidBodyDesc.isStatic ? STATIC : KINEMATIC,
+			rigidBodyDesc.isStatic ? STATIC : DYNAMIC,
 			new EntityRigidBodyProps( entity )
 		);
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );

@@ -7,7 +7,12 @@ class RuleStorage {
 	public var entityGravityScale( default, null ) : Float;
 	public var interactionRange( default, null ) : Float;
 	public var playerStartLocation( default, null ) : String;
+	public var friendlyDamageTakenColor( default, null ) : Int;
+	public var unfriendlyDamageTakenColor( default, null ) : Int;
+	public var friendlyStatusBarColor( default, null ) : Int;
+	public var unfriendlyStatusBarColor( default, null ) : Int;
 
+	// dont touch this, only add fields
 	public function new( rules : IndexId<Data.Rule, Data.RuleKind> ) {
 		for ( entry in Reflect.fields( this ) ) {
 			var rule = rules.resolve( entry );

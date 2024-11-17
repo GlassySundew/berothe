@@ -93,7 +93,6 @@ class GameServer extends Process {
 
 	function onNewClientConnected( networkClient : NetworkClient ) {
 		if ( networkClient.ownerObject != null ) return;
-		trace( "new clientcontroller created" );
 		var clientController = new ClientController( networkClient );
 		networkClient.ownerObject = clientController;
 		@:privateAccess server.host.register( clientController, networkClient );

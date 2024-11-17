@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import dn.Delayer;
 import util.Assert;
 import future.Future;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
@@ -17,7 +18,7 @@ class OverworldEntity {
 	public final desc : EntityDescription;
 	public final transform : EntityTransform = new EntityTransform();
 	public final components : EntityComponents;
-
+	public final delayer = new Delayer( hxd.Timer.wantedFPS );
 	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 	public final disposed : Future<Bool> = new Future();
 	public final postDisposed : Future<Bool> = new Future();
@@ -45,9 +46,11 @@ class OverworldEntity {
 		components.dispose();
 		disposed.resolve( true );
 		postDisposed.resolve( true );
+		delayer.destroy();
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {
+		delayer.update( tmod );
 		onFrame.dispatch( dt, tmod );
 	}
 

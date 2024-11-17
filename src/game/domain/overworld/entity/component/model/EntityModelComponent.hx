@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.client.en.comp.view.EntityMessageVO;
 import future.Future;
 import signals.Signal;
 import game.domain.overworld.entity.component.combat.EntityDamageType;
@@ -15,14 +16,16 @@ import core.DispArray;
 
 class EntityModelComponent extends EntityComponent {
 
-	public var inventory : EntityInventory;
-	public var stats : EntityStats;
-	public var factions : DispArray<FactionDescription>;
 	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
-	public final onDamaged = new Signal<Int, EntityDamageType>();
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
-	public final displayName = new MutableProperty<String>();
 	public final onDeath : Future<Bool> = new Future();
+	public final onDamaged = new Signal<Int, EntityDamageType>();
+	public final displayName = new MutableProperty<String>();
+	public final statusMessages : DispArray<EntityMessageVO> = new DispArray<EntityMessageVO>();
+
+	public var inventory( default, null ) : EntityInventory;
+	public var stats( default, null ) : EntityStats;
+	public var factions( default, null ) : DispArray<FactionDescription>;
 
 	public var desc( get, never ) : EntityModelDescription;
 	inline function get_desc() : EntityModelDescription {
@@ -75,6 +78,14 @@ class EntityModelComponent extends EntityComponent {
 	}
 
 	public function getDamagedWith( damage : Int, type : EntityDamageType ) {
+		var damageSpeech : String = Random.fromArray( desc.speechDamaged );
+		if ( damageSpeech == null ) damageSpeech = "";
+		// todo replace parentheses with those of corresponding damage type
+		damageSpeech += ' ($damage)';
+		var mesVO = EntityMessageVO.damageTaken( damageSpeech );
+		statusMessages.push( mesVO );
+		entity.delayer.addS(() -> statusMessages.remove( mesVO ), 3 );
+
 		hp.val -= damage;
 		onDamaged.dispatch( damage, type );
 	}
@@ -91,7 +102,7 @@ class EntityModelComponent extends EntityComponent {
 		inventory = new EntityInventory( this, desc.baseInventorySize, desc.equipSlots );
 		stats = new EntityStats( desc );
 		stats.attachToEntity( entity );
-		
+
 		factions = new DispArray();
 		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
 

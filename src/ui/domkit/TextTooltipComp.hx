@@ -1,5 +1,6 @@
 package ui.domkit;
 
+import h3d.Vector4;
 import util.Assets;
 import h2d.Font;
 import h2d.Object;
@@ -20,25 +21,20 @@ class TextTooltipComp extends h2d.Flow implements h2d.domkit.Object {
 		</textTooltip>;
 
 	// @formatter:on
-	public var label( get, set ) : String;
 	public var font( get, set ) : Font;
+	inline function get_font() return shadowed_text.font;
+	inline function set_font( s ) return shadowed_text.font = s;
 
-	function get_label()
-		return shadowed_text.text;
+	public var label( get, set ) : String;
+	inline function get_label() return shadowed_text.text;
+	inline function set_label( s ) return shadowed_text.text = s;
 
-	function set_label( s ) {
-		shadowed_text.text = s;
-		return s;
-	}
+	public var color( get, set ) : Vector4;
+	inline function get_color() return shadowed_text.color;
+	inline function set_color( s ) return shadowed_text.color = s;
 
-	function set_font( s ) {
-		shadowed_text.font = s;
-		return s;
-	}
-
-	function get_font()
-		return shadowed_text.font;
-
+	
+	
 	public var cornersRounder : CornersRounder;
 
 	public function new( text : String = "", ?font : Font, ?style : Style, ?parent : Object ) {
