@@ -25,10 +25,11 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s var inventoryRepl : EntityInventoryReplicator;
 	@:s var statusMessages : NSArray<EntityMessageVO> = new NSArray();
 
+	public var modelComp( get, never ) : EntityModelComponent;
+	inline function get_modelComp() return Std.downcast( component, EntityModelComponent );
+
 	override function followComponentServer( component : EntityComponent, entityRepl ) {
 		super.followComponentServer( component, entityRepl );
-
-		var modelComp = Std.downcast( component, EntityModelComponent );
 
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
@@ -38,8 +39,6 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		modelComp.displayName.subscribeProp( displayName );
 		modelComp.onDamaged.add( onDamaged );
 		modelComp.statusMessages.subscribeNetwork( statusMessages );
-
-		statusMessages.onSet.add( ( i, ele ) -> trace( "sending message text: " + ele ) );
 	}
 
 	#if client
@@ -78,6 +77,11 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	}
 	#end
 
+	@:rpc( server )
+	public function sayText( text : String ) {
+		modelComp.sayText( text );
+	}
+
 	@:rpc( clients )
 	function onDamaged( amount : Float, type : EntityDamageType ) {}
 
@@ -86,5 +90,13 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		equipRepl.unregister( host, ctx );
 		inventoryRepl.unregister( host, ctx );
 		factionsRepl.unregister( host, ctx );
+	}
+
+	override public function networkAllow(
+		op : hxbit.NetworkSerializable.Operation,
+		propId : Int,
+		clientSer : hxbit.NetworkSerializable
+	) : Bool {
+		return true;
 	}
 }

@@ -77,6 +77,12 @@ class EntityModelComponent extends EntityComponent {
 		return false;
 	}
 
+	public function sayText( text : String ) {
+		var mesVO = EntityMessageVO.speech( text );
+		statusMessages.push( mesVO );
+		entity.delayer.addS(() -> statusMessages.remove( mesVO ), 5 );
+	}
+
 	public function getDamagedWith( damage : Int, type : EntityDamageType ) {
 		var damageSpeech : String = Random.fromArray( desc.speechDamaged );
 		if ( damageSpeech == null ) damageSpeech = "";

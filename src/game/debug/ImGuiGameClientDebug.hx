@@ -46,7 +46,9 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 
 		this.drawable = new ImGuiDrawable( Boot.inst.s2d );
 
+		Main.inst.root.add( drawable, Const.DP_IMGUI );
 		// trace(Boot.inst.s2d.viewportScaleX);
+
 		rootNode = new WindowNode( "game debug" );
 
 		// rootNode.addChild( new ImGuiDemo() );

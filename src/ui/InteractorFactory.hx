@@ -69,7 +69,7 @@ class InteractorFactory {
 			var p = m.allocPass( "highlight" );
 			p.culling = None;
 			p.depthWrite = false;
-			p.depthTest = LessEqual;
+			p.depthTest = Always;
 			p.addShader( shader );
 		}
 

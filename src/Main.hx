@@ -70,9 +70,9 @@ class Main extends Process {
 		Data.load( hxd.Res.data.entry.getText() );
 		new DataStorage();
 
-		createUi();
-
 		initGamePadController();
+
+		createUi();
 
 		Settings.inst.loadSettings();
 
@@ -94,7 +94,9 @@ class Main extends Process {
 	}
 
 	function createUi() {
-		console = new ui.Console( Assets.fontPixel16, Boot.inst.s2d );
+		console = new ui.Console( Assets.fontPixel16 );
+
+		root.add( console, Const.DP_UI_FRONT );
 
 		#if debug
 		createFpsCounter();
@@ -202,7 +204,8 @@ class Main extends Process {
 	override function update() {
 		// dn.heaps.slib.SpriteLib.TMOD = tmod;
 		if ( ca.isKeyboardPressed( Key.F11 ) ) toggleFullscreen();
-		// if ( ca.isKeyboardPressed(Key.M) ) Assets.toggleMusicPause();
+		if ( ca.isKeyboardPressed( Key.ENTER ) )
+			console.show();
 
 		#if game_tmod
 		stats.text = "tmod: " + tmod;

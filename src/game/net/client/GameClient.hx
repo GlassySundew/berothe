@@ -1,5 +1,8 @@
 package game.net.client;
 
+import game.net.entity.component.EntityModelComponentReplicator;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
+import ui.Console;
 import rx.disposables.Composite;
 import domkit.Component;
 import haxe.EnumFlags;
@@ -122,6 +125,12 @@ class GameClient extends Process {
 
 			#if debug debugDraw(); #end
 		} );
+	}
+
+	public function sayMessage( text : String ) {
+		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+		if ( modelRepl == null ) return;
+		modelRepl.sayText(text);
 	}
 
 	#if( client && debug )

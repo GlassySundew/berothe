@@ -1,5 +1,7 @@
 package ui;
 
+import hxd.Key;
+import dn.heaps.input.ControllerAccess;
 #if client
 import game.net.client.GameClient;
 import h2d.Console.ConsoleArg;
@@ -14,8 +16,11 @@ class Console extends h2d.Console {
 	var flags : Map<String, Bool>;
 	#end
 
-	public function new( f : h2d.Font, p : h2d.Object ) {
+	final ca : ControllerAccess<game.client.ControllerAction>;
+
+	public function new( f : h2d.Font, ?p : h2d.Object ) {
 		super( f, p );
+		ca = Main.inst.controller.createAccess();
 		logTxt = new h2d.HtmlText( f, this );
 		logTxt.x = 2;
 		logTxt.dropShadow = {
@@ -24,7 +29,10 @@ class Console extends h2d.Console {
 			color : 0,
 			alpha : 0.5
 		};
-		logTxt.visible = false;
+
+		// tf.onFocusLost = _ -> {};
+
+		// logTxt.visible = false;
 		// scale(2); // TODO smarter scaling for 4k screens
 
 		// Settings
@@ -69,20 +77,6 @@ class Console extends h2d.Console {
 		this.addCommand( "loadlvl", [{ name : "k", t : AString }], function ( name : String, ?manual : Bool = true ) {
 			// GameClient.inst.startLevel(name + ".tmx", { manual : true });
 		} );
-		var pp : Bool = true;
-		this.addCommand( "pp", [], function ( ?k : String ) {
-			if ( pp ) {
-				Boot.inst.s3d.renderer = h3d.mat.MaterialSetup.current.createRenderer();
-				pp = false;
-			} else {
-				Boot.inst.renderer = new CustomRenderer();
-				Boot.inst.s3d.renderer = Boot.inst.renderer;
-				Boot.inst.renderer.depthColorMap = hxd.Res.gradients.test.toTexture();
-				Boot.inst.renderer.enableFXAA = false;
-				Boot.inst.renderer.enableSao = false;
-				pp = true;
-			}
-		} );
 		#end
 	}
 
@@ -98,10 +92,24 @@ class Console extends h2d.Console {
 		super.show();
 		logTxt.visible = true;
 		logTxt.alpha = 1;
+		ca.takeExclusivity();
 	}
 
 	override function hide() {
 		super.hide();
+		Main.inst.delayer.addF(() -> {
+			ca.releaseExclusivity();
+		}, 1 );
+	}
+
+	override function log( text : String, ?color : Int ) {
+		if ( color == null ) color = tf.textColor;
+		var oldH = logTxt.textHeight;
+		logTxt.text = '<font color="#${StringTools.hex( color & 0xFFFFFF, 6 )}">${StringTools.htmlEscape( text )}</font><br/>' + logTxt.text;
+		if ( logDY != 0 ) logDY += logTxt.textHeight - oldH;
+		logTxt.alpha = 1;
+		logTxt.visible = true;
+		lastLogTime = haxe.Timer.stamp();
 	}
 
 	override function sync( ctx : h2d.RenderContext ) {
@@ -110,15 +118,14 @@ class Console extends h2d.Console {
 		var scene = ctx.scene;
 		if ( scene != null ) {
 			x = 0;
-			y = scene.height - height;
+			y = 0;
 			width = scene.width;
 			tf.maxWidth = width;
-			bg.tile.scaleToSize( width, -logTxt.textHeight );
-			bg.tile.dy = logTxt.font.lineHeight;
+			bg.tile.scaleToSize( width, logTxt.textHeight );
 		}
 		var log = logTxt;
 		if ( log.visible ) {
-			log.y = bg.y - log.textHeight + logDY + log.font.lineHeight;
+			log.y = log.font.lineHeight;
 			var dt = haxe.Timer.stamp() - lastLogTime;
 			if ( dt > 2 && !bg.visible ) {
 				log.alpha -= ctx.elapsedTime * 4;
@@ -171,7 +178,7 @@ class Console extends h2d.Console {
 		logIndex = -1;
 
 		if ( !validCommand ) {
-			log( 'Unknown command "$command"', errorColor );
+			GameClient.inst.sayMessage( command );
 			return;
 		}
 

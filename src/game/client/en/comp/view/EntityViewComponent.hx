@@ -179,7 +179,7 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function updateStatusBar3DPointPosition() {
-		statusBar3dPoint.z = view.result.getGraphics().heapsObject.getBounds().zMax + 5;
+		statusBar3dPoint.z = view.result.getGraphics().heapsObject.getBounds().zMax + 3;
 	}
 	#end
 }

@@ -46,7 +46,7 @@ class EntityStatusBarContainer {
 		content.horizontalAlign = Middle;
 		content.layout = Vertical;
 		content.verticalSpacing = 1;
-		content.y += 15;
+		// content.y += ;
 
 		createNameLabel();
 	}
@@ -113,7 +113,6 @@ class EntityStatusBarContainer {
 
 	function removeChatMessageIdx( idx : Int ) {
 		var dispMessage = messages[idx];
-		trace( "removing message: " + idx, dispMessage );
 		messages.remove( dispMessage );
 		dispMessage.tooltipClip.remove();
 	}
