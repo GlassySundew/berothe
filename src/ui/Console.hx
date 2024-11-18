@@ -41,43 +41,6 @@ class Console extends h2d.Console {
 		h2d.Console.HIDE_LOG_TIMEOUT = 30;
 		#end
 		// Lib.redirectTracesToH2dConsole(this);
-
-		// Debug flags
-		#if debug
-		flags = new Map();
-		this.addCommand( "set", [{ name : "k", t : AString }], function ( k : String ) {
-			setFlag( k, true );
-			log( "+ " + k, 0x80FF00 );
-		} );
-		this.addCommand( "unset", [{ name : "k", t : AString, opt : true }], function ( ?k : String ) {
-			if ( k == null ) {
-				log( "Reset all.", 0xFF0000 );
-				flags = new Map();
-			} else {
-				log( "- " + k, 0xFF8000 );
-				setFlag( k, false );
-			}
-		} );
-
-		this.addCommand( "connect", [], function ( ?k : String ) {
-			// (new Connect());
-		} );
-
-		this.addCommand( "hud", [], function ( ?k : String ) {
-			// Player.inst.pui.root.visible = !Player.inst.pui.root.visible;
-		} );
-
-		this.addAlias( "+", "set" );
-		this.addAlias( "-", "unset" );
-
-		this.addCommand( "untarget", '', [], function ( ?k : String ) {
-			GameClient.inst.cameraProc.untarget();
-		} );
-
-		this.addCommand( "loadlvl", [{ name : "k", t : AString }], function ( name : String, ?manual : Bool = true ) {
-			// GameClient.inst.startLevel(name + ".tmx", { manual : true });
-		} );
-		#end
 	}
 
 	#if debug
@@ -87,6 +50,11 @@ class Console extends h2d.Console {
 	#else
 	public function hasFlag( k : String ) return false;
 	#end
+
+	override function resetCommands() {
+		super.resetCommands();
+		commands = [];
+	}
 
 	override function show() {
 		super.show();
