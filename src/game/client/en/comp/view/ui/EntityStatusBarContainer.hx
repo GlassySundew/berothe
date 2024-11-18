@@ -46,7 +46,6 @@ class EntityStatusBarContainer {
 		content.horizontalAlign = Middle;
 		content.layout = Vertical;
 		content.verticalSpacing = 1;
-		// content.y += ;
 
 		createNameLabel();
 	}
@@ -71,6 +70,7 @@ class EntityStatusBarContainer {
 	}
 
 	public function setChatMessage( idx : Int, mesVO : EntityMessageVO ) {
+		trace( "setting chat msg: " + idx, mesVO?.message );
 		if ( mesVO != null ) {
 			setChatMessageIdx( idx, mesVO );
 		} else {

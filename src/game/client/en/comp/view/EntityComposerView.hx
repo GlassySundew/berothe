@@ -27,7 +27,7 @@ import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.domain.overworld.entity.component.combat.EntityAttackListItem;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 
-class EntityComposerView extends NodeBase<EntityComposerView> implements IEntityView {
+class EntityComposerView implements IEntityView {
 
 	public static final GLOBAL_SPEED_MULTIPLIER = 1 / 15;
 
@@ -59,7 +59,6 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 		file : String,
 		animations : EntityAnimations
 	) {
-		super( null );
 		this.viewComponent = viewComponent;
 		this.animations = animations;
 		this.file = file;
@@ -96,12 +95,6 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 
 	public function addChildView( view : IEntityView ) {
 		addChildObject( view.getGraphics() );
-
-		switch Type.getClass( view ) {
-			case EntityComposerView:
-				addChild( Std.downcast( view, EntityComposerView ) );
-			case EntityStaticBoxView: throw new NotImplementedException();
-		}
 	}
 
 	public function addChildObject( object : ObjectNode3D ) @:privateAccess {
@@ -210,12 +203,6 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 				animationDesc.speedMult * listener.getSpeed() * GLOBAL_SPEED_MULTIPLIER * tmod
 			);
 			listener.playedOnContainer( animationContainer );
-
-			for ( child in children ) {
-				if ( child.animations.byKey[animationKey] != null ) {
-					child.playAnimation( animationKey, listener, tmod );
-				}
-			}
 		}
 	}
 
@@ -263,7 +250,7 @@ class EntityComposerView extends NodeBase<EntityComposerView> implements IEntity
 	}
 
 	inline function walkListener() : Bool {
-		return dynamics?.isMovementApplied;
+		return dynamics?.isMovementApplied.val;
 	}
 
 	inline function idleListener() : Bool {

@@ -1,5 +1,6 @@
 package game.client.en.comp.view;
 
+import hrt.prefab.Object3D;
 import rx.disposables.Composite;
 import core.MutableProperty;
 import rx.disposables.ISubscription;
@@ -106,7 +107,7 @@ class EntityViewComponent extends EntityComponent {
 		if ( viewGraphics == null ) return;
 		view.resolve( viewGraphics );
 
-		entity.components.onAppear(
+		var maybeSub = entity.components.onAppear(
 			EntityModelComponent,
 			( cl, modelComp ) -> {
 				createStatusBar( modelComp );
@@ -114,6 +115,7 @@ class EntityViewComponent extends EntityComponent {
 				updateStatusBar3DPointPosition();
 			}
 		);
+		if ( maybeSub != null ) subscription.add( maybeSub );
 
 		var node = view.result.getGraphics();
 		subscribeMoving( node );
@@ -152,7 +154,8 @@ class EntityViewComponent extends EntityComponent {
 
 	function createStatusBar( modelComp : EntityModelComponent ) {
 		statusBar3dPoint = new Object();
-		view.then( ( viewResult ) -> viewResult.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) ) );
+		var viewResult = view.result;
+		viewResult.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
 		var statusBar = new EntityStatusBarContainer( statusBar3dPoint, this );
 		statusBarFuture.resolve( statusBar );
 		Main.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
@@ -168,6 +171,7 @@ class EntityViewComponent extends EntityComponent {
 				statusBar.setDisplayName( newVal );
 			}
 		);
+		modelComp.statusMessages.subscribe( statusBar.setChatMessage );
 
 		inline function checkEnemy() {
 			statusBar.setFriendliness(
@@ -179,7 +183,9 @@ class EntityViewComponent extends EntityComponent {
 	}
 
 	function updateStatusBar3DPointPosition() {
-		statusBar3dPoint.z = view.result.getGraphics().heapsObject.getBounds().zMax + 3;
+		statusBar3dPoint.z = hxd.Math.clamp(
+			view.result.getGraphics().heapsObject.getBounds().zMax, 0, 100
+		) + 3;
 	}
 	#end
 }

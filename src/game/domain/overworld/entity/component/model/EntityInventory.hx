@@ -38,7 +38,7 @@ class EntityInventory extends EntityItemHolderBase {
 	public function claimOwnage() {
 		// todo она должна знать что сущность не загружается, а создаётся с нуля. для spawnInventory
 		addItemsOnEntityCreation();
-		model.onDeath.then( _ -> dropInventory() );
+		model.onDeathSignal.then( _ -> dropInventory() );
 	}
 
 	inline function addItemsOnEntityCreation() {

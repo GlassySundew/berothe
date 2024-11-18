@@ -88,9 +88,9 @@ class Main extends Process {
 		new Client();
 		new MainMenu( Main.inst.root );
 
-		// #if debug
+		#if debug
 		Boot.inst.createServer();
-		// #end
+		#end
 	}
 
 	function createUi() {

@@ -46,7 +46,7 @@ class Item {
 	public function dispose() {
 		disposed.resolve( true );
 		setContainer( null );
-		trace( "destroyoing item" );
+		trace( "destroyoing item: " + this );
 	}
 
 	public function setContainer( cont : IItemContainer ) {

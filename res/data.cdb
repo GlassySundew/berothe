@@ -57,6 +57,12 @@
 					"value": {
 						"color": 15434625
 					}
+				},
+				{
+					"id": "deathMessageEntity",
+					"value": {
+						"entity": "deathMessage"
+					}
 				}
 			],
 			"separators": [],
@@ -88,6 +94,12 @@
 					"name": "color",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "6:entity",
+					"name": "entity",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -113,6 +125,10 @@
 				{
 					"id": "collider_box",
 					"preset": "collider_box"
+				},
+				{
+					"id": "deathMessage",
+					"preset": "deathMessage"
 				},
 				{
 					"id": "model",
@@ -165,7 +181,7 @@
 			],
 			"separators": [
 				{
-					"title": "blocks",
+					"title": "specials",
 					"id": "graybox"
 				},
 				{
@@ -211,6 +227,11 @@
 				{
 					"id": "collider_box",
 					"properties": "block",
+					"view": "none"
+				},
+				{
+					"id": "deathMessage",
+					"properties": "deathMessage",
 					"view": "none"
 				},
 				{
@@ -316,7 +337,12 @@
 				{
 					"id": "deathMessage",
 					"properties": {
-						"dynamics": false
+						"dynamics": false,
+						"isDeathMessage": true,
+						"model": {
+							"hideNameByDefault": true,
+							"id": "dthMsg"
+						}
 					}
 				},
 				{
@@ -958,6 +984,12 @@
 				{
 					"typeStr": "8",
 					"name": "spawnInventory",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "2",
+					"name": "isDeathMessage",
 					"opt": true,
 					"kind": null
 				}

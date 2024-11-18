@@ -64,15 +64,6 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 				( i, elem ) -> modelComp.statusMessages.set( i, elem ),
 				( i, elem ) -> modelComp.statusMessages.removeByIdx( i )
 			);
-
-			entityRepl.entity.result.components.onAppear(
-				EntityViewComponent,
-				( cl, viewComp ) -> {
-					viewComp.statusBarFuture.then( ( statusBar ) ->
-						modelComp.statusMessages.onChanged.add( statusBar.setChatMessage )
-					);
-				}
-			);
 		} );
 	}
 	#end

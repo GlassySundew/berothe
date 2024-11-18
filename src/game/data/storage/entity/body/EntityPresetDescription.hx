@@ -1,26 +1,24 @@
 package game.data.storage.entity.body;
 
-import game.data.storage.entity.body.view.extensions.ViewStencilDescription;
-import game.data.storage.entity.body.view.extensions.ViewColorRandomShiftDescription;
-import game.domain.overworld.item.model.EntityOfItemComponent;
-import game.data.storage.item.EntityOfItemComponentDescription;
-import game.domain.overworld.entity.component.ai.EntityAIComponent;
-import game.data.storage.entity.body.properties.EntityAIDescription;
+import game.data.storage.entity.body.properties.DeathMessageDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.model.EntityModelDescription;
 import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.properties.DynamicsDescription;
+import game.data.storage.entity.body.properties.EntityAIDescription;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
 import game.data.storage.entity.body.properties.InteractableDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
 import game.data.storage.entity.body.view.EntityViewDescription;
+import game.data.storage.entity.body.view.extensions.ViewColorRandomShiftDescription;
+import game.data.storage.entity.body.view.extensions.ViewStencilDescription;
 import game.data.storage.entity.component.EntityComponentDescription;
+import game.data.storage.item.EntityOfItemComponentDescription;
 #if client
-import game.data.storage.entity.body.view.EntityViewComponentExtensionsFactory;
-import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 import game.data.storage.entity.body.view.EntityLightSourceDescription;
+import game.data.storage.entity.body.view.EntityViewDescriptionAbstractFactory;
 #end
 
 class EntityPresetDescription extends DescriptionBase {
@@ -29,6 +27,9 @@ class EntityPresetDescription extends DescriptionBase {
 
 	public var propertyDescs( default, null ) : Array<EntityComponentDescription> = [];
 	public var clientPropertyDescs( default, null ) : Array<EntityComponentDescription> = [];
+
+	// special
+	public var deathMessage : DeathMessageDescription;
 
 	// character
 	public var dynamics( default, null ) : Null<DynamicsDescription>;
@@ -74,6 +75,9 @@ class EntityPresetDescription extends DescriptionBase {
 
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
 
+			// special
+			deathMessage = new DeathMessageDescription(),
+			
 			// character
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),

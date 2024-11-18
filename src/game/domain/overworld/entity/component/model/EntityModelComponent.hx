@@ -18,7 +18,7 @@ class EntityModelComponent extends EntityComponent {
 
 	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
-	public final onDeath : Future<Bool> = new Future();
+	public final onDeathSignal : Future<Bool> = new Future();
 	public final onDamaged = new Signal<Int, EntityDamageType>();
 	public final displayName = new MutableProperty<String>();
 	public final statusMessages : DispArray<EntityMessageVO> = new DispArray<EntityMessageVO>();
@@ -77,10 +77,14 @@ class EntityModelComponent extends EntityComponent {
 		return false;
 	}
 
+	public function provideMsgVO( msgVO : EntityMessageVO, timeoutS = 5 ) {
+		statusMessages.push( msgVO );
+		entity.delayer.addS(() -> statusMessages.remove( msgVO ), timeoutS );
+	}
+
 	public function sayText( text : String ) {
-		var mesVO = EntityMessageVO.speech( text );
-		statusMessages.push( mesVO );
-		entity.delayer.addS(() -> statusMessages.remove( mesVO ), 5 );
+		var msgVO = EntityMessageVO.speech( text );
+		provideMsgVO( msgVO );
 	}
 
 	public function getDamagedWith( damage : Int, type : EntityDamageType ) {
@@ -88,9 +92,8 @@ class EntityModelComponent extends EntityComponent {
 		if ( damageSpeech == null ) damageSpeech = "";
 		// todo replace parentheses with those of corresponding damage type
 		damageSpeech += ' ($damage)';
-		var mesVO = EntityMessageVO.damageTaken( damageSpeech );
-		statusMessages.push( mesVO );
-		entity.delayer.addS(() -> statusMessages.remove( mesVO ), 3 );
+		var msgVO = EntityMessageVO.damageTaken( damageSpeech );
+		provideMsgVO( msgVO, 3 );
 
 		hp.val -= damage;
 		onDamaged.dispatch( damage, type );
@@ -110,7 +113,8 @@ class EntityModelComponent extends EntityComponent {
 		stats.attachToEntity( entity );
 
 		factions = new DispArray();
-		factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
+		if ( desc.factionId != null )
+			factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
 
 		if ( desc.baseHp != 0 ) hp.val = desc.baseHp;
 
@@ -119,8 +123,26 @@ class EntityModelComponent extends EntityComponent {
 
 	function onHpChanged( oldVal : Int, newVal : Int ) {
 		if ( newVal <= 0 ) {
-			onDeath.resolve( true );
+			onDeath();
 			entity.dispose();
 		}
+	}
+
+	function onDeath() {
+		var deathEntityDesc = DataStorage.inst.entityStorage.getById(
+			DataStorage.inst.rule.deathMessageEntity
+		);
+		var location = entity.location.getValue();
+		var deathPointEntity = location.entityFactory.createEntity( deathEntityDesc );
+		var deathComp = deathPointEntity.components.get( EntityDeathMessageComponent );
+		deathComp.providePrecedingEntity( this.entity );
+		deathPointEntity.transform.setPosition(
+			entity.transform.x,
+			entity.transform.y,
+			entity.transform.z
+		);
+		location.addEntity( deathPointEntity );
+
+		onDeathSignal.resolve( true );
 	}
 }
