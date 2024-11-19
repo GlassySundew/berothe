@@ -88,6 +88,9 @@ class GameClient extends Process {
 		subscription.add( Client.inst.onUnregister.add( onUnregister ) );
 
 		currentLocationSelf.addOnValue( ( oldLoc, newLoc ) -> {
+			locationLights?.remove();
+			locationLights = null;
+
 			if ( oldLoc != null ) {
 				oldLoc.removeEntity( controlledEntity.getValue().entity.result );
 				oldLoc.dispose();
@@ -106,16 +109,17 @@ class GameClient extends Process {
 				locationLights.shadows.mode = Dynamic;
 				locationLights.shadows.blur.radius = 0.2;
 				locationLights.shadows.bias = 0.02;
-			} else {
-				locationLights?.remove();
-				locationLights = null;
 			}
 		} );
-		new graphics.BatchRenderer( Boot.inst.s3d );
+	}
+
+	public function consoleSay( text : String ) {
+		Main.inst.console.log( text );
 	}
 
 	public function onLocationProvided( locationDescId : String ) {
 		controlledEntity.onAppear( ( playerRepl ) -> {
+			new graphics.BatchRenderer( Boot.inst.s3d );
 			currentLocationSelf.val = core.getOrCreateLocationByDesc(
 				DataStorage.inst.locationStorage.getById(
 					locationDescId
@@ -127,10 +131,16 @@ class GameClient extends Process {
 		} );
 	}
 
+	public function setUnfriendly() {
+		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+		if ( modelRepl == null ) return;
+		modelRepl.setUnfriendly();
+	}
+
 	public function sayMessage( text : String ) {
 		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
 		if ( modelRepl == null ) return;
-		modelRepl.sayText(text);
+		modelRepl.sayText( text );
 	}
 
 	#if( client && debug )
@@ -159,6 +169,7 @@ class GameClient extends Process {
 		currentLocationSelf.val = null;
 		controlledEntity.getValue()?.entity.result?.dispose();
 		subscription.unsubscribe();
+		BatchRenderer.inst?.dispose();
 
 		disposed.resolve( true );
 		inst = null;

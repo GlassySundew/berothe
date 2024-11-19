@@ -27,6 +27,7 @@ class EntityAttackListItem {
 	var entity : OverworldEntity;
 
 	var subscription : Composite;
+	var isOwned = false;
 
 	public function new( desc : AttackListItemVO ) {
 		this.desc = desc;
@@ -71,6 +72,7 @@ class EntityAttackListItem {
 
 	#if !debug inline #end
 	public function claimOwnage() {
+		isOwned = true;
 		emitter.onAppear( emitter -> {
 			emitter.getCallbackContainer().beginCB.add(
 				EntityCollisionsService.unwrapContact.bind(
@@ -111,6 +113,7 @@ class EntityAttackListItem {
 					subscription.add( entity.onFrame.add( update ) );
 				} );
 				subscription.add( Subscription.create(() -> sub.cancel() ) );
+				if ( isOwned ) claimOwnage();
 			}
 		);
 

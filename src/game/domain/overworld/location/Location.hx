@@ -111,7 +111,7 @@ class Location {
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
-		Assert.isTrue( entity.location.getValue() == this );
+		Assert.isTrue( entity.location.getValue() == this, "entity " + entity + " does not belong to " + this );
 
 		chunks.removeEntity( entity );
 		entities.remove( entity );

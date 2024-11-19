@@ -94,7 +94,7 @@ class Server extends Process {
 		var clientController = cast( c.ownerObject, ClientController );
 		if ( clientController.__host == null ) return;
 
-		clientController.unregister( host );
+		// clientController.unregister( host );
 		clientController.__host = null;
 	}
 

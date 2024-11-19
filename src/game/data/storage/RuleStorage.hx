@@ -12,6 +12,7 @@ class RuleStorage {
 	public var friendlyStatusBarColor( default, null ) : Int;
 	public var unfriendlyStatusBarColor( default, null ) : Int;
 	public var deathMessageEntity( default, null ) : String;
+	public var unfriendlyPlayerFaction( default, null ) : String;
 
 	// dont touch this, only add fields
 	public function new( rules : IndexId<Data.Rule, Data.RuleKind> ) {

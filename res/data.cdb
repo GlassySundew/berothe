@@ -63,6 +63,12 @@
 					"value": {
 						"entity": "deathMessage"
 					}
+				},
+				{
+					"id": "unfriendlyPlayerFaction",
+					"value": {
+						"faction": "unfriendlyPlayer"
+					}
 				}
 			],
 			"separators": [],
@@ -98,6 +104,12 @@
 				{
 					"typeStr": "6:entity",
 					"name": "entity",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "6:faction",
+					"name": "faction",
 					"opt": true,
 					"kind": null
 				}
@@ -2365,7 +2377,19 @@
 				},
 				{
 					"id": "humans",
-					"hostileTo": []
+					"hostileTo": [
+						{
+							"faction": "bats"
+						}
+					]
+				},
+				{
+					"id": "unfriendlyPlayer",
+					"hostileTo": [
+						{
+							"faction": "humans"
+						}
+					]
 				},
 				{
 					"id": "bats",
@@ -2914,6 +2938,46 @@
 				},
 				{
 					"id": "randomRoaming"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "locale",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "1",
+					"name": "text",
+					"kind": "localizable"
+				}
+			],
+			"lines": [
+				{
+					"id": "unheard",
+					"text": "You call out, yet your words drift into nothingness, unheard and unheeded in the vast silence."
+				},
+				{
+					"id": "unheard2",
+					"text": "You speak, but your voice fades into the void, leaving no trace in the stillness."
+				},
+				{
+					"id": "not_enough_life_4_unfriendly",
+					"text": "Your mastery of life skill is not yet sufficient to enter a hostile state."
+				},
+				{
+					"id": "no_more_violence",
+					"text": "You push for greater aggression, but no more can be mustered."
+				},
+				{
+					"id": "no_more_friendliness",
+					"text": "You have reached the very limits of friendliness, with no path to grow kinder still."
 				}
 			],
 			"separators": [],

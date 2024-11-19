@@ -37,10 +37,10 @@ class Console extends h2d.Console {
 
 		// Settings
 		inst = this;
-		#if debug
-		h2d.Console.HIDE_LOG_TIMEOUT = 30;
-		#end
+		h2d.Console.HIDE_LOG_TIMEOUT = 4.5;
 		// Lib.redirectTracesToH2dConsole(this);
+
+		tf.cursorTile.dy = 0;
 	}
 
 	#if debug
@@ -53,7 +53,10 @@ class Console extends h2d.Console {
 
 	override function resetCommands() {
 		super.resetCommands();
-		commands = [];
+
+		addCommand( "unfriendly", "", [], () -> {
+			GameClient.inst?.setUnfriendly();
+		} );
 	}
 
 	override function show() {
@@ -95,7 +98,7 @@ class Console extends h2d.Console {
 		if ( log.visible ) {
 			log.y = log.font.lineHeight;
 			var dt = haxe.Timer.stamp() - lastLogTime;
-			if ( dt > 2 && !bg.visible ) {
+			if ( dt > h2d.Console.HIDE_LOG_TIMEOUT && !bg.visible ) {
 				log.alpha -= ctx.elapsedTime * 4;
 				if ( log.alpha <= 0 ) log.visible = false;
 			}
@@ -146,7 +149,14 @@ class Console extends h2d.Console {
 		logIndex = -1;
 
 		if ( !validCommand ) {
-			GameClient.inst.sayMessage( command );
+			GameClient.inst?.sayMessage( command );
+			if ( GameClient.inst == null )
+				log( Data.locale.get(
+					Random.fromArray( [
+						Data.LocaleKind.unheard,
+						Data.LocaleKind.unheard2
+					] )
+				).text );
 			return;
 		}
 

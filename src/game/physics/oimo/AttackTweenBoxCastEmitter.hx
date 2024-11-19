@@ -114,7 +114,6 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 			'$ATTACK_CD_KEY',
 			desc.cooldown + desc.duration * 2
 		);
-		physics.addRigidBody( rigidBody );
 
 		tweenCombinator = new TweenCombinator();
 
@@ -134,6 +133,9 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		currentTween.onEnd = () -> {
 			removeEmitter();
 		};
+
+		update( 0, 0 );
+		physics.addRigidBody( rigidBody );
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {

@@ -28,7 +28,7 @@ class MainMenu extends PopupBase {
 
 	public function new( ?parent : Object ) {
 		super( parent );
-		
+
 		escapableByKey = false;
 
 		vertFlow = new Flow( contentFlow );
@@ -92,6 +92,8 @@ class MainMenu extends PopupBase {
 		// 	}, true );
 		// }, 10 );
 		#end
+
+		ca.releaseExclusivity();
 
 		onResize();
 	}

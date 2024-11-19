@@ -99,7 +99,7 @@ class Main extends Process {
 		root.add( console, Const.DP_UI_FRONT );
 
 		#if debug
-		createFpsCounter();
+		// createFpsCounter();
 		#if game_tmod
 		stats = new Text( Assets.fontPixel16, Boot.inst.s2d );
 		#end

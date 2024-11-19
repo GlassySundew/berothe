@@ -1,5 +1,6 @@
 package game.net.entity.component;
 
+import game.net.client.GameClient;
 import game.client.en.comp.view.EntityMessageVO;
 import game.client.en.comp.view.EntityViewComponent;
 import game.domain.overworld.entity.component.combat.EntityDamageType;
@@ -68,6 +69,23 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	}
 	#end
 
+	public function setUnfriendly() {
+		#if client
+		var unfriendlyFactionMaybe = modelComp.factions.filter(
+			( faction ) -> faction.id == DataStorage.inst.rule.unfriendlyPlayerFaction
+		)[0];
+
+		if ( unfriendlyFactionMaybe != null ) {
+			GameClient.inst.consoleSay(
+				Data.locale.get( Data.LocaleKind.no_more_violence ).text
+			);
+			return;
+		}
+
+		setUnfriendlyRPC();
+		#end
+	}
+
 	@:rpc( server )
 	public function sayText( text : String ) {
 		modelComp.sayText( text );
@@ -76,11 +94,28 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:rpc( clients )
 	function onDamaged( amount : Float, type : EntityDamageType ) {}
 
+	@:rpc( server )
+	function setUnfriendlyRPC() {
+		var unfrFactionId = DataStorage.inst.rule.unfriendlyPlayerFaction;
+		var unfriendlyFactionMaybe = modelComp.factions.filter(
+			( faction ) -> faction.id == unfrFactionId
+		)[0];
+		if ( unfriendlyFactionMaybe != null ) return;
+
+		modelComp.factions.push(
+			DataStorage.inst.factionStorage.getById( unfrFactionId )
+		);
+	}
+
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
 		super.unregister( host, ctx );
+		displayName.unregister( host, ctx );
+		factionsRepl.unregister( host, ctx );
+		isSleeping.unregister( host, ctx );
+		statsRepl.unregister( host, ctx );
 		equipRepl.unregister( host, ctx );
 		inventoryRepl.unregister( host, ctx );
-		factionsRepl.unregister( host, ctx );
+		statusMessages.unregister( host, ctx );
 	}
 
 	override public function networkAllow(

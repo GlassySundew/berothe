@@ -15,7 +15,9 @@ class EntityDamageService {
 		var equipType = sourceAttackListItem.equipSlotType;
 		var sourceModel = sourceEntity.components.get( EntityModelComponent );
 		var targetModel = targetEntity.components.get( EntityModelComponent );
-		// todo weapon archetype consideration is through stat holders
+
+		if ( !sourceModel.isEnemy( targetEntity )
+			&& !targetModel.isEnemy( sourceEntity ) ) return;
 
 		var attackStat = sourceModel.stats.limbAttacks.filter(
 			limbAttk -> limbAttk.desc == sourceAttackListItem

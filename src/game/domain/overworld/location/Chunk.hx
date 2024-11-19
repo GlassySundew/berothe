@@ -46,6 +46,8 @@ class Chunk {
 	}
 
 	public function removeEntity( entity : OverworldEntity ) {
+
+		#if client trace("removing " + entity); #end
 		if ( entities.remove( entity ) ) {
 			onEntityRemoved.dispatch( entity );
 		} else {
