@@ -33,19 +33,17 @@ class EntityInventoryHudViewMediator {
 	}
 }
 
-class EntityInventoryHudComp extends CustomFlow implements h2d.domkit.Object {
+class EntityInventoryHudComp extends Flow implements h2d.domkit.Object {
 
 	// @formatter:off
 	static var SRC = 
-		<entity-inventory-hud-comp >
+		<entity-inventory-hud-comp>
 			<flow 
-				margin = "10" 
 				public id = "inventory_container"
-				valign = "bottom"
-				halign = "right"
+				margin = "10"
+
 				layout = "vertical"
 			>
-
 			</flow>
 
 		</entity-inventory-hud-comp>
@@ -57,8 +55,11 @@ class EntityInventoryHudComp extends CustomFlow implements h2d.domkit.Object {
 	) {
 		super( parent );
 		initComponent();
-		customFillHeight = true;
-		customFillWidth = true;
+	}
+
+	override function onAdd() {
+		super.onAdd();
+		haxe.Timer.delay(() -> parent.contentChanged( this ), 0 );
 	}
 }
 

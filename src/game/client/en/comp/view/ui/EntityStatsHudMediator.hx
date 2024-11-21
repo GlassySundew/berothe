@@ -25,7 +25,7 @@ class EntityStatsHudMediator {
 	var leadingAttackEquip : EntityEquipmentSlotType;
 
 	final subscribtion = Composite.create();
-	
+
 	public function new(
 		model : EntityModelComponent,
 		entity : OverworldEntity
@@ -34,9 +34,8 @@ class EntityStatsHudMediator {
 		this.entity = entity;
 		this.model = model;
 
-		view = new EntityStatsHudViewMediator( this );
-		Main.inst.root.add( view.comp, util.Const.DP_UI );
-
+		view = new EntityStatsHudViewMediator( this, Main.inst.botLeftHud );
+		
 		entity.components.onAppear(
 			EntityAttackListComponent,
 			( _, attackListComp ) -> {
@@ -55,7 +54,7 @@ class EntityStatsHudMediator {
 		subscribtion.unsubscribe();
 		view.comp.remove();
 	}
-	
+
 	function subscribe() {
 		subscribeAttack();
 		subscribeDefence();
@@ -91,7 +90,7 @@ class EntityStatsHudMediator {
 		var result = "Attack:";
 
 		for ( attackListItem in attackListComp.attacksList ) {
-			result += " ";			
+			result += " ";
 			var equipSlotType = attackListItem.desc.equipSlotType;
 			var limbAttack = stats.limbAttacks.filter(
 				limbAttack -> limbAttack.desc.equipSlotType == equipSlotType

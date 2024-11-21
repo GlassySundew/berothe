@@ -70,7 +70,6 @@ class EntityStatusBarContainer {
 	}
 
 	public function setChatMessage( idx : Int, mesVO : EntityMessageVO ) {
-		trace( "setting chat msg: " + idx, mesVO?.message );
 		if ( mesVO != null ) {
 			setChatMessageIdx( idx, mesVO );
 		} else {

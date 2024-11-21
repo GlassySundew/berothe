@@ -16,7 +16,7 @@ enum State {
 
 abstract class EntityBehaviourBase {
 
-	static final enemyContactRange = 5;
+	static final enemyContactRange = 4;
 
 	final agroRange : Float = 25;
 
@@ -109,6 +109,9 @@ abstract class EntityBehaviourBase {
 				if ( enemyModel == null || !model.isEnemy( enemy ) ) return;
 
 				var dynamics = enemy.components.get( EntityDynamicsComponent );
+				if ( dynamics == null ) return;
+
+				onEnemyEntityMove( enemy );
 				dynamics.onMove.add( onEnemyEntityMove.bind( enemy ) );
 			}
 		);

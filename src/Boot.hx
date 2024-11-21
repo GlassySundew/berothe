@@ -96,11 +96,6 @@ class Boot extends hxd.App {
 		Util.hollowScene = new Scene();
 
 		new Main( s2d );
-
-		onResize();
-
-		// var prefab = Res.levels.start.load().make();
-		// Boot.inst.s3d.addChild(prefab.findFirstLocal3d());
 	}
 
 	override function onResize() {
@@ -113,6 +108,8 @@ class Boot extends hxd.App {
 		this.deltaTime = dt;
 		dn.Process.updateAll( hxd.Timer.tmod );
 		super.update( dt );
+
+		// Sys.sleep(( 1000 / 20 - dt ) / 1000 );
 	}
 
 	public function createServer() {

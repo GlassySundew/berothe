@@ -21,6 +21,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s public final displayName : NSMutableProperty<String> = new NSMutableProperty<String>();
 	@:s final factionsRepl : NSArray<String> = new NSArray();
 	@:s final isSleeping : NSMutableProperty<Bool> = new NSMutableProperty<Bool>();
+	@:s final hp : NSMutableProperty<Int> = new NSMutableProperty<Int>();
 	@:s var statsRepl : EntityStatsReplicator;
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
@@ -40,6 +41,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		modelComp.displayName.subscribeProp( displayName );
 		modelComp.onDamaged.add( onDamaged );
 		modelComp.statusMessages.subscribeNetwork( statusMessages );
+		modelComp.hp.subscribeProp( hp );
 	}
 
 	#if client
@@ -57,6 +59,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 			);
 			isSleeping.subscribeProp( modelComp.isSleeping );
 			displayName.subscribeProp( modelComp.displayName );
+			hp.subscribeProp( modelComp.hp );
 
 			// todo this is temporary, remove after
 			modelComp.displayName.subscribeProp( displayName );

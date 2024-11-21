@@ -91,10 +91,11 @@ abstract class EntityItemHolderBase {
 				);
 
 				entityItem.components.get( EntityOfItemComponent ).provideItem( item );
-				entityItem.transform.x.val = model.entity.transform.x.val + Random.int(-sizeHLFX, sizeHLFX );
-				entityItem.transform.y.val = model.entity.transform.y.val + Random.int(-sizeHLFY, sizeHLFY );
-				entityItem.transform.z.val = model.entity.transform.z.val + Random.int(0, sizeZ );
-
+				entityItem.transform.setPosition(
+					model.entity.transform.x.val + Random.int(-sizeHLFX, sizeHLFX ),
+					model.entity.transform.y.val + Random.int(-sizeHLFY, sizeHLFY ),
+					model.entity.transform.z.val + Random.int( 0, sizeZ )
+				);
 				model.entity.location.getValue().addEntity( entityItem );
 			}
 			if ( item.amount.val > 1 && item.desc.isSplittable ) {

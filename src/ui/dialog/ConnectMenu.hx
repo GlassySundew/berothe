@@ -28,7 +28,12 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 				padding-top="7"
 			> 
 				<shadowed-text( "ip: " ) valign="middle" />
-				<text-input public id="ipInput" background-color-prop={0x80808080} input-width-prop="200" width="200" />
+				<text-input 
+					public id = "ipInput" 
+					background-color-prop = {0x80808080} 
+					max-width = "200" 
+					width = "200" 
+				/>
 			</flow>
 			
 			<flow layout="horizontal" hspacing="5">

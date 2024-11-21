@@ -1,5 +1,7 @@
 package game.data.storage.entity.model;
 
+import Types.Number;
+import game.domain.overworld.entity.component.model.stat.EntityMaxHpStat;
 import game.domain.overworld.entity.component.model.stat.EntityWeaponRangeStat;
 import haxe.exceptions.NotImplementedException;
 import game.domain.overworld.entity.component.model.stat.EntityAttackStat;
@@ -11,6 +13,7 @@ enum abstract EntityAdditiveStatType( Int ) {
 	var DEFENCE;
 	var WEAPON_RANGE;
 	var SPEED;
+	var MAX_HP;
 
 	#if !debug inline #end
 	public static function fromCdb( type : Data.EntityAdditiveStat ) : EntityAdditiveStatType {
@@ -19,6 +22,7 @@ enum abstract EntityAdditiveStatType( Int ) {
 			case defence: DEFENCE;
 			case weaponRange: WEAPON_RANGE;
 			case speed: SPEED;
+			case maxHp: MAX_HP;
 		}
 	}
 
@@ -29,6 +33,7 @@ enum abstract EntityAdditiveStatType( Int ) {
 			case DEFENCE: throw new NotImplementedException();
 			case WEAPON_RANGE: new EntityWeaponRangeStat( amount );
 			case SPEED: new EntityWeaponRangeStat( amount );
+			case MAX_HP: new EntityMaxHpStat( amount );
 		}
 	}
 }

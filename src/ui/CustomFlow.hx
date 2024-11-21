@@ -10,11 +10,11 @@ class CustomFlow extends Flow {
 	public var customFillHeight = false;
 
 	override function sync( ctx : RenderContext ) {
-		super.sync( ctx );
-
 		if ( customFillWidth && minWidth != GameUtil.wScaled )
 			minWidth = GameUtil.wScaled;
 		if ( customFillHeight && minHeight != GameUtil.hScaled )
 			minHeight = GameUtil.hScaled;
+
+		super.sync( ctx );
 	}
 }

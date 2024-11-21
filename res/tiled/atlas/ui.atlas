@@ -1,445 +1,438 @@
 ui.png
-size: 256, 193
+size: 128, 366
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 9slice_window
   rotate: false
-  xy: 0, 64
+  xy: 100, 59
   size: 26, 30
   orig: 26, 30
   offset: 0, 0
   index: -1
 asteroid0
   rotate: false
-  xy: 68, 64
+  xy: 0, 92
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 asteroid1
   rotate: false
-  xy: 100, 64
+  xy: 32, 92
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 asteroid2
   rotate: false
-  xy: 132, 64
+  xy: 64, 92
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 asteroid3
   rotate: false
-  xy: 164, 64
+  xy: 96, 92
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 body_selected
   rotate: false
-  xy: 196, 64
+  xy: 0, 124
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 caret0
   rotate: false
-  xy: 0, 0
+  xy: 1, 0
   size: 4, 10
   orig: 4, 10
   offset: 0, 0
   index: -1
 caret1
   rotate: false
-  xy: 4, 0
+  xy: 5, 0
   size: 4, 10
   orig: 4, 10
   offset: 0, 0
   index: -1
 close_but_0
   rotate: false
-  xy: 0, 96
+  xy: 32, 124
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 close_but_1
   rotate: false
-  xy: 32, 96
+  xy: 64, 124
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 close_button_inventory0
   rotate: false
-  xy: 8, 0
+  xy: 36, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 close_button_inventory1
   rotate: false
-  xy: 20, 0
+  xy: 48, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 close_button_inventory2
   rotate: false
-  xy: 32, 0
+  xy: 60, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 craft_but0
   rotate: false
-  xy: 83, 0
+  xy: 84, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 craft_but1
   rotate: false
-  xy: 99, 0
+  xy: 100, 0
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 craft_but2
   rotate: false
-  xy: 115, 0
+  xy: 0, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 craftWinToggle0
   rotate: false
-  xy: 131, 0
+  xy: 16, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 craftWinToggle1
   rotate: false
-  xy: 147, 0
+  xy: 32, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 cursor0
   rotate: false
-  xy: 163, 0
+  xy: 48, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 cursor1
   rotate: false
-  xy: 179, 0
+  xy: 64, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 discord0
   rotate: false
-  xy: 64, 96
+  xy: 96, 124
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 discord1
   rotate: false
-  xy: 96, 96
+  xy: 0, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 discord2
   rotate: false
-  xy: 128, 96
+  xy: 32, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 edit0
   rotate: false
-  xy: 160, 96
+  xy: 64, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 edit1
   rotate: false
-  xy: 192, 96
+  xy: 96, 156
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-health_caret
+health_bg_border
   rotate: false
-  xy: 44, 0
-  size: 3, 12
-  orig: 3, 12
+  xy: 9, 0
+  size: 5, 14
+  orig: 5, 14
+  offset: 0, 0
+  index: -1
+health_icon
+  rotate: false
+  xy: 72, 34
+  size: 20, 20
+  orig: 20, 20
   offset: 0, 0
   index: -1
 health_line
   rotate: false
-  xy: 47, 0
-  size: 1, 12
-  orig: 1, 12
+  xy: 0, 0
+  size: 1, 14
+  orig: 1, 14
   offset: 0, 0
   index: -1
-health_sign
+health_stat_border
   rotate: false
-  xy: 78, 16
-  size: 34, 20
-  orig: 34, 20
+  xy: 14, 0
+  size: 5, 14
+  orig: 5, 14
   offset: 0, 0
   index: -1
 inventory_cell
   rotate: false
-  xy: 16, 16
+  xy: 16, 34
   size: 18, 18
   orig: 18, 18
   offset: 0, 0
   index: -1
 inventoryWinToggle0
   rotate: false
-  xy: 195, 0
+  xy: 80, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 inventoryWinToggle1
   rotate: false
-  xy: 211, 0
+  xy: 96, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 keyboard_icon0
   rotate: false
-  xy: 40, 16
+  xy: 34, 34
   size: 19, 19
   orig: 19, 19
   offset: 0, 0
   index: -1
 keyboard_icon1
   rotate: false
-  xy: 59, 16
+  xy: 53, 34
   size: 19, 19
   orig: 19, 19
   offset: 0, 0
   index: -1
 navigation_win
   rotate: false
-  xy: 48, 0
+  xy: 72, 0
   size: 12, 12
   orig: 12, 12
   offset: 0, 0
   index: -1
 new0
   rotate: false
-  xy: 224, 96
+  xy: 0, 188
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 new1
   rotate: false
-  xy: 0, 128
+  xy: 32, 188
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 new2
   rotate: false
-  xy: 32, 128
+  xy: 64, 188
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-oxygen_scale
-  rotate: false
-  xy: 60, 0
-  size: 12, 12
-  orig: 12, 12
-  offset: 0, 0
-  index: -1
-oxygen_sign
-  rotate: false
-  xy: 112, 16
-  size: 34, 20
-  orig: 34, 20
-  offset: 0, 0
-  index: -1
 player_head
   rotate: false
-  xy: 72, 0
+  xy: 25, 0
   size: 11, 12
   orig: 11, 12
   offset: 0, 0
   index: -1
 recipe
   rotate: false
-  xy: 146, 16
+  xy: 46, 59
   size: 32, 20
   orig: 32, 20
   offset: 0, 0
   index: -1
 recipe_comp
   rotate: false
-  xy: 0, 36
+  xy: 0, 346
   size: 98, 20
   orig: 98, 20
   offset: 0, 0
   index: -1
 recipe_hint
   rotate: false
-  xy: 172, 160
+  xy: 78, 59
   size: 22, 33
   orig: 22, 33
   offset: 0, 0
   index: -1
 save0
   rotate: false
-  xy: 64, 128
+  xy: 96, 188
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 save1
   rotate: false
-  xy: 96, 128
+  xy: 0, 220
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 save2
   rotate: false
-  xy: 128, 128
+  xy: 32, 220
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 scrollbar_background_9slice
   rotate: false
-  xy: 34, 16
+  xy: 19, 0
   size: 6, 18
   orig: 6, 18
   offset: 0, 0
   index: -1
 start0
   rotate: false
-  xy: 160, 128
+  xy: 64, 220
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 start1
   rotate: false
-  xy: 192, 128
+  xy: 96, 220
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 start2
   rotate: false
-  xy: 224, 128
+  xy: 0, 252
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tp0
   rotate: false
-  xy: 227, 0
+  xy: 112, 18
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 tp1
   rotate: false
-  xy: 0, 16
+  xy: 0, 34
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
 trash0
   rotate: false
-  xy: 0, 160
+  xy: 32, 252
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 trash1
   rotate: false
-  xy: 32, 160
+  xy: 64, 252
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 travel_but0
   rotate: false
-  xy: 98, 36
+  xy: 92, 34
   size: 23, 25
   orig: 23, 25
   offset: 0, 0
   index: -1
 travel_but1
   rotate: false
-  xy: 121, 36
+  xy: 0, 59
   size: 23, 25
   orig: 23, 25
   offset: 0, 0
   index: -1
 travel_but2
   rotate: false
-  xy: 144, 36
+  xy: 23, 59
   size: 23, 25
   orig: 23, 25
   offset: 0, 0
   index: -1
 twitter0
   rotate: false
-  xy: 64, 160
+  xy: 0, 284
   size: 36, 32
   orig: 36, 32
   offset: 0, 0
   index: -1
 twitter1
   rotate: false
-  xy: 100, 160
+  xy: 36, 284
   size: 36, 32
   orig: 36, 32
   offset: 0, 0
   index: -1
 twitter2
   rotate: false
-  xy: 136, 160
+  xy: 72, 284
   size: 36, 32
   orig: 36, 32
   offset: 0, 0
   index: -1
 vk0
   rotate: false
-  xy: 167, 36
+  xy: 0, 316
   size: 42, 28
   orig: 42, 28
   offset: 0, 0
   index: -1
 vk1
   rotate: false
-  xy: 209, 36
+  xy: 42, 316
   size: 42, 28
   orig: 42, 28
   offset: 0, 0
   index: -1
 vk2
   rotate: false
-  xy: 26, 64
+  xy: 84, 316
   size: 42, 30
   orig: 42, 30
   offset: 0, 0

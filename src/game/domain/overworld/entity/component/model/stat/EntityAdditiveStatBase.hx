@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model.stat;
 
+import Types.Number;
 import game.data.storage.entity.model.EntityAdditiveStatType;
 
 abstract class EntityAdditiveStatBase {

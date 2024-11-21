@@ -1,3 +1,5 @@
+import h2d.Flow;
+import ui.CustomFlow;
 import hxd.Event;
 import sdl.Window;
 import hrt.prefab.rfx.Sao;
@@ -40,15 +42,20 @@ class Main extends Process {
 
 	public static var inst : Main;
 
-	public var console : ui.Console;
-	public var controller : Controller<ControllerAction>;
-	public var ca : ControllerAccess<ControllerAction>;
-	public var save : Save;
-	public var cliCon : MutableProperty<ClientController> = new MutableProperty( null );
+	public var console( default, null ) : ui.Console;
+	public var controller( default, null ) : Controller<ControllerAction>;
+	public var ca( default, null ) : ControllerAccess<ControllerAction>;
+	public var save( default, null ) : Save;
+	public var cliCon( default, null ) : MutableProperty<ClientController> = new MutableProperty( null );
 
-	public var onClose : Signal = new Signal();
-	public var onResizeEvent : Signal = new Signal();
-	public var onUpdate : Signal = new Signal();
+	public var botRightHud : Flow;
+	public var botLeftHud : Flow;
+	public var topRightHud : Flow;
+	public var hudLayout( default, null ) : CustomFlow;
+
+	public final onClose : Signal = new Signal();
+	public final onResizeEvent : Signal = new Signal();
+	public final onUpdate : Signal = new Signal();
 
 	#if game_tmod
 	var stats : h2d.Text;
@@ -98,8 +105,28 @@ class Main extends Process {
 
 		root.add( console, Const.DP_UI_FRONT );
 
+		hudLayout = new CustomFlow();
+		hudLayout.customFillHeight = true;
+		hudLayout.customFillWidth = true;
+
+		botRightHud = new Flow( hudLayout );
+		hudLayout.getProperties( botRightHud ).isAbsolute = true;
+		hudLayout.getProperties( botRightHud ).align( Bottom, Right );
+
+		botLeftHud = new Flow( hudLayout );
+		hudLayout.getProperties( botLeftHud ).isAbsolute = true;
+		hudLayout.getProperties( botLeftHud ).align( Bottom, Left );
+
+		topRightHud = new Flow( hudLayout );
+		topRightHud.layout = Vertical;
+		topRightHud.horizontalAlign = Right;
+		hudLayout.getProperties( topRightHud ).isAbsolute = true;
+		hudLayout.getProperties( topRightHud ).align( Top, Right );
+
+		root.add( hudLayout, Const.DP_UI );
+
 		#if debug
-		// createFpsCounter();
+		createFpsCounter();
 		#if game_tmod
 		stats = new Text( Assets.fontPixel16, Boot.inst.s2d );
 		#end
@@ -109,7 +136,7 @@ class Main extends Process {
 	function createFpsCounter() {
 		var fps = new Text( Assets.fontPixel16 );
 
-		root.add( fps, Const.DP_UI );
+		topRightHud.addChild( fps );
 
 		onUpdate.add(() -> @:privateAccess {
 			fps.text = 'fps: ${Boot.inst.engine.fps}\ndraw calls: ${Boot.inst.engine.drawCalls}';

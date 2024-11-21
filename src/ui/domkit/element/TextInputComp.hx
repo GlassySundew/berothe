@@ -1,5 +1,6 @@
 package ui.domkit.element;
 
+import h2d.Flow;
 import h2d.RenderContext;
 import h2d.col.Bounds;
 import ui.core.TextInput;
@@ -8,23 +9,23 @@ import h2d.Font;
 import h2d.domkit.Object;
 
 @:uiComp( "text-input" )
-class TextInputComp extends TextInput implements h2d.domkit.Object {
+class TextInputComp extends Flow implements h2d.domkit.Object {
 
 	@:p public var backgroundColorProp( default, set ) : Int;
 	function set_backgroundColorProp( v : Int ) {
-		return backgroundColorProp = backgroundColor = v;
+		return backgroundColorProp = textInput.backgroundColor = v;
 	}
 
-	@:p public var inputWidthProp( default, set ) : Int;
-	function set_inputWidthProp( v : Int ) {
-		this.textWidth = v;
-		return inputWidth = v;
-	}
+	public var text( get, set ) : String;
+	inline function get_text() return textInput.text;
+	inline function set_text( v : String ) return textInput.text = v;
 
 	var contentChangedTriggered = false;
+	final textInput : TextInput;
 
 	public function new( ?font : Font, ?parent ) {
-		super( font == null ? Assets.fontPixel16 : font, parent );
+		super( parent );
+		textInput = new TextInput( font == null ? Assets.fontPixel16 : font, this );
 		initComponent();
 	}
 
@@ -34,5 +35,6 @@ class TextInputComp extends TextInput implements h2d.domkit.Object {
 			onContentChanged();
 		}
 		super.sync( ctx );
+		textInput.inputWidth = this.outerWidth;
 	}
 }

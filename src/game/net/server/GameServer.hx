@@ -1,5 +1,6 @@
 package game.net.server;
 
+import hxd.Timer;
 #if server
 import dn.Process;
 import hxbit.NetworkHost.NetworkClient;
@@ -105,8 +106,8 @@ class GameServer extends Process {
 		);
 	}
 
-	override function update() {
-		core.update( tmod / hxd.Timer.wantedFPS, tmod );
+	override function update(  ) {
+		core.update( Timer.dt, tmod );
 	}
 }
 #end

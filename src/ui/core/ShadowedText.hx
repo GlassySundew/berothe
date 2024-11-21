@@ -22,8 +22,4 @@ class ShadowedText extends h2d.Text {
 		var outline = new PixelOutline( 0x000000, 10 );
 		drawable.filter = outline;
 	}
-
-	override function get_textHeight() : Float {
-		return super.get_textHeight() + 1;
-	}
 }

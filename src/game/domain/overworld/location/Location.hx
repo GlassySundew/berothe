@@ -49,6 +49,9 @@ class Location {
 
 	var anchorEntitiesPresent : Int = 0;
 
+	var fixedTimeStep = 1.0 / 60.0; // Шаг физики в секундах (60 Гц)
+	var accumulatedTime = 0.0;
+
 	public function new(
 		locationDesc : LocationDescription,
 		entityFactory : EntityFactory,
@@ -167,7 +170,12 @@ class Location {
 	}
 
 	public function update( dt : Float, tmod : Float ) {
-		physics.update( dt );
+		accumulatedTime += dt;
+		while ( accumulatedTime >= fixedTimeStep ) {
+			physics.update( fixedTimeStep );
+			accumulatedTime -= fixedTimeStep;
+		}
+		
 		for ( entity in entities ) {
 			entity.update( dt, tmod );
 		}

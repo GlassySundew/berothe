@@ -461,7 +461,7 @@
 							"baseInventorySize": 4,
 							"faction": "humans",
 							"hideNameByDefault": false,
-							"baseSpeed": 12,
+							"baseSpeed": 15,
 							"baseDefence": 1,
 							"speechDamaged": [
 								{
@@ -523,7 +523,7 @@
 							"hideNameByDefault": true,
 							"displayName": "Bat",
 							"faction": "bats",
-							"baseSpeed": 7,
+							"baseSpeed": 4,
 							"spawnInventory": [
 								{
 									"item": "gold",
@@ -2301,6 +2301,12 @@
 				},
 				{
 					"id": "defence"
+				},
+				{
+					"id": "speed"
+				},
+				{
+					"id": "maxHp"
 				}
 			],
 			"separators": [],
@@ -2961,7 +2967,7 @@
 			"lines": [
 				{
 					"id": "unheard",
-					"text": "You call out, yet your words drift into nothingness, unheard and unheeded in the vast silence."
+					"text": "You call out, yet your words drift into nothingness, unheeded in the vast silence."
 				},
 				{
 					"id": "unheard2",

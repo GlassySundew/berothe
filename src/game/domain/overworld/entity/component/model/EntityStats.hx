@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.domain.overworld.entity.component.model.stat.EntityMaxHpStat;
 import game.domain.overworld.entity.component.model.stat.EntityDefenceStat;
 import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
 import haxe.exceptions.NotImplementedException;
@@ -19,6 +20,7 @@ class EntityStats {
 	public final weaponRanges : Array<EntityAttkItemStatHolder> = [];
 	public final speed : EntityStatHolder = new EntityStatHolder();
 	public final defence : EntityStatHolder = new EntityStatHolder();
+	public final maxHp : EntityStatHolder = new EntityStatHolder();
 
 	// todo
 	// public final hp
@@ -37,6 +39,10 @@ class EntityStats {
 
 		if ( modelDesc.baseDefence != 0 ) {
 			defence.addStat( new EntityDefenceStat( modelDesc.baseDefence ) );
+		}
+
+		if ( modelDesc.baseHp != 0 ) {
+			maxHp.addStat( new EntityMaxHpStat( modelDesc.baseHp ) );
 		}
 	}
 
@@ -58,6 +64,8 @@ class EntityStats {
 				case SPEED: throw new NotImplementedException();
 				case WEAPON_RANGE:
 					addAttackLimbStat( stat, weaponRanges, slot );
+				case MAX_HP:
+					maxHp.addStat( stat );
 			}
 		}
 	}

@@ -1,11 +1,17 @@
 package ui.domkit.element;
 
+import h2d.Flow;
 import ui.core.TextButton;
 import hxd.Event;
 import h2d.domkit.Object;
 
 @:uiComp( "text-button" )
-class TextButtonComp extends TextButton implements Object {
+class TextButtonComp extends Flow implements Object {
+
+	public var onClick( never, set ) : Event -> Void;
+	inline function set_onClick( v : Event -> Void ) return button.onClick = v;
+
+	final button : TextButton;
 
 	public function new(
 		title : String,
@@ -15,7 +21,8 @@ class TextButtonComp extends TextButton implements Object {
 		?prefix : String = "> ",
 		?parent : h2d.Object
 	) {
-		super( title, prefix, action, colorDef, colorPressed, parent );
+		super( parent );
+		button = new TextButton( title, prefix, action, colorDef, colorPressed, this );
 		initComponent();
 	}
 }

@@ -24,7 +24,7 @@ class ServerBoot {
 	final thousandSlashSixty = 1000 / 60;
 
 	function mainLoop() {
-		Sys.sleep(( thousandSlashSixty - Timer.dt ) / 1000 );
+		// Sys.sleep(( thousandSlashSixty - Timer.dt ) / 1000 );
 		hxd.Timer.update();
 		var tmod = hxd.Timer.tmod * speed;
 		dn.Process.updateAll( tmod );

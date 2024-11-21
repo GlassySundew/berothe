@@ -12,7 +12,7 @@ class EntityInventoryHudMediator {
 
 	final inventory : EntityInventory;
 	final view : EntityInventoryHudViewMediator;
-	
+
 	public var inventorySlots : Array<ItemSlot>;
 
 	public function new( inventory : EntityInventory ) {
@@ -20,8 +20,7 @@ class EntityInventoryHudMediator {
 
 		setupSlots();
 
-		view = new EntityInventoryHudViewMediator( this );
-		Main.inst.root.add( view.comp, util.Const.DP_UI );
+		view = new EntityInventoryHudViewMediator( this, Main.inst.botRightHud );
 	}
 
 	public function dispose() {

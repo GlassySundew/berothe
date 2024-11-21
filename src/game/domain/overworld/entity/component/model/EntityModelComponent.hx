@@ -54,7 +54,6 @@ class EntityModelComponent extends EntityComponent {
 		isSleeping.val = false;
 	}
 
-	#if !debug inline #end;
 	public function isEnemy( enemyMaybe : OverworldEntity ) : Bool {
 		var enemyMaybeModel = enemyMaybe.components.get( EntityModelComponent );
 		if ( enemyMaybeModel == null ) return false;

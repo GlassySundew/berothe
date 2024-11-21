@@ -4,7 +4,6 @@ import h2d.domkit.Style;
 import ui.dialog.DeleteDialog;
 import ui.dialog.SaveManager.Mode;
 import ui.domkit.element.ButtonComp;
-import ui.domkit.element.FixedScrollAreaComp;
 import ui.domkit.element.ShadowedTextComp;
 import ui.domkit.element.ScrollFlowComp;
 
