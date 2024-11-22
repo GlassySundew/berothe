@@ -175,7 +175,7 @@ class Location {
 			physics.update( fixedTimeStep );
 			accumulatedTime -= fixedTimeStep;
 		}
-		
+
 		for ( entity in entities ) {
 			entity.update( dt, tmod );
 		}

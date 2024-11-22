@@ -42,6 +42,9 @@ class OptionsMenu extends PopupBase {
 			Settings.inst.saveSettings();
 		}
 
+		nicknameInput.inputWidth = 200;
+		nicknameInput.backgroundColor = 0x80808080;
+		
 		// nicknameInput.onKeyDown = function(e : Event) {
 		// 	if ( e.keyCode == Key.ENTER ) {
 		// 		Util.nickname = nicknameInput.text;

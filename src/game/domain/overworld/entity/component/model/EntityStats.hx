@@ -1,5 +1,7 @@
 package game.domain.overworld.entity.component.model;
 
+import game.data.storage.DataStorage;
+import game.domain.overworld.entity.component.model.stat.EntityHPRegenStat;
 import game.domain.overworld.entity.component.model.stat.EntityMaxHpStat;
 import game.domain.overworld.entity.component.model.stat.EntityDefenceStat;
 import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
@@ -22,6 +24,9 @@ class EntityStats {
 	public final defence : EntityStatHolder = new EntityStatHolder();
 	public final maxHp : EntityStatHolder = new EntityStatHolder();
 
+	/** per second **/
+	public final hpRegen : EntityStatHolder = new EntityStatHolder();
+
 	// todo
 	// public final hp
 	var entity( default, null ) : OverworldEntity;
@@ -34,8 +39,9 @@ class EntityStats {
 		this.entity = entity;
 		createAttackStat();
 
-		if ( modelDesc.baseSpeed != 0 )
+		if ( modelDesc.baseSpeed != 0 ) {
 			speed.addStat( new EntitySpeedStat( modelDesc.baseSpeed ) );
+		}
 
 		if ( modelDesc.baseDefence != 0 ) {
 			defence.addStat( new EntityDefenceStat( modelDesc.baseDefence ) );
@@ -44,6 +50,8 @@ class EntityStats {
 		if ( modelDesc.baseHp != 0 ) {
 			maxHp.addStat( new EntityMaxHpStat( modelDesc.baseHp ) );
 		}
+
+		hpRegen.addStat( new EntityHPRegenStat( DataStorage.inst.rule.baseHpRegenPerSecond ) );
 	}
 
 	/**
@@ -60,12 +68,16 @@ class EntityStats {
 			switch stat.type {
 				case ATTACK:
 					addAttackLimbStat( stat, limbAttacks, slot );
-				case DEFENCE: throw new NotImplementedException();
-				case SPEED: throw new NotImplementedException();
 				case WEAPON_RANGE:
 					addAttackLimbStat( stat, weaponRanges, slot );
+				case DEFENCE:
+					defence.addStat( stat );
+				case SPEED:
+					speed.addStat( stat );
 				case MAX_HP:
 					maxHp.addStat( stat );
+				case HP_REGEN:
+					hpRegen.addStat( stat );
 			}
 		}
 	}

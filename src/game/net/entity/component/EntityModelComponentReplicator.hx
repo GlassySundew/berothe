@@ -36,7 +36,10 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
-		modelComp.factions.subscribe( ( i, val ) -> if ( val != null ) factionsRepl[i] = val.id );
+		modelComp.factions.subscribe( ( i, val ) -> {
+			if ( val != null ) factionsRepl[i] = val.id; 
+			else factionsRepl.removeByIdx(i);
+		} );
 		modelComp.isSleeping.subscribeProp( isSleeping );
 		modelComp.displayName.subscribeProp( displayName );
 		modelComp.onDamaged.add( onDamaged );
@@ -55,6 +58,10 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 			factionsRepl.subscribleWithMapping(
 				( i, faction ) -> {
 					modelComp.factions.set( i, DataStorage.inst.factionStorage.getById( faction ) );
+				},
+				( i, faction ) -> {
+					trace( "removing faction" );
+					modelComp.factions.removeByIdx( i );
 				}
 			);
 			isSleeping.subscribeProp( modelComp.isSleeping );
@@ -71,6 +78,23 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		} );
 	}
 	#end
+
+	public function setFriendly() {
+		#if client
+		var unfriendlyFactionMaybe = modelComp.factions.filter(
+			( faction ) -> faction.id == DataStorage.inst.rule.unfriendlyPlayerFaction
+		)[0];
+
+		if ( unfriendlyFactionMaybe == null ) {
+			GameClient.inst.consoleSay(
+				Data.locale.get( Data.LocaleKind.no_more_friendliness ).text
+			);
+			return;
+		}
+
+		setFriendlyRPC();
+		#end
+	}
 
 	public function setUnfriendly() {
 		#if client
@@ -96,6 +120,19 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
 	@:rpc( clients )
 	function onDamaged( amount : Float, type : EntityDamageType ) {}
+
+	@:rpc( server )
+	function setFriendlyRPC() {
+		var unfrFactionId = DataStorage.inst.rule.unfriendlyPlayerFaction;
+		var unfriendlyFactionMaybe = modelComp.factions.filter(
+			( faction ) -> faction.id == unfrFactionId
+		)[0];
+		if ( unfriendlyFactionMaybe == null ) return;
+
+		modelComp.factions.remove(
+			DataStorage.inst.factionStorage.getById( unfrFactionId )
+		);
+	}
 
 	@:rpc( server )
 	function setUnfriendlyRPC() {

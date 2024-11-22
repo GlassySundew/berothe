@@ -38,10 +38,13 @@ abstract class EntityItemHolderBase {
 	}
 
 	public function tryGiveItem( item : Item ) {
-		for ( equipSlot in slots ) {
-			if ( equipSlot.hasSpaceForItem( item.desc, item.amount ) ) {
-				equipSlot.giveItem( item );
-				return ItemPickupAttemptResult.success();
+		for ( slot in slots ) {
+			if ( slot.hasSpaceForItem( item.desc, item.amount ) ) {
+				slot.giveItem( item );
+				if (
+					item.itemContainerProp.getValue() == slot
+					|| item.amount.getValue() == 0
+				) return ItemPickupAttemptResult.success();
 			}
 		}
 		return ItemPickupAttemptResult.failure();

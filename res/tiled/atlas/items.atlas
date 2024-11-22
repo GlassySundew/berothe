@@ -1,11 +1,18 @@
 items.png
-size: 31, 18
+size: 31, 43
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-orc_prison_key
+club
   rotate: false
   xy: 0, 0
+  size: 26, 25
+  orig: 26, 25
+  offset: 0, 0
+  index: -1
+orc_prison_key
+  rotate: false
+  xy: 0, 25
   size: 31, 18
   orig: 31, 18
   offset: 0, 0

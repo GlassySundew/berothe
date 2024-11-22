@@ -34,11 +34,13 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		world._rigidBodyList = null;
 	}
 
-	public function update( dt : Float ) {
+	public inline function update( dt : Float ) {
 		world.step( dt );
+	}
 
+	public inline function drawDebug() {
 		if ( debugDraw != null && debugDraw.graphics.visible ) {
-			Std.downcast( debugDraw, HeapsOimophysicsDebugDraw ).graphics.clear();
+			debugDraw.update();
 			inline world.debugDraw();
 		}
 	}

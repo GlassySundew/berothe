@@ -131,6 +131,12 @@ class GameClient extends Process {
 		} );
 	}
 
+	public function setFriendly() {
+		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+		if ( modelRepl == null ) return;
+		modelRepl.setFriendly();
+	}
+
 	public function setUnfriendly() {
 		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
 		if ( modelRepl == null ) return;
@@ -178,6 +184,7 @@ class GameClient extends Process {
 	override function update() {
 		super.update();
 		currentLocationSelf.val?.physics.getDebugDraw()?.update();
+		currentLocationSelf.val?.physics?.drawDebug();
 
 		if ( ca.isPressed( Escape ) ) {
 			new PauseMenu( this, Main.inst.root, Main.inst );

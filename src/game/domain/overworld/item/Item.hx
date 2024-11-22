@@ -40,6 +40,10 @@ class Item {
 		this.amount.addOnValue( ( old, nw ) -> {
 			if ( nw == 0 ) dispose();
 			if ( nw < 0 ) throw "unsupported logic: " + toString() + " amount less than zero";
+			if (
+				!desc.isUnlimitedStackSize()
+				&& nw > desc.stackSize
+			) throw "unsupported logic: " + toString() + " exceeded stack size";
 		} );
 	}
 
@@ -47,6 +51,12 @@ class Item {
 		disposed.resolve( true );
 		setContainer( null );
 		trace( "destroyoing item: " + this );
+	}
+
+	public inline function canFitMoreItemsIn() : Bool {
+		return(
+			amount.getValue() < desc.stackSize
+			|| desc.isUnlimitedStackSize() );
 	}
 
 	public function setContainer( cont : IItemContainer ) {

@@ -11,6 +11,7 @@ interface IPhysicsEngine {
 	function removeRigidBody( rigidBody : IRigidBody ) : Void;
 	function setDebugDraw( debugDraw : IDebugDraw ) : Void;
 	function getDebugDraw() : IDebugDraw;
+	function drawDebug() : Void;
 	function dispose() : Void;
 	function rayCast(
 		start : ThreeDeeVector,

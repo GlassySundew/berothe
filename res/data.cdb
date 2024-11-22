@@ -69,6 +69,18 @@
 					"value": {
 						"faction": "unfriendlyPlayer"
 					}
+				},
+				{
+					"id": "baseHpRegenPerSecond",
+					"value": {
+						"float": 0.5
+					}
+				},
+				{
+					"id": "regenDelayOnDamageSecond",
+					"value": {
+						"float": 4
+					}
 				}
 			],
 			"separators": [],
@@ -523,7 +535,7 @@
 							"hideNameByDefault": true,
 							"displayName": "Bat",
 							"faction": "bats",
-							"baseSpeed": 4,
+							"baseSpeed": 9,
 							"spawnInventory": [
 								{
 									"item": "gold",
@@ -693,7 +705,7 @@
 							"baseInventorySize": 4,
 							"faction": "orcs",
 							"displayName": "Orc",
-							"baseSpeed": 11
+							"baseSpeed": 12
 						},
 						"attack": {
 							"id": "attack",
@@ -2042,7 +2054,7 @@
 					"id": "gold_piece",
 					"viewComps": {
 						"colorRandomShift": {
-							"radius": 150
+							"radius": 70
 						}
 					},
 					"type": [
@@ -2307,6 +2319,9 @@
 				},
 				{
 					"id": "maxHp"
+				},
+				{
+					"id": "hpRegen"
 				}
 			],
 			"separators": [],
@@ -2437,6 +2452,12 @@
 					"scope": null
 				},
 				{
+					"typeStr": "3",
+					"name": "stackSize",
+					"kind": null,
+					"defaultValue": 1
+				},
+				{
 					"typeStr": "10:Weapon,Blunt,Sharp,AnimalPart,Potion,Scroll,Food,Gold",
 					"name": "type"
 				},
@@ -2448,7 +2469,7 @@
 				{
 					"typeStr": "2",
 					"name": "isSplittable",
-					"kind": null
+					"documentation": "(is split by death dropping)"
 				},
 				{
 					"typeStr": "17",
@@ -2468,7 +2489,8 @@
 					"props": {},
 					"iconAsset": "",
 					"overworldPresentation": "gold_piece",
-					"isSplittable": true
+					"isSplittable": true,
+					"stackSize": -1
 				},
 				{
 					"id": "orc_prison_key",
@@ -2476,7 +2498,8 @@
 					"props": {},
 					"iconAsset": "orc_prison_key",
 					"overworldPresentation": "orc_prison_key",
-					"isSplittable": false
+					"isSplittable": false,
+					"stackSize": 1
 				},
 				{
 					"id": "club",
@@ -2503,9 +2526,10 @@
 						]
 					},
 					"type": 3,
-					"iconAsset": "",
+					"iconAsset": "club",
 					"overworldPresentation": "club",
-					"isSplittable": false
+					"isSplittable": false,
+					"stackSize": 1
 				},
 				{
 					"id": "sword",
@@ -2513,7 +2537,8 @@
 					"type": 5,
 					"iconAsset": "",
 					"overworldPresentation": "bat",
-					"isSplittable": false
+					"isSplittable": false,
+					"stackSize": 1
 				}
 			],
 			"separators": [],
@@ -2984,6 +3009,14 @@
 				{
 					"id": "no_more_friendliness",
 					"text": "You have reached the very limits of friendliness, with no path to grow kinder still."
+				},
+				{
+					"id": "unconnected_1",
+					"text": "You reach out to act, but without a connection, you are but a shadow adrift, unable to leave a mark upon the world."
+				},
+				{
+					"id": "unconnected_2",
+					"text": "You attempt to command, yet in a formless state, your actions vanish into nothingness, unseen and unfelt."
 				}
 			],
 			"separators": [],

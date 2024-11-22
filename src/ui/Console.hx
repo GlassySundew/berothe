@@ -56,7 +56,22 @@ class Console extends h2d.Console {
 
 		addCommand( "unfriendly", "", [], () -> {
 			GameClient.inst?.setUnfriendly();
+			if ( GameClient.inst == null ) unconnectedResponce();
 		} );
+
+		addCommand( "friendly", "", [], () -> {
+			GameClient.inst?.setFriendly();
+			if ( GameClient.inst == null ) unconnectedResponce();
+		} );
+	}
+
+	function unconnectedResponce() {
+		log(
+			Random.fromArray( [
+				Data.locale.get( Data.LocaleKind.unconnected_1 ).text,
+				Data.locale.get( Data.LocaleKind.unconnected_2 ).text
+			] )
+		);
 	}
 
 	override function show() {

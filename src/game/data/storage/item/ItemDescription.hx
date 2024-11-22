@@ -39,6 +39,7 @@ class ItemDescription extends DescriptionBase {
 		}
 
 		return new ItemDescription(
+			entry.stackSize,
 			equipAsset,
 			equipSlots,
 			equipStats,
@@ -67,6 +68,7 @@ class ItemDescription extends DescriptionBase {
 	}
 
 	public final types : Array<ItemType>;
+	public final stackSize : Int;
 	public final equippable : Bool;
 	public final equipAsset : Null<IEntityViewProvider>;
 	public final equipSlots : Null<Array<EntityEquipmentSlotType>>;
@@ -76,6 +78,7 @@ class ItemDescription extends DescriptionBase {
 	public final isSplittable : Bool;
 
 	public function new(
+		stackSize : Int,
 		equipAsset : EntityComposerViewProvider,
 		equipSlots : Null<Array<EntityEquipmentSlotType>>,
 		equipStats : Null<Array<EquipStat>>,
@@ -88,6 +91,7 @@ class ItemDescription extends DescriptionBase {
 	) {
 		super( id );
 
+		this.stackSize = stackSize;
 		this.equippable = equippable;
 		this.iconAsset = iconAsset;
 		this.types = types;
@@ -96,6 +100,10 @@ class ItemDescription extends DescriptionBase {
 		this.equipStats = equipStats;
 		this.overworldEntityId = overworldEntityId;
 		this.isSplittable = isSplittable;
+	}
+
+	public inline function isUnlimitedStackSize() {
+		return stackSize == -1;
 	}
 
 	public inline function getOverworldReprEntityDesc() : EntityDescription {

@@ -1,20 +1,22 @@
 package game.domain.overworld.entity.component.model;
 
-import game.client.en.comp.view.EntityMessageVO;
+import core.DispArray;
+import core.MutableProperty;
 import future.Future;
 import signals.Signal;
-import game.domain.overworld.entity.component.combat.EntityDamageType;
-import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
+import game.client.en.comp.view.EntityMessageVO;
 import game.data.storage.DataStorage;
+import game.data.storage.entity.body.model.EntityModelDescription;
 import game.data.storage.faction.FactionDescription;
+import game.data.storage.item.ItemDescription;
+import game.domain.overworld.entity.component.combat.EntityDamageType;
 import game.domain.overworld.item.Item;
 import game.domain.overworld.item.model.ItemPickupAttemptResult;
-import game.data.storage.item.ItemDescription;
-import game.data.storage.entity.body.model.EntityModelDescription;
-import core.MutableProperty;
-import core.DispArray;
 
 class EntityModelComponent extends EntityComponent {
+
+	public static final REGEN_DELAYER_ID = "regen";
+	public static final DAMAGED_REGEN_DELAY_DELAYER_ID = "regen";
 
 	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
@@ -97,6 +99,18 @@ class EntityModelComponent extends EntityComponent {
 
 		hp.val -= damage;
 		onDamaged.dispatch( damage, type );
+
+		if ( entity.disposed.isTriggered ) return;
+
+		entity.delayer.cancelById( DAMAGED_REGEN_DELAY_DELAYER_ID );
+		entity.delayer.cancelById( REGEN_DELAYER_ID );
+		entity.delayer.addS(
+			DAMAGED_REGEN_DELAY_DELAYER_ID,
+			() -> {
+				subscribeHpRegen();
+			},
+			DataStorage.inst.rule.regenDelayOnDamageSecond
+		);
 	}
 
 	override function claimOwnage() {
@@ -117,14 +131,33 @@ class EntityModelComponent extends EntityComponent {
 			factions.push( DataStorage.inst.factionStorage.getById( desc.factionId ) );
 
 		if ( desc.baseHp != 0 ) hp.val = desc.baseHp;
-
 		if ( desc.displayName != null ) displayName.val = desc.displayName;
+
+		subscribeHpRegen();
+	}
+
+	function subscribeHpRegen() {
+		if ( hp.val == stats.maxHp.amount.getValue() ) return;
+
+		entity.delayer.addS(
+			REGEN_DELAYER_ID,
+			() -> {
+				hp.val++;
+				subscribeHpRegen();
+			},
+			1 / stats.hpRegen.amount.getValue()
+		);
 	}
 
 	function onHpChanged( oldVal : Int, newVal : Int ) {
+		if ( newVal > stats.maxHp.amount.getValue() ) {
+			hp.val = Std.int( stats.maxHp.amount.getValue() );
+			return;
+		}
 		if ( newVal <= 0 ) {
 			onDeath();
 			entity.dispose();
+			return;
 		}
 	}
 

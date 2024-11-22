@@ -1,5 +1,7 @@
 package game.client.en.comp;
 
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
+import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import util.Assert;
 import rx.Subscription;
 import util.Settings;
@@ -59,8 +61,10 @@ class EntityControl {
 		);
 
 		entity.components.componentStream.observe( comp -> {
-			if ( Std.isOfType( comp, EntityAttackListComponent ) ) return;
-			if ( Std.isOfType( comp, EntityModelComponent ) ) return;
+			if (
+				!Std.isOfType( comp, EntityRigidBodyComponent )
+				&& !Std.isOfType( comp, EntityDynamicsComponent ) )
+				return;
 
 			#if debug Assert.isFalse( comp.isOwned ); #end
 			comp.claimOwnage();

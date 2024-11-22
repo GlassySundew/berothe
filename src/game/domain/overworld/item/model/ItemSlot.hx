@@ -24,24 +24,35 @@ class ItemSlot implements IItemContainer {
 		this.restriction = restriction ?? new ItemRestriction();
 	}
 
-	public function giveItem( item : Item ) {
-		if ( this.item.val != null ) {
-			if ( this.item.val.desc == item.desc ) {
-				// todo partial pouring (incomplete amount transfer)
-				this.item.val.amount.val += item.amount.val;
+	public function giveItem( itemGiven : Item ) {
+		if ( item.val != null ) {
+			if ( item.val.desc == itemGiven.desc ) {
+				if (
+					item.val.amount.getValue() + itemGiven.amount.getValue() <= item.val.desc.stackSize
+					|| item.val.desc.isUnlimitedStackSize() //
+				) {
+					item.val.amount.val += itemGiven.amount.val;
+					itemGiven.amount.val = 0;
+				} else if (
+					item.val.amount.getValue() + itemGiven.amount.getValue() > item.val.desc.stackSize //
+				) {
+					itemGiven.amount.val -= item.val.desc.stackSize - item.val.amount.val;
+					item.val.amount.val = item.val.desc.stackSize;
+				}
 			} else {
-				trace( "ERROR: TRYING TO PICKUP ITEM TO OCCUPIED CELL WITH NON-COMPATIBLE ITEM: " + this.item, item );
+				trace( "ERROR: TRYING TO PICKUP ITEM TO OCCUPIED CELL WITH NON-COMPATIBLE ITEM: " + item, itemGiven );
 			}
+
 			return;
 		}
 
-		item.setContainer( this );
-		this.item.val = item;
+		itemGiven.setContainer( this );
+		item.val = itemGiven;
 
-		item.itemContainerProp.addOnValue(
+		itemGiven.itemContainerProp.addOnValue(
 			( oldCont, newCont ) -> {
 				if ( newCont == this ) return;
-				this.item.val = null;
+				item.val = null;
 			}, 1
 		);
 	}
@@ -62,12 +73,14 @@ class ItemSlot implements IItemContainer {
 		itemDesc : ItemDescription,
 		amount : Null<Int> = 1
 	) : Bool {
-		// TODO container item insides check
+		// TODO container item insides check (в таком случае обращаемся внутрь предмета)
 
 		return
-			( this.item.val == null
-				|| ( this.item.val.desc == itemDesc // todo also require stack size
-				) )
-				&& restriction.isFulfilledByItem( itemDesc );
+			( item.val == null
+				|| (
+					item.val.desc == itemDesc
+					&& item.val.canFitMoreItemsIn()
+				) //
+			) && restriction.isFulfilledByItem( itemDesc );
 	}
 }

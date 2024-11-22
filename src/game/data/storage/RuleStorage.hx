@@ -13,6 +13,8 @@ class RuleStorage {
 	public var unfriendlyStatusBarColor( default, null ) : Int;
 	public var deathMessageEntity( default, null ) : String;
 	public var unfriendlyPlayerFaction( default, null ) : String;
+	public var baseHpRegenPerSecond( default, null ) : Float;
+	public var regenDelayOnDamageSecond( default, null ) : Float;
 
 	// dont touch this, only add fields
 	public function new( rules : IndexId<Data.Rule, Data.RuleKind> ) {

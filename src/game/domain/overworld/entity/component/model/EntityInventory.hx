@@ -17,10 +17,12 @@ class EntityInventory extends EntityItemHolderBase {
 
 	public final equipSlots : Map<EntityEquipmentSlotType, EquipItemSlot> = [];
 
-	public var inventorySlots( default, null ) : Array<ItemSlot>;
-
 	final baseInventorySize : Int;
 	final equipSlotsDesc : Array<EntityEquipSlotDescription>;
+
+	public var inventorySlots( default, null ) : Array<ItemSlot>;
+
+	var goldSlot : ItemSlot;
 
 	public function new(
 		model : EntityModelComponent,
@@ -62,7 +64,7 @@ class EntityInventory extends EntityItemHolderBase {
 			tryGiveItem( item );
 		}
 	}
-	var goldSlot : ItemSlot;
+
 	function createSlots() {
 		inventorySlots = [];
 
