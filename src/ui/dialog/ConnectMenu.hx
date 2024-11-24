@@ -71,6 +71,17 @@ class ConnectMenu extends PopupBase {
 
 		createBg();
 
+		#if !debug
+		PopupBase.destroyByPopupType( MainMenu );
+
+		Client.inst.connect(
+			'51.68.220.173',
+			() -> trace( "failed connection" )
+		);
+		destroy();
+		#end
+
+		
 		var connectComp = new ConnectComp( contentFlow );
 		connectComp.connect.onClick = ( e ) -> {
 			PopupBase.destroyByPopupType( MainMenu );

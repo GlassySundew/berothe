@@ -105,7 +105,7 @@
 							"x": -26.41,
 							"y": 105.52,
 							"z": 94.93,
-							"scaleX": 179,
+							"scaleX": 180.68,
 							"scaleY": 65,
 							"scaleZ": 318,
 							"rotationZ": 172.7
@@ -124,6 +124,21 @@
 							"scaleY": 26.71,
 							"scaleZ": 120.03,
 							"rotationZ": 177.4
+						},
+						{
+							"type": "customBox",
+							"name": "wall",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 63.62,
+							"y": 90.48,
+							"z": 54.25,
+							"scaleX": 8.21,
+							"scaleY": 26.71,
+							"scaleZ": 120.03,
+							"rotationZ": -161.1
 						},
 						{
 							"type": "customBox",

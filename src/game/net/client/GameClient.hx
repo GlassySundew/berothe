@@ -1,5 +1,6 @@
 package game.net.client;
 
+import dn.Delayer;
 import game.net.entity.component.EntityModelComponentReplicator;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import ui.Console;
@@ -92,7 +93,8 @@ class GameClient extends Process {
 			locationLights = null;
 
 			if ( oldLoc != null ) {
-				oldLoc.removeEntity( controlledEntity.getValue().entity.result );
+				if ( !controlledEntity.getValue().entity.result?.disposed.isTriggered )
+					oldLoc.removeEntity( controlledEntity.getValue().entity.result );
 				oldLoc.dispose();
 				oldLoc.update( 0, 0 );
 				#if debug
@@ -110,6 +112,11 @@ class GameClient extends Process {
 				locationLights.shadows.blur.radius = 0.2;
 				locationLights.shadows.bias = 0.02;
 			}
+
+			Boot.inst.s3d.visible = false;
+			delayer.addF(() -> {
+				Boot.inst.s3d.visible = true;
+			}, 5 );
 		} );
 	}
 
@@ -173,7 +180,8 @@ class GameClient extends Process {
 		ca.dispose();
 
 		currentLocationSelf.val = null;
-		controlledEntity.getValue()?.entity.result?.dispose();
+		if ( !controlledEntity?.getValue()?.entity.result?.disposed.isTriggered )
+			controlledEntity.getValue()?.entity.result?.dispose();
 		subscription.unsubscribe();
 		BatchRenderer.inst?.dispose();
 

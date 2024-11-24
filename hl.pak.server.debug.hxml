@@ -1,0 +1,12 @@
+
+hl.server.hxml
+debug.hxml
+
+-hl redist/server/server.hl
+
+-D pak
+-D linux
+
+-cmd haxe -hl hxd.fmt.pak.Build.hl -lib heaps -main hxd.fmt.pak.Build && hl hxd.fmt.pak.Build.hl -out redist/server/res -exclude vox,obj,mtl,ttf
+
+

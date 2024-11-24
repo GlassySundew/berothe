@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import rx.disposables.Composite;
 import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties;
 import game.physics.oimo.EntityRigidBodyProps;
 import util.Assert;
@@ -12,7 +13,7 @@ class SleepyPointGuard extends EntityBehaviourBase {
 	final triggerId : String;
 
 	public function new( params : AIProperties ) {
-		super(params);
+		super( params );
 		this.triggerId = params.triggerId;
 	}
 
@@ -22,6 +23,7 @@ class SleepyPointGuard extends EntityBehaviourBase {
 		entity.components.onAppear(
 			EntityModelComponent,
 			( cl, modelComp ) -> {
+				var composite = Composite.create();
 				var sub : ISubscription = null;
 				sub = modelComp.isSleeping.addOnValue(
 					( _, val ) -> //
@@ -33,9 +35,10 @@ class SleepyPointGuard extends EntityBehaviourBase {
 							}
 						}
 				);
+				composite.add( sub );
 
-				var collisionTrigger = location.getTriggerByIdent(triggerId);
-				
+				var collisionTrigger = location.getTriggerByIdent( triggerId );
+
 				if ( triggerId == null || collisionTrigger == null ) return;
 
 				// seeking for entity trigger on location
@@ -54,6 +57,8 @@ class SleepyPointGuard extends EntityBehaviourBase {
 						someEntityTriggered( Std.downcast( cb._b2.userData, EntityRigidBodyProps ).entity );
 					}
 				} );
+				composite.add( sub );
+				entity.disposed.then( _ -> composite.unsubscribe() );
 			}
 		);
 	}

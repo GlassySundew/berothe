@@ -35,7 +35,7 @@ class EntityStatsHudMediator {
 		this.model = model;
 
 		view = new EntityStatsHudViewMediator( this, Main.inst.botLeftHud );
-		
+
 		entity.components.onAppear(
 			EntityAttackListComponent,
 			( _, attackListComp ) -> {
@@ -75,13 +75,13 @@ class EntityStatsHudMediator {
 		var goldSlot = model.inventory.inventorySlots.filter(
 			( slot ) -> slot.restriction.types.contains( GOLD )
 		)[0];
-		var itemSub : ISubscription = null;
+		var sub : Composite = Composite.create();
 		goldSlot.itemProp.addOnValueImmediately( ( oldItem, newItem ) -> {
-			itemSub?.unsubscribe();
+			sub?.unsubscribe();
 			if ( newItem == null ) {
 				handler_onGoldChanged( goldSlot, 0, 0 );
 			} else {
-				itemSub = newItem.amount.addOnValueImmediately( handler_onGoldChanged.bind( goldSlot ) );
+				sub.add( newItem.amount.addOnValueImmediately( handler_onGoldChanged.bind( goldSlot ) ) );
 			}
 		} );
 	}
