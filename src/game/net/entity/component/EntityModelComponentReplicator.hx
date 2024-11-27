@@ -49,7 +49,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		if ( entityRepl.entity.result.desc.id == "player" )
 			displayName.addOnValueImmediately( ( oldName, newName ) -> {
 				if ( newName != null )
-					trace( "player nameset: " + newName );
+					trace( "player name set: " + newName );
 			} );
 	}
 

@@ -37,6 +37,12 @@ class EntityInventory extends EntityItemHolderBase {
 		super( model );
 	}
 
+	public function dispose() {
+		for ( slot in getItemSlotIterator() ) {
+			slot.dispose();
+		}
+	}
+
 	public function claimOwnage() {
 		// todo она должна знать что сущность не загружается, а создаётся с нуля. для spawnInventory
 		addItemsOnEntityCreation();

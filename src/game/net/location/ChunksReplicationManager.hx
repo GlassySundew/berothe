@@ -17,6 +17,10 @@ class ChunksReplicationManager {
 		location.onChunkCreated.add( onChunkAdded );
 	}
 
+	public function dispose() {
+		chunks.clear();
+	}
+
 	function onChunkAdded( chunk : Chunk ) {
 		validateAccess( chunk.x, chunk.y, chunk.z );
 		var chunkRepl = new ChunkReplicator( chunk, coreReplicator );

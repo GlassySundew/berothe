@@ -53,6 +53,8 @@ class EntityViewComponent extends EntityComponent {
 		#if client
 		statusBarFuture.result?.root.remove();
 		#end
+
+		viewExtraConfig = null;
 	}
 
 	public function provideExtraViewConfig( config : EntityViewExtraInitSetting ) {

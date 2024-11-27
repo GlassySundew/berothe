@@ -38,7 +38,7 @@ class EntityPresetDescription extends DescriptionBase {
 	public var canChangeLocation( default, null ) : Bool;
 	public var isAnchor( default, null ) : Bool;
 	public var rigidBodyTorsoDesc( default, null ) : Null<RigidBodyTorsoDescription>;
-	public var staticRigidBodyDecs( default, null ) : Null<StaticObjectRigidBodyDescription>;
+	public var staticRigidBodyDesc( default, null ) : Null<StaticObjectRigidBodyDescription>;
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 	public var ai( default, null ) : Null<EntityAIDescription>;
@@ -84,7 +84,7 @@ class EntityPresetDescription extends DescriptionBase {
 
 			// character
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
-			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
+			staticRigidBodyDesc = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),

@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import hxd.Timer;
 import oimo.dynamics.rigidbody.MassData;
 import oimo.common.Mat3;
 import dn.M;
@@ -25,8 +26,8 @@ class OimoRigidBody implements IRigidBody {
 		?props : Any
 	) : IRigidBody {
 
-		Assert.isOfType( shape, OimoRigidBodyShape );
-		var unwrapShape = Std.downcast( shape, OimoRigidBodyShape ).shape;
+		Assert.isOfType( shape, OimoWrappedShape );
+		var unwrapShape = Std.downcast( shape, OimoWrappedShape );
 
 		var config = new RigidBodyConfig();
 		config.type = switch type {
@@ -116,7 +117,7 @@ class OimoRigidBody implements IRigidBody {
 
 	public inline function addShape( shape : IRigidBodyShape ) {
 		shapes.push( shape );
-		rigidBody.addShape( Std.downcast( shape, OimoRigidBodyShape ).shape );
+		rigidBody.addShape( Std.downcast( shape, OimoWrappedShape ) );
 	}
 
 	public inline function setRotationFactor( rotationFactor : ThreeDeeVector ) {
@@ -205,12 +206,7 @@ class OimoRigidBody implements IRigidBody {
 		rotationY.val = hpsRotation.y;
 		rotationZ.val = hpsRotation.z;
 
-		var tmod =
-			#if server
-			game.net.server.GameServer.inst.tmod;
-			#elseif client
-			game.net.client.GameClient.inst.tmod;
-			#end
+		var tmod = Timer.tmod;
 
 		if (
 			doRoundSleep

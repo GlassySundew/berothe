@@ -21,9 +21,8 @@ class ChunkReplicator extends NetNode {
 
 	public static var chunkCount = 0;
 
-	@:s
-	var entities : NSArray<EntityReplicator> = new NSArray();
-
+	@:s var entities : NSArray<EntityReplicator> = new NSArray();
+	
 	@:s var x : Int;
 	@:s var y : Int;
 	@:s var z : Int;

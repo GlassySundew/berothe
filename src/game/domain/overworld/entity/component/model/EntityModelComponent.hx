@@ -38,6 +38,11 @@ class EntityModelComponent extends EntityComponent {
 		super( desc );
 	}
 
+	override function dispose() {
+		inventory.dispose();
+		super.dispose();
+	}
+
 	public function tryGiveItem( item : Item ) : ItemPickupAttemptResult {
 		return inventory.tryGiveItem( item );
 	}
@@ -60,7 +65,7 @@ class EntityModelComponent extends EntityComponent {
 		// todo fearing
 		return !isSleeping.val;
 	}
-	
+
 	public function isEnemy( enemyMaybe : OverworldEntity ) : Bool {
 		var enemyMaybeModel = enemyMaybe.components.get( EntityModelComponent );
 		if ( enemyMaybeModel == null ) return false;

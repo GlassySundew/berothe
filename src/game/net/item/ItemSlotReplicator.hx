@@ -51,7 +51,7 @@ class ItemSlotReplicator extends NetNode {
 	}
 
 	function onItemChanged( oldItem : Item, item : Item ) {
-		if ( oldItem != null ) {
+		if ( oldItem != null && !oldItem.disposed.isTriggered ) {
 			var itemReplicator = CoreReplicator.inst.getItemReplicator( oldItem );
 			removeChild( itemReplicator );
 		}

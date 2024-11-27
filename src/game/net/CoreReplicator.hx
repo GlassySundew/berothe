@@ -55,7 +55,7 @@ class CoreReplicator {
 		item : Item
 	) : ItemReplicator {
 		var itemRepl = items[item.id];
-		Assert.notNull( itemRepl, 'item replicator is not found' );
+		Assert.notNull( itemRepl, item + ' replicator is not found' );
 		return itemRepl;
 	}
 
@@ -68,11 +68,23 @@ class CoreReplicator {
 		);
 		#end
 		locations[location.id] = new LocationReplicator( location, this );
+		location.disposed.then( _ -> {
+			locations[location.id].dispose();
+			locations.remove( location.id );
+		} );
 	}
 
 	function onEntityCreated( entity : OverworldEntity ) {
+		#if debug
+		Assert.notExistsInMap(
+			entity.id,
+			entities,
+			"entity id interfere check failed in main replication module!"
+		);
+		#end
 		var entityReplicator = new EntityReplicator( entity );
 		entities[entity.id] = entityReplicator;
+		entity.postDisposed.then( _ -> entities.remove( entity.id ) );
 
 		entityReplicator.followServer();
 	}
@@ -88,5 +100,8 @@ class CoreReplicator {
 
 		var itemReplicator = new ItemReplicator( item );
 		items[item.id] = itemReplicator;
+		item.disposed.then( _ -> {
+			items.remove( item.id );
+		} );
 	}
 }

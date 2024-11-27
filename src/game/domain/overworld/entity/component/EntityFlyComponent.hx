@@ -1,7 +1,6 @@
 package game.domain.overworld.entity.component;
 
 import game.data.storage.DataStorage;
-import game.net.server.GameServer;
 import game.domain.overworld.location.physics.RayCastHit;
 import game.domain.overworld.location.physics.IRigidBodyShape;
 import game.physics.oimo.RayCastCallback;
@@ -54,10 +53,11 @@ class EntityFlyComponent extends EntityComponent {
 	}
 
 	inline function onRayCollide( shape : IRigidBodyShape, rayCastHit : RayCastHit ) {
-		// GameServer.inst.tmod
-		trace( rayCastHit.fraction );
+
+		#if server
 		if ( rayCastHit.fraction < 1 ) {
-			entity.transform.velZ.val += ( 1 - rayCastHit.fraction ) * 2;
+			entity.transform.velZ.val += ( 1 - rayCastHit.fraction ) * 2 * game.net.server.GameServer.inst.tmod;
 		}
+		#end
 	}
 }

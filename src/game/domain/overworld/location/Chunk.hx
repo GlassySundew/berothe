@@ -57,6 +57,7 @@ class Chunk {
 	public function removeEntity( entity : OverworldEntity ) {
 		if ( entities.remove( entity ) ) {
 			entitySubs[entity]?.unsubscribe();
+			entitySubs.remove( entity );
 			onEntityRemoved.dispatch( entity );
 		} else {
 			trace( "entity: " + entity + " was not found in the chunk it has to be removed from" );

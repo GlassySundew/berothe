@@ -95,11 +95,10 @@ class GameClient extends Process {
 			if ( oldLoc != null ) {
 				if ( !controlledEntity.getValue().entity.result?.disposed.isTriggered )
 					oldLoc.removeEntity( controlledEntity.getValue().entity.result );
-				oldLoc.dispose();
-				oldLoc.update( 0, 0 );
 				#if debug
 				oldLoc.physics.getDebugDraw()?.remove();
 				#end
+				oldLoc.dispose();
 			}
 
 			if ( newLoc == null ) return;
@@ -125,6 +124,8 @@ class GameClient extends Process {
 	}
 
 	public function onLocationProvided( locationDescId : String ) {
+		trace( "LOCATION PROVIDED: " + locationDescId );
+
 		controlledEntity.onAppear( ( playerRepl ) -> {
 			new graphics.BatchRenderer( Boot.inst.s3d );
 			currentLocationSelf.val = core.getOrCreateLocationByDesc(

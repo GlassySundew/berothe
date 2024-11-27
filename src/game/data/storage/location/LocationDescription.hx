@@ -46,6 +46,8 @@ class LocationDescription extends DescriptionBase {
 
 	final levelType : LocationType;
 
+	var locationDataResolver : LocationDataResolver;
+
 	public function new(
 		locType : LocationType,
 		chunkSize : Int,
@@ -60,7 +62,7 @@ class LocationDescription extends DescriptionBase {
 		this.instancing = instancing;
 	}
 
-	public function createLocationDataResolver() : LocationDataResolver {
-		return new LocationDataResolver( levelType );
+	public function getLocationDataResolver() : LocationDataResolver {
+		return( locationDataResolver ?? ( locationDataResolver = new LocationDataResolver( levelType ) ) );
 	}
 }

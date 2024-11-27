@@ -20,9 +20,15 @@ class EntityDynamicsComponent extends EntityComponent {
 		onMoveInvalidate = true;
 	}
 
+	override function dispose() {
+		super.dispose();
+		onMove.destroy();
+		isResting.dispose();
+	}
+
 	override function claimOwnage() {
 		super.claimOwnage();
-		
+
 		subscription?.unsubscribe();
 		subscription = Composite.create();
 
@@ -82,6 +88,11 @@ class EntityDynamicsComponent extends EntityComponent {
 		isResting.val = !onMoveInvalidate;
 
 		if ( onMoveInvalidate ) {
+			if ( entity.transform.z.val <= -100 ) {
+				trace( "WARNING: " + entity + " has fell off on " + entity.location.getValue() + " destroying..." );
+				entity.dispose();
+			}
+
 			onMoveInvalidate = false;
 			onMove.dispatch();
 		}

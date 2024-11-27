@@ -46,27 +46,24 @@ class EntityComponentsReplicator extends NetNode {
 	}
 
 	public function dispose() {
-		@:privateAccess
-		for ( component in components.map ) {
-			component.dispose();
+		for ( component in components.keyValueIterator() ) {
+			component.value.dispose();
 		}
+		components.__host = null;
 	}
 
 	function onComponentAdded( component : EntityComponent ) {
 		if ( !component.description.isReplicable ) return;
 
 		var replicator = component.description.buildCompReplicator( this );
-		replicator?.followComponentServer( component, entityRepl );
-		if ( replicator != null ) components[replicator.classType] = replicator;
+		replicator.followComponentServer( component, entityRepl );
+		components[replicator.classType] = replicator;
 
 		if (
 			isMappingFinished
 			&& entityRepl.entity.result.components.get( component.classType ) != null
 		)
 			trace( "apparently bad logic, double component set: " + component.classType );
-
-		if ( replicator == null )
-			trace( component + " component does not have network replication" );
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {

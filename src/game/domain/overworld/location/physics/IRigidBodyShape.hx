@@ -12,8 +12,8 @@ interface IRigidBodyShape {
 	function getCollisionGroup() : Int;
 	function getCollisionMask() : Int;
 	function getPosition() : ThreeDeeVector;
-	function setContactCallback( callback : ContactCallbackWrapper ) : Void;
-	function getContactCallback() : ContactCallbackWrapper;
+	function setContactCallbackWrapper( callback : ContactCallbackWrapper ) : Void;
+	function getContactCallbackWrapper() : ContactCallbackWrapper;
 	function setDensity( value : Float ) : Void;
 	function setRestitution( value : Float ) : Void;
 	function setFriction( value : Float ) : Void;

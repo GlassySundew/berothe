@@ -24,6 +24,10 @@ class ItemSlot implements IItemContainer {
 		this.restriction = restriction ?? new ItemRestriction();
 	}
 
+	public function dispose() {
+		item.val?.dispose();
+	}
+
 	public function giveItem( itemGiven : Item ) {
 		if ( item.val != null ) {
 			if ( item.val.desc == itemGiven.desc ) {

@@ -20,6 +20,10 @@ class Chunks {
 		this.location = location;
 	}
 
+	public function dispose() {
+
+	}
+	
 	public function removeEntity( entity : OverworldEntity ) {
 		entitySubscriptions[entity]?.unsubscribe();
 		entitySubscriptions.remove( entity );
@@ -44,9 +48,7 @@ class Chunks {
 		var dynamics = entity.components.get( EntityDynamicsComponent );
 		if ( dynamics != null ) {
 			var sub = dynamics.onMove.add( onEntityMove.bind( entity ) );
-			var assignment = SingleAssignment.create();
-			assignment.set( sub );
-			entitySubscriptions[entity] = assignment;
+			entitySubscriptions[entity] = sub;
 		}
 		onEntityMove( entity );
 	}

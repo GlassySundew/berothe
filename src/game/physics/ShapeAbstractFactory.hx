@@ -1,9 +1,9 @@
 package game.physics;
 
+import game.physics.oimo.OimoWrappedShape;
 import dn.M;
 import game.physics.oimo.OimoShapeConfig;
 import game.domain.overworld.location.physics.IRigidBodyShape;
-import game.physics.oimo.OimoRigidBodyShape;
 
 class ShapeAbstractFactory {
 
@@ -18,7 +18,7 @@ class ShapeAbstractFactory {
 		var shapeConfig = ShapeConfigFactory.create();
 		shapeConfig.setGeometry( geom );
 
-		return OimoRigidBodyShape.create( shapeConfig );
+		return new OimoWrappedShape( shapeConfig );
 	}
 
 	public static function capsule(
@@ -31,7 +31,7 @@ class ShapeAbstractFactory {
 		var shapeConfig = ShapeConfigFactory.create();
 		shapeConfig.setGeometry( geom );
 
-		var shape = OimoRigidBodyShape.create( shapeConfig );
+		var shape = new OimoWrappedShape( shapeConfig );
 		shape.setLocalRotation( M.toRad( 90 ), 0, 0 );
 		return shape;
 	}

@@ -25,6 +25,7 @@ class Location {
 	static final fixedTimeStep = 1.0 / 60.0; // Шаг физики в секундах (60 Гц)
 
 	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
+	public var physics( default, null ) : IPhysicsEngine;
 
 	/** not replicated but created via `location id` -> `geting through DataStorage on client` **/
 	public final objectFactory : OverworldStaticObjectsFactory;
@@ -33,11 +34,10 @@ class Location {
 	public final locationDesc : LocationDescription;
 	public final id : String;
 	public final chunks : Chunks;
-	public final physics : IPhysicsEngine;
 	public final triggers : Array<EntityTrigger> = [];
 	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
 	public final localPoints : EntityLocalPoints = new EntityLocalPoints();
-	
+
 	public final onChunkCreated = new Signal<Chunk>();
 	public final onEntityAdded = new Signal<OverworldEntity>();
 	public final onNoMoreAnchorEntitiesLeft = new Signal();
@@ -49,6 +49,7 @@ class Location {
 	final globalEntities : Array<OverworldEntity> = [];
 	final entitySubscriptions : Map<OverworldEntity, ISubscription> = [];
 
+	var disposeInvalidate = false;
 	var anchorEntitiesPresent : Int = 0;
 	var accumulatedTime = 0.0;
 
@@ -84,7 +85,13 @@ class Location {
 		}
 		triggers.resize( 0 );
 		physics.dispose();
+		physics = null;
+		entities.resize( 0 );
 		disposed.resolve( true );
+	}
+
+	public function invalidateDispose() {
+		disposeInvalidate = true;
 	}
 
 	public function addEntity( entity : OverworldEntity ) {
@@ -103,10 +110,12 @@ class Location {
 		#if debug
 		Assert.notExistsInMap( entity, entitySubscriptions );
 		#end
+
 		var sub : CallbackLink = null;
 		entitySubscriptions[entity] = Subscription.create(() -> sub.cancel() );
 		sub = entity.disposed.then( _ -> {
 			removeEntity( entity );
+			trace( entity + " has been removed from location" );
 			// entity.removeChunk();
 		} );
 
@@ -177,19 +186,22 @@ class Location {
 		}
 
 		for ( entity in entities ) {
+			if ( entity.disposed.isTriggered ) continue;
 			entity.update( dt, tmod );
 		}
 		for ( entity in globalEntities ) {
 			entity.update( dt, tmod );
 		}
 		behaviourManager.update( dt, tmod );
+
+		if ( disposeInvalidate ) dispose();
 	}
 
 	public function loadAuthoritative() {
 		// TODO async
 		loadData();
 
-		onNoMoreAnchorEntitiesLeft.add( dispose );
+		onNoMoreAnchorEntitiesLeft.add( invalidateDispose );
 
 		createAndAttachTriggers();
 		setupLocationTransitionTriggers();
@@ -213,7 +225,7 @@ class Location {
 	}
 
 	function loadData() {
-		locationDataProvider = locationDesc.createLocationDataResolver().objectsDataProvider;
+		locationDataProvider = locationDesc.getLocationDataResolver().objectsDataProvider;
 		locationDataProvider.load();
 	}
 

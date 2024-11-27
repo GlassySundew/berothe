@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.block;
 
+import rx.disposables.Composite;
 import game.domain.overworld.location.Location;
 import game.domain.overworld.entity.component.EntityRigidBodyComponentBase;
 import util.Assert;
@@ -33,32 +34,27 @@ class StaticObjectRigidBodyComponent extends EntityRigidBodyComponentBase {
 	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
 		super.onAttachedToLocation( oldLoc, location );
 		if ( location == null ) return;
-
-		entity.transform.x.subscribeProp( rigidBody.x, true );
-		entity.transform.y.subscribeProp( rigidBody.y, true );
-		entity.transform.z.subscribeProp( rigidBody.z, true );
-		entity.transform.velX.subscribeProp( rigidBody.velX, true );
-		entity.transform.velY.subscribeProp( rigidBody.velY, true );
-		entity.transform.velZ.subscribeProp( rigidBody.velZ, true );
-		entity.transform.rotationX.subscribeProp( rigidBody.rotationX, true );
-		entity.transform.rotationY.subscribeProp( rigidBody.rotationY, true );
-		entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ, true );
+		subscription.add( entity.transform.x.subscribeProp( rigidBody.x, true ) );
+		subscription.add( entity.transform.y.subscribeProp( rigidBody.y, true ) );
+		subscription.add( entity.transform.z.subscribeProp( rigidBody.z, true ) );
+		subscription.add( entity.transform.velX.subscribeProp( rigidBody.velX, true ) );
+		subscription.add( entity.transform.velY.subscribeProp( rigidBody.velY, true ) );
+		subscription.add( entity.transform.velZ.subscribeProp( rigidBody.velZ, true ) );
+		subscription.add( entity.transform.rotationX.subscribeProp( rigidBody.rotationX, true ) );
+		subscription.add( entity.transform.rotationY.subscribeProp( rigidBody.rotationY, true ) );
+		subscription.add( entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ, true ) );
 	}
-	
+
 	function createRigidBody() : IRigidBody {
 		Assert.notNull( config );
-
 		var torsoShape = ShapeAbstractFactory.box(
 			config.sizeX,
 			config.sizeY,
 			config.sizeZ
 		);
-
 		var rigidBodyLocal = RigidBodyAbstractFactory.create( torsoShape, STATIC );
-
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
-
 		return rigidBodyLocal;
 	}
 }

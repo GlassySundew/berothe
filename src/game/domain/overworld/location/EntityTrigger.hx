@@ -35,7 +35,7 @@ class EntityTrigger {
 		);
 		torsoShape.setCollisionGroup( util.Const.G_PHYSICS );
 		torsoShape.setCollisionMask( util.Const.G_PHYSICS );
-		torsoShape.setContactCallback( cb );
+		torsoShape.setContactCallbackWrapper( cb );
 
 		rigidBody = RigidBodyAbstractFactory.create(
 			torsoShape,

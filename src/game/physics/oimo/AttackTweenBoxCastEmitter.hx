@@ -59,10 +59,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		var shapeConfig = ShapeConfigFactory.create();
 		shapeConfig.setGeometry( geom );
 
-		shape = OimoRigidBodyShape.create( shapeConfig );
+		shape = new OimoWrappedShape( shapeConfig );
 		shape.setCollisionGroup( util.Const.G_HITBOX );
 		shape.setCollisionMask( util.Const.G_HITBOX );
-		shape.setContactCallback( new ContactCallbackWrapper() );
+		shape.setContactCallbackWrapper( new ContactCallbackWrapper() );
 
 		rigidBody = RigidBodyAbstractFactory.create( shape, TRIGGER );
 		rigidBody.setRotationFactor( { x : 0, y : 0, z : 0 } );
@@ -103,7 +103,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	}
 
 	public inline function getCallbackContainer() : ContactCallbackWrapper {
-		return shape.getContactCallback();
+		return shape.getContactCallbackWrapper();
 	}
 
 	public function performCasting() {

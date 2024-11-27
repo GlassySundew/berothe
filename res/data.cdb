@@ -504,7 +504,7 @@
 									"offsetY": -2.1,
 									"offsetZ": 8,
 									"cooldown": 3.4,
-									"duration": 0.35,
+									"duration": 0.3,
 									"endX": 2,
 									"equipSlot": "hand_left",
 									"baseAttack": 1
@@ -519,7 +519,7 @@
 									"offsetY": 2.1,
 									"offsetZ": 8,
 									"cooldown": 0.7,
-									"duration": 0.35,
+									"duration": 0.3,
 									"endX": 2,
 									"key": "attack_right_attack",
 									"equipSlot": "hand_right",
@@ -2951,7 +2951,7 @@
 				{
 					"typeStr": "2",
 					"name": "isOpen",
-					"kind": null
+					"documentation": "is open air, adds directed lighting if true"
 				},
 				{
 					"typeStr": "3",
@@ -2972,7 +2972,7 @@
 						0,
 						"start"
 					],
-					"instancing": 0,
+					"instancing": 2,
 					"isOpen": false
 				},
 				{

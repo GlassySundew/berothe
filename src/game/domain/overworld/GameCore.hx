@@ -51,7 +51,6 @@ class GameCore implements IUpdatable {
 
 	public final entityFactory : EntityFactory;
 	public final itemFactory : ItemFactory;
-	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 	final locationFactory : LocationFactory;
 	final locationContainers : Map<String, ILocationContainer> = [];
 
@@ -83,6 +82,5 @@ class GameCore implements IUpdatable {
 		for ( location in locationContainers ) {
 			location.update( dt, tmod );
 		}
-		onFrame.dispatch( dt, tmod );
 	}
 }

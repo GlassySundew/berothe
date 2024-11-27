@@ -24,7 +24,7 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 	var world : World = new World();
 	var debugDraw : HeapsOimophysicsDebugDraw;
 
-	var shapes : Map<Int, OimoRigidBodyShape> = [];
+	var shapes : Map<Int, OimoWrappedShape> = [];
 
 	public inline function new() {
 		world.setGravity( new Vec3( 0, 0, -9.8 ) );
@@ -32,6 +32,7 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 
 	public function dispose() {
 		world._rigidBodyList = null;
+		world = null;
 	}
 
 	public inline function update( dt : Float ) {

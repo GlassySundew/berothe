@@ -366,6 +366,20 @@
 								"$cdbtype": "locationEntityDF",
 								"isBatched": true
 							},
+							"x": -47.8,
+							"y": 65.04,
+							"z": 1,
+							"rotationZ": 61.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
 							"x": -0.4,
 							"y": 61.54,
 							"z": 1,

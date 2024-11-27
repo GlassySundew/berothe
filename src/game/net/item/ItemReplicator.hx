@@ -32,6 +32,7 @@ class ItemReplicator extends NetNode {
 	function onItemDisposed() {
 		unregister( NetworkHost.current );
 		parent?.removeChild( this );
+		__host = null;
 	}
 
 	override function alive() {

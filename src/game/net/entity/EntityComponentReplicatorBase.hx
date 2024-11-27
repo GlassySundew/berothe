@@ -23,7 +23,9 @@ abstract class EntityComponentReplicatorBase extends NetNode {
 		super.init();
 	}
 
-	public function dispose() {}
+	public function dispose() {
+		component = null;
+	}
 
 	override function alive() {
 		super.alive();

@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 import dn.Delayer;
 import util.Assert;
 import future.Future;
@@ -19,9 +20,10 @@ class OverworldEntity {
 	public final transform : EntityTransform = new EntityTransform();
 	public final components : EntityComponents;
 	public final delayer = new Delayer( hxd.Timer.wantedFPS );
-	public final onFrame : Signal<Float, Float> = new Signal<Float, Float>();
 	public final disposed : Future<Bool> = new Future();
 	public final postDisposed : Future<Bool> = new Future();
+
+	public var onFrame( default, null ) : Signal<Float, Float> = new Signal<Float, Float>();
 
 	var chunkSelf : MutableProperty<Chunk> = new MutableProperty<Chunk>();
 	public var chunk( get, never ) : IProperty<Chunk>;
@@ -43,15 +45,19 @@ class OverworldEntity {
 
 	public function dispose() {
 		Assert.isFalse( disposed.isTriggered, this + " entity double dispose" );
-		components.dispose();
 		disposed.resolve( true );
+		components.dispose();
 		postDisposed.resolve( true );
 		delayer.destroy();
+
+		onFrame.destroy();
+		onFrame = null;
 	}
 
-	public inline function update( dt : Float, tmod : Float ) {
-		delayer.update( tmod );
+	#if !debug inline #end
+	public function update( dt : Float, tmod : Float ) {
 		onFrame.dispatch( dt, tmod );
+		delayer.update( tmod );
 	}
 
 	public function setLocation( location : Location ) {
@@ -68,6 +74,7 @@ class OverworldEntity {
 
 	@:keep
 	public function toString() : String {
-		return "Entity: " + desc.id;
+		var model = components.get( EntityModelComponent );
+		return "Entity: " + desc.id + " " + ( model != null ? model.displayName.val : "" );
 	}
 }

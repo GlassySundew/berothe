@@ -2,6 +2,8 @@
 	entrypoint for headless standalone server executable
 **/
 
+import sys.thread.Thread;
+import util.Repeater;
 import hxd.System;
 import hxd.Timer;
 import net.Server;
@@ -16,21 +18,30 @@ class ServerBoot {
 		inst = new ServerBoot();
 	}
 
-	function loadAssets( onLoaded : Void -> Void ) {
-		onLoaded();
-	}
-
+	var fps = 0.;
 	var speed = 1.0;
-	final thousandSlashSixty = 1000 / 60;
+
+	var lastTime : Float = Sys.time();
+
+	final oneSlashSixty = 1 / 60;
 
 	function mainLoop() {
-		// Sys.sleep(( thousandSlashSixty - Timer.dt ) / 1000 );
 		hxd.Timer.update();
+
+		var currentTime : Float = Sys.time();
+		var dt : Float = currentTime - lastTime;
+		fps = 1.0 / dt;
+		var delaySeconds = oneSlashSixty - dt;
+
+		lastTime = currentTime;
+
+		if ( delaySeconds > 0 ) {
+			Sys.sleep( delaySeconds );
+		}
+
 		var tmod = hxd.Timer.tmod * speed;
 		dn.Process.updateAll( tmod );
 	}
-
-	function update( dt : Float ) {}
 
 	public function new() {
 
@@ -40,18 +51,16 @@ class ServerBoot {
 		}
 
 		hxd.System.start( function () {
-			loadAssets( function () {
-				hxd.Timer.skip();
-				mainLoop();
-				hxd.System.setLoop( mainLoop );
+			mainLoop();
+			hxd.System.setLoop( mainLoop );
 
-				server = new Server();
+			server = new Server();
 
-
-			} );
 			#if !debug
 			hl.UI.closeConsole();
 			#end
 		} );
+
+		// Repeater.repeatSeconds(() -> trace( fps, Timer.dt ), 5 );
 	}
 }

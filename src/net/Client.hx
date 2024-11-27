@@ -117,18 +117,19 @@ class Client extends Process {
 	}
 
 	function onError( msg : String ) {
+		trace( "connection error : " + msg );
 		switch msg {
 			case "Connection closed" | "Failed to write data":
 				if ( connected ) connectionClosed();
-			default:
-				connectionClosed();
+			case e:
+				connectionClosed( msg );
 		}
 	}
 
-	function connectionClosed() {
+	function connectionClosed( reason = "Connection closed" ) {
 		disconnect();
 		new ConfirmDialog(
-			"Connection closed",
+			reason,
 			( e ) -> {
 				new MainMenu( Main.inst.root );
 			},
