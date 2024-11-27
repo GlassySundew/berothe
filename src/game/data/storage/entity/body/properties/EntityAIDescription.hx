@@ -20,6 +20,7 @@ class AIProperties {
 inline function getTypeFromCdb( cdbEntry : Data.NpcBehaviour ) : EntityBehaviourType {
 	return
 		switch cdbEntry.id {
+			case flowerPollinator: FLOWER_POLLINATOR;
 			case sleepyPointGuard: SLEEPY_POINT_GUARD;
 			case randomRoaming: RANDOM_ROAMING;
 		}
@@ -27,6 +28,7 @@ inline function getTypeFromCdb( cdbEntry : Data.NpcBehaviour ) : EntityBehaviour
 
 enum abstract EntityBehaviourType( String ) to String {
 
+	var FLOWER_POLLINATOR;
 	var SLEEPY_POINT_GUARD;
 	var RANDOM_ROAMING;
 }

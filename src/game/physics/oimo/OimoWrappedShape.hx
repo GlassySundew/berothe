@@ -13,7 +13,10 @@ class OimoWrappedShape extends Shape {
 		return cacheIdSelf;
 	}
 
+	public final config : IShapeConfig;
+
 	public function new( config : IShapeConfig ) {
 		super( Std.downcast( config, OimoShapeConfig ).config );
+		this.config = config;
 	}
 }

@@ -14,4 +14,9 @@ interface IRigidBodyShape {
 	function getPosition() : ThreeDeeVector;
 	function setContactCallback( callback : ContactCallbackWrapper ) : Void;
 	function getContactCallback() : ContactCallbackWrapper;
+	function setDensity( value : Float ) : Void;
+	function setRestitution( value : Float ) : Void;
+	function setFriction( value : Float ) : Void;
+	function setVolume( value : Float ) : Void;
+	function getConfig() : IShapeConfig;
 }

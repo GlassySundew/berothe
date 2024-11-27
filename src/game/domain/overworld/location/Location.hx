@@ -22,34 +22,34 @@ import game.physics.PhysicsEngineAbstractFactory;
 
 class Location {
 
-	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
+	static final fixedTimeStep = 1.0 / 60.0; // Шаг физики в секундах (60 Гц)
 
-	public final locationDesc : LocationDescription;
-	public final id : String;
-	public final physics : IPhysicsEngine;
-	public final entityFactory : EntityFactory;
-	public final chunks : Chunks;
-	public final triggers : Array<EntityTrigger> = [];
-	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
+	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
 
 	/** not replicated but created via `location id` -> `geting through DataStorage on client` **/
 	public final objectFactory : OverworldStaticObjectsFactory;
+	public final entityFactory : EntityFactory;
 
+	public final locationDesc : LocationDescription;
+	public final id : String;
+	public final chunks : Chunks;
+	public final physics : IPhysicsEngine;
+	public final triggers : Array<EntityTrigger> = [];
+	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
+	public final localPoints : EntityLocalPoints = new EntityLocalPoints();
+	
 	public final onChunkCreated = new Signal<Chunk>();
 	public final onEntityAdded = new Signal<OverworldEntity>();
+	public final onNoMoreAnchorEntitiesLeft = new Signal();
 	public final onEntityRemoved : Signal<OverworldEntity> = new Signal<OverworldEntity>();
 	public final entityStream : Observable<OverworldEntity>;
 	public final disposed : Future<Bool> = new Future();
-
-	public final onNoMoreAnchorEntitiesLeft = new Signal();
 
 	final entities : Array<OverworldEntity> = [];
 	final globalEntities : Array<OverworldEntity> = [];
 	final entitySubscriptions : Map<OverworldEntity, ISubscription> = [];
 
 	var anchorEntitiesPresent : Int = 0;
-
-	var fixedTimeStep = 1.0 / 60.0; // Шаг физики в секундах (60 Гц)
 	var accumulatedTime = 0.0;
 
 	public function new(

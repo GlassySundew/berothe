@@ -15,7 +15,8 @@ class RuleStorage {
 	public var unfriendlyPlayerFaction( default, null ) : String;
 	public var baseHpRegenPerSecond( default, null ) : Float;
 	public var regenDelayOnDamageSecond( default, null ) : Float;
-
+	public var flyingEntityGravityScale( default, null ) : Float;
+	
 	// dont touch this, only add fields
 	public function new( rules : IndexId<Data.Rule, Data.RuleKind> ) {
 		for ( entry in Reflect.fields( this ) ) {

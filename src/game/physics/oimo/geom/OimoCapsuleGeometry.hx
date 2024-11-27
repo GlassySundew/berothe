@@ -1,12 +1,15 @@
 package game.physics.oimo.geom;
+
+import oimo.common.Mat3;
+import oimo.collision.geometry.CapsuleGeometry;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import oimo.m.M;
 
-class OimoCapsuleGeometry extends OimoGeometry {
-	
-	public final capsuleGeom : oimo.collision.geometry.CapsuleGeometry;
+class OimoCapsuleGeometry extends CapsuleGeometry {
 
-	public function new( geom : oimo.collision.geometry.CapsuleGeometry ) {
-		this.capsuleGeom = geom;
-		super( geom );
+	public var mass : Float = 1;
+
+	public function new( radius : Float, halfHeight : Float ) {
+		super( radius, halfHeight );
 	}
 }

@@ -71,4 +71,25 @@ class OimoRigidBodyShape implements IRigidBodyShape {
 		#if debug Assert.isOfType( shape.getContactCallback(), ContactCallbackWrapper ); #end
 		return Std.downcast( shape.getContactCallback(), ContactCallbackWrapper );
 	}
+
+	public inline function setDensity( value : Float ) {
+		shape.setDensity( value );
+	}
+
+	public inline function setRestitution( value : Float ) {
+		shape.setRestitution( value );
+	}
+
+	public inline function setFriction( value : Float ) {
+		shape.setFriction( value );
+	}
+
+	public inline function setVolume( value : Float ) {
+		shape.config.geom.setVolume( value );
+		shape._rigidBody?._shapeModified();
+	}
+
+	public inline function getConfig() : IShapeConfig {
+		return shape.config;
+	}
 }

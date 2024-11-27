@@ -1,5 +1,6 @@
 package net;
 
+import signals.Signal;
 #if server
 import dn.Process;
 import game.net.server.GameServer;
@@ -27,6 +28,8 @@ class Server extends Process {
 
 	public var host( default, null ) : SocketHost;
 	public var uid : Int;
+
+	public final onClientDisconnected = new Signal<ClientController>();
 
 	var game : GameServer;
 
@@ -96,6 +99,8 @@ class Server extends Process {
 
 		// clientController.unregister( host );
 		clientController.__host = null;
+
+		onClientDisconnected.dispatch( clientController );
 	}
 
 	public function log( s : String, ?pos : haxe.PosInfos ) {

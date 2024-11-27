@@ -1,11 +1,11 @@
 {
 	"type": "entityComposer",
-	"name": "tree",
-	"x": -29.93,
-	"y": 61.6,
-	"z": 1,
-	"rotationZ": -17.3,
 	"children": [
+		{
+			"type": "model",
+			"name": "tree",
+			"source": "voxel/structures/tree/obj/fbx/tree.fbx"
+		},
 		{
 			"type": "customBox",
 			"name": "customBox",
@@ -15,21 +15,11 @@
 					1
 				]
 			},
-			"x": 1,
-			"y": 1,
-			"z": 35.7,
-			"scaleX": 23,
-			"scaleY": 23,
-			"scaleZ": 28.6,
-			"isCollidable": false
-		},
-		{
-			"type": "model",
-			"name": "tree",
-			"source": "voxel/structures/tree/obj/fbx/tree.fbx",
-			"x": -0.41,
-			"y": -1.22,
-			"retargetAnim": true
+			"y": 1.83,
+			"z": 35.54,
+			"scaleX": 18.44,
+			"scaleY": 21.27,
+			"scaleZ": 30.02
 		}
 	]
 }

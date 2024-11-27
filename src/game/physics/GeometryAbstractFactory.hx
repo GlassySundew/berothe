@@ -1,5 +1,6 @@
 package game.physics;
 
+import game.physics.oimo.geom.OimoBoxGeomWrapper;
 import game.physics.oimo.OimoGeometry;
 import game.physics.oimo.geom.OimoCapsuleGeometry;
 import oimo.collision.geometry.CapsuleGeometry;
@@ -16,16 +17,12 @@ class GeometryAbstractFactory {
 		zSize : Float
 	) : IBoxGeometry {
 
-		var geom = new BoxGeometry(
-			new Vec3(
-				xSize / 2,
-				ySize / 2,
-				zSize / 2
-			)
-		);
-
-		var wrapper = new OimoBoxGeometry( geom );
-		return wrapper;
+		var wrapper = new OimoBoxGeometry( new Vec3(
+			xSize / 2,
+			ySize / 2,
+			zSize / 2
+		) );
+		return new OimoBoxGeomWrapper( wrapper );
 	}
 
 	public static function capsule(
@@ -33,12 +30,10 @@ class GeometryAbstractFactory {
 		zSize : Float
 	) : OimoGeometry {
 
-		var geom = new CapsuleGeometry(
+		var wrapper = new OimoCapsuleGeometry(
 			xSize / 2,
 			zSize / 2
 		);
-
-		var wrapper = new OimoCapsuleGeometry( geom );
-		return wrapper;
+		return new OimoGeometry( wrapper );
 	}
 }

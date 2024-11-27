@@ -1,5 +1,7 @@
 package game.data.storage.entity.body;
 
+import game.data.storage.entity.body.properties.EntityFlyingDescription;
+import game.data.storage.entity.body.properties.LocalDispatchPointDescription;
 import game.data.storage.entity.body.properties.DeathMessageDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
@@ -41,9 +43,11 @@ class EntityPresetDescription extends DescriptionBase {
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 	public var ai( default, null ) : Null<EntityAIDescription>;
 	public var model : Null<EntityModelDescription>;
+	public var fly : Null<EntityFlyingDescription>;
 
 	// structure
 	public var interactabeDesc( default, null ) : Null<InteractableDescription>;
+	public var localDispatchPoint( default, null ) : Null<LocalDispatchPointDescription>;
 
 	// item
 	public var ofItem : EntityOfItemComponentDescription;
@@ -77,7 +81,7 @@ class EntityPresetDescription extends DescriptionBase {
 
 			// special
 			deathMessage = new DeathMessageDescription(),
-			
+
 			// character
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			staticRigidBodyDecs = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
@@ -85,9 +89,11 @@ class EntityPresetDescription extends DescriptionBase {
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
 			ai = EntityAIDescription.fromCdb( entry.properties.properties.behaviour ),
+			fly = EntityFlyingDescription.fromCdb( entry.properties.properties.flyingDistance ),
 
 			// structure
 			interactabeDesc = InteractableDescription.fromCdb( entry.properties.properties.interactable ),
+			localDispatchPoint = LocalDispatchPointDescription.fromCdb( entry.properties.properties.localDispatchPoint ),
 
 			// item
 			ofItem = new EntityOfItemComponentDescription(),
@@ -100,6 +106,7 @@ class EntityPresetDescription extends DescriptionBase {
 			lightSource = EntityLightSourceDescription.fromCdb( entry.properties.properties.lightSource ),
 			ViewColorRandomShiftDescription.fromCdb( entry.view.viewComps.colorRandomShift ),
 			ViewStencilDescription.fromCdb( entry.view.viewComps.stencil ),
+
 		] : Array<EntityComponentDescription> ) );
 		#end
 	}

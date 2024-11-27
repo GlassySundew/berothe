@@ -12,7 +12,7 @@ import net.NetNode;
 
 class EntityTransformReplicator extends NetNode {
 
-	static final maxInterpolationTime = 100;
+	static final maxInterpolationTime = 200;
 
 	@:s public final x : NSMutableProperty<Float> = new NSMutableProperty( 0. );
 	@:s public final y : NSMutableProperty<Float> = new NSMutableProperty( 0. );
@@ -93,56 +93,6 @@ class EntityTransformReplicator extends NetNode {
 
 		interpolationSub?.unsubscribe();
 		interpolationSub = Composite.create();
-
-		var networkSyncInvalidate = false;
-
-		#if client
-		var isInterpolating = false;
-		interpolationSub.add( x.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncX = ( Math.abs( newVal - oldVal ) > 5 ) ? newVal : oldVal;
-			networkSyncInvalidate = true;
-		} ) );
-		interpolationSub.add( y.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncY = ( Math.abs( newVal - oldVal ) > 5 ) ? newVal : oldVal;
-			networkSyncInvalidate = true;
-		} ) );
-		interpolationSub.add( z.addOnValue( ( oldVal, newVal ) -> {
-			lastUpdateTS = Timer.stamp();
-			lastSyncZ = ( Math.abs( newVal - oldVal ) > 5 ) ? newVal : oldVal;
-			networkSyncInvalidate = true;
-		} ) );
-
-		interpolationSub.add( entity.onFrame.add( ( dt, tmod ) -> {
-
-			if ( networkSyncInvalidate == true ) {
-				lastSyncX = x.val;
-				lastSyncY = y.val;
-				lastSyncZ = z.val;
-				networkSyncInvalidate = false;
-			}
-
-			var timeSinceLastUpd = ( Timer.stamp() - lastUpdateTS ) * 1000;
-			var interpRatio = timeSinceLastUpd / maxInterpolationTime;
-			if ( interpRatio > 1 ) {
-				return;
-			}
-			x.mutePropagation = true;
-			y.mutePropagation = true;
-			z.mutePropagation = true;
-			isInterpolating = true;
-
-			entity.transform.x.val = hxd.Math.lerp( lastSyncX, x.val, interpRatio );
-			entity.transform.y.val = hxd.Math.lerp( lastSyncY, y.val, interpRatio );
-			entity.transform.z.val = hxd.Math.lerp( lastSyncZ, z.val, interpRatio );
-
-			x.mutePropagation = false;
-			y.mutePropagation = false;
-			z.mutePropagation = false;
-			isInterpolating = false;
-		} ) );
-		#end
 	}
 
 	public function claimOwnage() {
@@ -156,7 +106,6 @@ class EntityTransformReplicator extends NetNode {
 
 	function setupClientSyncronization() {
 		createNetworkToModelStream();
-		// createModelToNetworkStream();
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {

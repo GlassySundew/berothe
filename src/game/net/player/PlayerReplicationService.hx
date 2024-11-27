@@ -63,6 +63,10 @@ class PlayerReplicationService {
 		init();
 	}
 
+	public function onClientDisconnected() {
+		playerEntity.dispose();
+	}
+
 	function init() {
 		sub.add( playerEntity.chunk.addOnValueImmediately( onAddedToChunk ) );
 		sub.add( playerEntity.location.addOnValueImmediately( onAddedToLocation ) );

@@ -56,6 +56,11 @@ class EntityModelComponent extends EntityComponent {
 		isSleeping.val = false;
 	}
 
+	public inline function isCapable() {
+		// todo fearing
+		return !isSleeping.val;
+	}
+	
 	public function isEnemy( enemyMaybe : OverworldEntity ) : Bool {
 		var enemyMaybeModel = enemyMaybe.components.get( EntityModelComponent );
 		if ( enemyMaybeModel == null ) return false;
@@ -69,6 +74,9 @@ class EntityModelComponent extends EntityComponent {
 		return false;
 	}
 
+	/**
+		checks if this entity has hostile faction
+	**/
 	public function hasEnemy() {
 		for ( faction in factions ) {
 			if ( faction.hostileFactions.get().length > 0 ) {

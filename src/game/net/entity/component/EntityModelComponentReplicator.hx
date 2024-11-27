@@ -37,14 +37,20 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
 		modelComp.factions.subscribe( ( i, val ) -> {
-			if ( val != null ) factionsRepl[i] = val.id; 
-			else factionsRepl.removeByIdx(i);
+			if ( val != null ) factionsRepl[i] = val.id;
+			else factionsRepl.removeByIdx( i );
 		} );
 		modelComp.isSleeping.subscribeProp( isSleeping );
 		modelComp.displayName.subscribeProp( displayName );
 		modelComp.onDamaged.add( onDamaged );
 		modelComp.statusMessages.subscribeNetwork( statusMessages );
 		modelComp.hp.subscribeProp( hp );
+
+		if ( entityRepl.entity.result.desc.id == "player" )
+			displayName.addOnValueImmediately( ( oldName, newName ) -> {
+				if ( newName != null )
+					trace( "player nameset: " + newName );
+			} );
 	}
 
 	#if client

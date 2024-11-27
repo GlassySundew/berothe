@@ -48,6 +48,7 @@ class GameServer extends Process {
 		coreReplicator = new CoreReplicator( core );
 
 		onClientAuthMessage.add( onNewClientConnected );
+		server.onClientDisconnected.add( onClientDisconnected );
 
 		#if debug
 		// onGetServerStatusMessage.add( ( client ) -> {
@@ -101,13 +102,19 @@ class GameServer extends Process {
 
 		var playerReplicator = createPlayer();
 
-		playerReplicator.entity.then( ( playerEntity ) ->
-			var playerReplManager = preparePlayer( playerEntity, playerReplicator, clientController )
+		playerReplicator.entity.then( ( playerEntity ) -> {
+			var playerReplManager = preparePlayer( playerEntity, playerReplicator, clientController );
+			clientController.providePlayerReplService( playerReplManager );
+		}
 		);
 	}
 
-	override function update(  ) {
+	override function update() {
 		core.update( Timer.dt, tmod );
+	}
+
+	function onClientDisconnected( cliCon : ClientController ) {
+		cliCon.playerReplService.onClientDisconnected();
 	}
 }
 #end

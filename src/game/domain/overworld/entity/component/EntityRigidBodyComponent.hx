@@ -1,5 +1,7 @@
 package game.domain.overworld.entity.component;
 
+import oimo.dynamics.rigidbody.MassData;
+import be.Constant.Ints;
 import rx.disposables.ISubscription;
 import game.data.location.objects.LocationCollisionObjectVO;
 import rx.disposables.Composite;
@@ -25,7 +27,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	final rigidBodyDesc : RigidBodyTorsoDescription;
 
-	var torsoShape : IRigidBodyShape;
+	public var torsoShape( default, null ) : IRigidBodyShape;
 	var standRayCastCallback : RayCastCallback;
 	var dynamicsComponent : EntityDynamicsComponent;
 
@@ -39,9 +41,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		entity.location.addOnValueImmediately( ( oldLoc, loc ) -> {
 			if ( loc == null ) return;
 			rigidBodyFuture.then( rigidBody -> {
-				rigidBody.setGravityScale( DataStorage.inst.rule.entityGravityScale );
 				rigidBody.setLinearDamping( { x : 25, y : 25, z : 0 } );
-				rigidBody.setType( DYNAMIC );
 
 				rigidBody.x.subscribeProp( entity.transform.x );
 				rigidBody.y.subscribeProp( entity.transform.y );
@@ -53,10 +53,14 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 				rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
 				rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
 
-				if ( rigidBodyDesc.hasFeet ) {
-					var maybeSub = entity.components.onAppear( EntityDynamicsComponent, subscribeStanding );
-					if ( maybeSub != null ) subscription.add( maybeSub );
-				}
+				var maybeSub = entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
+				if ( maybeSub != null ) subscription.add( maybeSub );
+
+				var intertia = torsoShape.getConfig().geom.getIntertiaCoeff();
+				var massData = new MassData();
+				massData.localInertia = intertia;
+				massData.mass = 1;
+				rigidBody.setMassData( massData );
 			} );
 		} );
 	}
@@ -112,20 +116,29 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 		torsoShape.moveLocally( rigidBodyDesc.offsetX, rigidBodyDesc.offsetY, rigidBodyDesc.offsetZ );
+		var intertia = torsoShape.getConfig().geom.getIntertiaCoeff();
 
 		var rigidBodyLocal = RigidBodyAbstractFactory.create(
 			torsoShape,
-			rigidBodyDesc.isStatic ? STATIC : KINEMATIC,
+			rigidBodyDesc.isStatic ? STATIC : DYNAMIC,
 			new EntityRigidBodyProps( entity )
 		);
+
 		rigidBodyLocal.setRotationFactor( { x : 0, y : 0, z : 0 } );
-		rigidBodyLocal.setLinearDamping( { x : 9999, y : 9999, z : 9999 } );
-		rigidBodyLocal.setGravityScale( 0 );
+		rigidBodyLocal.setLinearDamping( { x : 10, y : 10, z : 9999 } );
+		rigidBodyLocal.setGravityScale( DataStorage.inst.rule.entityGravityScale );
+
+		rigidBodyLocal.wakeUp();
+
+		var massData = new MassData();
+		massData.localInertia = intertia;
+		massData.mass = 9999;
+		rigidBodyLocal.setMassData( massData );
 
 		return rigidBodyLocal;
 	}
 
-	function subscribeStanding( key, dynamicsComponent : EntityDynamicsComponent ) {
+	function onDynamicsAppeared( key, dynamicsComponent : EntityDynamicsComponent ) {
 		standRayCastCallback = new RayCastCallback();
 		standRayCastCallback.onShapeCollide.add( onRayCollide );
 
@@ -140,13 +153,18 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 				) {
 					setRotationBasedOffVelocities();
 				}
-
-				var start = torsoShape.getPosition();
-				var end = start.clone();
-				end.z -= rigidBodyDesc.offsetZ;
-
-				physics.rayCast( start, end, standRayCastCallback );
 			} ) );
+
+		if ( rigidBodyDesc.hasFeet ) {
+			subscription.add(
+				dynamicsComponent.onMove.add(() -> {
+					var start = torsoShape.getPosition();
+					var end = start.clone();
+					end.z -= rigidBodyDesc.offsetZ;
+
+					physics.rayCast( start, end, standRayCastCallback );
+				} ) );
+		}
 
 		dynamicsComponent.invalidateMove();
 	}

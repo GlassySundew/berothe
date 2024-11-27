@@ -1,5 +1,6 @@
 package game.domain.overworld.location.physics;
 
+import h3d.Vector;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.component.combat.EntityDamageService;
 import game.physics.oimo.EntityRigidBodyProps;
@@ -32,6 +33,10 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 	}
 
 	@:from public inline static function fromOimo( vec : Vec3 ) : ThreeDeeVector {
+		return { x : vec.x, y : vec.y, z : vec.z };
+	}
+
+	@:from public inline static function fromh3d( vec : Vector ) : ThreeDeeVector {
 		return { x : vec.x, y : vec.y, z : vec.z };
 	}
 

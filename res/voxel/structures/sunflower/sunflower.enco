@@ -1,0 +1,10 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "model",
+			"name": "sunflower",
+			"source": "voxel/structures/sunflower/obj/fbx/sunflower.fbx"
+		}
+	]
+}

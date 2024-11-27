@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import oimo.dynamics.rigidbody.MassData;
 import oimo.common.Mat3;
 import dn.M;
 import game.domain.overworld.location.physics.ITransform;
@@ -168,6 +169,10 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody._autoSleep = value;
 	}
 
+	public inline function setMassData( massData : MassData ) : Void {
+		rigidBody.setMassData( massData );
+	}
+
 	public function onUpdated( ?doRoundSleep = true ) {
 		if ( rotationInvalidate ) {
 			var quat = new Quat();
@@ -222,4 +227,6 @@ class OimoRigidBody implements IRigidBody {
 	public function getShape() : Null<IRigidBodyShape> {
 		return shapes[0];
 	}
+
+	public function setMass() {}
 }

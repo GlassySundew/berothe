@@ -16,8 +16,6 @@ class RigidBodyAbstractFactory {
 		type : RigidBodyType,
 		?props : Any
 	) : IRigidBody {
-		// ask global resources for engine presence
-
 		return OimoRigidBody.create( shape, type, props );
 	}
 }

@@ -1,5 +1,8 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import util.GameUtil;
+import rx.disposables.Composite;
+import rx.disposables.ISubscription;
 import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties;
 import dn.M;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
@@ -16,7 +19,7 @@ enum State {
 
 abstract class EntityBehaviourBase {
 
-	static final enemyContactRange = 4;
+	static final enemyContactRange = 5;
 
 	final agroRange : Float = 25;
 
@@ -52,6 +55,10 @@ abstract class EntityBehaviourBase {
 	}
 
 	public function update( dt : Float, tmod : Float ) {
+		if (
+			model == null
+			|| !model.isCapable() ) return;
+
 		switch state {
 			case CALM:
 			case AGRO( enemy ):
@@ -70,7 +77,11 @@ abstract class EntityBehaviourBase {
 
 				attackComp.attack();
 		}
+
+		updateBehaviour( dt, tmod );
 	}
+
+	function updateBehaviour( dt : Float, tmod : Float ) {}
 
 	inline function walkTo( x : Float, y : Float, tmod : Float ) {
 		var angle = Math.atan2(
@@ -102,23 +113,37 @@ abstract class EntityBehaviourBase {
 		if ( attackComp == null ) return;
 		if ( model.factions.length == 0 || !model.hasEnemy() ) return;
 
-		entity.location.getValue().entityStream.observe(
-			enemy -> {
-				if ( enemy == entity ) return;
-				var enemyModel = enemy.components.get( EntityModelComponent );
-				if ( enemyModel == null || !model.isEnemy( enemy ) ) return;
+		var chunkChangedSub : Composite = null;
+		entity.chunk.addOnValueImmediately( ( oldChunk, newChunk ) -> {
+			chunkChangedSub?.unsubscribe();
+			if ( newChunk == null ) return;
+			chunkChangedSub = Composite.create();
 
-				var dynamics = enemy.components.get( EntityDynamicsComponent );
-				if ( dynamics == null ) return;
+			var chunks = newChunk.location.chunks;
+			for ( tile in GameUtil.twoDGrid ) {
+				var x = tile.x + newChunk.x;
+				var y = tile.y + newChunk.y;
+				var z = newChunk.z;
 
-				onEnemyEntityMove( enemy );
-				dynamics.onMove.add( onEnemyEntityMove.bind( enemy ) );
+				chunkChangedSub.add( chunks.validateChunkAccess( x, y, z ).onEntityMoved.add( onSomeEntityMoved ) );
 			}
-		);
+		} );
+	}
+
+	inline function onSomeEntityMoved( maybeEnemy : OverworldEntity ) {
+		if ( maybeEnemy == entity ) return;
+		var enemyModel = maybeEnemy.components.get( EntityModelComponent );
+		if ( enemyModel == null || !model.isEnemy( maybeEnemy ) ) return;
+
+		var dynamics = maybeEnemy.components.get( EntityDynamicsComponent );
+		if ( dynamics == null ) return;
+
+		onEnemyEntityMove( maybeEnemy );
 	}
 
 	function onEnemyEntityMove( enemy : OverworldEntity ) {
-		if ( model.isSleeping ) return;
+		if ( !model.isCapable() ) return;
+
 		switch state {
 			case AGRO( enemy ): return;
 			default:

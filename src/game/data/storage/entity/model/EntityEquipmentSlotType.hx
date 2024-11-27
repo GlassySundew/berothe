@@ -2,7 +2,7 @@ package game.data.storage.entity.model;
 
 import util.Assert;
 
-var typeConversion : Map<Data.EquipSlotTypeKind, EntityEquipmentSlotType> = //
+private var typeConversion : Map<Data.EquipSlotTypeKind, EntityEquipmentSlotType> = //
 	[
 		//
 		head => EQUIP_HEAD,

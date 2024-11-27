@@ -75,9 +75,10 @@ class EntityStatsHudMediator {
 		var goldSlot = model.inventory.inventorySlots.filter(
 			( slot ) -> slot.restriction.types.contains( GOLD )
 		)[0];
-		var sub : Composite = Composite.create();
+		var sub : Composite = null;
 		goldSlot.itemProp.addOnValueImmediately( ( oldItem, newItem ) -> {
 			sub?.unsubscribe();
+			sub = Composite.create();
 			if ( newItem == null ) {
 				handler_onGoldChanged( goldSlot, 0, 0 );
 			} else {

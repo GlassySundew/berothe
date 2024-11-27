@@ -1,0 +1,10 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "model",
+			"name": "tulip",
+			"source": "voxel/structures/tulip/obj/fbx/tulip.fbx"
+		}
+	]
+}

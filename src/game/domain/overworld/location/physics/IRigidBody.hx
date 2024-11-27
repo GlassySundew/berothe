@@ -1,5 +1,6 @@
 package game.domain.overworld.location.physics;
 
+import oimo.dynamics.rigidbody.MassData;
 import game.domain.overworld.location.physics.Types.RigidBodyType;
 import core.IMutableProperty;
 import core.IProperty;
@@ -36,4 +37,5 @@ interface IRigidBody {
 	function sleep() : Void;
 	function wakeUp() : Void;
 	function setAutoSleep( value : Bool ) : Void;
+	function setMassData( massData : MassData ) : Void;
 }

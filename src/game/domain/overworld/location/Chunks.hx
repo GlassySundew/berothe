@@ -47,11 +47,11 @@ class Chunks {
 			var assignment = SingleAssignment.create();
 			assignment.set( sub );
 			entitySubscriptions[entity] = assignment;
-			// entitySubscriptions[entity] = dynamics.onMove.add( onEntityMove.bind( entity ) );
 		}
 		onEntityMove( entity );
 	}
 
+	#if !debug inline #end
 	public function validateChunkAccess( x : Int, y : Int, z : Int ) {
 		if ( chunks[z] == null ) chunks[z] = new Map();
 		if ( chunks[z][y] == null ) chunks[z][y] = new Map();
