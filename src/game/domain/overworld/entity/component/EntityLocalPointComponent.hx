@@ -23,8 +23,8 @@ class EntityLocalPointComponent extends EntityComponent {
 
 			var transform = new Matrix();
 			transform.identity();
-			transform.translate( entity.transform.x.val, entity.transform.y.val, entity.transform.z.val );
-			transform.initRotation( entity.transform.rotationX, entity.transform.rotationY, entity.transform.rotationZ );
+			transform.prependTranslation( entity.transform.x.val, entity.transform.y.val, entity.transform.z.val );
+			transform.prependRotation( entity.transform.rotationX, entity.transform.rotationY, entity.transform.rotationZ );
 
 			var globalPoint = util.MatrixUtil.multVector( transform, localPoint );
 

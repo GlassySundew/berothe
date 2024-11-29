@@ -1,0 +1,35 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "light",
+			"name": "light",
+			"x": -0.99,
+			"y": -3.27,
+			"z": 26.15,
+			"rotationX": 42.9,
+			"rotationY": 120,
+			"rotationZ": -4.2,
+			"kind": "Directional",
+			"power": 1.44,
+			"range": 10,
+			"size": 2.17,
+			"zNear": 0.02,
+			"maxDist": 1000,
+			"minDist": 0,
+			"shadows": {
+				"mode": "Dynamic",
+				"size": 512,
+				"radius": 0,
+				"quality": 1,
+				"bias": 0.1,
+				"samplingMode": {
+					"kind": "PCF",
+					"quality": 1,
+					"scale": 0,
+					"bias": 0.1
+				}
+			}
+		}
+	]
+}

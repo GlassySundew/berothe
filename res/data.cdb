@@ -25,7 +25,7 @@
 				{
 					"id": "flyingEntityGravityScale",
 					"value": {
-						"float": 1.5
+						"float": 2
 					}
 				},
 				{
@@ -181,6 +181,10 @@
 					"preset": "bat"
 				},
 				{
+					"id": "bee",
+					"preset": "bee"
+				},
+				{
 					"id": "club",
 					"preset": "club"
 				},
@@ -207,6 +211,14 @@
 				{
 					"id": "tree",
 					"preset": "tree"
+				},
+				{
+					"id": "tulip",
+					"preset": "tulip"
+				},
+				{
+					"id": "sunflower",
+					"preset": "sunflower"
 				}
 			],
 			"separators": [
@@ -285,6 +297,11 @@
 					"view": "bat"
 				},
 				{
+					"id": "bee",
+					"properties": "bee",
+					"view": "bee"
+				},
+				{
 					"id": "club",
 					"properties": "club",
 					"view": "club"
@@ -318,6 +335,16 @@
 					"id": "tree",
 					"properties": "tree",
 					"view": "tree"
+				},
+				{
+					"id": "tulip",
+					"properties": "tulip",
+					"view": "tulip"
+				},
+				{
+					"id": "sunflower",
+					"properties": "sunflower",
+					"view": "sunflower"
 				}
 			],
 			"separators": [
@@ -390,7 +417,8 @@
 							"offsetZ": 11,
 							"id": "humanTorso",
 							"hasFeet": true,
-							"geometry": 1
+							"geometry": 1,
+							"offsetY": 0
 						},
 						"dynamics": true,
 						"bodyHitbox": {
@@ -535,7 +563,59 @@
 					"id": "bee",
 					"properties": {
 						"dynamics": true,
-						"behaviour": {}
+						"behaviour": {
+							"type": "flowerPollinator"
+						},
+						"bodyHitbox": {
+							"id": "hb",
+							"sizeX": 3,
+							"sizeY": 3,
+							"sizeZ": 12,
+							"offsetZ": 0,
+							"offsetX": 0.5,
+							"offsetY": -0.5
+						},
+						"rigidBodyTorso": {
+							"id": "rb",
+							"geometry": 0,
+							"sizeX": 1,
+							"sizeY": 1,
+							"sizeZ": 1,
+							"offsetX": 0.5,
+							"offsetY": -0.5,
+							"offsetZ": 0.5
+						},
+						"spawnInventory": [
+							{
+								"item": "gold",
+								"botEdgeRnd": 1,
+								"topEdgeRnd": 1,
+								"distrubution": [
+									0
+								]
+							}
+						],
+						"flying": {
+							"baseDistance": 16,
+							"amplitude": 1.3,
+							"frequency": 1
+						},
+						"model": {
+							"baseHp": 1,
+							"baseDefence": 1,
+							"baseSpeed": 7,
+							"displayName": "Bee",
+							"hideNameByDefault": true,
+							"faction": "bats",
+							"speechDamaged": [
+								{
+									"speech": "Bzz"
+								},
+								{
+									"speech": "Bzzt"
+								}
+							]
+						}
 					}
 				},
 				{
@@ -569,19 +649,17 @@
 						"rigidBodyTorso": {
 							"id": "torso",
 							"hasFeet": false,
-							"offsetZ": 10,
+							"offsetZ": 3,
 							"sizeX": 3,
 							"sizeY": 2,
 							"sizeZ": 1,
-							"geometry": 0
-						},
-						"behaviour": {
-							"type": "randomRoaming"
+							"geometry": 0,
+							"offsetX": 0
 						},
 						"bodyHitbox": {
 							"id": "torsoHitbox",
 							"offsetX": 0,
-							"offsetZ": 7.5,
+							"offsetZ": 3.5,
 							"sizeX": 3,
 							"sizeY": 3,
 							"sizeZ": 7
@@ -617,7 +695,14 @@
 								]
 							}
 						],
-						"flyingDistance": 12
+						"flying": {
+							"baseDistance": 12,
+							"amplitude": 2,
+							"frequency": 0.75
+						},
+						"behaviour": {
+							"type": "randomRoaming"
+						}
 					}
 				},
 				{
@@ -932,15 +1017,39 @@
 							"geometry": 0,
 							"isStatic": true,
 							"offsetZ": 4,
-							"sizeX": 1,
+							"sizeX": 2,
 							"sizeY": 2,
-							"sizeZ": 9
+							"sizeZ": 9,
+							"offsetY": 0.5,
+							"offsetX": 0.5
 						},
 						"localDispatchPoint": {
 							"name": 0,
-							"offsetX": -1,
+							"offsetX": 1,
 							"offsetY": 0,
 							"offsetZ": 9
+						}
+					}
+				},
+				{
+					"id": "sunflower",
+					"properties": {
+						"dynamics": false,
+						"rigidBodyTorso": {
+							"id": "rb",
+							"geometry": 0,
+							"offsetZ": 5,
+							"isStatic": true,
+							"sizeX": 2,
+							"sizeY": 4,
+							"sizeZ": 11,
+							"offsetX": 1
+						},
+						"localDispatchPoint": {
+							"name": 0,
+							"offsetZ": 12,
+							"offsetX": 1,
+							"offsetY": -2
 						}
 					}
 				}
@@ -992,12 +1101,6 @@
 				{
 					"typeStr": "2",
 					"name": "ofItem",
-					"opt": true,
-					"kind": null
-				},
-				{
-					"typeStr": "4",
-					"name": "flyingDistance",
 					"opt": true,
 					"kind": null
 				},
@@ -1062,6 +1165,12 @@
 				{
 					"typeStr": "17",
 					"name": "localDispatchPoint",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "17",
+					"name": "flying",
 					"opt": true,
 					"kind": null
 				}
@@ -1241,6 +1350,11 @@
 					"scope": 2
 				},
 				{
+					"typeStr": "1",
+					"name": "displayName",
+					"opt": true
+				},
+				{
 					"typeStr": "2",
 					"name": "hideNameByDefault",
 					"opt": true,
@@ -1276,11 +1390,6 @@
 				{
 					"typeStr": "6:faction",
 					"name": "faction",
-					"opt": true
-				},
-				{
-					"typeStr": "1",
-					"name": "displayName",
 					"opt": true
 				},
 				{
@@ -1451,6 +1560,35 @@
 				{
 					"typeStr": "4",
 					"name": "offsetZ",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "entityPropertySetup@properties@flying",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "4",
+					"name": "baseDistance",
+					"kind": null,
+					"documentation": "*above ground"
+				},
+				{
+					"typeStr": "4",
+					"name": "amplitude",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "frequency",
 					"opt": true,
 					"kind": null
 				}
@@ -2074,6 +2212,46 @@
 					"viewComps": {}
 				},
 				{
+					"id": "bee",
+					"viewComps": {},
+					"type": [
+						1,
+						"bee"
+					],
+					"animations": [
+						{
+							"key": "idle",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "walk",
+							"animations": [
+								{
+									"key": "walk"
+								}
+							],
+							"speedMult": 0.5,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "sleep",
+							"animations": [
+								{
+									"key": "idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						}
+					]
+				},
+				{
 					"id": "wall_torch",
 					"type": [
 						1,
@@ -2299,6 +2477,10 @@
 				{
 					"id": "bat",
 					"file": "voxel/characters/bat/bat.enco"
+				},
+				{
+					"id": "bee",
+					"file": "voxel/characters/bee/bee.enco"
 				},
 				{
 					"id": "club",
@@ -3152,6 +3334,12 @@
 				{
 					"typeStr": "6:entity",
 					"name": "spawnedEntity"
+				},
+				{
+					"typeStr": "17",
+					"name": "emitter",
+					"opt": true,
+					"kind": null
 				}
 			],
 			"separators": [],
@@ -3164,6 +3352,29 @@
 					]
 				}
 			}
+		},
+		{
+			"name": "entitySpawnPointDF@emitter",
+			"props": {
+				"hide": true,
+				"isProps": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "3",
+					"name": "maxEntitiesPresent",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "4",
+					"name": "cooldown",
+					"opt": true,
+					"kind": null
+				}
+			]
 		},
 		{
 			"name": "locationObjContainerTypeDF",

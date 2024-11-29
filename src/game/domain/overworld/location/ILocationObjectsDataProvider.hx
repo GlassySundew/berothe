@@ -10,6 +10,7 @@ import game.data.storage.entity.EntityDescription;
 interface ILocationObjectsDataProvider {
 
 	function load() : Void;
+	function getSpawnPoints() : Array<LocationSpawnVO>;
 	function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawnVO>;
 	function getGlobalObjects() : Array<LocationEntityVO>;
 	function getPresentEntities() : Array<LocationEntityVO>;

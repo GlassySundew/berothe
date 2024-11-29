@@ -1,5 +1,6 @@
 package game.data.location.objects;
 
+import game.domain.overworld.location.SpawnEntityEmitter;
 import hrt.prefab.Object3D;
 import game.data.storage.DataStorage;
 import game.data.storage.entity.EntityDescription;
@@ -10,6 +11,13 @@ class LocationSpawnVO extends LocationObjectVO {
 		instance : Object3D,
 		cdbEntry : Data.EntitySpawnPointDFDef
 	) : LocationSpawnVO {
+
+		var cooldown = 0.;
+		var maxEntitiesPresent = 0;
+		if ( cdbEntry.emitter != null ) {
+			cooldown = cdbEntry.emitter.cooldown;
+			maxEntitiesPresent = cdbEntry.emitter.maxEntitiesPresent;
+		}
 
 		return new LocationSpawnVO(
 			instance.scaleX,
@@ -22,11 +30,15 @@ class LocationSpawnVO extends LocationObjectVO {
 			instance.y,
 			instance.z,
 			instance.name,
+			cooldown,
+			maxEntitiesPresent,
 			cdbEntry.spawnedEntity
 		);
 	}
 
 	public final spawnedEntityDesc : EntityDescription;
+	public final cooldown : Float;
+	public final maxEntitiesPresent : Int;
 
 	public function new(
 		sizeX : Float,
@@ -39,6 +51,8 @@ class LocationSpawnVO extends LocationObjectVO {
 		y : Float,
 		z : Float,
 		name : String,
+		cooldown : Float,
+		maxEntitiesPresent : Int,
 		spawnedEntityId : Data.EntityKind
 	) {
 		super(
@@ -53,6 +67,13 @@ class LocationSpawnVO extends LocationObjectVO {
 			z,
 			name
 		);
+		this.cooldown = cooldown;
+		this.maxEntitiesPresent = maxEntitiesPresent;
 		spawnedEntityDesc = DataStorage.inst.entityStorage.getById( spawnedEntityId.toString() );
+	}
+
+	public function createSpawnEmitter() : Null<SpawnEntityEmitter> {
+		if ( maxEntitiesPresent == 0 ) return null;
+		else return new SpawnEntityEmitter( this );
 	}
 }

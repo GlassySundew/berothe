@@ -37,6 +37,7 @@ abstract class EntityBehaviourBase {
 	public function dispose( _ ) {}
 
 	public function attachToEntity( entity : OverworldEntity ) {
+		trace( "attaching behaviour to: " + entity );
 		this.entity = entity;
 		entity.components.onAppear(
 			EntityDynamicsComponent,

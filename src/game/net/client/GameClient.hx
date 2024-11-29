@@ -1,5 +1,6 @@
 package game.net.client;
 
+import pass.PbrSetup.PbrRenderer;
 import dn.Delayer;
 import game.net.entity.component.EntityModelComponentReplicator;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
@@ -66,7 +67,7 @@ class GameClient extends Process {
 
 	final subscription = Composite.create();
 
-	var locationLights : DirLight;
+	var locationLights : hrt.prefab.Prefab;
 	var ca : ControllerAccess<ControllerAction>;
 	var cam : CameraController;
 
@@ -89,7 +90,7 @@ class GameClient extends Process {
 		subscription.add( Client.inst.onUnregister.add( onUnregister ) );
 
 		currentLocationSelf.addOnValue( ( oldLoc, newLoc ) -> {
-			locationLights?.remove();
+			locationLights?.findFirstLocal3d().remove();
 			locationLights = null;
 
 			if ( oldLoc != null ) {
@@ -103,13 +104,12 @@ class GameClient extends Process {
 
 			if ( newLoc == null ) return;
 
+			Std.downcast(Boot.inst.s3d.renderer, PbrRenderer).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.3;
+			
 			if ( newLoc.locationDesc.isOpenAir ) {
-				locationLights?.remove();
-				locationLights = new DirLight( new h3d.Vector( -0.7, -0.2, -1 ), Boot.inst.s3d );
-				locationLights.power = 1;
-				locationLights.shadows.mode = Dynamic;
-				locationLights.shadows.blur.radius = 0.2;
-				locationLights.shadows.bias = 0.02;
+				locationLights?.findFirstLocal3d().remove();
+				locationLights = Res.levels.light.load().make();
+				Boot.inst.s3d.addChild( locationLights.findFirstLocal3d() );
 			}
 
 			Boot.inst.s3d.visible = false;

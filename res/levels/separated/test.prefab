@@ -31,7 +31,8 @@
 							"depthWrite": "On"
 						}
 					},
-					"mainPassName": "default"
+					"materialName": "tree",
+					"mainPassName": "alpha"
 				}
 			]
 		},
@@ -39,25 +40,26 @@
 			"type": "model",
 			"name": "human_0_torso_walk",
 			"source": "voxel/characters/human/obj/fbx/human_0_torso_walk.fbx",
-			"x": 22.01,
-			"y": 24.73,
+			"x": 13.24,
+			"y": 21.88,
+			"z": 53.43,
 			"children": [
 				{
 					"type": "material",
 					"name": "material",
 					"props": {
 						"PBR": {
-							"mode": "Forward",
-							"blend": "None",
-							"shadows": false,
+							"mode": "BeforeTonemapping",
+							"blend": "Alpha",
+							"shadows": true,
 							"culling": "Front",
 							"depthTest": "Greater",
 							"colorMask": 15,
 							"enableStencil": true,
 							"stencilFailOp": "Keep",
 							"depthFailOp": "Keep",
-							"stencilPassOp": "Replace",
-							"stencilCompare": "Always",
+							"stencilPassOp": "Keep",
+							"stencilCompare": "LessEqual",
 							"stencilValue": 1,
 							"stencilReadMask": 255,
 							"stencilWriteMask": 0,
@@ -73,8 +75,9 @@
 			"type": "model",
 			"name": "human_0_torso_walk",
 			"source": "voxel/characters/human/obj/fbx/human_0_torso_walk.fbx",
-			"x": 2.07,
-			"y": -23.93
+			"x": 21.5,
+			"y": -18.67,
+			"z": 5.26
 		}
 	]
 }

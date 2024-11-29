@@ -338,11 +338,6 @@
 				{
 					"type": "object",
 					"name": "trees",
-					"props": {
-						"type": "entityInstancedRenderGroup",
-						"props": {},
-						"$cdbtype": "locationObjContainerTypeDF"
-					},
 					"children": [
 						{
 							"type": "reference",
@@ -447,10 +442,9 @@
 								"entity": "tree",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 10.79,
-							"y": -16.64,
-							"z": 1,
-							"rotationZ": -10.5
+							"x": -54.47,
+							"y": -56.01,
+							"z": 1
 						},
 						{
 							"type": "reference",
@@ -460,10 +454,10 @@
 								"entity": "tree",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 64.54,
-							"y": -27.04,
+							"x": -87.73,
+							"y": -2.84,
 							"z": 1,
-							"rotationZ": -117.4
+							"rotationZ": 99.3
 						},
 						{
 							"type": "reference",
@@ -473,8 +467,34 @@
 								"entity": "tree",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 119.27,
-							"y": -71.97,
+							"x": -85.76,
+							"y": 19.23,
+							"z": 1,
+							"rotationZ": -6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 56.41,
+							"y": -37.59,
+							"z": 1,
+							"rotationZ": -100.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 117.02,
+							"y": -77,
 							"z": 1,
 							"rotationZ": 26.6
 						},
@@ -515,7 +535,7 @@
 							"x": 124.56,
 							"y": 101.07,
 							"z": 1,
-							"rotationZ": 148
+							"rotationZ": 77.6
 						},
 						{
 							"type": "reference",
@@ -564,8 +584,8 @@
 								"entity": "tree",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 31.53,
-							"y": -18.38,
+							"x": -6.49,
+							"y": -37.13,
 							"z": 1,
 							"rotationZ": 60.2
 						},
@@ -577,8 +597,8 @@
 								"entity": "tree",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 83.85,
-							"y": -85.53,
+							"x": 78.31,
+							"y": -80.92,
 							"z": 1,
 							"rotationZ": -109.4
 						},
@@ -590,10 +610,58 @@
 								"entity": "tree",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 99.58,
-							"y": -85,
+							"x": 100.06,
+							"y": -90.93,
 							"z": 1,
 							"rotationZ": -167
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "tulips",
+					"props": {
+						"type": "entityInstancedRenderGroup",
+						"props": {},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "reference",
+							"name": "tulip",
+							"source": "voxel/structures/tulip/tulip.enco",
+							"props": {
+								"entity": "tulip",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 15.4,
+							"y": -13.5,
+							"z": 1,
+							"rotationZ": 69.6
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "sunflowers",
+					"props": {
+						"type": "entityInstancedRenderGroup",
+						"props": {},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -26.9,
+							"y": -25.58,
+							"z": 1,
+							"rotationZ": -35.3
 						}
 					]
 				}
@@ -727,7 +795,42 @@
 			"source": "voxel/characters/human/human.enco",
 			"x": -67.6,
 			"y": 26.9,
-			"z": -0.1,
+			"z": -0.1
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF"
+			},
+			"x": 30.5,
+			"y": -17.3,
+			"z": 7.82
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"maxEntitiesPresent": 2,
+					"cooldown": 20
+				}
+			},
+			"x": -12.53,
+			"y": -42.26,
+			"z": 7.82
+		},
+		{
+			"type": "reference",
+			"name": "light",
+			"source": "levels/light.prefab",
+			"editorOnly": true,
+			"rotationZ": 45.1,
 			"editMode": true
 		}
 	]

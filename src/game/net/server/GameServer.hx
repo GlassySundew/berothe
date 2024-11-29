@@ -74,9 +74,9 @@ class GameServer extends Process {
 			playerEntity
 		);
 
-		var entity = core.entityFactory.placeEntityBySpawnPointEntityDesc( location, playerEntity );
+		core.entityFactory.placeEntityBySpawnPointEntityDesc( location, playerEntity );
 
-		return coreReplicator.getEntityReplicator( entity );
+		return coreReplicator.getEntityReplicator( playerEntity );
 	}
 
 	function preparePlayer(

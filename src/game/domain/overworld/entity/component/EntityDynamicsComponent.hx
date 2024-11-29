@@ -90,7 +90,7 @@ class EntityDynamicsComponent extends EntityComponent {
 		if ( onMoveInvalidate ) {
 			if ( entity.transform.z.val <= -100 ) {
 				trace( "WARNING: " + entity + " has fell off on " + entity.location.getValue() + " destroying..." );
-				entity.dispose();
+				entity.invalidateDispose();
 			}
 
 			onMoveInvalidate = false;

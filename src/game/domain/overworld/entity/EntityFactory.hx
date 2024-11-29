@@ -59,7 +59,7 @@ class EntityFactory {
 	public function placeEntityBySpawnPointEntityDesc(
 		location : Location,
 		entity : OverworldEntity
-	) : OverworldEntity {
+	) {
 		var entityDesc = entity.desc;
 		var spawnPointDesc : LocationSpawnVO = location.getSpawnByEntityDesc( entityDesc );
 
@@ -68,8 +68,10 @@ class EntityFactory {
 			spawnPointDesc.y,
 			spawnPointDesc.z
 		);
+		entity.transform.setRotation(
+			0, 0, spawnPointDesc.rotationZ
+		);
 		location.addEntity( entity );
-		return entity;
 	}
 
 	public function createEntity( entityDesc : EntityDescription ) : OverworldEntity {

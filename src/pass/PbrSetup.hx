@@ -3,7 +3,6 @@ package pass;
 import h2d.Tile;
 import h2d.Bitmap;
 import h3d.Vector;
-import game.net.client.GameClient;
 import h3d.Camera;
 import hxd.Res;
 import h3d.mat.Texture;
@@ -12,7 +11,7 @@ class PbrSetup extends h3d.mat.PbrMaterialSetup {
 
 	override function createRenderer() {
 		var env = new h3d.scene.pbr.Environment( Res.defaultEnv.toTexture() );
-		env.power = 0.4;
+		env.power = 0.7;
 		env.compute();
 		return new PbrRenderer( env );
 	}
@@ -73,27 +72,27 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 
 	public function renderCharacterDepth() {
 
-		var transform = GameClient.inst.controlledEntity.val?.entity.result?.transform;
-		if ( transform == null ) return;
-		controlCharacterPos.set( transform.x, transform.y, transform.z );
-		characterDepth.shader.characterPos.x = transform.x;
-		characterDepth.shader.characterPos.y = transform.y;
-		characterDepth.shader.characterPos.z = transform.z;
+		// var transform = GameClient.inst.controlledEntity.val?.entity.result?.transform;
+		// if ( transform == null ) return;
+		// controlCharacterPos.set( transform.x, transform.y, transform.z );
+		// characterDepth.shader.characterPos.x = transform.x;
+		// characterDepth.shader.characterPos.y = transform.y;
+		// characterDepth.shader.characterPos.z = transform.z;
 
-		controlCam.pos.x = controlCharacterPos.x;
-		controlCam.pos.y = controlCharacterPos.y;
-		controlCam.pos.z = controlCharacterPos.z;
+		// controlCam.pos.x = controlCharacterPos.x;
+		// controlCam.pos.y = controlCharacterPos.y;
+		// controlCam.pos.z = controlCharacterPos.z;
 
-		var mainCam = ctx.camera;
-		ctx.setCamera( controlCam );
-		initGlobals();
+		// var mainCam = ctx.camera;
+		// ctx.setCamera( controlCam );
+		// initGlobals();
 
-		setTarget( controlCharDepth );
-		ctx.engine.clearF( new h3d.Vector4( 1 ) );
-		renderPass( output, get( "default" ) );
+		// setTarget( controlCharDepth );
+		// ctx.engine.clearF( new h3d.Vector4( 1 ) );
+		// renderPass( output, get( "default" ) );
 
-		ctx.setCamera( mainCam );
-		initGlobals();
+		// ctx.setCamera( mainCam );
+		// initGlobals();
 	}
 
 	override function initTextures() {

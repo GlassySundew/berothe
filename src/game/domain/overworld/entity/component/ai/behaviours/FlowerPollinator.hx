@@ -16,6 +16,15 @@ class FlowerPollinator extends EntityBehaviourBase {
 
 	var flowerChosen : ThreeDeeVector;
 	var pollingState : PollingState;
+	var flyComp : EntityFlyComponent;
+
+	override function attachToEntity( entity : OverworldEntity ) {
+		super.attachToEntity( entity );
+		entity.components.onAppear(
+			EntityFlyComponent,
+			( cl, flyComp ) -> this.flyComp = flyComp
+		);
+	}
 
 	override function updateBehaviour( dt : Float, tmod : Float ) {
 		switch pollingState {
@@ -37,6 +46,8 @@ class FlowerPollinator extends EntityBehaviourBase {
 					walkTo( flowerChosen.x, flowerChosen.y, tmod );
 				}
 			case POLLING:
+				flyComp?.suspend();
+				dynamics.isMovementApplied.val = false;
 		}
 	}
 }

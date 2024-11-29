@@ -4,7 +4,9 @@
 		{
 			"type": "model",
 			"name": "tulip",
-			"source": "voxel/structures/tulip/obj/fbx/tulip.fbx"
+			"source": "voxel/structures/tulip/obj/fbx/tulip.fbx",
+			"x": 1,
+			"y": 1
 		}
 	]
 }

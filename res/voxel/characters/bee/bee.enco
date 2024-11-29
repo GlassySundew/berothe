@@ -1,0 +1,15 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "reference",
+			"name": "wings",
+			"source": "voxel/characters/bee/wings.plst"
+		},
+		{
+			"type": "model",
+			"name": "bee_2_body",
+			"source": "voxel/characters/bee/obj/fbx/bee_2_body.fbx"
+		}
+	]
+}

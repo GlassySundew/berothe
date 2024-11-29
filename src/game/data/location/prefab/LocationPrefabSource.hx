@@ -37,6 +37,12 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 		parse();
 	}
 
+	#if !debug inline #end
+	public function getSpawnPoints() : Array<LocationSpawnVO> {
+		return spawns;
+	}
+
+	#if !debug inline #end
 	public function getSpawnsByEntityDesc( entityDesc : EntityDescription ) : Array<LocationSpawnVO> {
 		return spawns.filter( ( spawn : LocationSpawnVO ) -> {
 			return spawn.spawnedEntityDesc == entityDesc;

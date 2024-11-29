@@ -76,7 +76,7 @@ class EntityStatsHudMediator {
 			( slot ) -> slot.restriction.types.contains( GOLD )
 		)[0];
 		var sub : Composite = null;
-		goldSlot.itemProp.addOnValueImmediately( ( oldItem, newItem ) -> {
+		subscribtion.add( goldSlot.itemProp.addOnValueImmediately( ( oldItem, newItem ) -> {
 			sub?.unsubscribe();
 			sub = Composite.create();
 			if ( newItem == null ) {
@@ -84,7 +84,7 @@ class EntityStatsHudMediator {
 			} else {
 				sub.add( newItem.amount.addOnValueImmediately( handler_onGoldChanged.bind( goldSlot ) ) );
 			}
-		} );
+		} ) );
 	}
 
 	function handler_onAttackChanged( _, _ ) {

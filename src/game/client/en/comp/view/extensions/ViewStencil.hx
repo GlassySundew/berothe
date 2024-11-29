@@ -1,5 +1,6 @@
 package game.client.en.comp.view.extensions;
 
+import h3d.mat.Material;
 import h3d.mat.Texture;
 import h3d.shader.FixedColor;
 import graphics.BatchElement;
@@ -24,39 +25,52 @@ class ViewStencil extends EntityViewExtensionComponentBase {
 			var obj = view.getGraphics().heapsObject;
 			var mats = obj.getMaterials();
 
-			if ( mats.length == 0 ) {
-				var batches : Array<BatchElement> = obj.findAll( ( obj ) -> {
-					return Std.downcast( obj, BatchElement );
-				} );
-				for ( batch in batches ) {
-					mats.push( batch.batch.mb.material );
-				}
-			}
-
-			for ( mat in mats ) {
-
-				switch desc.type {
+			#if !debug inline #end
+			function createStencil( ?mat : Material ) : Stencil {
+				return switch desc.type {
 					case Obstacle:
-						var stencilPass = mat.mainPass;
-						var stencil = stencilPass.stencil = new Stencil();
+						var stencilPass = mat?.mainPass;
+						var stencil = new Stencil();
 						stencil.setFunc( Always, 1 );
 						stencil.setOp( Keep, Keep, Replace );
-						mat.mainPass.depthTest = LessEqual;
+
+						if ( mat != null ) mat.mainPass.depthTest = Less;
+						if ( stencilPass != null ) stencilPass.stencil = stencil;
+
+						stencil;
 					case Objective:
-						var stencilPass = mat.allocPass( "stencil" );
-						var stencil = stencilPass.stencil = new Stencil();
+						var stencilPass = mat?.allocPass( "stencil" );
+						var stencil = new Stencil();
 						stencilPass.depthTest = Greater;
 						stencil.setFunc( LessEqual, 1, 0xFF, 0 );
 						stencil.setOp( Keep, Keep, Replace );
-						stencilPass.enableLights = false;
-						stencilPass.culling = Front;
-						var colorSet = new FixedColor( 0x806c00 );
-						colorSet.USE_ALPHA = false;
 
-						stencilPass.addShader( colorSet );
-						var props  = new h3d.shader.pbr.PropsValues( 0, 1, 0, 1 );
-						stencilPass.addShader( props );
+						if ( stencilPass != null ) {
+							stencilPass.stencil = stencil;
+							stencilPass.enableLights = false;
+							stencilPass.culling = Front;
+							var colorSet = new FixedColor( 0x806c00 );
+							colorSet.USE_ALPHA = false;
+
+							stencilPass.addShader( colorSet );
+							var props = new h3d.shader.pbr.PropsValues( 0, 1, 0, 1 );
+							stencilPass.addShader( props );
+						}
+
+						stencil;
 				}
+			}
+
+			if ( mats.length == 0 ) {
+				var batch : BatchElement = obj.find( ( obj ) -> {
+					return Std.downcast( obj, BatchElement );
+				} );
+				if ( batch != null ) createStencil( batch.batch.mb.material );
+			}
+
+			for ( mat in mats ) {
+				if ( mat.mainPass.stencil != null ) continue;
+				createStencil( mat );
 			}
 		} );
 	}

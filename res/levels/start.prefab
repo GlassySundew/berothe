@@ -934,8 +934,8 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 25.24,
-							"y": -64.9,
+							"x": 24.3,
+							"y": -65.53,
 							"z": 6.92,
 							"scaleX": 6.44,
 							"scaleY": 26.9,
@@ -964,8 +964,8 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 44.71,
-							"y": -77.08,
+							"x": 44.45,
+							"y": -77.26,
 							"z": 6.92,
 							"scaleX": 5.54,
 							"scaleY": 23.95,
@@ -979,12 +979,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 51.48,
-							"y": -86.46,
+							"x": 43.27,
+							"y": -92.37,
 							"z": 6.92,
-							"scaleY": 11.14,
+							"scaleX": 4.94,
+							"scaleY": 28.16,
 							"scaleZ": 38.07,
-							"rotationZ": -5.1
+							"rotationZ": -77.6
 						},
 						{
 							"type": "customBox",
@@ -993,13 +994,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 36.65,
-							"y": -121.12,
+							"x": 55.26,
+							"y": -85.52,
 							"z": 6.92,
 							"scaleX": 4.94,
-							"scaleY": 18.23,
+							"scaleY": 18.99,
 							"scaleZ": 38.07,
-							"rotationZ": -77.6
+							"rotationZ": 6.3
 						},
 						{
 							"type": "customBox",
@@ -1023,8 +1024,8 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 12.98,
-							"y": -85.27,
+							"x": 13.43,
+							"y": -84.46,
 							"z": 6.92,
 							"scaleX": 6.9,
 							"scaleY": 10.94,
@@ -1038,8 +1039,8 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 6.17,
-							"y": -85.16,
+							"x": 6.66,
+							"y": -83.9,
 							"z": 6.92,
 							"scaleX": 5.85,
 							"scaleY": 7.77,
@@ -1057,7 +1058,7 @@
 							"y": -96.89,
 							"z": 6.92,
 							"scaleX": 6.92,
-							"scaleY": 24.55,
+							"scaleY": 27.89,
 							"scaleZ": 38.07,
 							"rotationZ": -11
 						},
@@ -1455,8 +1456,8 @@
 				"spawnedEntity": "player",
 				"$cdbtype": "entitySpawnPointDF"
 			},
-			"x": -10.06,
-			"y": -77.29,
+			"x": 23.05,
+			"y": -78.43,
 			"rotationZ": -45
 		},
 		{
@@ -1539,13 +1540,30 @@
 					"location": "meadow"
 				}
 			},
-			"x": 50.12,
-			"y": -84.71,
+			"x": 51.21,
+			"y": -85.47,
 			"z": 7.13,
 			"scaleX": 20.49,
 			"scaleY": 4.14,
 			"scaleZ": 49.51,
-			"rotationZ": -88.8
+			"rotationZ": -88.8,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false
+						}
+					}
+				}
+			]
 		}
 	]
 }

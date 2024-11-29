@@ -15,7 +15,7 @@ class EntityLocalPoints {
 		entity : OverworldEntity,
 		point : ThreeDeeVector
 	) {
-		points[name][entity] = point;
+		( points[name] ?? ( points[name] = new Map() ) )[entity] = point;
 	}
 
 	public inline function getRandomPointByName( name : LocalPointName ) : ThreeDeeVector {

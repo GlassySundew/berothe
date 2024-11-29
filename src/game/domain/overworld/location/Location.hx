@@ -1,5 +1,7 @@
 package game.domain.overworld.location;
 
+import hxd.Timer;
+import dn.Delayer;
 import future.Future;
 import tink.CoreApi.CallbackLink;
 import game.client.en.comp.view.EntityViewComponent;
@@ -37,6 +39,7 @@ class Location {
 	public final triggers : Array<EntityTrigger> = [];
 	public final behaviourManager : EntityBehaviourManager = new EntityBehaviourManager();
 	public final localPoints : EntityLocalPoints = new EntityLocalPoints();
+	public final delayer : Delayer = new Delayer( Timer.wantedFPS );
 
 	public final onChunkCreated = new Signal<Chunk>();
 	public final onEntityAdded = new Signal<OverworldEntity>();
@@ -185,6 +188,8 @@ class Location {
 			accumulatedTime -= fixedTimeStep;
 		}
 
+		delayer.update( tmod );
+
 		for ( entity in entities ) {
 			if ( entity.disposed.isTriggered ) continue;
 			entity.update( dt, tmod );
@@ -207,6 +212,7 @@ class Location {
 		setupLocationTransitionTriggers();
 		createAndAttachStaticObjects();
 		createAndAttachPresentEntities();
+		attachSpawnPoints();
 	}
 
 	public function loadNonAuthoritative() {
@@ -299,6 +305,15 @@ class Location {
 					}
 				);
 			}
+		}
+	}
+
+	function attachSpawnPoints() {
+		var spawnVOs = locationDataProvider.getSpawnPoints();
+		for ( spawnVO in spawnVOs ) {
+			var emitterMaybe = spawnVO.createSpawnEmitter();
+			if ( emitterMaybe == null ) continue;
+			emitterMaybe.attachToLocation( this );
 		}
 	}
 

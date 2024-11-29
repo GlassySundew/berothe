@@ -1,6 +1,6 @@
 package game.data.storage.entity.body;
 
-import game.data.storage.entity.body.properties.EntityFlyingDescription;
+import game.data.storage.entity.body.properties.EntityFlyDescription;
 import game.data.storage.entity.body.properties.LocalDispatchPointDescription;
 import game.data.storage.entity.body.properties.DeathMessageDescription;
 import util.extensions.ArrayExtensions;
@@ -43,7 +43,7 @@ class EntityPresetDescription extends DescriptionBase {
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 	public var ai( default, null ) : Null<EntityAIDescription>;
 	public var model : Null<EntityModelDescription>;
-	public var fly : Null<EntityFlyingDescription>;
+	public var fly : Null<EntityFlyDescription>;
 
 	// structure
 	public var interactabeDesc( default, null ) : Null<InteractableDescription>;
@@ -86,10 +86,10 @@ class EntityPresetDescription extends DescriptionBase {
 			rigidBodyTorsoDesc = RigidBodyTorsoDescription.fromCdb( entry.properties.properties.rigidBodyTorso ),
 			staticRigidBodyDesc = StaticObjectRigidBodyDescription.fromCdb( entry.properties.properties.staticObjectRigidBody ),
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
+			fly = EntityFlyDescription.fromCdb( entry.properties.properties.flying ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
 			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
 			ai = EntityAIDescription.fromCdb( entry.properties.properties.behaviour ),
-			fly = EntityFlyingDescription.fromCdb( entry.properties.properties.flyingDistance ),
 
 			// structure
 			interactabeDesc = InteractableDescription.fromCdb( entry.properties.properties.interactable ),

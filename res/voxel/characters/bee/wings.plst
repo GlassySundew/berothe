@@ -1,0 +1,24 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "idle"
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "walk",
+			"children": [
+				{
+					"type": "model",
+					"name": "bee_0_walk",
+					"source": "voxel/characters/bee/obj/fbx/bee_0_walk.fbx"
+				},
+				{
+					"type": "object",
+					"name": "object"
+				}
+			]
+		}
+	]
+}

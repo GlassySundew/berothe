@@ -4,7 +4,8 @@
 		{
 			"type": "model",
 			"name": "sunflower",
-			"source": "voxel/structures/sunflower/obj/fbx/sunflower.fbx"
+			"source": "voxel/structures/sunflower/obj/fbx/sunflower.fbx",
+			"z": -0.001
 		}
 	]
 }

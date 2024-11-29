@@ -25,6 +25,8 @@ class OverworldEntity {
 
 	public var onFrame( default, null ) : Signal<Float, Float> = new Signal<Float, Float>();
 
+	var disposeInvalidate = false;
+
 	var chunkSelf : MutableProperty<Chunk> = new MutableProperty<Chunk>();
 	public var chunk( get, never ) : IProperty<Chunk>;
 	inline function get_chunk() : IProperty<Chunk> {
@@ -54,10 +56,16 @@ class OverworldEntity {
 		onFrame = null;
 	}
 
+	public function invalidateDispose() {
+		disposeInvalidate = true;
+	}
+
 	#if !debug inline #end
 	public function update( dt : Float, tmod : Float ) {
 		onFrame.dispatch( dt, tmod );
 		delayer.update( tmod );
+
+		if ( disposeInvalidate ) dispose();
 	}
 
 	public function setLocation( location : Location ) {
