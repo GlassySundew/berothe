@@ -1,5 +1,6 @@
 package game.data.storage.entity.body.properties;
 
+import game.net.entity.component.EntitySimpleComponentReplicator;
 import game.domain.overworld.entity.component.ai.EntityAIComponent;
 import game.net.entity.EntityComponentReplicatorBase;
 import game.domain.overworld.entity.EntityComponent;
@@ -57,7 +58,10 @@ class EntityAIDescription extends EntityComponentDescription {
 		super( id );
 		type = id;
 		this.params = params;
+
+		// #if !debug
 		isReplicable = false;
+		// #end
 	}
 
 	public function buildComponent() : EntityComponent {
@@ -65,6 +69,10 @@ class EntityAIDescription extends EntityComponentDescription {
 	}
 
 	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
+		#if debug
+		return new EntitySimpleComponentReplicator( parent );
+		#end
+
 		throw new haxe.exceptions.NotImplementedException();
 	}
 }

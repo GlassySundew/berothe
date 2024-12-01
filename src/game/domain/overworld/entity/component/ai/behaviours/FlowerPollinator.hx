@@ -12,11 +12,14 @@ enum PollingState {
 
 class FlowerPollinator extends EntityBehaviourBase {
 
-	final POLLING_RANGE = 1;
+	static final POLLING_RANGE = 1;
+	static final POLLING_DURATION_MIN = 10;
+	static final POLLING_DURATION_MAX = 20;
 
 	var flowerChosen : ThreeDeeVector;
 	var pollingState : PollingState;
 	var flyComp : EntityFlyComponent;
+	var isPollingTimerSet : Bool = false;
 
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
@@ -43,11 +46,24 @@ class FlowerPollinator extends EntityBehaviourBase {
 				) {
 					pollingState = POLLING;
 				} else {
-					walkTo( flowerChosen.x, flowerChosen.y, tmod );
+					objectivePoint.set( flowerChosen.x, flowerChosen.y, flowerChosen.z );
+					smartWalkToObjective( tmod );
+					dynamics.isMovementApplied.val = true;
 				}
 			case POLLING:
 				flyComp?.suspend();
 				dynamics.isMovementApplied.val = false;
+				if ( !isPollingTimerSet ) {
+					isPollingTimerSet = true;
+					entity.delayer.addS(
+						() -> {
+							pollingState = IDLE;
+							isPollingTimerSet = false;
+							flyComp?.resume();
+						},
+						Random.int( POLLING_DURATION_MIN, POLLING_DURATION_MAX )
+					);
+				}
 		}
 	}
 }

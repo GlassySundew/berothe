@@ -71,14 +71,60 @@
 					"rotationZ": 180
 				},
 				{
-					"type": "model",
-					"name": "orc_prison",
-					"source": "voxel/levels/orc_prison/fbx/orc_prison.fbx",
-					"locked": true,
-					"props": {
-						"entity": "model",
-						"$cdbtype": "locationEntityDF"
-					}
+					"type": "volumetricLightmap",
+					"name": "volumetricLightmap",
+					"x": -10.12,
+					"y": -108.5,
+					"z": -1.12,
+					"scaleX": 17.23,
+					"scaleY": 15.19,
+					"scaleZ": 26.96,
+					"resolution": 4,
+					"children": [
+						{
+							"type": "model",
+							"name": "orc_prison",
+							"source": "voxel/levels/orc_prison/fbx/orc_prison.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 0.5873,
+							"y": 7.1429,
+							"z": 0.0415,
+							"scaleX": 0.058,
+							"scaleY": 0.0658,
+							"scaleZ": 0.0371
+						},
+						{
+							"type": "reference",
+							"name": "human_spwn",
+							"source": "voxel/characters/human/human.enco",
+							"props": {
+								"spawnedEntity": "player",
+								"$cdbtype": "entitySpawnPointDF"
+							},
+							"x": 0.07,
+							"y": 0.28,
+							"z": 0.04,
+							"scaleX": 0.0621,
+							"scaleY": 0.0621,
+							"scaleZ": 0.0371,
+							"rotationZ": -48.6005
+						},
+						{
+							"type": "reference",
+							"name": "light",
+							"source": "voxel/structures/wall_torch/entity/light.prefab",
+							"x": 0.1642,
+							"y": -0.0178,
+							"z": 0.5556,
+							"scaleX": 0.058,
+							"scaleY": 0.0658,
+							"scaleZ": 0.0371,
+							"editMode": true
+						}
+					]
 				},
 				{
 					"type": "object",
@@ -399,9 +445,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -76.23,
-							"y": 80.05,
+							"x": -76.21,
+							"y": 81.54,
 							"z": 6.92,
+							"scaleX": 6.09,
 							"scaleY": 21.69,
 							"scaleZ": 38.07,
 							"rotationZ": 89.4
@@ -413,9 +460,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -72.37,
-							"y": 78.68,
+							"x": -70.83,
+							"y": 80.61,
 							"z": 6.92,
+							"scaleX": 6.61,
 							"scaleY": 10.62,
 							"scaleZ": 38.07,
 							"rotationZ": 51.3
@@ -440,9 +488,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -57.47,
-							"y": 78.7,
+							"x": -57.54,
+							"y": 79.29,
 							"z": 6.92,
+							"scaleX": 4.97,
 							"scaleY": 24,
 							"scaleZ": 38.07,
 							"rotationZ": 96.4
@@ -454,9 +503,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -39.49,
-							"y": 81.38,
+							"x": -39.56,
+							"y": 82.72,
 							"z": 6.92,
+							"scaleX": 6.24,
 							"scaleY": 15.05,
 							"scaleZ": 38.07,
 							"rotationZ": 93.1
@@ -468,9 +518,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -30.82,
-							"y": 72.07,
+							"x": -30.5,
+							"y": 72.22,
 							"z": 6.92,
+							"scaleX": 5.23,
 							"scaleY": 26.31,
 							"scaleZ": 38.07,
 							"rotationZ": 24.6
@@ -482,10 +533,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -28.15,
-							"y": 56.24,
+							"x": -29.61,
+							"y": 45.36,
 							"z": 6.92,
-							"scaleY": 13.7,
+							"scaleX": 2.99,
+							"scaleY": 3.57,
 							"scaleZ": 38.07,
 							"rotationZ": -2.6
 						},
@@ -496,23 +548,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -30.17,
-							"y": 45.67,
-							"z": 6.92,
-							"scaleY": 2.91,
-							"scaleZ": 38.07,
-							"rotationZ": -2.6
-						},
-						{
-							"type": "customBox",
-							"name": "floor",
-							"props": {
-								"entity": "collider_box",
-								"$cdbtype": "locationEntityDF"
-							},
-							"x": -28.38,
+							"x": -25.22,
 							"y": 44.32,
 							"z": 6.92,
+							"scaleX": 10.28,
 							"scaleY": 31.52,
 							"scaleZ": 38.07
 						},
@@ -523,9 +562,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -27.48,
+							"x": -24.34,
 							"y": 20.65,
 							"z": 6.92,
+							"scaleX": 8.29,
 							"scaleY": 17.6,
 							"scaleZ": 38.07
 						},
@@ -536,9 +576,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -26.15,
+							"x": -22.71,
 							"y": 4.19,
 							"z": 6.92,
+							"scaleX": 8.38,
 							"scaleY": 17.6,
 							"scaleZ": 38.07
 						},
@@ -549,12 +590,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -29.19,
-							"y": -5.63,
+							"x": -26.76,
+							"y": -7.09,
 							"z": 6.92,
+							"scaleX": 8.67,
 							"scaleY": 17.6,
 							"scaleZ": 38.07,
-							"rotationZ": -30.9
+							"rotationZ": -27.5
 						},
 						{
 							"type": "customBox",
@@ -563,10 +605,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -34.99,
-							"y": -17.69,
+							"x": -32.3,
+							"y": -19.05,
 							"z": 6.92,
-							"scaleY": 9.81,
+							"scaleX": 8.83,
+							"scaleY": 12.33,
 							"scaleZ": 38.07,
 							"rotationZ": -20.5
 						},
@@ -577,24 +620,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -35.51,
-							"y": -25.19,
+							"x": -39.49,
+							"y": -32.94,
 							"z": 6.92,
-							"scaleY": 9.81,
-							"scaleZ": 38.07,
-							"rotationZ": -0.7
-						},
-						{
-							"type": "customBox",
-							"name": "floor",
-							"props": {
-								"entity": "collider_box",
-								"$cdbtype": "locationEntityDF"
-							},
-							"x": -40.95,
-							"y": -31.63,
-							"z": 6.92,
-							"scaleY": 19.15,
+							"scaleX": 6.88,
+							"scaleY": 29.13,
 							"scaleZ": 38.07,
 							"rotationZ": -41.9
 						},
@@ -605,23 +635,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -49.92,
-							"y": -41.6,
+							"x": -55.28,
+							"y": -45.77,
 							"z": 6.92,
-							"scaleY": 10.54,
-							"scaleZ": 38.07,
-							"rotationZ": -55.8
-						},
-						{
-							"type": "customBox",
-							"name": "floor",
-							"props": {
-								"entity": "collider_box",
-								"$cdbtype": "locationEntityDF"
-							},
-							"x": -55.53,
-							"y": -43.07,
-							"z": 6.92,
+							"scaleX": 8,
 							"scaleY": 10.54,
 							"scaleZ": 38.07,
 							"rotationZ": -84.8
@@ -633,12 +650,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -71.5,
-							"y": -53.98,
+							"x": -69.85,
+							"y": -55.54,
 							"z": 6.92,
+							"scaleX": 6.92,
 							"scaleY": 32.33,
 							"scaleZ": 38.07,
-							"rotationZ": -46.5
+							"rotationZ": -47.8
 						},
 						{
 							"type": "customBox",
@@ -647,9 +665,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -85.96,
-							"y": -77.5,
+							"x": -82.66,
+							"y": -78.22,
 							"z": 6.92,
+							"scaleX": 8.9,
 							"scaleY": 26.84,
 							"scaleZ": 38.07,
 							"rotationZ": -12.3
@@ -661,9 +680,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -84.74,
-							"y": -103.13,
+							"x": -79.63,
+							"y": -102.66,
 							"z": 6.92,
+							"scaleX": 11.65,
 							"scaleY": 26.84,
 							"scaleZ": 38.07,
 							"rotationZ": 5.3
@@ -675,12 +695,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -83.5,
-							"y": -118.52,
+							"x": -78.24,
+							"y": -116.14,
 							"z": 6.92,
+							"scaleX": 12.36,
 							"scaleY": 8.65,
 							"scaleZ": 38.07,
-							"rotationZ": 22.2
+							"rotationZ": 8.1
 						},
 						{
 							"type": "customBox",
@@ -689,9 +710,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -77.39,
-							"y": -122.82,
+							"x": -76.8,
+							"y": -120.44,
 							"z": 6.92,
+							"scaleX": 7.24,
 							"scaleY": 8.65,
 							"scaleZ": 38.07,
 							"rotationZ": 76.1
@@ -703,9 +725,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -69.49,
-							"y": -122.03,
+							"x": -71.32,
+							"y": -119.34,
 							"z": 6.92,
+							"scaleX": 7.62,
 							"scaleY": 8.65,
 							"scaleZ": 38.07,
 							"rotationZ": 124.2
@@ -717,12 +740,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -64.78,
-							"y": -115.23,
+							"x": -68.46,
+							"y": -114.21,
 							"z": 6.92,
+							"scaleX": 7.18,
 							"scaleY": 8.65,
 							"scaleZ": 38.07,
-							"rotationZ": 159.1
+							"rotationZ": 166.1
 						},
 						{
 							"type": "customBox",
@@ -731,9 +755,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -67.05,
-							"y": -98.54,
+							"x": -69.71,
+							"y": -99.25,
 							"z": 6.92,
+							"scaleX": 6.12,
 							"scaleY": 25.56,
 							"scaleZ": 38.07,
 							"rotationZ": -165
@@ -745,12 +770,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -71.87,
-							"y": -80.6,
+							"x": -74.58,
+							"y": -81.1,
 							"z": 6.92,
+							"scaleX": 4.6,
 							"scaleY": 25.56,
 							"scaleZ": 38.07,
-							"rotationZ": -169.7
+							"rotationZ": -168.5
 						},
 						{
 							"type": "customBox",
@@ -759,9 +785,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -68.06,
-							"y": -63.31,
+							"x": -69.8,
+							"y": -61.76,
 							"z": 6.92,
+							"scaleX": 6.21,
 							"scaleY": 25.56,
 							"scaleZ": 38.07,
 							"rotationZ": 138.3
@@ -773,10 +800,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -72.21,
-							"y": -69.9,
+							"x": -74.03,
+							"y": -68.96,
 							"z": 6.92,
-							"scaleY": 7.7,
+							"scaleX": 3.97,
+							"scaleY": 12.92,
 							"scaleZ": 38.07,
 							"rotationZ": 152.8
 						},
@@ -787,9 +815,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -53.87,
-							"y": -53.55,
+							"x": -54.44,
+							"y": -51.7,
 							"z": 6.92,
+							"scaleX": 5.44,
 							"scaleY": 25.56,
 							"scaleZ": 38.07,
 							"rotationZ": 107.1
@@ -801,9 +830,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -41.68,
-							"y": -50.75,
+							"x": -41.72,
+							"y": -48.31,
 							"z": 6.92,
+							"scaleX": 5.99,
 							"scaleY": 8.99,
 							"scaleZ": 38.07,
 							"rotationZ": 90.9
@@ -815,9 +845,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -32.46,
-							"y": -47.63,
+							"x": -33.7,
+							"y": -45.98,
 							"z": 6.92,
+							"scaleX": 5.62,
 							"scaleY": 10.48,
 							"scaleZ": 38.07,
 							"rotationZ": 126.7
@@ -829,10 +860,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -26.04,
-							"y": -43.65,
+							"x": -25.67,
+							"y": -40.89,
 							"z": 6.92,
-							"scaleX": 3.04,
+							"scaleX": 9.3,
 							"scaleY": 5.9,
 							"scaleZ": 38.07,
 							"rotationZ": 82.3
@@ -1054,10 +1085,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": 1.91,
-							"y": -96.89,
+							"x": 9.33,
+							"y": -98.33,
 							"z": 6.92,
-							"scaleX": 6.92,
+							"scaleX": 23.26,
 							"scaleY": 27.89,
 							"scaleZ": 38.07,
 							"rotationZ": -11
@@ -1069,13 +1100,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -1.99,
-							"y": -111.15,
+							"x": -4.14,
+							"y": -110.55,
 							"z": 6.92,
 							"scaleX": 5.6,
 							"scaleY": 6.72,
 							"scaleZ": 38.07,
-							"rotationZ": -15.7
+							"rotationZ": 16.2
 						},
 						{
 							"type": "customBox",
@@ -1084,10 +1115,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -23.96,
-							"y": -135.53,
+							"x": -19.91,
+							"y": -140.42,
 							"z": 6.92,
-							"scaleX": 6.01,
+							"scaleX": 21.09,
 							"scaleY": 40.51,
 							"scaleZ": 38.07,
 							"rotationZ": -50.4
@@ -1099,11 +1130,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -43.14,
-							"y": -149.5,
+							"x": -41.35,
+							"y": -153.57,
 							"z": 6.92,
-							"scaleX": 8.17,
-							"scaleY": 17.44,
+							"scaleX": 19.12,
+							"scaleY": 42.66,
 							"scaleZ": 38.07,
 							"rotationZ": -66.3
 						},
@@ -1114,10 +1145,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -87.18,
-							"y": -155.34,
+							"x": -86.83,
+							"y": -160.17,
 							"z": 6.92,
-							"scaleX": 8.12,
+							"scaleX": 20.51,
 							"scaleY": 71.41,
 							"scaleZ": 38.07,
 							"rotationZ": -85.8
@@ -1143,11 +1174,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -128.42,
-							"y": -155.17,
+							"x": -130.04,
+							"y": -158.26,
 							"z": 6.92,
-							"scaleX": 8.05,
-							"scaleY": 29.72,
+							"scaleX": 14.47,
+							"scaleY": 50.57,
 							"scaleZ": 38.07,
 							"rotationZ": -102.6
 						},
@@ -1158,11 +1189,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -145.15,
-							"y": -140.77,
+							"x": -148.63,
+							"y": -141.12,
 							"z": 6.92,
-							"scaleX": 7.43,
-							"scaleY": 16.82,
+							"scaleX": 14.6,
+							"scaleY": 41.29,
 							"scaleZ": 38.07,
 							"rotationZ": -174.2
 						},
@@ -1173,13 +1204,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -141.59,
-							"y": -119.87,
+							"x": -145.28,
+							"y": -118.52,
 							"z": 6.92,
-							"scaleX": 6.94,
+							"scaleX": 14.09,
 							"scaleY": 28.33,
 							"scaleZ": 38.07,
-							"rotationZ": 160.2
+							"rotationZ": 158.4
 						},
 						{
 							"type": "customBox",
@@ -1188,10 +1219,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -138.52,
-							"y": -103.03,
+							"x": -141.49,
+							"y": -103.73,
 							"z": 6.92,
-							"scaleX": 7.62,
+							"scaleX": 14.61,
 							"scaleY": 14.51,
 							"scaleZ": 38.07,
 							"rotationZ": -166.8
@@ -1203,10 +1234,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -143.02,
-							"y": -90.44,
+							"x": -146.38,
+							"y": -92.66,
 							"z": 6.92,
-							"scaleX": 5.85,
+							"scaleX": 15.04,
 							"scaleY": 14.51,
 							"scaleZ": 38.07,
 							"rotationZ": -146.5
@@ -1218,10 +1249,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -145.8,
-							"y": -80.21,
+							"x": -149.01,
+							"y": -80.22,
 							"z": 6.92,
-							"scaleX": 5.8,
+							"scaleX": 11.67,
 							"scaleY": 14.51,
 							"scaleZ": 38.07,
 							"rotationZ": -179.8
@@ -1233,10 +1264,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -140.97,
-							"y": -68.17,
+							"x": -141.69,
+							"y": -67.64,
 							"z": 6.92,
-							"scaleX": 6,
+							"scaleX": 8.76,
 							"scaleY": 24.98,
 							"scaleZ": 38.07,
 							"rotationZ": 143.6
@@ -1248,10 +1279,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -124.24,
-							"y": -53.67,
+							"x": -124.67,
+							"y": -52.92,
 							"z": 6.92,
-							"scaleX": 6.8,
+							"scaleX": 9.13,
 							"scaleY": 24.98,
 							"scaleZ": 38.07,
 							"rotationZ": 119.6
@@ -1263,13 +1294,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -109.46,
-							"y": -45.29,
+							"x": -111.56,
+							"y": -42.67,
 							"z": 6.92,
-							"scaleX": 6.31,
+							"scaleX": 13.54,
 							"scaleY": 9.57,
 							"scaleZ": 38.07,
-							"rotationZ": 129.2
+							"rotationZ": 124.2
 						},
 						{
 							"type": "customBox",
@@ -1281,10 +1312,10 @@
 							"x": -105.43,
 							"y": -40.43,
 							"z": 6.92,
-							"scaleX": 5.54,
+							"scaleX": 10.83,
 							"scaleY": 9.57,
 							"scaleZ": 38.07,
-							"rotationZ": 158.4
+							"rotationZ": -178.2
 						},
 						{
 							"type": "customBox",
@@ -1293,10 +1324,10 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -88.95,
-							"y": -32.73,
+							"x": -89.88,
+							"y": -29.91,
 							"z": 6.92,
-							"scaleX": 5.68,
+							"scaleX": 11.84,
 							"scaleY": 39.52,
 							"scaleZ": 38.07,
 							"rotationZ": 108.3
@@ -1323,11 +1354,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -63.63,
-							"y": -3.2,
+							"x": -63.64,
+							"y": -4.53,
 							"z": 6.92,
 							"scaleX": 7.33,
-							"scaleY": 13.44,
+							"scaleY": 10.32,
 							"scaleZ": 38.07,
 							"rotationZ": 179.6
 						},
@@ -1372,7 +1403,7 @@
 							"y": 6.19,
 							"z": 6.92,
 							"scaleX": 7.68,
-							"scaleY": 10.95,
+							"scaleY": 18,
 							"scaleZ": 38.07,
 							"rotationZ": -155.6
 						},
@@ -1383,11 +1414,11 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -6.48,
-							"y": -118.92,
+							"x": -2.41,
+							"y": -122.49,
 							"z": 6.92,
-							"scaleX": 5.51,
-							"scaleY": 12.83,
+							"scaleX": 17.75,
+							"scaleY": 26.68,
 							"scaleZ": 38.07,
 							"rotationZ": -41.3
 						},
@@ -1398,12 +1429,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -88.49,
-							"y": -94.04,
+							"x": -84.75,
+							"y": -95.01,
 							"z": 6.92,
-							"scaleY": 6.63,
+							"scaleX": 9.83,
+							"scaleY": 9.14,
 							"scaleZ": 38.07,
-							"rotationZ": 1.4
+							"rotationZ": 5.5
 						},
 						{
 							"type": "customBox",
@@ -1412,12 +1444,13 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -86.36,
-							"y": -99.17,
+							"x": -85.72,
+							"y": -103.48,
 							"z": 6.92,
+							"scaleX": 5.53,
 							"scaleY": 6.63,
 							"scaleZ": 38.07,
-							"rotationZ": 17.3
+							"rotationZ": 47.4
 						},
 						{
 							"type": "customBox",
@@ -1438,53 +1471,6 @@
 		},
 		{
 			"type": "reference",
-			"name": "iron_bars_door",
-			"source": "voxel/structures/iron_bars_door/iron_bars_door.enco",
-			"props": {
-				"entity": "orc_prison_door",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -68.5,
-			"y": 54,
-			"z": 1.5
-		},
-		{
-			"type": "reference",
-			"name": "human_spwn",
-			"source": "voxel/characters/human/human.enco",
-			"props": {
-				"spawnedEntity": "player",
-				"$cdbtype": "entitySpawnPointDF"
-			},
-			"x": 23.05,
-			"y": -78.43,
-			"rotationZ": -45
-		},
-		{
-			"type": "reference",
-			"name": "key",
-			"source": "voxel/items/orc_prison_key/entity/key.enco",
-			"props": {
-				"entity": "orc_prison_key",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -60.37,
-			"y": 53.01,
-			"z": 2.5
-		},
-		{
-			"type": "reference",
-			"name": "orc",
-			"source": "voxel/characters/orc/entity/orc.enco",
-			"props": {
-				"entity": "orc",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -61.49,
-			"y": 22.32
-		},
-		{
-			"type": "reference",
 			"name": "bat",
 			"source": "voxel/characters/bat/bat.enco",
 			"props": {
@@ -1493,77 +1479,6 @@
 			},
 			"x": -43.61,
 			"y": -86.72
-		},
-		{
-			"type": "reference",
-			"name": "club",
-			"source": "voxel/items/club/entity/club.enco",
-			"props": {
-				"entity": "club",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -5.77,
-			"y": -71.68,
-			"z": 1.89
-		},
-		{
-			"type": "box",
-			"name": "sleepy_orc_wake_trigger",
-			"props": {
-				"type": "entityCollisionTrigger",
-				"$cdbtype": "locationObjContainerTypeDF",
-				"extra": "sleepy_orc_wake_trigger",
-				"id": "sleepy_orc_wake_trigger",
-				"props": {
-					"ident": "sleepy_orc_wake_trigger"
-				}
-			},
-			"x": -66.51,
-			"y": -36.36,
-			"z": 20.21,
-			"scaleX": 27.84,
-			"scaleZ": 49.51,
-			"rotationZ": -54.6
-		},
-		{
-			"type": "box",
-			"name": "meadow_transition",
-			"props": {
-				"type": "entityCollisionTrigger",
-				"$cdbtype": "locationObjContainerTypeDF",
-				"extra": "",
-				"id": "",
-				"asd": {
-					"asde": 0
-				},
-				"props": {
-					"location": "meadow"
-				}
-			},
-			"x": 51.21,
-			"y": -85.47,
-			"z": 7.13,
-			"scaleX": 20.49,
-			"scaleY": 4.14,
-			"scaleZ": 49.51,
-			"rotationZ": -88.8,
-			"children": [
-				{
-					"type": "material",
-					"name": "material",
-					"props": {
-						"PBR": {
-							"mode": "PBR",
-							"blend": "None",
-							"shadows": true,
-							"culling": "Back",
-							"depthTest": "Less",
-							"colorMask": 15,
-							"enableStencil": false
-						}
-					}
-				}
-			]
 		}
 	]
 }

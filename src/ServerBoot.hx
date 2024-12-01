@@ -61,6 +61,5 @@ class ServerBoot {
 			#end
 		} );
 
-		// Repeater.repeatSeconds(() -> trace( fps, Timer.dt ), 5 );
 	}
 }

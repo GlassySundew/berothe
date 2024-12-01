@@ -14,6 +14,10 @@ class OimoTransform implements ITransform {
 		this.transform = transform ?? new Transform();
 	}
 
+	public inline function add( vec : ThreeDeeVector ) {
+		transform.translate( vec.toOimo() );
+	}
+
 	public inline function getPosition() : ThreeDeeVector {
 		return {
 			x : transform._positionX,

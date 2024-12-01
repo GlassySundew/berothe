@@ -638,6 +638,58 @@
 							"y": -13.5,
 							"z": 1,
 							"rotationZ": 69.6
+						},
+						{
+							"type": "reference",
+							"name": "tulip",
+							"source": "voxel/structures/tulip/tulip.enco",
+							"props": {
+								"entity": "tulip",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -53.46,
+							"y": -24.44,
+							"z": 1,
+							"rotationZ": 69.6
+						},
+						{
+							"type": "reference",
+							"name": "tulip",
+							"source": "voxel/structures/tulip/tulip.enco",
+							"props": {
+								"entity": "tulip",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -38.91,
+							"y": -16.55,
+							"z": 1,
+							"rotationZ": 121.6
+						},
+						{
+							"type": "reference",
+							"name": "tulip",
+							"source": "voxel/structures/tulip/tulip.enco",
+							"props": {
+								"entity": "tulip",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 21.9,
+							"y": -33.39,
+							"z": 1,
+							"rotationZ": 104.9
+						},
+						{
+							"type": "reference",
+							"name": "tulip",
+							"source": "voxel/structures/tulip/tulip.enco",
+							"props": {
+								"entity": "tulip",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 30.48,
+							"y": -17.03,
+							"z": 1,
+							"rotationZ": 32.6
 						}
 					]
 				},
@@ -662,100 +714,46 @@
 							"y": -25.58,
 							"z": 1,
 							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -52.6,
+							"y": -9.36,
+							"z": 1,
+							"rotationZ": -15
+						},
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 16.02,
+							"y": -24.14,
+							"z": 1,
+							"rotationZ": -14.6
+						},
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -4.96,
+							"y": -19.67,
+							"z": 1,
+							"rotationZ": 18
 						}
-					]
-				}
-			]
-		},
-		{
-			"type": "box",
-			"name": "town_transition",
-			"editorOnly": true,
-			"props": {
-				"type": "entityCollisionTrigger",
-				"$cdbtype": "locationObjContainerTypeDF",
-				"extra": "",
-				"id": "",
-				"asd": {
-					"asde": 0
-				},
-				"props": {
-					"location": "meadow"
-				}
-			},
-			"x": 69.74,
-			"y": -56.54,
-			"z": 7,
-			"scaleX": 4.44,
-			"scaleY": 11.96,
-			"scaleZ": 22.77,
-			"children": [
-				{
-					"type": "material",
-					"name": "material",
-					"props": {
-						"PBR": {
-							"mode": "PBR",
-							"blend": "None",
-							"shadows": true,
-							"culling": "Back",
-							"depthTest": "Less",
-							"colorMask": 15,
-							"enableStencil": false
-						}
-					},
-					"color": [
-						0.5176470588235293,
-						0.14509803921568626,
-						0.9019607843137255,
-						1
-					]
-				}
-			]
-		},
-		{
-			"type": "box",
-			"name": "batcave_transition",
-			"editorOnly": true,
-			"props": {
-				"type": "entityCollisionTrigger",
-				"$cdbtype": "locationObjContainerTypeDF",
-				"extra": "",
-				"id": "",
-				"asd": {
-					"asde": 0
-				},
-				"props": {
-					"location": "meadow"
-				}
-			},
-			"x": 64.97,
-			"y": 101.29,
-			"z": 13.94,
-			"scaleX": 4.44,
-			"scaleY": 18.9,
-			"scaleZ": 27.3,
-			"rotationZ": 1,
-			"children": [
-				{
-					"type": "material",
-					"name": "material",
-					"props": {
-						"PBR": {
-							"mode": "PBR",
-							"blend": "None",
-							"shadows": true,
-							"culling": "Back",
-							"depthTest": "Less",
-							"colorMask": 15,
-							"enableStencil": false
-						}
-					},
-					"color": [
-						0.5176470588235293,
-						0.14509803921568626,
-						0.9019607843137255,
-						1
 					]
 				}
 			]
@@ -777,7 +775,6 @@
 		{
 			"type": "object",
 			"name": "orc cave exit",
-			"editorOnly": true,
 			"props": {
 				"type": "entityTransitionExit",
 				"props": {
@@ -788,50 +785,6 @@
 			"x": -105.15,
 			"y": 60.02,
 			"z": 78.93
-		},
-		{
-			"type": "reference",
-			"name": "human",
-			"source": "voxel/characters/human/human.enco",
-			"x": -67.6,
-			"y": 26.9,
-			"z": -0.1
-		},
-		{
-			"type": "reference",
-			"name": "bee",
-			"source": "voxel/characters/bee/bee.enco",
-			"props": {
-				"spawnedEntity": "bee",
-				"$cdbtype": "entitySpawnPointDF"
-			},
-			"x": 30.5,
-			"y": -17.3,
-			"z": 7.82
-		},
-		{
-			"type": "reference",
-			"name": "bee",
-			"source": "voxel/characters/bee/bee.enco",
-			"props": {
-				"spawnedEntity": "bee",
-				"$cdbtype": "entitySpawnPointDF",
-				"emitter": {
-					"maxEntitiesPresent": 2,
-					"cooldown": 20
-				}
-			},
-			"x": -12.53,
-			"y": -42.26,
-			"z": 7.82
-		},
-		{
-			"type": "reference",
-			"name": "light",
-			"source": "levels/light.prefab",
-			"editorOnly": true,
-			"rotationZ": 45.1,
-			"editMode": true
 		}
 	]
 }

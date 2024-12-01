@@ -1,5 +1,6 @@
 package game.physics.oimo;
 
+import game.physics.oimo.geom.OimoBoxGeometry;
 import oimo.collision.geometry.BoxGeometry;
 import game.domain.overworld.location.physics.ITransform;
 import game.domain.overworld.location.physics.ITransformProvider;
@@ -113,12 +114,19 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		#if client
 		if ( debugDraw == null ) return;
 		var beginPoint = beginTransform.getPosition();
-		debugDraw.line( beginPoint, beginPoint.addScaled( translation, callback.fraction ), ThreeDeeVector.fromColorF( 0x23DB20 ) );
-		beginTransform.setPosition( beginTransform.getPosition().addScaledEq( translation, callback.fraction ) );
-		debugDraw.point( callback.position, ThreeDeeVector.fromColorF( 0xB224A1 ) );
+
+		var fraction = 1.;
+		var position = new ThreeDeeVector();
+		if ( callback.hit ) {
+			fraction = callback.contacts[0].fraction;
+			position = callback.contacts[0].position;
+		}
+		debugDraw.line( beginPoint, beginPoint.addScaled( translation, fraction ), ThreeDeeVector.fromColorF( 0x23DB20 ) );
+		beginTransform.setPosition( beginTransform.getPosition().addScaledEq( translation, fraction ) );
+		debugDraw.point( position, ThreeDeeVector.fromColorF( 0xB224A1 ) );
 
 		switch Type.getClass( geom ) {
-			case BoxGeometry:
+			case BoxGeometry | OimoBoxGeometry:
 				var box = Std.downcast( geom, BoxGeometry );
 				debugDraw.box( beginTransform, box.getHalfExtents(), ThreeDeeVector.fromColorF( 0x185ED0 ).toOimo() );
 

@@ -44,6 +44,8 @@ class SpawnEntityEmitter {
 			!ignoreDelayerPresence
 			&& location.delayer.hasId( DELAYER_ID ) ) return;
 
+		trace( "created entity spawn delayer" );
+
 		location.delayer.addS(
 			DELAYER_ID,
 			spawnEntity.bind( true ),

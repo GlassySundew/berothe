@@ -20,6 +20,8 @@ class SleepyPointGuard extends EntityBehaviourBase {
 	override function onAttachedToLocation( location : Location ) {
 		super.onAttachedToLocation( location );
 		sleep();
+		#if client return; #end
+		
 		entity.components.onAppear(
 			EntityModelComponent,
 			( cl, modelComp ) -> {

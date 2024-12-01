@@ -588,8 +588,8 @@
 						"spawnInventory": [
 							{
 								"item": "gold",
-								"botEdgeRnd": 1,
-								"topEdgeRnd": 1,
+								"botEdgeRnd": 2,
+								"topEdgeRnd": 2,
 								"distrubution": [
 									0
 								]
@@ -1043,7 +1043,8 @@
 							"sizeX": 2,
 							"sizeY": 4,
 							"sizeZ": 11,
-							"offsetX": 1
+							"offsetX": 1,
+							"offsetY": -1
 						},
 						"localDispatchPoint": {
 							"name": 0,

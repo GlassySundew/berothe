@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import game.net.client.GameClient;
 import dn.M;
 import hxd.Timer;
 import dn.Cooldown;
@@ -20,6 +21,8 @@ class RandomRoaming extends EntityBehaviourBase {
 	override function update( dt : Float, tmod : Float ) {
 		super.update( dt, tmod );
 
+		#if client return; #end
+		
 		switch state {
 			case AGRO( enemy ): return;
 			default:
@@ -29,7 +32,7 @@ class RandomRoaming extends EntityBehaviourBase {
 
 		if ( point == null ) repickPoint();
 
-		walkTo( point.x, point.y, tmod );
+		walkTowardsPoint( point.x, point.y, tmod );
 
 		if ( M.dist(
 			point.x,

@@ -1,5 +1,10 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import util.Extensions.ReverseArrayKeyValueIterator;
+import oimo.dynamics.callback.RayCastClosest;
+import game.physics.oimo.EntityRigidBodyProps;
+import game.physics.oimo.RayCastCallback;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import util.GameUtil;
 import rx.disposables.Composite;
 import rx.disposables.ISubscription;
@@ -11,6 +16,7 @@ import game.domain.overworld.location.Location;
 import util.MathUtil;
 import game.domain.overworld.location.Chunk;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
+import game.physics.oimo.OimoWrappedShape;
 
 enum State {
 	CALM;
@@ -19,15 +25,20 @@ enum State {
 
 abstract class EntityBehaviourBase {
 
-	static final enemyContactRange = 5;
+	static final ENEMY_CONTACT_RANGE = 6;
+	static final MIN_COLLISION_EVADE_DISTANCE = 4;
 
 	final agroRange : Float = 25;
 
 	var dynamics : EntityDynamicsComponent;
 	var model : EntityModelComponent;
 	var attackComp : EntityAttackListComponent;
+	var rigidBodyComp : EntityRigidBodyComponent;
 	var entity( default, null ) : OverworldEntity;
 	var state : State;
+
+	var objectivePoint : ThreeDeeVector = new ThreeDeeVector();
+	var pathfindCastCB = new RayCastCallback();
 
 	public function new( params : AIProperties ) {
 		state = CALM;
@@ -37,7 +48,6 @@ abstract class EntityBehaviourBase {
 	public function dispose( _ ) {}
 
 	public function attachToEntity( entity : OverworldEntity ) {
-		trace( "attaching behaviour to: " + entity );
 		this.entity = entity;
 		entity.components.onAppear(
 			EntityDynamicsComponent,
@@ -51,6 +61,10 @@ abstract class EntityBehaviourBase {
 			EntityAttackListComponent,
 			( cl, attackComp ) -> this.attackComp = attackComp
 		);
+		entity.components.onAppear(
+			EntityRigidBodyComponent,
+			( cl, rigidBodyComp ) -> this.rigidBodyComp = rigidBodyComp
+		);
 		entity.location.onAppear( onAttachedToLocation );
 		entity.disposed.then( dispose );
 	}
@@ -58,20 +72,23 @@ abstract class EntityBehaviourBase {
 	public function update( dt : Float, tmod : Float ) {
 		if (
 			model == null
-			|| !model.isCapable() ) return;
+			|| !model.isCapable() //
+		) return;
 
 		switch state {
 			case CALM:
 			case AGRO( enemy ):
+				var offsetZ = enemy.desc.getBodyDescription().rigidBodyTorsoDesc?.offsetZ;
 				if ( //
 					M.dist(
 						entity.transform.x,
 						entity.transform.y,
 						enemy.transform.x,
 						enemy.transform.y
-					) > enemyContactRange //
+					) > ENEMY_CONTACT_RANGE //
 				) {
-					walkTo( enemy.transform.x.val, enemy.transform.y.val, tmod );
+					objectivePoint.set( enemy.transform.x, enemy.transform.y, enemy.transform.z.val + offsetZ );
+					smartWalkToObjective( tmod );
 				} else {
 					dynamics.isMovementApplied.val = false;
 				}
@@ -84,7 +101,86 @@ abstract class EntityBehaviourBase {
 
 	function updateBehaviour( dt : Float, tmod : Float ) {}
 
-	inline function walkTo( x : Float, y : Float, tmod : Float ) {
+	function smartWalkToObjective( tmod : Float ) {
+		if ( rigidBodyComp == null ) {
+			#if server walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod ); #end
+			return;
+		}
+
+		var shape = rigidBodyComp.rigidBody.getShape();
+		var translation = objectivePoint.sub( entity.transform.getPosition() );
+		var physics = entity.location.getValue().physics;
+		var backward = entity.transform.getRotation().getForwardZ();
+		backward.negate();
+		var offsetDistance = 1.0;
+		backward.scale( offsetDistance );
+		var startTransform = rigidBodyComp.rigidBody.transform.clone();
+		startTransform.add( backward );
+
+		pathfindCastCB.clear();
+		physics.convexCast(
+			shape.getConfig().geom,
+			startTransform,
+			translation,
+			pathfindCastCB
+		);
+		pathfindCastCB.sort();
+		// if (smartPathfindingConvexCastCB.shape._rigidBody.userData)
+		// var maybeEntity = Std.downcast( smartPathfindingConvexCastCB.shape._rigidBody?.userData, EntityRigidBodyProps )?.entity;
+
+		// trace( pathfindCastCB.hit );
+		if ( !pathfindCastCB.hit ) {
+			walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod );
+			return;
+		}
+
+		var raycastHit : RayCastClosest = null;
+		for ( contact in pathfindCastCB.contacts ) {
+			if ( //
+				contact.shape.getCollisionGroup() //
+					& rigidBodyComp.rigidBody.getShape().getCollisionMask() == 0 //
+			) continue;
+			if ( //
+				Std.downcast( contact.shape, OimoWrappedShape ) //
+					== rigidBodyComp.rigidBody.getShape() //
+			) continue;
+
+			raycastHit = contact;
+			break;
+		}
+
+		if ( raycastHit == null ) {
+			walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod );
+			return;
+		}
+
+		var distanceToCollision = translation.length() * raycastHit.fraction;
+		var distanceToObjective = entity.transform.getPosition().distance( objectivePoint );
+
+		#if client return; #end
+		if ( distanceToCollision < MIN_COLLISION_EVADE_DISTANCE && distanceToObjective > ENEMY_CONTACT_RANGE ) {
+			// obstacle bypassing
+			var direction = translation.normalized();
+			raycastHit.normal.z = 0;
+			raycastHit.normal.normalize();
+			var tangent = direction.cross( raycastHit.normal );
+			tangent.z = 0;
+			tangent.normalize();
+			if ( tangent.dot( direction ) < 0 ) {
+				tangent.negate(); // Инверсия
+			}
+
+			tangent.scale( model.stats.speed.amount.getValue() * tmod );
+			entity.transform.velX.val += tangent.x;
+			entity.transform.velY.val += tangent.y;
+			dynamics.isMovementApplied.val = true;
+			return;
+		} else {
+			walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod );
+		}
+	}
+
+	inline function walkTowardsPoint( x : Float, y : Float, tmod : Float ) {
 		var angle = Math.atan2(
 			y - entity.transform.y.val,
 			x - entity.transform.x.val
@@ -103,11 +199,11 @@ abstract class EntityBehaviourBase {
 	}
 
 	final function sleep() {
-		entity.components.get( EntityModelComponent ).sleep();
+		entity.components.get( EntityModelComponent )?.sleep();
 	}
 
 	final function wake() {
-		entity.components.get( EntityModelComponent ).wake();
+		entity.components.get( EntityModelComponent )?.wake();
 	}
 
 	function initializeAttackComponent() {
@@ -161,6 +257,7 @@ abstract class EntityBehaviourBase {
 
 	// called when have no aggro in list and not sleeping
 	function seekForEnemy() {
+		#if client return null; #end
 		var enemyEntity = null;
 		mapSurroundingEntities( ( enemy ) -> {
 			if ( enemy == entity ) {

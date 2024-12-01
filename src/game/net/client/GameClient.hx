@@ -104,7 +104,7 @@ class GameClient extends Process {
 
 			if ( newLoc == null ) return;
 
-			Std.downcast(Boot.inst.s3d.renderer, PbrRenderer).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.3;
+			Std.downcast(Boot.inst.s3d.renderer, PbrRenderer).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
 			
 			if ( newLoc.locationDesc.isOpenAir ) {
 				locationLights?.findFirstLocal3d().remove();

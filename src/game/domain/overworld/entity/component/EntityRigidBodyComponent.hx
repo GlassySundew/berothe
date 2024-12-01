@@ -163,6 +163,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 					end.z -= rigidBodyDesc.offsetZ;
 
 					physics.rayCast( start, end, standRayCastCallback );
+					standRayCastCallback.clear();
 				} ) );
 		}
 

@@ -42,6 +42,15 @@ class EntityTransform {
 	}
 
 	#if !debug inline #end
+	public function getRotation() : ThreeDeeVector {
+		return {
+			x : rotationX.val,
+			y : rotationY.val,
+			z : rotationZ.val
+		}
+	}
+
+	#if !debug inline #end
 	public function setRotation( x : Float, y : Float, z : Float ) {
 		this.rotationX.val = x;
 		this.rotationY.val = y;

@@ -67,6 +67,12 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		this = { x : x, y : y, z : z };
 	}
 
+	public inline function set( x : Float, y : Float, z : Float ) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+
 	public inline function setFromVec( vector : ThreeDeeVector ) {
 		this.x = vector.x;
 		this.y = vector.y;
@@ -95,6 +101,75 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 			y : this.y / subdiv,
 			z : this.z / subdiv
 		}
+	}
+
+	public inline function lengthSq() {
+		return x * x + y * y + z * z;
+	}
+
+	public inline function length() {
+		return hxd.Math.sqrt( lengthSq() );
+	}
+
+	public inline function distance( v : ThreeDeeVector ) {
+		return Math.sqrt( distanceSq( v ) );
+	}
+
+	public inline function distanceSq( v : ThreeDeeVector ) {
+		var dx = v.x - x;
+		var dy = v.y - y;
+		var dz = v.z - z;
+		return dx * dx + dy * dy + dz * dz;
+	}
+
+	public inline function cross( v : ThreeDeeVector ) {
+		// note : cross product is left-handed
+		return new ThreeDeeVector( y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x );
+	}
+
+	public inline function normalize() {
+		var k = lengthSq();
+		if ( k < hxd.Math.EPSILON2 ) k = 0 else k = hxd.Math.invSqrt( k );
+		x *= k;
+		y *= k;
+		z *= k;
+	}
+
+	public inline function dot( v : ThreeDeeVector ) {
+		return x * v.x + y * v.y + z * v.z;
+	}
+
+	public inline function scale( f : Float ) {
+		/*
+			The scale of a vector represents its length and thus
+			only x/y/z should be affected by scaling
+		 */
+		x *= f;
+		y *= f;
+		z *= f;
+	}
+
+	public inline function scaled( v : Float ) {
+		// see scale
+		return new ThreeDeeVector( x * v, y * v, z * v );
+	}
+
+	public inline function negate() {
+		x = -x;
+		y = -y;
+		z = -z;
+	}
+
+	public inline function getForwardZ() : ThreeDeeVector {
+		var forwardX = Math.cos( z );
+		var forwardY = Math.sin( z );
+		return new ThreeDeeVector( forwardX, forwardY, 0 );
+	}
+
+	public inline function normalized() {
+		var k = lengthSq();
+		if ( k < hxd.Math.EPSILON2 ) k = 0 else k = hxd.Math.invSqrt( k );
+		return new ThreeDeeVector( x * k, y * k, z * k );
 	}
 
 	public inline function clone() : ThreeDeeVector {
