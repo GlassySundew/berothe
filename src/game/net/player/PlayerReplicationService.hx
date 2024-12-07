@@ -64,7 +64,7 @@ class PlayerReplicationService {
 	}
 
 	public function onClientDisconnected() {
-		playerEntity.dispose();
+		if ( !playerEntity.disposed.isTriggered ) playerEntity.dispose();
 	}
 
 	function init() {
@@ -264,7 +264,7 @@ class PlayerReplicationService {
 
 		cliCon.onControlledEntityLocationChange( location.locationDesc.id );
 
-		attachVisibleChunks( playerEntity.chunk.getValue() );
+		// attachVisibleChunks( playerEntity.chunk.getValue() );
 		oldLoc?.onEntityRemoved.remove( locationOnEntityRemoved );
 		location.onEntityRemoved.add( locationOnEntityRemoved );
 	}

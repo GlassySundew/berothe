@@ -16,7 +16,7 @@ import game.domain.overworld.entity.OverworldEntity;
 class EntityReplicator extends NetNode {
 
 	public var entity( default, null ) : Future<OverworldEntity> = new Future();
-	
+
 	@:s public final id : String;
 
 	@:s public final transformRepl : EntityTransformReplicator;

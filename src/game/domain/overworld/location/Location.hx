@@ -1,5 +1,7 @@
 package game.domain.overworld.location;
 
+import game.net.server.GameServer;
+import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import hxd.Timer;
 import dn.Delayer;
 import future.Future;
@@ -100,14 +102,14 @@ class Location {
 	public function addEntity( entity : OverworldEntity ) {
 		#if debug
 		Assert.notExistsInArray( entity, entities, 'trying to add an already existing entity: $entity onto a location' );
-		Assert.isFalse( entity.disposed.result );
+		Assert.isFalse( entity.disposed.result, "disposed " + entity + " was tried to be added to: " + this );
 		#end
 
 		entity.location.getValue()?.removeEntity( entity );
 
 		entities.push( entity );
-		chunks.addEntity( entity );
 		entity.setLocation( this );
+		chunks.addEntity( entity );
 		onEntityAdded.dispatch( entity );
 
 		#if debug
@@ -168,7 +170,10 @@ class Location {
 			return;
 		}
 
+		entity.transform.onTakeControl.dispatch();
+		entity.transform.setVelocity( 0, 0, 0 );
 		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
+		entity.transform.onReleaseControl.dispatch();
 
 		targetLocation.addEntity( entity );
 	}

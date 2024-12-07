@@ -785,6 +785,186 @@
 			"x": -105.15,
 			"y": 60.02,
 			"z": 78.93
+		},
+		{
+			"type": "object",
+			"name": "inala hall exit",
+			"props": {
+				"type": "entityTransitionExit",
+				"props": {
+					"location": "castle_inala_hall"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 75,
+			"y": -56,
+			"z": 1
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -63.73,
+			"y": 57.77,
+			"z": 8.64
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -72.85,
+			"y": -72.84,
+			"z": 8.39
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -15.32,
+			"y": -43.81,
+			"z": 5.73
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": 17.66,
+			"y": 20.76,
+			"z": 6.58
+		},
+		{
+			"type": "reference",
+			"name": "bee",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": 54.93,
+			"y": -43.54,
+			"z": 6.39
+		},
+		{
+			"type": "box",
+			"name": "bat_cave_transition",
+			"editorOnly": true,
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "meadow"
+				}
+			},
+			"x": 65.93,
+			"y": 101.46,
+			"z": -6.61,
+			"scaleX": 3,
+			"scaleY": 13.44,
+			"scaleZ": 50,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false
+						}
+					}
+				}
+			]
+		},
+		{
+			"type": "box",
+			"name": "castle_inala_hall_transition",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "castle_inala_hall"
+				}
+			},
+			"x": 70.93,
+			"y": -56.54,
+			"z": -6.61,
+			"scaleX": 3,
+			"scaleY": 13.44,
+			"scaleZ": 50,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false
+						}
+					}
+				}
+			]
+		},
+		{
+			"type": "reference",
+			"name": "renderprops",
+			"source": "levels/renderprops.prefab",
+			"editorOnly": true,
+			"editMode": true
 		}
 	]
 }

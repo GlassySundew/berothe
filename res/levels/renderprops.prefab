@@ -1,0 +1,41 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "renderProps",
+			"name": "renderProps",
+			"props": {
+				"PBR": {
+					"mode": "Pbr",
+					"emissive": 1.04,
+					"exposure": 0.12,
+					"sky": "Background",
+					"tone": "Filmic",
+					"occlusion": 1.66,
+					"a": 3.48,
+					"b": 0.26,
+					"c": 2.6,
+					"d": 2.23,
+					"e": 0.29
+				}
+			},
+			"isDefault": true,
+			"children": [
+				{
+					"type": "rfx.sao",
+					"name": "sao",
+					"size": 0.56,
+					"blur": 10,
+					"noiseScale": 10,
+					"samples": 32,
+					"radius": 20,
+					"intensity": 7.38,
+					"bias": 0.08,
+					"USE_FADE": true,
+					"fadeStart": 0,
+					"fadeEnd": 500
+				}
+			]
+		}
+	]
+}

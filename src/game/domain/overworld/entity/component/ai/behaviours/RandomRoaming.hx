@@ -22,7 +22,7 @@ class RandomRoaming extends EntityBehaviourBase {
 		super.update( dt, tmod );
 
 		#if client return; #end
-		
+
 		switch state {
 			case AGRO( enemy ): return;
 			default:

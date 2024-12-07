@@ -116,6 +116,7 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		torsoShape.setCollisionGroup( Const.G_PHYSICS );
 		torsoShape.setCollisionMask( Const.G_PHYSICS );
 		torsoShape.moveLocally( rigidBodyDesc.offsetX, rigidBodyDesc.offsetY, rigidBodyDesc.offsetZ );
+		torsoShape.setFriction( 0 );
 		var intertia = torsoShape.getConfig().geom.getIntertiaCoeff();
 
 		var rigidBodyLocal = RigidBodyAbstractFactory.create(

@@ -1,5 +1,6 @@
 package game.net.client;
 
+import hrt.prefab.RenderProps;
 import pass.PbrSetup.PbrRenderer;
 import dn.Delayer;
 import game.net.entity.component.EntityModelComponentReplicator;
@@ -89,6 +90,9 @@ class GameClient extends Process {
 
 		subscription.add( Client.inst.onUnregister.add( onUnregister ) );
 
+		var renderPropsRes = Res.levels.renderprops.load().make();
+		renderPropsRes.findAll( RenderProps )[0]?.applyProps( Boot.inst.s3d.renderer );
+
 		currentLocationSelf.addOnValue( ( oldLoc, newLoc ) -> {
 			locationLights?.findFirstLocal3d().remove();
 			locationLights = null;
@@ -104,8 +108,8 @@ class GameClient extends Process {
 
 			if ( newLoc == null ) return;
 
-			Std.downcast(Boot.inst.s3d.renderer, PbrRenderer).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
-			
+			Std.downcast( Boot.inst.s3d.renderer, PbrRenderer ).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
+
 			if ( newLoc.locationDesc.isOpenAir ) {
 				locationLights?.findFirstLocal3d().remove();
 				locationLights = Res.levels.light.load().make();

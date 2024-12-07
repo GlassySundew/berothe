@@ -28,6 +28,8 @@ class Chunks {
 		entitySubscriptions[entity]?.unsubscribe();
 		entitySubscriptions.remove( entity );
 
+		onEntityMove( entity );
+		
 		var chunkIdx = getChunkIdxFromAbsolute( {
 			x : entity.transform.x.val,
 			y : entity.transform.y.val,

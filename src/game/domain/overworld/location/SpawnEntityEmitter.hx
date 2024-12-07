@@ -38,13 +38,10 @@ class SpawnEntityEmitter {
 	}
 
 	function onEntityAmountChanged( ignoreDelayerPresence = false ) {
-		trace( "current bees: " + entityCounter, entityCounter == spawnVO.maxEntitiesPresent, location.delayer.hasId( DELAYER_ID ) );
 		if ( entityCounter == spawnVO.maxEntitiesPresent ) return;
 		if (
 			!ignoreDelayerPresence
 			&& location.delayer.hasId( DELAYER_ID ) ) return;
-
-		trace( "created entity spawn delayer" );
 
 		location.delayer.addS(
 			DELAYER_ID,

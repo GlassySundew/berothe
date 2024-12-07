@@ -75,9 +75,9 @@ class EntityTransformReplicator extends NetNode {
 		networkToModelStream?.unsubscribe();
 		networkToModelStream = new Composite();
 
-		networkToModelStream.add( x.subscribeProp( entity.transform.x ) );
-		networkToModelStream.add( y.subscribeProp( entity.transform.y ) );
-		networkToModelStream.add( z.subscribeProp( entity.transform.z ) );
+		networkToModelStream.add( x.addOnValueImmediately( ( _, newV ) -> if ( !x.syncBack ) entity.transform.x.val = newV ) );
+		networkToModelStream.add( y.addOnValueImmediately( ( _, newV ) -> if ( !y.syncBack ) entity.transform.y.val = newV ) );
+		networkToModelStream.add( z.addOnValueImmediately( ( _, newV ) -> if ( !z.syncBack ) entity.transform.z.val = newV ) );
 
 		networkToModelStream.add( velX.subscribeProp( entity.transform.velX ) );
 		networkToModelStream.add( velY.subscribeProp( entity.transform.velY ) );
@@ -105,6 +105,9 @@ class EntityTransformReplicator extends NetNode {
 	}
 
 	function setupClientSyncronization() {
+		x.syncBack = false;
+		y.syncBack = false;
+		z.syncBack = false;
 		createNetworkToModelStream();
 	}
 

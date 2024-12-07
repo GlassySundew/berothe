@@ -852,6 +852,28 @@
 					}
 				},
 				{
+					"id": "caelira",
+					"properties": {
+						"dynamics": true,
+						"model": {
+							"displayName": "Caelira",
+							"id": "model"
+						},
+						"rigidBodyTorso": {
+							"id": "humanTorso",
+							"geometry": 1,
+							"offsetY": 0,
+							"offsetZ": 11,
+							"sizeX": 3,
+							"sizeZ": 8,
+							"hasFeet": true
+						},
+						"behaviour": {
+							"type": "sleepyPointGuard"
+						}
+					}
+				},
+				{
 					"id": "club",
 					"properties": {
 						"dynamics": true,
@@ -1063,6 +1085,11 @@
 				{
 					"title": "characters",
 					"id": "player"
+				},
+				{
+					"title": "npc humans",
+					"level": 1,
+					"id": "caelira"
 				},
 				{
 					"title": "items",
@@ -3167,6 +3194,16 @@
 						"meadow"
 					],
 					"isOpen": true
+				},
+				{
+					"id": "castle_inala_hall",
+					"instancing": 2,
+					"isOpen": false,
+					"chunkSize": 55,
+					"level": [
+						0,
+						"castle_inala_hall"
+					]
 				}
 			],
 			"separators": [],
@@ -3201,6 +3238,10 @@
 				{
 					"id": "meadow",
 					"file": "levels/meadow.prefab"
+				},
+				{
+					"id": "castle_inala_hall",
+					"file": "levels/castle_caelira_hall.prefab"
 				}
 			],
 			"separators": [],
@@ -3268,6 +3309,272 @@
 			"props": {}
 		},
 		{
+			"name": "npcResponses",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "8",
+					"name": "responses"
+				}
+			],
+			"lines": [
+				{
+					"id": "caelira",
+					"responses": [
+						{
+							"stepId": "intro",
+							"actions": [
+								{
+									"type": [
+										0,
+										"caelira_intro_greeting"
+									]
+								}
+							],
+							"trigger": [
+								{
+									"type": [
+										0
+									]
+								}
+							],
+							"advanceTrigger": [
+								{
+									"requirements": [
+										{
+											"type": [
+												1,
+												"no"
+											]
+										}
+									],
+									"nextChain": "coward"
+								}
+							]
+						},
+						{
+							"stepId": "coward",
+							"trigger": [
+								{
+									"type": [
+										1,
+										"hi"
+									]
+								}
+							],
+							"actions": [],
+							"advanceTrigger": [
+								{
+									"requirements": [
+										{
+											"type": [
+												1,
+												"im_sorry"
+											]
+										}
+									],
+									"nextChain": "intro"
+								}
+							]
+						}
+					]
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "npcAwaitSpeech",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				},
+				{
+					"typeStr": "8",
+					"name": "samples",
+					"kind": null
+				}
+			],
+			"lines": [
+				{
+					"id": "hi",
+					"samples": [
+						{
+							"text": "hi"
+						},
+						{
+							"text": "hello"
+						}
+					]
+				},
+				{
+					"id": "yes",
+					"samples": [
+						{
+							"text": "yes"
+						},
+						{
+							"text": "i do"
+						},
+						{
+							"text": "indeed"
+						}
+					]
+				},
+				{
+					"id": "no",
+					"samples": [
+						{
+							"text": "no"
+						}
+					]
+				},
+				{
+					"id": "im_sorry",
+					"samples": [
+						{
+							"text": "sorry"
+						}
+					]
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "npcAwaitSpeech@samples",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "1",
+					"name": "text",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "quest",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"kind": null,
+					"scope": null
+				}
+			],
+			"lines": [],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "npcResponses@responses",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "stepId",
+					"scope": 1
+				},
+				{
+					"typeStr": "8",
+					"name": "trigger"
+				},
+				{
+					"typeStr": "8",
+					"name": "actions",
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "advanceTrigger",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponses@responses@trigger",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponses@responses@actions",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponseActionType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponses@responses@advanceTrigger",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "8",
+					"name": "requirements",
+					"kind": null
+				},
+				{
+					"typeStr": "6:npcResponses@responses",
+					"name": "nextChain",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponses@responses@advanceTrigger@requirements",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
 			"name": "locale",
 			"columns": [
 				{
@@ -3310,9 +3617,18 @@
 				{
 					"id": "unconnected_2",
 					"text": "You attempt to command, yet in a formless state, your actions vanish into nothingness, unseen and unfelt."
+				},
+				{
+					"id": "caelira_intro_greeting",
+					"text": "Welcome, traveler. I am Caelira, entrusted with gathering those who would stand against our foes. The tale of your escape from the orcish prison proves your courage beyond doubt. Will you lend your strength to safeguard these walls and honor the valor that guided you here?"
 				}
 			],
-			"separators": [],
+			"separators": [
+				{
+					"title": "npc responces",
+					"id": "caelira_intro_greeting"
+				}
+			],
 			"props": {}
 		},
 		{
@@ -3601,6 +3917,60 @@
 						{
 							"name": "power",
 							"typeStr": "4"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "NpcResponseActionType",
+			"cases": [
+				{
+					"name": "Say",
+					"args": [
+						{
+							"name": "text",
+							"typeStr": "6:locale"
+						}
+					]
+				},
+				{
+					"name": "GiveQuest",
+					"args": [
+						{
+							"name": "quest",
+							"typeStr": "6:quest"
+						}
+					]
+				},
+				{
+					"name": "TurnAwayFromPlayer",
+					"args": []
+				}
+			]
+		},
+		{
+			"name": "NpcResponceChainAdvanceRequirementType",
+			"cases": [
+				{
+					"name": "TriggerOnApproach",
+					"args": []
+				},
+				{
+					"name": "TextSaid",
+					"args": [
+						{
+							"name": "text",
+							"typeStr": "6:npcAwaitSpeech"
+						}
+					]
+				},
+				{
+					"name": "QuestCompleted",
+					"args": [
+						{
+							"name": "questId",
+							"typeStr": "6:quest"
 						}
 					]
 				}

@@ -1,0 +1,286 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "object",
+			"name": "global",
+			"props": {
+				"type": "global",
+				"props": {},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"children": [
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 71.7,
+					"y": 59,
+					"z": 14,
+					"rotationZ": 180
+				},
+				{
+					"type": "object",
+					"name": "models",
+					"children": [
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_0_column",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_0_column.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_1_column",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_1_column.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_2_column",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_2_column.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_3_column",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_3_column.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_4",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_4.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_5_column",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_5_column.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_6_wall",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_6_wall.fbx"
+						},
+						{
+							"type": "model",
+							"name": "castle_caelyra_hall_8_floor",
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_8_floor _ carpet.fbx"
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "collision",
+					"children": [
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 40.1,
+							"y": 35.92,
+							"z": -18,
+							"scaleX": 177.88,
+							"scaleY": 288.12,
+							"scaleZ": 38
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 91,
+							"y": 37.23,
+							"z": -18,
+							"scaleX": 35,
+							"scaleY": 289,
+							"scaleZ": 207.55
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 52,
+							"y": 146,
+							"z": -18,
+							"scaleX": 207,
+							"scaleY": 34,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 52,
+							"y": -51,
+							"z": -18,
+							"scaleX": 207,
+							"scaleY": 34,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -8,
+							"y": 37.23,
+							"z": -18,
+							"scaleX": 35,
+							"scaleY": 289,
+							"scaleZ": 207.55
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 11,
+							"y": 109,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 11,
+							"y": 83,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 11,
+							"y": 20,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 11,
+							"y": -7,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 42,
+							"y": -24,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "meadow exit",
+			"props": {
+				"type": "entityTransitionExit",
+				"props": {
+					"location": "meadow"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 68,
+			"y": 99,
+			"scaleX": 207,
+			"scaleY": 0,
+			"scaleZ": 207
+		},
+		{
+			"type": "box",
+			"name": "meadow_transition",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "meadow"
+				}
+			},
+			"x": 74,
+			"y": 99,
+			"z": 23,
+			"scaleX": 3,
+			"scaleY": 23,
+			"scaleZ": 50,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Distortion",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false,
+							"parallaxSteps": 47,
+							"parallax": 0.4,
+							"emissive": 10
+						}
+					},
+					"mainPassName": "alpha",
+					"color": [
+						0.34509803921568627,
+						0.32941176470588235,
+						0.7137254901960784,
+						1
+					]
+				}
+			]
+		}
+	]
+}

@@ -71,60 +71,14 @@
 					"rotationZ": 180
 				},
 				{
-					"type": "volumetricLightmap",
-					"name": "volumetricLightmap",
-					"x": -10.12,
-					"y": -108.5,
-					"z": -1.12,
-					"scaleX": 17.23,
-					"scaleY": 15.19,
-					"scaleZ": 26.96,
-					"resolution": 4,
-					"children": [
-						{
-							"type": "model",
-							"name": "orc_prison",
-							"source": "voxel/levels/orc_prison/fbx/orc_prison.fbx",
-							"props": {
-								"entity": "model",
-								"$cdbtype": "locationEntityDF"
-							},
-							"x": 0.5873,
-							"y": 7.1429,
-							"z": 0.0415,
-							"scaleX": 0.058,
-							"scaleY": 0.0658,
-							"scaleZ": 0.0371
-						},
-						{
-							"type": "reference",
-							"name": "human_spwn",
-							"source": "voxel/characters/human/human.enco",
-							"props": {
-								"spawnedEntity": "player",
-								"$cdbtype": "entitySpawnPointDF"
-							},
-							"x": 0.07,
-							"y": 0.28,
-							"z": 0.04,
-							"scaleX": 0.0621,
-							"scaleY": 0.0621,
-							"scaleZ": 0.0371,
-							"rotationZ": -48.6005
-						},
-						{
-							"type": "reference",
-							"name": "light",
-							"source": "voxel/structures/wall_torch/entity/light.prefab",
-							"x": 0.1642,
-							"y": -0.0178,
-							"z": 0.5556,
-							"scaleX": 0.058,
-							"scaleY": 0.0658,
-							"scaleZ": 0.0371,
-							"editMode": true
-						}
-					]
+					"type": "model",
+					"name": "orc_prison",
+					"source": "voxel/levels/orc_prison/fbx/orc_prison.fbx",
+					"locked": true,
+					"props": {
+						"entity": "model",
+						"$cdbtype": "locationEntityDF"
+					}
 				},
 				{
 					"type": "object",
@@ -1471,6 +1425,53 @@
 		},
 		{
 			"type": "reference",
+			"name": "iron_bars_door",
+			"source": "voxel/structures/iron_bars_door/iron_bars_door.enco",
+			"props": {
+				"entity": "orc_prison_door",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -68.5,
+			"y": 54,
+			"z": 1.5
+		},
+		{
+			"type": "reference",
+			"name": "human_spwn",
+			"source": "voxel/characters/human/human.enco",
+			"props": {
+				"spawnedEntity": "player",
+				"$cdbtype": "entitySpawnPointDF"
+			},
+			"x": 23.05,
+			"y": -78.43,
+			"rotationZ": -45
+		},
+		{
+			"type": "reference",
+			"name": "key",
+			"source": "voxel/items/orc_prison_key/entity/key.enco",
+			"props": {
+				"entity": "orc_prison_key",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -60.37,
+			"y": 53.01,
+			"z": 2.5
+		},
+		{
+			"type": "reference",
+			"name": "orc",
+			"source": "voxel/characters/orc/entity/orc.enco",
+			"props": {
+				"entity": "orc",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -61.49,
+			"y": 22.32
+		},
+		{
+			"type": "reference",
 			"name": "bat",
 			"source": "voxel/characters/bat/bat.enco",
 			"props": {
@@ -1479,6 +1480,97 @@
 			},
 			"x": -43.61,
 			"y": -86.72
+		},
+		{
+			"type": "reference",
+			"name": "club",
+			"source": "voxel/items/club/entity/club.enco",
+			"props": {
+				"entity": "club",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -5.77,
+			"y": -71.68,
+			"z": 1.89
+		},
+		{
+			"type": "box",
+			"name": "sleepy_orc_wake_trigger",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "sleepy_orc_wake_trigger",
+				"id": "sleepy_orc_wake_trigger",
+				"props": {
+					"ident": "sleepy_orc_wake_trigger"
+				}
+			},
+			"x": -66.51,
+			"y": -36.36,
+			"z": 20.21,
+			"scaleX": 27.84,
+			"scaleZ": 49.51,
+			"rotationZ": -54.6
+		},
+		{
+			"type": "box",
+			"name": "meadow_transition",
+			"props": {
+				"type": "entityCollisionTrigger",
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "meadow"
+				}
+			},
+			"x": 51.21,
+			"y": -85.47,
+			"z": 7.13,
+			"scaleX": 20.49,
+			"scaleY": 4.14,
+			"scaleZ": 49.51,
+			"rotationZ": -88.8,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "PBR",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false
+						}
+					}
+				}
+			]
+		},
+		{
+			"type": "renderProps",
+			"name": "renderProps",
+			"editorOnly": true,
+			"props": {
+				"PBR": {
+					"mode": "Pbr",
+					"emissive": 2,
+					"exposure": 0.15,
+					"sky": "Background",
+					"tone": "Linear",
+					"occlusion": 2,
+					"a": 2.51,
+					"b": 0.03,
+					"c": 2.43,
+					"d": 0.59,
+					"e": 0.14
+				}
+			}
 		}
 	]
 }

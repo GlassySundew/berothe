@@ -128,12 +128,13 @@ abstract class EntityBehaviourBase {
 		// if (smartPathfindingConvexCastCB.shape._rigidBody.userData)
 		// var maybeEntity = Std.downcast( smartPathfindingConvexCastCB.shape._rigidBody?.userData, EntityRigidBodyProps )?.entity;
 
-		// trace( pathfindCastCB.hit );
+		// raycast processing
 		if ( !pathfindCastCB.hit ) {
 			walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod );
 			return;
 		}
 
+		// picking right shape contact
 		var raycastHit : RayCastClosest = null;
 		for ( contact in pathfindCastCB.contacts ) {
 			if ( //
@@ -144,7 +145,6 @@ abstract class EntityBehaviourBase {
 				Std.downcast( contact.shape, OimoWrappedShape ) //
 					== rigidBodyComp.rigidBody.getShape() //
 			) continue;
-
 			raycastHit = contact;
 			break;
 		}
@@ -160,6 +160,7 @@ abstract class EntityBehaviourBase {
 		#if client return; #end
 		if ( distanceToCollision < MIN_COLLISION_EVADE_DISTANCE && distanceToObjective > ENEMY_CONTACT_RANGE ) {
 			// obstacle bypassing
+			// calculating direction to walk along the obstacle
 			var direction = translation.normalized();
 			raycastHit.normal.z = 0;
 			raycastHit.normal.normalize();
@@ -167,7 +168,7 @@ abstract class EntityBehaviourBase {
 			tangent.z = 0;
 			tangent.normalize();
 			if ( tangent.dot( direction ) < 0 ) {
-				tangent.negate(); // Инверсия
+				tangent.negate();
 			}
 
 			tangent.scale( model.stats.speed.amount.getValue() * tmod );
@@ -176,6 +177,7 @@ abstract class EntityBehaviourBase {
 			dynamics.isMovementApplied.val = true;
 			return;
 		} else {
+			// no need to bypass the obstacle: either too close to objective, or too far from obstacle
 			walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod );
 		}
 	}

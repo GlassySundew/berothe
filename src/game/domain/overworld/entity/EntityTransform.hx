@@ -34,11 +34,20 @@ class EntityTransform {
 
 	#if !debug inline #end
 	public function setPosition( x : Float, y : Float, z : Float ) {
-		onTakeControl.dispatch();
+		// onTakeControl.dispatch();
 		this.x.val = x;
 		this.y.val = y;
 		this.z.val = z;
-		onReleaseControl.dispatch();
+		// onReleaseControl.dispatch();
+	}
+
+	#if !debug inline #end
+	public function setVelocity( x : Float, y : Float, z : Float ) {
+		// onTakeControl.dispatch();
+		this.velX.val = x;
+		this.velY.val = y;
+		this.velZ.val = z;
+		// onReleaseControl.dispatch();
 	}
 
 	#if !debug inline #end
@@ -52,9 +61,11 @@ class EntityTransform {
 
 	#if !debug inline #end
 	public function setRotation( x : Float, y : Float, z : Float ) {
+		// onTakeControl.dispatch();
 		this.rotationX.val = x;
 		this.rotationY.val = y;
 		this.rotationZ.val = z;
+		// onReleaseControl.dispatch();
 	}
 
 	@:keep
