@@ -11,10 +11,12 @@ class AIProperties {
 
 	public final triggerId : Null<String>;
 	public final agroRange : Null<Float>;
+	public final npcResponsesId : Null<String>;
 
 	public inline function new( entry : Data.EntityPropertySetup_properties_behaviour_params ) {
 		triggerId = entry.triggerId;
 		agroRange = entry.agroRange;
+		npcResponsesId = entry.npcResponsesId.toString();
 	}
 }
 
@@ -24,6 +26,7 @@ inline function getTypeFromCdb( cdbEntry : Data.NpcBehaviour ) : EntityBehaviour
 			case flowerPollinator: FLOWER_POLLINATOR;
 			case sleepyPointGuard: SLEEPY_POINT_GUARD;
 			case randomRoaming: RANDOM_ROAMING;
+			case npcQuestGiver: NPC_QUEST_GIVER;
 		}
 }
 
@@ -32,6 +35,7 @@ enum abstract EntityBehaviourType( String ) to String {
 	var FLOWER_POLLINATOR;
 	var SLEEPY_POINT_GUARD;
 	var RANDOM_ROAMING;
+	var NPC_QUEST_GIVER;
 }
 
 class EntityAIDescription extends EntityComponentDescription {

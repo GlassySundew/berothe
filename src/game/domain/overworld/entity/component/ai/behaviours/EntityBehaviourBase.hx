@@ -1,22 +1,18 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
-import util.Extensions.ReverseArrayKeyValueIterator;
-import oimo.dynamics.callback.RayCastClosest;
-import game.physics.oimo.EntityRigidBodyProps;
-import game.physics.oimo.RayCastCallback;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
-import util.GameUtil;
-import rx.disposables.Composite;
-import rx.disposables.ISubscription;
-import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties;
 import dn.M;
-import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
-import game.domain.overworld.entity.OverworldEntity;
-import game.domain.overworld.location.Location;
+import oimo.dynamics.callback.RayCastClosest;
+import rx.disposables.Composite;
+import util.GameUtil;
 import util.MathUtil;
-import game.domain.overworld.location.Chunk;
+import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties;
+import game.domain.overworld.entity.OverworldEntity;
+import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
+import game.domain.overworld.location.Location;
+import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import game.physics.oimo.OimoWrappedShape;
+import game.physics.oimo.RayCastCallback;
 
 enum State {
 	CALM;
@@ -103,7 +99,7 @@ abstract class EntityBehaviourBase {
 
 	function smartWalkToObjective( tmod : Float ) {
 		if ( rigidBodyComp == null ) {
-			#if server walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod ); #end
+			walkTowardsPoint( objectivePoint.x, objectivePoint.y, tmod );
 			return;
 		}
 
@@ -125,8 +121,6 @@ abstract class EntityBehaviourBase {
 			pathfindCastCB
 		);
 		pathfindCastCB.sort();
-		// if (smartPathfindingConvexCastCB.shape._rigidBody.userData)
-		// var maybeEntity = Std.downcast( smartPathfindingConvexCastCB.shape._rigidBody?.userData, EntityRigidBodyProps )?.entity;
 
 		// raycast processing
 		if ( !pathfindCastCB.hit ) {
@@ -182,7 +176,8 @@ abstract class EntityBehaviourBase {
 		}
 	}
 
-	inline function walkTowardsPoint( x : Float, y : Float, tmod : Float ) {
+	function walkTowardsPoint( x : Float, y : Float, tmod : Float ) {
+		#if client return; #end
 		var angle = Math.atan2(
 			y - entity.transform.y.val,
 			x - entity.transform.x.val

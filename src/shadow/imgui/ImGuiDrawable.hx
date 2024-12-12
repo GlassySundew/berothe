@@ -155,10 +155,11 @@ class ImGuiDrawableBuffers {
 				if ( cmd.callback != null ) {
 					e.setRenderZone(); // Makre sure to reset clip rect.
 					cmd.callback( data, cmd, commandData );
-				} else if ( cmd.elemCount > 0 && ctx.beginDrawObject( obj, cmd.textureID == null ? noTexture : cmd.textureID ) ) {
-					e.setRenderZone( cmd.clipLeft, cmd.clipTop, cmd.clipWidth, cmd.clipHeight );
-					e.renderIndexed( vertex_buffers[i], index_buffers[i], Std.int( cmd.indexOffset / 3 ), Std.int( cmd.elemCount / 3 ) );
-				}
+				} else
+					if ( cmd.elemCount > 0 && ctx.beginDrawObject( obj, cmd.textureID == null ? noTexture : cmd.textureID ) ) {
+						e.setRenderZone( cmd.clipLeft, cmd.clipTop, cmd.clipWidth, cmd.clipHeight );
+						e.renderIndexed( vertex_buffers[i], index_buffers[i], Std.int( cmd.indexOffset / 3 ), Std.int( cmd.elemCount / 3 ) );
+					}
 			}
 		}
 		e.setRenderZone();
@@ -264,6 +265,7 @@ class ImGuiDrawable extends h2d.Drawable {
 
 	public function dispose() {
 		ImGuiDrawableBuffers.instance.dispose();
+		getScene().removeEventListener( onEvent );
 	}
 
 	public function update( dt : Float ) {
@@ -273,7 +275,7 @@ class ImGuiDrawable extends h2d.Drawable {
 
 		var win = Window.getInstance();
 		if ( win.width != this.scene_size.width || win.height != this.scene_size.height ) {
-			this.scene_size = { width : Std.int( win.width), height : Std.int( win.height  ) };
+			this.scene_size = { width : Std.int( win.width ), height : Std.int( win.height ) };
 			ImGui.setDisplaySize( scene_size.width, scene_size.height );
 		}
 		#if hlimgui_cursor

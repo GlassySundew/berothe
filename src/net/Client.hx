@@ -1,5 +1,6 @@
 package net;
 
+import util.Const;
 import hxbit.NetworkSerializable;
 import rx.disposables.ISubscription;
 #if client
@@ -131,7 +132,7 @@ class Client extends Process {
 		new ConfirmDialog(
 			reason,
 			( e ) -> {
-				new MainMenu( Main.inst.root );
+				root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 			},
 			Main.inst.root
 		);

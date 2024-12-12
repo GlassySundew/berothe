@@ -93,7 +93,7 @@ class Main extends Process {
 		}
 
 		new Client();
-		new MainMenu( Main.inst.root );
+		root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 
 		#if debug
 		Boot.inst.createServer();

@@ -53,6 +53,7 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 	}
 
 	public function removeRigidBody( rigidBody : IRigidBody ) {
+		if ( world == null ) return;
 		Assert.isOfType( rigidBody, OimoRigidBody );
 		world.removeRigidBody( Std.downcast( rigidBody, OimoRigidBody ).rigidBody );
 	}

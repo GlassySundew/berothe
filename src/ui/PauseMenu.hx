@@ -1,5 +1,6 @@
 package ui;
 
+import util.Const;
 import util.GameUtil;
 import util.Util;
 import dn.Tweenie.TType;
@@ -49,7 +50,7 @@ class PauseMenu extends PopupBase {
 			// TODO make
 			// Save.inst.disconnect();
 
-			new MainMenu( Main.inst.root );
+			Main.inst.root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 			destroy();
 		}, contentFlow );
 

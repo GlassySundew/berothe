@@ -14,7 +14,7 @@ class RuleStorage {
 	public var deathMessageEntity( default, null ) : String;
 	public var unfriendlyPlayerFaction( default, null ) : String;
 	public var baseHpRegenPerSecond( default, null ) : Float;
-	public var regenDelayOnDamageSecond( default, null ) : Float;
+	public var regenDelayOnDamageSeconds( default, null ) : Float;
 	public var flyingEntityGravityScale( default, null ) : Float;
 	
 	// dont touch this, only add fields

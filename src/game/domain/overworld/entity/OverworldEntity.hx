@@ -1,5 +1,6 @@
 package game.domain.overworld.entity;
 
+import dn.Cooldown;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import dn.Delayer;
 import util.Assert;
@@ -20,6 +21,7 @@ class OverworldEntity {
 	public final transform : EntityTransform = new EntityTransform();
 	public final components : EntityComponents;
 	public final delayer = new Delayer( hxd.Timer.wantedFPS );
+	public final cd = new Cooldown( hxd.Timer.wantedFPS );
 	public final disposed : Future<Bool> = new Future();
 	public final postDisposed : Future<Bool> = new Future();
 
@@ -51,6 +53,7 @@ class OverworldEntity {
 		components.dispose();
 		postDisposed.resolve( true );
 		delayer.destroy();
+		cd.destroy();
 
 		onFrame.destroy();
 		onFrame = null;
@@ -64,6 +67,7 @@ class OverworldEntity {
 	public function update( dt : Float, tmod : Float ) {
 		onFrame.dispatch( dt, tmod );
 		delayer.update( tmod );
+		cd.update( tmod );
 
 		if ( disposeInvalidate ) dispose();
 	}

@@ -30,42 +30,74 @@
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_0_column",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_0_column.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_0_column.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_1_column",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_1_column.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_1_column.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_2_column",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_2_column.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_2_column.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_3_column",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_3_column.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_3_column.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_4",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_4.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_4.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_5_column",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_5_column.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_5_column.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_6_wall",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_6_wall.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_6_wall.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						},
 						{
 							"type": "model",
 							"name": "castle_caelyra_hall_8_floor",
-							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_8_floor _ carpet.fbx"
+							"source": "voxel/levels/castle_caelyra_hall/obj/fbx/castle_caelyra_hall_8_floor _ carpet.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							}
 						}
 					]
 				},

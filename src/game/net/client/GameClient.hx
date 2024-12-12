@@ -1,32 +1,24 @@
 package game.net.client;
 
-import hrt.prefab.RenderProps;
-import pass.PbrSetup.PbrRenderer;
-import dn.Delayer;
-import game.net.entity.component.EntityModelComponentReplicator;
-import game.domain.overworld.entity.component.model.EntityModelComponent;
-import ui.Console;
-import rx.disposables.Composite;
-import domkit.Component;
-import haxe.EnumFlags;
 import future.Future;
-import h3d.scene.Mesh;
-import hxd.Res;
 import graphics.BatchRenderer;
-import h3d.scene.pbr.DirLight;
+import hrt.prefab.RenderProps;
+import hxd.Res;
+import pass.PbrSetup.PbrRenderer;
+import rx.disposables.Composite;
 import util.threeD.ModelCache;
+import game.net.entity.component.EntityModelComponentReplicator;
 #if client
-import ui.dialog.ConnectMenu;
-import signals.Signal;
-import net.NetNode;
-import hxbit.NetworkSerializable;
 import core.IProperty;
 import core.MutableProperty;
 import dn.Process;
 import dn.heaps.input.ControllerAccess;
 import h3d.scene.CameraController;
 import h3d.scene.Object;
+import hxbit.NetworkSerializable;
 import net.Client;
+import net.NetNode;
+import signals.Signal;
 import ui.PauseMenu;
 import util.Const;
 import util.Settings;
@@ -34,10 +26,10 @@ import util.threeD.CameraProcess;
 import game.client.ControllerAction;
 import game.data.storage.DataStorage;
 import game.debug.HeapsOimophysicsDebugDraw;
+import game.debug.ImGuiGameClientDebug;
 import game.domain.overworld.GameCore;
 import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
-import game.net.location.LocationReplicator;
 
 /**
 	Логика игры на клиете
@@ -67,6 +59,7 @@ class GameClient extends Process {
 	public final disposed = new Future();
 
 	final subscription = Composite.create();
+	var imguiPanel : ImGuiGameClientDebug;
 
 	var locationLights : hrt.prefab.Prefab;
 	var ca : ControllerAccess<ControllerAction>;
@@ -121,6 +114,10 @@ class GameClient extends Process {
 				Boot.inst.s3d.visible = true;
 			}, 5 );
 		} );
+
+		#if debug
+		imguiPanel = new game.debug.ImGuiGameClientDebug( GameClient.inst );
+		#end
 	}
 
 	public function consoleSay( text : String ) {
@@ -187,6 +184,7 @@ class GameClient extends Process {
 		currentLocationSelf.val = null;
 		if ( !controlledEntity?.getValue()?.entity.result?.disposed.isTriggered )
 			controlledEntity.getValue()?.entity.result?.dispose();
+		
 		subscription.unsubscribe();
 		BatchRenderer.inst?.dispose();
 

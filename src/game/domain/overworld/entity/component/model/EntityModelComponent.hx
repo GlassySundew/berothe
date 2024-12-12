@@ -111,9 +111,12 @@ class EntityModelComponent extends EntityComponent {
 		provideMsgVO( msgVO, 3 );
 
 		hp.val -= damage;
-		onDamaged.dispatch( damage, type );
 
 		if ( entity.disposed.isTriggered ) return;
+
+		isSleeping.val = false;
+		
+		onDamaged.dispatch( damage, type );
 
 		entity.delayer.cancelById( DAMAGED_REGEN_DELAY_DELAYER_ID );
 		entity.delayer.cancelById( REGEN_DELAYER_ID );
@@ -122,7 +125,7 @@ class EntityModelComponent extends EntityComponent {
 			() -> {
 				subscribeHpRegen();
 			},
-			DataStorage.inst.rule.regenDelayOnDamageSecond
+			DataStorage.inst.rule.regenDelayOnDamageSeconds
 		);
 	}
 

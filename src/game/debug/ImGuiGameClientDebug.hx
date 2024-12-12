@@ -102,7 +102,4 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 		super.onResize();
 		drawable.setScale( 1 / Boot.inst.s2d.viewportScaleX );
 	}
-	override function update() {
-		super.update();
-	}
 }

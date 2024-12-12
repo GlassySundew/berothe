@@ -40,11 +40,15 @@ class PopupBase extends Process {
 	function get_contentTopPadding() : Int
 		return 0;
 
+	public final rootCtx : Object;
+
 	public function new( ?parent : Object, ?parentProcess : Process ) {
 		super( parentProcess );
 		popups.push( this );
 
-		createRoot( parent );
+		rootCtx = parent == null ? new Object() : parent;
+		
+		createRoot( rootCtx );
 
 		contentFlow = new Flow( root );
 		contentFlow.verticalSpacing = 5;

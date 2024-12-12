@@ -1,5 +1,6 @@
 package game.data.storage;
 
+import game.data.storage.npcResponses.NpcResponseStorage;
 import game.data.storage.faction.FactionDescriptionStorage;
 import game.data.storage.item.ItemDescription;
 import game.data.storage.entity.EntityDescriptionStorage;
@@ -16,6 +17,7 @@ class DataStorage {
 	public final entityStorage : EntityDescriptionStorage = new EntityDescriptionStorage();
 	public final factionStorage : FactionDescriptionStorage = new FactionDescriptionStorage();
 	public final itemStorage : ItemDescriptionStorage = new ItemDescriptionStorage();
+	public final npcResponsesStorage : NpcResponseStorage = new NpcResponseStorage();
 	public final rule : RuleStorage;
 
 	public function new() {
@@ -28,5 +30,6 @@ class DataStorage {
 		entityStorage.init( Data.entity );
 		itemStorage.init( Data.item );
 		factionStorage.init( Data.faction );
+		npcResponsesStorage.init( Data.npcResponse );
 	}
 }

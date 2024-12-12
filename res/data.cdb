@@ -83,7 +83,7 @@
 					}
 				},
 				{
-					"id": "regenDelayOnDamageSecond",
+					"id": "regenDelayOnDamageSeconds",
 					"value": {
 						"float": 4
 					}
@@ -502,7 +502,7 @@
 									"links": []
 								}
 							],
-							"baseHp": 5,
+							"baseHp": 9,
 							"id": "humanModel",
 							"baseInventorySize": 4,
 							"faction": "humans",
@@ -823,7 +823,7 @@
 									"endX": 2,
 									"key": "attack_right_attack",
 									"equipSlot": "hand_right",
-									"baseAttack": 1
+									"baseAttack": 6
 								},
 								{
 									"id": "orc_hand_attack_left",
@@ -839,7 +839,7 @@
 									"duration": 0.35,
 									"endX": 2,
 									"equipSlot": "hand_left",
-									"baseAttack": 1
+									"baseAttack": 6
 								}
 							]
 						},
@@ -869,7 +869,10 @@
 							"hasFeet": true
 						},
 						"behaviour": {
-							"type": "sleepyPointGuard"
+							"type": "npcQuestGiver",
+							"params": {
+								"npcResponses": "caelira"
+							}
 						}
 					}
 				},
@@ -1000,7 +1003,25 @@
 				{
 					"id": "skeleton_prisoner",
 					"properties": {
-						"dynamics": false
+						"dynamics": false,
+						"interactable": {
+							"id": "intr",
+							"actionsQueue": [
+								{
+									"action": {
+										"pickupItem": {
+											"item": "gold"
+										},
+										"setInteractivity": true,
+										"toggleEntityTransformInList": [
+											{
+												"transform": {}
+											}
+										]
+									}
+								}
+							]
+						}
 					}
 				},
 				{
@@ -1087,7 +1108,7 @@
 					"id": "player"
 				},
 				{
-					"title": "npc humans",
+					"title": "npc questgivers",
 					"level": 1,
 					"id": "caelira"
 				},
@@ -1640,6 +1661,12 @@
 				{
 					"typeStr": "4",
 					"name": "agroRange",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "6:npcResponse",
+					"name": "npcResponses",
 					"opt": true,
 					"kind": null
 				}
@@ -2856,6 +2883,15 @@
 					"overworldPresentation": "bat",
 					"isSplittable": false,
 					"stackSize": 1
+				},
+				{
+					"id": "egg",
+					"stackSize": 3,
+					"type": 64,
+					"overworldPresentation": "graybox",
+					"isSplittable": true,
+					"props": {},
+					"iconAsset": ""
 				}
 			],
 			"separators": [],
@@ -3182,7 +3218,7 @@
 						0,
 						"start"
 					],
-					"instancing": 2,
+					"instancing": 0,
 					"isOpen": false
 				},
 				{
@@ -3303,13 +3339,16 @@
 				},
 				{
 					"id": "flowerPollinator"
+				},
+				{
+					"id": "npcQuestGiver"
 				}
 			],
 			"separators": [],
 			"props": {}
 		},
 		{
-			"name": "npcResponses",
+			"name": "npcResponse",
 			"columns": [
 				{
 					"typeStr": "0",
@@ -3319,7 +3358,8 @@
 				},
 				{
 					"typeStr": "8",
-					"name": "responses"
+					"name": "responses",
+					"kind": null
 				}
 			],
 			"lines": [
@@ -3327,7 +3367,14 @@
 					"id": "caelira",
 					"responses": [
 						{
-							"stepId": "intro",
+							"chainId": "intro",
+							"trigger": [
+								{
+									"type": [
+										0
+									]
+								}
+							],
 							"actions": [
 								{
 									"type": [
@@ -3336,57 +3383,158 @@
 									]
 								}
 							],
-							"trigger": [
+							"chat": [
 								{
-									"type": [
-										0
-									]
+									"trigger": "hi",
+									"say": "unheard"
 								}
 							],
-							"advanceTrigger": [
+							"chainAdvanceTriggers": [
 								{
 									"requirements": [
 										{
 											"type": [
-												1,
-												"no"
-											]
-										}
-									],
-									"nextChain": "coward"
-								}
-							]
-						},
-						{
-							"stepId": "coward",
-							"trigger": [
-								{
-									"type": [
-										1,
-										"hi"
-									]
-								}
-							],
-							"actions": [],
-							"advanceTrigger": [
-								{
-									"requirements": [
-										{
-											"type": [
-												1,
-												"im_sorry"
+												2,
+												"meet_witch"
 											]
 										}
 									],
 									"nextChain": "intro"
 								}
 							]
+						},
+						{
+							"chainId": "coward",
+							"trigger": [],
+							"actions": []
 						}
 					]
 				}
 			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "npcResponse@responses",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "chainId",
+					"kind": null,
+					"scope": 1
+				},
+				{
+					"typeStr": "8",
+					"name": "trigger",
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "actions",
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "chainAdvanceTriggers",
+					"opt": true
+				},
+				{
+					"typeStr": "8",
+					"name": "chat",
+					"opt": true,
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponse@responses@trigger",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponse@responses@actions",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponseActionType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponse@responses@chainAdvanceTriggers",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "8",
+					"name": "requirements",
+					"kind": null
+				},
+				{
+					"typeStr": "6:npcResponse@responses",
+					"name": "nextChain",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponse@responses@chainAdvanceTriggers@requirements",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponse@responses@chat",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:npcAwaitSpeech",
+					"name": "trigger",
+					"kind": null
+				},
+				{
+					"typeStr": "6:locale",
+					"name": "say",
+					"kind": null
+				}
+			]
 		},
 		{
 			"name": "npcAwaitSpeech",
@@ -3475,104 +3623,13 @@
 					"scope": null
 				}
 			],
-			"lines": [],
+			"lines": [
+				{
+					"id": "meet_witch"
+				}
+			],
 			"separators": [],
 			"props": {}
-		},
-		{
-			"name": "npcResponses@responses",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "stepId",
-					"scope": 1
-				},
-				{
-					"typeStr": "8",
-					"name": "trigger"
-				},
-				{
-					"typeStr": "8",
-					"name": "actions",
-					"kind": null
-				},
-				{
-					"typeStr": "8",
-					"name": "advanceTrigger",
-					"opt": true,
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponses@responses@trigger",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
-					"name": "type",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponses@responses@actions",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "9:NpcResponseActionType",
-					"name": "type",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponses@responses@advanceTrigger",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "8",
-					"name": "requirements",
-					"kind": null
-				},
-				{
-					"typeStr": "6:npcResponses@responses",
-					"name": "nextChain",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponses@responses@advanceTrigger@requirements",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
-					"name": "type",
-					"kind": null
-				}
-			]
 		},
 		{
 			"name": "locale",
@@ -3625,7 +3682,7 @@
 			],
 			"separators": [
 				{
-					"title": "npc responces",
+					"title": "npc responses",
 					"id": "caelira_intro_greeting"
 				}
 			],
@@ -3969,7 +4026,7 @@
 					"name": "QuestCompleted",
 					"args": [
 						{
-							"name": "questId",
+							"name": "quest",
 							"typeStr": "6:quest"
 						}
 					]

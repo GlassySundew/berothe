@@ -12,15 +12,8 @@ class RandomRoaming extends EntityBehaviourBase {
 	final pointLifeSec : Float = 4;
 
 	var point : { x : Float, y : Float };
-	final cd : Cooldown = new Cooldown( Timer.wantedFPS );
 
-	override function dispose( _ : Bool ) {
-		cd.reset();
-	}
-
-	override function update( dt : Float, tmod : Float ) {
-		super.update( dt, tmod );
-
+	override function updateBehaviour( dt : Float, tmod : Float ) {
 		#if client return; #end
 
 		switch state {
@@ -28,7 +21,7 @@ class RandomRoaming extends EntityBehaviourBase {
 			default:
 		}
 
-		cd.update( tmod );
+		entity.cd.update( tmod );
 
 		if ( point == null ) repickPoint();
 
@@ -50,8 +43,8 @@ class RandomRoaming extends EntityBehaviourBase {
 			x : entity.transform.x.val + hxd.Math.random( pickDist * 2 ) - pickDist,
 			y : entity.transform.y.val + hxd.Math.random( pickDist * 2 ) - pickDist
 		};
-		cd.unset( "pickPoint" );
-		cd.setS(
+		entity.cd.unset( "pickPoint" );
+		entity.cd.setS(
 			"pickPoint",
 			pointLifeSec,
 			() -> repickPoint()
