@@ -1,5 +1,6 @@
 package game.data.storage.entity.body;
 
+import game.data.storage.entity.body.view.extensions.ViewPaletteSwapDescription;
 import game.data.storage.entity.body.properties.EntityFlyDescription;
 import game.data.storage.entity.body.properties.LocalDispatchPointDescription;
 import game.data.storage.entity.body.properties.DeathMessageDescription;
@@ -106,6 +107,7 @@ class EntityPresetDescription extends DescriptionBase {
 			lightSource = EntityLightSourceDescription.fromCdb( entry.properties.properties.lightSource ),
 			ViewColorRandomShiftDescription.fromCdb( entry.view.viewComps.colorRandomShift ),
 			ViewStencilDescription.fromCdb( entry.view.viewComps.stencil ),
+			ViewPaletteSwapDescription.fromCdb( entry.view.viewComps.paletteSwap ),
 
 		] : Array<EntityComponentDescription> ) );
 		#end

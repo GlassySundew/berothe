@@ -343,7 +343,6 @@
 			"type": "reference",
 			"name": "woman",
 			"source": "voxel/characters/woman/woman.enco",
-			"editorOnly": true,
 			"props": {
 				"entity": "caelyra",
 				"$cdbtype": "locationEntityDF"

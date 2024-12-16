@@ -25,6 +25,11 @@
 					"type": "reference",
 					"name": "human",
 					"source": "voxel/characters/human/bodyparts/torso.plst"
+				},
+				{
+					"type": "model",
+					"name": "human_27_torso_static",
+					"source": "voxel/characters/human/obj/fbx/human_27_torso_static.fbx"
 				}
 			]
 		}

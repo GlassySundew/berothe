@@ -803,7 +803,6 @@
 			"type": "reference",
 			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
-			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -820,7 +819,6 @@
 			"type": "reference",
 			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
-			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -837,7 +835,6 @@
 			"type": "reference",
 			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
-			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -854,7 +851,6 @@
 			"type": "reference",
 			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
-			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -871,7 +867,6 @@
 			"type": "reference",
 			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
-			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",

@@ -19,6 +19,11 @@
 					"type": "reference",
 					"name": "torso",
 					"source": "voxel/characters/woman/torso.plst"
+				},
+				{
+					"type": "model",
+					"name": "woman_27_torso_static",
+					"source": "voxel/characters/woman/obj/fbx/woman_27_torso_static.fbx"
 				}
 			]
 		}
