@@ -41,7 +41,6 @@ class EntityReplicator extends NetNode {
 	}
 
 	override public function unregister( host : NetworkHost, ?ctx ) {
-		trace( "unregistering " + entity.result );
 		super.unregister( host, ctx );
 		transformRepl.unregister( host, ctx );
 		componentsRepl.unregister( host, ctx );
@@ -54,14 +53,13 @@ class EntityReplicator extends NetNode {
 
 	#if client
 	override function onUnregisteredClient() {
-		trace( "entity disconnected " + entity.result );
+		// trace( "entity disconnected " + entity.result );
 		super.onUnregisteredClient();
 		entity.result.dispose();
 	}
 	#end
 
 	function onEntityDisposed( ?v ) {
-		trace( "removing entity" );
 		componentsRepl.dispose();
 		parent?.removeChild( this );
 		unregister( NetworkHost.current );
@@ -81,7 +79,7 @@ class EntityReplicator extends NetNode {
 
 		entity.resolve( entityLocal );
 
-		trace( "aliving entity : " + this );
+		// trace( "aliving entity : " + this );
 	}
 
 	function onLocationChanged( _, location : Location ) {

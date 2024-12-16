@@ -41,6 +41,7 @@ class EntityStatusBarContainer {
 		root.verticalAlign = Bottom;
 		root.cameraRelative = true;
 		root.pixelSnap = false;
+		root.clampInScreen = true;
 
 		content = new Flow( root );
 		content.horizontalAlign = Middle;
@@ -102,6 +103,7 @@ class EntityStatusBarContainer {
 
 	function setChatMessageIdx( idx : Int, mesVO : EntityMessageVO ) {
 		var textComp = new TextTooltipComp( mesVO.message );
+		textComp.maxWidth = 350;
 		content.addChild( textComp );
 		messages[idx] = {
 			tooltipClip : textComp,

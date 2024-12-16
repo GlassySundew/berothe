@@ -1,0 +1,26 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "object",
+			"name": "object",
+			"children": [
+				{
+					"type": "reference",
+					"name": "left_hand",
+					"source": "voxel/characters/woman/left_hand.plst"
+				},
+				{
+					"type": "reference",
+					"name": "right_hand",
+					"source": "voxel/characters/woman/right_hand.plst"
+				},
+				{
+					"type": "reference",
+					"name": "torso",
+					"source": "voxel/characters/woman/torso.plst"
+				}
+			]
+		}
+	]
+}

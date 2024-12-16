@@ -44,22 +44,16 @@ class EntityHitboxComponent extends EntityRigidBodyComponentBase {
 		rigidBodyLocal.setLinearDamping( { x : 99999, y : 99999, z : 99999 } );
 		rigidBodyLocal.setGravityScale( 0 );
 
+		entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
+
+		entity.transform.x.subscribeProp( rigidBodyLocal.x );
+		entity.transform.y.subscribeProp( rigidBodyLocal.y );
+		entity.transform.z.subscribeProp( rigidBodyLocal.z );
+
 		return rigidBodyLocal;
 	}
 
-	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
-		super.onAttachedToLocation( oldLoc, location );
-		if ( location == null ) return;
-
-		var maybeSub = entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
-		if ( maybeSub != null ) subscription.add( maybeSub );
-
-		subscription.add( entity.transform.x.subscribeProp( rigidBody.x ) );
-		subscription.add( entity.transform.y.subscribeProp( rigidBody.y ) );
-		subscription.add( entity.transform.z.subscribeProp( rigidBody.z ) );
-	}
-
 	function onDynamicsAppeared( _, dynamics : EntityDynamicsComponent ) {
-		subscription.add( dynamics.onMove.add(() -> rigidBody.wakeUp() ) );
+		dynamics.onMove.add(() -> rigidBody.wakeUp() );
 	}
 }

@@ -32,11 +32,12 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 	final cooldown : Cooldown;
 	final rigidBody : IRigidBody;
 	final shape : IRigidBodyShape;
-	final physics : IPhysicsEngine;
 
 	var tweenSizeX : Float;
 	var tweenSizeY : Float;
 	var tweenSizeZ : Float;
+
+	var physics : IPhysicsEngine;
 
 	var tweenCombinator : TweenCombinator;
 
@@ -46,12 +47,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 
 	public function new(
 		desc : AttackListItemVO,
-		sourceTransform : ITransform,
-		physics : IPhysicsEngine
+		sourceTransform : ITransform
 	) {
 		this.desc = desc;
 		this.sourceTransform = sourceTransform;
-		this.physics = physics;
 		this.emitTransform = new OimoTransform();
 		this.cooldown = new Cooldown( hxd.Timer.wantedFPS );
 
@@ -85,6 +84,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		removeEmitter();
 	}
 
+	public inline function attachPhysics(physics : IPhysicsEngine) {
+		this.physics = physics;
+	}
+	
 	public inline function setAttackRange( amount : Float ) {
 		attackRange = amount;
 	}
@@ -135,7 +138,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		};
 
 		update( 0, 0 );
-		physics.addRigidBody( rigidBody );
+		physics?.addRigidBody( rigidBody );
 	}
 
 	public inline function update( dt : Float, tmod : Float ) {

@@ -68,7 +68,7 @@ class OverworldEntity {
 		onFrame.dispatch( dt, tmod );
 		delayer.update( tmod );
 		cd.update( tmod );
-
+		
 		if ( disposeInvalidate ) dispose();
 	}
 

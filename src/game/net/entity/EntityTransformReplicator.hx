@@ -1,5 +1,6 @@
 package game.net.entity;
 
+import game.net.server.GameServer;
 import rx.disposables.ISubscription;
 import h3d.Vector;
 import haxe.Timer;
@@ -28,6 +29,8 @@ class EntityTransformReplicator extends NetNode {
 
 	public var modelToNetworkStream( default, null ) : Composite;
 	public var networkToModelStream( default, null ) : Composite;
+
+	public var ignoreSync = false;
 
 	var entity : OverworldEntity;
 
@@ -75,9 +78,29 @@ class EntityTransformReplicator extends NetNode {
 		networkToModelStream?.unsubscribe();
 		networkToModelStream = new Composite();
 
-		networkToModelStream.add( x.addOnValueImmediately( ( _, newV ) -> if ( !x.syncBack ) entity.transform.x.val = newV ) );
-		networkToModelStream.add( y.addOnValueImmediately( ( _, newV ) -> if ( !y.syncBack ) entity.transform.y.val = newV ) );
-		networkToModelStream.add( z.addOnValueImmediately( ( _, newV ) -> if ( !z.syncBack ) entity.transform.z.val = newV ) );
+		#if server
+		networkToModelStream.add( x.addOnValueImmediately(
+			( _, newV ) -> @:privateAccess { //
+				if ( !ignoreSync ) entity.transform.x.val = newV;
+				else x.maskVal = entity.transform.x.val;
+			} ) );
+		networkToModelStream.add( y.addOnValueImmediately(
+			( _, newV ) -> @:privateAccess { //
+				if ( !ignoreSync ) entity.transform.y.val = newV;
+				else y.maskVal = entity.transform.y.val;
+			} ) );
+		networkToModelStream.add( z.addOnValueImmediately(
+			( _, newV ) -> @:privateAccess { //
+				if ( !ignoreSync ) entity.transform.z.val = newV
+				else {
+					z.maskVal = entity.transform.z.val;
+				}
+			} ) );
+		#else
+		networkToModelStream.add( x.subscribeProp( entity.transform.x ) );
+		networkToModelStream.add( y.subscribeProp( entity.transform.y ) );
+		networkToModelStream.add( z.subscribeProp( entity.transform.z ) );
+		#end
 
 		networkToModelStream.add( velX.subscribeProp( entity.transform.velX ) );
 		networkToModelStream.add( velY.subscribeProp( entity.transform.velY ) );
@@ -90,14 +113,9 @@ class EntityTransformReplicator extends NetNode {
 
 	function followEntity( entity : OverworldEntity ) {
 		this.entity = entity;
-
-		interpolationSub?.unsubscribe();
-		interpolationSub = Composite.create();
 	}
 
-	public function claimOwnage() {
-		interpolationSub?.unsubscribe();
-	}
+	public function claimOwnage() {}
 
 	function setupServerSyncronization() {
 		createModelToNetworkStream();
@@ -105,9 +123,6 @@ class EntityTransformReplicator extends NetNode {
 	}
 
 	function setupClientSyncronization() {
-		x.syncBack = false;
-		y.syncBack = false;
-		z.syncBack = false;
 		createNetworkToModelStream();
 	}
 

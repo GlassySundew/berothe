@@ -7,6 +7,7 @@ class RuleStorage {
 	public var entityGravityScale( default, null ) : Float;
 	public var interactionRange( default, null ) : Float;
 	public var playerStartLocation( default, null ) : String;
+	public var debugStartLocation( default, null ) : String;
 	public var friendlyDamageTakenColor( default, null ) : Int;
 	public var unfriendlyDamageTakenColor( default, null ) : Int;
 	public var friendlyStatusBarColor( default, null ) : Int;
@@ -32,7 +33,7 @@ class RuleStorage {
 			}
 
 			if ( value == null ) {
-				trace( "value of rule id: " + rule.id + " is null!" );
+				trace( "value of rule id: " + rule.id + " is not found in cdb!" );
 				continue;
 			}
 			Reflect.setField( this, rule.id.toString(), value );

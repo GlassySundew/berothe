@@ -788,22 +788,22 @@
 		},
 		{
 			"type": "object",
-			"name": "inala hall exit",
+			"name": "caelyra hall exit",
 			"props": {
 				"type": "entityTransitionExit",
 				"props": {
-					"location": "castle_inala_hall"
+					"location": "castle_caelyra_hall"
 				},
 				"$cdbtype": "locationObjContainerTypeDF"
 			},
-			"x": 75,
-			"y": -56,
-			"z": 1
+			"x": 76,
+			"y": -56
 		},
 		{
 			"type": "reference",
-			"name": "bee",
+			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
+			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -818,8 +818,9 @@
 		},
 		{
 			"type": "reference",
-			"name": "bee",
+			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
+			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -834,8 +835,9 @@
 		},
 		{
 			"type": "reference",
-			"name": "bee",
+			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
+			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -850,8 +852,9 @@
 		},
 		{
 			"type": "reference",
-			"name": "bee",
+			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
+			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -866,8 +869,9 @@
 		},
 		{
 			"type": "reference",
-			"name": "bee",
+			"name": "bee spawn",
 			"source": "voxel/characters/bee/bee.enco",
+			"editorOnly": true,
 			"props": {
 				"spawnedEntity": "bee",
 				"$cdbtype": "entitySpawnPointDF",
@@ -932,15 +936,15 @@
 					"asde": 0
 				},
 				"props": {
-					"location": "castle_inala_hall"
+					"location": "castle_caelyra_hall"
 				}
 			},
 			"x": 70.93,
 			"y": -56.54,
-			"z": -6.61,
-			"scaleX": 3,
+			"z": 3.39,
+			"scaleX": 4.63,
 			"scaleY": 13.44,
-			"scaleZ": 50,
+			"scaleZ": 31.7,
 			"children": [
 				{
 					"type": "material",
@@ -965,6 +969,18 @@
 			"source": "levels/renderprops.prefab",
 			"editorOnly": true,
 			"editMode": true
+		},
+		{
+			"type": "reference",
+			"name": "human_spwn",
+			"source": "voxel/characters/human/human.enco",
+			"props": {
+				"spawnedEntity": "player",
+				"$cdbtype": "entitySpawnPointDF"
+			},
+			"x": 85.89,
+			"y": -45.46,
+			"rotationZ": -45
 		}
 	]
 }

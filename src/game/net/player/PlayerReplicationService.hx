@@ -1,5 +1,7 @@
 package game.net.player;
 
+import util.Repeater;
+import rx.Subscription;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.net.server.GameServer;
@@ -71,7 +73,6 @@ class PlayerReplicationService {
 		sub.add( playerEntity.chunk.addOnValueImmediately( onAddedToChunk ) );
 		sub.add( playerEntity.location.addOnValueImmediately( onAddedToLocation ) );
 		playerEntity.disposed.then( _ -> {
-			trace( "player removed" );
 			sub.unsubscribe();
 			wipeAllChunks();
 		} );
@@ -99,9 +100,11 @@ class PlayerReplicationService {
 	}
 
 	function giveControl() {
-		// wait for network flushed
-		GameServer.inst.delayer.addF(() -> {
+		// wait for client response flush
+		cliCon.pingClient( ( _ ) -> {
 			var transform = playerEntityReplicator.transformRepl;
+			transform.ignoreSync = false;
+
 			transform.x.syncBack = false;
 			transform.y.syncBack = false;
 			transform.z.syncBack = false;
@@ -113,11 +116,13 @@ class PlayerReplicationService {
 			transform.rotationX.syncBack = false;
 			transform.rotationY.syncBack = false;
 			transform.rotationZ.syncBack = false;
-		}, 1 );
+		} );
 	}
 
 	function takeControl() {
 		var transform = playerEntityReplicator.transformRepl;
+		transform.ignoreSync = true;
+
 		transform.x.syncBack = true;
 		transform.y.syncBack = true;
 		transform.z.syncBack = true;
@@ -131,6 +136,9 @@ class PlayerReplicationService {
 		transform.rotationZ.syncBack = true;
 	}
 
+	/** 
+		@return true if new subscription was created 
+	**/
 	function validateChunkAccess( x : Int, y : Int, z : Int ) : Bool {
 		if ( chunks[z] == null ) chunks[z] = new Map();
 		if ( chunks[z][y] == null ) chunks[z][y] = new Map();
@@ -163,7 +171,6 @@ class PlayerReplicationService {
 	}
 
 	function wipeAllChunks() {
-		trace( "wiping all chunks" );
 		for ( zChunkRow in chunks ) {
 			for ( yChunkRow in zChunkRow ) {
 				for ( xi => xChunkRepl in yChunkRow ) {
@@ -254,7 +261,7 @@ class PlayerReplicationService {
 	}
 
 	function onAddedToLocation( oldLoc : Location, location : Location ) {
-		trace( "setting location: " + location, "old one: " + oldLoc, "equality: " + ( oldLoc == location ) );
+		locationSub?.unsubscribe();
 
 		if ( oldLoc != null ) wipeAllChunks();
 
@@ -265,8 +272,7 @@ class PlayerReplicationService {
 		cliCon.onControlledEntityLocationChange( location.locationDesc.id );
 
 		// attachVisibleChunks( playerEntity.chunk.getValue() );
-		oldLoc?.onEntityRemoved.remove( locationOnEntityRemoved );
-		location.onEntityRemoved.add( locationOnEntityRemoved );
+		locationSub = location.onEntityRemoved.add( locationOnEntityRemoved );
 	}
 
 	function locationOnEntityRemoved( entity : OverworldEntity ) {

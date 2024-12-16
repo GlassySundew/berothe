@@ -81,12 +81,11 @@ class ClientController extends NetNode {
 	public function sendTransaction( t : Transaction ) : TransactionResult {
 		return t.validate();
 	}
-	/**
-		костыль для бага, нужен любой rpc вызов чтобы 
-		подгрузить Level после подключения
-	**/
-	// @:rpc
-	// function emptyPing() {}
+
+	@:rpc( owner )
+	public function pingClient() : Bool {
+		return true;
+	}
 }
 
 class TestNetPinger extends NetNode {

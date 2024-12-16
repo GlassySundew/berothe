@@ -223,6 +223,4 @@ class OimoRigidBody implements IRigidBody {
 	public function getShape() : Null<IRigidBodyShape> {
 		return Std.downcast( rigidBody._shapeList, OimoWrappedShape );
 	}
-
-	public function setMass() {}
 }

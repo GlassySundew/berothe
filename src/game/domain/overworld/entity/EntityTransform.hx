@@ -1,5 +1,7 @@
 package game.domain.overworld.entity;
 
+import util.MathUtil;
+import dn.M;
 import game.domain.overworld.location.physics.Types.ThreeDeeVector;
 import signals.Signal;
 import core.MutableProperty;
@@ -22,6 +24,36 @@ class EntityTransform {
 	public final onReleaseControl = new Signal();
 
 	public function new() {}
+
+	#if !debug inline #end
+	public function distToEntity2D( entity : OverworldEntity ) : Float {
+		return M.dist( x.val, y.val, entity.transform.x.val, entity.transform.y.val );
+	}
+
+	#if !debug inline #end
+	public function distToEntity3D( entity : OverworldEntity ) : Float {
+		return
+			MathUtil.dist3(
+				x.val, y.val, z.val,
+				entity.transform.x.val, entity.transform.y.val, entity.transform.z.val
+			);
+	}
+
+	#if !debug inline #end
+	public function turnTowardsTo( entity : OverworldEntity ) {
+		var dx = entity.transform.x.val - x.val;
+		var dy = entity.transform.y.val - y.val;
+		var angle = Math.atan2( dy, dx );
+		rotationZ.val = angle;
+	}
+
+	#if !debug inline #end
+	public function turnAwayFrom( entity : OverworldEntity ) {
+		var dx = entity.transform.x.val - x.val;
+		var dy = entity.transform.y.val - y.val;
+		var angle = Math.atan2( dy, dx ) - M.toRad( 180 );
+		rotationZ.val = angle;
+	}
 
 	#if !debug inline #end
 	public function getPosition() : ThreeDeeVector {

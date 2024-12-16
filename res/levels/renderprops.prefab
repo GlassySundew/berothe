@@ -29,7 +29,7 @@
 					"noiseScale": 10,
 					"samples": 32,
 					"radius": 20,
-					"intensity": 7.38,
+					"intensity": 9.02,
 					"bias": 0.08,
 					"USE_FADE": true,
 					"fadeStart": 0,

@@ -38,30 +38,27 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 	override public function claimOwnage() {
 		super.claimOwnage();
-		entity.location.addOnValueImmediately( ( oldLoc, loc ) -> {
-			if ( loc == null ) return;
-			rigidBodyFuture.then( rigidBody -> {
-				rigidBody.setLinearDamping( { x : 25, y : 25, z : 0 } );
+		rigidBodyFuture.then( rigidBody -> {
+			rigidBody.setLinearDamping( { x : 25, y : 25, z : 0 } );
 
-				rigidBody.x.subscribeProp( entity.transform.x );
-				rigidBody.y.subscribeProp( entity.transform.y );
-				rigidBody.z.subscribeProp( entity.transform.z );
-				rigidBody.velX.subscribeProp( entity.transform.velX );
-				rigidBody.velY.subscribeProp( entity.transform.velY );
-				rigidBody.velZ.subscribeProp( entity.transform.velZ );
-				rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
-				rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
-				rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
+			rigidBody.x.subscribeProp( entity.transform.x );
+			rigidBody.y.subscribeProp( entity.transform.y );
+			rigidBody.z.subscribeProp( entity.transform.z );
+			rigidBody.velX.subscribeProp( entity.transform.velX );
+			rigidBody.velY.subscribeProp( entity.transform.velY );
+			rigidBody.velZ.subscribeProp( entity.transform.velZ );
+			rigidBody.rotationX.subscribeProp( entity.transform.rotationX );
+			rigidBody.rotationY.subscribeProp( entity.transform.rotationY );
+			rigidBody.rotationZ.subscribeProp( entity.transform.rotationZ );
 
-				var maybeSub = entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
-				if ( maybeSub != null ) subscription.add( maybeSub );
+			var maybeSub = entity.components.onAppear( EntityDynamicsComponent, onDynamicsAppeared );
+			if ( maybeSub != null ) subscription.add( maybeSub );
 
-				var intertia = torsoShape.getConfig().geom.getIntertiaCoeff();
-				var massData = new MassData();
-				massData.localInertia = intertia;
-				massData.mass = 1;
-				rigidBody.setMassData( massData );
-			} );
+			var intertia = torsoShape.getConfig().geom.getIntertiaCoeff();
+			var massData = new MassData();
+			massData.localInertia = intertia;
+			massData.mass = 1;
+			rigidBody.setMassData( massData );
 		} );
 	}
 
@@ -82,21 +79,6 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 				rb.addShape( shape );
 			}
 		} );
-	}
-
-	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
-		super.onAttachedToLocation( oldLoc, location );
-		if ( location == null ) return;
-
-		subscription.add( entity.transform.x.subscribeProp( rigidBody.x, true ) );
-		subscription.add( entity.transform.y.subscribeProp( rigidBody.y, true ) );
-		subscription.add( entity.transform.z.subscribeProp( rigidBody.z, true ) );
-		subscription.add( entity.transform.velX.subscribeProp( rigidBody.velX, true ) );
-		subscription.add( entity.transform.velY.subscribeProp( rigidBody.velY, true ) );
-		subscription.add( entity.transform.velZ.subscribeProp( rigidBody.velZ, true ) );
-		subscription.add( entity.transform.rotationX.subscribeProp( rigidBody.rotationX, true ) );
-		subscription.add( entity.transform.rotationY.subscribeProp( rigidBody.rotationY, true ) );
-		subscription.add( entity.transform.rotationZ.subscribeProp( rigidBody.rotationZ, true ) );
 	}
 
 	function createRigidBody() {
@@ -136,6 +118,16 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 		massData.mass = 9999;
 		rigidBodyLocal.setMassData( massData );
 
+		entity.transform.x.subscribeProp( rigidBodyLocal.x, true );
+		entity.transform.y.subscribeProp( rigidBodyLocal.y, true );
+		entity.transform.z.subscribeProp( rigidBodyLocal.z, true );
+		entity.transform.velX.subscribeProp( rigidBodyLocal.velX, true );
+		entity.transform.velY.subscribeProp( rigidBodyLocal.velY, true );
+		entity.transform.velZ.subscribeProp( rigidBodyLocal.velZ, true );
+		entity.transform.rotationX.subscribeProp( rigidBodyLocal.rotationX, true );
+		entity.transform.rotationY.subscribeProp( rigidBodyLocal.rotationY, true );
+		entity.transform.rotationZ.subscribeProp( rigidBodyLocal.rotationZ, true );
+
 		return rigidBodyLocal;
 	}
 
@@ -145,27 +137,25 @@ class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 
 		this.dynamicsComponent = dynamicsComponent;
 
-		subscription.add(
-			dynamicsComponent.onMove.add(() -> {
-				rigidBody.wakeUp();
-				if (
-					Math.abs( rigidBody.velX.val ) > rotationApplicationVelMin
-					|| Math.abs( rigidBody.velY.val ) > rotationApplicationVelMin
-				) {
-					setRotationBasedOffVelocities();
-				}
-			} ) );
+		dynamicsComponent.onMove.add(() -> {
+			rigidBody.wakeUp();
+			if (
+				Math.abs( rigidBody.velX.val ) > rotationApplicationVelMin
+				|| Math.abs( rigidBody.velY.val ) > rotationApplicationVelMin
+			) {
+				setRotationBasedOffVelocities();
+			}
+		} );
 
 		if ( rigidBodyDesc.hasFeet ) {
-			subscription.add(
-				dynamicsComponent.onMove.add(() -> {
-					var start = torsoShape.getPosition();
-					var end = start.clone();
-					end.z -= rigidBodyDesc.offsetZ;
+			dynamicsComponent.onMove.add(() -> {
+				var start = torsoShape.getPosition();
+				var end = start.clone();
+				end.z -= rigidBodyDesc.offsetZ;
 
-					physics.rayCast( start, end, standRayCastCallback );
-					standRayCastCallback.clear();
-				} ) );
+				physics.rayCast( start, end, standRayCastCallback );
+				standRayCastCallback.clear();
+			} );
 		}
 
 		dynamicsComponent.invalidateMove();

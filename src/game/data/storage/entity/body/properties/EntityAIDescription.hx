@@ -12,11 +12,13 @@ class AIProperties {
 	public final triggerId : Null<String>;
 	public final agroRange : Null<Float>;
 	public final npcResponsesId : Null<String>;
+	public final npcResponseEntryChainId : Null<String>;
 
 	public inline function new( entry : Data.EntityPropertySetup_properties_behaviour_params ) {
 		triggerId = entry.triggerId;
 		agroRange = entry.agroRange;
 		npcResponsesId = entry.npcResponsesId.toString();
+		npcResponseEntryChainId = entry.npcResponseEntryChainId.toString();
 	}
 }
 

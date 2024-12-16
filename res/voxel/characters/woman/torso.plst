@@ -1,0 +1,62 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "torso_stand",
+			"children": [
+				{
+					"type": "model",
+					"name": "woman_22_torso_stand",
+					"source": "voxel/characters/woman/obj/fbx/woman_22_torso_stand.fbx"
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "torso_walk",
+			"children": [
+				{
+					"type": "model",
+					"name": "woman_0_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_0_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_1_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_1_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_2_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_2_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_3_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_3_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_4_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_4_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_5_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_5_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_6_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_6_torso_walk.fbx"
+				},
+				{
+					"type": "model",
+					"name": "woman_7_torso_walk",
+					"source": "voxel/characters/woman/obj/fbx/woman_7_torso_walk.fbx"
+				}
+			]
+		}
+	]
+}

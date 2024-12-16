@@ -108,8 +108,6 @@ class Boot extends hxd.App {
 		this.deltaTime = dt;
 		dn.Process.updateAll( hxd.Timer.tmod );
 		super.update( dt );
-
-		// Sys.sleep(( 1000 / 20 - dt ) / 1000 );
 	}
 
 	public function createServer() {

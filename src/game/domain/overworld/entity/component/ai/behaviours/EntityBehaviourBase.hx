@@ -203,10 +203,7 @@ abstract class EntityBehaviourBase {
 		entity.components.get( EntityModelComponent )?.wake();
 	}
 
-	function initializeAttackComponent() {
-		if ( attackComp == null ) return;
-		if ( model.factions.length == 0 || !model.hasEnemy() ) return;
-
+	inline function subscribeSurroundingChunksForEntityMovement( cb : OverworldEntity -> Void ) {
 		var chunkChangedSub : Composite = null;
 		entity.chunk.addOnValueImmediately( ( oldChunk, newChunk ) -> {
 			chunkChangedSub?.unsubscribe();
@@ -219,13 +216,21 @@ abstract class EntityBehaviourBase {
 				var y = tile.y + newChunk.y;
 				var z = newChunk.z;
 
-				chunkChangedSub.add( chunks.validateChunkAccess( x, y, z ).onEntityMoved.add( onSomeEntityMoved ) );
+				chunkChangedSub.add( chunks.validateChunkAccess( x, y, z ).onEntityMoved.add( cb ) );
 			}
 		} );
 	}
 
-	inline function onSomeEntityMoved( maybeEnemy : OverworldEntity ) {
+	function initializeAttackComponent() {
+		if ( attackComp == null ) return;
+		if ( model.factions.length == 0 || !model.hasEnemy() ) return;
+
+		subscribeSurroundingChunksForEntityMovement( onMaybeEnemyMoved );
+	}
+
+	inline function onMaybeEnemyMoved( maybeEnemy : OverworldEntity ) {
 		if ( maybeEnemy == entity ) return;
+		if ( !model.hasEnemy() ) return;
 		var enemyModel = maybeEnemy.components.get( EntityModelComponent );
 		if ( enemyModel == null || !model.isEnemy( maybeEnemy ) ) return;
 
@@ -242,12 +247,7 @@ abstract class EntityBehaviourBase {
 			case AGRO( enemy ): return;
 			default:
 		}
-		if ( M.dist(
-			enemy.transform.x,
-			enemy.transform.y,
-			entity.transform.x,
-			entity.transform.y
-		) < agroRange ) {
+		if ( entity.transform.distToEntity2D( enemy ) < agroRange ) {
 			state = AGRO( enemy );
 		}
 	}
@@ -286,22 +286,8 @@ abstract class EntityBehaviourBase {
 		}
 
 		entities.sort( ( entity1, entity2 ) -> {
-			var dist1 = MathUtil.dist3(
-				entity1.transform.x,
-				entity1.transform.y,
-				entity1.transform.z,
-				entity.transform.x,
-				entity.transform.y,
-				entity.transform.z,
-			);
-			var dist2 = MathUtil.dist3(
-				entity2.transform.x,
-				entity2.transform.y,
-				entity2.transform.z,
-				entity.transform.x,
-				entity.transform.y,
-				entity.transform.z,
-			);
+			var dist1 = entity.transform.distToEntity2D( entity1 );
+			var dist2 = entity.transform.distToEntity2D( entity2 );
 			return Std.int( dist1 - dist2 );
 		} );
 

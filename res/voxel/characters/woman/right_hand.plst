@@ -1,0 +1,247 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "right_hand_idle",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "idle_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"y": 2,
+							"z": 6
+						},
+						{
+							"type": "model",
+							"name": "woman_23_right_hand_idle",
+							"source": "voxel/characters/woman/obj/fbx/woman_23_right_hand_idle.fbx"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "right_hand_attack",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 3,
+							"y": 2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "woman_8_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_8_right_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 4,
+							"y": 2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "woman_9_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_9_right_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 5,
+							"y": 2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "woman_10_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_10_right_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 5,
+							"y": 2,
+							"z": 8
+						},
+						{
+							"type": "model",
+							"name": "woman_11_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_11_right_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 5,
+							"y": 2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "woman_12_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_12_right_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 4,
+							"y": 2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "woman_13_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_13_right_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "last_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 3,
+							"y": 2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "woman_14_right_hand_attack",
+							"source": "voxel/characters/woman/obj/fbx/woman_14_right_hand_attack.fbx"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "right_hand_raised",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "model",
+							"name": "woman_25_right_hand_raised",
+							"source": "voxel/characters/woman/obj/fbx/woman_25_right_hand_raised.fbx"
+						},
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_right"
+								]
+							},
+							"x": 3,
+							"y": 2,
+							"z": 6
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -15,6 +15,6 @@ class EntityDeathMessageComponent extends EntityComponent {
 			modelComp.factions.push( predFaction );
 		}
 
-		modelComp.statusMessages.onChanged.add( ( _, _ ) -> this.entity.dispose() );
+		modelComp.statusMessages.onChanged.add( ( _, _ ) -> this.entity.invalidateDispose() );
 	}
 }

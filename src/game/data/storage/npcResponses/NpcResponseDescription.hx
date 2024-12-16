@@ -52,6 +52,7 @@ class NpcResponseDescription extends DescriptionBase {
 	}
 
 	public final chains : Array<NpcResponseChainElement>;
+	public final chainsById : Map<String, NpcResponseChainElement> = [];
 
 	public function new(
 		id : String,
@@ -59,5 +60,9 @@ class NpcResponseDescription extends DescriptionBase {
 	) {
 		super( id );
 		this.chains = chains;
+
+		for ( chain in chains ) {
+			chainsById[chain.chainId] = chain;
+		}
 	}
 }

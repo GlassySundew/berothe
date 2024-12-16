@@ -1,5 +1,6 @@
 package game.domain.overworld.location;
 
+import util.Assert;
 import rx.disposables.SingleAssignment;
 import rx.disposables.Boolean;
 import rx.disposables.ISubscription;
@@ -20,16 +21,14 @@ class Chunks {
 		this.location = location;
 	}
 
-	public function dispose() {
+	public function dispose() {}
 
-	}
-	
 	public function removeEntity( entity : OverworldEntity ) {
 		entitySubscriptions[entity]?.unsubscribe();
 		entitySubscriptions.remove( entity );
 
 		onEntityMove( entity );
-		
+
 		var chunkIdx = getChunkIdxFromAbsolute( {
 			x : entity.transform.x.val,
 			y : entity.transform.y.val,
@@ -50,6 +49,8 @@ class Chunks {
 		var dynamics = entity.components.get( EntityDynamicsComponent );
 		if ( dynamics != null ) {
 			var sub = dynamics.onMove.add( onEntityMove.bind( entity ) );
+			
+			Assert.notExistsInMap( entity, entitySubscriptions );
 			entitySubscriptions[entity] = sub;
 		}
 		onEntityMove( entity );

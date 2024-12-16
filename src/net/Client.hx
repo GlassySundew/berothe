@@ -132,7 +132,7 @@ class Client extends Process {
 		new ConfirmDialog(
 			reason,
 			( e ) -> {
-				root.add( new MainMenu().rootCtx, Const.DP_MAIN );
+				Main.inst.root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 			},
 			Main.inst.root
 		);

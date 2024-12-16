@@ -236,6 +236,13 @@ class EntityComposerView implements IEntityView {
 				}
 			}
 		);
+		if ( viewComponent.entity.desc.getBodyDescription().attackDesc == null ) {
+			final listener = new AnimationState(() -> return true );
+			for ( attackAnimItem in attackKeyList ) {
+				if ( !animations.byKey.exists( attackAnimItem.idle ) ) continue;
+				playAnimation( attackAnimItem.idle, listener, 0 );
+			}
+		}
 		viewComponent.entity.components.onAppear(
 			EntityModelComponent,
 			( cl, modelComp ) -> {

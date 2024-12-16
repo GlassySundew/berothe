@@ -24,8 +24,33 @@
 					"rotationZ": 180
 				},
 				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 14.7,
+					"y": 18,
+					"z": 14
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 15.7,
+					"y": 82,
+					"z": 14
+				},
+				{
 					"type": "object",
 					"name": "models",
+					"x": 0.5,
 					"children": [
 						{
 							"type": "model",
@@ -155,7 +180,7 @@
 								"$cdbtype": "locationEntityDF"
 							},
 							"x": 52,
-							"y": -51,
+							"y": -42,
 							"z": -18,
 							"scaleX": 207,
 							"scaleY": 34,
@@ -168,12 +193,12 @@
 								"entity": "collider_box",
 								"$cdbtype": "locationEntityDF"
 							},
-							"x": -8,
-							"y": 37.23,
+							"x": -7,
+							"y": 37,
 							"z": -18,
 							"scaleX": 35,
 							"scaleY": 289,
-							"scaleZ": 207.55
+							"scaleZ": 207
 						},
 						{
 							"type": "customBox",
@@ -259,8 +284,8 @@
 				},
 				"$cdbtype": "locationObjContainerTypeDF"
 			},
-			"x": 68,
-			"y": 99,
+			"x": 67,
+			"y": 105,
 			"scaleX": 207,
 			"scaleY": 0,
 			"scaleZ": 207
@@ -280,11 +305,11 @@
 					"location": "meadow"
 				}
 			},
-			"x": 74,
-			"y": 99,
+			"x": 75,
+			"y": 104.5,
 			"z": 23,
-			"scaleX": 3,
-			"scaleY": 23,
+			"scaleX": 4.14,
+			"scaleY": 12.5,
 			"scaleZ": 50,
 			"children": [
 				{
@@ -313,6 +338,19 @@
 					]
 				}
 			]
+		},
+		{
+			"type": "reference",
+			"name": "woman",
+			"source": "voxel/characters/woman/woman.enco",
+			"editorOnly": true,
+			"props": {
+				"entity": "caelyra",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": 26.8,
+			"y": -5.8,
+			"z": -0.1
 		}
 	]
 }

@@ -6,6 +6,7 @@ debug.hxml
 
 -D pak
 -D linux
+-D prod
 
 -cmd haxe -hl hxd.fmt.pak.Build.hl -lib heaps -main hxd.fmt.pak.Build && hl hxd.fmt.pak.Build.hl -out redist/server/res -exclude vox,obj,mtl,ttf
 

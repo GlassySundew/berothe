@@ -26,7 +26,6 @@ class EntityAttackListItem {
 
 	var entity : OverworldEntity;
 
-	var subscription : Composite;
 	var isOwned = false;
 
 	public function new( desc : AttackListItemVO ) {
@@ -63,6 +62,24 @@ class EntityAttackListItem {
 		this.entity = entity;
 		entity.location.addOnValueImmediately( onAttachedToLocation );
 		entity.disposed.then( _ -> dispose() );
+
+		entity.components.onAppear(
+			EntityRigidBodyComponent,
+			( cl, rigidBodyComp ) -> {
+				rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
+					emitter.val = new AttackTweenBoxCastEmitter(
+						desc,
+						rigidBody.transform
+					);
+					attackRange.addOnValueImmediately(
+						( old, newVal ) -> emitter.val.setAttackRange( newVal )
+					);
+
+					entity.onFrame.add( update );
+				} );
+				if ( isOwned ) claimOwnage();
+			}
+		);
 	}
 
 	#if !debug inline #end
@@ -95,29 +112,8 @@ class EntityAttackListItem {
 	function onAttachedToLocation( oldLoc : Location, location : Location ) {
 		if ( location == null ) return;
 
-		subscription?.unsubscribe();
-		subscription = Composite.create();
-		var maybeSub = entity.components.onAppear(
-			EntityRigidBodyComponent,
-			( cl, rigidBodyComp ) -> {
-				var sub = rigidBodyComp.rigidBodyFuture.then( rigidBody -> {
-					emitter.val = new AttackTweenBoxCastEmitter(
-						desc,
-						rigidBody.transform,
-						location.physics
-					);
-					subscription.add( attackRange.addOnValueImmediately(
-						( old, newVal ) -> emitter.val.setAttackRange( newVal )
-					) );
-
-					subscription.add( entity.onFrame.add( update ) );
-				} );
-				subscription.add( Subscription.create(() -> sub.cancel() ) );
-				if ( isOwned ) claimOwnage();
-			}
-		);
-
-		if ( maybeSub != null ) subscription.add( maybeSub );
+		emitter.val?.removeEmitter();
+		emitter.onAppear( emitter -> emitter.attachPhysics( location.physics ) );
 	}
 
 	inline function update( dt, tmod ) {

@@ -108,11 +108,6 @@ class GameClient extends Process {
 				locationLights = Res.levels.light.load().make();
 				Boot.inst.s3d.addChild( locationLights.findFirstLocal3d() );
 			}
-
-			Boot.inst.s3d.visible = false;
-			delayer.addF(() -> {
-				Boot.inst.s3d.visible = true;
-			}, 5 );
 		} );
 
 		#if debug
@@ -125,8 +120,6 @@ class GameClient extends Process {
 	}
 
 	public function onLocationProvided( locationDescId : String ) {
-		trace( "LOCATION PROVIDED: " + locationDescId );
-
 		controlledEntity.onAppear( ( playerRepl ) -> {
 			new graphics.BatchRenderer( Boot.inst.s3d );
 			currentLocationSelf.val = core.getOrCreateLocationByDesc(

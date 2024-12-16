@@ -23,7 +23,6 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 		subscription?.unsubscribe();
 		if ( rigidBody != null ) {
 			detach();
-			rigidBodyFuture = new Future();
 		}
 
 		if ( location == null ) return;
@@ -32,16 +31,16 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 
 		super.onAttachedToLocation( oldLoc, location );
 
-		rigidBody = tryCreateRigidBody();
+		if ( rigidBody == null ) {
+			rigidBody = tryCreateRigidBody();
+			rigidBodyFuture.resolve( rigidBody );
+		}
 		rigidBody.setPosition( { x : entity.transform.x, y : entity.transform.y, z : entity.transform.z } );
 		physics.addRigidBody( rigidBody );
-
-		rigidBodyFuture.resolve( rigidBody );
 	}
 
 	function detach() {
 		physics?.removeRigidBody( rigidBody );
-		rigidBody = null;
 		physics = null;
 	}
 

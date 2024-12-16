@@ -41,6 +41,12 @@
 					}
 				},
 				{
+					"id": "debugStartLocation",
+					"value": {
+						"location": "meadow"
+					}
+				},
+				{
 					"id": "friendlyDamageTakenColor",
 					"value": {
 						"color": 14540582
@@ -185,6 +191,10 @@
 					"preset": "bee"
 				},
 				{
+					"id": "caelyra",
+					"preset": "caelyra"
+				},
+				{
 					"id": "club",
 					"preset": "club"
 				},
@@ -229,6 +239,11 @@
 				{
 					"title": "characters",
 					"id": "rogue"
+				},
+				{
+					"title": "npc questgivers",
+					"level": 1,
+					"id": "caelyra"
 				},
 				{
 					"title": "items",
@@ -302,6 +317,11 @@
 					"view": "bee"
 				},
 				{
+					"id": "caelyra",
+					"properties": "caelyra",
+					"view": "caelyra"
+				},
+				{
 					"id": "club",
 					"properties": "club",
 					"view": "club"
@@ -355,6 +375,11 @@
 				{
 					"title": "characters",
 					"id": "human"
+				},
+				{
+					"title": "npc questgivers",
+					"level": 1,
+					"id": "caelyra"
 				},
 				{
 					"title": "items",
@@ -532,7 +557,7 @@
 									"offsetY": -2.1,
 									"offsetZ": 8,
 									"cooldown": 3.4,
-									"duration": 0.3,
+									"duration": 0.2,
 									"endX": 2,
 									"equipSlot": "hand_left",
 									"baseAttack": 1
@@ -547,7 +572,7 @@
 									"offsetY": 2.1,
 									"offsetZ": 8,
 									"cooldown": 0.7,
-									"duration": 0.3,
+									"duration": 0.2,
 									"endX": 2,
 									"key": "attack_right_attack",
 									"equipSlot": "hand_right",
@@ -852,11 +877,11 @@
 					}
 				},
 				{
-					"id": "caelira",
+					"id": "caelyra",
 					"properties": {
 						"dynamics": true,
 						"model": {
-							"displayName": "Caelira",
+							"displayName": "Caelyra",
 							"id": "model"
 						},
 						"rigidBodyTorso": {
@@ -871,7 +896,8 @@
 						"behaviour": {
 							"type": "npcQuestGiver",
 							"params": {
-								"npcResponses": "caelira"
+								"npcResponses": "caelyra",
+								"npcResponseEntryChain": "caelyra_intro"
 							}
 						}
 					}
@@ -1110,7 +1136,7 @@
 				{
 					"title": "npc questgivers",
 					"level": 1,
-					"id": "caelira"
+					"id": "caelyra"
 				},
 				{
 					"title": "items",
@@ -1669,6 +1695,12 @@
 					"name": "npcResponses",
 					"opt": true,
 					"kind": null
+				},
+				{
+					"typeStr": "6:npcResponse@responses",
+					"name": "npcResponseEntryChain",
+					"opt": true,
+					"kind": null
 				}
 			]
 		},
@@ -2117,6 +2149,96 @@
 					}
 				},
 				{
+					"id": "woman",
+					"viewComps": {},
+					"type": [
+						1,
+						"human"
+					],
+					"animations": [
+						{
+							"key": "idle",
+							"animations": [
+								{
+									"key": "torso_stand"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "walk",
+							"animations": [
+								{
+									"key": "torso_walk"
+								}
+							],
+							"speedMult": 0.14,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_idle",
+							"animations": [
+								{
+									"key": "right_hand_idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_raised",
+							"animations": [
+								{
+									"key": "right_hand_raised"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_attack",
+							"animations": [
+								{
+									"key": "right_hand_attack"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_idle",
+							"animations": [
+								{
+									"key": "left_hand_idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_raised",
+							"animations": [
+								{
+									"key": "left_hand_raised"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_attack",
+							"animations": [
+								{
+									"key": "left_hand_attack"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						}
+					]
+				},
+				{
 					"id": "orc",
 					"type": [
 						1,
@@ -2307,6 +2429,115 @@
 					]
 				},
 				{
+					"id": "caelyra",
+					"viewComps": {
+						"paletteSwap": [
+							{
+								"from": 4205568,
+								"to": 10252615
+							},
+							{
+								"from": 16573600,
+								"to": 16044980
+							},
+							{
+								"from": 15776828,
+								"to": 41212
+							},
+							{
+								"from": 17408,
+								"to": 32196
+							}
+						]
+					},
+					"type": [
+						1,
+						"woman"
+					],
+					"animations": [
+						{
+							"key": "idle",
+							"animations": [
+								{
+									"key": "torso_stand"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "walk",
+							"animations": [
+								{
+									"key": "torso_walk"
+								}
+							],
+							"speedMult": 0.14,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_idle",
+							"animations": [
+								{
+									"key": "right_hand_idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_raised",
+							"animations": [
+								{
+									"key": "right_hand_raised"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_attack",
+							"animations": [
+								{
+									"key": "right_hand_attack"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_idle",
+							"animations": [
+								{
+									"key": "left_hand_idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_raised",
+							"animations": [
+								{
+									"key": "left_hand_raised"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_attack",
+							"animations": [
+								{
+									"key": "left_hand_attack"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						}
+					]
+				},
+				{
 					"id": "wall_torch",
 					"type": [
 						1,
@@ -2441,6 +2672,10 @@
 					"id": "human"
 				},
 				{
+					"title": "npc questgivers",
+					"id": "caelyra"
+				},
+				{
 					"title": "structures",
 					"id": "wall_torch"
 				},
@@ -2468,6 +2703,12 @@
 				{
 					"typeStr": "17",
 					"name": "stencil",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "8",
+					"name": "paletteSwap",
 					"opt": true,
 					"kind": null
 				}
@@ -2506,6 +2747,26 @@
 			]
 		},
 		{
+			"name": "entityView@viewComps@paletteSwap",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "11",
+					"name": "from",
+					"kind": null
+				},
+				{
+					"typeStr": "11",
+					"name": "to",
+					"kind": null
+				}
+			]
+		},
+		{
 			"name": "entityComposed",
 			"columns": [
 				{
@@ -2524,6 +2785,10 @@
 				{
 					"id": "human",
 					"file": "voxel/characters/human/human.enco"
+				},
+				{
+					"id": "woman",
+					"file": "voxel/characters/woman/woman.enco"
 				},
 				{
 					"id": "orc",
@@ -3232,13 +3497,13 @@
 					"isOpen": true
 				},
 				{
-					"id": "castle_inala_hall",
+					"id": "castle_caelyra_hall",
 					"instancing": 2,
 					"isOpen": false,
 					"chunkSize": 55,
 					"level": [
 						0,
-						"castle_inala_hall"
+						"castle_caelyra_hall"
 					]
 				}
 			],
@@ -3276,8 +3541,8 @@
 					"file": "levels/meadow.prefab"
 				},
 				{
-					"id": "castle_inala_hall",
-					"file": "levels/castle_caelira_hall.prefab"
+					"id": "castle_caelyra_hall",
+					"file": "levels/castle_caelyra_hall.prefab"
 				}
 			],
 			"separators": [],
@@ -3364,10 +3629,10 @@
 			],
 			"lines": [
 				{
-					"id": "caelira",
+					"id": "caelyra",
 					"responses": [
 						{
-							"chainId": "intro",
+							"chainId": "caelyra_intro",
 							"trigger": [
 								{
 									"type": [
@@ -3379,7 +3644,7 @@
 								{
 									"type": [
 										0,
-										"caelira_intro_greeting"
+										"caelyra_intro_greeting"
 									]
 								}
 							],
@@ -3399,12 +3664,17 @@
 											]
 										}
 									],
-									"nextChain": "intro"
+									"nextChain": "caelyra_intro"
 								}
 							]
 						},
 						{
 							"chainId": "coward",
+							"trigger": [],
+							"actions": []
+						},
+						{
+							"chainId": "caelyra_accept_witch_visit",
 							"trigger": [],
 							"actions": []
 						}
@@ -3424,9 +3694,7 @@
 			"columns": [
 				{
 					"typeStr": "0",
-					"name": "chainId",
-					"kind": null,
-					"scope": 1
+					"name": "chainId"
 				},
 				{
 					"typeStr": "8",
@@ -3676,14 +3944,14 @@
 					"text": "You attempt to command, yet in a formless state, your actions vanish into nothingness, unseen and unfelt."
 				},
 				{
-					"id": "caelira_intro_greeting",
-					"text": "Welcome, traveler. I am Caelira, entrusted with gathering those who would stand against our foes. The tale of your escape from the orcish prison proves your courage beyond doubt. Will you lend your strength to safeguard these walls and honor the valor that guided you here?"
+					"id": "caelyra_intro_greeting",
+					"text": "Welcome, traveler. I am Caelyra, entrusted with gathering those who would stand against our foes. The tale of your escape from the orcish prison proves your courage beyond doubt. Will you lend your strength to safeguard these walls and honor the valor that guided you here?"
 				}
 			],
 			"separators": [
 				{
 					"title": "npc responses",
-					"id": "caelira_intro_greeting"
+					"id": "caelyra_intro_greeting"
 				}
 			],
 			"props": {}

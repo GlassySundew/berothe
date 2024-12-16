@@ -55,7 +55,7 @@ class Location {
 	final entitySubscriptions : Map<OverworldEntity, ISubscription> = [];
 
 	var disposeInvalidate = false;
-	var anchorEntitiesPresent : Int = 0;
+	var anchorEntitiesPresent : Int = 1;
 	var accumulatedTime = 0.0;
 
 	public function new(
@@ -120,8 +120,6 @@ class Location {
 		entitySubscriptions[entity] = Subscription.create(() -> sub.cancel() );
 		sub = entity.disposed.then( _ -> {
 			removeEntity( entity );
-			trace( entity + " has been removed from location" );
-			// entity.removeChunk();
 		} );
 
 		if ( entity.desc.getBodyDescription().isAnchor ) anchorEntitiesPresent++;
@@ -163,19 +161,22 @@ class Location {
 
 		if ( exitPoint == null ) {
 			trace(
-				"exit point was not found, from: "
+				"WARNING: exit point from: "
 				+ locationDesc.id
-				+ " to: " + targetLocationDesc.id
+				+ " to: " + targetLocationDesc.id + " was not found"
 			);
 			return;
 		}
 
+		#if server
 		entity.transform.onTakeControl.dispatch();
+
 		entity.transform.setVelocity( 0, 0, 0 );
 		entity.transform.setPosition( exitPoint.x, exitPoint.y, exitPoint.z );
 		entity.transform.onReleaseControl.dispatch();
 
 		targetLocation.addEntity( entity );
+		#end
 	}
 
 	public function hasEntity( entity : OverworldEntity ) : Bool {
@@ -210,6 +211,8 @@ class Location {
 	public function loadAuthoritative() {
 		// TODO async
 		loadData();
+
+		trace( "loading level" );
 
 		onNoMoreAnchorEntitiesLeft.add( invalidateDispose );
 
@@ -288,7 +291,6 @@ class Location {
 
 	function createAndAttachPresentEntities() {
 		var entityVOs = locationDataProvider.getPresentEntities();
-		trace( "parsing present entities " );
 		for ( entityVO in entityVOs ) {
 			var entity = entityFactory.createEntity( entityVO.entityDesc );
 			entity.transform.setPosition(
