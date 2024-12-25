@@ -20,8 +20,10 @@ class EntityAIComponent extends EntityComponent {
 	}
 
 	function onAttachedToLocation( location : Location ) {
+		#if server
 		behaviour = BehaviourFactory.fromDesc( desc );
 		Assert.notNull( behaviour );
 		behaviour.attachToEntity( entity );
+		#end
 	}
 }

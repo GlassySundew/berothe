@@ -21,7 +21,7 @@ class ShadowedTextComp extends Flow implements h2d.domkit.Object {
 	inline function get_color() return textLabel.color;
 	inline function set_color( v : Vector4 ) return textLabel.color = v;
 
-	final textLabel : ShadowedText;
+	public final textLabel : ShadowedText;
 
 	public function new( ?text : String = "", ?font : Font, ?parent : h2d.Object ) {
 		super( parent );

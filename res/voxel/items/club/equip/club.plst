@@ -51,7 +51,6 @@
 		{
 			"type": "fbfAnimationNode",
 			"name": "attack_prime_raised",
-			"x": -1,
 			"children": [
 				{
 					"type": "model",

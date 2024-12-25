@@ -50,6 +50,7 @@
 				{
 					"type": "object",
 					"name": "models",
+					"locked": true,
 					"x": 0.5,
 					"children": [
 						{
@@ -143,6 +144,19 @@
 							"scaleX": 177.88,
 							"scaleY": 288.12,
 							"scaleZ": 38
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 43,
+							"y": 66,
+							"z": 1.5,
+							"scaleX": 28,
+							"scaleY": 225
 						},
 						{
 							"type": "customBox",
@@ -347,8 +361,8 @@
 				"entity": "caelyra",
 				"$cdbtype": "locationEntityDF"
 			},
-			"x": 26.8,
-			"y": -5.8,
+			"x": 20.8,
+			"y": 80.2,
 			"z": -0.1
 		}
 	]

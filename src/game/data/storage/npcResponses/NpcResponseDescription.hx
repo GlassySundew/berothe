@@ -1,17 +1,20 @@
 package game.data.storage.npcResponses;
 
+import game.data.storage.npcResponses.NpcResponseType;
 import game.data.storage.npcResponses.NpcActivationTriggerType;
 
 typedef ChainAdvanceTrigger = {
 	var requirements : Array<NpcActivationTriggerType>;
+	var completionActions : Array<NpcResponseType>;
 	var nextChainId : String;
 }
 
 typedef NpcResponseChainElement = {
 	var chainId : String;
-	var activationTriggers : Array<NpcActivationTriggerType>;
-	var actions : Array<NpcResponseType>;
-	var chainAdvanceTriggers : Array<ChainAdvanceTrigger>;
+	var refocusActions : Array<{triggers : Array<NpcActivationTriggerType>, actions : Array<NpcResponseType> }>;
+	var chainAdvancements : Array<ChainAdvanceTrigger>;
+	var chat : Array<{triggers : Array<NpcActivationTriggerType>, say : String }>;
+	var chatRestActions : Array<NpcResponseType>;
 }
 
 class NpcResponseDescription extends DescriptionBase {
@@ -19,28 +22,52 @@ class NpcResponseDescription extends DescriptionBase {
 	public static function fromCdb( entry : Data.NpcResponse ) : NpcResponseDescription {
 		var chains : Array<NpcResponseChainElement> = [
 			for ( response in entry.responses ) {
-				var actions = [for ( action in response.actions ) {
-					NpcResponseType.fromCdb( action.type );
+				var refocusActions = [for ( refocusAction in response.refocusActions ) {
+					triggers : [for ( trigger in refocusAction.trigger ) {
+						NpcActivationTriggerType.fromCdb( trigger.type );
+					}],
+					actions : [for ( action in refocusAction.actions ) {
+						NpcResponseType.fromCdb( action.type );
+					}]
 				}];
-				var activationTriggers = [for ( trigger in response.trigger ) {
-					NpcActivationTriggerType.fromCdb( trigger.type );
-				}];
-				var chainAdvanceTriggers = response.chainAdvanceTriggers == null ? [] : [
-					for ( chainAdvanceTrigger in response.chainAdvanceTriggers ) {
+				var chainAdvancements = response.chainAdvancements == null ? [] : [
+					for ( chainAdvancement in response.chainAdvancements ) {
 						{
 							requirements : [
-								for ( requirement in chainAdvanceTrigger.requirements ) {
+								for ( requirement in chainAdvancement.requirements ) {
 									NpcActivationTriggerType.fromCdb( requirement.type );
 								}],
-							nextChainId : chainAdvanceTrigger.nextChainId.toString()
+							completionActions : chainAdvancement.completionActions == null ? [] : [
+								for ( action in chainAdvancement.completionActions ) {
+									NpcResponseType.fromCdb( action.type );
+								}
+							],
+							nextChainId : chainAdvancement.nextChainId.toString()
 						}
 					}];
+				var chat = response.chat == null ? [] : [
+					for ( chatEntry in response.chat ) {
+						var triggers = [for ( triggerElem in chatEntry.trigger ) {
+							NpcActivationTriggerType.fromCdb( triggerElem.type );
+						}];
+						{
+							triggers : triggers,
+							say : chatEntry.say.id.toString()
+						}
+					}
+				];
+				var chatRestActions = response.chatRestActions == null ? [] : [
+					for ( chatRestAction in response.chatRestActions ) {
+						NpcResponseType.fromCdb( chatRestAction.type );
+					}
+				];
 
 				{
 					chainId : response.chainId.toString(),
-					activationTriggers : activationTriggers,
-					actions : actions,
-					chainAdvanceTriggers : chainAdvanceTriggers
+					refocusActions : refocusActions,
+					chainAdvancements : chainAdvancements,
+					chat : chat,
+					chatRestActions : chatRestActions
 				}
 			}
 		];

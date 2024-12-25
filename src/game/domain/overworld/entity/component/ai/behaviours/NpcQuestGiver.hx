@@ -1,19 +1,23 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
-import util.GameUtil;
-import game.domain.overworld.entity.component.model.EntityStats;
-import rx.disposables.ISubscription;
+import game.net.server.GameServer;
+import game.data.storage.npcResponses.NpcResponseType;
+import game.data.storage.npcResponses.NpcActivationTriggerType;
 import rx.disposables.Composite;
-import game.domain.overworld.entity.component.model.EntityModelComponent;
+import rx.disposables.ISubscription;
 import util.Assert;
+import game.client.en.comp.view.EntityMessageVO;
 import game.data.storage.DataStorage;
 import game.data.storage.npcResponses.NpcResponseDescription;
+import game.domain.overworld.entity.component.model.EntityModelComponent;
 
 class NpcQuestGiver extends EntityBehaviourBase {
 
-	static final INTERACTION_DISTANCE = 35;
+	static final FOCUS_TIMEOUT_DELAY_ID = "questgiver_delay";
+	static final FOCUS_TIMEOUT_SECONDS = 13;
+	static final INTERACTION_DISTANCE = 65;
 
-	var currentFocus : OverworldEntity;
+	var currentFocus : Null<OverworldEntity>;
 
 	final responses : NpcResponseDescription;
 
@@ -43,7 +47,7 @@ class NpcQuestGiver extends EntityBehaviourBase {
 
 		susbcribtion.add( entity.location.getValue().onEntityAdded.add( onEntityAdded ) );
 		susbcribtion.add( entity.location.getValue().onEntityRemoved.add(
-			someEntity -> entitySubscriptions[someEntity].unsubscribe()
+			someEntity -> entitySubscriptions[someEntity]?.unsubscribe()
 		) );
 
 		subscribeSurroundingChunksForEntityMovement( onSomeEntityMoved );
@@ -53,14 +57,21 @@ class NpcQuestGiver extends EntityBehaviourBase {
 		if ( someEntity == entity ) return;
 
 		var model = someEntity.components.get( EntityModelComponent );
+		if ( model == null ) return;
 		entitySubscriptions[someEntity] = model.statusMessages.onChanged.add( onSomeEntitySaidSomething.bind( someEntity ) );
 	}
 
 	inline function onSomeEntityMoved( someEntity : OverworldEntity ) {
 		if ( someEntity == entity ) return;
+
+		var isEligible = checkEligibleForFocus( someEntity );
+		if ( !isEligible ) return;
+
 		var currentChain = getCurrentChain( someEntity );
-		if ( currentChain != null
-			&& currentChain.actions.contains( TURN_AWAY_FROM_PLAYER ) //
+		if (
+			someEntity == currentFocus
+			&& currentChain != null
+			&& doesChainContainTurningAway( someEntity, null, currentChain ) //
 		) {
 			entity.transform.turnAwayFrom( someEntity );
 			return;
@@ -70,21 +81,58 @@ class NpcQuestGiver extends EntityBehaviourBase {
 			entity.transform.turnTowardsTo( someEntity );
 		}
 
+		if ( currentFocus == someEntity ) return;
+		triggerOnApproach( someEntity );
+		checkChainProgressions( someEntity );
+	}
+
+	inline function onSomeEntitySaidSomething( someEntity : OverworldEntity, i, msg : EntityMessageVO ) {
+		if ( msg == null ) return;
+
 		var isEligible = checkEligibleForFocus( someEntity );
 		if ( !isEligible ) return;
 
-		triggerOnApproach( someEntity );
-		currentFocus = someEntity;
+		triggerOnSpeech( someEntity, msg.message );
+		focusOnEntity( someEntity );
+		checkChainProgressions( someEntity );
 	}
 
-	inline function onSomeEntitySaidSomething( someEntity : OverworldEntity, i, msg ) {
-		if ( msg == null ) return;
+	inline function focusOnEntity( someEntity : OverworldEntity ) {
+		entity.delayer.cancelById( FOCUS_TIMEOUT_DELAY_ID );
+		entity.delayer.addS(
+			FOCUS_TIMEOUT_DELAY_ID,
+			() -> currentFocus = null,
+			FOCUS_TIMEOUT_SECONDS
+		);
 
-		checkEligibleForFocus( someEntity );
+		entity.transform.turnTowardsTo( someEntity );
+		currentFocus = someEntity;
+
+		onSomeEntityMoved( someEntity );
+	}
+
+	inline function doesChainContainTurningAway(
+		someEntity : OverworldEntity,
+		textSaid : Null<String>,
+		currentChain : NpcResponseChainElement
+	) {
+		var result = false;
+		for ( refocusAction in currentChain.refocusActions ) {
+			if ( //
+				refocusAction.actions.contains( TURN_AWAY_FROM_PLAYER )
+				&& areRequirementsFulfilled( someEntity, textSaid, refocusAction.triggers ) //
+			) {
+				result = true;
+				break;
+			}
+		}
+		return result;
 	}
 
 	inline function checkEligibleForFocus( someEntity : OverworldEntity ) : Bool {
+		if ( currentFocus == someEntity ) return true;
 		if ( currentFocus != null || someEntity == entity ) return false;
+		if ( !someEntity.components.has( EntityModelComponent ) ) return false;
 		if ( entity.transform.distToEntity2D( someEntity ) > INTERACTION_DISTANCE ) return false;
 
 		// todo loading from db
@@ -106,23 +154,122 @@ class NpcQuestGiver extends EntityBehaviourBase {
 	inline function triggerOnApproach( someEntity : OverworldEntity ) {
 		var currentChain = getCurrentChain( someEntity );
 		Assert.notNull( currentChain );
-		if ( currentChain.activationTriggers.contains( TRIGGER_ON_APPROACH ) ) {
-			performChainAction( currentChain );
+		for ( action in currentChain.refocusActions ) {
+			if ( action.triggers.contains( TRIGGER_ON_APPROACH ) ) {
+				performActions( someEntity, action.actions );
+				focusOnEntity( someEntity );
+				break;
+			}
 		}
 	}
 
-	inline function triggerOnSpeech( someEntity : OverworldEntity, text : String ) {}
+	function triggerOnSpeech( someEntity : OverworldEntity, text : String ) {
+		var currentChain = getCurrentChain( someEntity );
+		Assert.notNull( currentChain );
 
-	inline function performChainAction( chain : NpcResponseChainElement ) {
-		for ( action in chain.actions ) {
+		if ( someEntity == currentFocus ) {
+			for ( chainAdvance in currentChain.chainAdvancements ) {
+				if ( areRequirementsFulfilled( someEntity, text, chainAdvance.requirements ) ) {
+					progressChainTo( someEntity, chainAdvance, chainAdvance.nextChainId );
+					trace( "triggered speech, advancing to " + chainAdvance );
+					return;
+				}
+			}
+			performActions( someEntity, currentChain.chatRestActions );
+		} else {
+			// refocusing
+			for ( refocusAction in currentChain.refocusActions ) {
+				if ( areRequirementsFulfilled( someEntity, text, refocusAction.triggers ) ) {
+					performActions( someEntity, refocusAction.actions );
+					return;
+				}
+			}
+
+			for ( chatEntry in currentChain.chat ) {
+				if ( areRequirementsFulfilled( someEntity, text, chatEntry.triggers ) ) {
+					model.sayText(
+						Data.locale.resolve( chatEntry.say ).text
+					);
+					return;
+				}
+			}
+
+			performActions( someEntity, currentChain.chatRestActions );
+		}
+	}
+
+	/**
+		checks chain progessions without requirements
+	**/
+	inline function checkChainProgressions( someEntity : OverworldEntity ) {
+		var currentChain = getCurrentChain( someEntity );
+		for ( chainProgress in currentChain.chainAdvancements )
+			if ( areRequirementsFulfilled( someEntity, chainProgress.requirements ) ) {
+				progressChainTo( someEntity, chainProgress, chainProgress.nextChainId );
+				break;
+			}
+	}
+
+	inline function progressChainTo(
+		someEntity : OverworldEntity,
+		trigger : ChainAdvanceTrigger,
+		chainId : String
+	) {
+		performActions( someEntity, trigger.completionActions );
+		interactorsMemory[someEntity.id] = chainId;
+		onSomeEntityMoved( someEntity );
+	}
+
+	#if !debug inline #end
+	function performActions(
+		someEntity : OverworldEntity,
+		actions : Array<NpcResponseType>
+	) {
+		for ( action in actions ) {
 			switch action {
 				case SAY( localeId ):
+					model.purgeStatusBar();
 					model.sayText(
 						Data.locale.resolve( localeId ).text
 					);
 				case GIVE_QUEST( questId ):
 				case TURN_AWAY_FROM_PLAYER:
+				case GENERATE_ITEM( itemDescId, amount ):
+					var item = GameServer.inst.core.itemFactory.createItem(
+						DataStorage.inst.itemStorage.getById( itemDescId )
+					);
+					item.amount.val = amount;
+					model.inventory.dropItemInFront( item );
 			}
 		}
+	}
+
+	inline function areRequirementsFulfilled(
+		someEntity : OverworldEntity,
+		?textSaid : Null<String>,
+		requirements : Array<NpcActivationTriggerType>
+	) {
+		var result = true;
+		for ( req in requirements ) {
+			switch req {
+				case TRIGGER_ON_APPROACH: result = result && true;
+				case TEXT_SAID( awaitSpeechId ):
+					if ( textSaid == null ) {
+						result = result && false;
+						continue;
+					}
+					var speechAwaitEntry = Data.npcAwaitSpeech.resolve( awaitSpeechId );
+
+					var isSpeechFulfilled = false;
+					for ( speechAwait in speechAwaitEntry.samples ) {
+						if ( StringTools.contains( textSaid, speechAwait.text ) ) {
+							isSpeechFulfilled = true;
+						}
+					}
+					result = result && isSpeechFulfilled;
+				case QUEST_COMPLETED( questId ):
+			}
+		}
+		return result;
 	}
 }

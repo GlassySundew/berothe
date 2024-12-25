@@ -68,18 +68,21 @@ class OimoRigidBody implements IRigidBody {
 			( oldVal, value ) -> {
 				rigidBody._transform._positionX = value;
 				wakeUp();
+				updateTransform();
 			}
 		);
 		y.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionY = value;
 				wakeUp();
+				updateTransform();
 			}
 		);
 		z.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionZ = value;
 				wakeUp();
+				updateTransform();
 			}
 		);
 
@@ -97,16 +100,19 @@ class OimoRigidBody implements IRigidBody {
 			( oldVal, value ) -> {
 				rigidBody._velX = value;
 				wakeUp();
+				updateTransform();
 			} );
 		velY.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._velY = value;
 				wakeUp();
+				updateTransform();
 			} );
 		velZ.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._velZ = value;
 				wakeUp();
+				updateTransform();
 			} );
 
 		rigidBody._sleeping.subscribeProp( isSleeping );
@@ -186,6 +192,7 @@ class OimoRigidBody implements IRigidBody {
 			rigidBody.setRotation(
 				new Mat3().fromQuat( new oimo.common.Quat( quat.x, quat.y, quat.z, quat.w ) )
 			);
+			updateTransform();
 		}
 
 		x.val = rigidBody._transform._positionX;

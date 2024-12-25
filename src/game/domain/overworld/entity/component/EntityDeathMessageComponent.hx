@@ -10,7 +10,7 @@ class EntityDeathMessageComponent extends EntityComponent {
 		var msg = predecessorModelComp.statusMessages.at( -1 );
 
 		var modelComp = this.entity.components.get( EntityModelComponent );
-		modelComp.provideMsgVO( msg );
+		modelComp.provideMsgVO( msg, 3 );
 		for ( predFaction in predecessorModelComp.factions.iterator() ) {
 			modelComp.factions.push( predFaction );
 		}

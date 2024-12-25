@@ -14,8 +14,6 @@ class ShadowedText extends h2d.Text {
 
 		smooth = false;
 		addTextOutlineTo( this );
-
-		y++; // because top outlined pixel is not drawn
 	}
 
 	public static function addTextOutlineTo( drawable : Drawable ) {

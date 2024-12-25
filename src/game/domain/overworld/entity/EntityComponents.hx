@@ -16,7 +16,6 @@ class EntityComponents {
 	public final componentStream : Observable<EntityComponent>;
 	final entity : OverworldEntity;
 
-
 	public function new( entity : OverworldEntity ) {
 		this.entity = entity;
 
@@ -40,8 +39,14 @@ class EntityComponents {
 		components[component.classType] = component;
 	}
 
+	#if !debug inline #end
 	public function get<T : EntityComponent>( compClass : Class<T> ) : T {
 		return cast components[cast compClass];
+	}
+
+	#if !debug inline #end
+	public function has<T : EntityComponent>( compClass : Class<T> ) {
+		return components[cast compClass] != null;
 	}
 
 	public function map( func : ( comp : EntityComponent ) -> Void ) {
@@ -58,7 +63,7 @@ class EntityComponents {
 	}
 
 	#if !debug inline #end
-	public function onAppearFut<T:EntityComponent>( cl : Class<T> ) : Future<T> {
+	public function onAppearFut<T : EntityComponent>( cl : Class<T> ) : Future<T> {
 		var future = new Future<T>();
 		onAppear( cl, ( cl, val ) -> future.resolve( val ) );
 		return future;

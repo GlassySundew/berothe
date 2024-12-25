@@ -13,7 +13,7 @@ import game.domain.overworld.item.model.ItemPickupAttemptResult;
 import game.domain.overworld.item.Item;
 import game.domain.overworld.item.model.ItemSlot;
 
-class EntityInventory extends EntityItemHolderBase {
+class EntityInventory extends EntityItemStorageBase {
 
 	public final equipSlots : Map<EntityEquipmentSlotType, EquipItemSlot> = [];
 

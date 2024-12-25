@@ -50,7 +50,6 @@ class Item {
 	public function dispose() {
 		disposed.resolve( true );
 		setContainer( null );
-		trace( "destroyoing item: " + this );
 	}
 
 	public inline function canFitMoreItemsIn() : Bool {

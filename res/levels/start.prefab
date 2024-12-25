@@ -1443,8 +1443,8 @@
 				"spawnedEntity": "player",
 				"$cdbtype": "entitySpawnPointDF"
 			},
-			"x": -127.99,
-			"y": 68.95,
+			"x": -49.5,
+			"y": -118.43,
 			"rotationZ": -45
 		},
 		{
@@ -1491,6 +1491,18 @@
 			},
 			"x": -5.77,
 			"y": -71.68,
+			"z": 1.89
+		},
+		{
+			"type": "reference",
+			"name": "club",
+			"source": "voxel/items/club/entity/club.enco",
+			"props": {
+				"entity": "club",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -5.77,
+			"y": -63.68,
 			"z": 1.89
 		},
 		{

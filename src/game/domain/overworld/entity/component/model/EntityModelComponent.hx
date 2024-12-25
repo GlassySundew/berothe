@@ -18,6 +18,18 @@ class EntityModelComponent extends EntityComponent {
 	public static final REGEN_DELAYER_ID = "regen";
 	public static final DAMAGED_REGEN_DELAY_DELAYER_ID = "regen";
 
+	static final DEFAULT_READING_SPEED_PM : Int = 1050;
+
+	public static inline function calculateReadingTime(
+		textLength : Int,
+		?speed : Int = null
+	) {
+		var readingSpeed = speed ?? DEFAULT_READING_SPEED_PM;
+		var minutes = textLength / readingSpeed;
+		var seconds = minutes * 60;
+		return Math.max( seconds, 4 );
+	}
+
 	public final hp : MutableProperty<Int> = new MutableProperty( 1 );
 	public final isSleeping : MutableProperty<Null<Bool>> = new MutableProperty();
 	public final onDeathSignal : Future<Bool> = new Future();
@@ -92,9 +104,14 @@ class EntityModelComponent extends EntityComponent {
 		return false;
 	}
 
-	public function provideMsgVO( msgVO : EntityMessageVO, timeoutS = 5 ) {
+	public function purgeStatusBar() {
+		statusMessages.clear();
+	}
+	
+	public function provideMsgVO( msgVO : EntityMessageVO, timeoutS = null ) {
 		statusMessages.push( msgVO );
-		entity.delayer.addS(() -> statusMessages.remove( msgVO ), timeoutS );
+		var readingTime = timeoutS ?? calculateReadingTime( msgVO.message.length );
+		entity.delayer.addS(() -> statusMessages.remove( msgVO ), readingTime );
 	}
 
 	public function sayText( text : String ) {
@@ -115,7 +132,7 @@ class EntityModelComponent extends EntityComponent {
 		if ( entity.disposed.isTriggered ) return;
 
 		isSleeping.val = false;
-		
+
 		onDamaged.dispatch( damage, type );
 
 		entity.delayer.cancelById( DAMAGED_REGEN_DELAY_DELAYER_ID );

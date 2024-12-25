@@ -37,7 +37,9 @@ class Assets {
 
 	public static function init() {
 
-		fontPixel16 = hxd.Res.fonts.Haversham_fnt.toSdfFont( 16, Alpha, 0.5, 0 );
+		fontPixel16 = hxd.Res.fonts.lookout.toSdfFont( 16, Alpha, 0.5, 0.0 );
+		// fontPixel16 = hxd.Res.fonts.Haversham_fnt.toFont();
+		// fontPixel16.resizeTo( 16 );
 
 		fontPixel32 = fontPixel16.clone();
 		fontPixel32.resizeTo( 32 );

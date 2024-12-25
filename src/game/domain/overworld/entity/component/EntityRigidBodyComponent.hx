@@ -1,25 +1,18 @@
 package game.domain.overworld.entity.component;
 
+import game.physics.oimo.OimoRigidBody;
+import game.domain.overworld.location.physics.IRigidBody;
 import oimo.dynamics.rigidbody.MassData;
-import be.Constant.Ints;
-import rx.disposables.ISubscription;
-import game.data.location.objects.LocationCollisionObjectVO;
-import rx.disposables.Composite;
-import dn.M;
-import dn.phys.Velocity;
-import game.physics.oimo.EntityRigidBodyProps;
-import oimo.common.Vec3;
-import game.physics.oimo.ContactCallbackWrapper;
-import game.physics.oimo.RayCastCallback;
 import util.Const;
-import game.domain.overworld.location.Location;
-import game.domain.overworld.location.physics.IRigidBodyShape;
-import game.domain.overworld.location.physics.RayCastHit;
+import game.data.location.objects.LocationCollisionObjectVO;
 import game.data.storage.DataStorage;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
+import game.domain.overworld.location.physics.IRigidBodyShape;
+import game.domain.overworld.location.physics.RayCastHit;
 import game.physics.RigidBodyAbstractFactory;
 import game.physics.ShapeAbstractFactory;
-import game.physics.oimo.OimoRigidBody;
+import game.physics.oimo.EntityRigidBodyProps;
+import game.physics.oimo.RayCastCallback;
 
 class EntityRigidBodyComponent extends EntityRigidBodyComponentBase {
 

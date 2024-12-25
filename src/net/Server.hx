@@ -95,8 +95,7 @@ class Server extends Process {
 
 	public function destroyClient( c : SocketClient ) {
 		var clientController = cast( c.ownerObject, ClientController );
-		if ( clientController == null ) return;
-		if ( clientController.__host == null ) return;
+		if ( clientController?.__host == null ) return;
 
 		// clientController.unregister( host );
 		clientController.__host = null;

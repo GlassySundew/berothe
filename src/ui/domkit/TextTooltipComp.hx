@@ -33,8 +33,6 @@ class TextTooltipComp extends h2d.Flow implements h2d.domkit.Object {
 	inline function get_color() return shadowed_text.color;
 	inline function set_color( s ) return shadowed_text.color = s;
 
-	
-	
 	public var cornersRounder : CornersRounder;
 
 	public function new( text : String = "", ?font : Font, ?style : Style, ?parent : Object ) {

@@ -96,7 +96,7 @@ class EntityStatusBarContainer {
 			case DAMAGE_TAKEN:
 				isFriendly ? DataStorage.inst.rule.friendlyDamageTakenColor : DataStorage.inst.rule.unfriendlyDamageTakenColor;
 			case SPEECH:
-				DataStorage.inst.rule.friendlyStatusBarColor;
+				DataStorage.inst.rule.speechColor;
 		}
 		dispMes.tooltipClip.color = Col.fromInt( colorCode ).toShaderVec4().toVector4();
 	}
@@ -105,6 +105,7 @@ class EntityStatusBarContainer {
 		var textComp = new TextTooltipComp( mesVO.message );
 		textComp.maxWidth = 350;
 		content.addChild( textComp );
+		textComp.shadowed_text.textLabel.textAlign = MultilineCenter;
 		messages[idx] = {
 			tooltipClip : textComp,
 			messageVO : mesVO

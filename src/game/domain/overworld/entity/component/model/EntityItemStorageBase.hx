@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.net.server.GameServer;
 import game.domain.overworld.item.model.EntityOfItemComponent;
 import game.domain.overworld.item.model.ItemSlot;
 import game.data.storage.item.ItemDescription;
@@ -7,7 +8,9 @@ import game.domain.overworld.item.model.ItemPickupAttemptResult;
 import game.domain.overworld.item.Item;
 import game.domain.overworld.item.model.ItemSlot;
 
-abstract class EntityItemHolderBase {
+abstract class EntityItemStorageBase {
+
+	public static final FRONT_DROPPING_DISTANCE = 5;
 
 	/**
 		слоты сервиса
@@ -79,35 +82,78 @@ abstract class EntityItemHolderBase {
 	}
 
 	public function dropInventory() {
-		var torsoDesc = model.entity.desc.getBodyDescription().rigidBodyTorsoDesc;
-		var sizeZ = Std.int( torsoDesc.sizeZ + torsoDesc.offsetZ / 2 );
-		var sizeHLFY = Std.int( torsoDesc.sizeY / 2 );
-		var sizeHLFX = Std.int( torsoDesc.sizeX / 2 );
-
 		for ( slot in slots ) {
 			var item = slot.itemProp.getValue();
 			if ( item == null ) continue;
+			dropItemAround( item );
+			slot.removeItem();
+		}
+	}
 
-			inline function createEntityForItem( item : Item ) {
-				var entityItem = GameCore.inst.entityFactory.createEntity(
-					item.desc.getOverworldReprEntityDesc()
-				);
+	/**
+		usually used when dropping manually
+	**/
+	public function dropItemInFront( item : Item ) {
+		var halfSizes = getHalfSizes();
 
-				entityItem.components.get( EntityOfItemComponent ).provideItem( item );
-				entityItem.transform.setPosition(
-					model.entity.transform.x.val + Random.int(-sizeHLFX, sizeHLFX ),
-					model.entity.transform.y.val + Random.int(-sizeHLFY, sizeHLFY ),
-					model.entity.transform.z.val + Random.int( 0, sizeZ )
-				);
-				model.entity.location.getValue().addEntity( entityItem );
+		inline function setPosition( entity : OverworldEntity ) {
+			entity.transform.setPosition(
+				model.entity.transform.x.val + FRONT_DROPPING_DISTANCE * Math.cos( model.entity.transform.rotationZ ),
+				model.entity.transform.y.val + FRONT_DROPPING_DISTANCE * Math.sin( model.entity.transform.rotationZ ),
+				model.entity.transform.z.val + halfSizes.sizeHalfZ
+			);
+		}
+		var entityItem = createEntityForItem( item );
+		setPosition( entityItem );
+	}
+
+	/**
+		usually used when dropping upon death, or gold dropping
+	**/
+	public function dropItemAround( item : Item ) {
+		var halfSizes = getHalfSizes();
+
+		inline function setPosition( entity : OverworldEntity ) {
+			entity.transform.setPosition(
+				model.entity.transform.x.val + Random.int(-halfSizes.sizeHalfX, halfSizes.sizeHalfX ),
+				model.entity.transform.y.val + Random.int(-halfSizes.sizeHalfY, halfSizes.sizeHalfY ),
+				model.entity.transform.z.val + Random.int( 0, halfSizes.sizeHalfZ )
+			);
+		}
+
+		var entity = null;
+		if ( item.amount.val > 1 && item.desc.isSplittable ) {
+			for ( splittedItem in GameCore.inst.itemFactory.split( item ) ) {
+				entity = createEntityForItem( splittedItem );
+				setPosition( entity );
 			}
-			if ( item.amount.val > 1 && item.desc.isSplittable ) {
-				for ( splittedItem in GameCore.inst.itemFactory.split( item ) ) {
-					createEntityForItem( splittedItem );
-				}
-			} else {
-				createEntityForItem( item );
-			}
+		} else {
+			entity = createEntityForItem( item );
+			setPosition( entity );
+		}
+	}
+
+	inline function createEntityForItem( item : Item ) {
+		var entityItem = GameCore.inst.entityFactory.createEntity(
+			item.desc.getOverworldReprEntityDesc()
+		);
+
+		entityItem.components.get( EntityOfItemComponent ).provideItem( item );
+		model.entity.location.getValue().addEntity( entityItem );
+
+		return entityItem;
+	}
+
+	inline function getHalfSizes() {
+		var torsoDesc = model.entity.desc.getBodyDescription().rigidBodyTorsoDesc;
+		var sizeHalfZ = Std.int( torsoDesc.sizeZ + torsoDesc.offsetZ ) >> 1;
+		var sizeHalfY = Std.int( torsoDesc.sizeY ) >> 1;
+		var sizeHalfX = Std.int( torsoDesc.sizeX ) >> 1;
+
+		return {
+			sizeHalfZ : sizeHalfZ,
+			sizeHalfY : sizeHalfY,
+			sizeHalfX : sizeHalfX,
 		}
 	}
 

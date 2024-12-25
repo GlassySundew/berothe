@@ -12,6 +12,7 @@ class RuleStorage {
 	public var unfriendlyDamageTakenColor( default, null ) : Int;
 	public var friendlyStatusBarColor( default, null ) : Int;
 	public var unfriendlyStatusBarColor( default, null ) : Int;
+	public var speechColor( default, null ) : Int;
 	public var deathMessageEntity( default, null ) : String;
 	public var unfriendlyPlayerFaction( default, null ) : String;
 	public var baseHpRegenPerSecond( default, null ) : Float;
