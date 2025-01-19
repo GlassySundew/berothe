@@ -33,7 +33,6 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 
 	public function dispose() {
 		world._rigidBodyList = null;
-		world = null;
 	}
 
 	public inline function update( dt : Float ) {

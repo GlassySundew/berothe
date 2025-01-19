@@ -1,5 +1,7 @@
 package game.domain.overworld.location;
 
+import game.net.client.GameClient;
+import game.domain.overworld.entity.component.EntityInteractableComponent;
 import hrt.prefab.Model;
 import game.client.en.comp.view.EntityViewComponent;
 import util.Assert;
@@ -58,6 +60,28 @@ class OverworldStaticObjectsFactory {
 				)
 			);
 		}
+
+		if ( objectDesc.isBatched ) {
+			entity.components.onAppear(
+				EntityViewComponent,
+				( _, viewComp ) -> {
+					viewComp.isBatched.val = true;
+				}
+			);
+		}
+
+		#if client
+		entity.components.onAppear(
+			EntityInteractableComponent,
+			( cl, comp ) -> {
+				comp.interactive.then(
+					( int ) -> int.onClick.add(
+						( e ) -> comp.useBy( GameClient.inst.controlledEntity.val.entity.result )
+					)
+				);
+			}
+		);
+		#end
 
 		return entity;
 	}

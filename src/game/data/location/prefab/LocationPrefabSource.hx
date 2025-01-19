@@ -89,13 +89,13 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 			case LOCATION_OBJ_CONTAINER_TYPE:
 				var entry : Data.LocationObjContainerTypeDFDef = instance.props;
 				switch entry.type {
-					case global:
+					case Global:
 						globalObjects = globalObjects.concat(
 							LocationObjectFactory.parseGlobalContainer( instance )
 						);
-					case entityCollisionTrigger:
+					case EntityCollisionTrigger:
 						triggers.push( LocationEntityTriggerVO.fromPrefabInstance( instance, entry ) );
-					case entityTransitionExit:
+					case EntityTransitionExit:
 						locationTransitionExits.push(
 							LocationLinkObjectVO.fromPrefabInstance( instance, entry )
 						);
@@ -104,7 +104,7 @@ class LocationPrefabSource implements ILocationObjectsDataProvider {
 			case LOCATION_ENTITY_PRESENT:
 				var entry : Data.LocationEntityDF = instance.props;
 				presentEntities.push(
-					LocationEntityVO.fromPrefabInstance( instance, entry )
+					LocationEntityVO.fromPrefabInstance( instance, entry.entity )
 				);
 			case e:
 				trace( "Prefab instance: " + instance + " " + " sheet id: " + cdbSheetId + "; is not suppported" );

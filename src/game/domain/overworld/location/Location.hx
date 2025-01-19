@@ -277,14 +277,6 @@ class Location {
 		for ( objectVO in objectsVOs ) {
 			if ( objectVO == null ) continue;
 			var entity = objectFactory.createByDesc( objectVO, isAuth );
-			if ( objectVO.isBatched ) {
-				entity.components.onAppear(
-					EntityViewComponent,
-					( _, viewComp ) -> {
-						viewComp.isBatched.val = true;
-					}
-				);
-			}
 			addGlobalEntity( entity );
 		}
 	}
@@ -327,6 +319,8 @@ class Location {
 	function addGlobalEntity( entity : OverworldEntity ) {
 		entity.setLocation( this );
 		globalEntities.push( entity );
+
+		
 	}
 
 	@:keep

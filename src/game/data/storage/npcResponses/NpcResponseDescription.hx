@@ -13,8 +13,9 @@ typedef NpcResponseChainElement = {
 	var chainId : String;
 	var refocusActions : Array<{triggers : Array<NpcActivationTriggerType>, actions : Array<NpcResponseType> }>;
 	var chainAdvancements : Array<ChainAdvanceTrigger>;
-	var chat : Array<{triggers : Array<NpcActivationTriggerType>, say : String }>;
+	var actions : Array<{triggers : Array<NpcActivationTriggerType>, actions : Array<NpcResponseType> }>;
 	var chatRestActions : Array<NpcResponseType>;
+	var unfocusActions : Array<NpcResponseType>;
 }
 
 class NpcResponseDescription extends DescriptionBase {
@@ -45,14 +46,17 @@ class NpcResponseDescription extends DescriptionBase {
 							nextChainId : chainAdvancement.nextChainId.toString()
 						}
 					}];
-				var chat = response.chat == null ? [] : [
-					for ( chatEntry in response.chat ) {
-						var triggers = [for ( triggerElem in chatEntry.trigger ) {
+				var actions = response.actions == null ? [] : [
+					for ( actionEntry in response.actions ) {
+						var triggers = [for ( triggerElem in actionEntry.trigger ) {
 							NpcActivationTriggerType.fromCdb( triggerElem.type );
+						}];
+						var actions = [for ( action in actionEntry.actions ) {
+							NpcResponseType.fromCdb( action.type );
 						}];
 						{
 							triggers : triggers,
-							say : chatEntry.say.id.toString()
+							actions : actions
 						}
 					}
 				];
@@ -61,13 +65,19 @@ class NpcResponseDescription extends DescriptionBase {
 						NpcResponseType.fromCdb( chatRestAction.type );
 					}
 				];
+				var unfocusActions = response.unfocusActions == null ? [] : [
+					for ( unfocusAction in response.unfocusActions ) {
+						NpcResponseType.fromCdb( unfocusAction.type );
+					}
+				];
 
 				{
 					chainId : response.chainId.toString(),
 					refocusActions : refocusActions,
 					chainAdvancements : chainAdvancements,
-					chat : chat,
-					chatRestActions : chatRestActions
+					actions : actions,
+					chatRestActions : chatRestActions,
+					unfocusActions : unfocusActions,
 				}
 			}
 		];

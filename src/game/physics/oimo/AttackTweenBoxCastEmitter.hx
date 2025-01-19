@@ -84,10 +84,10 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		removeEmitter();
 	}
 
-	public inline function attachPhysics(physics : IPhysicsEngine) {
+	public inline function attachPhysics( physics : IPhysicsEngine ) {
 		this.physics = physics;
 	}
-	
+
 	public inline function setAttackRange( amount : Float ) {
 		attackRange = amount;
 	}
@@ -169,7 +169,8 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		rigidBody.updateTransform();
 	}
 
-	public inline function removeEmitter() {
+	#if !debug inline #end
+	public function removeEmitter() {
 		if ( isInAction() && currentTween != null ) {
 			physics.removeRigidBody( rigidBody );
 			currentTween?.endWithoutCallbacks();

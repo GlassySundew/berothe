@@ -11,7 +11,7 @@ class LocationEntityVO extends LocationObjectVO {
 
 	public static function fromPrefabInstance(
 		instance : Object3D,
-		cdbEntry : Data.LocationEntityDF
+		cdbEntry : Data.Entity
 	) : LocationEntityVO {
 
 		return new LocationEntityVO(
@@ -26,7 +26,7 @@ class LocationEntityVO extends LocationObjectVO {
 			instance.z,
 			instance.name,
 			instance,
-			cdbEntry.entity.id
+			cdbEntry.id
 		);
 	}
 

@@ -17,6 +17,7 @@ class ItemRestriction {
 	}
 
 	public function isFulfilledByItem( itemDesc : ItemDescription ) : Bool {
+		// if(type)
 		var typesComparison = Util.isArrayCompletePartOfAnother( types, itemDesc.types );
 		var equipFulfil = //
 			!isEquipment || (

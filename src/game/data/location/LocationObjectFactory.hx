@@ -21,17 +21,30 @@ class LocationObjectFactory {
 				switch cdbSheetId {
 					case LOCATION_OBJ_CONTAINER_TYPE:
 						var entry : Data.LocationObjContainerTypeDF = prefabLocal.props;
-						switch entry.type.id {
-							case entityInstancedRenderGroup:
+						switch entry.type {
+							case EntityInstancedRenderGroup:
 								var elements = parseGlobalContainer( prefabLocal );
 								for ( ele in elements ) {
 									ele.isBatched = true;
 									result.push( ele );
 								}
 								return false;
+							case PropagatedEntityType:
+								var entitySource = entry.props.entity;
+
+								HideUtil.mapPrefabChildrenWithDerefRec(
+									prefabLocal,
+									( prefabChild ) -> {
+										result.push( LocationEntityVO.fromPrefabInstance(
+											Std.downcast( prefabChild, Object3D ),
+											entry.props.entity
+										) );
+										return false;
+									}
+								);
+								return false;
 							default:
 						}
-
 					default:
 				}
 				result.push( LocationObjectFactory.fromPrefab( obj3D ) );
@@ -50,11 +63,11 @@ class LocationObjectFactory {
 			switch cdbSheetId {
 				case LOCATION_ENTITY_PRESENT:
 					var entry : Data.LocationEntityDF = cast prefab.props;
-					return LocationEntityVO.fromPrefabInstance( prefab, entry );
+					return LocationEntityVO.fromPrefabInstance( prefab, entry.entity );
 				case LOCATION_OBJ_CONTAINER_TYPE:
 					var entry : Data.LocationObjContainerTypeDF = prefab.props;
-					switch entry.type.id {
-						case entityInstancedRenderGroup:
+					switch entry.type {
+						case EntityInstancedRenderGroup:
 							// for ( child in prefab.children ) {
 							// 	var childEntry : Data.LocationEntityDF = cast child.props;
 							// 	if ( childEntry == null ) continue;
@@ -65,8 +78,7 @@ class LocationObjectFactory {
 							// 	vo.isBatched = true;
 							// 	return vo;
 							// }
-
-						case e: trace( "global entity container type: " + e + " is not supported" );
+						case e: trace( "global entity container type: " + e + " is not supported, name: " + prefab.name );
 					}
 				case e:
 					trace(

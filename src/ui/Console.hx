@@ -172,6 +172,7 @@ class Console extends h2d.Console {
 						Data.LocaleKind.unheard2
 					] )
 				).text );
+			hide();
 			return;
 		}
 
@@ -292,6 +293,7 @@ class Console extends h2d.Console {
 		}
 
 		doCall( cmd.callb, vargs );
+		hide();
 	}
 }
 #end

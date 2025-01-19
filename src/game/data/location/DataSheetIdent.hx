@@ -1,6 +1,6 @@
 package game.data.location;
 
-enum abstract DataSheetIdent( String ) from String {
+enum abstract DataSheetIdent( String ) from String to String {
 
 	var ENTITY_SPAWNPOINT = "entitySpawnPointDF";
 	var LOCATION_OBJ_CONTAINER_TYPE = "locationObjContainerTypeDF";

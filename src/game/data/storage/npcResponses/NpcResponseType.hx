@@ -5,6 +5,7 @@ enum NpcResponseType {
 	GIVE_QUEST( questId : String );
 	TURN_AWAY_FROM_PLAYER;
 	GENERATE_ITEM( itemDescId : String, amount : Int );
+	UNFOCUS;
 }
 
 inline function fromCdb( entry : Data.NpcResponseActionType ) : NpcResponseType {
@@ -13,5 +14,6 @@ inline function fromCdb( entry : Data.NpcResponseActionType ) : NpcResponseType 
 		case GiveQuest( quest ): GIVE_QUEST( quest.id.toString() );
 		case TurnAwayFromPlayer: TURN_AWAY_FROM_PLAYER;
 		case GenerateItem( item, amount ): GENERATE_ITEM( item.id.toString(), amount );
+		case Unfocus: UNFOCUS;
 	}
 }

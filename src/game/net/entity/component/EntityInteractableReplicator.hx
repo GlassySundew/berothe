@@ -53,66 +53,13 @@ class EntityInteractableReplicator extends EntityComponentReplicatorBase {
 	override function followComponentClient( entity : EntityReplicator ) {
 		super.followComponentClient( entityRepl );
 
-		entityRepl.entity.then( ( entity ) -> {
-			var viewFut = entity.components.onAppearFut( EntityViewComponent );
-			Future.sequence( followedComponent, viewFut )
-				.then(
-					results -> createInteractor( results[1] )
+		followedComponent.then( ( comp ) -> {
+			Std.downcast( comp, EntityInteractableComponent )
+				.interactive.then(
+					( int ) -> int.onClick.add(
+						( e ) -> useBy( GameClient.inst.controlledEntity.val )
+					)
 				);
-		} );
-	}
-
-	function createInteractor( viewComp : EntityViewComponent ) {
-		if ( !isTurnedOn.val ) return;
-
-		var interactorVO = new InteractorVO();
-		interactorVO.doHighlight = true;
-		interactorVO.highlightColor = 0xD9D9D9;
-
-		if ( interactableComponent.desc.tooltipLocale != null )
-			interactorVO.tooltipVO = new TextTooltipMediator(
-				interactableComponent.desc.tooltipLocale
-			);
-
-		GameClient.inst.controlledEntity.onAppear( ctrlEnt -> {
-			ctrlEnt.entity.result.components.onAppear(
-				EntityDynamicsComponent,
-				( _, dynamics ) -> {
-
-					var sub = Composite.create();
-					var predicamentSignal = new Signal<Bool>();
-					sub.add( dynamics.onMove.add(() -> {
-						predicamentSignal.dispatch(
-							interactableComponent.checkDistance(
-								ctrlEnt.entity.result
-							)
-						);
-					} ) );
-
-					viewComp.view.then( ( view ) -> {
-						var int = InteractorFactory.create(
-							interactorVO,
-							view.getGraphics(),
-							predicamentSignal
-						);
-
-						int.onClick.add( ( e ) -> {
-							useBy( GameClient.inst.controlledEntity.val );
-						} );
-
-						sub.add( isTurnedOn.addOnValueImmediately(
-							( old, newV ) -> {
-								if ( newV ) return;
-
-								predicamentSignal.destroy();
-								sub.unsubscribe();
-
-								int.remove();
-							}
-						) );
-					} );
-				}
-			);
 		} );
 	}
 	#end

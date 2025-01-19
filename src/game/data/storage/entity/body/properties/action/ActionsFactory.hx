@@ -39,6 +39,12 @@ class ActionsFactory {
 					var itemDescId = action.pickupItem.itemId.toString();
 					return new ItemPickupAction( itemDescId );
 				}
+				
+				if ( action.printSystem != null ) {
+					var localeId = action.printSystem.id.toString();
+					return new SystemPrintAction( localeId );
+				}
+				
 				throw new NotImplementedException( "empty action:" + action + " not supported" );
 
 			} : () -> BodyActionBase

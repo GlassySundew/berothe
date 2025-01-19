@@ -24,10 +24,6 @@ class EntityComponentsReplicator extends NetNode {
 	var entityRepl : EntityReplicator;
 	var isMappingFinished = false;
 
-	public function new( ?parent ) {
-		super( parent );
-	}
-
 	public function followEntityServer( entityRepl : EntityReplicator ) {
 		Assert.isNull( this.entityRepl, "double entity following for single replicator of components" );
 
