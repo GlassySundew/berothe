@@ -1,0 +1,473 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "object",
+			"name": "global",
+			"props": {
+				"type": 0,
+				"props": {},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"children": [
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 47.7,
+					"y": -98,
+					"z": 16
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 196,
+					"y": 69,
+					"z": 16,
+					"rotationZ": -180
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 105.7,
+					"y": 3,
+					"z": 16,
+					"rotationZ": -180
+				},
+				{
+					"type": "reference",
+					"name": "wall_torch",
+					"source": "voxel/structures/wall_torch/entity/wall_torch.enco",
+					"props": {
+						"entity": "wall_torch",
+						"$cdbtype": "locationEntityDF"
+					},
+					"x": 47.7,
+					"y": 13,
+					"z": 16
+				},
+				{
+					"type": "object",
+					"name": "models",
+					"locked": true,
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "model"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"x": 0.5,
+					"children": [
+						{
+							"type": "model",
+							"name": "castle_cross_hall_4",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_4.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_3",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_3.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_2",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_2.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_1",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_1.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_0",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_0.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_4",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_4.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_5_wall",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_5_wall.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						},
+						{
+							"type": "model",
+							"name": "castle_cross_hall_6_floor",
+							"source": "voxel/levels/castle_cross_hall/obj/fbx/castle_cross_hall_6_floor _ carpet.fbx",
+							"props": {
+								"entity": "model",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -0.5
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "collision",
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "collider_box"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 109.1,
+							"y": -33.08,
+							"z": -18,
+							"scaleX": 258.97,
+							"scaleY": 288.12,
+							"scaleZ": 38
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 75.5,
+							"y": -14,
+							"z": 1.5,
+							"scaleX": 27,
+							"scaleY": 225
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 149,
+							"y": 44.5,
+							"z": 1.5,
+							"scaleX": 120,
+							"scaleY": 27
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 247,
+							"y": -135.5,
+							"z": -18,
+							"scaleX": 280,
+							"scaleY": 289,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 134,
+							"y": 96,
+							"z": -18,
+							"scaleX": 207,
+							"scaleY": 34,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 214.5,
+							"y": 42,
+							"z": -18,
+							"scaleX": 33,
+							"scaleY": 136,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 28,
+							"y": -140,
+							"z": -18,
+							"scaleX": 207,
+							"scaleY": 34,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 25.5,
+							"y": 2,
+							"z": -18,
+							"scaleX": 35,
+							"scaleY": 289,
+							"scaleZ": 207
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 44,
+							"y": 66,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 44,
+							"y": -25,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 44,
+							"y": -97,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"props": {
+								"entity": "collider_box",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 44,
+							"y": 14,
+							"z": -18,
+							"scaleX": 6,
+							"scaleY": 6,
+							"scaleZ": 118
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "box",
+			"name": "caelyra_hall_transition",
+			"props": {
+				"type": 2,
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "castle_caelyra_hall"
+				}
+			},
+			"x": 42,
+			"y": 44.5,
+			"z": 11,
+			"scaleX": 4.14,
+			"scaleY": 17,
+			"scaleZ": 22.92,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Distortion",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false,
+							"parallaxSteps": 47,
+							"parallax": 0.4,
+							"emissive": 10
+						}
+					},
+					"mainPassName": "alpha",
+					"color": [
+						0.34509803921568627,
+						0.32941176470588235,
+						0.7137254901960784,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "caelyra hall exit",
+			"props": {
+				"type": 3,
+				"props": {
+					"location": "castle_caelyra_hall"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 47,
+			"y": 45,
+			"scaleX": 207,
+			"scaleY": 0,
+			"scaleZ": 207
+		},
+		{
+			"type": "box",
+			"name": "grassy_transition",
+			"props": {
+				"type": 2,
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "grassy"
+				}
+			},
+			"x": 196,
+			"y": 44.5,
+			"z": 11,
+			"scaleX": 4.14,
+			"scaleY": 17,
+			"scaleZ": 22.92,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Distortion",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false,
+							"parallaxSteps": 47,
+							"parallax": 0.4,
+							"emissive": 10
+						}
+					},
+					"mainPassName": "alpha",
+					"color": [
+						0.34509803921568627,
+						0.32941176470588235,
+						0.7137254901960784,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "grassy exit",
+			"props": {
+				"type": 3,
+				"props": {
+					"location": "grassy"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 190,
+			"y": 45,
+			"z": 2,
+			"scaleX": 207,
+			"scaleY": 0,
+			"scaleZ": 207,
+			"rotationY": -180,
+			"rotationZ": -180
+		}
+	]
+}

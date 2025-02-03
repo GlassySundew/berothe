@@ -1,0 +1,25 @@
+{
+	"type": "entityComposer",
+	"children": [
+		{
+			"type": "reference",
+			"name": "right_hand",
+			"source": "voxel/characters/thymea/right_hand.plst"
+		},
+		{
+			"type": "reference",
+			"name": "left_hand",
+			"source": "voxel/characters/thymea/left_hand.plst"
+		},
+		{
+			"type": "reference",
+			"name": "torso",
+			"source": "voxel/characters/thymea/torso.plst"
+		},
+		{
+			"type": "model",
+			"name": "thymea_27_torso_static",
+			"source": "voxel/characters/thymea/obj/fbx/thymea_27_torso_static.fbx"
+		}
+	]
+}

@@ -1,0 +1,3161 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "object",
+			"name": "global",
+			"props": {
+				"type": 0,
+				"props": {},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"children": [
+				{
+					"type": "object",
+					"name": "models",
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "model"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"x": 0.5,
+					"children": [
+						{
+							"type": "model",
+							"name": "grassy_field_14_plane4",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_14_plane4.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_13_plane3",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_13_plane3.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_12_plane2",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_12_plane2.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_11_plane1",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_11_plane1.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_10",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_10.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_9",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_9.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_8",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_8.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_7_castle",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_7_castle.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_6",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_6.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_5",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_5.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_4_plane1",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_4_plane1.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_3_plane1",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_3_plane1.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_2_plane1",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_2_plane1.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_1_plane1",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_1_plane1.fbx"
+						},
+						{
+							"type": "model",
+							"name": "grassy_field_0_plane1",
+							"source": "voxel/levels/grassy_field/obj/fbx/grassy_field_0_plane1.fbx"
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "collision",
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "collider_box"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -22.85,
+							"y": -579.88,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": 15.9
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -5.83,
+							"y": -594.52,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": 79.9
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -15.19,
+							"y": -590.42,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": 53
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -25.87,
+							"y": -589.67,
+							"z": 3,
+							"scaleX": 13.17,
+							"scaleY": 6.62,
+							"scaleZ": 81,
+							"rotationZ": 34.2
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 4.04,
+							"y": -593.88,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": 106.7
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 12.53,
+							"y": -589.01,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": 134.4
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 18.06,
+							"y": -580.69,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": 161.2
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 19.04,
+							"y": -570.46,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -172.7
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 15.27,
+							"y": -561.06,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -146.3
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -11.65,
+							"y": -554.14,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -63.4
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -19.21,
+							"y": -560.53,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -36.6
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 7.52,
+							"y": -554.52,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -117.9
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -2.07,
+							"y": -552.1,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -91.1
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -23.31,
+							"y": -569.99,
+							"z": 3,
+							"scaleX": 28,
+							"scaleY": 17,
+							"scaleZ": 81,
+							"rotationZ": -10.9
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -588.5,
+							"y": -706,
+							"z": 63,
+							"scaleX": 141,
+							"scaleY": 168,
+							"scaleZ": 124
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -525.5,
+							"y": -619,
+							"z": 34,
+							"scaleX": 7,
+							"scaleY": 8,
+							"scaleZ": 67
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -571.5,
+							"y": -619,
+							"z": 34,
+							"scaleX": 7,
+							"scaleY": 8,
+							"scaleZ": 67
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -514.5,
+							"y": -629.5,
+							"z": 34,
+							"scaleX": 7,
+							"scaleY": 7,
+							"scaleZ": 67
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -514.5,
+							"y": -675.5,
+							"z": 34,
+							"scaleX": 7,
+							"scaleY": 7,
+							"scaleZ": 67
+						},
+						{
+							"type": "object",
+							"name": "world bounds + floor",
+							"children": [
+								{
+									"type": "customBox",
+									"name": "customBox",
+									"x": -284,
+									"y": -364,
+									"z": -48,
+									"scaleX": 1139,
+									"scaleY": 1231,
+									"scaleZ": 98
+								},
+								{
+									"type": "customBox",
+									"name": "customBox",
+									"x": 176,
+									"y": -395,
+									"z": 190,
+									"scaleX": 70,
+									"scaleY": 1610.7,
+									"scaleZ": 679
+								},
+								{
+									"type": "customBox",
+									"name": "customBox",
+									"x": -259,
+									"y": 88,
+									"z": 173,
+									"scaleX": 1328.51,
+									"scaleY": 89,
+									"scaleZ": 713
+								},
+								{
+									"type": "customBox",
+									"name": "customBox",
+									"x": -243,
+									"y": -737,
+									"z": 187,
+									"scaleX": 1432,
+									"scaleY": 34,
+									"scaleZ": 702.7,
+									"isCollidable": false
+								},
+								{
+									"type": "customBox",
+									"name": "customBox",
+									"x": -633.5,
+									"y": -306,
+									"z": 222,
+									"scaleX": 35,
+									"scaleY": 1403.37,
+									"scaleZ": 644
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "trees",
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "tree"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -603.93,
+							"y": -612.4,
+							"z": 1,
+							"rotationZ": -37.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -579.93,
+							"y": -603.4,
+							"z": 1,
+							"rotationZ": 24.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -598.93,
+							"y": -591.4,
+							"z": 1,
+							"rotationZ": -125.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -602.93,
+							"y": -570.4,
+							"z": 1,
+							"rotationZ": -65.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -603.93,
+							"y": -543.4,
+							"z": 1,
+							"rotationZ": 174.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -599.93,
+							"y": -518.4,
+							"z": 1,
+							"rotationZ": 114.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -609.93,
+							"y": -490.4,
+							"z": 1,
+							"rotationZ": -95.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -596.93,
+							"y": -469.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -602.93,
+							"y": -449.4,
+							"z": 1,
+							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -578.93,
+							"y": -463.4,
+							"z": 1,
+							"rotationZ": -95.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -576.93,
+							"y": -497.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -591.93,
+							"y": -425.4,
+							"z": 1,
+							"rotationZ": -5.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -573.93,
+							"y": -438.4,
+							"z": 1,
+							"rotationZ": 144.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -595.93,
+							"y": -397.4,
+							"z": 1,
+							"rotationZ": 24.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -570.93,
+							"y": -400.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -596.93,
+							"y": -373.4,
+							"z": 1,
+							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -578.93,
+							"y": -373.4,
+							"z": 1,
+							"rotationZ": -155.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -602.93,
+							"y": -349.4,
+							"z": 1,
+							"rotationZ": -5.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -602.93,
+							"y": -324.4,
+							"z": 1,
+							"rotationZ": 114.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -574.93,
+							"y": -343.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -602.93,
+							"y": -301.4,
+							"z": 1,
+							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -579.93,
+							"y": -309.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -603.93,
+							"y": -230.4,
+							"z": 1,
+							"rotationZ": 144.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -607.93,
+							"y": -256.4,
+							"z": 1,
+							"rotationZ": -155.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -601.93,
+							"y": -276.4,
+							"z": 1,
+							"rotationZ": 144.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -578.93,
+							"y": -272.4,
+							"z": 1,
+							"rotationZ": -125.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -561.9,
+							"y": 28.47,
+							"z": 1,
+							"rotationZ": -128
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -562.04,
+							"y": -10.58,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -540.93,
+							"y": 23.35,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -519.91,
+							"y": 27.22,
+							"z": 1,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -492.9,
+							"y": 28.06,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -467.93,
+							"y": 23.92,
+							"z": 1,
+							"rotationZ": 24.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -439.87,
+							"y": 33.75,
+							"z": 1,
+							"rotationZ": 174.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -418.95,
+							"y": 20.63,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -398.91,
+							"y": 26.51,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -413.05,
+							"y": 2.59,
+							"z": 1,
+							"rotationZ": 174.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -447.06,
+							"y": 0.79,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -483.06,
+							"y": 5.79,
+							"z": 1,
+							"rotationZ": -140.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -517.06,
+							"y": 7.79,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -374.98,
+							"y": 25.37,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -388.08,
+							"y": -2.55,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -346.95,
+							"y": 29.21,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -350.1,
+							"y": -5.78,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -322.95,
+							"y": 20.06,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -323.05,
+							"y": 2.06,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -298.91,
+							"y": 25.92,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -273.91,
+							"y": 25.78,
+							"z": 1,
+							"rotationZ": 24.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -293.08,
+							"y": -2.11,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -250.91,
+							"y": 25.64,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -259.05,
+							"y": 2.69,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -179.91,
+							"y": 26.22,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -205.89,
+							"y": 30.38,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -225.92,
+							"y": 24.49,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -222.06,
+							"y": 1.47,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -148.98,
+							"y": 22.37,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -162.08,
+							"y": -5.55,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -193.08,
+							"y": 8.45,
+							"z": 1,
+							"rotationZ": -50.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -120.95,
+							"y": 26.21,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -124.1,
+							"y": -8.78,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -96.95,
+							"y": 17.06,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -97.05,
+							"y": -0.94,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -72.91,
+							"y": 22.92,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -47.91,
+							"y": 22.78,
+							"z": 1,
+							"rotationZ": 24.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -67.08,
+							"y": -5.11,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -24.91,
+							"y": 22.64,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -33.05,
+							"y": -0.31,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 46.09,
+							"y": 23.22,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 20.11,
+							"y": 27.38,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 0.08,
+							"y": 21.49,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 3.94,
+							"y": -1.53,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -120.27,
+							"y": -708.5,
+							"z": 1,
+							"rotationZ": 52
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 137.87,
+							"y": -693.45,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -141.24,
+							"y": -703.38,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -162.26,
+							"y": -707.25,
+							"z": 1,
+							"rotationZ": 24.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -189.27,
+							"y": -708.09,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -214.24,
+							"y": -703.95,
+							"z": 1,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -242.3,
+							"y": -713.78,
+							"z": 1,
+							"rotationZ": -5.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -263.22,
+							"y": -700.66,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -283.26,
+							"y": -706.54,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -269.12,
+							"y": -682.62,
+							"z": 1,
+							"rotationZ": -5.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -238.11,
+							"y": -690.82,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -307.19,
+							"y": -695.4,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -294.09,
+							"y": -677.48,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -335.22,
+							"y": -699.24,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -332.07,
+							"y": -674.25,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -359.22,
+							"y": -700.09,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -359.12,
+							"y": -682.09,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -383.26,
+							"y": -705.95,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -408.26,
+							"y": -705.81,
+							"z": 1,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -386.09,
+							"y": -683.92,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -431.26,
+							"y": -705.67,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -416.12,
+							"y": -686.72,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -507.26,
+							"y": -704.25,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -482.28,
+							"y": -706.41,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -456.25,
+							"y": -704.52,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -466.11,
+							"y": -689.5,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -490.11,
+							"y": -689.5,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 138.9,
+							"y": -279.7,
+							"z": 1,
+							"rotationZ": 142
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 115.85,
+							"y": -315.56,
+							"z": 1,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 145.78,
+							"y": -311.67,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 140.65,
+							"y": -330.69,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 142.49,
+							"y": -355.7,
+							"z": 1,
+							"rotationZ": -5.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 138.35,
+							"y": -378.67,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 146.18,
+							"y": -405.73,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 141.06,
+							"y": -426.65,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 140.94,
+							"y": -449.69,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 114.02,
+							"y": -435.55,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 118.22,
+							"y": -405.54,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 140.37,
+							"y": -475.32,
+							"z": 1,
+							"rotationZ": 168.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 119.88,
+							"y": -463.45,
+							"z": 1,
+							"rotationZ": -41.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 141.31,
+							"y": -502.59,
+							"z": 1,
+							"rotationZ": -161.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 112.78,
+							"y": -500.9,
+							"z": 1,
+							"rotationZ": -131.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 143.7,
+							"y": -527.55,
+							"z": 1,
+							"rotationZ": 138.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 117.8,
+							"y": -528.61,
+							"z": 1,
+							"rotationZ": 18.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 139.06,
+							"y": -555.07,
+							"z": 1,
+							"rotationZ": 168.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 136.36,
+							"y": -579.92,
+							"z": 1,
+							"rotationZ": -71.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 117.58,
+							"y": -550.99,
+							"z": 1,
+							"rotationZ": -162.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 140.07,
+							"y": -597.69,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 140.65,
+							"y": -667.69,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 136.81,
+							"y": -645.71,
+							"z": 1,
+							"rotationZ": 24.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 138.92,
+							"y": -622.68,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 116.58,
+							"y": -349.99,
+							"z": 1,
+							"rotationZ": -38
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 114.63,
+							"y": -376.13,
+							"z": 1,
+							"rotationZ": 24.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 109.7,
+							"y": -244.02,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 114.83,
+							"y": -290,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 124.99,
+							"y": -261.99,
+							"z": 1,
+							"rotationZ": 174.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 137.13,
+							"y": -243.02,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 109.3,
+							"y": -214.96,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 114.42,
+							"y": -194.04,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 114.54,
+							"y": -171,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 141.46,
+							"y": -185.14,
+							"z": 1,
+							"rotationZ": -95.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 137.26,
+							"y": -215.15,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 115.11,
+							"y": -145.37,
+							"z": 1,
+							"rotationZ": -11.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 140.6,
+							"y": -155.24,
+							"z": 1,
+							"rotationZ": 138.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 114.17,
+							"y": -118.1,
+							"z": 1,
+							"rotationZ": 18.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 142.7,
+							"y": -119.79,
+							"z": 1,
+							"rotationZ": 48.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 111.78,
+							"y": -93.14,
+							"z": 1,
+							"rotationZ": -41.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 137.68,
+							"y": -92.08,
+							"z": 1,
+							"rotationZ": -161.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 116.42,
+							"y": -65.62,
+							"z": 1,
+							"rotationZ": -11.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 128.12,
+							"y": -44.77,
+							"z": 1,
+							"rotationZ": 108.5
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 137.9,
+							"y": -69.7,
+							"z": 1,
+							"rotationZ": 17.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 115.41,
+							"y": -23,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 130.83,
+							"y": 35,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 131.67,
+							"y": 16.02,
+							"z": 1,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 142.56,
+							"y": -19.01,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -195.1,
+							"y": -697.54,
+							"z": 1,
+							"rotationZ": 81.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 143.78,
+							"y": -701.66,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 123.74,
+							"y": -707.54,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 137.88,
+							"y": -683.62,
+							"z": 1,
+							"rotationZ": -5.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 99.81,
+							"y": -696.4,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 112.91,
+							"y": -678.48,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 71.78,
+							"y": -700.24,
+							"z": 1,
+							"rotationZ": 114.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 74.93,
+							"y": -675.25,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 47.78,
+							"y": -701.09,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 47.88,
+							"y": -683.09,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 23.74,
+							"y": -706.95,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -1.26,
+							"y": -706.81,
+							"z": 1,
+							"rotationZ": -155.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": 20.91,
+							"y": -684.92,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -24.26,
+							"y": -706.67,
+							"z": 1,
+							"rotationZ": 54.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -9.12,
+							"y": -687.72,
+							"z": 1,
+							"rotationZ": 144.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -100.26,
+							"y": -705.25,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -75.28,
+							"y": -707.41,
+							"z": 1,
+							"rotationZ": -65.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -49.25,
+							"y": -705.52,
+							"z": 1,
+							"rotationZ": -125.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -59.11,
+							"y": -690.5,
+							"z": 1,
+							"rotationZ": -35.6
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -83.11,
+							"y": -690.5,
+							"z": 1,
+							"rotationZ": 84.4
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -580.93,
+							"y": -247.4,
+							"z": 1,
+							"rotationZ": 114.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -573.93,
+							"y": -532.4,
+							"z": 1,
+							"rotationZ": -155.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -578.93,
+							"y": -559.4,
+							"z": 1,
+							"rotationZ": -65.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -601.93,
+							"y": -205.4,
+							"z": 1,
+							"rotationZ": -37.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -577.93,
+							"y": -196.4,
+							"z": 1,
+							"rotationZ": 24.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -578.93,
+							"y": -223.4,
+							"z": 1,
+							"rotationZ": -20.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -596.93,
+							"y": -184.4,
+							"z": 1,
+							"rotationZ": -125.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -600.93,
+							"y": -163.4,
+							"z": 1,
+							"rotationZ": -65.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -601.93,
+							"y": -136.4,
+							"z": 1,
+							"rotationZ": 174.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -597.93,
+							"y": -111.4,
+							"z": 1,
+							"rotationZ": 114.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -607.93,
+							"y": -83.4,
+							"z": 1,
+							"rotationZ": -95.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -594.93,
+							"y": -62.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -600.93,
+							"y": -42.4,
+							"z": 1,
+							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -576.93,
+							"y": -56.4,
+							"z": 1,
+							"rotationZ": -95.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -574.93,
+							"y": -90.4,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -589.93,
+							"y": -18.4,
+							"z": 1,
+							"rotationZ": -5.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -571.93,
+							"y": -31.4,
+							"z": 1,
+							"rotationZ": 144.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -593.93,
+							"y": 9.6,
+							"z": 1,
+							"rotationZ": 24.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -568.93,
+							"y": 6.6,
+							"z": 1,
+							"rotationZ": 54.7
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -594.93,
+							"y": 33.6,
+							"z": 1,
+							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -576.93,
+							"y": 33.6,
+							"z": 1,
+							"rotationZ": -155.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -577.93,
+							"y": -119.4,
+							"z": 1,
+							"rotationZ": -155.3
+						},
+						{
+							"type": "reference",
+							"name": "tree",
+							"source": "voxel/structures/tree/tree.enco",
+							"props": {
+								"entity": "tree",
+								"$cdbtype": "locationEntityDF",
+								"isBatched": true
+							},
+							"x": -578.93,
+							"y": -151.4,
+							"z": 1,
+							"rotationZ": -95.3
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "box",
+			"name": "thymea_transition",
+			"props": {
+				"type": 2,
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "thymea_hut"
+				}
+			},
+			"x": 32.68,
+			"y": -574.5,
+			"z": 7,
+			"scaleX": 4,
+			"scaleY": 17,
+			"scaleZ": 28,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Distortion",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false,
+							"parallaxSteps": 47,
+							"parallax": 0.4,
+							"emissive": 10
+						}
+					},
+					"mainPassName": "alpha",
+					"color": [
+						0.34509803921568627,
+						0.32941176470588235,
+						0.7137254901960784,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "thymea exit",
+			"props": {
+				"type": 3,
+				"props": {
+					"location": "thymea_hut"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 37,
+			"y": -575
+		},
+		{
+			"type": "box",
+			"name": "cross_hall_transition",
+			"props": {
+				"type": 2,
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "castle_cross_hall"
+				}
+			},
+			"x": -519,
+			"y": -652.5,
+			"z": 9,
+			"scaleX": 4,
+			"scaleY": 17,
+			"scaleZ": 28,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Distortion",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false,
+							"parallaxSteps": 47,
+							"parallax": 0.4,
+							"emissive": 10
+						}
+					},
+					"mainPassName": "alpha",
+					"color": [
+						0.34509803921568627,
+						0.32941176470588235,
+						0.7137254901960784,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "cross hall exit",
+			"props": {
+				"type": 3,
+				"props": {
+					"location": "castle_cross_hall"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": -513,
+			"y": -652,
+			"z": 2
+		},
+		{
+			"type": "reference",
+			"name": "human_spwn",
+			"source": "voxel/characters/human/human.enco",
+			"props": {
+				"spawnedEntity": "player",
+				"$cdbtype": "entitySpawnPointDF"
+			},
+			"x": 63.97,
+			"y": -570.84,
+			"rotationZ": -45
+		}
+	]
+}

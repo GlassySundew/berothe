@@ -1,0 +1,305 @@
+{
+	"type": "prefab",
+	"children": [
+		{
+			"type": "object",
+			"name": "global",
+			"props": {
+				"type": 0,
+				"props": {},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"children": [
+				{
+					"type": "object",
+					"name": "models",
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "model"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "model",
+							"name": "thymea_hut",
+							"source": "voxel/levels/thymea_hut/obj/fbx/thymea_hut.fbx"
+						}
+					]
+				},
+				{
+					"type": "object",
+					"name": "collision",
+					"props": {
+						"type": 1,
+						"props": {
+							"entity": "collider_box"
+						},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"y": 1,
+							"z": -48,
+							"scaleX": 153.75,
+							"scaleY": 148.38,
+							"scaleZ": 98
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -20,
+							"y": -33,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": 60
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -31,
+							"y": -23,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": 37.5
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -37.93,
+							"y": -6.94,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": 10.6
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -37.29,
+							"y": 11.61,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -14.2
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -30.84,
+							"y": 24.47,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -33.1
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -18.38,
+							"y": 34.9,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -57.3
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -8.24,
+							"y": 38.13,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -77.9
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 7.83,
+							"y": 38.04,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -101.8
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 21.91,
+							"y": 32.15,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -122.4
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 32.56,
+							"y": 21.3,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -144.1
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 35.52,
+							"y": 14.67,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -158.8
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 37.5,
+							"y": -0.33,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 33.42,
+							"y": -17.78,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -28.7
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": 20.67,
+							"y": -31.59,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -59.4
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -0.59,
+							"y": -37.53,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -85.4
+						},
+						{
+							"type": "customBox",
+							"name": "customBox",
+							"x": -10.98,
+							"y": -36.49,
+							"z": 38,
+							"scaleX": 9,
+							"scaleY": 26,
+							"scaleZ": 99,
+							"rotationZ": -101
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "box",
+			"name": "grassy_transition",
+			"props": {
+				"type": 2,
+				"$cdbtype": "locationObjContainerTypeDF",
+				"extra": "",
+				"id": "",
+				"asd": {
+					"asde": 0
+				},
+				"props": {
+					"location": "grassy"
+				}
+			},
+			"x": 33,
+			"y": 0.5,
+			"z": 11,
+			"scaleX": 4.14,
+			"scaleY": 17,
+			"scaleZ": 22.92,
+			"children": [
+				{
+					"type": "material",
+					"name": "material",
+					"props": {
+						"PBR": {
+							"mode": "Distortion",
+							"blend": "None",
+							"shadows": true,
+							"culling": "Back",
+							"depthTest": "Less",
+							"colorMask": 15,
+							"enableStencil": false,
+							"parallaxSteps": 47,
+							"parallax": 0.4,
+							"emissive": 10
+						}
+					},
+					"mainPassName": "alpha",
+					"color": [
+						0.34509803921568627,
+						0.32941176470588235,
+						0.7137254901960784,
+						1
+					]
+				}
+			]
+		},
+		{
+			"type": "object",
+			"name": "grassy exit",
+			"props": {
+				"type": 3,
+				"props": {
+					"location": "grassy"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 27,
+			"y": 1
+		},
+		{
+			"type": "reference",
+			"name": "thymea",
+			"source": "voxel/characters/thymea/thymea.enco",
+			"props": {
+				"entity": "thymea",
+				"$cdbtype": "locationEntityDF"
+			},
+			"x": -21.1,
+			"y": -0.9,
+			"z": 0.9
+		}
+	]
+}

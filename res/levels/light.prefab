@@ -19,15 +19,12 @@
 			"minDist": 0,
 			"shadows": {
 				"mode": "Dynamic",
-				"size": 512,
-				"radius": 0,
+				"size": 1024,
+				"radius": 0.82,
 				"quality": 1,
-				"bias": 0.1,
+				"bias": 0.08,
 				"samplingMode": {
-					"kind": "PCF",
-					"quality": 1,
-					"scale": 0,
-					"bias": 0.1
+					"kind": "None"
 				}
 			}
 		}

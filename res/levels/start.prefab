@@ -5,8 +5,9 @@
 			"type": "object",
 			"name": "global",
 			"props": {
-				"type": "global",
-				"$cdbtype": "locationObjContainerTypeDF"
+				"type": 0,
+				"$cdbtype": "locationObjContainerTypeDF",
+				"props": {}
 			},
 			"children": [
 				{
@@ -1443,8 +1444,8 @@
 				"spawnedEntity": "player",
 				"$cdbtype": "entitySpawnPointDF"
 			},
-			"x": -49.5,
-			"y": -118.43,
+			"x": -130.11,
+			"y": 66.83,
 			"rotationZ": -45
 		},
 		{
@@ -1482,34 +1483,10 @@
 			"y": -86.72
 		},
 		{
-			"type": "reference",
-			"name": "club",
-			"source": "voxel/items/club/entity/club.enco",
-			"props": {
-				"entity": "club",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -5.77,
-			"y": -71.68,
-			"z": 1.89
-		},
-		{
-			"type": "reference",
-			"name": "club",
-			"source": "voxel/items/club/entity/club.enco",
-			"props": {
-				"entity": "club",
-				"$cdbtype": "locationEntityDF"
-			},
-			"x": -5.77,
-			"y": -63.68,
-			"z": 1.89
-		},
-		{
 			"type": "box",
 			"name": "sleepy_orc_wake_trigger",
 			"props": {
-				"type": "entityCollisionTrigger",
+				"type": 2,
 				"$cdbtype": "locationObjContainerTypeDF",
 				"extra": "sleepy_orc_wake_trigger",
 				"id": "sleepy_orc_wake_trigger",
@@ -1528,7 +1505,7 @@
 			"type": "box",
 			"name": "meadow_transition",
 			"props": {
-				"type": "entityCollisionTrigger",
+				"type": 3,
 				"$cdbtype": "locationObjContainerTypeDF",
 				"extra": "",
 				"id": "",

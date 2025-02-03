@@ -5,9 +5,10 @@
 			"type": "object",
 			"name": "global",
 			"props": {
-				"type": "global",
+				"type": 0,
 				"$cdbtype": "locationObjContainerTypeDF",
-				"props": {}
+				"props": {},
+				"typeEnum": 0
 			},
 			"children": [
 				{
@@ -621,7 +622,7 @@
 					"type": "object",
 					"name": "tulips",
 					"props": {
-						"type": "entityInstancedRenderGroup",
+						"type": 4,
 						"props": {},
 						"$cdbtype": "locationObjContainerTypeDF"
 					},
@@ -697,7 +698,7 @@
 					"type": "object",
 					"name": "sunflowers",
 					"props": {
-						"type": "entityInstancedRenderGroup",
+						"type": 4,
 						"props": {},
 						"$cdbtype": "locationObjContainerTypeDF"
 					},
@@ -762,7 +763,7 @@
 			"type": "object",
 			"name": "orc cave exit",
 			"props": {
-				"type": "entityTransitionExit",
+				"type": 3,
 				"props": {
 					"location": "start"
 				},
@@ -776,7 +777,7 @@
 			"type": "object",
 			"name": "orc cave exit",
 			"props": {
-				"type": "entityTransitionExit",
+				"type": 3,
 				"props": {
 					"location": "start"
 				},
@@ -785,19 +786,6 @@
 			"x": -105.15,
 			"y": 60.02,
 			"z": 78.93
-		},
-		{
-			"type": "object",
-			"name": "caelyra hall exit",
-			"props": {
-				"type": "entityTransitionExit",
-				"props": {
-					"location": "castle_caelyra_hall"
-				},
-				"$cdbtype": "locationObjContainerTypeDF"
-			},
-			"x": 76,
-			"y": -56
 		},
 		{
 			"type": "reference",
@@ -920,10 +908,23 @@
 			]
 		},
 		{
+			"type": "object",
+			"name": "caelyra hall exit",
+			"props": {
+				"type": 3,
+				"props": {
+					"location": "castle_caelyra_hall"
+				},
+				"$cdbtype": "locationObjContainerTypeDF"
+			},
+			"x": 76,
+			"y": -56
+		},
+		{
 			"type": "box",
 			"name": "castle_inala_hall_transition",
 			"props": {
-				"type": "entityCollisionTrigger",
+				"type": 2,
 				"$cdbtype": "locationObjContainerTypeDF",
 				"extra": "",
 				"id": "",

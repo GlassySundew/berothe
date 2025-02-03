@@ -1,0 +1,248 @@
+{
+	"type": "playStates",
+	"children": [
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_idle",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": -1,
+							"y": -2,
+							"z": 6
+						},
+						{
+							"type": "model",
+							"name": "thymea_24_left_hand_idle",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_24_left_hand_idle.fbx"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_attack",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 2,
+							"y": -2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "thymea_15_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_15_left_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 3,
+							"y": -2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "thymea_16_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_16_left_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 4,
+							"y": -2,
+							"z": 8
+						},
+						{
+							"type": "model",
+							"name": "thymea_17_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_17_left_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 5,
+							"y": -2,
+							"z": 9
+						},
+						{
+							"type": "model",
+							"name": "thymea_18_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_18_left_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 4,
+							"y": -2,
+							"z": 8
+						},
+						{
+							"type": "model",
+							"name": "thymea_19_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_19_left_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "object",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 3,
+							"y": -2,
+							"z": 8
+						},
+						{
+							"type": "model",
+							"name": "thymea_20_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_20_left_hand_attack.fbx"
+						}
+					]
+				},
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "last_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 2,
+							"y": -2,
+							"z": 7
+						},
+						{
+							"type": "model",
+							"name": "thymea_21_left_hand_attack",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_21_left_hand_attack.fbx"
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "fbfAnimationNode",
+			"name": "left_hand_raised",
+			"children": [
+				{
+					"type": "parallelPlay",
+					"name": "parallelPlay",
+					"children": [
+						{
+							"type": "object",
+							"name": "first_attk_mount",
+							"props": {
+								"$cdbtype": "plstSpecialObjDF",
+								"type": [
+									0,
+									"hand_left"
+								]
+							},
+							"x": 2,
+							"y": -2,
+							"z": 6
+						},
+						{
+							"type": "model",
+							"name": "thymea_26_left_hand_raised",
+							"source": "voxel/characters/thymea/obj/fbx/thymea_26_left_hand_raised.fbx"
+						}
+					]
+				}
+			]
+		}
+	]
+}
