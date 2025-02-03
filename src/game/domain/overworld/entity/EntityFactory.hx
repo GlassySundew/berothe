@@ -80,7 +80,7 @@ class EntityFactory {
 
 		onEntityCreated.dispatch( entity );
 
-		for ( comp in entity.components.components ) {
+		for ( comp in entity.components.container ) {
 			comp.claimOwnage();
 		}
 

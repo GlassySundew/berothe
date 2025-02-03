@@ -60,7 +60,7 @@ class EntityControl {
 			}
 		);
 
-		entity.components.componentStream.observe( comp -> {
+		entity.components.container.stream.observe( comp -> {
 			if (
 				!Std.isOfType( comp, EntityRigidBodyComponent )
 				&& !Std.isOfType( comp, EntityDynamicsComponent ) )

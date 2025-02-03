@@ -75,7 +75,7 @@ class EntityAIDescription extends EntityComponentDescription {
 	}
 
 	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		#if debug
+		#if( debug && !prod )
 		return new EntitySimpleComponentReplicator( parent );
 		#end
 

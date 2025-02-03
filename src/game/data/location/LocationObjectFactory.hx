@@ -30,19 +30,22 @@ class LocationObjectFactory {
 								}
 								return false;
 							case PropagatedEntityType:
-								var entitySource = entry.props.entity;
-
 								HideUtil.mapPrefabChildrenWithDerefRec(
 									prefabLocal,
 									( prefabChild ) -> {
-										result.push( LocationEntityVO.fromPrefabInstance(
-											Std.downcast( prefabChild, Object3D ),
-											entry.props.entity
-										) );
-										return false;
+										if (
+											prefabChild != null
+											// && !prefabChild.editorOnly
+											// && prefabChild.enabled
+										)
+											result.push( LocationEntityVO.fromPrefabInstance(
+												Std.downcast( prefabChild, Object3D ),
+												entry.props.entity
+											) );
+										return true;
 									}
 								);
-								return false;
+								return true;
 							default:
 						}
 					default:

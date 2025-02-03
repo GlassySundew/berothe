@@ -29,9 +29,7 @@ class EntityComponentsReplicator extends NetNode {
 
 		this.entityRepl = entityRepl;
 
-		entityRepl.entity.result.components.map( onComponentAdded );
-		isMappingFinished = true;
-		entityRepl.entity.result.components.onComponentAdded.add( onComponentAdded );
+		entityRepl.entity.result.components.container.stream.observe( onComponentAdded );
 	}
 
 	public function followEntityClient( entity : EntityReplicator ) {
@@ -53,13 +51,10 @@ class EntityComponentsReplicator extends NetNode {
 
 		var replicator = component.description.buildCompReplicator( this );
 		replicator.followComponentServer( component, entityRepl );
-		components[replicator.classType] = replicator;
 
-		if (
-			isMappingFinished
-			&& entityRepl.entity.result.components.get( component.classType ) != null
-		)
-			trace( "apparently bad logic, double component set: " + component.classType );
+		Assert.isFalse( components.exists( untyped replicator.classType.__clid ) );
+
+		components[replicator.classType] = replicator;
 	}
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {

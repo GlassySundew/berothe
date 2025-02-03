@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.model;
 
+import game.domain.overworld.entity.component.model.skills.EntitySkillContainer;
 import core.DispArray;
 import core.MutableProperty;
 import future.Future;
@@ -37,6 +38,7 @@ class EntityModelComponent extends EntityComponent {
 	public final displayName = new MutableProperty<String>();
 	public final statusMessages : DispArray<EntityMessageVO> = new DispArray<EntityMessageVO>();
 
+	public var skills( default, null ) : EntitySkillContainer;
 	public var inventory( default, null ) : EntityInventory;
 	public var stats( default, null ) : EntityStats;
 	public var factions( default, null ) : DispArray<FactionDescription>;
@@ -107,7 +109,7 @@ class EntityModelComponent extends EntityComponent {
 	public function purgeStatusBar() {
 		statusMessages.clear();
 	}
-	
+
 	public function provideMsgVO( msgVO : EntityMessageVO, timeoutS = null ) {
 		statusMessages.push( msgVO );
 		var readingTime = timeoutS ?? calculateReadingTime( msgVO.message.length );
@@ -155,6 +157,7 @@ class EntityModelComponent extends EntityComponent {
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
+		skills = new EntitySkillContainer( entity );
 		inventory = new EntityInventory( this, desc.baseInventorySize, desc.equipSlots );
 		stats = new EntityStats( desc );
 		stats.attachToEntity( entity );

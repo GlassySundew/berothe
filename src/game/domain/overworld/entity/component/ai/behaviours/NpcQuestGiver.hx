@@ -1,5 +1,6 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
+import haxe.exceptions.NotImplementedException;
 import game.net.server.GameServer;
 import game.data.storage.npcResponses.NpcResponseType;
 import game.data.storage.npcResponses.NpcActivationTriggerType;
@@ -10,6 +11,7 @@ import game.client.en.comp.view.EntityMessageVO;
 import game.data.storage.DataStorage;
 import game.data.storage.npcResponses.NpcResponseDescription;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
+import game.domain.overworld.entity.skills.AdditiveStatSkillFactory;
 
 class NpcQuestGiver extends EntityBehaviourBase {
 
@@ -255,6 +257,15 @@ class NpcQuestGiver extends EntityBehaviourBase {
 					item.amount.val = amount;
 					model.inventory.dropItemInFront( item );
 				case UNFOCUS: unfocusFromEntity( someEntity );
+				case GRANT_SKILL( skillDescId ):
+					var focusEntModel = currentFocus.components.get( EntityModelComponent );
+					var skill = AdditiveStatSkillFactory.fromDescription(
+						DataStorage.inst.skillStorage.getById( skillDescId )
+					);
+					focusEntModel.skills.add( skill );
+
+					// skill.
+					// focusEntModel.
 			}
 		}
 	}
@@ -283,7 +294,8 @@ class NpcQuestGiver extends EntityBehaviourBase {
 						}
 					}
 					result = result || isSpeechFulfilled;
-				case QUEST_COMPLETED( questId ):
+				case QUEST_COMPLETED( questId ): throw new NotImplementedException();
+				case HAS_ITEM( itemId, amount ): throw new NotImplementedException();
 			}
 		}
 		return result;

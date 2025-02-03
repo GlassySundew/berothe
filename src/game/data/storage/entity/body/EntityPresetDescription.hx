@@ -77,7 +77,6 @@ class EntityPresetDescription extends DescriptionBase {
 		isAnchor = entry.properties.properties.isAnchor;
 
 		propertyDescs = ArrayExtensions.deNullify(( [
-
 			entry.properties.properties.dynamics ? dynamics = new DynamicsDescription( entry.id + "Dynamics" ) : null,
 
 			// special
@@ -97,7 +96,7 @@ class EntityPresetDescription extends DescriptionBase {
 			localDispatchPoint = LocalDispatchPointDescription.fromCdb( entry.properties.properties.localDispatchPoint ),
 
 			// item
-			ofItem = new EntityOfItemComponentDescription(),
+			ofItem = entry.properties.properties.ofItem ? new EntityOfItemComponentDescription() : null,
 
 		] : Array<EntityComponentDescription> ) );
 

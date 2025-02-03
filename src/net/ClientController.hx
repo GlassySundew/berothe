@@ -29,6 +29,10 @@ class ClientController extends NetNode {
 	public function new( networkClient : NetworkClient ) {
 		super();
 		this.networkClient = networkClient;
+
+		// @:privateAccess
+		// var test = IPFetcher.get_peer_name( Std.downcast( networkClient, SocketClient ).socket.s.handle );
+		// trace(test.toBytes(22).toString());
 	}
 
 	#if server

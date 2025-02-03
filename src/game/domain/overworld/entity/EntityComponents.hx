@@ -11,46 +11,40 @@ import util.Assert;
 
 class EntityComponents {
 
-	public final onComponentAdded : Signal<EntityComponent> = new Signal<EntityComponent>();
-	public final components : ClassMap<Class<EntityComponent>, EntityComponent> = new ClassMap();
-	public final componentStream : Observable<EntityComponent>;
+	public final container : ClassMap<Class<EntityComponent>, EntityComponent> = new ClassMap();
 	final entity : OverworldEntity;
 
 	public function new( entity : OverworldEntity ) {
 		this.entity = entity;
-
-		componentStream = ObservableFactory.ofIterable( components )
-			.append( ObservableFactory.fromSignal( onComponentAdded ) );
 	}
 
 	public function dispose() {
-		for ( component in components ) {
+		for ( component in container ) {
 			component.dispose();
 		}
 	}
 
 	public function add( component : EntityComponent ) {
 		#if debug
-		Assert.notExistsInClassMap( component, components );
+		Assert.notExistsInClassMap( component, container );
 		#end
 
-		onComponentAdded.dispatch( component );
 		component.attachToEntity( entity );
-		components[component.classType] = component;
+		container[component.classType] = component;
 	}
 
 	#if !debug inline #end
 	public function get<T : EntityComponent>( compClass : Class<T> ) : T {
-		return cast components[cast compClass];
+		return cast container[cast compClass];
 	}
 
 	#if !debug inline #end
 	public function has<T : EntityComponent>( compClass : Class<T> ) {
-		return components[cast compClass] != null;
+		return container[cast compClass] != null;
 	}
 
 	public function map( func : ( comp : EntityComponent ) -> Void ) {
-		for ( component in components ) {
+		for ( component in container ) {
 			func( component );
 		}
 	}
@@ -59,7 +53,7 @@ class EntityComponents {
 		key : Class<T>,
 		cb : Class<T> -> T -> Void
 	) : Null<ISubscription> {
-		return components.onAppear( cast key, cast cb );
+		return container.onAppear( cast key, cast cb );
 	}
 
 	#if !debug inline #end

@@ -19,7 +19,6 @@ class EntityStatHolder {
 	public function new() {}
 
 	public function recalculate() {
-		// Assert.isNull( receiver );
 		amountProp.val = Lambda.fold(
 			stats,
 			( item, result ) -> item.amount + result,
@@ -28,7 +27,6 @@ class EntityStatHolder {
 	}
 
 	public function addStat( stat : EntityAdditiveStatBase ) {
-		// Assert.isNull( receiver );
 		stats.push( stat );
 		recalculate();
 	}

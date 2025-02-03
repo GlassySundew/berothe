@@ -43,7 +43,7 @@
 				{
 					"id": "debugStartLocation",
 					"value": {
-						"location": "meadow"
+						"location": "grassy"
 					}
 				},
 				{
@@ -201,6 +201,10 @@
 					"preset": "caelyra"
 				},
 				{
+					"id": "thymea",
+					"preset": "thymea"
+				},
+				{
 					"id": "club",
 					"preset": "club"
 				},
@@ -326,6 +330,11 @@
 					"id": "caelyra",
 					"properties": "caelyra",
 					"view": "caelyra"
+				},
+				{
+					"id": "thymea",
+					"properties": "thymea",
+					"view": "thymea"
 				},
 				{
 					"id": "club",
@@ -898,6 +907,32 @@
 					}
 				},
 				{
+					"id": "thymea",
+					"properties": {
+						"dynamics": true,
+						"model": {
+							"displayName": "Caelyra",
+							"id": "model"
+						},
+						"rigidBodyTorso": {
+							"id": "humanTorso",
+							"geometry": 1,
+							"offsetY": 0,
+							"offsetZ": 11,
+							"sizeX": 3,
+							"sizeZ": 8,
+							"hasFeet": true
+						},
+						"behaviour": {
+							"type": "npcQuestGiver",
+							"params": {
+								"npcResponses": "thymea",
+								"npcResponseEntryChain": "thymea_intro"
+							}
+						}
+					}
+				},
+				{
 					"id": "club",
 					"properties": {
 						"dynamics": true,
@@ -1030,15 +1065,7 @@
 							"actionsQueue": [
 								{
 									"action": {
-										"pickupItem": {
-											"item": "gold"
-										},
-										"setInteractivity": true,
-										"toggleEntityTransformInList": [
-											{
-												"transform": {}
-											}
-										]
+										"printSystem": "orc_prison_prisoner_interaction"
 									}
 								}
 							]
@@ -1729,6 +1756,12 @@
 				{
 					"typeStr": "17",
 					"name": "pickupItem",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "6:locale",
+					"name": "printSystem",
 					"opt": true,
 					"kind": null
 				}
@@ -2497,6 +2530,115 @@
 					]
 				},
 				{
+					"id": "thymea",
+					"viewComps": {
+						"paletteSwap": [
+							{
+								"from": 4205568,
+								"to": 9995639
+							},
+							{
+								"from": 16573600,
+								"to": 14984301
+							},
+							{
+								"from": 15776828,
+								"to": 9527202
+							},
+							{
+								"from": 17408,
+								"to": 8081545
+							}
+						]
+					},
+					"type": [
+						1,
+						"thymea"
+					],
+					"animations": [
+						{
+							"key": "idle",
+							"animations": [
+								{
+									"key": "torso_stand"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "walk",
+							"animations": [
+								{
+									"key": "torso_walk"
+								}
+							],
+							"speedMult": 0.14,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_idle",
+							"animations": [
+								{
+									"key": "right_hand_idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_raised",
+							"animations": [
+								{
+									"key": "right_hand_raised"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_right_attack",
+							"animations": [
+								{
+									"key": "right_hand_attack"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_idle",
+							"animations": [
+								{
+									"key": "left_hand_idle"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_raised",
+							"animations": [
+								{
+									"key": "left_hand_raised"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						},
+						{
+							"key": "attack_left_attack",
+							"animations": [
+								{
+									"key": "left_hand_attack"
+								}
+							],
+							"speedMult": 1,
+							"isAffectedByStats": true
+						}
+					]
+				},
+				{
 					"id": "wall_torch",
 					"type": [
 						1,
@@ -2762,6 +2904,10 @@
 					"file": "voxel/characters/bee/bee.enco"
 				},
 				{
+					"id": "thymea",
+					"file": "voxel/characters/thymea/thymea.enco"
+				},
+				{
 					"id": "club",
 					"file": "voxel/items/club/entity/club.enco"
 				},
@@ -2802,6 +2948,10 @@
 				{
 					"title": "characters",
 					"id": "human"
+				},
+				{
+					"title": "npc questgivers",
+					"id": "thymea"
 				},
 				{
 					"title": "items",
@@ -2890,6 +3040,23 @@
 				},
 				{
 					"id": "hpRegen"
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "skill",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "id",
+					"scope": null
+				}
+			],
+			"lines": [
+				{
+					"id": "life"
 				}
 			],
 			"separators": [],
@@ -3437,7 +3604,7 @@
 			"lines": [
 				{
 					"id": "start",
-					"chunkSize": 55,
+					"chunkSize": 85,
 					"level": [
 						0,
 						"start"
@@ -3448,7 +3615,7 @@
 				{
 					"id": "meadow",
 					"instancing": 2,
-					"chunkSize": 55,
+					"chunkSize": 85,
 					"level": [
 						0,
 						"meadow"
@@ -3459,10 +3626,40 @@
 					"id": "castle_caelyra_hall",
 					"instancing": 2,
 					"isOpen": false,
-					"chunkSize": 55,
+					"chunkSize": 85,
 					"level": [
 						0,
 						"castle_caelyra_hall"
+					]
+				},
+				{
+					"id": "castle_cross_hall",
+					"instancing": 2,
+					"isOpen": false,
+					"chunkSize": 85,
+					"level": [
+						0,
+						"castle_cross_hall"
+					]
+				},
+				{
+					"id": "grassy",
+					"instancing": 2,
+					"isOpen": true,
+					"chunkSize": 85,
+					"level": [
+						0,
+						"grassy_field"
+					]
+				},
+				{
+					"id": "thymea_hut",
+					"instancing": 2,
+					"isOpen": false,
+					"chunkSize": 85,
+					"level": [
+						0,
+						"thymea_hut"
 					]
 				}
 			],
@@ -3502,6 +3699,18 @@
 				{
 					"id": "castle_caelyra_hall",
 					"file": "levels/castle_caelyra_hall.prefab"
+				},
+				{
+					"id": "castle_cross_hall",
+					"file": "levels/castle_cross_hall.prefab"
+				},
+				{
+					"id": "grassy_field",
+					"file": "levels/grassy_field.prefab"
+				},
+				{
+					"id": "thymea_hut",
+					"file": "levels/thymea_hut.prefab"
 				}
 			],
 			"separators": [],
@@ -3509,39 +3718,6 @@
 				"editor": {
 					"categories": [
 						"location"
-					]
-				}
-			}
-		},
-		{
-			"name": "locationContainerType",
-			"columns": [
-				{
-					"typeStr": "0",
-					"name": "id",
-					"kind": null,
-					"scope": null
-				}
-			],
-			"lines": [
-				{
-					"id": "global"
-				},
-				{
-					"id": "entityCollisionTrigger"
-				},
-				{
-					"id": "entityTransitionExit"
-				},
-				{
-					"id": "entityInstancedRenderGroup"
-				}
-			],
-			"separators": [],
-			"props": {
-				"editor": {
-					"categories": [
-						"locationDF"
 					]
 				}
 			}
@@ -3616,29 +3792,11 @@
 										}
 									]
 								}
-							]
+							],
+							"unfocusActions": []
 						},
 						{
 							"chainId": "caelyra_not_accepted_yet",
-							"chat": [
-								{
-									"say": "caelyra_not_yet_accepted_tries_to_evade",
-									"trigger": [
-										{
-											"type": [
-												1,
-												"hi"
-											]
-										},
-										{
-											"type": [
-												1,
-												"im_sorry"
-											]
-										}
-									]
-								}
-							],
 							"chatRestActions": [
 								{
 									"type": [
@@ -3654,6 +3812,12 @@
 											"type": [
 												1,
 												"yes"
+											]
+										},
+										{
+											"type": [
+												1,
+												"quest"
 											]
 										}
 									],
@@ -3719,11 +3883,16 @@
 										}
 									]
 								}
-							]
-						},
-						{
-							"chainId": "caelyra_coward",
-							"chat": [
+							],
+							"unfocusActions": [
+								{
+									"type": [
+										0,
+										"caelyra_not_yet_accepted_unfocus"
+									]
+								}
+							],
+							"actions": [
 								{
 									"trigger": [
 										{
@@ -3731,11 +3900,44 @@
 												1,
 												"hi"
 											]
+										},
+										{
+											"type": [
+												1,
+												"im_sorry"
+											]
 										}
 									],
-									"say": "caelyra_coward_speech"
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_not_yet_accepted_tries_to_evade"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"bye"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												6
+											]
+										}
+									]
 								}
-							],
+							]
+						},
+						{
+							"chainId": "caelyra_coward",
 							"chatRestActions": [
 								{
 									"type": [
@@ -3782,6 +3984,44 @@
 										}
 									]
 								}
+							],
+							"unfocusActions": [],
+							"actions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"hi"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_coward_speech"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"bye"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												6
+											]
+										}
+									]
+								}
 							]
 						},
 						{
@@ -3807,7 +4047,72 @@
 									]
 								}
 							],
-							"refocusActions": []
+							"refocusActions": [
+								{
+									"trigger": [],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_recruited_welcome"
+											]
+										}
+									]
+								}
+							],
+							"chatRestActions": [
+								{
+									"type": [
+										0,
+										"caelyra_recruited_dont_understand"
+									]
+								}
+							],
+							"unfocusActions": [
+								{
+									"type": [
+										0,
+										"caelyra_recruited_unfocus"
+									]
+								}
+							],
+							"actions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"quest"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_recruited_quest_ask"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"bye"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												6
+											]
+										}
+									]
+								}
+							]
 						},
 						{
 							"chainId": "coward_accepted_to_help",
@@ -3830,19 +4135,6 @@
 											]
 										}
 									]
-								}
-							],
-							"chat": [
-								{
-									"trigger": [
-										{
-											"type": [
-												1,
-												"hi"
-											]
-										}
-									],
-									"say": "caelyra_coward_speech"
 								}
 							],
 							"chatRestActions": [
@@ -3870,7 +4162,239 @@
 										}
 									]
 								}
+							],
+							"unfocusActions": [],
+							"actions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"hi"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_coward_speech"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"bye"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												6
+											]
+										}
+									]
+								}
 							]
+						}
+					]
+				},
+				{
+					"id": "thymea",
+					"responses": [
+						{
+							"chainId": "thymea_intro",
+							"refocusActions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												0
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_intro_greeting"
+											]
+										}
+									]
+								}
+							],
+							"unfocusActions": [],
+							"chainAdvancements": [
+								{
+									"requirements": [],
+									"nextChain": "thymea_offer_life"
+								}
+							]
+						},
+						{
+							"chainId": "thymea_offer_life",
+							"refocusActions": [
+								{
+									"trigger": [
+										{}
+									],
+									"actions": []
+								}
+							],
+							"unfocusActions": [
+								{
+									"type": [
+										5,
+										""
+									]
+								}
+							],
+							"chainAdvancements": [
+								{
+									"requirements": [],
+									"nextChain": ""
+								}
+							],
+							"actions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"yes"
+											]
+										}
+									],
+									"actions": []
+								}
+							]
+						},
+						{
+							"chainId": "thymea_not_accepted_yet",
+							"refocusActions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"hi"
+											]
+										},
+										{
+											"type": [
+												1,
+												"quest"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_intro_greeting"
+											]
+										}
+									]
+								}
+							],
+							"unfocusActions": [
+								{
+									"type": [
+										0,
+										"thymea_no_life_unfocus"
+									]
+								}
+							],
+							"chainAdvancements": [
+								{
+									"requirements": [
+										{
+											"type": [
+												1,
+												"yes"
+											]
+										},
+										{
+											"type": [
+												3,
+												"gold",
+												3
+											]
+										}
+									],
+									"nextChain": "thymea_n",
+									"completionActions": [
+										{
+											"type": [
+												0,
+												"thymea_life_skill_acquisition"
+											]
+										},
+										{
+											"type": [
+												4,
+												"life"
+											]
+										}
+									]
+								}
+							],
+							"actions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"hi"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_no_life_tries_to_evade"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"quest"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_no_life_tries_to_evade"
+											]
+										}
+									]
+								}
+							],
+							"chatRestActions": [
+								{
+									"type": [
+										0,
+										"thymea_no_life_tries_to_evade"
+									]
+								}
+							]
+						},
+						{
+							"chainId": "thymea_n",
+							"refocusActions": [],
+							"unfocusActions": []
 						}
 					]
 				}
@@ -3902,14 +4426,18 @@
 				},
 				{
 					"typeStr": "8",
-					"name": "chat",
-					"opt": true,
-					"kind": null
+					"name": "actions",
+					"opt": true
 				},
 				{
 					"typeStr": "8",
 					"name": "chatRestActions",
 					"opt": true
+				},
+				{
+					"typeStr": "8",
+					"name": "unfocusActions",
+					"kind": null
 				}
 			]
 		},
@@ -4019,7 +4547,7 @@
 			]
 		},
 		{
-			"name": "npcResponse@responses@chat",
+			"name": "npcResponse@responses@actions",
 			"props": {
 				"hide": true
 			},
@@ -4032,14 +4560,14 @@
 					"kind": null
 				},
 				{
-					"typeStr": "6:locale",
-					"name": "say",
+					"typeStr": "8",
+					"name": "actions",
 					"kind": null
 				}
 			]
 		},
 		{
-			"name": "npcResponse@responses@chat@trigger",
+			"name": "npcResponse@responses@actions@trigger",
 			"props": {
 				"hide": true
 			},
@@ -4054,7 +4582,37 @@
 			]
 		},
 		{
+			"name": "npcResponse@responses@actions@actions",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponseActionType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
 			"name": "npcResponse@responses@chatRestActions",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "9:NpcResponseActionType",
+					"name": "type",
+					"kind": null
+				}
+			]
+		},
+		{
+			"name": "npcResponse@responses@unfocusActions",
 			"props": {
 				"hide": true
 			},
@@ -4102,7 +4660,16 @@
 							"text": "yes"
 						},
 						{
+							"text": "yup"
+						},
+						{
+							"text": "yea"
+						},
+						{
 							"text": "i do"
+						},
+						{
+							"text": "sure"
 						},
 						{
 							"text": "indeed"
@@ -4114,6 +4681,12 @@
 					"samples": [
 						{
 							"text": "no"
+						},
+						{
+							"text": "naw"
+						},
+						{
+							"text": "nope"
 						}
 					]
 				},
@@ -4127,7 +4700,19 @@
 				},
 				{
 					"id": "quest",
-					"samples": []
+					"samples": [
+						{
+							"text": "quest"
+						}
+					]
+				},
+				{
+					"id": "bye",
+					"samples": [
+						{
+							"text": "bye"
+						}
+					]
 				}
 			],
 			"separators": [],
@@ -4212,24 +4797,32 @@
 					"text": "You attempt to command, yet in a formless state, your actions vanish into nothingness, unseen and unfelt."
 				},
 				{
+					"id": "orc_prison_prisoner_interaction",
+					"text": "Another soul claimed by these forsaken walls."
+				},
+				{
 					"id": "caelyra_intro_greeting",
-					"text": "Welcome, traveler. I am Caelyra, entrusted with gathering those who would stand against our foes.\nThe tale of your escape from the orcish prison proves your courage beyond doubt.\nWill you lend your strength to safeguard these walls and honor the valor that guided you here?"
+					"text": "Welcome, traveler.\nI am Caelyra, entrusted with gathering those who would stand against our foes.\nThe tale of your escape from the orcish prison proves your courage beyond doubt.\nWill you lend your strength to safeguard these walls and honor the valor that guided you here?"
 				},
 				{
 					"id": "caelyra_not_yet_accepted_tries_to_evade",
-					"text": "Forgive me, but this is no time for idle chatter. Will you stand with us, or shall I seek aid elsewhere?"
+					"text": "Forgive me, but this is no time for idle chatter.\nWill you stand with us, or shall I seek aid elsewhere?"
 				},
 				{
 					"id": "caelyra_not_yet_accepted_afk_refocus",
-					"text": "Ah, you’ve returned. I trust you’ve had time to gather your thoughts. Are you ready now to stand with us and lend your strength to the castle’s cause?"
+					"text": "Ah, you’ve returned.\nI trust you’ve had time to gather your thoughts.\nAre you ready now to stand with us and lend your strength to the castle’s cause?"
+				},
+				{
+					"id": "caelyra_not_yet_accepted_unfocus",
+					"text": "Farewell, traveler.\nMay your path be safe, and may you find the courage to return when you are ready to stand with us."
 				},
 				{
 					"id": "caelyra_ask_for_help_giberrish",
-					"text": "Your words elude me, but I take it you are still finding your footing. Speak plainly, traveler - will you stand with us or not?"
+					"text": "Your words elude me, but I take it you are still finding your footing.\nSpeak plainly, traveler - will you stand with us or not?"
 				},
 				{
 					"id": "caelyra_accepted_to_help",
-					"text": "Your resolve does you credit, and the castle welcomes your aid. Yet strength is forged, not given. Seek out the witch in the southern fields - her wisdom will guide you on your path. Take this club; it may be humble, but it will serve you well until you grow stronger."
+					"text": "Your resolve does you credit, and the castle welcomes your aid.\nYet strength is forged, not given. Seek out the witch in the southeastern fields - her wisdom will guide you on your path.\nTake this club; it may be humble, but it will serve you well until you grow stronger."
 				},
 				{
 					"id": "caelyra_coward_intro",
@@ -4241,13 +4834,67 @@
 				},
 				{
 					"id": "caelyra_coward_apologized",
-					"text": "Apologies are a start, but words alone won't mend your cowardice. Are you ready now to stand with us, or will you falter again?"
+					"text": "Apologies are a start, but words alone won't mend your cowardice.\nAre you ready now to stand with us, or will you falter again?"
+				},
+				{
+					"id": "caelyra_recruited_welcome",
+					"text": "Ah, you return!\nIt warms my heart to see you again.\nHave you found the strength you sought?\nThe castle still stands, but its guardians can always use a hand as steadfast as yours."
+				},
+				{
+					"id": "caelyra_recruited_dont_understand",
+					"text": "I’m afraid I don’t understand your words, traveler, but perhaps there’s another who can."
+				},
+				{
+					"id": "caelyra_recruited_quest_ask",
+					"text": "Your path is clear, brave one.\nSeek out the witch in her hut, south-east of the castle.\nHer guidance will prepare you for the challenges ahead."
+				},
+				{
+					"id": "caelyra_recruited_unfocus",
+					"text": "Go with courage, and may your path lead to strength and honor.\nThe castle awaits your return, brave one."
+				},
+				{
+					"id": "thymea_intro_greeting",
+					"text": "Welcome, curious soul.\nI sense the stirrings of potential within you - an ember awaiting a steady hand.\nThese fields hold quiet secrets for those who listen. Will you accept my guidance?"
+				},
+				{
+					"id": "thymea_offer_life",
+					"text": "Your resolve is clear, child.\nThe power to strengthen your mortal frame demands balance.\nBring me three gold coins, and I shall share the secret of life’s vigor… shall we proceed?"
+				},
+				{
+					"id": "thymea_life_not_enough_gold",
+					"text": "I can sense your eagerness, yet the weight of your purse does not match your desire.\nReturn to me when you can offer three gold coins, and we shall continue your path onward."
+				},
+				{
+					"id": "thymea_no_life_tries_to_evade",
+					"text": "Your curiosity is as deep as the forest, yet let us not stray from our purpose.\nThe wisdom to fortify life awaits for three gold coins. Now, shall we continue?"
+				},
+				{
+					"id": "thymea_no_life_unfocus",
+					"text": "Farewell, dear traveler.\nMay the winds of fate guide you safely until our paths cross once more, and remember - the secrets of life patiently await your return."
+				},
+				{
+					"id": "thymea_life_skill_acquisition",
+					"text": "It begins…\n…the essence of life is not merely in breath, but in struggle…\n…with each foe felled, the body remembers, the spirit endures…\n…strength is not given, but taken from the fallen…\n…and now, the path is yours to walk."
 				}
 			],
 			"separators": [
 				{
+					"title": "system",
+					"id": "unheard"
+				},
+				{
 					"title": "npc responses",
 					"id": "caelyra_intro_greeting"
+				},
+				{
+					"title": "caelyra",
+					"level": 1,
+					"id": "caelyra_intro_greeting"
+				},
+				{
+					"level": 1,
+					"title": "thymea",
+					"id": "thymea_intro_greeting"
 				}
 			],
 			"props": {}
@@ -4318,9 +4965,8 @@
 			"name": "locationObjContainerTypeDF",
 			"columns": [
 				{
-					"typeStr": "6:locationContainerType",
-					"name": "type",
-					"kind": null
+					"typeStr": "5:Global,PropagatedEntityType,EntityCollisionTrigger,EntityTransitionExit,EntityInstancedRenderGroup",
+					"name": "type"
 				},
 				{
 					"typeStr": "17",
@@ -4356,6 +5002,12 @@
 				{
 					"typeStr": "1",
 					"name": "ident",
+					"opt": true,
+					"kind": null
+				},
+				{
+					"typeStr": "6:entity",
+					"name": "entity",
 					"opt": true,
 					"kind": null
 				}
@@ -4580,6 +5232,28 @@
 							"typeStr": "3"
 						}
 					]
+				},
+				{
+					"name": "GrantSkill",
+					"args": [
+						{
+							"name": "skill",
+							"typeStr": "6:skill"
+						}
+					]
+				},
+				{
+					"name": "SetChain",
+					"args": [
+						{
+							"name": "response",
+							"typeStr": "6:npcResponse@responses"
+						}
+					]
+				},
+				{
+					"name": "Unfocus",
+					"args": []
 				}
 			]
 		},
@@ -4605,6 +5279,19 @@
 						{
 							"name": "quest",
 							"typeStr": "6:quest"
+						}
+					]
+				},
+				{
+					"name": "HasItem",
+					"args": [
+						{
+							"name": "item",
+							"typeStr": "6:item"
+						},
+						{
+							"name": "amount",
+							"typeStr": "3"
 						}
 					]
 				}

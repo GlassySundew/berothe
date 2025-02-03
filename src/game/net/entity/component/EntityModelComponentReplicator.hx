@@ -1,5 +1,8 @@
 package game.net.entity.component;
 
+import game.data.storage.skill.SkillDescription.SkillType;
+import game.net.entity.component.model.skills.EntitySkillsReplicator;
+import game.domain.overworld.entity.component.model.skills.EntitySkillContainer;
 import game.net.client.GameClient;
 import game.client.en.comp.view.EntityMessageVO;
 import game.client.en.comp.view.EntityViewComponent;
@@ -18,7 +21,7 @@ import game.domain.overworld.entity.EntityComponent;
 
 class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
-	@:s public final displayName : NSMutableProperty<String> = new NSMutableProperty<String>();
+	@:s final displayName : NSMutableProperty<String> = new NSMutableProperty<String>();
 	@:s final factionsRepl : NSArray<String> = new NSArray();
 	@:s final isSleeping : NSMutableProperty<Bool> = new NSMutableProperty<Bool>();
 	@:s final hp : NSMutableProperty<Int> = new NSMutableProperty<Int>();
@@ -26,6 +29,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
 	@:s var statusMessages : NSArray<EntityMessageVO> = new NSArray();
+	@:s var skills : EntitySkillsReplicator;
 
 	public var modelComp( get, never ) : EntityModelComponent;
 	inline function get_modelComp() return Std.downcast( component, EntityModelComponent );
@@ -36,6 +40,8 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
+		skills = new EntitySkillsReplicator( modelComp.skills, this );
+
 		modelComp.factions.subscribe( ( i, val ) -> {
 			if ( val != null ) factionsRepl[i] = val.id;
 			else factionsRepl.removeByIdx( i );
@@ -46,6 +52,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		modelComp.statusMessages.subscribeNetwork( statusMessages );
 		modelComp.hp.subscribeProp( hp );
 
+		// ! debug
 		if ( entityRepl.entity.result.desc.id == "player" )
 			displayName.addOnValueImmediately( ( oldName, newName ) -> {
 				if ( newName != null )
@@ -66,7 +73,6 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 					modelComp.factions.set( i, DataStorage.inst.factionStorage.getById( faction ) );
 				},
 				( i, faction ) -> {
-					trace( "removing faction" );
 					modelComp.factions.removeByIdx( i );
 				}
 			);

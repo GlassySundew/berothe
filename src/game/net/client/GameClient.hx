@@ -1,5 +1,6 @@
 package game.net.client;
 
+import h3d.scene.Light;
 import future.Future;
 import graphics.BatchRenderer;
 import hrt.prefab.RenderProps;
@@ -177,7 +178,7 @@ class GameClient extends Process {
 		currentLocationSelf.val = null;
 		if ( !controlledEntity?.getValue()?.entity.result?.disposed.isTriggered )
 			controlledEntity.getValue()?.entity.result?.dispose();
-		
+
 		subscription.unsubscribe();
 		BatchRenderer.inst?.dispose();
 
@@ -198,6 +199,17 @@ class GameClient extends Process {
 		onUpdate.dispatch();
 
 		BatchRenderer.inst?.emitBatches();
+
+		var frustum = Boot.inst.s3d.camera.frustum;
+		function getRec( obj : h3d.scene.Object ) {
+			if ( !Std.isOfType( obj, Light ) ) {
+				var bounds = obj.getBounds();
+				obj.culled = !frustum.hasBounds( bounds );
+			}
+			for ( o in obj )
+				getRec( o );
+		}
+		getRec( Boot.inst.s3d );
 	}
 
 	override function pause() {
