@@ -3,16 +3,9 @@ package game.data.storage.npcResponses;
 import game.data.storage.npcResponses.NpcResponseType;
 import game.data.storage.npcResponses.NpcActivationTriggerType;
 
-typedef ChainAdvanceTrigger = {
-	var requirements : Array<NpcActivationTriggerType>;
-	var completionActions : Array<NpcResponseType>;
-	var nextChainId : String;
-}
-
 typedef NpcResponseChainElement = {
 	var chainId : String;
 	var refocusActions : Array<{triggers : Array<NpcActivationTriggerType>, actions : Array<NpcResponseType> }>;
-	var chainAdvancements : Array<ChainAdvanceTrigger>;
 	var actions : Array<{triggers : Array<NpcActivationTriggerType>, actions : Array<NpcResponseType> }>;
 	var chatRestActions : Array<NpcResponseType>;
 	var unfocusActions : Array<NpcResponseType>;
@@ -31,21 +24,6 @@ class NpcResponseDescription extends DescriptionBase {
 						NpcResponseType.fromCdb( action.type );
 					}]
 				}];
-				var chainAdvancements = response.chainAdvancements == null ? [] : [
-					for ( chainAdvancement in response.chainAdvancements ) {
-						{
-							requirements : [
-								for ( requirement in chainAdvancement.requirements ) {
-									NpcActivationTriggerType.fromCdb( requirement.type );
-								}],
-							completionActions : chainAdvancement.completionActions == null ? [] : [
-								for ( action in chainAdvancement.completionActions ) {
-									NpcResponseType.fromCdb( action.type );
-								}
-							],
-							nextChainId : chainAdvancement.nextChainId.toString()
-						}
-					}];
 				var actions = response.actions == null ? [] : [
 					for ( actionEntry in response.actions ) {
 						var triggers = [for ( triggerElem in actionEntry.trigger ) {
@@ -74,7 +52,6 @@ class NpcResponseDescription extends DescriptionBase {
 				{
 					chainId : response.chainId.toString(),
 					refocusActions : refocusActions,
-					chainAdvancements : chainAdvancements,
 					actions : actions,
 					chatRestActions : chatRestActions,
 					unfocusActions : unfocusActions,

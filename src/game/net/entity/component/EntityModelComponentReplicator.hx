@@ -29,7 +29,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
 	@:s var statusMessages : NSArray<EntityMessageVO> = new NSArray();
-	@:s var skills : EntitySkillsReplicator;
+	@:s var skillsRepl : EntitySkillsReplicator;
 
 	public var modelComp( get, never ) : EntityModelComponent;
 	inline function get_modelComp() return Std.downcast( component, EntityModelComponent );
@@ -40,7 +40,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
-		skills = new EntitySkillsReplicator( modelComp.skills, this );
+		skillsRepl = new EntitySkillsReplicator( modelComp.skills, this );
 
 		modelComp.factions.subscribe( ( i, val ) -> {
 			if ( val != null ) factionsRepl[i] = val.id;

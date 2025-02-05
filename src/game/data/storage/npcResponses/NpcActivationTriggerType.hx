@@ -7,6 +7,7 @@ enum NpcActivationTriggerType {
 	TEXT_SAID( awaitSpeechId : String );
 	QUEST_COMPLETED( questId : String );
 	HAS_ITEM( itemId : String, amount : Int );
+	DOES_NOT_HAVE_ITEM( itemId : String, amount : Int );
 }
 
 inline function fromCdb( entry : Data.NpcResponceChainAdvanceRequirementType ) : NpcActivationTriggerType {
@@ -15,5 +16,6 @@ inline function fromCdb( entry : Data.NpcResponceChainAdvanceRequirementType ) :
 		case TextSaid( text ): TEXT_SAID( text.id.toString() );
 		case QuestCompleted( quest ): QUEST_COMPLETED( quest.id.toString() );
 		case HasItem( item, amount ): HAS_ITEM( item.id.toString(), amount );
+		case DoesNotHaveItem( item, amount ): DOES_NOT_HAVE_ITEM( item.id.toString(), amount );
 	}
 }

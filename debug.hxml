@@ -13,5 +13,7 @@
 -D hxbit_report_errors
 # -D no-inline # does not work :(
 
+# -D dump=pretty
+
 
 -debug

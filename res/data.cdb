@@ -37,7 +37,7 @@
 				{
 					"id": "playerStartLocation",
 					"value": {
-						"location": "start"
+						"location": "grassy"
 					}
 				},
 				{
@@ -3768,12 +3768,6 @@
 					"responses": [
 						{
 							"chainId": "caelyra_intro",
-							"chainAdvancements": [
-								{
-									"requirements": [],
-									"nextChain": "caelyra_not_accepted_yet"
-								}
-							],
 							"refocusActions": [
 								{
 									"trigger": [
@@ -3793,7 +3787,20 @@
 									]
 								}
 							],
-							"unfocusActions": []
+							"unfocusActions": [],
+							"actions": [
+								{
+									"trigger": [],
+									"actions": [
+										{
+											"type": [
+												5,
+												"caelyra_not_accepted_yet"
+											]
+										}
+									]
+								}
+							]
 						},
 						{
 							"chainId": "caelyra_not_accepted_yet",
@@ -3802,59 +3809,6 @@
 									"type": [
 										0,
 										"caelyra_ask_for_help_giberrish"
-									]
-								}
-							],
-							"chainAdvancements": [
-								{
-									"requirements": [
-										{
-											"type": [
-												1,
-												"yes"
-											]
-										},
-										{
-											"type": [
-												1,
-												"quest"
-											]
-										}
-									],
-									"nextChain": "caelyra_accept_witch_visit",
-									"completionActions": [
-										{
-											"type": [
-												0,
-												"caelyra_accepted_to_help"
-											]
-										},
-										{
-											"type": [
-												3,
-												"club",
-												1
-											]
-										}
-									]
-								},
-								{
-									"requirements": [
-										{
-											"type": [
-												1,
-												"no"
-											]
-										}
-									],
-									"nextChain": "caelyra_coward",
-									"completionActions": [
-										{
-											"type": [
-												0,
-												"caelyra_coward_intro"
-											]
-										}
 									]
 								}
 							],
@@ -3933,6 +3887,67 @@
 											]
 										}
 									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"yes"
+											]
+										},
+										{
+											"type": [
+												1,
+												"quest"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_accepted_to_help"
+											]
+										},
+										{
+											"type": [
+												3,
+												"club",
+												1
+											]
+										},
+										{
+											"type": [
+												5,
+												"caelyra_accept_witch_visit"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"no"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_coward_intro"
+											]
+										},
+										{
+											"type": [
+												5,
+												"caelyra_coward"
+											]
+										}
+									]
 								}
 							]
 						},
@@ -3943,27 +3958,6 @@
 									"type": [
 										0,
 										"caelyra_coward_speech"
-									]
-								}
-							],
-							"chainAdvancements": [
-								{
-									"requirements": [
-										{
-											"type": [
-												1,
-												"im_sorry"
-											]
-										}
-									],
-									"nextChain": "caelyra_not_accepted_yet",
-									"completionActions": [
-										{
-											"type": [
-												0,
-												"caelyra_coward_apologized"
-											]
-										}
 									]
 								}
 							],
@@ -4021,32 +4015,35 @@
 											]
 										}
 									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"im_sorry"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_coward_apologized"
+											]
+										},
+										{
+											"type": [
+												5,
+												"caelyra_not_accepted_yet"
+											]
+										}
+									]
 								}
 							]
 						},
 						{
 							"chainId": "caelyra_accept_witch_visit",
-							"chainAdvancements": [
-								{
-									"requirements": [
-										{
-											"type": [
-												1,
-												"no"
-											]
-										}
-									],
-									"nextChain": "coward_accepted_to_help",
-									"completionActions": [
-										{
-											"type": [
-												0,
-												"caelyra_coward_intro"
-											]
-										}
-									]
-								}
-							],
 							"refocusActions": [
 								{
 									"trigger": [],
@@ -4111,32 +4108,35 @@
 											]
 										}
 									]
-								}
-							]
-						},
-						{
-							"chainId": "coward_accepted_to_help",
-							"chainAdvancements": [
+								},
 								{
-									"requirements": [
+									"trigger": [
 										{
 											"type": [
 												1,
-												"im_sorry"
+												"no"
 											]
 										}
 									],
-									"nextChain": "coward_accepted_to_help",
-									"completionActions": [
+									"actions": [
 										{
 											"type": [
 												0,
-												"caelyra_coward_apologized"
+												"caelyra_coward_intro"
+											]
+										},
+										{
+											"type": [
+												5,
+												"caelyra_coward_accepted_to_help"
 											]
 										}
 									]
 								}
-							],
+							]
+						},
+						{
+							"chainId": "caelyra_coward_accepted_to_help",
 							"chatRestActions": [
 								{
 									"type": [
@@ -4199,6 +4199,30 @@
 											]
 										}
 									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"im_sorry"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_coward_apologized"
+											]
+										},
+										{
+											"type": [
+												5,
+												"caelyra_coward_accepted_to_help"
+											]
+										}
+									]
 								}
 							]
 						}
@@ -4229,10 +4253,17 @@
 								}
 							],
 							"unfocusActions": [],
-							"chainAdvancements": [
+							"actions": [
 								{
-									"requirements": [],
-									"nextChain": "thymea_offer_life"
+									"trigger": [],
+									"actions": [
+										{
+											"type": [
+												5,
+												"thymea_offer_life"
+											]
+										}
+									]
 								}
 							]
 						},
@@ -4241,25 +4272,24 @@
 							"refocusActions": [
 								{
 									"trigger": [
-										{}
+										{
+											"type": [
+												1,
+												"hi"
+											]
+										}
 									],
-									"actions": []
-								}
-							],
-							"unfocusActions": [
-								{
-									"type": [
-										5,
-										""
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_no_life_refocus"
+											]
+										}
 									]
 								}
 							],
-							"chainAdvancements": [
-								{
-									"requirements": [],
-									"nextChain": ""
-								}
-							],
+							"unfocusActions": [],
 							"actions": [
 								{
 									"trigger": [
@@ -4267,6 +4297,44 @@
 											"type": [
 												1,
 												"yes"
+											]
+										},
+										{
+											"type": [
+												4,
+												"gold",
+												3
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												4,
+												"life"
+											]
+										},
+										{
+											"type": [
+												0,
+												"thymea_life_skill_acquisition"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"yes"
+											]
+										},
+										{
+											"type": [
+												3,
+												"gold",
+												3
 											]
 										}
 									],
@@ -4307,40 +4375,6 @@
 									"type": [
 										0,
 										"thymea_no_life_unfocus"
-									]
-								}
-							],
-							"chainAdvancements": [
-								{
-									"requirements": [
-										{
-											"type": [
-												1,
-												"yes"
-											]
-										},
-										{
-											"type": [
-												3,
-												"gold",
-												3
-											]
-										}
-									],
-									"nextChain": "thymea_n",
-									"completionActions": [
-										{
-											"type": [
-												0,
-												"thymea_life_skill_acquisition"
-											]
-										},
-										{
-											"type": [
-												4,
-												"life"
-											]
-										}
 									]
 								}
 							],
@@ -4421,11 +4455,6 @@
 				},
 				{
 					"typeStr": "8",
-					"name": "chainAdvancements",
-					"opt": true
-				},
-				{
-					"typeStr": "8",
 					"name": "actions",
 					"opt": true
 				},
@@ -4478,61 +4507,6 @@
 		},
 		{
 			"name": "npcResponse@responses@refocusActions@actions",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "9:NpcResponseActionType",
-					"name": "type",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponse@responses@chainAdvancements",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "8",
-					"name": "requirements",
-					"kind": null
-				},
-				{
-					"typeStr": "8",
-					"name": "completionActions",
-					"opt": true
-				},
-				{
-					"typeStr": "6:npcResponse@responses",
-					"name": "nextChain",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponse@responses@chainAdvancements@requirements",
-			"props": {
-				"hide": true
-			},
-			"separators": [],
-			"lines": [],
-			"columns": [
-				{
-					"typeStr": "9:NpcResponceChainAdvanceRequirementType",
-					"name": "type",
-					"kind": null
-				}
-			]
-		},
-		{
-			"name": "npcResponse@responses@chainAdvancements@completionActions",
 			"props": {
 				"hide": true
 			},
@@ -4871,6 +4845,10 @@
 				{
 					"id": "thymea_no_life_unfocus",
 					"text": "Farewell, dear traveler.\nMay the winds of fate guide you safely until our paths cross once more, and remember - the secrets of life patiently await your return."
+				},
+				{
+					"id": "thymea_no_life_refocus",
+					"text": "Ah, you have returned, dear traveler.\nTell me, have you gathered the three gold coins required to embark on your transformation, or must destiny still provide them?"
 				},
 				{
 					"id": "thymea_life_skill_acquisition",
@@ -5284,6 +5262,19 @@
 				},
 				{
 					"name": "HasItem",
+					"args": [
+						{
+							"name": "item",
+							"typeStr": "6:item"
+						},
+						{
+							"name": "amount",
+							"typeStr": "3"
+						}
+					]
+				},
+				{
+					"name": "DoesNotHaveItem",
 					"args": [
 						{
 							"name": "item",

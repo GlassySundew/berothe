@@ -9,9 +9,11 @@ enum NpcResponseType {
 	GENERATE_ITEM( itemDescId : String, amount : Int );
 	UNFOCUS;
 	GRANT_SKILL( skillDescId : String );
+	SET_CHAIN( chainId : String );
 }
 
-inline function fromCdb( entry : Data.NpcResponseActionType ) : NpcResponseType {
+#if !debug inline #end
+function fromCdb( entry : Data.NpcResponseActionType ) : NpcResponseType {
 	return switch entry {
 		case Say( text ): SAY( text.id.toString() );
 		case GiveQuest( quest ): GIVE_QUEST( quest.id.toString() );
@@ -19,5 +21,6 @@ inline function fromCdb( entry : Data.NpcResponseActionType ) : NpcResponseType 
 		case GenerateItem( item, amount ): GENERATE_ITEM( item.id.toString(), amount );
 		case Unfocus: UNFOCUS;
 		case GrantSkill( skill ): GRANT_SKILL( skill.id.toString() );
+		case SetChain( chain ): SET_CHAIN( chain.chainId.toString() );
 	}
 }

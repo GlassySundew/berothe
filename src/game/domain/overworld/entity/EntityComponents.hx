@@ -26,7 +26,7 @@ class EntityComponents {
 
 	public function add( component : EntityComponent ) {
 		#if debug
-		Assert.notExistsInClassMap( component, container );
+		Assert.notExistsInClassMap( component.classType, container );
 		#end
 
 		component.attachToEntity( entity );

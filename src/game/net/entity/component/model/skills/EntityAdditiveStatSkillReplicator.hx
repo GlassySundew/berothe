@@ -8,8 +8,8 @@ class EntityAdditiveStatSkillReplicator extends NetNode {
 	public final skill : EntityAdditiveStatSkillBase;
 
 	public function new( skill : EntityAdditiveStatSkillBase, ?parent ) {
-		super( parent );
 		this.skill = skill;
+		super( parent );
 	}
 
 	override function alive() {

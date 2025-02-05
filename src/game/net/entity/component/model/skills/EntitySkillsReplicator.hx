@@ -20,9 +20,6 @@ class EntitySkillsReplicator extends NetNode {
 	public function new( skillsContainer : EntitySkillContainer, ?parent ) {
 		super( parent );
 		this.skillsContainer = skillsContainer;
-	}
-
-	public function followEntityServer( entityRepl : EntityReplicator ) {
 		skillsContainer.container.stream.observe( onSkillAdded );
 	}
 
@@ -36,6 +33,8 @@ class EntitySkillsReplicator extends NetNode {
 		var skillRepl = new EntityAdditiveStatSkillReplicator( skill, this );
 
 		Assert.isFalse( skills.exists( untyped skill.classType.__clid ) );
+
+		trace( "creating skill replicator" );
 
 		skills[skill.desc.type] = skillRepl;
 	}

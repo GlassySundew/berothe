@@ -93,7 +93,7 @@ class NpcQuestGiver extends EntityBehaviourBase {
 		}
 
 		triggerOnApproach( someEntity );
-		checkChainProgressions( someEntity );
+		performCurrentChainActionIfFullfilled( someEntity );
 	}
 
 	inline function onSomeEntitySaidSomething( someEntity : OverworldEntity, i, msg : EntityMessageVO ) {
@@ -105,7 +105,7 @@ class NpcQuestGiver extends EntityBehaviourBase {
 		var hasRefocused = someEntity != currentFocus;
 		focusOnEntity( someEntity );
 		triggerOnSpeech( someEntity, msg.message, hasRefocused );
-		checkChainProgressions( someEntity );
+		performCurrentChainActionIfFullfilled( someEntity );
 	}
 
 	inline function focusOnEntity( someEntity : OverworldEntity ) {
@@ -170,7 +170,8 @@ class NpcQuestGiver extends EntityBehaviourBase {
 
 	inline function containsEnum<T : EnumValue>( value : T, enums : Array<T> ) {}
 
-	inline function triggerOnApproach( someEntity : OverworldEntity ) {
+	#if !debug inline #end
+	function triggerOnApproach( someEntity : OverworldEntity ) {
 		var currentChain = getCurrentChain( someEntity );
 		Assert.notNull( currentChain );
 		for ( action in currentChain.refocusActions ) {
@@ -196,13 +197,6 @@ class NpcQuestGiver extends EntityBehaviourBase {
 			}
 			performActions( someEntity, currentChain.chatRestActions );
 		} else {
-			for ( chainAdvance in currentChain.chainAdvancements ) {
-				if ( areRequirementsFulfilled( someEntity, text, chainAdvance.requirements ) ) {
-					progressChainTo( someEntity, chainAdvance, chainAdvance.nextChainId );
-					trace( "triggered speech, advancing to " + chainAdvance );
-					return;
-				}
-			}
 			for ( action in currentChain.actions ) {
 				if ( areRequirementsFulfilled( someEntity, text, action.triggers ) ) {
 					performActions( someEntity, action.actions );
@@ -214,26 +208,26 @@ class NpcQuestGiver extends EntityBehaviourBase {
 		}
 	}
 
-	/**
-		checks chain progessions without requirements
-	**/
-	inline function checkChainProgressions( someEntity : OverworldEntity ) {
+	#if !debug inline #end
+	function performCurrentChainActionIfFullfilled(
+		someEntity : OverworldEntity,
+	) {
 		var currentChain = getCurrentChain( someEntity );
-		for ( chainProgress in currentChain.chainAdvancements )
-			if ( areRequirementsFulfilled( someEntity, chainProgress.requirements ) ) {
-				progressChainTo( someEntity, chainProgress, chainProgress.nextChainId );
-				break;
+		for ( action in currentChain.actions ) {
+			if ( areRequirementsFulfilled( someEntity, null, action.triggers ) ) {
+				performActions( someEntity, action.actions );
+				return;
 			}
+		}
 	}
 
 	inline function progressChainTo(
 		someEntity : OverworldEntity,
-		trigger : ChainAdvanceTrigger,
 		chainId : String
 	) {
-		performActions( someEntity, trigger.completionActions );
 		interactorsMemory[someEntity.id] = chainId;
 		onSomeEntityMoved( someEntity );
+		trace( "shifting chain to:" + chainId );
 	}
 
 	#if !debug inline #end
@@ -263,9 +257,8 @@ class NpcQuestGiver extends EntityBehaviourBase {
 						DataStorage.inst.skillStorage.getById( skillDescId )
 					);
 					focusEntModel.skills.add( skill );
-
-					// skill.
-					// focusEntModel.
+				case SET_CHAIN( chainId ):
+					progressChainTo( someEntity, chainId );
 			}
 		}
 	}
@@ -276,14 +269,15 @@ class NpcQuestGiver extends EntityBehaviourBase {
 		?textSaid : Null<String>,
 		requirements : Array<NpcActivationTriggerType>
 	) {
-		var result = requirements.length == 0 ? true : false;
+		var model = someEntity.components.get( EntityModelComponent );
+		var result = true;
 		for ( req in requirements ) {
 			switch req {
-				case TRIGGER_ON_APPROACH: result = result && true;
+				case TRIGGER_ON_APPROACH:
 				case TEXT_SAID( awaitSpeechId ):
 					if ( textSaid == null ) {
-						result = result && false;
-						continue;
+						result = false;
+						break;
 					}
 					var speechAwaitEntry = Data.npcAwaitSpeech.resolve( awaitSpeechId );
 
@@ -291,11 +285,27 @@ class NpcQuestGiver extends EntityBehaviourBase {
 					for ( speechAwait in speechAwaitEntry.samples ) {
 						if ( StringTools.contains( textSaid, speechAwait.text ) ) {
 							isSpeechFulfilled = true;
+							break;
 						}
 					}
-					result = result || isSpeechFulfilled;
+					result = result && isSpeechFulfilled;
 				case QUEST_COMPLETED( questId ): throw new NotImplementedException();
-				case HAS_ITEM( itemId, amount ): throw new NotImplementedException();
+				case HAS_ITEM( itemId, amount ):
+					if ( !model.inventory.hasItem(
+						DataStorage.inst.itemStorage.getById( itemId ),
+						amount
+					) ) {
+						result = false;
+						break;
+					}
+				case DOES_NOT_HAVE_ITEM( itemId, amount ):
+					if ( model.inventory.hasItem(
+						DataStorage.inst.itemStorage.getById( itemId ),
+						amount
+					) ) {
+						result = false;
+						break;
+					}
 			}
 		}
 		return result;

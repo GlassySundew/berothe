@@ -22,7 +22,7 @@ class EntitySkillContainer {
 
 	public function add( skill : EntityAdditiveStatSkillBase ) {
 		#if debug
-		Assert.notExistsInClassMap( skill, container );
+		Assert.notExistsInClassMap( skill.classType, container );
 		#end
 
 		skill.attachToEntity( entity );
