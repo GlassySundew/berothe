@@ -27,7 +27,7 @@ class PopupBase extends Process {
 		return cast popups.filter( m -> return Type.getClass( m ) == cast popupCl )[0];
 	}
 
-	var ca : ControllerAccess<ControllerAction>;
+	var escapeCa : ControllerAccess<EscapeAction>;
 
 	final contentFlow : Flow;
 	final onResizeSignal = new Signal();
@@ -54,9 +54,9 @@ class PopupBase extends Process {
 		contentFlow.verticalSpacing = 5;
 		contentFlow.verticalAlign = Middle;
 
-		ca = Main.inst.controller.createAccess();
-		ca.takeExclusivity();
-		ca.lock( 0.1 );
+		escapeCa = Main.inst.escapeController.createAccess();
+		escapeCa.takeExclusivity();
+		escapeCa.lock( 0.1 );
 
 		onResizeCb = onResizeSignal.dispatch;
 	}
@@ -73,7 +73,7 @@ class PopupBase extends Process {
 
 		if (
 			escapableByKey
-			&& ca.isPressed( Escape ) //
+			&& escapeCa.isPressed( ESCAPE ) //
 		) {
 			destroy();
 		}
@@ -84,13 +84,13 @@ class PopupBase extends Process {
 	override function onDispose() {
 		super.onDispose();
 
-		ca.releaseExclusivity();
-		ca.dispose();
+		escapeCa.releaseExclusivity();
+		escapeCa.dispose();
 
 		popups.remove( this );
 
 		if ( popups.length > 0 ) {
-			popups[popups.length - 1].ca.takeExclusivity();
+			popups[popups.length - 1].escapeCa.takeExclusivity();
 			popups[popups.length - 1].onFocus();
 		}
 	}

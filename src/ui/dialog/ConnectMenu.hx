@@ -43,20 +43,10 @@ class ConnectComp extends Flow implements h2d.domkit.Object {
 		</connect-comp>
 	
 	// @formatter:on
-	var style : Style;
 
 	public function new( ?parent ) {
 		super( parent );
 		initComponent();
-
-		style = new Style();
-		style.load( Res.domkit.connectMenu );
-		style.addObject( this );
-	}
-
-	override function sync( ctx : RenderContext ) {
-		super.sync( ctx );
-		style.sync();
 	}
 }
 

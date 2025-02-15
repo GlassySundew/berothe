@@ -46,8 +46,8 @@ class EntityMovementControlComponent extends EntityClientComponent {
 	}
 
 	function update( dt : Float, tmod : Float ) {
-		var lx = ca.getAnalogValue2( MoveLeft, MoveRight );
-		var ly = ca.getAnalogValue2( MoveDown, MoveUp );
+		var lx = ca.getAnalogValue2( MOVE_LEFT, MOVE_RIGHT );
+		var ly = ca.getAnalogValue2( MOVE_DOWN, MOVE_UP );
 
 		if ( Math.abs( lx ) == 1 && Math.abs( ly ) == 1 ) { // wasd cornering
 			lx *= Math.cos( Const.FOURTY_FIVE_DEGREE_RAD );
@@ -62,8 +62,8 @@ class EntityMovementControlComponent extends EntityClientComponent {
 			var s = leftDist * model.stats.speed.amount.getValue() * tmod;
 			var inputDirX = Math.cos( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
 			var inputDirY = -Math.sin( leftAng + Const.FOURTY_FIVE_DEGREE_RAD ) * s;
-			entity.transform.velX.val += inputDirX;// * Boot.inst.deltaTime * 60;
-			entity.transform.velY.val += inputDirY;// * Boot.inst.deltaTime * 60;
+			entity.transform.velX.val += inputDirX; // * Boot.inst.deltaTime * 60;
+			entity.transform.velY.val += inputDirY; // * Boot.inst.deltaTime * 60;
 		}
 	}
 }

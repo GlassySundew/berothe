@@ -1,3 +1,4 @@
+import util.Assets;
 import core.MutableProperty;
 import hxd.Timer;
 import hxd.Res;

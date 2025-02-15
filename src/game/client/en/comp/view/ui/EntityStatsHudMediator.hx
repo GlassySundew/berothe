@@ -1,5 +1,6 @@
 package game.client.en.comp.view.ui;
 
+import h2d.Object;
 import rx.disposables.Composite;
 import rx.disposables.ISubscription;
 import game.domain.overworld.item.model.ItemSlot;
@@ -28,13 +29,14 @@ class EntityStatsHudMediator {
 
 	public function new(
 		model : EntityModelComponent,
-		entity : OverworldEntity
+		entity : OverworldEntity,
+		parent : Object
 	) {
 		this.stats = model.stats;
 		this.entity = entity;
 		this.model = model;
 
-		view = new EntityStatsHudViewMediator( this, Main.inst.botLeftHud );
+		view = new EntityStatsHudViewMediator( this, parent );
 
 		entity.components.onAppear(
 			EntityAttackListComponent,

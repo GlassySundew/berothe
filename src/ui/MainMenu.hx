@@ -93,7 +93,7 @@ class MainMenu extends PopupBase {
 		// }, 10 );
 		#end
 
-		ca.releaseExclusivity();
+		escapeCa.releaseExclusivity();
 
 		onResize();
 	}

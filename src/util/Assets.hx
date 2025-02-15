@@ -1,5 +1,7 @@
 package util;
 
+import ui.CustomFlow;
+import h2d.domkit.Style;
 import dn.heaps.assets.Aseprite;
 import dn.heaps.assets.Atlas;
 import dn.heaps.slib.*;
@@ -35,11 +37,11 @@ class Assets {
 
 	static var music : dn.heaps.Sfx;
 
+	public static var styleCommon : Style;
+
 	public static function init() {
 
-		fontPixel16 = hxd.Res.fonts.lookout.toSdfFont( 16, Alpha, 0.5, 0.0 );
-		// fontPixel16 = hxd.Res.fonts.Haversham_fnt.toFont();
-		// fontPixel16.resizeTo( 16 );
+		fontPixel16 = hxd.Res.fonts.lookout_sdf_fnt.toSdfFont( 16, Alpha, 0.5, 0.0 );
 
 		fontPixel32 = fontPixel16.clone();
 		fontPixel32.resizeTo( 32 );
@@ -61,6 +63,21 @@ class Assets {
 		ui.defineAnim( "keyboard_icon", "0-1" );
 
 		healthBarStat = new StatAsset( uiAseDict.health_bg, uiAseDict.health_stat );
+
+		styleCommon = new Style();
+		styleCommon.load( Res.domkit.common, true );
+		#if debug
+		styleCommon.allowInspect = true;
+		#end
+	}
+
+	public static function bindStyle( style : Style, flow : CustomFlow ) {
+		style.addObject( flow );
+		flow.onRemoveSignal.add(() -> style.removeObject( flow ) );
+	}
+
+	public static function update( dt : Float ) {
+		styleCommon.sync( dt );
 	}
 
 	public static function playMusic() {

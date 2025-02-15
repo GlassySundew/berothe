@@ -1505,7 +1505,7 @@
 			"type": "box",
 			"name": "meadow_transition",
 			"props": {
-				"type": 3,
+				"type": 2,
 				"$cdbtype": "locationObjContainerTypeDF",
 				"extra": "",
 				"id": "",

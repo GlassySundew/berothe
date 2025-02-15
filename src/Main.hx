@@ -1,3 +1,4 @@
+import ui.core.ShadowedText;
 import h2d.Flow;
 import ui.CustomFlow;
 import hxd.Event;
@@ -43,6 +44,7 @@ class Main extends Process {
 	public static var inst : Main;
 
 	public var console( default, null ) : ui.Console;
+	public var escapeController( default, null ) : Controller<EscapeAction>;
 	public var controller( default, null ) : Controller<ControllerAction>;
 	public var ca( default, null ) : ControllerAccess<ControllerAction>;
 	public var save( default, null ) : Save;
@@ -105,19 +107,21 @@ class Main extends Process {
 
 		root.add( console, Const.DP_UI_FRONT );
 
-		hudLayout = new CustomFlow();
+		hudLayout = new CustomFlowComponent();
 		hudLayout.customFillHeight = true;
 		hudLayout.customFillWidth = true;
 
-		botRightHud = new Flow( hudLayout );
+		botRightHud = new CustomFlowComponent( hudLayout );
 		hudLayout.getProperties( botRightHud ).isAbsolute = true;
 		hudLayout.getProperties( botRightHud ).align( Bottom, Right );
 
-		botLeftHud = new Flow( hudLayout );
+		botLeftHud = new CustomFlowComponent( hudLayout );
+		botLeftHud.layout = Vertical;
+		hudLayout.horizontalAlign = Left;
 		hudLayout.getProperties( botLeftHud ).isAbsolute = true;
 		hudLayout.getProperties( botLeftHud ).align( Bottom, Left );
 
-		topRightHud = new Flow( hudLayout );
+		topRightHud = new CustomFlowComponent( hudLayout );
 		topRightHud.layout = Vertical;
 		topRightHud.horizontalAlign = Right;
 		hudLayout.getProperties( topRightHud ).isAbsolute = true;
@@ -125,6 +129,8 @@ class Main extends Process {
 
 		root.add( hudLayout, Const.DP_UI );
 
+		Assets.bindStyle( Assets.styleCommon, hudLayout );
+		
 		#if debug
 		createFpsCounter();
 		#if game_tmod
@@ -134,7 +140,7 @@ class Main extends Process {
 	}
 
 	function createFpsCounter() {
-		var fps = new Text( Assets.fontPixel16 );
+		var fps = new ShadowedText( Assets.fontPixel16 );
 
 		topRightHud.addChild( fps );
 
@@ -151,30 +157,31 @@ class Main extends Process {
 
 	function initGamePadController() {
 		controller = Controller.createFromAbstractEnum( ControllerAction );
+		escapeController = Controller.createFromAbstractEnum( EscapeAction );
+
 		ca = controller.createAccess();
 		// ca.lockCondition
-		controller.bindKeyboard( MoveUp, [Key.UP, Key.W] );
-		controller.bindKeyboard( MoveLeft, [Key.LEFT, Key.A] );
-		controller.bindKeyboard( MoveDown, [Key.DOWN, Key.S] );
-		controller.bindKeyboard( MoveRight, [Key.RIGHT, Key.D] );
+		controller.bindKeyboard( MOVE_UP, [Key.UP, Key.W] );
+		controller.bindKeyboard( MOVE_LEFT, [Key.LEFT, Key.A] );
+		controller.bindKeyboard( MOVE_DOWN, [Key.DOWN, Key.S] );
+		controller.bindKeyboard( MOVE_RIGHT, [Key.RIGHT, Key.D] );
 
-		controller.bindPadLStick4( MoveLeft, MoveRight, MoveUp, MoveDown );
+		controller.bindPadLStick4( MOVE_LEFT, MOVE_RIGHT, MOVE_UP, MOVE_DOWN );
 
-		controller.bindKeyboard( Action, Key.E );
-		controller.bindKeyboard( DropItem, Key.Q );
-		controller.bindKeyboard( ToggleInventory, Key.TAB );
-		controller.bindKeyboard( ToggleCraftingMenu, Key.C );
-		controller.bindKeyboard( Attack, Key.F );
+		controller.bindKeyboard( ACTION, Key.E );
+		controller.bindKeyboard( DROP_ITEM, Key.Q );
+		controller.bindKeyboard( TOGGLE_INVENTORY, Key.TAB );
+		controller.bindKeyboard( ATTACK, Key.F );
 
-		controller.bindKeyboard( Escape, Key.ESCAPE );
+		escapeController.bindKeyboard( ESCAPE, Key.ESCAPE );
 
-		controller.bindPad( Attack, X );
+		controller.bindPad( ATTACK, X );
 
 		Boot.inst.s3d.addEventListener( onSceneEvent );
 
 		// saving confinured attack pad code for emulation with mouse click
 		@:privateAccess
-		for ( binding in controller.bindings[Attack] ) {
+		for ( binding in controller.bindings[ATTACK] ) {
 			if ( binding.padButton != null ) {
 				attackPadBind = binding.padButton;
 				break;
@@ -240,6 +247,8 @@ class Main extends Process {
 
 		onUpdate.dispatch();
 		super.update();
+
+		Assets.update( dt );
 	}
 }
 #end

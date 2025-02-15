@@ -33,7 +33,7 @@ class EntityAttackControlComponent extends EntityClientComponent {
 	}
 
 	function update( dt : Float, tmod : Float ) {
-		var isControlApplied = controller.isDown( Attack );
+		var isControlApplied = controller.isDown( ATTACK );
 
 		if ( isControlApplied ) attackList.attack();
 	}

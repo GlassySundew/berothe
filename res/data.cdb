@@ -37,7 +37,7 @@
 				{
 					"id": "playerStartLocation",
 					"value": {
-						"location": "grassy"
+						"location": "start"
 					}
 				},
 				{
@@ -911,7 +911,7 @@
 					"properties": {
 						"dynamics": true,
 						"model": {
-							"displayName": "Caelyra",
+							"displayName": "Thymea",
 							"id": "model"
 						},
 						"rigidBodyTorso": {
@@ -3052,15 +3052,103 @@
 					"typeStr": "0",
 					"name": "id",
 					"scope": null
+				},
+				{
+					"typeStr": "8",
+					"name": "progression"
 				}
 			],
 			"lines": [
 				{
-					"id": "life"
+					"id": "life",
+					"progression": [
+						{
+							"points": 4,
+							"level": 1,
+							"xpReq": 50
+						},
+						{
+							"points": 6,
+							"level": 2,
+							"xpReq": 85
+						},
+						{
+							"points": 8,
+							"level": 3,
+							"xpReq": 125
+						},
+						{
+							"points": 10,
+							"level": 4,
+							"xpReq": 0
+						},
+						{
+							"points": 12,
+							"level": 5,
+							"xpReq": 0
+						},
+						{
+							"points": 14,
+							"level": 6,
+							"xpReq": 0
+						},
+						{
+							"points": 17,
+							"level": 7,
+							"xpReq": 0
+						},
+						{
+							"points": 20,
+							"level": 8,
+							"xpReq": 0
+						},
+						{
+							"points": 24,
+							"level": 9,
+							"xpReq": 0
+						},
+						{
+							"points": 29,
+							"level": 10,
+							"xpReq": 0
+						},
+						{
+							"points": 34,
+							"level": 11,
+							"xpReq": 0
+						},
+						{
+							"points": 40,
+							"level": 12,
+							"xpReq": 0
+						}
+					]
 				}
 			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "skill@progression",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "3",
+					"name": "level"
+				},
+				{
+					"typeStr": "4",
+					"name": "xpReq"
+				},
+				{
+					"typeStr": "4",
+					"name": "points"
+				}
+			]
 		},
 		{
 			"name": "entityView@animations",
@@ -3854,7 +3942,19 @@
 												1,
 												"hi"
 											]
-										},
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_not_yet_accepted_tries_to_evade"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
 										{
 											"type": [
 												1,
@@ -3895,7 +3995,32 @@
 												1,
 												"yes"
 											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"caelyra_accepted_to_help"
+											]
 										},
+										{
+											"type": [
+												3,
+												"club",
+												1
+											]
+										},
+										{
+											"type": [
+												5,
+												"caelyra_accept_witch_visit"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
 										{
 											"type": [
 												1,
@@ -4260,85 +4385,10 @@
 										{
 											"type": [
 												5,
-												"thymea_offer_life"
+												"thymea_not_accepted_yet"
 											]
 										}
 									]
-								}
-							]
-						},
-						{
-							"chainId": "thymea_offer_life",
-							"refocusActions": [
-								{
-									"trigger": [
-										{
-											"type": [
-												1,
-												"hi"
-											]
-										}
-									],
-									"actions": [
-										{
-											"type": [
-												0,
-												"thymea_no_life_refocus"
-											]
-										}
-									]
-								}
-							],
-							"unfocusActions": [],
-							"actions": [
-								{
-									"trigger": [
-										{
-											"type": [
-												1,
-												"yes"
-											]
-										},
-										{
-											"type": [
-												4,
-												"gold",
-												3
-											]
-										}
-									],
-									"actions": [
-										{
-											"type": [
-												4,
-												"life"
-											]
-										},
-										{
-											"type": [
-												0,
-												"thymea_life_skill_acquisition"
-											]
-										}
-									]
-								},
-								{
-									"trigger": [
-										{
-											"type": [
-												1,
-												"yes"
-											]
-										},
-										{
-											"type": [
-												3,
-												"gold",
-												3
-											]
-										}
-									],
-									"actions": []
 								}
 							]
 						},
@@ -4378,13 +4428,21 @@
 									]
 								}
 							],
+							"chatRestActions": [
+								{
+									"type": [
+										0,
+										"thymea_no_life_tries_to_evade"
+									]
+								}
+							],
 							"actions": [
 								{
 									"trigger": [
 										{
 											"type": [
 												1,
-												"hi"
+												"yes"
 											]
 										}
 									],
@@ -4392,7 +4450,13 @@
 										{
 											"type": [
 												0,
-												"thymea_no_life_tries_to_evade"
+												"thymea_offer_life"
+											]
+										},
+										{
+											"type": [
+												5,
+												"thymea_offer_life"
 											]
 										}
 									]
@@ -4410,7 +4474,165 @@
 										{
 											"type": [
 												0,
-												"thymea_no_life_tries_to_evade"
+												"thymea_offer_life"
+											]
+										},
+										{
+											"type": [
+												5,
+												"thymea_offer_life"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"bye"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												6
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"chainId": "thymea_offer_life",
+							"refocusActions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"hi"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_no_life_refocus"
+											]
+										}
+									]
+								}
+							],
+							"unfocusActions": [
+								{
+									"type": [
+										5,
+										"caelyra_not_accepted_yet"
+									]
+								},
+								{
+									"type": [
+										0,
+										"thymea_no_life_unfocus"
+									]
+								}
+							],
+							"actions": [
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"yes"
+											]
+										},
+										{
+											"type": [
+												4,
+												"gold",
+												3
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_life_not_enough_gold"
+											]
+										},
+										{
+											"type": [
+												5,
+												"thymea_not_accepted_yet"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"yes"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												4,
+												"life"
+											]
+										},
+										{
+											"type": [
+												0,
+												"thymea_life_skill_acquisition"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"no"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												0,
+												"thymea_no_life_refuses"
+											]
+										},
+										{
+											"type": [
+												5,
+												"thymea_not_accepted_yet"
+											]
+										}
+									]
+								},
+								{
+									"trigger": [
+										{
+											"type": [
+												1,
+												"bye"
+											]
+										}
+									],
+									"actions": [
+										{
+											"type": [
+												6
 											]
 										}
 									]
@@ -4422,11 +4644,17 @@
 										0,
 										"thymea_no_life_tries_to_evade"
 									]
+								},
+								{
+									"type": [
+										5,
+										"thymea_not_accepted_yet"
+									]
 								}
 							]
 						},
 						{
-							"chainId": "thymea_n",
+							"chainId": "thymea_life_acquired",
 							"refocusActions": [],
 							"unfocusActions": []
 						}
@@ -4775,6 +5003,34 @@
 					"text": "Another soul claimed by these forsaken walls."
 				},
 				{
+					"id": "no_skills",
+					"text": "Alas, your journey has not yet earned you any abilities."
+				},
+				{
+					"id": "friendly",
+					"text": "Toggles non-aggressive mode, ensuring your character engages peacefully with other players."
+				},
+				{
+					"id": "unfriendly",
+					"text": "Toggle your status to a hostile stance, provoking adversarial interactions with others."
+				},
+				{
+					"id": "skills",
+					"text": "Displays a concise summary of your acquired skills."
+				},
+				{
+					"id": "level",
+					"text": "Level"
+				},
+				{
+					"id": "life_name",
+					"text": "Life"
+				},
+				{
+					"id": "life_hitpoints",
+					"text": "hit points"
+				},
+				{
 					"id": "caelyra_intro_greeting",
 					"text": "Welcome, traveler.\nI am Caelyra, entrusted with gathering those who would stand against our foes.\nThe tale of your escape from the orcish prison proves your courage beyond doubt.\nWill you lend your strength to safeguard these walls and honor the valor that guided you here?"
 				},
@@ -4839,6 +5095,10 @@
 					"text": "I can sense your eagerness, yet the weight of your purse does not match your desire.\nReturn to me when you can offer three gold coins, and we shall continue your path onward."
 				},
 				{
+					"id": "thymea_no_life_refuses",
+					"text": "I see your heart has chosen another course, dear one.\nThe secrets of life's vitality remain, patiently waiting for those who dare to embrace them.\nShould you ever wish to awaken that hidden power, know that I shall be here to guide you."
+				},
+				{
 					"id": "thymea_no_life_tries_to_evade",
 					"text": "Your curiosity is as deep as the forest, yet let us not stray from our purpose.\nThe wisdom to fortify life awaits for three gold coins. Now, shall we continue?"
 				},
@@ -4859,6 +5119,16 @@
 				{
 					"title": "system",
 					"id": "unheard"
+				},
+				{
+					"title": "command descriptions",
+					"level": 1,
+					"id": "friendly"
+				},
+				{
+					"level": 1,
+					"title": "skills",
+					"id": "level"
 				},
 				{
 					"title": "npc responses",

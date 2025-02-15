@@ -1,15 +1,13 @@
 package game.net.entity.component.model.skills;
 
-import hxGeomAlgo.CCLabeler.Connectivity;
-import game.data.storage.skill.SkillDescription.SkillType;
 import net.NSIntMap.NSEnumMap;
-import game.domain.overworld.entity.skills.EntityAdditiveStatSkillBase;
-import util.Assert;
-import net.NSClassMap;
-import game.domain.overworld.entity.component.model.skills.EntitySkillContainer;
 import net.NetNode;
+import util.Assert;
+import game.data.storage.skill.SkillDescription.SkillType;
+import game.domain.overworld.entity.component.model.skills.EntitySkillContainer;
+import game.domain.overworld.entity.skills.EntityAdditiveStatSkillBase;
 
-class EntitySkillsReplicator extends NetNode {
+class EntitySkillsContainerReplicator extends NetNode {
 
 	@:s public final skills : NSEnumMap<
 		EntityAdditiveStatSkillReplicator,
@@ -23,9 +21,12 @@ class EntitySkillsReplicator extends NetNode {
 		skillsContainer.container.stream.observe( onSkillAdded );
 	}
 
-	public function followEntityClient( entity : EntityReplicator ) {
-		skills.subscribleWithMapping( ( classType, component ) -> {
-			Assert.notNull( component );
+	public function followClient( skillsContainer : EntitySkillContainer ) {
+		this.skillsContainer = skillsContainer;
+		skills.subscribleWithMapping( ( classType, skill ) -> {
+			Assert.notNull( skill );
+
+			skillsContainer.add( skill.skill );
 		} );
 	}
 

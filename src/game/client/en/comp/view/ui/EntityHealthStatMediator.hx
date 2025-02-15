@@ -2,10 +2,10 @@ package game.client.en.comp.view.ui;
 
 import Types.Number;
 import core.IProperty;
-import util.Assets;
-import domkit.Object;
-import h2d.Flow;
 import core.MutableProperty;
+import h2d.Flow;
+import h2d.Object;
+import util.Assets;
 import util.GameUtil;
 
 class EntityHealthStatMediator {
@@ -19,11 +19,12 @@ class EntityHealthStatMediator {
 
 	public function new(
 		propertyStat : IProperty<Number>,
-		propertyBg : IProperty<Number>
+		propertyBg : IProperty<Number>,
+		parent : Object
 	) {
 		this.propertyStat = propertyStat;
 		this.propertyBg = propertyBg;
-		view = new EntityHealthStatViewMediator( this );
+		view = new EntityHealthStatViewMediator( this, parent );
 
 		propertyStat.addOnValueImmediately( ( oldVal, val ) -> {
 			setStatVal( val );
@@ -56,9 +57,9 @@ class EntityHealthStatViewMediator {
 
 	public var comp : EntityHpStatComp;
 
-	public function new( mediator : EntityHealthStatMediator ) {
+	public function new( mediator : EntityHealthStatMediator, parent : Object ) {
 		this.mediator = mediator;
-		comp = new EntityHpStatComp( Main.inst.topRightHud );
+		comp = new EntityHpStatComp( parent );
 	}
 
 	public inline function dispose() {
@@ -71,21 +72,14 @@ class EntityHpStatComp extends Flow implements h2d.domkit.Object {
 	// @formatter:off
 	static var SRC =
 		<entity-hp-stat-comp 
-			layout="horizontal"
-			margin = "5"
-			hspacing = "10"
+			class="hud-container"
 		>
 			<stat-bar-comp(util.Assets.healthBarStat) 
 				public id="statComp" 
 				align = "middle left"
 			/>
 			<bitmap src={heartIcon}/>
-			<shadowed-text() 
-				public id = "statAmount"
-				align = "middle left"
-				offset-y = "-2"
-				min-width = "25"
-			/>
+			<text public id = "statAmount" class="numberStat" />
 		</entity-hp-stat-comp>
 
 	// @formatter:on

@@ -1,0 +1,13 @@
+.hud-container {
+  padding: 10;
+  hspacing: 10;
+  valign: top;
+}
+.hud-container > .numberStat {
+  offset-y: -2;
+}
+text {
+  font: url("fonts/lookout.fnt");
+  text-shadow: -1 1 #000000 1;
+  valign: middle;
+}

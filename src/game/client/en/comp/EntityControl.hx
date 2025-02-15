@@ -1,5 +1,8 @@
 package game.client.en.comp;
 
+import net.ClientController;
+import game.client.en.comp.view.ui.EntityInfoTextMediator;
+import ui.core.ShadowedText;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import util.Assert;
@@ -26,7 +29,11 @@ class EntityControl {
 
 	final ca : ControllerAccess<ControllerAction>;
 
-	public function new( entity : OverworldEntity, entityRepl : EntityReplicator ) {
+	public function new(
+		entity : OverworldEntity,
+		entityRepl : EntityReplicator,
+		cliCon : ClientController
+	) {
 		ca = Main.inst.controller.createAccess();
 		var entityDestroySub = Composite.create();
 
@@ -40,16 +47,23 @@ class EntityControl {
 			( _, modelComp ) -> {
 				modelComp.displayName.val = Settings.inst.params.nickname;
 
+				var bottomInfoMediator = new AdvancedStatInfoTextMediator(
+					modelComp,
+					Main.inst.botLeftHud
+				);
 				var statsMediator = new EntityStatsHudMediator(
 					modelComp,
 					entity,
+					Main.inst.botLeftHud
 				);
 				var inventoryMediator = new EntityInventoryHudMediator(
-					modelComp.inventory
+					modelComp.inventory,
+					Main.inst.botRightHud
 				);
 				var healthStatMediator = new EntityHealthStatMediator(
 					modelComp.hp,
-					modelComp.stats.maxHp.amount
+					modelComp.stats.maxHp.amount,
+					Main.inst.topRightHud
 				);
 
 				entityDestroySub.add( Subscription.create(() -> {

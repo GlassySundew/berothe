@@ -3017,6 +3017,69 @@
 							"rotationZ": -95.3
 						}
 					]
+				},
+				{
+					"type": "object",
+					"name": "sunflowers",
+					"props": {
+						"type": 4,
+						"props": {},
+						"$cdbtype": "locationObjContainerTypeDF"
+					},
+					"children": [
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -38.13,
+							"y": -505.54,
+							"z": 1,
+							"rotationZ": -35.3
+						},
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -63.83,
+							"y": -489.32,
+							"z": 1,
+							"rotationZ": -15
+						},
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": 4.79,
+							"y": -504.1,
+							"z": 1,
+							"rotationZ": -14.6
+						},
+						{
+							"type": "reference",
+							"name": "sunflower",
+							"source": "voxel/structures/sunflower/sunflower.enco",
+							"props": {
+								"entity": "sunflower",
+								"$cdbtype": "locationEntityDF"
+							},
+							"x": -16.19,
+							"y": -499.63,
+							"z": 1,
+							"rotationZ": 18
+						}
+					]
 				}
 			]
 		},
@@ -3156,6 +3219,70 @@
 			"x": 63.97,
 			"y": -570.84,
 			"rotationZ": -45
+		},
+		{
+			"type": "reference",
+			"name": "bee spawn",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -18.73,
+			"y": -470.23,
+			"z": 8.64
+		},
+		{
+			"type": "reference",
+			"name": "bee spawn",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -24.73,
+			"y": -465.23,
+			"z": 8.64
+		},
+		{
+			"type": "reference",
+			"name": "bee spawn",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -18.73,
+			"y": -461.23,
+			"z": 8.64
+		},
+		{
+			"type": "reference",
+			"name": "bee spawn",
+			"source": "voxel/characters/bee/bee.enco",
+			"props": {
+				"spawnedEntity": "bee",
+				"$cdbtype": "entitySpawnPointDF",
+				"emitter": {
+					"cooldown": 15,
+					"maxEntitiesPresent": 2
+				}
+			},
+			"x": -28.73,
+			"y": -476.23,
+			"z": 8.64
 		}
 	]
 }

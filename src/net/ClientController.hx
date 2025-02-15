@@ -1,5 +1,6 @@
 package net;
 
+import signals.Signal;
 #if server
 import game.net.player.PlayerReplicationService;
 #end
@@ -14,21 +15,29 @@ import util.Assert;
 import util.Repeater;
 import net.transaction.Transaction;
 
+enum InfoMessageType {
+	SKILLS;
+	TEXT( text : String );
+}
+
 /**
 	`ClientController` is a root net node for a singular player's channel
 **/
 class ClientController extends NetNode {
 
 	/** server-side **/
-	public var networkClient( default, null ) : NetworkClient;
-
 	#if server
+	public var networkClient( default, null ) : NetworkClient;
 	public var playerReplService( default, null ) : PlayerReplicationService;
 	#end
 
+	public var onInfoMessage( default, null ) = new Signal<InfoMessageType>();
+
 	public function new( networkClient : NetworkClient ) {
 		super();
+		#if server
 		this.networkClient = networkClient;
+		#end
 
 		// @:privateAccess
 		// var test = IPFetcher.get_peer_name( Std.downcast( networkClient, SocketClient ).socket.s.handle );
@@ -67,7 +76,12 @@ class ClientController extends NetNode {
 		#if client
 		Assert.notNull( GameClient.inst, "Error: game client is null ( probably this code has been executed on server )" );
 
-		entityRepl.entity.then( entity -> new EntityControl( entity, entityRepl ) );
+		entityRepl.entity.then(
+			entity -> new EntityControl(
+				entity,
+				entityRepl,
+				this
+			) );
 		GameClient.inst.controlledEntity.val = entityRepl;
 		#end
 	}

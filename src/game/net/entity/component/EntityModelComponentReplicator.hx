@@ -1,7 +1,7 @@
 package game.net.entity.component;
 
 import game.data.storage.skill.SkillDescription.SkillType;
-import game.net.entity.component.model.skills.EntitySkillsReplicator;
+import game.net.entity.component.model.skills.EntitySkillsContainerReplicator;
 import game.domain.overworld.entity.component.model.skills.EntitySkillContainer;
 import game.net.client.GameClient;
 import game.client.en.comp.view.EntityMessageVO;
@@ -29,7 +29,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
 	@:s var statusMessages : NSArray<EntityMessageVO> = new NSArray();
-	@:s var skillsRepl : EntitySkillsReplicator;
+	@:s var skillsRepl : EntitySkillsContainerReplicator;
 
 	public var modelComp( get, never ) : EntityModelComponent;
 	inline function get_modelComp() return Std.downcast( component, EntityModelComponent );
@@ -40,7 +40,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		statsRepl = new EntityStatsReplicator( modelComp.stats, entityRepl, this );
 		equipRepl = new EntityEquipReplicator( modelComp.inventory, entityRepl, this );
 		inventoryRepl = new EntityInventoryReplicator( modelComp.inventory, this );
-		skillsRepl = new EntitySkillsReplicator( modelComp.skills, this );
+		skillsRepl = new EntitySkillsContainerReplicator( modelComp.skills, this );
 
 		modelComp.factions.subscribe( ( i, val ) -> {
 			if ( val != null ) factionsRepl[i] = val.id;
@@ -68,6 +68,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 			var modelComp : EntityModelComponent = Std.downcast( comp, EntityModelComponent );
 			equipRepl.followClient( modelComp.inventory, entityRepl );
 			inventoryRepl.followClient( modelComp.inventory );
+			skillsRepl.followClient( modelComp.skills );
 			factionsRepl.subscribleWithMapping(
 				( i, faction ) -> {
 					modelComp.factions.set( i, DataStorage.inst.factionStorage.getById( faction ) );
@@ -167,6 +168,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 		statsRepl.unregister( host, ctx );
 		equipRepl.unregister( host, ctx );
 		inventoryRepl.unregister( host, ctx );
+		skillsRepl.unregister( host, ctx );
 		statusMessages.unregister( host, ctx );
 	}
 

@@ -53,7 +53,7 @@ class ViewStencil extends EntityViewExtensionComponentBase {
 							colorSet.USE_ALPHA = false;
 
 							stencilPass.addShader( colorSet );
-							var props = new h3d.shader.pbr.PropsValues( 0, 1, 0, 1 );
+							var props = new h3d.shader.pbr.PropsValues( 1, 1, 1, 1 );
 							stencilPass.addShader( props );
 						}
 

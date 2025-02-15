@@ -12,17 +12,14 @@ class StatBarComp extends Flow implements h2d.domkit.Object {
 
 	// @formatter:off
 	static var SRC =
-		<stat-bar-comp
-		>
+		<stat-bar-comp>
 			<flow layout="horizontal">
 				<flow id="bg" />
-				<mask id = "statValMask" position="absolute" >
-					<flow id="stat"  overflow = "hidden" >
+				<mask id="statValMask" position="absolute">
+					<flow id="stat" overflow="hidden">
 					</flow>
 				</mask>
-				
 			</flow>
-		
 		</stat-bar-comp>
 
 	// @formatter:on

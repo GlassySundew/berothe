@@ -1,5 +1,8 @@
 package game.net.client;
 
+import rx.ObservableFactory;
+import rx.Observable;
+import net.ClientController.InfoMessageType;
 import h3d.scene.Light;
 import future.Future;
 import graphics.BatchRenderer;
@@ -59,11 +62,14 @@ class GameClient extends Process {
 	public final modelCache : ModelCache = new ModelCache();
 	public final disposed = new Future();
 
-	final subscription = Composite.create();
-	var imguiPanel : ImGuiGameClientDebug;
+	public final infoMessageStream = new Future<Observable<InfoMessageType>>();
 
+	final subscription = Composite.create();
+	final onClientInfoMessage = new Signal<InfoMessageType>();
+
+	var imguiPanel : ImGuiGameClientDebug;
 	var locationLights : hrt.prefab.Prefab;
-	var ca : ControllerAccess<ControllerAction>;
+	var escapeCa : ControllerAccess<EscapeAction>;
 	var cam : CameraController;
 
 	public function new() {
@@ -75,7 +81,7 @@ class GameClient extends Process {
 		#end
 
 		inst = this;
-		ca = Main.inst.controller.createAccess();
+		escapeCa = Main.inst.escapeController.createAccess();
 
 		createRootInLayers( Main.inst.root, Const.DP_BG );
 
@@ -114,6 +120,12 @@ class GameClient extends Process {
 		#if debug
 		imguiPanel = new game.debug.ImGuiGameClientDebug( GameClient.inst );
 		#end
+
+		Main.inst.cliCon.onAppear( cliCon -> {
+			infoMessageStream.resolve( ObservableFactory
+				.fromSignal( cliCon.onInfoMessage )
+				.append( ObservableFactory.fromSignal( onClientInfoMessage ) ) );
+		} );
 	}
 
 	public function consoleSay( text : String ) {
@@ -152,6 +164,10 @@ class GameClient extends Process {
 		modelRepl.sayText( text );
 	}
 
+	public function emitInfoMessage( type : InfoMessageType ) {
+		onClientInfoMessage.dispatch( type );
+	}
+
 	#if( client && debug )
 	function debugDraw() {
 		var physicsDebugView = new HeapsOimophysicsDebugDraw( Boot.inst.s3d );
@@ -173,7 +189,7 @@ class GameClient extends Process {
 
 		Client.inst.disconnect();
 
-		ca.dispose();
+		escapeCa.dispose();
 
 		currentLocationSelf.val = null;
 		if ( !controlledEntity?.getValue()?.entity.result?.disposed.isTriggered )
@@ -191,7 +207,7 @@ class GameClient extends Process {
 		currentLocationSelf.val?.physics.getDebugDraw()?.update();
 		currentLocationSelf.val?.physics?.drawDebug();
 
-		if ( ca.isPressed( Escape ) ) {
+		if ( escapeCa.isPressed( ESCAPE ) ) {
 			new PauseMenu( this, Main.inst.root, Main.inst );
 		}
 

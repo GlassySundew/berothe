@@ -1,5 +1,6 @@
 package game.client.en.comp.view.ui;
 
+import h2d.Object;
 import rx.disposables.Composite;
 import game.domain.overworld.item.model.ItemSlot;
 import game.domain.overworld.item.model.EquipItemSlot;
@@ -15,12 +16,15 @@ class EntityInventoryHudMediator {
 
 	public var inventorySlots : Array<ItemSlot>;
 
-	public function new( inventory : EntityInventory ) {
+	public function new(
+		inventory : EntityInventory,
+		parent : Object
+	) {
 		this.inventory = inventory;
 
 		setupSlots();
 
-		view = new EntityInventoryHudViewMediator( this, Main.inst.botRightHud );
+		view = new EntityInventoryHudViewMediator( this, parent );
 	}
 
 	public function dispose() {

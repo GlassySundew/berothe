@@ -11,9 +11,10 @@ class ItemReplicator extends NetNode {
 
 	public var item( default, null ) : Future<Item> = new Future();
 
-	@:s var itemDescriptionId : String;
-	@:s var id : String;
+	@:s final itemDescriptionId : String;
 	@:s final amount : NSMutableProperty<Int> = new NSMutableProperty();
+
+	@:s var id : String;
 
 	public function new( item : Item, ?parent ) {
 		super( parent );
@@ -40,9 +41,7 @@ class ItemReplicator extends NetNode {
 
 		var desc = DataStorage.inst.itemStorage.getById( itemDescriptionId );
 		var itemLocal = new Item( desc, id );
-
 		amount.subscribeProp( itemLocal.amount );
-
 		item.resolve( itemLocal );
 	}
 

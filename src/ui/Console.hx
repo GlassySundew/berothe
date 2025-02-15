@@ -54,14 +54,18 @@ class Console extends h2d.Console {
 	override function resetCommands() {
 		super.resetCommands();
 
-		addCommand( "unfriendly", "", [], () -> {
+		addCommand( "unfriendly", Data.locale.get( Data.LocaleKind.unfriendly ).text, [], () -> {
 			GameClient.inst?.setUnfriendly();
 			if ( GameClient.inst == null ) unconnectedResponce();
 		} );
 
-		addCommand( "friendly", "", [], () -> {
+		addCommand( "friendly", Data.locale.get( Data.LocaleKind.friendly ).text, [], () -> {
 			GameClient.inst?.setFriendly();
 			if ( GameClient.inst == null ) unconnectedResponce();
+		} );
+
+		addCommand( "skills", Data.locale.get( Data.LocaleKind.skills ).text, [], () -> {
+			GameClient.inst.emitInfoMessage( SKILLS );
 		} );
 	}
 
