@@ -151,7 +151,9 @@ class EntityModelComponent extends EntityComponent {
 	override function claimOwnage() {
 		super.claimOwnage();
 		hp.addOnValueImmediately( onHpChanged );
+
 		inventory.claimOwnage();
+		stats.maxHp.amount.addOnValue( ( _, _ ) -> subscribeHpRegen() );
 	}
 
 	override function attachToEntity( entity : OverworldEntity ) {
