@@ -21,10 +21,12 @@ import game.domain.overworld.entity.EntityComponent;
 
 class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
-	@:s final displayName : NSMutableProperty<String> = new NSMutableProperty<String>();
+	@:s public final displayName : NSMutableProperty<String> = new NSMutableProperty<String>();
+
 	@:s final factionsRepl : NSArray<String> = new NSArray();
 	@:s final isSleeping : NSMutableProperty<Bool> = new NSMutableProperty<Bool>();
 	@:s final hp : NSMutableProperty<Int> = new NSMutableProperty<Int>();
+
 	@:s var statsRepl : EntityStatsReplicator;
 	@:s var equipRepl : EntityEquipReplicator;
 	@:s var inventoryRepl : EntityInventoryReplicator;
@@ -162,6 +164,7 @@ class EntityModelComponentReplicator extends EntityComponentReplicatorBase {
 
 	override function unregister( host : NetworkHost, ?ctx : NetworkSerializer ) {
 		super.unregister( host, ctx );
+
 		displayName.unregister( host, ctx );
 		factionsRepl.unregister( host, ctx );
 		isSleeping.unregister( host, ctx );

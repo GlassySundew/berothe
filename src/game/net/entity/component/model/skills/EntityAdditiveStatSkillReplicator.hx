@@ -34,6 +34,5 @@ class EntityAdditiveStatSkillReplicator extends NetNode {
 
 		var desc = DataStorage.inst.skillStorage.getById( skillDescId );
 		skill = AdditiveStatSkillFactory.fromDescription( desc );
-
 	}
 }

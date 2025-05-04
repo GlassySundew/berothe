@@ -67,21 +67,18 @@ class OimoRigidBody implements IRigidBody {
 		x.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionX = value;
-				wakeUp();
 				updateTransform();
 			}
 		);
 		y.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionY = value;
-				wakeUp();
 				updateTransform();
 			}
 		);
 		z.addOnValue(
 			( oldVal, value ) -> {
 				rigidBody._transform._positionZ = value;
-				wakeUp();
 				updateTransform();
 			}
 		);
@@ -201,13 +198,15 @@ class OimoRigidBody implements IRigidBody {
 		velX.val = rigidBody._velX;
 		velY.val = rigidBody._velY;
 		velZ.val = rigidBody._velZ;
+
 		var oimoQuat = rigidBody._transform.getRotation().toQuat();
 		var hpsRotation = new Quat(
 			oimoQuat.x,
 			oimoQuat.y,
 			oimoQuat.z,
 			oimoQuat.w
-		).toMatrix()
+		)
+			.toMatrix()
 			.getEulerAngles();
 		rotationX.val = hpsRotation.x;
 		rotationY.val = hpsRotation.y;

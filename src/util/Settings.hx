@@ -4,7 +4,6 @@ import core.MutableProperty;
 
 class Settings extends util.tools.Settings<
 	{
-		nickname : String,
 		fullscreen : Bool,
 		orthographics : MutableProperty<Bool>,
 		saveFiles : Array<String>,
@@ -29,7 +28,6 @@ class Settings extends util.tools.Settings<
 
 	private function new() {
 		params = {
-			nickname : "unnamed player",
 			fullscreen : false,
 			orthographics : new MutableProperty( false ),
 			saveFiles : [],

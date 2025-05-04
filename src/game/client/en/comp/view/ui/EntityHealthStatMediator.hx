@@ -26,13 +26,8 @@ class EntityHealthStatMediator {
 		this.propertyBg = propertyBg;
 		view = new EntityHealthStatViewMediator( this, parent );
 
-		propertyStat.addOnValueImmediately( ( oldVal, val ) -> {
-			setStatVal( val );
-		} );
-
-		propertyBg.addOnValueImmediately( ( oldVal, val ) -> {
-			setBgVal( val );
-		} );
+		propertyStat.addOnValueImmediately( ( oldVal, val ) -> setStatVal( val ) );
+		propertyBg.addOnValueImmediately( ( oldVal, val ) -> setBgVal( val ) );
 	}
 
 	public inline function dispose() {

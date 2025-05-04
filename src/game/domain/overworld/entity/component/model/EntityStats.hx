@@ -1,17 +1,14 @@
 package game.domain.overworld.entity.component.model;
 
 import game.data.storage.DataStorage;
-import game.domain.overworld.entity.component.model.stat.EntityHPRegenStat;
-import game.domain.overworld.entity.component.model.stat.EntityMaxHpStat;
-import game.domain.overworld.entity.component.model.stat.EntityDefenceStat;
-import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
-import haxe.exceptions.NotImplementedException;
 import game.data.storage.entity.body.model.EntityEquipSlotDescription;
 import game.data.storage.entity.body.model.EntityModelDescription;
-import game.data.storage.entity.model.EntityEquipmentSlotType;
 import game.domain.overworld.entity.component.model.stat.EntityAdditiveStatBase;
 import game.domain.overworld.entity.component.model.stat.EntityAttackStat;
-import game.domain.overworld.entity.component.model.stat.EntityWeaponRangeStat;
+import game.domain.overworld.entity.component.model.stat.EntityDefenceStat;
+import game.domain.overworld.entity.component.model.stat.EntityHPRegenStat;
+import game.domain.overworld.entity.component.model.stat.EntityMaxHpStat;
+import game.domain.overworld.entity.component.model.stat.EntitySpeedStat;
 import game.domain.overworld.item.model.EquipItemSlot;
 
 class EntityStats {

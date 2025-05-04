@@ -5,11 +5,11 @@ import game.data.storage.location.LocationDescription;
 class LocationDescriptionStorage extends DescriptionStorageBase<LocationDescription, Data.Location> {
 
 	public function getStartLocationDescription() : LocationDescription {
-		var locationId = 
+		var locationId =
 			#if prod
-				DataStorage.inst.rule.playerStartLocation;
+			DataStorage.inst.rule.playerStartLocation;
 			#else
-				DataStorage.inst.rule.debugStartLocation;
+			DataStorage.inst.rule.debugStartLocation;
 			#end
 
 		return getById( locationId );

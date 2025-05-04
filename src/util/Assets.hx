@@ -41,7 +41,8 @@ class Assets {
 
 	public static function init() {
 
-		fontPixel16 = hxd.Res.fonts.lookout_sdf_fnt.toSdfFont( 16, Alpha, 0.5, 0.0 );
+		fontPixel16 = hxd.Res.fonts.lookout_sdf_fnt.toFont();
+		// fontPixel16 = hxd.Res.fonts.lookout_sdf_fnt.toSdfFont( 16, Alpha, 0.5, 0.0 );
 
 		fontPixel32 = fontPixel16.clone();
 		fontPixel32.resizeTo( 32 );

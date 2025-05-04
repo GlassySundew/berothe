@@ -31,10 +31,8 @@ class StatBarComp extends Flow implements h2d.domkit.Object {
 	inline function get_statVal() return Std.int( stat.background.width );
 	inline function set_statVal( v : Int ) {
 		statValMask.width = v;
-		return Std.int( stat.background.width = M.fclamp( v, stat.background.tile.width, Floats.MAX ) );
+		return stat.minWidth = stat.maxWidth = Std.int( M.fclamp( v, stat.background.tile.width, Floats.MAX ) );
 	}
-
-	final statCenterWidth : Int;
 
 	public function new( statAsset : StatAsset, ?parent ) {
 		super( parent );
@@ -44,7 +42,5 @@ class StatBarComp extends Flow implements h2d.domkit.Object {
 		var bgSG = bg.background = Assets.uiAse.toScaleGrid( statAsset.bg, 0, bg );
 
 		statValMask.height = Std.int( statSG.height );
-
-		statCenterWidth = Std.int( stat.background.tile.width - stat.background.borderRight - stat.background.borderLeft );
 	}
 }

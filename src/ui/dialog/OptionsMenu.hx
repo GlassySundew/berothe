@@ -31,26 +31,5 @@ class OptionsMenu extends PopupBase {
 		var horFlow = new Flow( contentFlow );
 		horFlow.layout = Horizontal;
 		horFlow.verticalAlign = Top;
-
-		var nickname = new ShadowedText( Assets.fontPixel16, horFlow );
-		nickname.text = "username: ";
-
-		nicknameInput = new TextInput( Assets.fontPixel16, horFlow );
-		nicknameInput.text = Settings.inst.params.nickname;
-		nicknameInput.onFocusLost = function ( e : Event ) {
-			Settings.inst.params.nickname = nicknameInput.text;
-			Settings.inst.saveSettings();
-		}
-
-		nicknameInput.inputWidth = 200;
-		nicknameInput.backgroundColor = 0x80808080;
-		
-		// nicknameInput.onKeyDown = function(e : Event) {
-		// 	if ( e.keyCode == Key.ENTER ) {
-		// 		Util.nickname = nicknameInput.text;
-		// 		Util.saveSettings();
-		// 		if ( onRemoveEvent != null ) onRemoveEvent();
-		// 	}
-		// }
 	}
 }

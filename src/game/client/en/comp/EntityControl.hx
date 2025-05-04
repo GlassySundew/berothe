@@ -45,8 +45,6 @@ class EntityControl {
 		entity.components.onAppear(
 			EntityModelComponent,
 			( _, modelComp ) -> {
-				modelComp.displayName.val = Settings.inst.params.nickname;
-
 				var bottomInfoMediator = new AdvancedStatInfoTextMediator(
 					modelComp,
 					Main.inst.botLeftHud
@@ -70,6 +68,7 @@ class EntityControl {
 					statsMediator.dispose();
 					inventoryMediator.dispose();
 					healthStatMediator.dispose();
+					bottomInfoMediator.dispose();
 				} ) );
 			}
 		);

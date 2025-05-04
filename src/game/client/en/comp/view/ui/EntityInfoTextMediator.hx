@@ -18,6 +18,10 @@ class AdvancedStatInfoTextMediator extends EntityInfoTextMediator {
 	) {
 		super( [SKILLS], entityModel, parent );
 	}
+
+	public function dispose() {
+		
+	}
 }
 
 class EntityInfoTextMediator {

@@ -2,14 +2,9 @@ package net;
 
 enum Message {
 
-	/** seed on client side can only be used to generate icons in navigation window **/
-	WorldInfo( seed : String );
-	ClientAuth(); // todo auth
-	MapLoad( name : String );
-	Disconnect;
+	COMMAND( type : ClientCommandType );
 
-	#if debug
-	GetServerStatus;
-	ServerStatus( isHost : Bool );
-	#end
+	/** seed on client side can only be used to generate icons in navigation window **/
+	ClientAuth; // todo auth
+	Disconnect;
 }

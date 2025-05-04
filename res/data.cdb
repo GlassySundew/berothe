@@ -43,7 +43,7 @@
 				{
 					"id": "debugStartLocation",
 					"value": {
-						"location": "grassy"
+						"location": "start"
 					}
 				},
 				{
@@ -4414,7 +4414,7 @@
 										{
 											"type": [
 												0,
-												"thymea_intro_greeting"
+												"thymea_no_life_refocus"
 											]
 										}
 									]
@@ -4530,7 +4530,7 @@
 								{
 									"type": [
 										5,
-										"caelyra_not_accepted_yet"
+										"thymea_not_accepted_yet"
 									]
 								},
 								{
@@ -5007,6 +5007,10 @@
 					"text": "Alas, your journey has not yet earned you any abilities."
 				},
 				{
+					"id": "champion_hint",
+					"text": "You've picked up a gold coin! Invoke the '/champion' command to crown your hero with a noble name, enshrining your legacy in the annals of history."
+				},
+				{
 					"id": "friendly",
 					"text": "Toggles non-aggressive mode, ensuring your character engages peacefully with other players."
 				},
@@ -5017,6 +5021,10 @@
 				{
 					"id": "skills",
 					"text": "Displays a concise summary of your acquired skills."
+				},
+				{
+					"id": "champion",
+					"text": "Bestow your hero with a name that echoes through the ages. By invoking this command, you inscribe your journey into the annals of our realm, ensuring your progress endures as a lasting legacy. Note: This command cannot be used if your character already bears a name."
 				},
 				{
 					"id": "level",
@@ -5108,7 +5116,7 @@
 				},
 				{
 					"id": "thymea_no_life_refocus",
-					"text": "Ah, you have returned, dear traveler.\nTell me, have you gathered the three gold coins required to embark on your transformation, or must destiny still provide them?"
+					"text": "Ah, welcome back, dear traveler. Your presence fills this humble abode with a quiet joy. Pray, what new mysteries beckon you today?"
 				},
 				{
 					"id": "thymea_life_skill_acquisition",

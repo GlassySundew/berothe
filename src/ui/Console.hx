@@ -67,6 +67,10 @@ class Console extends h2d.Console {
 		addCommand( "skills", Data.locale.get( Data.LocaleKind.skills ).text, [], () -> {
 			GameClient.inst.emitInfoMessage( SKILLS );
 		} );
+
+		addCommand( "champion", Data.locale.get( Data.LocaleKind.champion ).text, [], () -> {
+			GameClient.inst.sendCommand( CHAMPION );
+		} );
 	}
 
 	function unconnectedResponce() {

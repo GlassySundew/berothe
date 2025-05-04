@@ -44,6 +44,11 @@ class ClientController extends NetNode {
 		// trace(test.toBytes(22).toString());
 	}
 
+	@:rpc( server )
+	public function executeCommand( command : InfoMessageType ) {
+		
+	}
+
 	#if server
 	public function providePlayerReplService( service : PlayerReplicationService ) {
 		this.playerReplService = service;
@@ -115,6 +120,6 @@ class TestNetPinger extends NetNode {
 
 	@:rpc
 	public function testPing() {
-		trace( "PPPIIIIIIINNNNNG" );
+		trace( "PIIIIIIINNNNNG" );
 	}
 }

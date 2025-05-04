@@ -6,7 +6,7 @@ import game.data.storage.entity.model.EntityAdditiveStatType;
 abstract class EntityAdditiveStatBase {
 
 	public final type : EntityAdditiveStatType;
-	public final amount : Float;
+	public var amount : Float;
 	var entity : OverworldEntity;
 
 	public function new(

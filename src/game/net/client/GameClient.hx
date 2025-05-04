@@ -1,5 +1,6 @@
 package game.net.client;
 
+import net.ClientCommandType;
 import rx.ObservableFactory;
 import rx.Observable;
 import net.ClientController.InfoMessageType;
@@ -147,25 +148,42 @@ class GameClient extends Process {
 	}
 
 	public function setFriendly() {
-		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+		var modelRepl = getControlledModel();
 		if ( modelRepl == null ) return;
 		modelRepl.setFriendly();
 	}
 
 	public function setUnfriendly() {
-		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+		var modelRepl = getControlledModel();
 		if ( modelRepl == null ) return;
 		modelRepl.setUnfriendly();
 	}
 
 	public function sayMessage( text : String ) {
-		var modelRepl = controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+		var modelRepl = getControlledModel();
 		if ( modelRepl == null ) return;
 		modelRepl.sayText( text );
 	}
 
 	public function emitInfoMessage( type : InfoMessageType ) {
 		onClientInfoMessage.dispatch( type );
+	}
+
+	public function sendCommand( commandType : ClientCommandType ) {
+		switch commandType {
+			case CHAMPION:
+				var model = getControlledModel();
+				if (
+					model.displayName.getValue() == ""
+					|| model.displayName.getValue() == null
+				) {}
+		}
+
+		// Main.inst.cliCon.val.sendTransaction
+	}
+
+	inline function getControlledModel() : Null<EntityModelComponentReplicator> {
+		return controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
 	}
 
 	#if( client && debug )
