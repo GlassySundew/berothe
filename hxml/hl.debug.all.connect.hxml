@@ -1,0 +1,8 @@
+
+# hl.server.debug.hxml
+hxml/hl.client.debug.connect.hxml
+
+--next
+
+# hl.client.debug.hxml
+hxml/hl.server.debug.connect.hxml

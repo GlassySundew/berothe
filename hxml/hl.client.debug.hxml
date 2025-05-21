@@ -3,8 +3,8 @@
 
 -hl bin/game.hl
 
-debug.hxml
-hl.client.hxml
+hxml/debug.hxml
+hxml/hl.client.hxml
 
 
 

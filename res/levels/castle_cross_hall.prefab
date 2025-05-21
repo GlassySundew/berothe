@@ -386,6 +386,18 @@
 			]
 		},
 		{
+			"type": "reference",
+			"name": "human_spwn",
+			"source": "voxel/characters/human/human.enco",
+			"props": {
+				"spawnedEntity": "player",
+				"$cdbtype": "entitySpawnPointDF"
+			},
+			"x": 109.6,
+			"y": 61.88,
+			"rotationZ": -45
+		},
+		{
 			"type": "object",
 			"name": "caelyra hall exit",
 			"props": {

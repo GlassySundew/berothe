@@ -1,6 +1,6 @@
 
-hl.server.hxml
-debug.hxml
+hxml/hl.server.hxml
+hxml/debug.hxml
 
 -hl redist/server/server.hl
 

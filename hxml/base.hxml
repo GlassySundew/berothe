@@ -7,6 +7,7 @@
 -lib deepnightLibs:git:https://github.com/deepnight/deepnightLibs.git
 -lib oimophysics:git:https://github.com/GlassySundew/OimoPhysics
 -lib hlimgui:git:https://github.com/GlassySundew/hlimgui.git#separatorText
+-lib echoes:git:https://github.com/GlassySundew/wechoes
 -lib format:git:https://github.com/HaxeFoundation/format.git
 -lib tink_core:git:https://github.com/haxetink/tink_core.git
 -lib hscript:git:https://github.com/HaxeFoundation/hscript

@@ -26,7 +26,7 @@ import game.physics.PhysicsEngineAbstractFactory;
 
 class Location {
 
-	static final fixedTimeStep = 1.0 / 200.0; // Шаг физики в секундах (60 Гц)
+	static final fixedTimeStep = 1.0 / 60.0; // Шаг физики в секундах (60 Гц)
 
 	public var locationDataProvider( default, null ) : ILocationObjectsDataProvider;
 	public var physics( default, null ) : IPhysicsEngine;
@@ -188,6 +188,11 @@ class Location {
 	}
 
 	public function update( dt : Float, tmod : Float ) {
+		accumulatedTime += dt;
+		while ( accumulatedTime >= fixedTimeStep ) {
+			physics.update( fixedTimeStep );
+			accumulatedTime -= fixedTimeStep;
+		}
 
 		delayer.update( tmod );
 
@@ -200,11 +205,6 @@ class Location {
 		}
 		behaviourManager.update( dt, tmod );
 
-		accumulatedTime += dt;
-		while ( accumulatedTime >= fixedTimeStep ) {
-		physics.update( fixedTimeStep );
-			accumulatedTime -= fixedTimeStep;
-		}
 		// physics.update( dt );
 
 		if ( disposeInvalidate ) dispose();

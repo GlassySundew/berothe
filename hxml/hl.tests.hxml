@@ -1,7 +1,7 @@
-base.hxml
+hxml/base.hxml
 -D server
 
 -main game.test.TestLocationServerMem
-debug.hxml
+hxml/debug.hxml
 
 -hl bin/test_mem.hl

@@ -331,16 +331,6 @@
 								{
 									"type": "customBox",
 									"name": "customBox",
-									"x": 176,
-									"y": -395,
-									"z": 190,
-									"scaleX": 70,
-									"scaleY": 1610.7,
-									"scaleZ": 679
-								},
-								{
-									"type": "customBox",
-									"name": "customBox",
 									"x": -259,
 									"y": 88,
 									"z": 173,
@@ -368,6 +358,911 @@
 									"scaleX": 35,
 									"scaleY": 1403.37,
 									"scaleZ": 644
+								},
+								{
+									"type": "object",
+									"name": "object",
+									"x": 176,
+									"y": -395,
+									"z": 190,
+									"children": [
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										},
+										{
+											"type": "customBox",
+											"name": "customBox",
+											"scaleX": 70,
+											"scaleY": 1610.7,
+											"scaleZ": 679
+										}
+									]
 								}
 							]
 						}

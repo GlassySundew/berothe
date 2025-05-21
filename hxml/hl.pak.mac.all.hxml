@@ -1,13 +1,7 @@
-hl.client.hxml
--hl redist/sdl_win/hlboot.dat
+hxml/hl.sdl.hxml
+-hl redist/sdl_mac/hlboot.dat
+
 -D pak
--D windows
-
-# --next
-
-# hl.server.hxml
-# -hl redist/sdl_win/server.hl
-# -D pak
-# -D windows
+-D macos
 
 -cmd haxe -hl hxd.fmt.pak.Build.hl -lib heaps -main hxd.fmt.pak.Build && hl hxd.fmt.pak.Build.hl -out redist/sdl_win/res -exclude vox,obj,mtl,ttf

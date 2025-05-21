@@ -5,6 +5,6 @@
 
 # -D display
 
-debug.hxml
+hxml/debug.hxml
 
-hl.client.debug.hxml
+hxml/hl.client.debug.hxml
