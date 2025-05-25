@@ -102,7 +102,7 @@ class ChunkReplicator extends NetNode {
 
 	#if( client && debug )
 	function drawDebug() {
-		var graphics = new Graphics( Boot.inst.s3d );
+		var graphics = new Graphics( ClientBoot.inst.s3d );
 		graphics.material.props = h3d.mat.MaterialSetup.current.getDefaults( "ui" );
 		graphics.material.mainPass.depth( false, Always );
 		graphics.material.mainPass.setPassName( "ui" );

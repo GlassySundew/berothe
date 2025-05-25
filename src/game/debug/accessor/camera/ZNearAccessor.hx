@@ -6,11 +6,11 @@ import core.MutableProperty.MutablePropertyBase;
 class ZNearAccessor extends MutablePropertyBase<Float> {
 
 	override function get_val() {
-		return Boot.inst.s3d.camera.zNear;
+		return ClientBoot.inst.s3d.camera.zNear;
 	}
 
 	override function set_val( v : Float ) {
-		return Boot.inst.s3d.camera.zNear = v;
+		return ClientBoot.inst.s3d.camera.zNear = v;
 	}
 
 	public function new() {

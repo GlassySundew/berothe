@@ -34,7 +34,7 @@ class EntityControl {
 		entityRepl : EntityReplicator,
 		cliCon : ClientController
 	) {
-		ca = Main.inst.controller.createAccess();
+		ca = ClientMain.inst.controller.createAccess();
 		var entityDestroySub = Composite.create();
 
 		var cameraFollow = new EntityCameraFollowComponent();
@@ -47,21 +47,21 @@ class EntityControl {
 			( _, modelComp ) -> {
 				var bottomInfoMediator = new AdvancedStatInfoTextMediator(
 					modelComp,
-					Main.inst.botLeftHud
+					ClientMain.inst.botLeftHud
 				);
 				var statsMediator = new EntityStatsHudMediator(
 					modelComp,
 					entity,
-					Main.inst.botLeftHud
+					ClientMain.inst.botLeftHud
 				);
 				var inventoryMediator = new EntityInventoryHudMediator(
 					modelComp.inventory,
-					Main.inst.botRightHud
+					ClientMain.inst.botRightHud
 				);
 				var healthStatMediator = new EntityHealthStatMediator(
 					modelComp.hp,
 					modelComp.stats.maxHp.amount,
-					Main.inst.topRightHud
+					ClientMain.inst.topRightHud
 				);
 
 				entityDestroySub.add( Subscription.create(() -> {

@@ -37,7 +37,7 @@ class InteractorFactory {
 		}
 
 		if ( interactorVO.tooltipVO != null )
-			TooltipManager.attach3d( interactorVO.tooltipVO, int );
+			TooltipManager.attach3d( interactorVO.tooltipVO, int, ClientMain.inst.root );
 
 		visibilitySignal?.add( ( val ) -> {
 			int.visible = val;

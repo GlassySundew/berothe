@@ -11,8 +11,8 @@ import util.Assets;
 class VoxelSceneTest {
 
 	public static function start() @:privateAccess {
-		Boot.inst.engine.backgroundColor = 0xB6ADAD;
-		var fwd = cast( Boot.inst.s3d.lightSystem, LightSystem );
+		ClientBoot.inst.engine.backgroundColor = 0xB6ADAD;
+		var fwd = cast( ClientBoot.inst.s3d.lightSystem, LightSystem );
 		// fwd.additiveLighting = false;
 		@:privateAccess
 		fwd.ambientLight = new Vector( 0, 0, 0, 0 );
@@ -22,8 +22,8 @@ class VoxelSceneTest {
 	}
 
 	static function bmpTest( lut : LUT ) {
-		var bitmap = new Bitmap( Res.lut8.toTile(), Boot.inst.s2d );
-		Boot.inst.s2d.addEventListener(
+		var bitmap = new Bitmap( Res.lut8.toTile(), ClientBoot.inst.s2d );
+		ClientBoot.inst.s2d.addEventListener(
 			( e ) -> {
 				switch( e.kind ) {
 					case EWheel:
@@ -46,14 +46,14 @@ class VoxelSceneTest {
 
 		obj.material.mainPass.addShader( new LUT( Assets.CONGRUENT.texture, obj.material.texture, 4 ) );
 
-		Boot.inst.s3d.addChild( obj );
-		var cam = new h3d.scene.CameraController( 20, Boot.inst.s3d );
+		ClientBoot.inst.s3d.addChild( obj );
+		var cam = new h3d.scene.CameraController( 20, ClientBoot.inst.s3d );
 		cam.loadFromCamera();
 	}
 
 	static function meshTest() {
 		var cache = new util.threeD.ModelCache();
-		var cam = new h3d.scene.CameraController( 20, Boot.inst.s3d );
+		var cam = new h3d.scene.CameraController( 20, ClientBoot.inst.s3d );
 		cam.loadFromCamera();
 
 		// var ls = cast( Boot.inst.s3d.lightSystem, LightSystem );
@@ -71,7 +71,7 @@ class VoxelSceneTest {
 			if ( doLut ) {
 				obj.material.mainPass.addShader( new LUT( Assets.CONGRUENT.texture, obj.material.texture, 4, lutOffX, lutOffY ) );
 			}
-			Boot.inst.s3d.addChild( obj );
+			ClientBoot.inst.s3d.addChild( obj );
 			// obj.lightCameraCenter = true;
 
 			obj.x = blockX;

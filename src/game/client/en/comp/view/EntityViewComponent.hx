@@ -147,7 +147,7 @@ class EntityViewComponent extends EntityComponent {
 
 	function addViewToScene( node : ObjectNode3D ) {
 		if ( !isBatched.val ) {
-			Boot.inst.root3D.addChild( node );
+			ClientBoot.inst.root3D.addChild( node );
 			return;
 		}
 
@@ -160,7 +160,7 @@ class EntityViewComponent extends EntityComponent {
 		viewResult.addChildObject( ObjectNode3D.fromHeaps( statusBar3dPoint ) );
 		var statusBar = new EntityStatusBarContainer( statusBar3dPoint, this );
 		statusBarFuture.resolve( statusBar );
-		Main.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
+		ClientMain.inst.root.add( statusBar.root, util.Const.DP_UI_NICKNAMES );
 		modelComp.displayName.addOnValueImmediately(
 			( oldVal, newVal ) -> {
 				statusBar.setDisplayNameVisibility(

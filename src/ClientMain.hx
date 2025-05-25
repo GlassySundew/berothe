@@ -39,9 +39,9 @@ import util.tools.Save;
 	client-side only
 **/
 @:publicFields
-class Main extends Process {
+class ClientMain extends Process {
 
-	public static var inst : Main;
+	public static var inst : ClientMain;
 
 	public var console( default, null ) : ui.Console;
 	public var escapeController( default, null ) : Controller<EscapeAction>;
@@ -98,7 +98,7 @@ class Main extends Process {
 		root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 
 		#if debug
-		Boot.inst.createServer();
+		ClientBoot.inst.createServer();
 		#end
 	}
 
@@ -134,7 +134,7 @@ class Main extends Process {
 		#if debug
 		createFpsCounter();
 		#if game_tmod
-		stats = new Text( Assets.fontPixel16, Boot.inst.s2d );
+		stats = new Text( Assets.fontPixel16, ClientBoot.inst.s2d );
 		#end
 		#end
 	}
@@ -145,7 +145,7 @@ class Main extends Process {
 		topRightHud.addChild( fps );
 
 		onUpdate.add(() -> @:privateAccess {
-			fps.text = 'fps: ${Boot.inst.engine.fps}\ndraw calls: ${Boot.inst.engine.drawCalls}';
+			fps.text = 'fps: ${ClientBoot.inst.engine.fps}\ndraw calls: $ClientBoot.inst.engine.drawCalls}';
 		} );
 	}
 
@@ -177,7 +177,7 @@ class Main extends Process {
 
 		controller.bindPad( ATTACK, X );
 
-		Boot.inst.s3d.addEventListener( onSceneEvent );
+		ClientBoot.inst.s3d.addEventListener( onSceneEvent );
 
 		// saving confinured attack pad code for emulation with mouse click
 		@:privateAccess
@@ -224,12 +224,12 @@ class Main extends Process {
 		// root.setScale( Const.UI_SCALE );
 
 		// Boot.inst.s2d.scaleX = Boot.inst.s2d.scaleY = 2;
-		Boot.inst.s2d.scaleMode = AutoZoom( 800, 400, true );
+		ClientBoot.inst.s2d.scaleMode = AutoZoom( 800, 400, true );
 
 		var win = hxd.Window.getInstance();
 		@:privateAccess {
-			Boot.inst.s2d.width = win.width;
-			Boot.inst.s2d.height = win.height;
+			ClientBoot.inst.s2d.width = win.width;
+			ClientBoot.inst.s2d.height = win.height;
 		}
 
 		onResizeEvent.dispatch();

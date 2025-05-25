@@ -1,7 +1,7 @@
 
 hxml/base.hxml
 
--main Boot
+-main ClientBoot
 
 # -D hl-ver=1.11.0
 -D windowTitle=Berothe

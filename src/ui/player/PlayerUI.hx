@@ -76,9 +76,9 @@ class PlayerUI extends Process {
 		inventory.recenter();
 
 		inventory.win.x = Settings.params.inventoryCoordRatio.toString() == new Vector( -1,
-			-1 ).toString() ? inventory.win.x : Settings.params.inventoryCoordRatio.x * Main.inst.w();
+			-1 ).toString() ? inventory.win.x : Settings.params.inventoryCoordRatio.x * ClientMain.inst.w();
 		inventory.win.y = Settings.params.inventoryCoordRatio.toString() == new Vector( -1,
-			-1 ).toString() ? inventory.win.y : Settings.params.inventoryCoordRatio.y * Main.inst.h();
+			-1 ).toString() ? inventory.win.y : Settings.params.inventoryCoordRatio.y * ClientMain.inst.h();
 
 		GameClient.inst.root.add( inventory.win, Const.DP_UI );
 		if ( Settings.params.inventoryVisible ) inventory.toggleVisible();

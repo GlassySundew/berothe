@@ -5,11 +5,11 @@ import core.MutableProperty.MutablePropertyBase;
 class SAORadiusAccessor extends MutablePropertyBase<Float> {
 
 	override function get_val() : Float {
-		return Boot.inst.renderer.sao.shader.sampleRadius;
+		return ClientBoot.inst.renderer.sao.shader.sampleRadius;
 	}
 
 	override function set_val( v : Float ) : Float {
-		return Boot.inst.renderer.sao.shader.sampleRadius = v;
+		return ClientBoot.inst.renderer.sao.shader.sampleRadius = v;
 	}
 
 	public function new() {

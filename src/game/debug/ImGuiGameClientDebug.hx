@@ -44,9 +44,9 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 	public function new( parent : Process ) {
 		super( parent );
 
-		this.drawable = new ImGuiDrawable( Boot.inst.s2d );
+		this.drawable = new ImGuiDrawable( ClientBoot.inst.s2d );
 
-		Main.inst.root.add( drawable, Const.DP_IMGUI );
+		ClientMain.inst.root.add( drawable, Const.DP_IMGUI );
 		// trace(Boot.inst.s2d.viewportScaleX);
 
 		rootNode = new WindowNode( "game debug" );
@@ -78,7 +78,7 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 			networkHeader
 		);
 
-		if ( Boot.inst.renderer != null ) {
+		if ( ClientBoot.inst.renderer != null ) {
 			var renderHeader = new CollapsingHeaderNode( "render", rootNode );
 			new DragIntNode( "sao samples", new SAOSamplesAccessor(), 2, 101, renderHeader );
 			new DragDoubleNode( "sao bias", new SAOBiasAccessor(), 0.0005, 0, 1, renderHeader );
@@ -100,6 +100,6 @@ class ImGuiGameClientDebug extends ImGuiDebug {
 
 	override function onResize() {
 		super.onResize();
-		drawable.setScale( 1 / Boot.inst.s2d.viewportScaleX );
+		drawable.setScale( 1 / ClientBoot.inst.s2d.viewportScaleX );
 	}
 }

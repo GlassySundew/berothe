@@ -20,6 +20,8 @@
 -lib seedyrng
 -lib haxe-concurrent
 -lib heaps-aseprite
+-lib utest
+# -lib hx3compat
 
 -cp src
 -cp .

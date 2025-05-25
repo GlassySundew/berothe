@@ -5,11 +5,11 @@ import core.MutableProperty.MutablePropertyBase;
 class ShadowPowerAccessor extends MutablePropertyBase<Float> {
 
 	override function get_val() : Float {
-		return Boot.inst.renderer.shadow.power;
+		return ClientBoot.inst.renderer.shadow.power;
 	}
 
 	override function set_val( v : Float ) : Float {
-		return Boot.inst.renderer.shadow.power = v;
+		return ClientBoot.inst.renderer.shadow.power = v;
 	}
 
 	public function new() {

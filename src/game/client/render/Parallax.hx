@@ -31,10 +31,10 @@ class Parallax extends Object {
 
 		drawParallax();
 
-		Main.inst.delayer.addF(() -> {
+		ClientMain.inst.delayer.addF(() -> {
 			if ( GameClient.inst != null ) @:privateAccess {
-				cameraX = GameClient.inst.cameraProc.camera.targetOffset.x;
-				cameraY = GameClient.inst.cameraProc.camera.targetOffset.y;
+				cameraX = GameClient.inst.cameraProc.cameraController.targetOffset.x;
+				cameraY = GameClient.inst.cameraProc.cameraController.targetOffset.y;
 			}
 		}, 2 );
 		// mesh.scale( .5 );
@@ -71,14 +71,14 @@ class Parallax extends Object {
 	override function sync( ctx : RenderContext ) @:privateAccess {
 		super.sync( ctx );
 		// if ( LevelView.inst != null && GameClient.inst != null ) {
-			var deltaX = GameClient.inst.cameraProc.camera.targetOffset.x - cameraX;
-			var deltaY = GameClient.inst.cameraProc.camera.targetOffset.y - cameraY;
+			var deltaX = GameClient.inst.cameraProc.cameraController.targetOffset.x - cameraX;
+			var deltaY = GameClient.inst.cameraProc.cameraController.targetOffset.y - cameraY;
 
 			// mesh.tile.scrollDiscrete( deltaX * parallaxEffect.x, deltaY * parallaxEffect.y );
 			// mesh.tile = mesh.tile;
 
-			cameraX = GameClient.inst.cameraProc.camera.targetOffset.x;
-			cameraY = GameClient.inst.cameraProc.camera.targetOffset.y;
+			cameraX = GameClient.inst.cameraProc.cameraController.targetOffset.x;
+			cameraY = GameClient.inst.cameraProc.cameraController.targetOffset.y;
 		// }
 	}
 }

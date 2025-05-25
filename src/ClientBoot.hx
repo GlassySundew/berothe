@@ -1,37 +1,19 @@
-import util.Assets;
-import core.MutableProperty;
-import hxd.Timer;
-import hxd.Res;
-import pass.PbrSetup;
-import tink.CoreApi.CallbackLink;
-import tink.CoreApi.Future;
-import rx.disposables.Composite;
+import echoes.Entity;
+import echoes.System;
+import echoes.World;
 import graphics.ObjectNode3D;
-import rx.schedulers.Test.TestBase;
-import oimo.common.Vec3;
-import oimo.m.IVec3;
-import core.ClassMap;
-import rx.Observable;
-import rx.ObservableFactory;
-import rx.Observer;
-import rx.Scheduler;
-import rx.Subscription;
-import rx.observables.MakeScheduled.SubscribeInterval;
-import rx.observables.Throttle;
-import rx.observers.IObserver;
-import rx.subjects.Replay;
+import pass.PbrSetup;
 #if client
 import h2d.Scene;
 import pass.CustomRenderer;
 import signals.Signal;
 import util.Env;
-import util.Repeater;
 import util.Util;
 import util.tools.Save;
 
-class Boot extends hxd.App {
+class ClientBoot extends hxd.App {
 
-	public static var inst( default, null ) : Boot;
+	public static var inst( default, null ) : ClientBoot;
 
 	public var root3D( default, null ) : ObjectNode3D;
 
@@ -41,7 +23,7 @@ class Boot extends hxd.App {
 	public var onResizeSignal : Signal = new Signal();
 
 	static function main() {
-		new Boot();
+		new ClientBoot();
 	}
 
 	public function new() {
@@ -61,7 +43,6 @@ class Boot extends hxd.App {
 		#if debug
 		hxd.Res.data.watch( function () {
 			Data.load( hxd.Res.data.entry.getBytes().toString() );
-			// if ( GameServer.inst != null ) GameServer.inst.onCdbReload();
 		} );
 		#end
 
@@ -88,7 +69,7 @@ class Boot extends hxd.App {
 			#end
 		}
 
-		CompileTime.importPackage( "hrt" );
+		// CompileTime.importPackage( "hrt" );
 
 		#if !debug
 		hl.UI.closeConsole();
@@ -96,7 +77,7 @@ class Boot extends hxd.App {
 
 		Util.hollowScene = new Scene();
 
-		new Main( s2d );
+		new ClientMain( s2d );
 	}
 
 	override function onResize() {
@@ -108,6 +89,7 @@ class Boot extends hxd.App {
 	override function update( dt : Float ) {
 		this.deltaTime = dt;
 		dn.Process.updateAll( hxd.Timer.tmod );
+
 		super.update( dt );
 	}
 
@@ -122,3 +104,21 @@ class Boot extends hxd.App {
 	}
 }
 #end
+
+class NameSystem extends System {
+
+	@:add private function nameAdded( name : Name ) : Void {
+		trace( 'name added: $name' );
+	}
+
+	@:update private function nameUpdated( name : Name ) : Void {
+		trace( 'name updated: $name' );
+	}
+
+	@:remove private function nameRemoved( name : Name ) : Void {
+		trace( 'name removed: $name' );
+	}
+}
+
+@:echoes_replace
+typedef Name = String;

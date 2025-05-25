@@ -74,7 +74,7 @@ class GameClient extends Process {
 	var cam : CameraController;
 
 	public function new() {
-		super( Main.inst );
+		super( ClientMain.inst );
 
 		#if debug
 		// new AxesHelper( Boot.inst.s3d );
@@ -82,17 +82,17 @@ class GameClient extends Process {
 		#end
 
 		inst = this;
-		escapeCa = Main.inst.escapeController.createAccess();
+		escapeCa = ClientMain.inst.escapeController.createAccess();
 
-		createRootInLayers( Main.inst.root, Const.DP_BG );
+		createRootInLayers( ClientMain.inst.root, Const.DP_BG );
 
-		cameraProc = new CameraProcess( this );
+		cameraProc = new CameraProcess( ClientBoot.inst.s3d.camera, this );
 		cameraProc.doRound = false;
 
 		subscription.add( Client.inst.onUnregister.add( onUnregister ) );
 
 		var renderPropsRes = Res.levels.renderprops.load().make();
-		renderPropsRes.findAll( RenderProps )[0]?.applyProps( Boot.inst.s3d.renderer );
+		renderPropsRes.findAll( RenderProps )[0]?.applyProps( ClientBoot.inst.s3d.renderer );
 
 		currentLocationSelf.addOnValue( ( oldLoc, newLoc ) -> {
 			locationLights?.findFirstLocal3d().remove();
@@ -109,12 +109,12 @@ class GameClient extends Process {
 
 			if ( newLoc == null ) return;
 
-			Std.downcast( Boot.inst.s3d.renderer, PbrRenderer ).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
+			Std.downcast( ClientBoot.inst.s3d.renderer, PbrRenderer ).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
 
 			if ( newLoc.locationDesc.isOpenAir ) {
 				locationLights?.findFirstLocal3d().remove();
 				locationLights = Res.levels.light.load().make();
-				Boot.inst.s3d.addChild( locationLights.findFirstLocal3d() );
+				ClientBoot.inst.s3d.addChild( locationLights.findFirstLocal3d() );
 			}
 		} );
 
@@ -122,7 +122,7 @@ class GameClient extends Process {
 		imguiPanel = new game.debug.ImGuiGameClientDebug( GameClient.inst );
 		#end
 
-		Main.inst.cliCon.onAppear( cliCon -> {
+		ClientMain.inst.cliCon.onAppear( cliCon -> {
 			infoMessageStream.resolve( ObservableFactory
 				.fromSignal( cliCon.onInfoMessage )
 				.append( ObservableFactory.fromSignal( onClientInfoMessage ) ) );
@@ -130,12 +130,12 @@ class GameClient extends Process {
 	}
 
 	public function consoleSay( text : String ) {
-		Main.inst.console.log( text );
+		ClientMain.inst.console.log( text );
 	}
 
 	public function onLocationProvided( locationDescId : String ) {
 		controlledEntity.onAppear( ( playerRepl ) -> {
-			new graphics.BatchRenderer( Boot.inst.s3d );
+			new graphics.BatchRenderer( ClientBoot.inst.s3d );
 			currentLocationSelf.val = core.getOrCreateLocationByDesc(
 				DataStorage.inst.locationStorage.getById(
 					locationDescId
@@ -188,7 +188,7 @@ class GameClient extends Process {
 
 	#if( client && debug )
 	function debugDraw() {
-		var physicsDebugView = new HeapsOimophysicsDebugDraw( Boot.inst.s3d );
+		var physicsDebugView = new HeapsOimophysicsDebugDraw( ClientBoot.inst.s3d );
 		currentLocationSelf.val.physics.setDebugDraw( physicsDebugView );
 		physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
 
@@ -226,7 +226,7 @@ class GameClient extends Process {
 		currentLocationSelf.val?.physics?.drawDebug();
 
 		if ( escapeCa.isPressed( ESCAPE ) ) {
-			new PauseMenu( this, Main.inst.root, Main.inst );
+			new PauseMenu( this, ClientMain.inst.root, ClientMain.inst );
 		}
 
 		currentLocationSelf.val?.update( hxd.Timer.dt, tmod );
@@ -234,7 +234,7 @@ class GameClient extends Process {
 
 		BatchRenderer.inst?.emitBatches();
 
-		var frustum = Boot.inst.s3d.camera.frustum;
+		var frustum = ClientBoot.inst.s3d.camera.frustum;
 		function getRec( obj : h3d.scene.Object ) {
 			if ( !Std.isOfType( obj, Light ) ) {
 				var bounds = obj.getBounds();
@@ -243,7 +243,7 @@ class GameClient extends Process {
 			for ( o in obj )
 				getRec( o );
 		}
-		getRec( Boot.inst.s3d );
+		getRec( ClientBoot.inst.s3d );
 	}
 
 	override function pause() {

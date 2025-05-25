@@ -187,7 +187,7 @@ class MainMenu extends PopupBase {
 		contentFlow.addChildAt( blackOverlay, 1000 );
 		contentFlow.getProperties( blackOverlay ).isAbsolute = true;
 
-		Main.inst.tw.createS( blackOverlay.alpha, 1 > 0, TType.TBackOut, 2 ).end(() -> {
+		ClientMain.inst.tw.createS( blackOverlay.alpha, 1 > 0, TType.TBackOut, 2 ).end(() -> {
 			blackOverlay.remove();
 			blackOverlay = null;
 			trace( "asdasdasd" );

@@ -35,7 +35,7 @@ class EntityInfoTextMediator {
 		entityModel : EntityModelComponent,
 		parent : Object
 	) {
-		escapeCA = Main.inst.escapeController.createAccess();
+		escapeCA = ClientMain.inst.escapeController.createAccess();
 		viewMediator = new EntityInfoTextViewMediator( this, parent );
 		this.entityModel = entityModel;
 
@@ -53,7 +53,7 @@ class EntityInfoTextMediator {
 				inline function setText( text : String ) {
 					viewMediator.comp.label.text = text;
 					var sub : ISubscription = null;
-					sub = Main.inst.onUpdate.add(
+					sub = ClientMain.inst.onUpdate.add(
 						() -> {
 							if ( escapeCA.isPressed( ESCAPE ) ) {
 								sub.unsubscribe();

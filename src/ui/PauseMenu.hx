@@ -50,7 +50,7 @@ class PauseMenu extends PopupBase {
 			// TODO make
 			// Save.inst.disconnect();
 
-			Main.inst.root.add( new MainMenu().rootCtx, Const.DP_MAIN );
+			ClientMain.inst.root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 			destroy();
 		}, contentFlow );
 

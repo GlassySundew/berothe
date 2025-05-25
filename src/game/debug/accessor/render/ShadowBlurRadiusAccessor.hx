@@ -5,11 +5,11 @@ import core.MutableProperty.MutablePropertyBase;
 class ShadowBlurRadiusAccessor extends MutablePropertyBase<Float> {
 
 	override function get_val() : Float {
-		return Boot.inst.renderer.shadow.blur.radius;
+		return ClientBoot.inst.renderer.shadow.blur.radius;
 	}
 
 	override function set_val( v : Float ) : Float {
-		return Boot.inst.renderer.shadow.blur.radius = v;
+		return ClientBoot.inst.renderer.shadow.blur.radius = v;
 	}
 
 	public function new() {

@@ -31,10 +31,10 @@ class Client extends Process {
 	var connectionRepeater : ISubscription;
 
 	public function new() {
-		super( Main.inst );
+		super( ClientMain.inst );
 		inst = this;
 
-		Main.inst.onClose.add(() -> {
+		ClientMain.inst.onClose.add(() -> {
 			try {
 				sendMessage( Disconnect );
 				host?.dispose();
@@ -132,9 +132,9 @@ class Client extends Process {
 		new ConfirmDialog(
 			reason,
 			( e ) -> {
-				Main.inst.root.add( new MainMenu().rootCtx, Const.DP_MAIN );
+				ClientMain.inst.root.add( new MainMenu().rootCtx, Const.DP_MAIN );
 			},
-			Main.inst.root
+			ClientMain.inst.root
 		);
 		onConnectionClosed.dispatch();
 		game?.destroy();

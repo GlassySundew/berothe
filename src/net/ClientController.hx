@@ -60,7 +60,7 @@ class ClientController extends NetNode {
 		super.alive();
 
 		Client.inst.host.self.ownerObject = this;
-		Main.inst.cliCon.val = this;
+		ClientMain.inst.cliCon.val = this;
 	}
 	#end
 

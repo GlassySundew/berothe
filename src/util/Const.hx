@@ -15,7 +15,7 @@ class Const {
 	public static var SCALE = 10;
 	public static var UI_SCALE( get, never ) : Float;
 	static function get_UI_SCALE() : Float {
-		return #if client Boot.inst.s2d.viewportScaleX #else 1. #end;
+		return #if client ClientBoot.inst.s2d.viewportScaleX #else 1. #end;
 	}
 
 	static var inc = 0;

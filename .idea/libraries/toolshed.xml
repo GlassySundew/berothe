@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="toolshed" type="Haxe">
+    <CLASSES>
+      <root url="file://$USER_HOME$/haxelib/hxToolShed/git/src" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/haxelib/hxToolShed/git/src" />
+    </SOURCES>
+  </library>
+</component>

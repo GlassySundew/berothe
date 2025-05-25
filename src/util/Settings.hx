@@ -49,8 +49,8 @@ class Settings extends util.tools.Settings<
 	override function saveSettings() {
 		#if hlsdl
 		@:privateAccess {
-			params.windowWidth = Boot.inst.engine.width;
-			params.windowHeight = Boot.inst.engine.height;
+			params.windowWidth = ClientBoot.inst.engine.width;
+			params.windowHeight = ClientBoot.inst.engine.height;
 
 			params.windowX = hxd.Window.getInstance().window.x;
 			params.windowY = hxd.Window.getInstance().window.y;

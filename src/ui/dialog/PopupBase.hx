@@ -54,7 +54,7 @@ class PopupBase extends Process {
 		contentFlow.verticalSpacing = 5;
 		contentFlow.verticalAlign = Middle;
 
-		escapeCa = Main.inst.escapeController.createAccess();
+		escapeCa = ClientMain.inst.escapeController.createAccess();
 		escapeCa.takeExclusivity();
 		escapeCa.lock( 0.1 );
 

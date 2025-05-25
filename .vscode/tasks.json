@@ -6,7 +6,7 @@
 		{
 			"label": "relaunch haxe servers",
 			"type": "shell",
-			"command": "haxe --wait 64228 & haxe --wait 64229",
+			"command": "haxe --wait 6228 & haxe --wait 6229",
 			"group": {
 				"kind": "build"
 			},
@@ -75,7 +75,7 @@
 		{
 			"label": "server_connect_compile",
 			"type": "hxml",
-			"file": "hl.server.debug.connect.hxml",
+			"file": "hxml/hl.server.debug.connect.hxml",
 			"presentation": {
 				"echo": false,
 				"reveal": "silent",
@@ -88,7 +88,7 @@
 		{
 			"label": "client_connect_compile",
 			"type": "hxml",
-			"file": "hl.client.debug.connect.hxml",
+			"file": "hxml/hl.client.debug.connect.hxml",
 			"presentation": {
 				"echo": false,
 				"reveal": "silent",

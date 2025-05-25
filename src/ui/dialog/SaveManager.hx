@@ -160,7 +160,7 @@ class SaveManager extends PopupBase {
 	}
 
 	public static function newSave( e : String, seed : String ) @:privateAccess {
-		Main.inst.cliCon.onAppear(
+		ClientMain.inst.cliCon.onAppear(
 			( cc ) -> {
 				// cc.orderSaveSystem( CreateNewSave( e ),
 				// 	( result ) -> {
@@ -169,7 +169,7 @@ class SaveManager extends PopupBase {
 				// );
 			}
 		);
-		Main.inst.cliCon.val = null;
+		ClientMain.inst.cliCon.val = null;
 		
 
 		Client.inst.repeatConnect( 0.1, 40 );
@@ -228,11 +228,11 @@ class SaveEntry extends Process {
 	}
 
 	public function new( name : String, mode : Mode, saveMan : SaveManager, ?parent : Object ) {
-		super( Main.inst );
+		super( ClientMain.inst );
 		thisObject = new Object( parent );
 
 		var syncDialog = ( dialog : PopupBase ) -> {
-			Main.inst.root.add( dialog.root, Const.DP_UI + 2 );
+			ClientMain.inst.root.add( dialog.root, Const.DP_UI + 2 );
 			dialog.root.x = saveMan.root.x;
 			dialog.root.y = thisObject.y - saveMan.scrollArea.scrollY + thisObject.getSize().height;
 		}

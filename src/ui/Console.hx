@@ -20,7 +20,7 @@ class Console extends h2d.Console {
 
 	public function new( f : h2d.Font, ?p : h2d.Object ) {
 		super( f, p );
-		ca = Main.inst.controller.createAccess();
+		ca = ClientMain.inst.controller.createAccess();
 		logTxt = new h2d.HtmlText( f, this );
 		logTxt.x = 2;
 		logTxt.dropShadow = {
@@ -91,7 +91,7 @@ class Console extends h2d.Console {
 
 	override function hide() {
 		super.hide();
-		Main.inst.delayer.addF(() -> {
+		ClientMain.inst.delayer.addF(() -> {
 			ca.releaseExclusivity();
 		}, 1 );
 	}

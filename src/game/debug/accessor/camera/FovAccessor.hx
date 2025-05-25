@@ -7,11 +7,11 @@ import core.MutableProperty.MutablePropertyBase;
 class FovAccessor extends MutablePropertyBase<Float> {
 
 	override function get_val() {
-		return GameClient.inst.cameraProc.camera.targetOffset.w;
+		return GameClient.inst.cameraProc.cameraController.targetOffset.w;
 	}
 
 	override function set_val( v : Float ) {
-		return GameClient.inst.cameraProc.camera.targetOffset.w = v;
+		return GameClient.inst.cameraProc.cameraController.targetOffset.w = v;
 	}
 
 	public function new() {

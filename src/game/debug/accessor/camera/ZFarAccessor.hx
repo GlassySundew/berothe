@@ -6,11 +6,11 @@ import core.MutableProperty.MutablePropertyBase;
 class ZFarAccessor extends MutablePropertyBase<Float> {
 
 	override function get_val() {
-		return Boot.inst.s3d.camera.zFar;
+		return ClientBoot.inst.s3d.camera.zFar;
 	}
 
 	override function set_val( v : Float ) {
-		return Boot.inst.s3d.camera.zFar = v;
+		return ClientBoot.inst.s3d.camera.zFar = v;
 	}
 
 	public function new() {
