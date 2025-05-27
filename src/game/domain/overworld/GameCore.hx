@@ -30,7 +30,7 @@ class LocationContainerFactory {
 	}
 }
 
-class GameCore implements IUpdatable {
+class GameCore {
 
 	public static var inst( default, null ) : GameCore;
 

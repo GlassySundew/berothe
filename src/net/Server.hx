@@ -138,12 +138,6 @@ class Server extends Process {
 		}
 	}
 
-	override function preUpdate() {
-		super.preUpdate();
-	}
-
-	override function update() {}
-
 	override function postUpdate() {
 		host.flush();
 	}

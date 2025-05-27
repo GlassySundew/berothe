@@ -1,19 +1,4 @@
-import ui.core.ShadowedText;
-import h2d.Flow;
-import ui.CustomFlow;
-import hxd.Event;
-import sdl.Window;
-import hrt.prefab.rfx.Sao;
-import hrt.prefab.Object3D;
-import h3d.scene.pbr.DirLight;
-import rx.disposables.Assignable;
-import rx.disposables.Boolean;
-import rx.Subscription;
-import rx.Observable;
-import rx.observables.Create;
-import rx.subjects.Behavior;
-import rx.ObservableFactory;
-import signals.Signal;
+import echoes.World;
 #if client
 import core.MutableProperty;
 import dn.Process;
@@ -21,13 +6,17 @@ import dn.heaps.input.Controller;
 import dn.heaps.input.ControllerAccess;
 import game.client.ControllerAction;
 import game.data.storage.DataStorage;
-import h2d.Text;
-import h3d.Engine;
+import graphics.ObjectNode3D;
+import h2d.Flow;
+import hxd.Event;
 import hxd.Key;
 import net.Client;
 import net.ClientController;
-import pass.CustomRenderer;
+import pass.PbrSetup;
+import signals.Signal;
+import ui.CustomFlow;
 import ui.MainMenu;
+import ui.core.ShadowedText;
 import util.Assets;
 import util.Const;
 import util.Cursors;
@@ -49,6 +38,7 @@ class ClientMain extends Process {
 	public var ca( default, null ) : ControllerAccess<ControllerAction>;
 	public var save( default, null ) : Save;
 	public var cliCon( default, null ) : MutableProperty<ClientController> = new MutableProperty( null );
+	public var root3D( default, null ) : ObjectNode3D;
 
 	public var botRightHud : Flow;
 	public var botLeftHud : Flow;
@@ -70,14 +60,11 @@ class ClientMain extends Process {
 		inst = this;
 		createRoot( s );
 
+		initRes();
+		initCdb();
 		setupRenderer();
 
-		Assets.init();
 		Cursors.init();
-		Lang.init( "en" );
-
-		Data.load( hxd.Res.data.entry.getText() );
-		new DataStorage();
 
 		initGamePadController();
 
@@ -100,6 +87,29 @@ class ClientMain extends Process {
 		#if debug
 		ClientBoot.inst.createServer();
 		#end
+	}
+
+	function initRes() {
+		#if( hl && pak )
+		hxd.Res.initPak();
+		#elseif( hl )
+		hxd.res.Resource.LIVE_UPDATE = true;
+		hxd.Res.initLocal();
+		#end
+
+		#if debug
+		hxd.Res.data.watch( function () {
+			Data.load( hxd.Res.data.entry.getBytes().toString() );
+		} );
+		#end
+
+		Assets.init();
+	}
+
+	function initCdb() {
+		Lang.init( "en" );
+		Data.load( hxd.Res.data.entry.getText() );
+		new DataStorage();
 	}
 
 	function createUi() {
@@ -130,7 +140,7 @@ class ClientMain extends Process {
 		root.add( hudLayout, Const.DP_UI );
 
 		Assets.bindStyle( Assets.styleCommon, hudLayout );
-		
+
 		#if debug
 		createFpsCounter();
 		#if game_tmod
@@ -145,7 +155,7 @@ class ClientMain extends Process {
 		topRightHud.addChild( fps );
 
 		onUpdate.add(() -> @:privateAccess {
-			fps.text = 'fps: ${ClientBoot.inst.engine.fps}\ndraw calls: $ClientBoot.inst.engine.drawCalls}';
+			fps.text = 'fps: ${ClientBoot.inst.engine.fps}\ndraw calls: ${ClientBoot.inst.engine.drawCalls}';
 		} );
 	}
 
@@ -153,6 +163,10 @@ class ClientMain extends Process {
 
 		// var light = new DirLight( new h3d.Vector( -0.4, -0.1, -1 ), Boot.inst.s3d );
 		// light.power = 0.4;
+
+		root3D = ObjectNode3D.fromHeaps( ClientBoot.inst.s3d );
+
+		h3d.mat.MaterialSetup.current = new PbrSetup( "PBR" );
 	}
 
 	function initGamePadController() {
@@ -207,34 +221,6 @@ class ClientMain extends Process {
 		controller.pad._setButton( controller.getPadButtonId( attackPadBind ), value );
 	}
 
-	override function onDispose() {
-		#if game_tmod
-		if ( stats != null ) stats.remove();
-		#end
-	}
-
-	override function onResize() {
-		super.onResize();
-
-		// if ( Const.AUTO_SCALE_TARGET_WID > 0 )
-		// 	Const.UI_SCALE = M.ceil(h() / Const.AUTO_SCALE_TARGET_WID);
-		// else if ( Const.AUTO_SCALE_TARGET_HEI > 0 )
-		// 	Const.UI_SCALE = M.floor(h() / Const.AUTO_SCALE_TARGET_HEI);
-
-		// root.setScale( Const.UI_SCALE );
-
-		// Boot.inst.s2d.scaleX = Boot.inst.s2d.scaleY = 2;
-		ClientBoot.inst.s2d.scaleMode = AutoZoom( 800, 400, true );
-
-		var win = hxd.Window.getInstance();
-		@:privateAccess {
-			ClientBoot.inst.s2d.width = win.width;
-			ClientBoot.inst.s2d.height = win.height;
-		}
-
-		onResizeEvent.dispatch();
-	}
-
 	override function update() {
 		// dn.heaps.slib.SpriteLib.TMOD = tmod;
 		if ( ca.isKeyboardPressed( Key.F11 ) ) toggleFullscreen();
@@ -249,6 +235,27 @@ class ClientMain extends Process {
 		super.update();
 
 		Assets.update( dt );
+	}
+
+	override function onResize() {
+		super.onResize();
+
+		// Boot.inst.s2d.scaleX = Boot.inst.s2d.scaleY = 2;
+		ClientBoot.inst.s2d.scaleMode = AutoZoom( 800, 400, true );
+
+		var win = hxd.Window.getInstance();
+		@:privateAccess {
+			ClientBoot.inst.s2d.width = win.width;
+			ClientBoot.inst.s2d.height = win.height;
+		}
+
+		onResizeEvent.dispatch();
+	}
+
+	override function onDispose() {
+		#if game_tmod
+		if ( stats != null ) stats.remove();
+		#end
 	}
 }
 #end

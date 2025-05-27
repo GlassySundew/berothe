@@ -31,8 +31,8 @@ class GameServer extends Process {
 	}
 
 	public final core : GameCore = new GameCore();
-	final server : Server;
 	final coreReplicator : CoreReplicator;
+	final server : Server;
 
 	public function new( server : Server ) {
 		super();

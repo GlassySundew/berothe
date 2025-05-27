@@ -14,7 +14,7 @@ class ServerBoot {
 	public static var inst( default, null ) : ServerBoot;
 	public static var server : Server;
 
-	static public function main() : Void {
+	public static function main() : Void {
 		inst = new ServerBoot();
 	}
 
@@ -60,6 +60,5 @@ class ServerBoot {
 			hl.UI.closeConsole();
 			#end
 		} );
-
 	}
 }

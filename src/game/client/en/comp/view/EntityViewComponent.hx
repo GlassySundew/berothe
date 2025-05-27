@@ -147,7 +147,7 @@ class EntityViewComponent extends EntityComponent {
 
 	function addViewToScene( node : ObjectNode3D ) {
 		if ( !isBatched.val ) {
-			ClientBoot.inst.root3D.addChild( node );
+			ClientMain.inst.root3D.addChild( node );
 			return;
 		}
 

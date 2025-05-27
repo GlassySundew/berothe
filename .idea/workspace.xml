@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e952cf7-d4f5-4203-b4ba-06c05f115de8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/berothe.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/castle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/compileTime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/deepnightLibs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/heaps.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/heeps.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hide.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hlopenal.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hx_concurrent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hxbit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/oimophysics.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/random.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tc.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientBoot.hx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientBoot.hx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientMain.hx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClientMain.hx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/game/client/en/comp/view/EntityViewComponent.hx" beforeDir="false" afterPath="$PROJECT_DIR$/src/game/client/en/comp/view/EntityViewComponent.hx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +20,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/haxelib/hxToolShed/git/src/net/NetNode.hx" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/haxelib/hxToolShed/git/src/signals/Signal.hx" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/haxelib/hxbit/git/hxbit/NetworkHost.hx" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/haxelib/hxbit/git/hxbit/NetworkSerializable.hx" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -60,6 +55,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.27830833&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -101,6 +97,9 @@
       <updated>1748006548294</updated>
       <workItem from="1748006549466" duration="1224000" />
       <workItem from="1748007796753" duration="4000" />
+      <workItem from="1748238509050" duration="4000" />
+      <workItem from="1748252497596" duration="20000" />
+      <workItem from="1748252538353" duration="25000" />
     </task>
     <servers />
   </component>
@@ -109,5 +108,9 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

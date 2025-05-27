@@ -2,7 +2,6 @@ import echoes.Entity;
 import echoes.System;
 import echoes.World;
 import graphics.ObjectNode3D;
-import pass.PbrSetup;
 #if client
 import h2d.Scene;
 import pass.CustomRenderer;
@@ -14,8 +13,6 @@ import util.tools.Save;
 class ClientBoot extends hxd.App {
 
 	public static var inst( default, null ) : ClientBoot;
-
-	public var root3D( default, null ) : ObjectNode3D;
 
 	public var renderer : CustomRenderer;
 	public var deltaTime( default, null ) : Float;
@@ -29,27 +26,6 @@ class ClientBoot extends hxd.App {
 	public function new() {
 		inst = this;
 		super();
-	}
-
-	override function setup() {
-
-		#if( hl && pak )
-		hxd.Res.initPak();
-		#elseif( hl )
-		hxd.res.Resource.LIVE_UPDATE = true;
-		hxd.Res.initLocal();
-		#end
-
-		#if debug
-		hxd.Res.data.watch( function () {
-			Data.load( hxd.Res.data.entry.getBytes().toString() );
-		} );
-		#end
-
-		h3d.mat.MaterialSetup.current = new PbrSetup( "PBR" );
-
-		super.setup();
-		root3D = ObjectNode3D.fromHeaps( s3d );
 	}
 
 	// Engine ready
