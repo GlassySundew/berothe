@@ -39,28 +39,28 @@ class SleepyPointGuard extends EntityBehaviourBase {
 				);
 				composite.add( sub );
 
-				var collisionTrigger = location.getTriggerByIdent( triggerId );
+				// var collisionTrigger = location.getTriggerByIdent( triggerId );
 
-				if ( triggerId == null || collisionTrigger == null ) return;
+				// if ( triggerId == null || collisionTrigger == null ) return;
 
-				// seeking for entity trigger on location
-				var sub : ISubscription = null;
-				sub = collisionTrigger.cb.postSolveCB.add( cb -> {
-					inline function someEntityTriggered( enemyMaybe : OverworldEntity ) {
-						if ( modelComp.isEnemy( enemyMaybe ) ) {
-							sub.unsubscribe();
-							wake();
-						}
-					}
-					if ( cb._b1.userData is EntityRigidBodyProps ) {
-						someEntityTriggered( Std.downcast( cb._b1.userData, EntityRigidBodyProps ).entity );
-					}
-					if ( cb._b2.userData is EntityRigidBodyProps ) {
-						someEntityTriggered( Std.downcast( cb._b2.userData, EntityRigidBodyProps ).entity );
-					}
-				} );
-				composite.add( sub );
-				entity.disposed.then( _ -> composite.unsubscribe() );
+				// // seeking for entity trigger on location
+				// var sub : ISubscription = null;
+				// sub = collisionTrigger.cb.postSolveCB.add( cb -> {
+				// 	inline function someEntityTriggered( enemyMaybe : OverworldEntity ) {
+				// 		if ( modelComp.isEnemy( enemyMaybe ) ) {
+				// 			sub.unsubscribe();
+				// 			wake();
+				// 		}
+				// 	}
+				// 	if ( cb._b1.userData is EntityRigidBodyProps ) {
+				// 		someEntityTriggered( Std.downcast( cb._b1.userData, EntityRigidBodyProps ).entity );
+				// 	}
+				// 	if ( cb._b2.userData is EntityRigidBodyProps ) {
+				// 		someEntityTriggered( Std.downcast( cb._b2.userData, EntityRigidBodyProps ).entity );
+				// 	}
+				// } );
+				// composite.add( sub );
+				// entity.disposed.then( _ -> composite.unsubscribe() );
 			}
 		);
 	}

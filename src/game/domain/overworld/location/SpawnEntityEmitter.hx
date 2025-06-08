@@ -22,31 +22,31 @@ class SpawnEntityEmitter {
 	}
 
 	function spawnEntity( ignoreDelayerPresence = false ) {
-		var entity = GameCore.inst.entityFactory.createEntity( spawnVO.spawnedEntityDesc );
-		entity.transform.setPosition(
-			spawnVO.x,
-			spawnVO.y,
-			spawnVO.z
-		);
-		location.addEntity( entity );
-		entityCounter++;
-		onEntityAmountChanged( ignoreDelayerPresence );
-		entity.postDisposed.then( _ -> {
-			entityCounter--;
-			onEntityAmountChanged();
-		} );
+		// var entity = GameCoreDepr.inst.entityFactory.createEntity( spawnVO.spawnedEntityDesc );
+		// entity.transform.setPosition(
+		// 	spawnVO.x,
+		// 	spawnVO.y,
+		// 	spawnVO.z
+		// );
+		// location.addEntity( entity );
+		// entityCounter++;
+		// onEntityAmountChanged( ignoreDelayerPresence );
+		// entity.postDisposed.then( _ -> {
+		// 	entityCounter--;
+		// 	onEntityAmountChanged();
+		// } );
 	}
 
 	function onEntityAmountChanged( ignoreDelayerPresence = false ) {
-		if ( entityCounter == spawnVO.maxEntitiesPresent ) return;
-		if (
-			!ignoreDelayerPresence
-			&& location.delayer.hasId( DELAYER_ID ) ) return;
+		// if ( entityCounter == spawnVO.maxEntitiesPresent ) return;
+		// if (
+		// 	!ignoreDelayerPresence
+		// 	&& location.delayer.hasId( DELAYER_ID ) ) return;
 
-		location.delayer.addS(
-			DELAYER_ID,
-			spawnEntity.bind( true ),
-			spawnVO.cooldown
-		);
+		// location.delayer.addS(
+		// 	DELAYER_ID,
+		// 	spawnEntity.bind( true ),
+		// 	spawnVO.cooldown
+		// );
 	}
 }

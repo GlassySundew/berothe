@@ -28,7 +28,7 @@ class EntityLocalPointComponent extends EntityComponent {
 
 			var globalPoint = util.MatrixUtil.multVector( transform, localPoint );
 
-			newLoc.localPoints.providePoint( desc.name, entity, globalPoint );
+			// newLoc.localPoints.providePoint( desc.name, entity, globalPoint );
 
 			sub.unsubscribe();
 		} );

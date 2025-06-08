@@ -8,8 +8,11 @@ import game.net.entity.EntityReplicator;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Chunk;
 import util.Assert;
-import game.domain.overworld.GameCore;
+import game.domain.depr.overworld.GameCoreDepr;
 import game.domain.overworld.location.Location;
+#if macro
+import haxe.macro.Expr;
+#end
 
 class CoreReplicator {
 
@@ -19,14 +22,16 @@ class CoreReplicator {
 	public final entities : Map<String, EntityReplicator> = [];
 	public final items : Map<String, ItemReplicator> = [];
 
-	final core : GameCore;
+	final core : GameCoreDepr;
 
-	public function new( core : GameCore ) {
+	public function new( core : GameCoreDepr ) {
 		inst = this;
 		this.core = core;
-		core.onLocationCreated.add( onLocationCreated );
-		core.onEntityCreated.add( onEntityCreated );
-		core.onItemCreated.add( onItemCreated );
+		// core.onLocationCreated.add( onLocationCreated );
+		// core.onEntityCreated.add( onEntityCreated );
+		// core.onItemCreated.add( onItemCreated );
+
+		// this.blahblah(this);
 	}
 
 	public inline function getEntityReplicator(
@@ -68,10 +73,10 @@ class CoreReplicator {
 		);
 		#end
 		locations[location.id] = new LocationReplicator( location, this );
-		location.disposed.then( _ -> {
-			locations[location.id].dispose();
-			locations.remove( location.id );
-		} );
+		// location.disposed.then( _ -> {
+		// 	locations[location.id].dispose();
+		// 	locations.remove( location.id );
+		// } );
 	}
 
 	function onEntityCreated( entity : OverworldEntity ) {

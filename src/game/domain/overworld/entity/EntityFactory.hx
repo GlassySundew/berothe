@@ -56,23 +56,23 @@ class EntityFactory {
 	/**
 		call this when we do not care by which spawnpoint entity will be created
 	**/
-	public function placeEntityBySpawnPointEntityDesc(
-		location : Location,
-		entity : OverworldEntity
-	) {
-		var entityDesc = entity.desc;
-		var spawnPointDesc : LocationSpawnVO = location.getSpawnByEntityDesc( entityDesc );
+	// public function placeEntityBySpawnPointEntityDesc(
+	// 	location : Location,
+	// 	entity : OverworldEntity
+	// ) {
+	// 	var entityDesc = entity.desc;
+	// 	var spawnPointDesc : LocationSpawnVO = location.getSpawnByEntityDesc( entityDesc );
 
-		entity.transform.setPosition(
-			spawnPointDesc.x,
-			spawnPointDesc.y,
-			spawnPointDesc.z
-		);
-		entity.transform.setRotation(
-			0, 0, spawnPointDesc.rotationZ
-		);
-		location.addEntity( entity );
-	}
+	// 	entity.transform.setPosition(
+	// 		spawnPointDesc.x,
+	// 		spawnPointDesc.y,
+	// 		spawnPointDesc.z
+	// 	);
+	// 	entity.transform.setRotation(
+	// 		0, 0, spawnPointDesc.rotationZ
+	// 	);
+	// 	location.addEntity( entity );
+	// }
 
 	public function createEntity( entityDesc : EntityDescription ) : OverworldEntity {
 		var entity = new OverworldEntity( entityDesc, '${++ENTITY_ID_STUB}' );

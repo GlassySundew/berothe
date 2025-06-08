@@ -1,7 +1,7 @@
 package game.test;
 
 import game.data.storage.DataStorage;
-import game.domain.overworld.GameCore;
+import game.domain.depr.overworld.GameCoreDepr;
 
 class TestLocationServerMem {
 
@@ -52,7 +52,7 @@ class TestLocationServerMem {
 	}
 
 	function test() {
-		var gameCore = new GameCore();
+		var gameCore = new GameCoreDepr();
 
 		var requester = gameCore.entityFactory.createEntity(
 			DataStorage.inst.entityStorage.getPlayerDescription()

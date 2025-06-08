@@ -191,8 +191,8 @@ abstract class EntityBehaviourBase {
 	}
 
 	function onAttachedToLocation( location : Location ) {
-		location.behaviourManager.attachBehaviour( this, entity );
-		initializeAttackComponent();
+		// location.behaviourManager.attachBehaviour( this, entity );
+		// initializeAttackComponent();
 	}
 
 	final function sleep() {
@@ -210,14 +210,14 @@ abstract class EntityBehaviourBase {
 			if ( newChunk == null ) return;
 			chunkChangedSub = Composite.create();
 
-			var chunks = newChunk.location.chunks;
-			for ( tile in GameUtil.twoDGrid ) {
-				var x = tile.x + newChunk.x;
-				var y = tile.y + newChunk.y;
-				var z = newChunk.z;
+			// var chunks = newChunk.location.chunks;
+			// for ( tile in GameUtil.twoDGrid ) {
+			// 	var x = tile.x + newChunk.x;
+			// 	var y = tile.y + newChunk.y;
+			// 	var z = newChunk.z;
 
-				chunkChangedSub.add( chunks.validateChunkAccess( x, y, z ).onEntityMoved.add( cb ) );
-			}
+			// 	chunkChangedSub.add( chunks.validateChunkAccess( x, y, z ).onEntityMoved.add( cb ) );
+			// }
 		} );
 	}
 
@@ -271,30 +271,30 @@ abstract class EntityBehaviourBase {
 	}
 
 	function mapSurroundingEntities( fn : ( entity : OverworldEntity ) -> Bool ) {
-		var entityChunk = entity.chunk.getValue();
-		var chunks = entity.location.getValue().chunks.chunks;
+		// var entityChunk = entity.chunk.getValue();
+		// var chunks = entity.location.getValue().chunks.chunks;
 
-		var entities : Array<OverworldEntity> = entity.chunk.getValue().entities;
+		// var entities : Array<OverworldEntity> = entity.chunk.getValue().entities;
 
-		for ( z in( entityChunk.z - 1 )...( entityChunk.z + 1 ) ) {
-			for ( y in( entityChunk.y - 1 )...( entityChunk.y + 1 ) ) {
-				for ( x in( entityChunk.x - 1 )...( entityChunk.x + 1 ) ) {
-					if ( z == 0 && y == 0 && x == 0 ) return;
-					entities = entities.concat( chunks[z][y][x].entities );
-				}
-			}
-		}
+		// for ( z in( entityChunk.z - 1 )...( entityChunk.z + 1 ) ) {
+		// 	for ( y in( entityChunk.y - 1 )...( entityChunk.y + 1 ) ) {
+		// 		for ( x in( entityChunk.x - 1 )...( entityChunk.x + 1 ) ) {
+		// 			if ( z == 0 && y == 0 && x == 0 ) return;
+		// 			entities = entities.concat( chunks[z][y][x].entities );
+		// 		}
+		// 	}
+		// }
 
-		entities.sort( ( entity1, entity2 ) -> {
-			var dist1 = entity.transform.distToEntity2D( entity1 );
-			var dist2 = entity.transform.distToEntity2D( entity2 );
-			return Std.int( dist1 - dist2 );
-		} );
+		// entities.sort( ( entity1, entity2 ) -> {
+		// 	var dist1 = entity.transform.distToEntity2D( entity1 );
+		// 	var dist2 = entity.transform.distToEntity2D( entity2 );
+		// 	return Std.int( dist1 - dist2 );
+		// } );
 
-		for ( entity in entities ) {
-			if ( entity == this.entity ) continue;
-			if ( !fn( entity ) )
-				break;
-		}
+		// for ( entity in entities ) {
+		// 	if ( entity == this.entity ) continue;
+		// 	if ( !fn( entity ) )
+		// 		break;
+		// }
 	}
 }

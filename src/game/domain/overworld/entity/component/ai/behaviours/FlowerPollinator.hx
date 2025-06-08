@@ -32,9 +32,9 @@ class FlowerPollinator extends EntityBehaviourBase {
 	override function updateBehaviour( dt : Float, tmod : Float ) {
 		switch pollingState {
 			case IDLE | null:
-				pollingState = FLYING_TO;
-				var location = entity.location.getValue();
-				flowerChosen = location.localPoints.getRandomPointByName( FLOWER );
+				// pollingState = FLYING_TO;
+				// var location = entity.location.getValue();
+				// flowerChosen = location.localPoints.getRandomPointByName( FLOWER );
 			case FLYING_TO:
 				if ( //
 					M.dist(

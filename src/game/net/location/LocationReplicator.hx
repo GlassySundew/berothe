@@ -24,7 +24,7 @@ class LocationReplicator {
 	}
 
 	public function getChunkReplicator( x : Int, y : Int, z : Int ) : ChunkReplicator {
-		location.chunks.validateChunkAccess( x, y, z );
+		// location.chunks.validateChunkAccess( x, y, z );
 		return chunksReplicator.chunks[z][y][x];
 	}
 }

@@ -6,7 +6,7 @@ import game.data.storage.entity.body.properties.LocalDispatchPointDescription;
 import game.data.storage.entity.body.properties.DeathMessageDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
-import game.data.storage.entity.body.model.EntityModelDescription;
+import game.data.storage.entity.body.model.EntityBaseStatsDescription;
 import game.data.storage.entity.body.properties.AttackListDescription;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.entity.body.properties.EntityAIDescription;
@@ -43,7 +43,7 @@ class EntityPresetDescription extends DescriptionBase {
 	public var bodyHitbox( default, null ) : Null<HitboxBodyDescription>;
 	public var attackDesc( default, null ) : Null<AttackListDescription>;
 	public var ai( default, null ) : Null<EntityAIDescription>;
-	public var model : Null<EntityModelDescription>;
+	public var model : Null<EntityBaseStatsDescription>;
 	public var fly : Null<EntityFlyDescription>;
 
 	// structure
@@ -88,7 +88,7 @@ class EntityPresetDescription extends DescriptionBase {
 			bodyHitbox = HitboxBodyDescription.fromCdb( entry.properties.properties.bodyHitbox ),
 			fly = EntityFlyDescription.fromCdb( entry.properties.properties.flying ),
 			attackDesc = AttackListDescription.fromCdb( entry.properties.properties.attack ),
-			model = EntityModelDescription.fromCdb( entry.properties.properties.model ),
+			model = EntityBaseStatsDescription.fromCdb( entry.properties.properties.baseStats ),
 			ai = EntityAIDescription.fromCdb( entry.properties.properties.behaviour ),
 
 			// structure

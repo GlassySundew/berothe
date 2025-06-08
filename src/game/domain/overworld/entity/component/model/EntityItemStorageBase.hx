@@ -94,17 +94,17 @@ abstract class EntityItemStorageBase {
 		usually used when dropping manually
 	**/
 	public function dropItemInFront( item : Item ) {
-		var halfSizes = getHalfSizes();
+		// var halfSizes = getHalfSizes();
 
-		inline function setPosition( entity : OverworldEntity ) {
-			entity.transform.setPosition(
-				model.entity.transform.x.val + FRONT_DROPPING_DISTANCE * Math.cos( model.entity.transform.rotationZ ),
-				model.entity.transform.y.val + FRONT_DROPPING_DISTANCE * Math.sin( model.entity.transform.rotationZ ),
-				model.entity.transform.z.val + halfSizes.sizeHalfZ
-			);
-		}
-		var entityItem = createEntityForItem( item );
-		setPosition( entityItem );
+		// inline function setPosition( entity : OverworldEntity ) {
+		// 	entity.transform.setPosition(
+		// 		model.entity.transform.x.val + FRONT_DROPPING_DISTANCE * Math.cos( model.entity.transform.rotationZ ),
+		// 		model.entity.transform.y.val + FRONT_DROPPING_DISTANCE * Math.sin( model.entity.transform.rotationZ ),
+		// 		model.entity.transform.z.val + halfSizes.sizeHalfZ
+		// 	);
+		// }
+		// var entityItem = createEntityForItem( item );
+		// setPosition( entityItem );
 	}
 
 	/**
@@ -122,26 +122,26 @@ abstract class EntityItemStorageBase {
 		}
 
 		var entity = null;
-		if ( item.amount.val > 1 && item.desc.isSplittable ) {
-			for ( splittedItem in GameCore.inst.itemFactory.split( item ) ) {
-				entity = createEntityForItem( splittedItem );
-				setPosition( entity );
-			}
-		} else {
-			entity = createEntityForItem( item );
-			setPosition( entity );
-		}
+		// if ( item.amount.val > 1 && item.desc.isSplittable ) {
+		// 	for ( splittedItem in GameCoreDepr.inst.itemFactory.split( item ) ) {
+		// 		entity = createEntityForItem( splittedItem );
+		// 		setPosition( entity );
+		// 	}
+		// } else {
+		// 	entity = createEntityForItem( item );
+		// 	setPosition( entity );
+		// }
 	}
 
 	inline function createEntityForItem( item : Item ) {
-		var entityItem = GameCore.inst.entityFactory.createEntity(
-			item.desc.getOverworldReprEntityDesc()
-		);
+		// var entityItem = GameCoreDepr.inst.entityFactory.createEntity(
+		// 	item.desc.getOverworldReprEntityDesc()
+		// );
 
-		entityItem.components.get( EntityOfItemComponent ).provideItem( item );
-		model.entity.location.getValue().addEntity( entityItem );
+		// entityItem.components.get( EntityOfItemComponent ).provideItem( item );
+		// model.entity.location.getValue().addEntity( entityItem );
 
-		return entityItem;
+		// return entityItem;
 	}
 
 	inline function getHalfSizes() {

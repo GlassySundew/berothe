@@ -2,7 +2,7 @@ package game.domain.overworld.entity.component.model;
 
 import game.data.storage.DataStorage;
 import game.data.storage.entity.body.model.EntityEquipSlotDescription;
-import game.data.storage.entity.body.model.EntityModelDescription;
+import game.data.storage.entity.body.model.EntityBaseStatsDescription;
 import game.domain.overworld.entity.component.model.stat.EntityAdditiveStatBase;
 import game.domain.overworld.entity.component.model.stat.EntityAttackStat;
 import game.domain.overworld.entity.component.model.stat.EntityDefenceStat;
@@ -13,7 +13,7 @@ import game.domain.overworld.item.model.EquipItemSlot;
 
 class EntityStats {
 
-	public final modelDesc : EntityModelDescription;
+	public final modelDesc : EntityBaseStatsDescription;
 
 	public final limbAttacks : Array<EntityAttkItemStatHolder> = [];
 	public final weaponRanges : Array<EntityAttkItemStatHolder> = [];
@@ -28,7 +28,7 @@ class EntityStats {
 	// public final hp
 	var entity( default, null ) : OverworldEntity;
 
-	public function new( modelDesc : EntityModelDescription ) {
+	public function new( modelDesc : EntityBaseStatsDescription ) {
 		this.modelDesc = modelDesc;
 	}
 

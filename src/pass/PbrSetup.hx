@@ -137,7 +137,7 @@ class PbrRenderer extends h3d.scene.pbr.Renderer {
 
 		begin( Decals );
 		drawPbrDecals( "decal" );
-		drawEmissiveDecals( "emissiveDecal" );
+		// drawEmissiveDecals( "emissiveDecal" );
 		end();
 
 		setTarget( textures.hdr );

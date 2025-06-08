@@ -20,11 +20,11 @@ typedef SpawnInventory = {
 	var topEdgeRnd : Int;
 }
 
-class EntityModelDescription extends EntityComponentDescription {
+class EntityBaseStatsDescription extends EntityComponentDescription {
 
 	public static function fromCdb(
-		entry : Data.EntityPropertySetup_properties_model
-	) : EntityModelDescription {
+		entry : Data.EntityPropertySetup_properties_baseStats
+	) : EntityBaseStatsDescription {
 		if ( entry == null ) return null;
 
 		var equipSlots = entry.equipment != null ? [
@@ -56,7 +56,7 @@ class EntityModelDescription extends EntityComponentDescription {
 			for ( speech in entry.speechDamaged ) speech.speech
 		];
 
-		return new EntityModelDescription(
+		return new EntityBaseStatsDescription(
 			entry.baseHp,
 			entry.baseInventorySize,
 			entry.baseSpeed,

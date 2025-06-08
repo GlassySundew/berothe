@@ -50,25 +50,25 @@ class EntityInventory extends EntityItemStorageBase {
 	}
 
 	inline function addItemsOnEntityCreation() {
-		for ( elem in model.desc.spawnInventory ) {
-			var itemDesc = DataStorage.inst.itemStorage.getById( elem.itemDescId );
-			var amount = //
-				if ( elem.botEdgeRnd == elem.topEdgeRnd ) {
-					elem.botEdgeRnd;
-				} else {
-					switch elem.distribution {
-						case LINEAR:
-							Random.int( elem.botEdgeRnd, elem.topEdgeRnd );
-						case SKEW( power ):
-							Std.int(
-								MathUtil.randomSkew( elem.botEdgeRnd, elem.topEdgeRnd, power )
-							);
-					};
-				}
-			var item = GameCore.inst.itemFactory.createItem( itemDesc );
-			item.amount.val = amount;
-			tryGiveItem( item );
-		}
+		// for ( elem in model.desc.spawnInventory ) {
+		// 	var itemDesc = DataStorage.inst.itemStorage.getById( elem.itemDescId );
+		// 	var amount = //
+		// 		if ( elem.botEdgeRnd == elem.topEdgeRnd ) {
+		// 			elem.botEdgeRnd;
+		// 		} else {
+		// 			switch elem.distribution {
+		// 				case LINEAR:
+		// 					Random.int( elem.botEdgeRnd, elem.topEdgeRnd );
+		// 				case SKEW( power ):
+		// 					Std.int(
+		// 						MathUtil.randomSkew( elem.botEdgeRnd, elem.topEdgeRnd, power )
+		// 					);
+		// 			};
+		// 		}
+		// 	var item = GameCoreDepr.inst.itemFactory.createItem( itemDesc );
+		// 	item.amount.val = amount;
+		// 	tryGiveItem( item );
+		// }
 	}
 
 	function createSlots() {

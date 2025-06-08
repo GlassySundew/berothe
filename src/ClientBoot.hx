@@ -10,6 +10,7 @@ import util.Env;
 import util.Util;
 import util.tools.Save;
 
+
 class ClientBoot extends hxd.App {
 
 	public static var inst( default, null ) : ClientBoot;
@@ -30,6 +31,7 @@ class ClientBoot extends hxd.App {
 
 	// Engine ready
 	override function init() {
+
 		Env.init();
 		Save.initFields();
 

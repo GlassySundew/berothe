@@ -20,19 +20,19 @@ class LocationPerRealmContainer implements ILocationContainer {
 	}
 
 	#if !debug inline #end
-	public function request( requestor : OverworldEntity, ?auth : Bool = false ) : Location {
+	public function request( requesterUnitID : String, ?auth : Bool = false ) : Location {
 		if ( location == null ) {
 			location = factory.createLocation( locationDesc );
-			auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
+			// auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
 
-			location.disposed.then( _ -> {
-				location = null;
-			} );
+			// location.disposed.then( _ -> {
+			// 	location = null;
+			// } );
 		}
 		return location;
 	}
 
-	public function update( dt : Float, tmod : Float ) {
-		if ( location != null ) location.update( dt, tmod );
+	public function update() {
+		if ( location != null ) location.update();
 	}
 }

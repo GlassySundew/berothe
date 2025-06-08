@@ -272,7 +272,7 @@ class PlayerReplicationService {
 		cliCon.onControlledEntityLocationChange( location.locationDesc.id );
 
 		// attachVisibleChunks( playerEntity.chunk.getValue() );
-		locationSub = location.onEntityRemoved.add( locationOnEntityRemoved );
+		// locationSub = location.onEntityRemoved.add( locationOnEntityRemoved );
 	}
 
 	function locationOnEntityRemoved( entity : OverworldEntity ) {

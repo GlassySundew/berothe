@@ -32,7 +32,7 @@ import game.client.ControllerAction;
 import game.data.storage.DataStorage;
 import game.debug.HeapsOimophysicsDebugDraw;
 import game.debug.ImGuiGameClientDebug;
-import game.domain.overworld.GameCore;
+import game.domain.depr.overworld.GameCoreDepr;
 import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
 
@@ -57,7 +57,7 @@ class GameClient extends Process {
 	}
 
 	public final onUpdate : Signal = new Signal();
-	public final core : GameCore = new GameCore();
+	public final core : GameCoreDepr = new GameCoreDepr();
 	public final controlledEntity : MutableProperty<EntityReplicator> = new MutableProperty();
 	public final cameraProc : CameraProcess;
 	public final modelCache : ModelCache = new ModelCache();
@@ -99,23 +99,23 @@ class GameClient extends Process {
 			locationLights = null;
 
 			if ( oldLoc != null ) {
-				if ( !controlledEntity.getValue().entity.result?.disposed.isTriggered )
-					oldLoc.removeEntity( controlledEntity.getValue().entity.result );
-				#if debug
-				oldLoc.physics.getDebugDraw()?.remove();
-				#end
-				oldLoc.dispose();
+				// if ( !controlledEntity.getValue().entity.result?.disposed.isTriggered )
+				// 	oldLoc.removeEntity( controlledEntity.getValue().entity.result );
+				// #if debug
+				// oldLoc.physics.getDebugDraw()?.remove();
+				// #end
+				// oldLoc.dispose();
 			}
 
 			if ( newLoc == null ) return;
 
-			Std.downcast( ClientBoot.inst.s3d.renderer, PbrRenderer ).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
+			// Std.downcast( ClientBoot.inst.s3d.renderer, PbrRenderer ).env.power = newLoc.locationDesc.isOpenAir ? 0.7 : 0.4;
 
-			if ( newLoc.locationDesc.isOpenAir ) {
-				locationLights?.findFirstLocal3d().remove();
-				locationLights = Res.levels.light.load().make();
-				ClientBoot.inst.s3d.addChild( locationLights.findFirstLocal3d() );
-			}
+			// if ( newLoc.locationDesc.isOpenAir ) {
+			// 	locationLights?.findFirstLocal3d().remove();
+			// 	locationLights = Res.levels.light.load().make();
+			// 	ClientBoot.inst.s3d.addChild( locationLights.findFirstLocal3d() );
+			// }
 		} );
 
 		#if debug
@@ -136,12 +136,12 @@ class GameClient extends Process {
 	public function onLocationProvided( locationDescId : String ) {
 		controlledEntity.onAppear( ( playerRepl ) -> {
 			new graphics.BatchRenderer( ClientBoot.inst.s3d );
-			currentLocationSelf.val = core.getOrCreateLocationByDesc(
-				DataStorage.inst.locationStorage.getById(
-					locationDescId
-				),
-				playerRepl.entity.result
-			);
+			// currentLocationSelf.val = core.getOrCreateLocationByDesc(
+			// 	DataStorage.inst.locationStorage.getById(
+			// 		locationDescId
+			// 	),
+			// 	playerRepl.entity.result
+			// );
 
 			#if debug debugDraw(); #end
 		} );
@@ -189,7 +189,7 @@ class GameClient extends Process {
 	#if( client && debug )
 	function debugDraw() {
 		var physicsDebugView = new HeapsOimophysicsDebugDraw( ClientBoot.inst.s3d );
-		currentLocationSelf.val.physics.setDebugDraw( physicsDebugView );
+		// currentLocationSelf.val.physics.setDebugDraw( physicsDebugView );
 		physicsDebugView.setVisibility( Settings.inst.params.debug.physicsDebugVisible );
 
 		Settings.inst.params.debug.physicsDebugVisible.addOnValue(
@@ -222,14 +222,14 @@ class GameClient extends Process {
 
 	override function update() {
 		super.update();
-		currentLocationSelf.val?.physics.getDebugDraw()?.update();
-		currentLocationSelf.val?.physics?.drawDebug();
+		// currentLocationSelf.val?.physics.getDebugDraw()?.update();
+		// currentLocationSelf.val?.physics?.drawDebug();
 
 		if ( escapeCa.isPressed( ESCAPE ) ) {
 			new PauseMenu( this, ClientMain.inst.root, ClientMain.inst );
 		}
 
-		currentLocationSelf.val?.update( hxd.Timer.dt, tmod );
+		// currentLocationSelf.val?.update( hxd.Timer.dt, tmod );
 		onUpdate.dispatch();
 
 		BatchRenderer.inst?.emitBatches();

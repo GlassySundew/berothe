@@ -1,7 +1,7 @@
 package game.net.location;
 
 import game.net.CoreReplicator;
-import game.domain.overworld.GameCore;
+import game.domain.depr.overworld.GameCoreDepr;
 import game.domain.overworld.location.Chunk;
 import game.domain.overworld.location.Location;
 
@@ -14,7 +14,7 @@ class ChunksReplicationManager {
 	public function new( location : Location, coreReplicator : CoreReplicator ) {
 		this.location = location;
 		this.coreReplicator = coreReplicator;
-		location.onChunkCreated.add( onChunkAdded );
+		// location.onChunkCreated.add( onChunkAdded );
 	}
 
 	public function dispose() {

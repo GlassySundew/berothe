@@ -2,16 +2,13 @@ package game.domain.overworld;
 
 import game.domain.overworld.location.LocationPerRealmContainer;
 import game.domain.overworld.location.LocationPerPlayerContainer;
-import game.domain.overworld.location.ILocationContainer;
-import game.domain.overworld.item.Item;
-import game.domain.overworld.item.ItemFactory;
-import game.domain.IUpdatable;
-import game.domain.overworld.entity.OverworldEntity;
-import game.domain.overworld.entity.EntityFactory;
-import signals.Signal;
-import game.domain.overworld.location.Location;
 import game.domain.overworld.location.LocationFactory;
 import game.data.storage.location.LocationDescription;
+import game.domain.overworld.location.Location;
+import game.domain.overworld.location.ILocationContainer;
+import game.domain.overworld.ecs.systems.units.UnitSpawnSystem;
+import echoes.SystemList;
+import echoes.World;
 
 class LocationContainerFactory {
 
@@ -32,55 +29,36 @@ class LocationContainerFactory {
 
 class GameCore {
 
-	public static var inst( default, null ) : GameCore;
-
-	public var onLocationCreated( get, never ) : Signal<Location>;
-	inline function get_onLocationCreated() : Signal<Location> {
-		return locationFactory.onLocationCreated;
-	}
-
-	public var onEntityCreated( get, never ) : Signal<OverworldEntity>;
-	inline function get_onEntityCreated() : Signal<OverworldEntity> {
-		return entityFactory.onEntityCreated;
-	}
-
-	public var onItemCreated( get, never ) : Signal<Item>;
-	inline function get_onItemCreated() : Signal<Item> {
-		return itemFactory.onItemCreated;
-	}
-
-	public final entityFactory : EntityFactory;
-	public final itemFactory : ItemFactory;
-	final locationFactory : LocationFactory;
 	final locationContainers : Map<String, ILocationContainer> = [];
+	final locationFactory = new LocationFactory();
 
-	public function new() {
-		inst = this;
-		itemFactory = new ItemFactory();
-		entityFactory = new EntityFactory();
-		locationFactory = new LocationFactory( entityFactory );
-	}
+	public function new() {}
 
 	public function getOrCreateLocationByDesc(
 		locationDesc : LocationDescription,
-		requester : OverworldEntity,
+		requesterUnitID : String,
 		auth = false
 	) : Location {
+
 		if ( locationContainers[locationDesc.id] == null ) {
+
 			var locationContainer = LocationContainerFactory.create(
 				locationDesc,
 				locationFactory,
 				auth
 			);
 			locationContainers[locationDesc.id] = locationContainer;
-			var location = locationContainer.request( requester, auth );
+			var location = locationContainer.request( requesterUnitID, auth );
 		}
-		return locationContainers[locationDesc.id].request( requester, auth );
+
+		return locationContainers[locationDesc.id].request( requesterUnitID, auth );
 	}
 
-	public function update( dt : Float, tmod : Float ) {
+	public function update() {
+
 		for ( location in locationContainers ) {
-			location.update( dt, tmod );
+
+			location.update();
 		}
 	}
 }

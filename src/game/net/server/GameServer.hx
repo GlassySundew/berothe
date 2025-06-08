@@ -1,5 +1,7 @@
 package game.net.server;
 
+import game.domain.overworld.config.EntityCreationConfig;
+import game.domain.overworld.GameCore;
 import hxd.Timer;
 #if server
 import dn.Process;
@@ -8,7 +10,7 @@ import net.ClientController;
 import net.Server;
 import game.data.storage.DataStorage;
 import game.data.storage.location.LocationDescription;
-import game.domain.overworld.GameCore;
+import game.domain.depr.overworld.GameCoreDepr;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Location;
 import game.net.entity.EntityReplicator;
@@ -30,8 +32,7 @@ class GameServer extends Process {
 		return inst = game;
 	}
 
-	public final core : GameCore = new GameCore();
-	final coreReplicator : CoreReplicator;
+	public final core = new GameCore();
 	final server : Server;
 
 	public function new( server : Server ) {
@@ -40,81 +41,55 @@ class GameServer extends Process {
 		inst = this;
 
 		// CompileTime.importPackage( "en" );
-		CompileTime.importPackage( "hrt" );
+		// CompileTime.importPackage( "hrt" );
 
 		Data.load( hxd.Res.data.entry.getText() );
 		new DataStorage();
 
-		coreReplicator = new CoreReplicator( core );
-
 		onClientAuthMessage.add( onNewClientConnected );
 		server.onClientDisconnected.add( onClientDisconnected );
-
-		#if debug
-		// onGetServerStatusMessage.add( ( client ) -> {
-		// 	server.host.sendMessage( net.Message.ServerStatus( server.host.isAuth ), client );
-		// } );
-		#end
 	}
 
 	public function getLevel(
 		locationDesc : LocationDescription,
-		requesterEntity : OverworldEntity
+		requesterEntityId : String
 	) : Location {
-		return core.getOrCreateLocationByDesc( locationDesc, requesterEntity, true );
+		return core.getOrCreateLocationByDesc( locationDesc, requesterEntityId, true );
 	}
 
-	function createPlayer() : EntityReplicator {
-		var playerEntity = core.entityFactory.createEntity(
+	function createPlayer() {
+
+		var playerCreationConfig = new EntityCreationConfig(
 			DataStorage.inst.entityStorage.getPlayerDescription()
 		);
 
 		var location = getLevel(
 			DataStorage.inst.locationStorage.getStartLocationDescription(),
-			playerEntity
+			""
 		);
 
-		core.entityFactory.placeEntityBySpawnPointEntityDesc( location, playerEntity );
-
-		return coreReplicator.getEntityReplicator( playerEntity );
-	}
-
-	function preparePlayer(
-		playerEntity : OverworldEntity,
-		playerReplicator : EntityReplicator,
-		cliCon : ClientController
-	) : PlayerReplicationService {
-		return
-			new PlayerReplicationService(
-				playerEntity,
-				playerReplicator,
-				cliCon,
-				coreReplicator
-			);
+		location.context.entityCreationQueue.push( playerCreationConfig );
 	}
 
 	function onNewClientConnected( networkClient : NetworkClient ) {
+
 		if ( networkClient.ownerObject != null ) return;
+
 		var clientController = new ClientController( networkClient );
 		networkClient.ownerObject = clientController;
 		@:privateAccess server.host.register( clientController, networkClient );
 		networkClient.sync();
 
-		var playerReplicator = createPlayer();
-
-		playerReplicator.entity.then( ( playerEntity ) -> {
-			var playerReplManager = preparePlayer( playerEntity, playerReplicator, clientController );
-			clientController.providePlayerReplService( playerReplManager );
-		}
-		);
+		createPlayer();
 	}
 
 	override function update() {
-		core.update( Timer.dt, tmod );
+
+		core.update();
 	}
 
 	function onClientDisconnected( cliCon : ClientController ) {
-		cliCon.playerReplService.onClientDisconnected();
+		// cliCon.playerReplService.onClientDisconnected();
 	}
 }
 #end

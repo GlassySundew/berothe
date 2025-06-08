@@ -20,19 +20,21 @@ class LocationPerPlayerContainer implements ILocationContainer {
 	}
 
 	#if !debug inline #end
-	public function request( requester : OverworldEntity, ?auth : Bool = false ) : Location {
-		if ( perPlayerLocations[requester.id] == null ) {
-			var location = perPlayerLocations[requester.id] = locationFactory.createLocation( locationDesc );
-			auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
-			location.disposed.then( ( _ ) -> perPlayerLocations.remove( requester.id ) );
+	public function request( requesterUnitID : String, ?auth : Bool = false ) : Location {
+
+		if ( perPlayerLocations[requesterUnitID] == null ) {
+
+			var location = perPlayerLocations[requesterUnitID] = locationFactory.createLocation( locationDesc );
+			// auth ? location.loadAuthoritative() : location.loadNonAuthoritative();
+			// location.disposed.then( ( _ ) -> perPlayerLocations.remove( requesterUnitID ) );
 		}
 
-		return perPlayerLocations[requester.id];
+		return perPlayerLocations[requesterUnitID];
 	}
 
-	public function update( dt : Float, tmod : Float ) {
+	public function update() {
 		for ( location in perPlayerLocations ) {
-			location.update( dt, tmod );
+			location.update();
 		}
 	}
 }

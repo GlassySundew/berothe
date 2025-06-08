@@ -1,7 +1,7 @@
 package game.data.storage.entity.body.properties.action;
 
 import game.domain.overworld.item.model.EntityOfItemComponent;
-import game.domain.overworld.GameCore;
+import game.domain.depr.overworld.GameCoreDepr;
 import game.data.storage.item.ItemDescription;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 import game.domain.overworld.entity.OverworldEntity;
@@ -28,7 +28,7 @@ class ItemPickupAction extends BodyActionBase {
 			if ( ofItem != null && ofItem.item != null ) {
 				ofItem.item;
 			} else {
-				GameCore.inst.itemFactory.createItem( itemDesc );
+				GameCoreDepr.inst.itemFactory.createItem( itemDesc );
 			}
 
 		model.tryGiveItem( item );

@@ -7,7 +7,7 @@ import future.Future;
 import signals.Signal;
 import game.client.en.comp.view.EntityMessageVO;
 import game.data.storage.DataStorage;
-import game.data.storage.entity.body.model.EntityModelDescription;
+import game.data.storage.entity.body.model.EntityBaseStatsDescription;
 import game.data.storage.faction.FactionDescription;
 import game.data.storage.item.ItemDescription;
 import game.domain.overworld.entity.component.combat.EntityDamageType;
@@ -43,12 +43,12 @@ class EntityModelComponent extends EntityComponent {
 	public var stats( default, null ) : EntityStats;
 	public var factions( default, null ) : DispArray<FactionDescription>;
 
-	public var desc( get, never ) : EntityModelDescription;
-	inline function get_desc() : EntityModelDescription {
-		return Std.downcast( description, EntityModelDescription );
+	public var desc( get, never ) : EntityBaseStatsDescription;
+	inline function get_desc() : EntityBaseStatsDescription {
+		return Std.downcast( description, EntityBaseStatsDescription );
 	}
 
-	public function new( desc : EntityModelDescription ) {
+	public function new( desc : EntityBaseStatsDescription ) {
 		super( desc );
 	}
 
@@ -200,20 +200,20 @@ class EntityModelComponent extends EntityComponent {
 	}
 
 	function onDeath() {
-		var deathEntityDesc = DataStorage.inst.entityStorage.getById(
-			DataStorage.inst.rule.deathMessageEntity
-		);
-		var location = entity.location.getValue();
-		var deathPointEntity = location.entityFactory.createEntity( deathEntityDesc );
-		var deathComp = deathPointEntity.components.get( EntityDeathMessageComponent );
-		deathComp.providePrecedingEntity( this.entity );
-		deathPointEntity.transform.setPosition(
-			entity.transform.x,
-			entity.transform.y,
-			entity.transform.z
-		);
-		location.addEntity( deathPointEntity );
+		// var deathEntityDesc = DataStorage.inst.entityStorage.getById(
+		// 	DataStorage.inst.rule.deathMessageEntity
+		// );
+		// var location = entity.location.getValue();
+		// var deathPointEntity = location.entityFactory.createEntity( deathEntityDesc );
+		// var deathComp = deathPointEntity.components.get( EntityDeathMessageComponent );
+		// deathComp.providePrecedingEntity( this.entity );
+		// deathPointEntity.transform.setPosition(
+		// 	entity.transform.x,
+		// 	entity.transform.y,
+		// 	entity.transform.z
+		// );
+		// location.addEntity( deathPointEntity );
 
-		onDeathSignal.resolve( true );
+		// onDeathSignal.resolve( true );
 	}
 }

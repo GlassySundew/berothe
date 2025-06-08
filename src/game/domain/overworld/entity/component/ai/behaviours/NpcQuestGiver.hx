@@ -48,14 +48,14 @@ class NpcQuestGiver extends EntityBehaviourBase {
 	override function attachToEntity( entity : OverworldEntity ) {
 		super.attachToEntity( entity );
 
-		susbcribtion.add( entity.location.getValue().onEntityAdded.add( onEntityAdded ) );
-		susbcribtion.add( entity.location.getValue().onEntityRemoved.add(
-			someEntity -> {
-				entitySubscriptions[someEntity]?.unsubscribe();
-				entitySubscriptions.remove( someEntity );
-				if ( someEntity == currentFocus ) unfocusFromEntity( someEntity );
-			}
-		) );
+		// susbcribtion.add( entity.location.getValue().onEntityAdded.add( onEntityAdded ) );
+		// susbcribtion.add( entity.location.getValue().onEntityRemoved.add(
+		// 	someEntity -> {
+		// 		entitySubscriptions[someEntity]?.unsubscribe();
+		// 		entitySubscriptions.remove( someEntity );
+		// 		if ( someEntity == currentFocus ) unfocusFromEntity( someEntity );
+		// 	}
+		// ) );
 
 		subscribeSurroundingChunksForEntityMovement( onSomeEntityMoved );
 	}
@@ -245,11 +245,11 @@ class NpcQuestGiver extends EntityBehaviourBase {
 				case GIVE_QUEST( questId ):
 				case TURN_AWAY_FROM_PLAYER:
 				case GENERATE_ITEM( itemDescId, amount ):
-					var item = GameServer.inst.core.itemFactory.createItem(
-						DataStorage.inst.itemStorage.getById( itemDescId )
-					);
-					item.amount.val = amount;
-					model.inventory.dropItemInFront( item );
+					// var item = GameServer.inst.core.itemFactory.createItem(
+					// 	DataStorage.inst.itemStorage.getById( itemDescId )
+					// );
+					// item.amount.val = amount;
+					// model.inventory.dropItemInFront( item );
 				case UNFOCUS: unfocusFromEntity( someEntity );
 				case GRANT_SKILL( skillDescId ):
 					var focusEntModel = currentFocus.components.get( EntityModelComponent );
