@@ -1,9 +1,13 @@
 package game.domain.overworld;
 
+import context.Context.IModuleContext;
+import hx.concurrent.collection.OrderedCollection;
+import game.domain.overworld.location.Chunks;
+import hx.concurrent.collection.Collection;
 import game.domain.overworld.config.EntityCreationConfig;
-import hx.concurrent.collection.Queue;
 
 interface IOverworldContext {
 
-	var entityCreationQueue( default, null ) : Queue<EntityCreationConfig>;
+	var entitySpawnConfigs( default, null ) : OrderedCollection<EntityCreationConfig>;
+	var chunks( default, null ) : Chunks;
 }

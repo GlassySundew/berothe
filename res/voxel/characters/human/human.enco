@@ -1,9 +1,9 @@
 {
 	"type": "entityComposer",
-	"name": "human",
-	"x": -67.6,
-	"y": 26.9,
-	"z": -0.1,
+	"name": "human_spwn",
+	"x": 109.6,
+	"y": 61.88,
+	"rotationZ": -45,
 	"children": [
 		{
 			"type": "object",
