@@ -79,7 +79,7 @@ class EntityFlyComponent extends EntityComponent {
 				var end = start.clone();
 				end.z -= desc.distance + oscilaltion;
 
-				newLoc.physics.rayCast( start, end, standRayCastCallback );
+				// newLoc.physics.rayCast( start, end, standRayCastCallback );
 			} );
 		} ) );
 
@@ -97,12 +97,12 @@ class EntityFlyComponent extends EntityComponent {
 			!modelComp?.isSleeping.val
 			&& rayCastHit.fraction < 1
 		) {
-			var tmod = game.net.server.GameServer.inst.tmod;
+			// var tmod = game.net.server.GameServer.inst.tmod;
 
-			var vertVel = entity.transform.velZ.val;
-			var force = (( desc.distance + oscilaltion ) * ( 1 - rayCastHit.fraction ) ) * 0.2 - vertVel * 0.1;
+			// var vertVel = entity.transform.velZ.val;
+			// var force = (( desc.distance + oscilaltion ) * ( 1 - rayCastHit.fraction ) ) * 0.2 - vertVel * 0.1;
 
-			entity.transform.velZ.val += force * tmod;
+			// entity.transform.velZ.val += force * tmod;
 		}
 		#end
 	}

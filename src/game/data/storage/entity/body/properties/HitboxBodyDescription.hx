@@ -1,10 +1,6 @@
 package game.data.storage.entity.body.properties;
 
-import game.domain.overworld.entity.component.EntityHitboxComponent;
-import game.net.entity.component.EntitySimpleComponentReplicator;
-import net.NetNode;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.domain.overworld.entity.EntityComponent;
+
 
 class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 
@@ -23,11 +19,4 @@ class HitboxBodyDescription extends VolumetricBodyDescriptionBase {
 		);
 	}
 
-	public function buildComponent() : EntityComponent {
-		return new EntityHitboxComponent( this );
-	}
-
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		return new EntitySimpleComponentReplicator( parent );
-	}
 }

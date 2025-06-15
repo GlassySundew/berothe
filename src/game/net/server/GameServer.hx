@@ -1,21 +1,18 @@
 package game.net.server;
 
-import game.domain.overworld.config.EntityCreationConfig;
-import game.domain.overworld.GameCore;
-import hxd.Timer;
 #if server
 import dn.Process;
+import echoes.Entity;
 import hxbit.NetworkHost.NetworkClient;
 import net.ClientController;
 import net.Server;
 import game.data.storage.DataStorage;
 import game.data.storage.location.LocationDescription;
-import game.domain.depr.overworld.GameCoreDepr;
-import game.domain.overworld.entity.OverworldEntity;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.GameCore;
+import game.domain.overworld.config.EntityCreationConfig;
+import game.domain.overworld.location.OverworldLocationMain;
+import game.domain.overworld.ecs.components.units.UnitTags.UnitSpawnRequest;
 import game.net.entity.EntityReplicator;
-import game.net.CoreReplicator;
-import game.net.player.PlayerReplicationService;
 
 /**
 	Логика игры на сервере
@@ -23,22 +20,16 @@ import game.net.player.PlayerReplicationService;
 @:build( util.Macros.buildNetworkMessageSignals( net.Message ) )
 class GameServer extends Process {
 
-	public static var inst( default, set ) : GameServer;
-	static function set_inst( game : GameServer ) {
-		if ( inst != null ) {
-			inst.destroy();
-			@:privateAccess Process._garbageCollector( Process.ROOTS );
-		}
-		return inst = game;
-	}
-
-	public final core = new GameCore();
+	final core : GameCore;
+	final coreReplicator : CoreReplicator;
 	final server : Server;
 
 	public function new( server : Server ) {
+
 		super();
 		this.server = server;
-		inst = this;
+		this.core = new GameCore();
+		this.coreReplicator = new CoreReplicator( core );
 
 		// CompileTime.importPackage( "en" );
 		// CompileTime.importPackage( "hrt" );
@@ -53,22 +44,8 @@ class GameServer extends Process {
 	public function getLevel(
 		locationDesc : LocationDescription,
 		requesterEntityId : String
-	) : Location {
+	) : OverworldLocationMain {
 		return core.getOrCreateLocationByDesc( locationDesc, requesterEntityId, true );
-	}
-
-	function createPlayer() {
-
-		var playerCreationConfig = new EntityCreationConfig(
-			DataStorage.inst.entityStorage.getPlayerDescription()
-		);
-
-		var location = getLevel(
-			DataStorage.inst.locationStorage.getStartLocationDescription(),
-			""
-		);
-
-		location.context.entityCreationQueue.push( playerCreationConfig );
 	}
 
 	function onNewClientConnected( networkClient : NetworkClient ) {
@@ -80,7 +57,29 @@ class GameServer extends Process {
 		@:privateAccess server.host.register( clientController, networkClient );
 		networkClient.sync();
 
-		createPlayer();
+		final repl = new EntityReplicator();
+
+		createPlayerEntity( clientController );
+	}
+
+	function createPlayerEntity( clientController : ClientController ) {
+
+		var playerCreationConfig = new EntityCreationConfig(
+			DataStorage.inst.entityStorage.getPlayerDescription()
+		);
+		playerCreationConfig.clientController = clientController;
+
+		var location = getLevel(
+			DataStorage.inst.locationStorage.getStartLocationDescription(),
+			""
+		);
+
+		location.context.entitySpawnConfigs.add( playerCreationConfig );
+		final configIdx = location.context.entitySpawnConfigs.length - 1;
+
+		final entity = new Entity( location.world );
+		final world = location.world;
+		entity.add( world, ( { configId : configIdx } : UnitSpawnRequest ) );
 	}
 
 	override function update() {

@@ -95,7 +95,7 @@ class EntityControl {
 			entityDestroySub.unsubscribe();
 		} );
 
-		entityRepl.transformRepl.claimOwnage();
-		entityRepl.transformRepl.createModelToNetworkStream();
+		// entityRepl.transformRepl.claimOwnage();
+		// entityRepl.transformRepl.createModelToNetworkStream();
 	}
 }

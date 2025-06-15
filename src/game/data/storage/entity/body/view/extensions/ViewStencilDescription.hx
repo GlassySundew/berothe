@@ -1,9 +1,5 @@
 package game.data.storage.entity.body.view.extensions;
 
-import game.client.en.comp.view.extensions.ViewStencil;
-import game.net.entity.EntityComponentReplicatorBase;
-import net.NetNode;
-import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 
 enum StencilPresetType {
@@ -31,13 +27,5 @@ class ViewStencilDescription extends EntityComponentDescription {
 	public function new( type : StencilPresetType ) {
 		super( "stencil" );
 		this.type = type;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new ViewStencil( this );
-	}
-
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		throw new haxe.exceptions.NotImplementedException();
 	}
 }

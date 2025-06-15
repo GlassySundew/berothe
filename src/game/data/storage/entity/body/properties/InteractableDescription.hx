@@ -1,14 +1,9 @@
 package game.data.storage.entity.body.properties;
 
 import tink.CoreApi.Lazy;
-import game.domain.overworld.entity.component.EntityInteractableComponent;
-import game.data.storage.entity.body.properties.action.BodyActionBase;
 import game.data.storage.entity.body.properties.action.ActionsFactory;
-import net.NetNode;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.domain.overworld.entity.EntityComponent;
+import game.data.storage.entity.body.properties.action.BodyActionBase;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.net.entity.component.EntityInteractableReplicator;
 
 typedef ItemRequirement = {
 	itemDescId : String,
@@ -54,15 +49,5 @@ class InteractableDescription extends EntityComponentDescription {
 			itemDescId : itemRequiredId,
 			breakChance : itemRequiredBreakChance ?? 0
 		};
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new EntityInteractableComponent( this );
-	}
-
-	public function buildCompReplicator(
-		?parent : NetNode
-	) : EntityComponentReplicatorBase {
-		return new EntityInteractableReplicator( parent );
 	}
 }

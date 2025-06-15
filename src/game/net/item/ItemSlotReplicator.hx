@@ -51,17 +51,17 @@ class ItemSlotReplicator extends NetNode {
 	}
 
 	function onItemChanged( oldItem : Item, item : Item ) {
-		if ( oldItem != null && !oldItem.disposed.isTriggered ) {
-			var itemReplicator = CoreReplicator.inst.getItemReplicator( oldItem );
-			removeChild( itemReplicator );
-		}
-		if ( item == null ) {
-			itemReplicator.val = null;
-			return;
-		}
+		// if ( oldItem != null && !oldItem.disposed.isTriggered ) {
+		// 	var itemReplicator = CoreReplicator.inst.getItemReplicator( oldItem );
+		// 	removeChild( itemReplicator );
+		// }
+		// if ( item == null ) {
+		// 	itemReplicator.val = null;
+		// 	return;
+		// }
 
-		itemReplicator.val = CoreReplicator.inst.getItemReplicator( item );
-		addChild( itemReplicator );
+		// itemReplicator.val = CoreReplicator.inst.getItemReplicator( item );
+		// addChild( itemReplicator );
 	}
 
 	override function alive() {

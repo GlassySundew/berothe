@@ -241,7 +241,7 @@ class Location {
 	}
 
 	function loadData() {
-		locationDataProvider = locationDesc.getLocationDataResolver().objectsDataProvider;
+		locationDataProvider = locationDesc.getDataResolver().objectsDataProvider;
 		locationDataProvider.load();
 	}
 

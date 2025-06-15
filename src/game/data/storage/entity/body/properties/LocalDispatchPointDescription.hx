@@ -1,10 +1,6 @@
 package game.data.storage.entity.body.properties;
 
-import game.net.entity.EntityComponentReplicatorBase;
-import net.NetNode;
-import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.domain.overworld.entity.component.EntityLocalPointComponent;
 
 enum abstract LocalPointName( String ) {
 
@@ -48,13 +44,5 @@ class LocalDispatchPointDescription extends EntityComponentDescription {
 		this.offsetZ = offsetZ;
 
 		isReplicable = false;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new EntityLocalPointComponent( this );
-	}
-
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		throw new haxe.exceptions.NotImplementedException();
 	}
 }

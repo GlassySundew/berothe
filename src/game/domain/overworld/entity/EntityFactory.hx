@@ -11,43 +11,43 @@ class EntityFactory {
 
 	static var ENTITY_ID_STUB = 0;
 
-	public static function createAndAttachClientComponentsFromProperties(
-		entityDesc : EntityDescription,
-		entity : OverworldEntity
-	) {
-		var properties = entityDesc.getBodyDescription();
-		createAndAttachComps(
-			entityDesc,
-			entity,
-			properties.clientPropertyDescs
-		);
-	}
+	// public static function createAndAttachClientComponentsFromProperties(
+	// 	entityDesc : EntityDescription,
+	// 	entity : OverworldEntity
+	// ) {
+	// 	var properties = entityDesc.getBodyDescription();
+	// 	createAndAttachComps(
+	// 		entityDesc,
+	// 		entity,
+	// 		properties.clientPropertyDescs
+	// 	);
+	// }
 
-	public static function createAndAttachComponentsFromProperties(
-		entityDesc : EntityDescription,
-		entity : OverworldEntity
-	) {
-		var properties = entityDesc.getBodyDescription();
-		createAndAttachComps(
-			entityDesc,
-			entity,
-			properties.propertyDescs
-		);
-	}
+	// public static function createAndAttachComponentsFromProperties(
+	// 	entityDesc : EntityDescription,
+	// 	entity : OverworldEntity
+	// ) {
+	// 	var properties = entityDesc.getBodyDescription();
+	// 	createAndAttachComps(
+	// 		entityDesc,
+	// 		entity,
+	// 		properties.propertyDescs
+	// 	);
+	// }
 
-	static function createAndAttachComps(
-		entityDesc : EntityDescription,
-		entity : OverworldEntity,
-		compDescs : Array<EntityComponentDescription>
-	) {
-		var components = EntityComponentsFactory.fromPropertyDescriptions( compDescs );
+	// static function createAndAttachComps(
+	// 	entityDesc : EntityDescription,
+	// 	entity : OverworldEntity,
+	// 	compDescs : Array<EntityComponentDescription>
+	// ) {
+	// 	var components = EntityComponentsFactory.fromPropertyDescriptions( compDescs );
 
-		for ( component in components ) {
-			Assert.notNull( component, "null component came from body property factory" );
-			if ( component != null )
-				entity.components.add( component );
-		}
-	}
+	// 	for ( component in components ) {
+	// 		Assert.notNull( component, "null component came from body property factory" );
+	// 		if ( component != null )
+	// 			entity.components.add( component );
+	// 	}
+	// }
 
 	public final onEntityCreated = new Signal<OverworldEntity>();
 
@@ -74,16 +74,16 @@ class EntityFactory {
 	// 	location.addEntity( entity );
 	// }
 
-	public function createEntity( entityDesc : EntityDescription ) : OverworldEntity {
-		var entity = new OverworldEntity( entityDesc, '${++ENTITY_ID_STUB}' );
-		createAndAttachComponentsFromProperties( entityDesc, entity );
+	// public function createEntity( entityDesc : EntityDescription ) : OverworldEntity {
+	// 	var entity = new OverworldEntity( entityDesc, '${++ENTITY_ID_STUB}' );
+	// 	createAndAttachComponentsFromProperties( entityDesc, entity );
 
-		onEntityCreated.dispatch( entity );
+	// 	onEntityCreated.dispatch( entity );
 
-		for ( comp in entity.components.container ) {
-			comp.claimOwnage();
-		}
+	// 	for ( comp in entity.components.container ) {
+	// 		comp.claimOwnage();
+	// 	}
 
-		return entity;
-	}
+	// 	return entity;
+	// }
 }

@@ -1,10 +1,6 @@
 package game.data.storage.entity.body.view.extensions;
 
-import game.client.en.comp.view.extensions.ViewPaletteSwap;
 import cdb.Types.ArrayRead;
-import game.net.entity.EntityComponentReplicatorBase;
-import net.NetNode;
-import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
 
 class ViewPaletteSwapDescription extends EntityComponentDescription {
@@ -29,13 +25,5 @@ class ViewPaletteSwapDescription extends EntityComponentDescription {
 		super( "palette_swap" );
 
 		this.paletteMap = paletteMap;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new ViewPaletteSwap( this );
-	}
-
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		throw new haxe.exceptions.NotImplementedException();
 	}
 }

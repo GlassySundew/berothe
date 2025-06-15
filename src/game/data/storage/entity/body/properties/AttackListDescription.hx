@@ -1,11 +1,6 @@
 package game.data.storage.entity.body.properties;
 
-import game.net.entity.component.attack.EntityAttackListReplicator;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.domain.overworld.entity.EntityComponent;
-import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.net.entity.component.EntitySimpleComponentReplicator;
 
 class AttackListDescription extends EntityComponentDescription {
 
@@ -30,11 +25,4 @@ class AttackListDescription extends EntityComponentDescription {
 		this.attackList = attackList;
 	}
 
-	public function buildComponent() : EntityComponent {
-		return new EntityAttackListComponent( this );
-	}
-
-	public function buildCompReplicator( ?parent ) : EntityComponentReplicatorBase {
-		return new EntityAttackListReplicator( parent );
-	}
 }

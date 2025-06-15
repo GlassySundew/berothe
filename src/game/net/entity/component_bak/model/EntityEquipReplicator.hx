@@ -1,21 +1,15 @@
 package game.net.entity.component.model;
 
-import game.domain.overworld.item.Item;
-import net.NSIntMap;
-import util.Assert;
-import game.client.en.comp.view.EntityViewComponent;
-import game.domain.overworld.entity.OverworldEntity;
-import game.net.item.EquipSlotReplicator;
-import game.data.storage.entity.model.EntityEquipmentSlotType;
-import game.net.item.ItemReplicator;
-import rx.disposables.Boolean;
-import rx.disposables.Composite;
-import game.net.item.ItemSlotReplicator;
-import net.NSArray;
 import hxbit.NetworkHost;
 import hxbit.NetworkSerializable.NetworkSerializer;
-import game.domain.overworld.entity.component.model.EntityInventory;
+import net.NSIntMap;
 import net.NetNode;
+import util.Assert;
+import game.client.en.comp.view.EntityViewComponent;
+import game.data.storage.entity.model.EntityEquipmentSlotType;
+import game.domain.overworld.entity.component.model.EntityInventory;
+import game.domain.overworld.item.Item;
+import game.net.item.EquipSlotReplicator;
 #if client
 import game.client.item.ItemEquipView;
 #end

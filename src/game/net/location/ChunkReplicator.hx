@@ -40,8 +40,8 @@ class ChunkReplicator extends NetNode {
 		y = chunk.y;
 		z = chunk.z;
 		this.coreReplicator = coreReplicator;
-		chunk.entityStream.observe( onEntityAddedToChunk );
-		chunk.onEntityRemoved.add( onEntityRemovedFromChunk );
+		// chunk.entityStream.observe( onEntityAddedToChunk );
+		// chunk.onEntityRemoved.add( onEntityRemovedFromChunk );
 	}
 
 	override public function unregister(
@@ -90,15 +90,15 @@ class ChunkReplicator extends NetNode {
 		#end
 	}
 
-	function onEntityAddedToChunk( entity : OverworldEntity ) {
-		var entityReplicator = coreReplicator.getEntityReplicator( entity );
-		entities.push( entityReplicator );
-	}
+	// function onEntityAddedToChunk( entity : OverworldEntity ) {
+	// 	var entityReplicator = coreReplicator.getEntityReplicator( entity );
+	// 	entities.push( entityReplicator );
+	// }
 
-	function onEntityRemovedFromChunk( entity : OverworldEntity ) {
-		var entityReplicator = coreReplicator.getEntityReplicator( entity );
-		entities.remove( entityReplicator );
-	}
+	// function onEntityRemovedFromChunk( entity : OverworldEntity ) {
+	// 	var entityReplicator = coreReplicator.getEntityReplicator( entity );
+	// 	entities.remove( entityReplicator );
+	// }
 
 	#if( client && debug )
 	function drawDebug() {

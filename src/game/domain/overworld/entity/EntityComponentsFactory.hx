@@ -9,9 +9,9 @@ class EntityComponentsFactory {
 	) : Array<EntityComponent> {
 		var result = [];
 
-		for ( property in bodyDescriptions ) {
-			if ( property != null ) result.push( property.buildComponent() );
-		}
+		// for ( property in bodyDescriptions ) {
+		// 	if ( property != null ) result.push( property.buildComponent() );
+		// }
 
 		return result;
 	}

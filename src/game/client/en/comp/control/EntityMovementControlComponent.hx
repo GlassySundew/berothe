@@ -11,7 +11,6 @@ import game.domain.overworld.entity.EntityComponent;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.net.entity.EntityReplicator;
-import game.net.entity.component.EntityDynamicsComponentReplicator;
 
 class EntityMovementControlComponent extends EntityClientComponent {
 

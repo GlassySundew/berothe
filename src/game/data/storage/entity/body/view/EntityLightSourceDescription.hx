@@ -1,11 +1,7 @@
 package game.data.storage.entity.body.view;
 
-import game.client.en.comp.view.EntityLightSourceComponent;
-import game.data.storage.entity.model.EntityEquipmentSlotType;
-import net.NetNode;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
+import game.data.storage.entity.model.EntityEquipmentSlotType;
 
 class EntityLightSourceDescription extends EntityComponentDescription {
 
@@ -31,15 +27,5 @@ class EntityLightSourceDescription extends EntityComponentDescription {
 		super( id );
 		this.equipSource = equipSource;
 		this.lightPrefabPath = lightPrefabPath;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new EntityLightSourceComponent( this );
-	}
-
-	public function buildCompReplicator(
-		?parent : NetNode
-	) : EntityComponentReplicatorBase {
-		throw new haxe.exceptions.NotImplementedException();
 	}
 }

@@ -12,7 +12,6 @@ import hxd.Res;
 import pass.PbrSetup.PbrRenderer;
 import rx.disposables.Composite;
 import util.threeD.ModelCache;
-import game.net.entity.component.EntityModelComponentReplicator;
 #if client
 import core.IProperty;
 import core.MutableProperty;
@@ -149,21 +148,21 @@ class GameClient extends Process {
 	}
 
 	public function setFriendly() {
-		var modelRepl = getControlledModel();
-		if ( modelRepl == null ) return;
-		modelRepl.setFriendly();
+		// var modelRepl = getControlledModel();
+		// if ( modelRepl == null ) return;
+		// modelRepl.setFriendly();
 	}
 
 	public function setUnfriendly() {
-		var modelRepl = getControlledModel();
-		if ( modelRepl == null ) return;
-		modelRepl.setUnfriendly();
+		// var modelRepl = getControlledModel();
+		// if ( modelRepl == null ) return;
+		// modelRepl.setUnfriendly();
 	}
 
 	public function sayMessage( text : String ) {
-		var modelRepl = getControlledModel();
-		if ( modelRepl == null ) return;
-		modelRepl.sayText( text );
+		// var modelRepl = getControlledModel();
+		// if ( modelRepl == null ) return;
+		// modelRepl.sayText( text );
 	}
 
 	public function emitInfoMessage( type : InfoMessageType ) {
@@ -171,21 +170,21 @@ class GameClient extends Process {
 	}
 
 	public function sendCommand( commandType : ClientCommandType ) {
-		switch commandType {
-			case CHAMPION:
-				var model = getControlledModel();
-				if (
-					model.displayName.getValue() == ""
-					|| model.displayName.getValue() == null
-				) {}
-		}
+		// switch commandType {
+		// 	case CHAMPION:
+		// 		var model = getControlledModel();
+		// 		if (
+		// 			model.displayName.getValue() == ""
+		// 			|| model.displayName.getValue() == null
+		// 		) {}
+		// }
 
 		// Main.inst.cliCon.val.sendTransaction
 	}
 
-	inline function getControlledModel() : Null<EntityModelComponentReplicator> {
-		return controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
-	}
+	// inline function getControlledModel() : Null<EntityModelComponentReplicator> {
+	// 	return controlledEntity.getValue()?.componentsRepl.components.get( EntityModelComponentReplicator );
+	// }
 
 	#if( client && debug )
 	function debugDraw() {
@@ -211,8 +210,8 @@ class GameClient extends Process {
 		escapeCa.dispose();
 
 		currentLocationSelf.val = null;
-		if ( !controlledEntity?.getValue()?.entity.result?.disposed.isTriggered )
-			controlledEntity.getValue()?.entity.result?.dispose();
+		// if ( !controlledEntity?.getValue()?.entity.result?.disposed.isTriggered )
+		// 	controlledEntity.getValue()?.entity.result?.dispose();
 
 		subscription.unsubscribe();
 		BatchRenderer.inst?.dispose();
@@ -256,7 +255,7 @@ class GameClient extends Process {
 	}
 
 	function onUnregister( o : NetworkSerializable ) {
-		Std.downcast( o, NetNode )?.onUnregisteredClient();
+		Std.downcast( o, NetNode )?.onUnregistered();
 	}
 }
 

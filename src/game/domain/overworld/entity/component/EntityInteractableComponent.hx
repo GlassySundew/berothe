@@ -72,44 +72,44 @@ class EntityInteractableComponent extends EntityComponent {
 				desc.tooltipLocale
 			);
 
-		GameClient.inst.controlledEntity.onAppear( ctrlEnt -> {
-			ctrlEnt.entity.result.components.onAppear(
-				EntityDynamicsComponent,
-				( _, dynamics ) -> {
+		// GameClient.inst.controlledEntity.onAppear( ctrlEnt -> {
+		// 	ctrlEnt.entity.result.components.onAppear(
+		// 		EntityDynamicsComponent,
+		// 		( _, dynamics ) -> {
 
-					var sub = Composite.create();
-					var predicamentSignal = new Signal<Bool>();
-					sub.add( dynamics.onMove.add(() -> {
-						predicamentSignal.dispatch(
-							checkDistance(
-								ctrlEnt.entity.result
-							)
-						);
-					} ) );
+		// 			var sub = Composite.create();
+		// 			var predicamentSignal = new Signal<Bool>();
+		// 			sub.add( dynamics.onMove.add(() -> {
+		// 				predicamentSignal.dispatch(
+		// 					checkDistance(
+		// 						ctrlEnt.entity.result
+		// 					)
+		// 				);
+		// 			} ) );
 
-					viewComp.view.then( ( view ) -> {
-						var int = InteractorFactory.create(
-							interactorVO,
-							view.getGraphics(),
-							predicamentSignal
-						);
+		// 			viewComp.view.then( ( view ) -> {
+		// 				var int = InteractorFactory.create(
+		// 					interactorVO,
+		// 					view.getGraphics(),
+		// 					predicamentSignal
+		// 				);
 
-						sub.add( isTurnedOn.addOnValueImmediately(
-							( old, newV ) -> {
-								if ( newV ) return;
+		// 				sub.add( isTurnedOn.addOnValueImmediately(
+		// 					( old, newV ) -> {
+		// 						if ( newV ) return;
 
-								predicamentSignal.destroy();
-								sub.unsubscribe();
+		// 						predicamentSignal.destroy();
+		// 						sub.unsubscribe();
 
-								int.remove();
-							}
-						) );
+		// 						int.remove();
+		// 					}
+		// 				) );
 
-						interactive.resolve( int );
-					} );
-				}
-			);
-		} );
+		// 				interactive.resolve( int );
+		// 			} );
+		// 		}
+		// 	);
+		// } );
 	}
 	#end
 

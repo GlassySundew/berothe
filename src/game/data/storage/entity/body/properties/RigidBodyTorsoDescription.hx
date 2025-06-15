@@ -1,11 +1,6 @@
 package game.data.storage.entity.body.properties;
 
-import net.NetNode;
-import game.domain.overworld.entity.EntityComponent;
-import game.domain.overworld.entity.component.EntityRigidBodyComponent;
 import game.data.storage.entity.body.properties.VolumetricBodyDescriptionBase;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.net.entity.component.EntityRigidBodyComponentReplicator;
 
 enum GeometryType {
 	BOX;
@@ -69,13 +64,5 @@ class RigidBodyTorsoDescription extends VolumetricBodyDescriptionBase {
 		this.geometry = geometry;
 		this.hasFeet = hasFeet;
 		this.isStatic = isStatic;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new EntityRigidBodyComponent( this );
-	}
-
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		return new EntityRigidBodyComponentReplicator( parent );
 	}
 }

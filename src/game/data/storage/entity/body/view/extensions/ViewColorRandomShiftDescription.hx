@@ -1,9 +1,5 @@
 package game.data.storage.entity.body.view.extensions;
 
-import game.client.en.comp.view.extensions.ViewColorRandomShift;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.domain.overworld.entity.EntityComponent;
-import net.NetNode;
 import game.data.storage.entity.component.EntityComponentDescription;
 
 class ViewColorRandomShiftDescription extends EntityComponentDescription {
@@ -22,13 +18,5 @@ class ViewColorRandomShiftDescription extends EntityComponentDescription {
 		super( "viewColorRandomShift" );
 
 		this.radius = radius;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new ViewColorRandomShift( this );
-	}
-
-	public function buildCompReplicator( ?parent : NetNode ) : EntityComponentReplicatorBase {
-		throw new haxe.exceptions.NotImplementedException();
 	}
 }
