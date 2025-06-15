@@ -33,7 +33,7 @@ import game.data.storage.DataStorage;
 import game.debug.HeapsOimophysicsDebugDraw;
 import game.debug.ImGuiGameClientDebug;
 import game.domain.depr.overworld.GameCoreDepr;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.net.entity.EntityReplicator;
 
 /**
@@ -50,9 +50,9 @@ class GameClient extends Process {
 		return inst = game;
 	}
 
-	final currentLocationSelf : MutableProperty<Location> = new MutableProperty();
-	public var currentLocation( get, never ) : IProperty<Location>;
-	inline function get_currentLocation() : IProperty<Location> {
+	final currentLocationSelf : MutableProperty<OverworldLocationMain> = new MutableProperty();
+	public var currentLocation( get, never ) : IProperty<OverworldLocationMain>;
+	inline function get_currentLocation() : IProperty<OverworldLocationMain> {
 		return currentLocationSelf;
 	}
 
@@ -123,9 +123,10 @@ class GameClient extends Process {
 		#end
 
 		ClientMain.inst.cliCon.onAppear( cliCon -> {
-			infoMessageStream.resolve( ObservableFactory
-				.fromSignal( cliCon.onInfoMessage )
-				.append( ObservableFactory.fromSignal( onClientInfoMessage ) ) );
+			infoMessageStream.resolve(
+				ObservableFactory.fromSignal( cliCon.onInfoMessage )
+					.append( ObservableFactory.fromSignal( onClientInfoMessage ) )
+			);
 		} );
 	}
 

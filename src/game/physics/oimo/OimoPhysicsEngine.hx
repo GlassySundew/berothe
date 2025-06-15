@@ -5,7 +5,7 @@ import oimo.collision.geometry.BoxGeometry;
 import game.domain.overworld.location.physics.ITransform;
 import game.domain.overworld.location.physics.ITransformProvider;
 import game.domain.overworld.location.physics.IGeometry;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.physics.oimo.RayCastCallback;
 import oimo.dynamics.rigidbody.Shape;
 import oimo.common.Vec3;
@@ -82,19 +82,19 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 	// 	return result;
 	// }
 
-	public inline function rayCast( begin : ThreeDeeVector, end : ThreeDeeVector, callback : RayCastCallback ) {
+	public inline function rayCast( begin : Vec, end : Vec, callback : RayCastCallback ) {
 		world.rayCast( begin.toOimo(), end.toOimo(), callback );
 
 		#if client
 		if ( debugDraw != null )
-			debugDraw.line( begin, end, ThreeDeeVector.fromColorF( 0xBA8200 ).toOimo() );
+			debugDraw.line( begin, end, Vec.fromColorF( 0xBA8200 ).toOimo() );
 		#end
 	}
 
 	public function convexCast(
 		convex : IGeometry,
 		start : ITransform,
-		translation : ThreeDeeVector,
+		translation : Vec,
 		callback : RayCastCallback
 	) {
 		#if debug
@@ -116,19 +116,19 @@ class OimoPhysicsEngine implements IPhysicsEngine {
 		var beginPoint = beginTransform.getPosition();
 
 		var fraction = 1.;
-		var position = new ThreeDeeVector();
+		var position = new Vec();
 		if ( callback.hit ) {
 			fraction = callback.contacts[0].fraction;
 			position = callback.contacts[0].position;
 		}
-		debugDraw.line( beginPoint, beginPoint.addScaled( translation, fraction ), ThreeDeeVector.fromColorF( 0x23DB20 ) );
+		debugDraw.line( beginPoint, beginPoint.addScaled( translation, fraction ), Vec.fromColorF( 0x23DB20 ) );
 		beginTransform.setPosition( beginTransform.getPosition().addScaledEq( translation, fraction ) );
-		debugDraw.point( position, ThreeDeeVector.fromColorF( 0xB224A1 ) );
+		debugDraw.point( position, Vec.fromColorF( 0xB224A1 ) );
 
 		switch Type.getClass( geom ) {
 			case BoxGeometry | OimoBoxGeometry:
 				var box = Std.downcast( geom, BoxGeometry );
-				debugDraw.box( beginTransform, box.getHalfExtents(), ThreeDeeVector.fromColorF( 0x185ED0 ).toOimo() );
+				debugDraw.box( beginTransform, box.getHalfExtents(), Vec.fromColorF( 0x185ED0 ).toOimo() );
 
 			case e: throw e + " geometry is not supported in debugdraw";
 		}

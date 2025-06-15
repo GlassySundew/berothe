@@ -2,11 +2,11 @@ package game.data.storage.entity.body.properties.action;
 
 import tink.CoreApi.Lazy;
 import haxe.exceptions.NotImplementedException;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 typedef Transform = {
-	?rotation : ThreeDeeVector,
-	?position : ThreeDeeVector
+	?rotation : Vec,
+	?position : Vec
 };
 
 class ActionsFactory {
@@ -21,7 +21,7 @@ class ActionsFactory {
 					return new ToggleEntityTransformInListAction(
 						[for ( vector in action.toggleEntityTransformInList ) {
 							{
-								rotation : new ThreeDeeVector(
+								rotation : new Vec(
 									vector.transform.angle?.x ?? 0,
 									vector.transform.angle?.y ?? 0,
 									vector.transform.angle?.z ?? 0

@@ -9,7 +9,7 @@ import game.domain.overworld.entity.component.model.EntityModelComponent;
 import core.IProperty;
 import core.MutableProperty;
 import signals.Signal;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.data.storage.entity.body.properties.AttackListItemVO;
 import game.physics.oimo.AttackTweenBoxCastEmitter;
 import oimo.collision.geometry.BoxGeometry;
@@ -109,11 +109,11 @@ class EntityAttackListItem {
 		} );
 	}
 
-	function onAttachedToLocation( oldLoc : Location, location : Location ) {
+	function onAttachedToLocation( oldLoc : OverworldLocationMain, location : OverworldLocationMain ) {
 		if ( location == null ) return;
 
 		emitter.val?.removeEmitter();
-		emitter.onAppear( emitter -> emitter.attachPhysics( location.physics ) );
+		// emitter.onAppear( emitter -> emitter.attachPhysics( location.physics ) );
 	}
 
 	inline function update( dt, tmod ) {

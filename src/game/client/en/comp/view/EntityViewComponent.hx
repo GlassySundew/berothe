@@ -15,8 +15,8 @@ import game.domain.overworld.entity.EntityComponent;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
-import game.domain.overworld.location.Location;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.OverworldLocationMain;
+import game.domain.overworld.location.physics.Types.Vec;
 #if client
 import game.client.en.comp.view.ui.EntityStatusBarContainer;
 import game.client.en.comp.view.ui.EntitySleepSpeech;
@@ -88,7 +88,7 @@ class EntityViewComponent extends EntityComponent {
 		for ( setting in viewExtraConfig ) {
 			switch setting {
 				case Size( x, y, z ):
-					view.provideSize( new ThreeDeeVector( x, y, z ) );
+					view.provideSize( new Vec( x, y, z ) );
 				default:
 			}
 		}
@@ -96,7 +96,7 @@ class EntityViewComponent extends EntityComponent {
 		return view;
 	}
 
-	function onAttachedToLocation( location : Location ) {
+	function onAttachedToLocation( location : OverworldLocationMain ) {
 		if ( view.result != null ) {
 			dispose();
 			view = new Future();
@@ -175,13 +175,13 @@ class EntityViewComponent extends EntityComponent {
 		);
 		modelComp.statusMessages.subscribe( statusBar.setChatMessage );
 
-		inline function checkEnemy() {
-			statusBar.setFriendliness(
-				!modelComp.isEnemy( GameClient.inst.controlledEntity.val.entity.result )
-			);
-		}
-		modelComp.factions.onChanged.add( ( _, _ ) -> checkEnemy() );
-		checkEnemy();
+		// inline function checkEnemy() {
+		// 	statusBar.setFriendliness(
+		// 		!modelComp.isEnemy( GameClient.inst.controlledEntity.val.entity.result )
+		// 	);
+		// }
+		// modelComp.factions.onChanged.add( ( _, _ ) -> checkEnemy() );
+		// checkEnemy();
 	}
 
 	function updateStatusBar3DPointPosition() {

@@ -19,7 +19,8 @@ class EntityComponentsReplicator extends NetNode {
 
 	@:s public final components : NSClassMap<
 		Class<EntityComponentReplicatorBase>,
-		EntityComponentReplicatorBase> = new NSClassMap();
+		EntityComponentReplicatorBase
+	> = new NSClassMap();
 
 	var entityRepl : EntityReplicator;
 	var isMappingFinished = false;
@@ -29,7 +30,7 @@ class EntityComponentsReplicator extends NetNode {
 
 		this.entityRepl = entityRepl;
 
-		entityRepl.entity.result.components.container.stream.observe( onComponentAdded );
+		// entityRepl.entity.result.components.container.stream.observe( onComponentAdded );
 	}
 
 	public function followEntityClient( entity : EntityReplicator ) {

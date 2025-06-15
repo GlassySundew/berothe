@@ -1,6 +1,6 @@
 package game.domain.overworld.entity.component;
 
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.location.physics.IPhysicsEngine;
 
 abstract class EntityPhysicsComponentBase extends EntityComponent {
@@ -12,8 +12,8 @@ abstract class EntityPhysicsComponentBase extends EntityComponent {
 		entity.location.addOnValueImmediately( onAttachedToLocation );
 	}
 
-	function onAttachedToLocation( oldLoc : Location, location : Location ) {
+	function onAttachedToLocation( oldLoc : OverworldLocationMain, location : OverworldLocationMain ) {
 		if ( location == null ) return;
-		physics = location.physics;
+		// physics = location.physics;
 	}
 }

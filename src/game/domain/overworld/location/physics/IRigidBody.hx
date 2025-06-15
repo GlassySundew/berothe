@@ -4,7 +4,7 @@ import oimo.dynamics.rigidbody.MassData;
 import game.domain.overworld.location.physics.Types.RigidBodyType;
 import core.IMutableProperty;
 import core.IProperty;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 interface IRigidBody {
 
@@ -28,10 +28,10 @@ interface IRigidBody {
 	function setRotation( x : Float, y : Float, z : Float ) : Void;
 	function addShape( shape : IRigidBodyShape ) : Void;
 	function getShape() : Null<IRigidBodyShape>;
-	function setRotationFactor( vec : ThreeDeeVector ) : Void;
-	function setLinearDamping( vec : ThreeDeeVector ) : Void;
+	function setRotationFactor( vec : Vec ) : Void;
+	function setLinearDamping( vec : Vec ) : Void;
 	function setGravityScale( value : Float ) : Void;
-	function setPosition( pos : ThreeDeeVector ) : Void;
+	function setPosition( pos : Vec ) : Void;
 	function setType( type : RigidBodyType ) : Void;
 	function updateTransform() : Void;
 	function sleep() : Void;

@@ -1,6 +1,6 @@
 package game.client.en.comp.view;
 
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import graphics.ObjectNode3D;
 
 interface IEntityView {
@@ -9,6 +9,6 @@ interface IEntityView {
 	function getGraphics() : ObjectNode3D;
 	function addChildView( view : IEntityView ) : Void;
 	function addChildObject( object : ObjectNode3D ) : Void;
-	function provideSize( vec : ThreeDeeVector ) : Void;
+	function provideSize( vec : Vec ) : Void;
 	function batcherize() : Void;
 }

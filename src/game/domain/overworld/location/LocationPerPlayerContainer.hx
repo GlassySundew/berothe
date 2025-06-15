@@ -8,7 +8,7 @@ class LocationPerPlayerContainer implements ILocationContainer {
 	final locationDesc : LocationDescription;
 	final locationFactory : LocationFactory;
 
-	final perPlayerLocations : Map<String, Location> = [];
+	final perPlayerLocations : Map<String, OverworldLocationMain> = [];
 
 	public function new(
 		locationDesc : LocationDescription,
@@ -20,7 +20,7 @@ class LocationPerPlayerContainer implements ILocationContainer {
 	}
 
 	#if !debug inline #end
-	public function request( requesterUnitID : String, ?auth : Bool = false ) : Location {
+	public function request( requesterUnitID : String, ?auth : Bool = false ) : OverworldLocationMain {
 
 		if ( perPlayerLocations[requesterUnitID] == null ) {
 

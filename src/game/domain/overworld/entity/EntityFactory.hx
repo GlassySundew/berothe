@@ -5,7 +5,7 @@ import util.Assert;
 import signals.Signal;
 import game.data.location.objects.LocationSpawnVO;
 import game.data.storage.entity.EntityDescription;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 
 class EntityFactory {
 

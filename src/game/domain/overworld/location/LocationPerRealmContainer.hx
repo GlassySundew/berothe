@@ -8,7 +8,7 @@ class LocationPerRealmContainer implements ILocationContainer {
 	final factory : LocationFactory;
 	final locationDesc : LocationDescription;
 
-	var location : Location;
+	var location : OverworldLocationMain;
 
 	public function new(
 		locationDesc : LocationDescription,
@@ -20,7 +20,7 @@ class LocationPerRealmContainer implements ILocationContainer {
 	}
 
 	#if !debug inline #end
-	public function request( requesterUnitID : String, ?auth : Bool = false ) : Location {
+	public function request( requesterUnitID : String, ?auth : Bool = false ) : OverworldLocationMain {
 		if ( location == null ) {
 			location = factory.createLocation( locationDesc );
 			// auth ? location.loadAuthoritative() : location.loadNonAuthoritative();

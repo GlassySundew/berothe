@@ -8,7 +8,7 @@ import h3d.mat.Material;
 import h3d.scene.Mesh;
 import h3d.prim.Cube;
 import graphics.ObjectNode3D;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import h3d.scene.Object;
 
 class EntityStaticBoxView implements IEntityView {
@@ -16,7 +16,7 @@ class EntityStaticBoxView implements IEntityView {
 	final object : ObjectNode3D;
 	final prim : Cube;
 
-	public function new( size : ThreeDeeVector ) {
+	public function new( size : Vec ) {
 		prim = new Cube();
 		prim.translate( -.5, -.5, -.5 );
 		prim.unindex();
@@ -31,7 +31,7 @@ class EntityStaticBoxView implements IEntityView {
 		object = ObjectNode3D.fromHeaps( mesh );
 	}
 
-	public inline function provideSize( vec : ThreeDeeVector ) {
+	public inline function provideSize( vec : Vec ) {
 		object.heapsObject.scaleX = vec.x;
 		object.heapsObject.scaleY = vec.y;
 		object.heapsObject.scaleZ = vec.z;

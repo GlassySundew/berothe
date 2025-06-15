@@ -1,12 +1,8 @@
 package game.data.storage.entity.body.properties;
 
-import game.data.storage.entity.model.EntityEquipmentSlotType;
-import game.domain.overworld.entity.component.combat.EntityAttackListItem;
-import net.NetNode;
-import game.net.entity.EntityComponentReplicatorBase;
 import game.data.storage.entity.body.view.AnimationKey;
 import game.data.storage.entity.body.view.AttackTranslationTween;
-import game.domain.overworld.entity.EntityComponent;
+import game.data.storage.entity.model.EntityEquipmentSlotType;
 
 class AttackListItemVO {
 

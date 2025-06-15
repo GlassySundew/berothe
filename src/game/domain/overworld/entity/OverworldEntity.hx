@@ -6,7 +6,7 @@ import dn.Delayer;
 import util.Assert;
 import future.Future;
 import game.domain.overworld.entity.component.EntityRigidBodyComponent;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import core.IProperty;
 import core.MutableProperty;
 import signals.Signal;
@@ -35,9 +35,9 @@ class OverworldEntity {
 		return chunkSelf;
 	}
 
-	var locationSelf : MutableProperty<Location> = new MutableProperty<Location>();
-	public var location( get, never ) : IProperty<Location>;
-	inline function get_location() : IProperty<Location> {
+	var locationSelf : MutableProperty<OverworldLocationMain> = new MutableProperty<OverworldLocationMain>();
+	public var location( get, never ) : IProperty<OverworldLocationMain>;
+	inline function get_location() : IProperty<OverworldLocationMain> {
 		return locationSelf;
 	}
 
@@ -72,7 +72,7 @@ class OverworldEntity {
 		if ( disposeInvalidate ) dispose();
 	}
 
-	public function setLocation( location : Location ) {
+	public function setLocation( location : OverworldLocationMain ) {
 		locationSelf.val = location;
 	}
 

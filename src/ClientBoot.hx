@@ -41,7 +41,7 @@ class ClientBoot extends hxd.App {
 			Sys.println( str );
 			#else
 			if ( !StringTools.startsWith( infos.fileName, "hx/concurrent" ) ) {
-				var str = haxe.Log.formatOutput( "\n\t\033[36m" + v, infos );
+				var str = haxe.Log.formatOutput( "\n    \033[36m" + v, infos );
 				Sys.println( "[CLIENT] " + str + "\033[0m" );
 			}
 			#end

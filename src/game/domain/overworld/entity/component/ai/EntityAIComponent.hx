@@ -3,7 +3,7 @@ package game.domain.overworld.entity.component.ai;
 import util.Assert;
 import game.data.storage.entity.body.properties.EntityAIDescription;
 import game.domain.overworld.entity.component.ai.behaviours.EntityBehaviourBase;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 
 class EntityAIComponent extends EntityComponent {
 
@@ -19,7 +19,7 @@ class EntityAIComponent extends EntityComponent {
 		entity.location.onAppear( onAttachedToLocation );
 	}
 
-	function onAttachedToLocation( location : Location ) {
+	function onAttachedToLocation( location : OverworldLocationMain ) {
 		#if server
 		behaviour = BehaviourFactory.fromDesc( desc );
 		Assert.notNull( behaviour );

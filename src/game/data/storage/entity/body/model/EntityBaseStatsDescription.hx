@@ -1,12 +1,6 @@
 package game.data.storage.entity.body.model;
 
-import game.net.entity.component.EntitySimpleComponentReplicator;
-import game.data.storage.entity.model.EntityEquipmentSlotType;
-import game.domain.overworld.entity.component.model.EntityModelComponent;
-import game.net.entity.EntityComponentReplicatorBase;
-import game.domain.overworld.entity.EntityComponent;
 import game.data.storage.entity.component.EntityComponentDescription;
-import game.net.entity.component.EntityModelComponentReplicator;
 
 enum RandomDistributionType {
 	LINEAR;
@@ -106,13 +100,5 @@ class EntityBaseStatsDescription extends EntityComponentDescription {
 		this.hideNameByDefault = hideNameByDefault;
 		this.spawnInventory = spawnInventory;
 		this.speechDamaged = speechDamaged;
-	}
-
-	public function buildComponent() : EntityComponent {
-		return new EntityModelComponent( this );
-	}
-
-	public function buildCompReplicator( ?parent ) : EntityComponentReplicatorBase {
-		return new EntityModelComponentReplicator( parent );
 	}
 }

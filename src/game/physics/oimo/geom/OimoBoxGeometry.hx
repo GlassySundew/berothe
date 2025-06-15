@@ -1,7 +1,7 @@
 package game.physics.oimo.geom;
 
 import oimo.common.Vec3;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import oimo.collision.geometry.BoxGeometry;
 import game.domain.overworld.location.physics.geom.IBoxGeometry;
 import oimo.m.M;
@@ -12,7 +12,7 @@ class OimoBoxGeometry extends BoxGeometry {
 		super( halfSize );
 	}
 
-	public function setSize( vec : ThreeDeeVector ) {
+	public function setSize( vec : Vec ) {
 		_setSize( vec.div( 0.5 ).toOimo() );
 	}
 

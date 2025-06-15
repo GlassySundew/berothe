@@ -1,8 +1,8 @@
 package game.domain.overworld.entity.component.ai.behaviours;
 
 import dn.M;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.physics.Types.Vec;
+import game.domain.overworld.location.OverworldLocationMain;
 
 enum PollingState {
 	FLYING_TO;
@@ -16,7 +16,7 @@ class FlowerPollinator extends EntityBehaviourBase {
 	static final POLLING_DURATION_MIN = 10;
 	static final POLLING_DURATION_MAX = 20;
 
-	var flowerChosen : ThreeDeeVector;
+	var flowerChosen : Vec;
 	var pollingState : PollingState;
 	var flyComp : EntityFlyComponent;
 	var isPollingTimerSet : Bool = false;

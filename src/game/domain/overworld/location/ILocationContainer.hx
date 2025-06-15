@@ -4,6 +4,6 @@ import game.domain.overworld.entity.OverworldEntity;
 
 interface ILocationContainer {
 
-	function request( requesterUnitID : String, ?auth : Bool ) : Location;
+	function request( requesterUnitID : String, ?auth : Bool ) : OverworldLocationMain;
 	function update() : Void;
 }

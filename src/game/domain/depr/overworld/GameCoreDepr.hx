@@ -9,7 +9,7 @@ import game.domain.IUpdatable;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.EntityFactory;
 import signals.Signal;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.location.LocationFactory;
 import game.data.storage.location.LocationDescription;
 
@@ -64,7 +64,7 @@ class GameCoreDepr {
 		locationDesc : LocationDescription,
 		requester : String,
 		auth = false
-	) : Location {
+	) : OverworldLocationMain {
 		if ( locationContainers[locationDesc.id] == null ) {
 			var locationContainer = LocationContainerFactory.create(
 				locationDesc,

@@ -10,7 +10,7 @@ import util.Assert;
 import game.net.client.GameClient;
 import hxbit.NetworkSerializable.NetworkSerializer;
 import hxbit.NetworkHost;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Chunk;
 import net.NSArray;
@@ -56,8 +56,8 @@ class ChunkReplicator extends NetNode {
 		super.unregister( host, ctx );
 	}
 
-	override function onUnregisteredClient() {
-		super.onUnregisteredClient();
+	override function onUnregistered() {
+		super.onUnregistered();
 		binderUnregClient?.unsubscribe();
 		binderUnregClient = null;
 	}

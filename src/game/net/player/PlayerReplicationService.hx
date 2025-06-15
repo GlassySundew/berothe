@@ -12,11 +12,11 @@ import rx.disposables.Composite;
 import util.Assert;
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.location.Chunk;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.net.entity.EntityReplicator;
 import game.net.location.ChunkReplicator;
 import game.net.CoreReplicator;
-import game.net.location.LocationReplicator;
+import game.net.location.OverworldLocationReplicator;
 
 class PlayerSubscribedChunk {
 
@@ -140,21 +140,21 @@ class PlayerReplicationService {
 		@return true if new subscription was created 
 	**/
 	function validateChunkAccess( x : Int, y : Int, z : Int ) : Bool {
-		if ( chunks[z] == null ) chunks[z] = new Map();
-		if ( chunks[z][y] == null ) chunks[z][y] = new Map();
-		if ( chunks[z][y][x] == null ) {
-			var locationReplManager : LocationReplicator //
-				= coreReplicator.getLocationReplicator( playerEntity.location.getValue() );
-			chunks[z][y][x] = new PlayerSubscribedChunk(
-				locationReplManager.getChunkReplicator( x, y, z )
-			);
+		// if ( chunks[z] == null ) chunks[z] = new Map();
+		// if ( chunks[z][y] == null ) chunks[z][y] = new Map();
+		// if ( chunks[z][y][x] == null ) {
+		// 	var locationReplManager : LocationReplicator //
+		// 		= coreReplicator.getLocationReplicator( playerEntity.location.getValue() );
+		// 	chunks[z][y][x] = new PlayerSubscribedChunk(
+		// 		locationReplManager.getChunkReplicator( x, y, z )
+		// 	);
 
-			Assert.notNull( chunks[z][y][x].replicator, "chunk replicator is null" );
+		// 	Assert.notNull( chunks[z][y][x].replicator, "chunk replicator is null" );
 
 			return true;
-		} else {
-			return false;
-		}
+		// } else {
+		// 	return false;
+		// }
 	}
 
 	#if !debug inline #end
@@ -209,23 +209,23 @@ class PlayerReplicationService {
 	}
 
 	function attachVisibleChunks( newChunk : Chunk ) {
-		final range = PLAYER_VISION_RANGE_CHUNKS;
-		for ( z in newChunk.z - range...newChunk.z + range + 1 ) {
-			for ( y in newChunk.y - range...newChunk.y + range + 1 ) {
-				for ( x in newChunk.x - range...newChunk.x + range + 1 ) {
+		// final range = PLAYER_VISION_RANGE_CHUNKS;
+		// for ( z in newChunk.z - range...newChunk.z + range + 1 ) {
+		// 	for ( y in newChunk.y - range...newChunk.y + range + 1 ) {
+		// 		for ( x in newChunk.x - range...newChunk.x + range + 1 ) {
 
-					var wasUnseen = validateChunkAccess( x, y, z );
-					if ( wasUnseen ) {
-						var chunkRepl = chunks[z][y][x];
-						cliCon.connect( chunkRepl.replicator );
+		// 			var wasUnseen = validateChunkAccess( x, y, z );
+		// 			if ( wasUnseen ) {
+		// 				var chunkRepl = chunks[z][y][x];
+		// 				cliCon.connect( chunkRepl.replicator );
 
-						chunkRepl.subscription.add(
-							chunkRepl.replicator.chunk.onEntityRemoved.add( onEntityRemovedFromChunk )
-						);
-					}
-				}
-			}
-		}
+		// 				chunkRepl.subscription.add(
+		// 					chunkRepl.replicator.chunk.onEntityRemoved.add( onEntityRemovedFromChunk )
+		// 				);
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 
 	function onEntityRemovedFromChunk( entity : OverworldEntity ) {
@@ -241,11 +241,11 @@ class PlayerReplicationService {
 					playerEntity.chunk.getValue(),
 					PLAYER_VISION_RANGE_CHUNKS
 				) ) {
-					var entityReplicator = coreReplicator.getEntityReplicator( entity );
-					entityReplicator.unregister(
-						NetworkHost.current,
-						cliCon.networkClient.ctx
-					);
+					// var entityReplicator = coreReplicator.getEntityReplicator( entity );
+					// entityReplicator.unregister(
+					// 	NetworkHost.current,
+					// 	cliCon.networkClient.ctx
+					// );
 			}
 		}, 1 );
 	}
@@ -260,7 +260,7 @@ class PlayerReplicationService {
 		attachVisibleChunks( chunk );
 	}
 
-	function onAddedToLocation( oldLoc : Location, location : Location ) {
+	function onAddedToLocation( oldLoc : OverworldLocationMain, location : OverworldLocationMain ) {
 		locationSub?.unsubscribe();
 
 		if ( oldLoc != null ) wipeAllChunks();
@@ -278,10 +278,10 @@ class PlayerReplicationService {
 	function locationOnEntityRemoved( entity : OverworldEntity ) {
 		if ( entity == playerEntity || entity.disposed.isTriggered ) return;
 
-		var entityReplicator = coreReplicator.getEntityReplicator( entity );
-		entityReplicator.unregister(
-			NetworkHost.current,
-			cliCon.networkClient.ctx
-		);
+		// var entityReplicator = coreReplicator.getEntityReplicator( entity );
+		// entityReplicator.unregister(
+		// 	NetworkHost.current,
+		// 	cliCon.networkClient.ctx
+		// );
 	}
 }

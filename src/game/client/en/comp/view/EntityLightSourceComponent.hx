@@ -6,7 +6,7 @@ import hrt.prefab.Object3D;
 import graphics.ObjectNode3D;
 import h3d.scene.fwd.PointLight;
 import util.Assert;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.entity.OverworldEntity;
 import game.data.storage.entity.body.view.EntityLightSourceDescription;
 import game.domain.overworld.entity.EntityComponent;
@@ -26,7 +26,7 @@ class EntityLightSourceComponent extends EntityComponent {
 		entity.location.onAppear( onAttachedToLocation );
 	}
 
-	function onAttachedToLocation( location : Location ) {
+	function onAttachedToLocation( location : OverworldLocationMain ) {
 
 		var parentViewComp = entity.components.get( EntityViewComponent );
 		Assert.notNull( parentViewComp );

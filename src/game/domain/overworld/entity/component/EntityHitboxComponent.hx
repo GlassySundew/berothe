@@ -4,7 +4,7 @@ import rx.disposables.Composite;
 import game.physics.oimo.EntityRigidBodyProps;
 import game.physics.oimo.ContactCallbackWrapper;
 import oimo.dynamics.callback.ContactCallback;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.data.storage.DataStorage;
 import game.physics.RigidBodyAbstractFactory;
 import util.Const;

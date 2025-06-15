@@ -25,7 +25,7 @@ import game.data.storage.entity.body.view.EntityAnimations;
 import game.domain.overworld.entity.component.EntityDynamicsComponent;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.domain.overworld.entity.component.combat.EntityAttackListItem;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 class EntityComposerView implements IEntityView {
 
@@ -87,7 +87,7 @@ class EntityComposerView implements IEntityView {
 		return object;
 	}
 
-	public inline function provideSize( vec : ThreeDeeVector ) {
+	public inline function provideSize( vec : Vec ) {
 		object.heapsObject.scaleX = vec.x;
 		object.heapsObject.scaleY = vec.y;
 		object.heapsObject.scaleZ = vec.z;

@@ -1,14 +1,15 @@
 package game.domain.overworld;
 
-import game.domain.overworld.location.LocationPerRealmContainer;
-import game.domain.overworld.location.LocationPerPlayerContainer;
-import game.domain.overworld.location.LocationFactory;
-import game.data.storage.location.LocationDescription;
-import game.domain.overworld.location.Location;
-import game.domain.overworld.location.ILocationContainer;
-import game.domain.overworld.ecs.systems.units.UnitSpawnSystem;
 import echoes.SystemList;
 import echoes.World;
+import signals.Signal;
+import game.data.storage.location.LocationDescription;
+import game.domain.overworld.ecs.systems.units.UnitSpawn;
+import game.domain.overworld.location.ILocationContainer;
+import game.domain.overworld.location.OverworldLocationMain;
+import game.domain.overworld.location.LocationFactory;
+import game.domain.overworld.location.LocationPerPlayerContainer;
+import game.domain.overworld.location.LocationPerRealmContainer;
 
 class LocationContainerFactory {
 
@@ -38,7 +39,7 @@ class GameCore {
 		locationDesc : LocationDescription,
 		requesterUnitID : String,
 		auth = false
-	) : Location {
+	) : OverworldLocationMain {
 
 		if ( locationContainers[locationDesc.id] == null ) {
 

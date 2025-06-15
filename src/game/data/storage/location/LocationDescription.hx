@@ -44,25 +44,25 @@ class LocationDescription extends DescriptionBase {
 	public final isOpenAir : Bool;
 	public final instancing : LocationInstancingType;
 
-	final levelType : LocationType;
+	final levelData : LocationType;
 
-	var locationDataResolver : LocationDataResolver;
+	var dataResolver : LocationDataResolver;
 
 	public function new(
-		locType : LocationType,
+		levelData : LocationType,
 		chunkSize : Int,
 		isOpenAir : Bool,
 		instancing : LocationInstancingType,
 		id : String
 	) {
 		super( id );
-		this.levelType = locType;
+		this.levelData = levelData;
 		this.chunkSize = chunkSize;
 		this.isOpenAir = isOpenAir;
 		this.instancing = instancing;
 	}
 
-	public function getLocationDataResolver() : LocationDataResolver {
-		return( locationDataResolver ?? ( locationDataResolver = new LocationDataResolver( levelType ) ) );
+	public function getDataResolver() : LocationDataResolver {
+		return( dataResolver ?? ( dataResolver = new LocationDataResolver( levelData ) ) );
 	}
 }

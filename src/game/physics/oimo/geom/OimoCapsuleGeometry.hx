@@ -2,7 +2,7 @@ package game.physics.oimo.geom;
 
 import oimo.common.Mat3;
 import oimo.collision.geometry.CapsuleGeometry;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import oimo.m.M;
 
 class OimoCapsuleGeometry extends CapsuleGeometry {

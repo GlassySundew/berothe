@@ -14,7 +14,7 @@ import util.Assert;
 import game.domain.overworld.location.physics.IRigidBody;
 import game.domain.overworld.location.physics.IRigidBodyShape;
 import game.domain.overworld.location.physics.Types.RigidBodyType;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 class OimoRigidBody implements IRigidBody {
 
@@ -123,11 +123,11 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody.addShape( Std.downcast( shape, OimoWrappedShape ) );
 	}
 
-	public inline function setRotationFactor( rotationFactor : ThreeDeeVector ) {
+	public inline function setRotationFactor( rotationFactor : Vec ) {
 		rigidBody.setRotationFactor( rotationFactor.toOimo() );
 	}
 
-	public inline function setLinearDamping( damping : ThreeDeeVector ) {
+	public inline function setLinearDamping( damping : Vec ) {
 		rigidBody.setLinearDamping( damping.toOimo() );
 	}
 
@@ -135,7 +135,7 @@ class OimoRigidBody implements IRigidBody {
 		rigidBody.setGravityScale( gravitiScale );
 	}
 
-	public inline function setPosition( pos : ThreeDeeVector ) {
+	public inline function setPosition( pos : Vec ) {
 		rigidBody.setPosition( pos.toOimo() );
 	}
 

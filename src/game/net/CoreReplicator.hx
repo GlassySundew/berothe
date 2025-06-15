@@ -1,15 +1,9 @@
 package game.net;
 
-import game.net.location.LocationReplicator;
-import game.net.item.ItemReplicator;
-import game.domain.overworld.item.Item;
-import net.ClientController;
-import game.net.entity.EntityReplicator;
-import game.domain.overworld.entity.OverworldEntity;
-import game.domain.overworld.location.Chunk;
 import util.Assert;
-import game.domain.depr.overworld.GameCoreDepr;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.GameCore;
+import game.domain.overworld.location.OverworldLocationMain;
+import game.net.location.OverworldLocationReplicator;
 #if macro
 import haxe.macro.Expr;
 #end

@@ -4,7 +4,7 @@ import game.net.client.GameClient;
 import dn.M;
 import hxd.Timer;
 import dn.Cooldown;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 
 class RandomRoaming extends EntityBehaviourBase {
 

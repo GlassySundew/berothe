@@ -36,4 +36,6 @@
 
 --macro Init.setup()
 
+HideImports
 plugins.bodyparts_animations.src.HideImports
+plugins.prefab_berothe.src.HideImports

@@ -2,7 +2,7 @@ package game.domain.overworld.entity;
 
 import util.MathUtil;
 import dn.M;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import signals.Signal;
 import core.MutableProperty;
 
@@ -56,7 +56,7 @@ class EntityTransform {
 	}
 
 	#if !debug inline #end
-	public function getPosition() : ThreeDeeVector {
+	public function getPosition() : Vec {
 		return {
 			x : x.val,
 			y : y.val,
@@ -83,7 +83,7 @@ class EntityTransform {
 	}
 
 	#if !debug inline #end
-	public function getRotation() : ThreeDeeVector {
+	public function getRotation() : Vec {
 		return {
 			x : rotationX.val,
 			y : rotationY.val,

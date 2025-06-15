@@ -1,21 +1,21 @@
 package game.data.storage.entity.body;
 
-import game.data.storage.entity.body.view.extensions.ViewPaletteSwapDescription;
-import game.data.storage.entity.body.properties.EntityFlyDescription;
-import game.data.storage.entity.body.properties.LocalDispatchPointDescription;
-import game.data.storage.entity.body.properties.DeathMessageDescription;
 import util.extensions.ArrayExtensions;
 import game.data.storage.DescriptionBase;
 import game.data.storage.entity.body.model.EntityBaseStatsDescription;
 import game.data.storage.entity.body.properties.AttackListDescription;
+import game.data.storage.entity.body.properties.DeathMessageDescription;
 import game.data.storage.entity.body.properties.DynamicsDescription;
 import game.data.storage.entity.body.properties.EntityAIDescription;
+import game.data.storage.entity.body.properties.EntityFlyDescription;
 import game.data.storage.entity.body.properties.HitboxBodyDescription;
 import game.data.storage.entity.body.properties.InteractableDescription;
+import game.data.storage.entity.body.properties.LocalDispatchPointDescription;
 import game.data.storage.entity.body.properties.RigidBodyTorsoDescription;
 import game.data.storage.entity.body.properties.StaticObjectRigidBodyDescription;
 import game.data.storage.entity.body.view.EntityViewDescription;
 import game.data.storage.entity.body.view.extensions.ViewColorRandomShiftDescription;
+import game.data.storage.entity.body.view.extensions.ViewPaletteSwapDescription;
 import game.data.storage.entity.body.view.extensions.ViewStencilDescription;
 import game.data.storage.entity.component.EntityComponentDescription;
 import game.data.storage.item.EntityOfItemComponentDescription;

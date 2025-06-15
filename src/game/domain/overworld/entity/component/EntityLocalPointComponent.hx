@@ -1,7 +1,7 @@
 package game.domain.overworld.entity.component;
 
 import rx.disposables.ISubscription;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import h3d.Matrix;
 import h3d.Vector;
 import game.data.storage.entity.body.properties.LocalDispatchPointDescription;

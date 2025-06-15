@@ -2,7 +2,7 @@ package game.data.storage.entity.body.properties.action;
 
 import game.data.storage.entity.body.properties.action.ActionsFactory.Transform;
 import game.domain.overworld.entity.OverworldEntity;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 class ToggleEntityTransformInListAction extends BodyActionBase {
 

@@ -1,7 +1,7 @@
 package game.physics.oimo;
 
 import oimo.common.Vec3;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.domain.overworld.location.physics.IRigidBodyShape;
 import game.domain.overworld.location.physics.IShapeConfig;
 import util.Assert;
@@ -26,7 +26,7 @@ class OimoWrappedShape extends Shape implements IRigidBodyShape {
 		_localTransform.setRotationXyz( new Vec3( x, y, z ) );
 	}
 
-	public function getPosition() : ThreeDeeVector {
+	public function getPosition() : Vec {
 		var transform = getTransform();
 		return {
 			x : transform._positionX,

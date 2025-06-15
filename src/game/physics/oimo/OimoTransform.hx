@@ -3,7 +3,7 @@ package game.physics.oimo;
 import util.Assert;
 import oimo.common.Transform;
 import game.domain.overworld.location.physics.Types.Quat;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.domain.overworld.location.physics.ITransform;
 
 class OimoTransform implements ITransform {
@@ -14,11 +14,11 @@ class OimoTransform implements ITransform {
 		this.transform = transform ?? new Transform();
 	}
 
-	public inline function add( vec : ThreeDeeVector ) {
+	public inline function add( vec : Vec ) {
 		transform.translate( vec.toOimo() );
 	}
 
-	public inline function getPosition() : ThreeDeeVector {
+	public inline function getPosition() : Vec {
 		return {
 			x : transform._positionX,
 			y : transform._positionY,
@@ -26,17 +26,17 @@ class OimoTransform implements ITransform {
 		};
 	}
 
-	public inline function setPosition( vec : ThreeDeeVector ) {
+	public inline function setPosition( vec : Vec ) {
 		transform._positionX = vec.x;
 		transform._positionY = vec.y;
 		transform._positionZ = vec.z;
 	}
 
-	public inline function getRotation() : ThreeDeeVector {
+	public inline function getRotation() : Vec {
 		return transform.getRotation().toEulerXyz();
 	}
 
-	public inline function setRotation( vec : ThreeDeeVector ) {
+	public inline function setRotation( vec : Vec ) {
 		transform.setRotationXyz( vec.toOimo() );
 	}
 
@@ -53,7 +53,7 @@ class OimoTransform implements ITransform {
 		return this;
 	}
 
-	public inline function translate( translation : ThreeDeeVector ) {
+	public inline function translate( translation : Vec ) {
 		transform.translate( translation.toOimo() );
 	}
 }

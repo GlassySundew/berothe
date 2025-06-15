@@ -2,7 +2,7 @@ package game.client.en.comp.view;
 
 import h3d.prim.Cube;
 import h3d.scene.Object;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import graphics.ObjectNode3D;
 
 class EntitySimpleObject implements IEntityView {
@@ -29,7 +29,7 @@ class EntitySimpleObject implements IEntityView {
 		this.object.addChild( object );
 	}
 
-	public function provideSize( vec : ThreeDeeVector ) {}
+	public function provideSize( vec : Vec ) {}
 
 	public function batcherize() {}
 }

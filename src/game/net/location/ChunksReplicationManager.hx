@@ -3,15 +3,15 @@ package game.net.location;
 import game.net.CoreReplicator;
 import game.domain.depr.overworld.GameCoreDepr;
 import game.domain.overworld.location.Chunk;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 
 class ChunksReplicationManager {
 
 	public final chunks : Map<Int, Map<Int, Map<Int, ChunkReplicator>>> = [];
-	final location : Location;
+	final location : OverworldLocationMain;
 	final coreReplicator : CoreReplicator;
 
-	public function new( location : Location, coreReplicator : CoreReplicator ) {
+	public function new( location : OverworldLocationMain, coreReplicator : CoreReplicator ) {
 		this.location = location;
 		this.coreReplicator = coreReplicator;
 		// location.onChunkCreated.add( onChunkAdded );

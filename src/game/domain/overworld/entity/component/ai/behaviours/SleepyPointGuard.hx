@@ -5,7 +5,7 @@ import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties
 import game.physics.oimo.EntityRigidBodyProps;
 import util.Assert;
 import rx.disposables.ISubscription;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
 
 class SleepyPointGuard extends EntityBehaviourBase {
@@ -17,7 +17,7 @@ class SleepyPointGuard extends EntityBehaviourBase {
 		this.triggerId = params.triggerId;
 	}
 
-	override function onAttachedToLocation( location : Location ) {
+	override function onAttachedToLocation( location : OverworldLocationMain ) {
 		super.onAttachedToLocation( location );
 		sleep();
 		#if client return; #end

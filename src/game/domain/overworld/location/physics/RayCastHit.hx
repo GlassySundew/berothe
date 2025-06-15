@@ -1,6 +1,6 @@
 package game.domain.overworld.location.physics;
 
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import graphics.ObjectNode3D;
 
 class RayCastHit {
@@ -21,13 +21,13 @@ class RayCastHit {
 		);
 	}
 
-	public var position : ThreeDeeVector;
-	public var normal : ThreeDeeVector;
+	public var position : Vec;
+	public var normal : Vec;
 	public var fraction : Float;
 
 	public inline function new(
-		position : ThreeDeeVector,
-		normal : ThreeDeeVector,
+		position : Vec,
+		normal : Vec,
 		fraction : Float
 	) {
 		this.position = position;

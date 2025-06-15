@@ -1,17 +1,17 @@
 package game.domain.overworld.location.physics;
 
 import game.domain.overworld.location.physics.Types.Quat;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 interface ITransform {
 
-	function getPosition() : ThreeDeeVector;
-	function setPosition( vec : ThreeDeeVector ) : Void;
-	function getRotation() : ThreeDeeVector;
-	function setRotation( vec : ThreeDeeVector ) : Void;
-	function add( vec : ThreeDeeVector ) : Void;
+	function getPosition() : Vec;
+	function setPosition( vec : Vec ) : Void;
+	function getRotation() : Vec;
+	function setRotation( vec : Vec ) : Void;
+	function add( vec : Vec ) : Void;
 
 	function clone() : ITransform;
 	function copyFrom( transform : ITransform ) : ITransform;
-	function translate( translation : ThreeDeeVector ) : Void;
+	function translate( translation : Vec ) : Void;
 }

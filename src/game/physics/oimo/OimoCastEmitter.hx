@@ -2,7 +2,7 @@ package game.physics.oimo;
 
 import util.Util;
 import game.physics.oimo.RayCastCallback;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.domain.overworld.location.physics.ITransform;
 import game.domain.overworld.location.physics.IGeometry;
 import game.domain.overworld.location.physics.IPhysicsEngine;
@@ -18,7 +18,7 @@ class OimoCastEmitter {
 	final physics : IPhysicsEngine;
 
 	public final sourceTransform : ITransform;
-	public var translation : ThreeDeeVector = new ThreeDeeVector();
+	public var translation : Vec = new Vec();
 
 	public var rotation : Float = 0;
 

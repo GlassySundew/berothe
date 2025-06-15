@@ -1,7 +1,7 @@
 package game.domain.overworld.location.physics;
 
 import game.physics.oimo.ContactCallbackWrapper;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 interface IRigidBodyShape {
 
@@ -11,7 +11,7 @@ interface IRigidBodyShape {
 	function setCollisionMask( collisionMask : Int ) : Void;
 	function getCollisionGroup() : Int;
 	function getCollisionMask() : Int;
-	function getPosition() : ThreeDeeVector;
+	function getPosition() : Vec;
 	function setContactCallbackWrapper( callback : ContactCallbackWrapper ) : Void;
 	function getContactCallbackWrapper() : ContactCallbackWrapper;
 	function setDensity( value : Float ) : Void;

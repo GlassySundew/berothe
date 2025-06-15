@@ -2,7 +2,7 @@ package game.domain.overworld.entity.component;
 
 import rx.disposables.Composite;
 import future.Future;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.location.physics.IPhysicsEngine;
 import game.domain.overworld.location.physics.IRigidBody;
 
@@ -19,7 +19,7 @@ abstract class EntityRigidBodyComponentBase extends EntityPhysicsComponentBase {
 		detach();
 	}
 
-	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
+	override function onAttachedToLocation( oldLoc : OverworldLocationMain, location : OverworldLocationMain ) {
 		subscription?.unsubscribe();
 		if ( rigidBody != null ) {
 			detach();

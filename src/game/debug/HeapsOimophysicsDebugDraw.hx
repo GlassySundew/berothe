@@ -1,6 +1,6 @@
 package game.debug;
 
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.domain.overworld.location.physics.IDebugDraw;
 import dn.Col;
 import h3d.col.Point;
@@ -29,7 +29,7 @@ class HeapsOimophysicsDebugDraw extends DebugDraw implements IDebugDraw {
 		graphics.visible = value;
 	}
 
-	override inline function point( v : ThreeDeeVector, color : ThreeDeeVector ) {
+	override inline function point( v : Vec, color : Vec ) {
 		graphics.lineStyle( 10, Col.fromRGBi( Std.int( color.x * 255 ), Std.int( color.y * 255 ), Std.int( color.z * 255 ), 255 ) );
 
 		// drawing little cross because graphics does not support single point
@@ -37,7 +37,7 @@ class HeapsOimophysicsDebugDraw extends DebugDraw implements IDebugDraw {
 		graphics.drawLine( new Point( v.x, v.y - 0.2, v.z - 0.2 ), new Point( v.x, v.y + 0.2, v.z + 0.2 ) );
 	}
 
-	override inline function triangle( v1 : ThreeDeeVector, v2 : ThreeDeeVector, v3 : ThreeDeeVector, n1 : ThreeDeeVector, n2 : ThreeDeeVector, n3 : ThreeDeeVector, color : ThreeDeeVector ) {
+	override inline function triangle( v1 : Vec, v2 : Vec, v3 : Vec, n1 : Vec, n2 : Vec, n3 : Vec, color : Vec ) {
 		graphics.lineStyle( 3, Col.fromRGBi( Std.int( color.x * 255 ), Std.int( color.y * 255 ), Std.int( color.z * 255 ), 255 ) );
 
 		graphics.drawLine( new Point( v1.x, v1.y, v1.z ), new Point( v2.x, v2.y, v2.z ) );
@@ -45,7 +45,7 @@ class HeapsOimophysicsDebugDraw extends DebugDraw implements IDebugDraw {
 		graphics.drawLine( new Point( v3.x, v3.y, v3.z ), new Point( v1.x, v1.y, v1.z ) );
 	}
 
-	override inline function line( v1 : ThreeDeeVector, v2 : ThreeDeeVector, color : ThreeDeeVector ) {
+	override inline function line( v1 : Vec, v2 : Vec, color : Vec ) {
 		graphics.lineStyle( 3, Col.fromRGBi( Std.int( color.x * 255 ), Std.int( color.y * 255 ), Std.int( color.z * 255 ), 255 ) );
 
 		graphics.drawLine( new Point( v1.x, v1.y, v1.z ), new Point( v2.x, v2.y, v2.z ) );

@@ -1,7 +1,7 @@
 package game.client.en.comp.view;
 
 import haxe.exceptions.NotImplementedException;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import h3d.scene.Object;
 import game.net.client.GameClient;
 import h3d.scene.Mesh;
@@ -21,7 +21,7 @@ class EntityModelView implements IEntityView {
 		model.remove();
 	}
 
-	public inline function provideSize( vec : ThreeDeeVector ) {
+	public inline function provideSize( vec : Vec ) {
 		object.heapsObject.scaleX = vec.x;
 		object.heapsObject.scaleY = vec.y;
 		object.heapsObject.scaleZ = vec.z;

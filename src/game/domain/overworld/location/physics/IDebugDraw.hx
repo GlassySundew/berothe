@@ -1,25 +1,25 @@
 package game.domain.overworld.location.physics;
 
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 
 interface IDebugDraw {
 
 	function remove() : Void;
 	function setVisibility( value : Bool ) : Void;
-	function point( v : ThreeDeeVector, color : ThreeDeeVector ) : Void;
+	function point( v : Vec, color : Vec ) : Void;
 	function triangle(
-		v1 : ThreeDeeVector,
-		v2 : ThreeDeeVector,
-		v3 : ThreeDeeVector,
-		n1 : ThreeDeeVector,
-		n2 : ThreeDeeVector,
-		n3 : ThreeDeeVector,
-		color : ThreeDeeVector
+		v1 : Vec,
+		v2 : Vec,
+		v3 : Vec,
+		n1 : Vec,
+		n2 : Vec,
+		n3 : Vec,
+		color : Vec
 	) : Void;
 	function line(
-		v1 : ThreeDeeVector,
-		v2 : ThreeDeeVector,
-		color : ThreeDeeVector
+		v1 : Vec,
+		v2 : Vec,
+		color : Vec
 	) : Void;
 	function update() : Void;
 }

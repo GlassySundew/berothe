@@ -7,7 +7,7 @@ class SpawnEntityEmitter {
 	static final DELAYER_ID = "spawn_cd";
 
 	final spawnVO : LocationSpawnVO;
-	var location( default, null ) : Location;
+	var location( default, null ) : OverworldLocationMain;
 
 	var entityCounter = 0;
 
@@ -15,7 +15,7 @@ class SpawnEntityEmitter {
 		this.spawnVO = spawnVO;
 	}
 
-	public function attachToLocation( location : Location ) {
+	public function attachToLocation( location : OverworldLocationMain ) {
 		this.location = location;
 
 		spawnEntity();

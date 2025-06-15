@@ -9,7 +9,7 @@ import game.physics.oimo.RayCastCallback;
 import util.Util;
 import dn.M;
 import dn.Cooldown;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.domain.overworld.location.physics.IPhysicsEngine;
 import game.domain.overworld.location.physics.ITransform;
 import game.data.storage.entity.body.properties.AttackListItemVO;
@@ -150,7 +150,7 @@ final class AttackTweenBoxCastEmitter implements IUpdatable {
 		emitTransform.copyFrom( sourceTransform );
 
 		var diffX = ( tweenSizeX ) * 2;
-		var rotatedVector = new ThreeDeeVector(
+		var rotatedVector = new Vec(
 			desc.offsetX + diffX,
 			desc.offsetY,
 			desc.offsetZ

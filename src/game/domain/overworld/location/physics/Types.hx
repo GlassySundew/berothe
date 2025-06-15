@@ -9,38 +9,44 @@ import h3d.Quat;
 import dn.Col;
 import oimo.common.Vec3;
 
-typedef PrivateVectorType = {
+typedef IntVec = {
+	var x : Int;
+	var y : Int;
+	var z : Int;
+}
+
+typedef VecImpl = {
 	var x : Float;
 	var y : Float;
 	var z : Float;
 }
 
 typedef Quat = {
-	> PrivateVectorType,
+	> VecImpl,
 	var w : Float;
 }
 
-abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVectorType {
+abstract Vec( VecImpl ) from VecImpl to VecImpl {
 
-	public static inline function fromColorI( color : Int ) : ThreeDeeVector {
+	public static inline function fromColorI( color : Int ) : Vec {
 		var color = Col.fromInt( color );
 		return { x : color.ri, y : color.gi, z : color.bi };
 	}
 
-	public static inline function fromColorF( color : Int ) : ThreeDeeVector {
+	public static inline function fromColorF( color : Int ) : Vec {
 		var color = Col.fromInt( color );
 		return { x : color.rf, y : color.gf, z : color.bf };
 	}
 
-	@:from public inline static function fromOimo( vec : Vec3 ) : ThreeDeeVector {
+	@:from public inline static function fromOimo( vec : Vec3 ) : Vec {
 		return { x : vec.x, y : vec.y, z : vec.z };
 	}
 
-	@:from public inline static function fromh3d( vec : Vector ) : ThreeDeeVector {
+	@:from public inline static function fromh3d( vec : Vector ) : Vec {
 		return { x : vec.x, y : vec.y, z : vec.z };
 	}
 
-	public inline static function anglesFromQuat( quat : Quat ) : ThreeDeeVector {
+	public inline static function anglesFromQuat( quat : Quat ) : Vec {
 		var quat = new h3d.Quat( quat.x, quat.y, quat.z, quat.w );
 		var rotation = quat.toEuler();
 
@@ -73,13 +79,13 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		this.z = z;
 	}
 
-	public inline function setFromVec( vector : ThreeDeeVector ) {
+	public inline function setFromVec( vector : Vec ) {
 		this.x = vector.x;
 		this.y = vector.y;
 		this.z = vector.z;
 	}
 
-	public inline function sub( subtractive : ThreeDeeVector ) : ThreeDeeVector {
+	public inline function sub( subtractive : Vec ) : Vec {
 		return {
 			x : this.x - subtractive.x,
 			y : this.y - subtractive.y,
@@ -87,7 +93,7 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		}
 	}
 
-	public inline function add( subtractive : ThreeDeeVector ) : ThreeDeeVector {
+	public inline function add( subtractive : Vec ) : Vec {
 		return {
 			x : this.x + subtractive.x,
 			y : this.y + subtractive.y,
@@ -95,7 +101,7 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		}
 	}
 
-	public inline function div( subdiv : Float ) : ThreeDeeVector {
+	public inline function div( subdiv : Float ) : Vec {
 		return {
 			x : this.x / subdiv,
 			y : this.y / subdiv,
@@ -111,20 +117,20 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		return hxd.Math.sqrt( lengthSq() );
 	}
 
-	public inline function distance( v : ThreeDeeVector ) {
+	public inline function distance( v : Vec ) {
 		return Math.sqrt( distanceSq( v ) );
 	}
 
-	public inline function distanceSq( v : ThreeDeeVector ) {
+	public inline function distanceSq( v : Vec ) {
 		var dx = v.x - x;
 		var dy = v.y - y;
 		var dz = v.z - z;
 		return dx * dx + dy * dy + dz * dz;
 	}
 
-	public inline function cross( v : ThreeDeeVector ) {
+	public inline function cross( v : Vec ) {
 		// note : cross product is left-handed
-		return new ThreeDeeVector( y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x );
+		return new Vec( y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x );
 	}
 
 	public inline function normalize() {
@@ -135,7 +141,7 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		z *= k;
 	}
 
-	public inline function dot( v : ThreeDeeVector ) {
+	public inline function dot( v : Vec ) {
 		return x * v.x + y * v.y + z * v.z;
 	}
 
@@ -151,7 +157,7 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 
 	public inline function scaled( v : Float ) {
 		// see scale
-		return new ThreeDeeVector( x * v, y * v, z * v );
+		return new Vec( x * v, y * v, z * v );
 	}
 
 	public inline function negate() {
@@ -160,19 +166,19 @@ abstract ThreeDeeVector( PrivateVectorType ) from PrivateVectorType to PrivateVe
 		z = -z;
 	}
 
-	public inline function getForwardZ() : ThreeDeeVector {
+	public inline function getForwardZ() : Vec {
 		var forwardX = Math.cos( z );
 		var forwardY = Math.sin( z );
-		return new ThreeDeeVector( forwardX, forwardY, 0 );
+		return new Vec( forwardX, forwardY, 0 );
 	}
 
 	public inline function normalized() {
 		var k = lengthSq();
 		if ( k < hxd.Math.EPSILON2 ) k = 0 else k = hxd.Math.invSqrt( k );
-		return new ThreeDeeVector( x * k, y * k, z * k );
+		return new Vec( x * k, y * k, z * k );
 	}
 
-	public inline function clone() : ThreeDeeVector {
+	public inline function clone() : Vec {
 		return { x : this.x, y : this.y, z : this.z };
 	}
 

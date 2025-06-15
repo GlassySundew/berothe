@@ -9,8 +9,8 @@ import game.data.storage.entity.body.properties.EntityAIDescription.AIProperties
 import game.domain.overworld.entity.OverworldEntity;
 import game.domain.overworld.entity.component.combat.EntityAttackListComponent;
 import game.domain.overworld.entity.component.model.EntityModelComponent;
-import game.domain.overworld.location.Location;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.OverworldLocationMain;
+import game.domain.overworld.location.physics.Types.Vec;
 import game.physics.oimo.OimoWrappedShape;
 import game.physics.oimo.RayCastCallback;
 
@@ -33,7 +33,7 @@ abstract class EntityBehaviourBase {
 	var entity( default, null ) : OverworldEntity;
 	var state : State;
 
-	var objectivePoint : ThreeDeeVector = new ThreeDeeVector();
+	var objectivePoint : Vec = new Vec();
 	var pathfindCastCB = new RayCastCallback();
 
 	public function new( params : AIProperties ) {
@@ -105,7 +105,7 @@ abstract class EntityBehaviourBase {
 
 		var shape = rigidBodyComp.rigidBody.getShape();
 		var translation = objectivePoint.sub( entity.transform.getPosition() );
-		var physics = entity.location.getValue().physics;
+		// var physics = entity.location.getValue().physics;
 		var backward = entity.transform.getRotation().getForwardZ();
 		backward.negate();
 		var offsetDistance = 1.0;
@@ -114,12 +114,12 @@ abstract class EntityBehaviourBase {
 		startTransform.add( backward );
 
 		pathfindCastCB.clear();
-		physics.convexCast(
-			shape.getConfig().geom,
-			startTransform,
-			translation,
-			pathfindCastCB
-		);
+		// physics.convexCast(
+		// 	shape.getConfig().geom,
+		// 	startTransform,
+		// 	translation,
+		// 	pathfindCastCB
+		// );
 		pathfindCastCB.sort();
 
 		// raycast processing
@@ -190,7 +190,7 @@ abstract class EntityBehaviourBase {
 		dynamics.isMovementApplied.val = true;
 	}
 
-	function onAttachedToLocation( location : Location ) {
+	function onAttachedToLocation( location : OverworldLocationMain ) {
 		// location.behaviourManager.attachBehaviour( this, entity );
 		// initializeAttackComponent();
 	}

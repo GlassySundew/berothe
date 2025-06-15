@@ -1,7 +1,7 @@
 package game.domain.overworld.location.physics;
 
 import game.physics.oimo.RayCastCallback;
-import game.domain.overworld.location.physics.Types.ThreeDeeVector;
+import game.domain.overworld.location.physics.Types.Vec;
 import oimo.dynamics.rigidbody.Shape;
 
 interface IPhysicsEngine {
@@ -14,15 +14,15 @@ interface IPhysicsEngine {
 	function drawDebug() : Void;
 	function dispose() : Void;
 	function rayCast(
-		start : ThreeDeeVector,
-		end : ThreeDeeVector,
+		start : Vec,
+		end : Vec,
 		rayCastCallBack : RayCastCallback
 	) : Void;
 
 	function convexCast(
 		convex : IGeometry,
 		start : ITransform,
-		translation : ThreeDeeVector,
+		translation : Vec,
 		callback : RayCastCallback
 	) : Void;
 }

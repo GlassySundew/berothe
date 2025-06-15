@@ -1,7 +1,7 @@
 package game.domain.overworld.entity.component.block;
 
 import rx.disposables.Composite;
-import game.domain.overworld.location.Location;
+import game.domain.overworld.location.OverworldLocationMain;
 import game.domain.overworld.entity.component.EntityRigidBodyComponentBase;
 import util.Assert;
 import util.Const;
@@ -31,7 +31,7 @@ class StaticObjectRigidBodyComponent extends EntityRigidBodyComponentBase {
 		this.config = config;
 	}
 
-	override function onAttachedToLocation( oldLoc : Location, location : Location ) {
+	override function onAttachedToLocation( oldLoc : OverworldLocationMain, location : OverworldLocationMain ) {
 		super.onAttachedToLocation( oldLoc, location );
 		if ( location == null ) return;
 		subscription.add( entity.transform.x.subscribeProp( rigidBody.x, true ) );

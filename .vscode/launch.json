@@ -8,7 +8,6 @@
 			"name": "HashLink client",
 			"request": "launch",
 			"type": "hl",
-			"hxml": "hl.debug.hxml",
 			"program": "${workspaceRoot}/bin/game.hl",
 			"cwd": "${workspaceFolder}",
 			"postDebugTask": "kill hl"
