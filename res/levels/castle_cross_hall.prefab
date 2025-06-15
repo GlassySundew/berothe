@@ -178,7 +178,8 @@
 							"z": -18,
 							"scaleX": 258.97,
 							"scaleY": 288.12,
-							"scaleZ": 38
+							"scaleZ": 38,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -191,7 +192,8 @@
 							"y": -14,
 							"z": 1.5,
 							"scaleX": 27,
-							"scaleY": 225
+							"scaleY": 225,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -204,7 +206,8 @@
 							"y": 44.5,
 							"z": 1.5,
 							"scaleX": 120,
-							"scaleY": 27
+							"scaleY": 27,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -218,7 +221,8 @@
 							"z": -18,
 							"scaleX": 280,
 							"scaleY": 289,
-							"scaleZ": 207
+							"scaleZ": 207,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -232,7 +236,8 @@
 							"z": -18,
 							"scaleX": 207,
 							"scaleY": 34,
-							"scaleZ": 207
+							"scaleZ": 207,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -246,7 +251,8 @@
 							"z": -18,
 							"scaleX": 33,
 							"scaleY": 136,
-							"scaleZ": 207
+							"scaleZ": 207,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -260,7 +266,8 @@
 							"z": -18,
 							"scaleX": 207,
 							"scaleY": 34,
-							"scaleZ": 207
+							"scaleZ": 207,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -274,7 +281,8 @@
 							"z": -18,
 							"scaleX": 35,
 							"scaleY": 289,
-							"scaleZ": 207
+							"scaleZ": 207,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -288,7 +296,8 @@
 							"z": -18,
 							"scaleX": 6,
 							"scaleY": 6,
-							"scaleZ": 118
+							"scaleZ": 118,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -302,7 +311,8 @@
 							"z": -18,
 							"scaleX": 6,
 							"scaleY": 6,
-							"scaleZ": 118
+							"scaleZ": 118,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -316,7 +326,8 @@
 							"z": -18,
 							"scaleX": 6,
 							"scaleY": 6,
-							"scaleZ": 118
+							"scaleZ": 118,
+							"isWireframe": true
 						},
 						{
 							"type": "customBox",
@@ -330,7 +341,8 @@
 							"z": -18,
 							"scaleX": 6,
 							"scaleY": 6,
-							"scaleZ": 118
+							"scaleZ": 118,
+							"isWireframe": true
 						}
 					]
 				}
