@@ -11,8 +11,8 @@ class ItemReplicator extends NetNode {
 
 	public var item( default, null ) : Future<Item> = new Future();
 
-	@:s final itemDescriptionId : String;
-	@:s final amount : NSMutableProperty<Int> = new NSMutableProperty();
+	@:s var itemDescriptionId : String;
+	@:s var amount : NSMutableProperty<Int> = new NSMutableProperty();
 
 	@:s var id : String;
 
