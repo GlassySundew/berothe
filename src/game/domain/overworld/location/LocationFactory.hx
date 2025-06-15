@@ -8,10 +8,14 @@ class LocationFactory {
 
 	static var LOCATION_ID_STUB = 0;
 
+	public final onLocationCreated = new Signal<OverworldLocationMain>();
+
 	public function new() {}
 
-	public function createLocation( locationDesc : LocationDescription ) : Location {
-		var location = new Location( locationDesc, '${++LOCATION_ID_STUB}' );
+	public function createLocation( locationDesc : LocationDescription ) : OverworldLocationMain {
+
+		var location = new OverworldLocationMain( locationDesc, '${++LOCATION_ID_STUB}' );
+		location.initialized.then( _ -> onLocationCreated.dispatch( location ) );
 		return location;
 	}
 }

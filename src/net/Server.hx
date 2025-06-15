@@ -50,9 +50,6 @@ class Server extends Process {
 
 		new Save();
 
-		if ( GameServer.inst != null ) {
-			GameServer.inst.destroy();
-		}
 		game = new GameServer( this );
 
 		startServer();

@@ -30,6 +30,11 @@ class LocationContainerFactory {
 
 class GameCore {
 
+	public var onLocationCreated( get, never ) : Signal<OverworldLocationMain>;
+	inline function get_onLocationCreated() : Signal<OverworldLocationMain> {
+		return locationFactory.onLocationCreated;
+	}
+
 	final locationContainers : Map<String, ILocationContainer> = [];
 	final locationFactory = new LocationFactory();
 
